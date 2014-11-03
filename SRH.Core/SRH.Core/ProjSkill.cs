@@ -6,23 +6,23 @@ using System.Threading.Tasks;
 
 namespace SRH.Core
 {
-    class ProjSkill : Skill
+    public class ProjSkill : Skill
     {
-        enum ProjSkillName 
-        {
-            Development, // Développement
-            Design, //  Conception
-            ProjManagement, // Management de projet
-            SystemsAnalyst, // Analyste fonctionnel
-            TechSupport, // Technicien d'infrastucture
-            BetaTest, // Béta testeur
-            DataBase, // Base de données
-            GUInterface, // Interface graphique
-            WebDevelopment, // Développement web
-            Networking, // Réseau
-            Security // Sécurité
-        }
 
+        readonly string _name;
+        //Level _lvlSkill;
+        //public ProjSkill(string skillName, int startLevel)
+        //{
+        //    // Exeption
+        //    //_lvlSkill = new Level();
+        //    _name = skillName;
+        //    _level.currentLevel = startLevel;
+            
+        //}
 
+        //public ProjSkill( string skillName ) 
+        //    : this( skillName, 1)
+        //{
+        //}
     }
 }

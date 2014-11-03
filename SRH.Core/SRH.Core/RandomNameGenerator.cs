@@ -9,10 +9,6 @@ namespace SRH.Core
 {
 	class RandomNameGenerator
 	{
-
-		class RandomNameGenerator
-	{
-
 		readonly List<string> _firstNames;
 		readonly List<string> _lastNames;
 
