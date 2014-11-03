@@ -40,7 +40,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Company.cs" />
+    <Compile Include="CompaSkill.cs" />
     <Compile Include="Employee.cs" />
+    <Compile Include="ProjSkill.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RandomNameGenerator.cs" />
     <Compile Include="Skill.cs" />

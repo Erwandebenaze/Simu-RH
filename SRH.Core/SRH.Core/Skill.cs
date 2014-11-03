@@ -5,7 +5,7 @@ using System.Text;
 
 namespace SRH.Core
 {
-    class Skill
+    abstract class Skill
     {
     }
 }
