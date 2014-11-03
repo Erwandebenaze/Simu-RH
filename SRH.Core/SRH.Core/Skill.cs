@@ -7,7 +7,7 @@ namespace SRH.Core
 {
     public abstract class Skill
     {
-        readonly public Level _level = new Level();
+        readonly Level _level = new Level();
         string _skillName;
 
         public void Initialize( string skillName, int startLevel = 1 )
