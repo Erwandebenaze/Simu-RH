@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SRH.Core
 {
-    class Level
+    public class Level
     {
         int _currentXp;
         int _xpRequired;

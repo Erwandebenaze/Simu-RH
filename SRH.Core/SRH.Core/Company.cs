@@ -13,7 +13,7 @@ namespace SRH.Core
         int _maxEmployees;
         int _maxProjectDifficulty;
         int _wealth;
-       // readonly Dictionary<string,Employee> _employees;
+        readonly Dictionary<string,Employee> _employees;
 
 
         public Company( string name )
