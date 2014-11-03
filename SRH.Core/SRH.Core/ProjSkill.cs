@@ -22,5 +22,7 @@ namespace SRH.Core
             Networking, // Réseau
             Security // Sécurité
         }
+
+
     }
 }

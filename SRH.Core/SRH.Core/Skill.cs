@@ -7,5 +7,7 @@ namespace SRH.Core
 {
     abstract class Skill
     {
+        readonly Level _level;
+
     }
 }
