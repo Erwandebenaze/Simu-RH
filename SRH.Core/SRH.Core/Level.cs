@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SRH.Core
 {
-    class Level
+    public class Level
     {
         int _currentXp;
         int _xpRequired;
@@ -28,11 +28,18 @@ namespace SRH.Core
         public void IncreaseXp(int xp)
         {
             if( xp < 1 ) throw new ArgumentException( "Xp must be positive" );
+            if (xp + _currentXp >= _xpRequired)
+            {
+                this.IncreaseLevelSkill();
+            }
+
+            _currentXp += xp;
+            _xpRequired += 200; // À mettre variable
             // TODO : Si le currentXp+ xp supérieur ou égal à xpRequired, alors, on appelle le lvlup correspondant.
         }
         public void IncreaseLevelSkill()
         {
-            throw new NotImplementedException();
+            _currentLevel += 1;
         }
         public void IncreaseLevelCompany()
         {

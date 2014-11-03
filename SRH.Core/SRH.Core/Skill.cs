@@ -7,7 +7,7 @@ namespace SRH.Core
 {
     public abstract class Skill
     {
-        protected Level _level;
+        public Level _level;
         string _skillName;
         protected int _upgradePrice;
         protected int _timeToUpgrade;

@@ -22,13 +22,24 @@ namespace SRH.Core.Tests
             Employee e = new Employee( "Dupont", "Jack", 18 );
             Skill s = e.AddSkill<ProjSkill>( "Development" );
             Assert.That(e.Skills.ContainsKey("Development")) ;
+            int skillLvl = s._level.currentLevel;
+            Assert.That( skillLvl, Is.EqualTo( 1 ) );
         }
 
+        [Test]
         public void Upgrade_a_Projskill()
         {
             Employee e = new Employee( "Dupont", "Jack", 18 );
             Skill s = e.AddSkill<ProjSkill>( "Development" );
-            
+            Dictionary<string, Skill> _skills = e.Skills;
+            int skillLvl = s._level.currentLevel;
+            Assert.That( skillLvl, Is.EqualTo( 1 ) );
+            s._level.IncreaseXp( 300 );
+            skillLvl = s._level.currentLevel;
+            Assert.That( skillLvl, Is.EqualTo( 2 ) );
+            s._level.IncreaseXp( 300 );
+            skillLvl = s._level.currentLevel;
+            Assert.That( skillLvl, Is.EqualTo( 3 ) );
         }
 
     }
