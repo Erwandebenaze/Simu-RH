@@ -8,8 +8,33 @@ namespace SRH.Core
 {
     public class ProjSkill : Skill
     {
+        public void FixPriceAndTime()
+        {
+            
+            switch( _level.currentLevel )
+            {
+                case 1 : 
+                    _upgradePrice = 1000;
+                    _timeToUpgrade = 3;
+                    break;
+                case 2 : 
+                    _upgradePrice = 1250;
+                    _timeToUpgrade = 4;
+                    break;
+                case 3 : 
+                    _upgradePrice = 1500;
+                    _timeToUpgrade = 5;
+                    break;
+                case 4 : 
+                    _upgradePrice = 1750;
+                    _timeToUpgrade = 6;
+                    break;
+                default :
+                    throw new InvalidOperationException();
+            }
 
-        readonly string _name;
+        }
+        //readonly string _name;
         //Level _lvlSkill;
         //public ProjSkill(string skillName, int startLevel)
         //{

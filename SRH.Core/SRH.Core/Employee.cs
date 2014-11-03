@@ -28,7 +28,7 @@ namespace SRH.Core
             // si l'employé n'a pas la compétence, il doit l'ajouter, sinon il l'augmente.
 
             throw new NotImplementedException();
-            //Retourne true ou false si la compétence a été augmenté (problème d'argent, la compétence n'est ps instnaciée (exeption)
+            //Retourne true ou false si la compétence a été augmenté (problème d'argent, la compétence n'est ps instanciée (exeption)
             
         }
         public Dictionary<string,Skill> Skills

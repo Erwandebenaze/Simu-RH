@@ -23,5 +23,13 @@ namespace SRH.Core.Tests
             Skill s = e.AddSkill<ProjSkill>( "Development" );
             Assert.That(e.Skills.ContainsKey("Development")) ;
         }
+
+        public void Upgrade_a_Projskill()
+        {
+            Employee e = new Employee( "Dupont", "Jack", 18 );
+            Skill s = e.AddSkill<ProjSkill>( "Development" );
+            
+        }
+
     }
 }
