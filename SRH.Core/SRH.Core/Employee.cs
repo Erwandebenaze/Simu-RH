@@ -11,7 +11,7 @@ namespace SRH.Core
         readonly string _firstName;
         int _age;
         Dictionary<string, Skill> _skills;
-		RandomEmployeeGenerator _randomName;
+		RandomEmployeeGenerator _randomEmployee;
 
         /// <summary>
 		/// Creates an <see cref="Employee"/>
@@ -33,9 +33,10 @@ namespace SRH.Core
 		/// </summary>
 		public Employee()
 		{
-			Dictionary<string, string> randomName = _randomName.GetRandomName();
+			Dictionary<string, string> randomName = _randomEmployee.GetRandomName();
 			randomName.TryGetValue( "FirstName", out _firstName );
 			randomName.TryGetValue( "LastName", out _lastName );
+			_age = _randomEmployee.GetRandomAge();
 
 		}
 
