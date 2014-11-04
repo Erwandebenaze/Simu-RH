@@ -7,20 +7,38 @@ namespace SRH.Core
 {
     public class Employee
     {
-        readonly string _name;
+        readonly string _lastName;
         readonly string _firstName;
         int _age;
         Dictionary<string, Skill> _skills;
+		RandomEmployeeGenerator _randomEmployee;
 
-        
+        /// <summary>
+		/// Creates an <see cref="Employee"/>
+        /// </summary>
+        /// <param name="name"></param>
+		/// <param name="firstName"></param>
+		/// <param name="age">Cannot inferior to 18 or superiror to 150</param>
         public Employee(string name, string firstName, int age)
         {
             //exeption
-            _name = name;
+            _lastName = name;
             _firstName = firstName;
             _age = age;
             _skills = new Dictionary<string,Skill>();
         }
+
+		/// <summary>
+		/// Creates a random <see cref="Employee"/>
+		/// </summary>
+		public Employee()
+		{
+			Dictionary<string, string> randomName = _randomEmployee.GetRandomName();
+			randomName.TryGetValue( "FirstName", out _firstName );
+			randomName.TryGetValue( "LastName", out _lastName );
+			_age = _randomEmployee.GetRandomAge();
+
+		}
 
         public bool Training()
         {

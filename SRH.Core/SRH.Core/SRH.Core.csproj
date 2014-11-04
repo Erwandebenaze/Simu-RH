@@ -48,7 +48,7 @@
     <Compile Include="Level.cs" />
     <Compile Include="ProjSkill.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RandomNameGenerator.cs" />
+    <Compile Include="RandomEmployeeGenerator.cs" />
     <Compile Include="Skill.cs" />
   </ItemGroup>
   <ItemGroup>
