@@ -30,7 +30,7 @@ namespace SRH.Core
             this.FixNextXpRequired<Company>();
         }
 
-        public int currentLevel
+        public int CurrentLevel
         {
             get { return _currentLevel; }
             set { _currentLevel = value; }
@@ -73,7 +73,7 @@ namespace SRH.Core
             if( typeof( T ).Equals( typeof( Skill ) ) )
             {
                 #region switch
-                switch( this.currentLevel )
+                switch( this.CurrentLevel )
                 {
                     case 1:
                         _xpRequired = 50;

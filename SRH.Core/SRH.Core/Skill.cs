@@ -16,7 +16,7 @@ namespace SRH.Core
         {
             _level = new Level(this);
             _skillName = skillName;
-            _level.currentLevel = startLevel;
+            _level.CurrentLevel = startLevel;
         }
 
 

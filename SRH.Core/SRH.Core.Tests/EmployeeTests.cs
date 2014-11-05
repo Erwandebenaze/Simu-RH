@@ -22,7 +22,7 @@ namespace SRH.Core.Tests
             Employee e = new Employee( "Dupont", "Jack", 18 );
             Skill s = e.AddSkill<ProjSkill>( "Development" );
             Assert.That(e.Skills.ContainsKey("Development")) ;
-            int skillLvl = s._level.currentLevel;
+            int skillLvl = s._level.CurrentLevel;
             Assert.That( skillLvl, Is.EqualTo( 1 ) );
         }
 
@@ -32,13 +32,13 @@ namespace SRH.Core.Tests
             Employee e = new Employee( "Dupont", "Jack", 18 );
             Skill s = e.AddSkill<ProjSkill>( "Development" );
             Dictionary<string, Skill> _skills = e.Skills;
-            int skillLvl = s._level.currentLevel;
+            int skillLvl = s._level.CurrentLevel;
             Assert.That( skillLvl, Is.EqualTo( 1 ) );
             s._level.IncreaseXp<Skill>( 50 );
-            skillLvl = s._level.currentLevel;
+            skillLvl = s._level.CurrentLevel;
             Assert.That( skillLvl, Is.EqualTo( 2 ) );
             s._level.IncreaseXp<Skill>( 100 );
-            skillLvl = s._level.currentLevel;
+            skillLvl = s._level.CurrentLevel;
             Assert.That( skillLvl, Is.EqualTo( 3 ) );
         }
 
