@@ -22,7 +22,7 @@ namespace SRH.Core.Tests
             Employee e = new Employee( "Dupont", "Jack", 18 );
             Skill s = e.AddSkill<ProjSkill>( "Development" );
             Assert.That(e.Skills.ContainsKey("Development")) ;
-            int skillLvl = s._level.CurrentLevel;
+            int skillLvl = s.Level.CurrentLevel;
             Assert.That( skillLvl, Is.EqualTo( 1 ) );
         }
 
