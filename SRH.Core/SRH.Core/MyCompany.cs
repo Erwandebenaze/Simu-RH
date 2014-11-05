@@ -26,7 +26,7 @@ namespace SRH.Core
             _maxProjectDifficulty = 1;
             _wealth = 15000;
 
-            _employees.Add();
+            //_employees.Add();
         }
 
         public Level Level
@@ -53,19 +53,19 @@ namespace SRH.Core
 		/// <summary>
 		/// Adds a young random <see cref="Employee"/>s to <see cref="MyCompany"/>
 		/// </summary>
-		public void AddEmployee()
-		{
-			Dictionary<string, string> randomName = _randomEmployee.GetRandomName();
+        //public void AddEmployee()
+        //{
+        //    Dictionary<string, string> randomName = _randomEmployee.GetRandomName();
 
-			string LastName;
-			string FirstName;
-			randomName.TryGetValue( "FirstName", out FirstName );
-			randomName.TryGetValue( "LastName", out LastName );
-			int Age = _randomEmployee.GetRandomAge( 18, 25 );
+        //    string LastName;
+        //    string FirstName;
+        //    randomName.TryGetValue( "FirstName", out FirstName );
+        //    randomName.TryGetValue( "LastName", out LastName );
+        //    int Age = _randomEmployee.GetRandomAge( 18, 25 );
 
-			Employee e = new Employee( this, LastName, FirstName, Age );
-			_employees.Add( e.Id, e );
-		}
+        //    Employee e = new Employee( this, LastName, FirstName, Age );
+        //    _employees.Add( e.Id, e );
+        //}
 
         public void AdjustValuesCompany()
         {
