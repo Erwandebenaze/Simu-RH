@@ -32,13 +32,13 @@ namespace SRH.Core.Tests
             Employee e = new Employee( "Dupont", "Jack", 18 );
             Skill s = e.AddSkill<ProjSkill>( "Development" );
             Dictionary<string, Skill> _skills = e.Skills;
-            int skillLvl = s._level.CurrentLevel;
+            int skillLvl = s.Level.CurrentLevel;
             Assert.That( skillLvl, Is.EqualTo( 1 ) );
-            s._level.IncreaseXp<Skill>( 50 );
-            skillLvl = s._level.CurrentLevel;
+            s.Level.IncreaseXp<Skill>( 50 );
+            skillLvl = s.Level.CurrentLevel;
             Assert.That( skillLvl, Is.EqualTo( 2 ) );
-            s._level.IncreaseXp<Skill>( 100 );
-            skillLvl = s._level.CurrentLevel;
+            s.Level.IncreaseXp<Skill>( 100 );
+            skillLvl = s.Level.CurrentLevel;
             Assert.That( skillLvl, Is.EqualTo( 3 ) );
         }
 

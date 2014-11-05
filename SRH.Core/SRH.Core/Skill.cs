@@ -7,7 +7,7 @@ namespace SRH.Core
 {
     public abstract class Skill
     {
-        public Level _level;
+        private Level _level;
         string _skillName;
         protected int _upgradePrice;
         protected int _timeToUpgrade;
@@ -19,11 +19,10 @@ namespace SRH.Core
             _level.CurrentLevel = startLevel;
         }
 
-
-
-        //public void Initialize(string skillName)
-        //    : this (skillName, 1)
-        //{ }
+        public Level Level
+        {
+            get { return _level;}
+        }
 
         public enum ProjSkillName
         {
@@ -47,12 +46,6 @@ namespace SRH.Core
             ContractManagement, // Gestion de contrat, decrease the duration of 30 projects.
             Animation // Animation, inscrease 30 employees hapiness
         }
-
-        //public string skillName
-        //{
-        //    get {  ;}
-        //}
-
 
     }
 }
