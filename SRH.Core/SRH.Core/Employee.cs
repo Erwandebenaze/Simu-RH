@@ -7,12 +7,12 @@ namespace SRH.Core
 {
     public class Employee
     {
+		Company _company;
 		readonly Guid _id;
         readonly string _lastName;
         readonly string _firstName;
         int _age;
         Dictionary<string, Skill> _skills;
-		RandomEmployeeGenerator _randomEmployee;
 
         /// <summary>
 		/// Creates an <see cref="Employee"/>
@@ -20,9 +20,10 @@ namespace SRH.Core
         /// <param name="name"></param>
 		/// <param name="firstName"></param>
 		/// <param name="age">Cannot inferior to 18 or superiror to 62</param>
-        public Employee(string name, string firstName, int age)
+        public Employee(Company c, string name, string firstName, int age)
         {
             //exeptions
+			_company = c;
 			_id = Guid.NewGuid();
             _lastName = name;
             _firstName = firstName;
@@ -30,19 +31,7 @@ namespace SRH.Core
             _skills = new Dictionary<string,Skill>();
         }
 
-		/// <summary>
-		/// Creates a random <see cref="Employee"/>
-		/// </summary>
-		public Employee()
-		{
-			_id = Guid.NewGuid();
-			Dictionary<string, string> randomName = _randomEmployee.GetRandomName();
-			randomName.TryGetValue( "FirstName", out _firstName );
-			randomName.TryGetValue( "LastName", out _lastName );
-			_age = _randomEmployee.GetRandomAge();
-		}
-
-		Guid Id
+		public Guid Id
 		{
 			get { return _id; }
 		}

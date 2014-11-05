@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 
 namespace SRH.Core
 {
-	class RandomEmployeeGenerator
+	class RandomGenerator
 	{
 		readonly List<string> _firstNames;
 		readonly List<string> _lastNames;
 		Random _randomNumberGenerator;
 
-		public RandomEmployeeGenerator ()
+		public RandomGenerator ()
 		{
             _firstNames = new List<string>();
             _lastNames = new List<string>();
@@ -40,6 +40,7 @@ namespace SRH.Core
 		{
 			get { return _randomNumberGenerator; }
 		}
+
 		public Dictionary<string, string> GetRandomName()
 		{
 			Dictionary<string, string> randomName = new Dictionary<string, string>();
@@ -48,10 +49,9 @@ namespace SRH.Core
 			return randomName;
 		}
 
-		public int GetRandomAge()
+		public int GetRandomAge(int ageMin, int ageMax)
 		{
-			return RandomNumberGenerator.Next( 18, 60 );
+			return RandomNumberGenerator.Next( ageMin, ageMax );
 		}
-
 	}
 }
