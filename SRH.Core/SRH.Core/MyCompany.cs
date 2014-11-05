@@ -26,7 +26,7 @@ namespace SRH.Core
             _maxProjectDifficulty = 1;
             _wealth = 15000;
 
-			_employees.Add()
+            _employees.Add();
         }
 
         public Level Level
@@ -67,5 +67,13 @@ namespace SRH.Core
 			_employees.Add( e.Id, e );
 		}
 
+        public void AdjustValuesCompany()
+        {
+            if( this.Level.CurrentLevel == 1 ) this.MaxEmployees = 10;
+            this.MaxEmployees = 10 + (2 * (this.Level.CurrentLevel - 1));
+
+            if( this.Level.CurrentLevel == 1 ) this.MaxProjectDifficulty = 0.5;
+            if( this.Level.CurrentLevel % 10 == 0 ) this.MaxProjectDifficulty += 0.5;
+        }
 	}
 }
