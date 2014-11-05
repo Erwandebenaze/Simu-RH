@@ -11,24 +11,28 @@ namespace SRH.Core
         int _currentXp;
         int _xpRequired;
         int _currentLevel;
+        Skill _sk;
+        MyCompany _mc;
+        private bool _skill;
 
         public Level( Skill s )
         {
             // TODO : Trouver le moyen de savoir qui appelle le constructeur pour savoir si c'est la company ou une skill.
-			_currentLevel = 1;
 			_currentXp = 0;
             _currentLevel = 1;
-
-            this.FixNextXpRequired<Skill>();
+            _sk = s;
+            _skill = true;
+            this.FixNextXpRequired();
         }
 
-        public Level( Company c )
+        public Level( MyCompany c )
         {
             // TODO : Trouver le moyen de savoir qui appelle le constructeur pour savoir si c'est la company ou une skill.
             _currentXp = 0;
             _currentLevel = 1;
-
-            this.FixNextXpRequired<Company>();
+            _mc = c;
+            _skill = false;
+            this.FixNextXpRequired();
         }
 
         public int CurrentLevel
@@ -37,7 +41,7 @@ namespace SRH.Core
             set { _currentLevel = value; }
         }
 
-        public void IncreaseXp<T>( int xp ) 
+        public void IncreaseXp( int xp ) 
         {
             #region Exceptions
             if( xp < 1 ) throw new ArgumentException( "Xp must be positive" );
@@ -50,7 +54,7 @@ namespace SRH.Core
                 this.IncreaseLevel();
 
             _currentXp += xp;
-            this.FixNextXpRequired<T>(); 
+            this.FixNextXpRequired(); 
         }
 
         //public void IncreaseXp<Company>( int xp )
@@ -69,9 +73,10 @@ namespace SRH.Core
         //    this.FixNextXpRequired();
         //}
 
-        private void FixNextXpRequired<T>()
+        private void FixNextXpRequired()
         {
-            if( typeof( T ).Equals( typeof( Skill ) ) )
+
+            if( _skill )
             {
                 #region switch
                 switch( this.CurrentLevel )
@@ -96,7 +101,7 @@ namespace SRH.Core
                 }
             }
                 #endregion
-            if( typeof( T ).Equals( typeof( Company ) ) )
+            if( !_skill )
             {
                 if (this._currentLevel == 1)
                     _xpRequired = 100;
@@ -106,23 +111,18 @@ namespace SRH.Core
         }
         private void IncreaseLevel()
         {
-            _currentLevel += 1;
+             if( _skill )
+             {
+                 _currentLevel += 1;
+             }
+             if( !_skill )
+             {
+                 _mc.AdjustValuesCompany();
+             }
         }
 
 		// TODO : intégrer directement à IncreaseLevelCompany
-		private void AdjustValuesCompany( Company c )
-		{
-			if( this.CurrentLevel == 1 ) c.MaxEmployees = 10;
-			c.MaxEmployees = 10 + ( 2 * ( this.CurrentLevel - 1 ) );
 
-			if(this.CurrentLevel == 1) c.MaxProjectDifficulty = 0.5;
-			if(this.CurrentLevel % 10 == 0) c.MaxProjectDifficulty += 0.5;
-		}
 
-		// TODO : intégrer directement à IncreaseLevelSkill
-		private void AdjustValuesSkill()
-		{
-			this.CurrentLevel += 1;
-		}
     }
 }

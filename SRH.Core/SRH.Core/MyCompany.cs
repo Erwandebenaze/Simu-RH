@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SRH.Core
 {
-	class MyCompany : Company
+	public class MyCompany : Company
 	{
 		int _maxEmployees;
 		double _maxProjectDifficulty;
@@ -19,6 +19,7 @@ namespace SRH.Core
             if( String.IsNullOrWhiteSpace( name ) ) throw new ArgumentNullException( "name" );
             
 			//TODO : Check if the name is already existing
+			_companyLevel = new Level(this);
 			_name = name;
 			_companyLevel = new Level( this );
             _maxEmployees = 10;
@@ -28,6 +29,10 @@ namespace SRH.Core
 			_employees.Add()
         }
 
+        public Level Level
+        {
+            get { return _companyLevel; }
+        }
 		public int MaxEmployees
 		{
 			get { return _maxEmployees; }

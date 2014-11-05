@@ -32,6 +32,7 @@ namespace SRH.Core
         }
 
 		public Guid Id
+		public Guid Id
 		{
 			get { return _id; }
 		}
