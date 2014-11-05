@@ -10,7 +10,7 @@ namespace SRH.Core
     {
         public void FixPriceAndTime()
         {
-            switch( _level.CurrentLevel )
+            switch( Level.CurrentLevel )
             {
                 case 1:
                     _upgradePrice = 1500;

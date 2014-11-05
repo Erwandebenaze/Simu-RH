@@ -42,7 +42,7 @@ namespace SRH.Core
 			_age = _randomEmployee.GetRandomAge();
 		}
 
-		Guid Id
+		public Guid Id
 		{
 			get { return _id; }
 		}

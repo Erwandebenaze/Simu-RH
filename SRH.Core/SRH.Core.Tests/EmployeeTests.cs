@@ -34,10 +34,10 @@ namespace SRH.Core.Tests
             Dictionary<string, Skill> _skills = e.Skills;
             int skillLvl = s.Level.CurrentLevel;
             Assert.That( skillLvl, Is.EqualTo( 1 ) );
-            s.Level.IncreaseXp<Skill>( 50 );
+            s.Level.IncreaseXp( 50 );
             skillLvl = s.Level.CurrentLevel;
             Assert.That( skillLvl, Is.EqualTo( 2 ) );
-            s.Level.IncreaseXp<Skill>( 100 );
+            s.Level.IncreaseXp( 100 );
             skillLvl = s.Level.CurrentLevel;
             Assert.That( skillLvl, Is.EqualTo( 3 ) );
         }
