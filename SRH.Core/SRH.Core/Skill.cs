@@ -14,7 +14,7 @@ namespace SRH.Core
 
         public void Initialize( string skillName, int startLevel = 1 )
         {
-            _level = new Level();
+            _level = new Level(this);
             _skillName = skillName;
             _level.currentLevel = startLevel;
         }

@@ -45,6 +45,7 @@
     <Compile Include="Company.cs" />
     <Compile Include="CompaSkill.cs" />
     <Compile Include="Employee.cs" />
+    <Compile Include="LaborMarket.cs" />
     <Compile Include="Level.cs" />
     <Compile Include="ProjSkill.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

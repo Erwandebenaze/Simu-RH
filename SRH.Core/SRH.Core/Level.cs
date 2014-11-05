@@ -12,11 +12,22 @@ namespace SRH.Core
         int _xpRequired;
         int _currentLevel;
 
-        public Level()
+        public Level( Skill s )
         {
             // TODO : Trouver le moyen de savoir qui appelle le constructeur pour savoir si c'est la company ou une skill.
             _currentXp = 0;
-            this.FixNextXpRequired();
+            _currentLevel = 1;
+
+            this.FixNextXpRequired<Skill>();
+        }
+
+        public Level( Company c )
+        {
+            // TODO : Trouver le moyen de savoir qui appelle le constructeur pour savoir si c'est la company ou une skill.
+            _currentXp = 0;
+            _currentLevel = 1;
+
+            this.FixNextXpRequired<Company>();
         }
 
         public int currentLevel
@@ -25,53 +36,76 @@ namespace SRH.Core
             set { _currentLevel = value; }
         }
 
-        public void IncreaseXp(int xp)
+        public void IncreaseXp<T>( int xp ) 
         {
+            #region Exceptions
             if( xp < 1 ) throw new ArgumentException( "Xp must be positive" );
             if( this._currentLevel == 2 && xp > 100 ) throw new ArgumentException( "Xp is too big for the level" );
             if( this._currentLevel == 3 && xp > 250 ) throw new ArgumentException( "Xp is too big for the level" );
             if( this._currentLevel == 4 && xp > 600 ) throw new ArgumentException( "Xp is too big for the level" );
             if( this._currentLevel == 5 && xp > 1000 ) throw new ArgumentException( "Xp is too big for the level" );
-
+            #endregion
             if (xp + _currentXp >= _xpRequired)
-            {
-                this.IncreaseLevelSkill();
-            }
+                this.IncreaseLevel();
 
             _currentXp += xp;
-            this.FixNextXpRequired(); // À mettre variable
-            // TODO : Si le currentXp+ xp supérieur ou égal à xpRequired, alors, on appelle le lvlup correspondant.
+            this.FixNextXpRequired<T>(); 
         }
 
-        private void FixNextXpRequired()
+        //public void IncreaseXp<Company>( int xp )
+        //{
+        //    #region Exceptions
+        //    if( xp < 1 ) throw new ArgumentException( "Xp must be positive" );
+        //    if( this._currentLevel == 2 && xp > 100 ) throw new ArgumentException( "Xp is too big for the level" );
+        //    if( this._currentLevel == 3 && xp > 250 ) throw new ArgumentException( "Xp is too big for the level" );
+        //    if( this._currentLevel == 4 && xp > 600 ) throw new ArgumentException( "Xp is too big for the level" );
+        //    if( this._currentLevel == 5 && xp > 1000 ) throw new ArgumentException( "Xp is too big for the level" );
+        //    #endregion
+        //    if( xp + _currentXp >= _xpRequired )
+        //        this.IncreaseLevel();
+
+        //    _currentXp += xp;
+        //    this.FixNextXpRequired();
+        //}
+
+        private void FixNextXpRequired<T>()
         {
-            switch( this.currentLevel )
+            if( typeof( T ).Equals( typeof( Skill ) ) )
             {
-                case 1:
-                    _xpRequired = 50;
-                    break;
-                case 2:
-                    _xpRequired = 100;
-                    break;
-                case 3:
-                    _xpRequired = 250;
-                    break;
-                case 4:
-                    _xpRequired = 600;
-                    break;
-                case 5:
-                    _xpRequired = 1000;
-                    break;
+                #region switch
+                switch( this.currentLevel )
+                {
+                    case 1:
+                        _xpRequired = 50;
+                        break;
+                    case 2:
+                        _xpRequired = 100;
+                        break;
+                    case 3:
+                        _xpRequired = 250;
+                        break;
+                    case 4:
+                        _xpRequired = 600;
+                        break;
+                    case 5:
+                        _xpRequired = 1000;
+                        break;
+                    default:
+                        throw new InvalidOperationException("Skill can be only level 1 to 5");
+                }
             }
-
+                #endregion
+            if( typeof( T ).Equals( typeof( Company ) ) )
+            {
+                if (this._currentLevel == 1)
+                    _xpRequired = 100;
+                else 
+                    _xpRequired *=2;
+            }
         }
-        private void IncreaseLevelSkill()
+        private void IncreaseLevel()
         {
             _currentLevel += 1;
-        }
-        public void IncreaseLevelCompany()
-        {
-            throw new NotImplementedException();
         }
     }
 }

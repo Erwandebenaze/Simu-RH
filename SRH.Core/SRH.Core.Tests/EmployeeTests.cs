@@ -27,17 +27,17 @@ namespace SRH.Core.Tests
         }
 
         [Test]
-        public void Upgrade_a_Projskill()
+        public void Upgrade_a_Projskill_for_an_employee()
         {
             Employee e = new Employee( "Dupont", "Jack", 18 );
             Skill s = e.AddSkill<ProjSkill>( "Development" );
             Dictionary<string, Skill> _skills = e.Skills;
             int skillLvl = s._level.currentLevel;
             Assert.That( skillLvl, Is.EqualTo( 1 ) );
-            s._level.IncreaseXp( 50 );
+            s._level.IncreaseXp<Skill>( 50 );
             skillLvl = s._level.currentLevel;
             Assert.That( skillLvl, Is.EqualTo( 2 ) );
-            s._level.IncreaseXp( 100 );
+            s._level.IncreaseXp<Skill>( 100 );
             skillLvl = s._level.currentLevel;
             Assert.That( skillLvl, Is.EqualTo( 3 ) );
         }
