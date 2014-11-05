@@ -6,24 +6,21 @@ using System.Threading.Tasks;
 
 namespace SRH.Core
 {
-    public abstract class Company
+    public class Company
     {
-        readonly string _name;
-        int _companyLevel;
-        int _maxEmployees;
-        int _maxProjectDifficulty;
-        int _wealth;
-        readonly Dictionary<string,Employee> _employees;
+        protected string _name;
+        protected int _wealth;
+        protected readonly Dictionary<Guid,Employee> _employees;
 
-
-        public Company( string name )
-        {
-            if( String.IsNullOrWhiteSpace( name ) ) throw new ArgumentNullException( "name" );
-            //TODO : Check if the name is already existing
-            _name = name;
-            _companyLevel = 1;
-            _maxEmployees = 10;
-            _maxProjectDifficulty = 1;
+        public Company()
+        {   
+			//TODO : Check if the name is already existing
+			_employees = new Dictionary<Guid, Employee>();
+			
+			// TODO : implémenter la liste de projets en cours
+			//_currentProjects = new List<Project>();
+            
+			// _name = GetRandomCompanyName;
             _wealth = 15000;
         }
     }
