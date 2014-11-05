@@ -56,7 +56,7 @@ namespace SRH.Core
 			string FirstName;
 			randomName.TryGetValue( "FirstName", out FirstName );
 			randomName.TryGetValue( "LastName", out LastName );
-			int Age = _randomEmployee.GetRandomAge();
+			int Age = _randomEmployee.GetRandomAge( 18, 25 );
 
 			Employee e = new Employee( this, LastName, FirstName, Age );
 			_employees.Add( e.Id, e );
