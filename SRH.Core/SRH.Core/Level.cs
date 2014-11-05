@@ -15,11 +15,12 @@ namespace SRH.Core
         public Level()
         {
             // TODO : Trouver le moyen de savoir qui appelle le constructeur pour savoir si c'est la company ou une skill.
-            _currentXp = 0;
+			_currentLevel = 1;
+			_currentXp = 0;
             this.FixNextXpRequired();
         }
 
-        public int currentLevel
+        public int CurrentLevel
         {
             get { return _currentLevel; }
             set { _currentLevel = value; }
@@ -73,5 +74,21 @@ namespace SRH.Core
         {
             throw new NotImplementedException();
         }
+
+		// TODO : intégrer directement à IncreaseLevelCompany
+		private void AdjustValuesCompany( Company c )
+		{
+			if( this.CurrentLevel == 1 ) c.MaxEmployees = 10;
+			c.MaxEmployees = 10 + ( 2 * ( this.CurrentLevel - 1 ) );
+
+			if(this.CurrentLevel == 1) c.MaxProjectDifficulty = 0.5;
+			if(this.CurrentLevel % 10 == 0) c.MaxProjectDifficulty += 0.5;
+		}
+
+		// TODO : intégrer directement à IncreaseLevelSkill
+		private void AdjustValuesSkill()
+		{
+			this.CurrentLevel += 1;
+		}
     }
 }

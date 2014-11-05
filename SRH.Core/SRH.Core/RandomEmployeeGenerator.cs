@@ -50,7 +50,7 @@ namespace SRH.Core
 
 		public int GetRandomAge()
 		{
-			return RandomNumberGenerator.Next( 18, 150 );
+			return RandomNumberGenerator.Next( 18, 60 );
 		}
 
 	}

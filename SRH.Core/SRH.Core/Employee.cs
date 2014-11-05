@@ -7,6 +7,7 @@ namespace SRH.Core
 {
     public class Employee
     {
+		readonly Guid _id;
         readonly string _lastName;
         readonly string _firstName;
         int _age;
@@ -18,10 +19,11 @@ namespace SRH.Core
         /// </summary>
         /// <param name="name"></param>
 		/// <param name="firstName"></param>
-		/// <param name="age">Cannot inferior to 18 or superiror to 150</param>
+		/// <param name="age">Cannot inferior to 18 or superiror to 62</param>
         public Employee(string name, string firstName, int age)
         {
-            //exeption
+            //exeptions
+			_id = Guid.NewGuid();
             _lastName = name;
             _firstName = firstName;
             _age = age;
@@ -33,11 +35,16 @@ namespace SRH.Core
 		/// </summary>
 		public Employee()
 		{
+			_id = Guid.NewGuid();
 			Dictionary<string, string> randomName = _randomEmployee.GetRandomName();
 			randomName.TryGetValue( "FirstName", out _firstName );
 			randomName.TryGetValue( "LastName", out _lastName );
 			_age = _randomEmployee.GetRandomAge();
+		}
 
+		Guid Id
+		{
+			get { return _id; }
 		}
 
         public bool Training()
