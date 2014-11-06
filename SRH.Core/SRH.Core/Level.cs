@@ -117,7 +117,7 @@ namespace SRH.Core
              }
              if( !_skill )
              {
-                 _mc.AdjustValuesCompany();
+                _mc.AdjustValuesCompany();
              }
         }
 

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SRH.Core
 {
-	internal class Person
+	public class Person
 	{
 
 		string _firstName;
@@ -15,10 +15,11 @@ namespace SRH.Core
 		// TODO : Implémenter le vieillissement des Persons
 		// DateTime _birthDate;
 		// TODO : Implémenter création aléatoire de skill
-		// List<Skill> _skills;
+		Dictionary<string, Skill> _skills;
 
 		internal Person( string FirstName, string LastName, int Age )
 		{
+			_skills = new Dictionary<string, Skill>();
 			_firstName = FirstName;
 			_lastName = LastName;
 			_age = Age;
@@ -36,6 +37,20 @@ namespace SRH.Core
 		public int Age
 		{
 			get { return _age; }
+		}
+
+		public Dictionary<string, Skill> Skills
+		{
+			get { return _skills; }
+		}
+
+		public T AddSkill<T>( string skillName ) where T : Skill, new()
+		{
+			T s = new T();
+			s.Initialize( skillName );
+			Skills.Add( skillName, s );
+
+			return s;
 		}
 	}
 }

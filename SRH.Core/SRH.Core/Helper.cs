@@ -6,48 +6,19 @@ using System.Threading.Tasks;
 
 namespace SRH.Core
 {
-	namespace SRH.Core
-	{
 		public class Helper
 		{
+			RandomGenerator _randomPersonGenerator = new RandomGenerator();
+
 			/// <summary>
 			/// Creates a random <see cref="Person"/>
 			/// </summary>
 			/// <param name="minAge">Must superior or equal to 18</param>
 			/// <param name="maxAge">Must be inferior or equal to 60</param>
 			/// <returns></returns>
-			public Person CreatePerson( int minAge, int maxAge )
+			public Person CreatePerson( int ageMin, int ageMax )
 			{
-				RandomGenerator r = new RandomGenerator();
-				string FirsName;
-				string LastName;
-
-				Dictionary<string, string> RandomName = r.GetRandomName();
-				RandomName.TryGetValue( "FirstName", out FirsName );
-				RandomName.TryGetValue( "LastName", out LastName );
-
-				int Age = r.GetRandomAge( minAge, maxAge );
-
-				Person p = new Person( FirsName, LastName, Age );
-				return p;
+				return _randomPersonGenerator.GetRandomPerson( ageMin, ageMax);
 			}
-
-			public Person CreatePerson()
-			{
-				RandomGenerator r = new RandomGenerator();
-				string FirsName;
-				string LastName;
-
-				Dictionary<string, string> RandomName = r.GetRandomName();
-				RandomName.TryGetValue( "FirstName", out FirsName );
-				RandomName.TryGetValue( "LastName", out LastName );
-
-				int Age = r.GetRandomAge( 18, 60 );
-
-				Person p = new Person( FirsName, LastName, Age );
-				return p;
-			}
-
 		}
-	}
 }

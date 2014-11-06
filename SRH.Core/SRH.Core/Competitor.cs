@@ -6,8 +6,12 @@ using System.Threading.Tasks;
 
 namespace SRH.Core
 {
-    public class Competitor : MyCompany
+    internal class Competitor : MyCompany
     {
+
+		public Competitor( string Name ) : base ( Name )
+		{
+		}
 		
     }
 }
