@@ -14,7 +14,7 @@ namespace SRH.Core.Tests
         [Test]
         public void Create_company()
         {
-            Company c = new Company();
+            Competitor c = new Competitor();
             Assert.That( c, Is.Not.Null);
         }
 

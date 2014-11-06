@@ -6,13 +6,8 @@ using System.Threading.Tasks;
 
 namespace SRH.Core
 {
-	class LaborMarket
-	{
-		List<Person> _joblessPersons;
-
-		public LaborMarket()
-		{
-
-		}
-	}
+    public class Competitor : MyCompany
+    {
+		
+    }
 }

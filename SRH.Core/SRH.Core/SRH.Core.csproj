@@ -42,12 +42,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Company.cs" />
+    <Compile Include="Competitor.cs" />
     <Compile Include="CompaSkill.cs" />
     <Compile Include="Employee.cs" />
+    <Compile Include="Game.cs" />
+    <Compile Include="Helper.cs" />
     <Compile Include="LaborMarket.cs" />
     <Compile Include="Level.cs" />
     <Compile Include="MyCompany.cs" />
+    <Compile Include="Person.cs" />
     <Compile Include="Project.cs" />
     <Compile Include="ProjSkill.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

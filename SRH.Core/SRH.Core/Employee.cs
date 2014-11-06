@@ -7,7 +7,7 @@ namespace SRH.Core
 {
     public class Employee
     {
-		Company _company;
+		Competitor _company;
 		readonly Guid _id;
         readonly string _lastName;
         readonly string _firstName;
@@ -20,7 +20,7 @@ namespace SRH.Core
         /// <param name="name"></param>
 		/// <param name="firstName"></param>
 		/// <param name="age">Cannot inferior to 18 or superiror to 62</param>
-        public Employee(Company c, string name, string firstName, int age)
+        public Employee(Competitor c, string name, string firstName, int age)
         {
             //exeptions
 			_company = c;
