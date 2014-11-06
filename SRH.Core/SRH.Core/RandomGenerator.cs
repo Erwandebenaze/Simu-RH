@@ -41,17 +41,14 @@ namespace SRH.Core
 			get { return _randomNumberGenerator; }
 		}
 
-		public Dictionary<string, string> GetRandomName()
+		public Person GetRandomPerson( int ageMin, int ageMax )
 		{
-			Dictionary<string, string> randomName = new Dictionary<string, string>();
-			randomName.Add( "FirstName", FirstNames[ RandomNumberGenerator.Next( 0, FirstNames.Count ) ] );
-			randomName.Add( "LastName", LastNames[ RandomNumberGenerator.Next( 0, FirstNames.Count ) ] );
-			return randomName;
-		}
+			string RandomFirstName = FirstNames[ RandomNumberGenerator.Next( 0, FirstNames.Count ) ];
+			string RandomLastName = LastNames[ RandomNumberGenerator.Next( 0, FirstNames.Count ) ];
+			int RandomAge = RandomNumberGenerator.Next( 18, 60 );
 
-		public int GetRandomAge(int ageMin, int ageMax)
-		{
-			return RandomNumberGenerator.Next( ageMin, ageMax );
+			Person p = new Person( RandomFirstName, RandomLastName, RandomAge );
+			return p;
 		}
 	}
 }

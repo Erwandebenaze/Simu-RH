@@ -72,14 +72,14 @@ namespace SRH.Core
 
         public void AffectEmployeeToAJob(Employee e, string skill)
         {
-            if( _skillsRequired.ContainsKey( skill ) && e.Skills.ContainsKey( skill ) ) 
+            if( _skillsRequired.ContainsKey( skill ) && e.Worker.Skills.ContainsKey( skill ) ) 
             _employeesAffectedWithSkill.Add( e, skill );
             _skillsRequired.Remove( skill );
         }
 
         public void RemoveEmployeeFromAJob( Employee e, string skill )
         {
-            if( !_skillsRequired.ContainsKey( skill ) && e.Skills.ContainsKey( skill ) )
+            if( !_skillsRequired.ContainsKey( skill ) && e.Worker.Skills.ContainsKey( skill ) )
                 _employeesAffectedWithSkill.Remove( e );
             // 1 à mettre en variable
             _skillsRequired.Add( skill, 1 );

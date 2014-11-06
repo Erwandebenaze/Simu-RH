@@ -14,15 +14,15 @@ namespace SRH.Core.Tests
         [Test]
         public void Create_company()
         {
-            Company c = new Company();
+            MyCompany c = new MyCompany("SimuRH");
             Assert.That( c, Is.Not.Null);
         }
 
         [Test]
-        public void Create_mycompany()
+        public void Create_competitor()
         {
-            MyCompany mc = new MyCompany("Danone");
-            Assert.That( mc, Is.Not.Null );
+            Competitor c = new Competitor("Danone");
+            Assert.That( c, Is.Not.Null );
         }
 
         [Test]
@@ -50,8 +50,8 @@ namespace SRH.Core.Tests
         public void Our_company_takes_experience_and_upgrade_his_level()
         {
             MyCompany mc = new MyCompany( "Danone" );
-            mc.Level.IncreaseXp( 100 );
-            Assert.That( mc.Level.CurrentLevel, Is.EqualTo( 2 ) );
+            mc.CompanyLevel.IncreaseXp( 101 );
+			Assert.That( mc.CompanyLevel.CurrentLevel, Is.EqualTo( 2 ) );
         }
     }
 }

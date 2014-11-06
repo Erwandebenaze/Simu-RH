@@ -6,18 +6,19 @@ using System.Threading.Tasks;
 
 namespace SRH.Core
 {
-    //class LaborMarket
-    //{
-    //    Dictionary<Guid, Employee> _employeesInMarket;
-
-    //    public LaborMarket()
-    //    {
-    //        _employeesInMarket = new Dictionary<Guid, Employee>();
-    //        for( int i=0; i < 100; i++ )
-    //        {
-    //            Employee e = new Employee();
-    //            _employeesInMarket.Add( e.Id,e );
-    //        }
-    //    }
-    //}
+	class LaborMarket
+	{
+		List<Person> _joblessPersons;
+		Helper _personMaker;
+		public LaborMarket()
+		{
+			_joblessPersons = new List<Person>();
+			_personMaker = new Helper();
+			for( int i = 0; i <= 100; i++ )
+			{
+				Person p = _personMaker.CreatePerson( 18, 60 );
+				_joblessPersons.Add( p );
+			}
+		}
+	}
 }
