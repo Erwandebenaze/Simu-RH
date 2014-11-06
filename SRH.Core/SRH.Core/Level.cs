@@ -111,14 +111,11 @@ namespace SRH.Core
         }
         private void IncreaseLevel()
         {
-             if( _skill )
-             {
-                 _currentLevel += 1;
-             }
              if( !_skill )
              {
                 _mc.AdjustValuesCompany();
              }
+			 _currentLevel += 1;
         }
 
 		// TODO : intégrer directement à IncreaseLevelCompany

@@ -50,7 +50,7 @@ namespace SRH.Core.Tests
         public void Our_company_takes_experience_and_upgrade_his_level()
         {
             MyCompany mc = new MyCompany( "Danone" );
-            mc.CompanyLevel.IncreaseXp( 100 );
+            mc.CompanyLevel.IncreaseXp( 101 );
 			Assert.That( mc.CompanyLevel.CurrentLevel, Is.EqualTo( 2 ) );
         }
     }

@@ -18,7 +18,7 @@ namespace SRH.Core
 		public MyCompany( string Name )
         {
 			if( String.IsNullOrWhiteSpace( Name ) ) throw new ArgumentNullException( "The company name cannot be null or a whitespace" );
-			//TODO : Check if the name is already existing
+			//TODO : Check if the name is already existing (saved)
 			_name = Name;
 			_employees = new List<Employee>();
             _wealth = 15000;
