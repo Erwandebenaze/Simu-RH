@@ -31,15 +31,21 @@
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.listView1 = new System.Windows.Forms.ListView();
-            this.Projet = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.Niveau = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.Gain = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.Temps = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.Project = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.LevelRequired = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.EarningsExpected = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.Time = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.listView2 = new System.Windows.Forms.ListView();
+            this.ProjectRunning = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.Level = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.Earnings = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.TimeLeft = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
             this.splitContainer2.Panel1.SuspendLayout();
+            this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -52,8 +58,8 @@
             // splitContainer1.Panel1
             // 
             this.splitContainer1.Panel1.Controls.Add(this.splitContainer2);
-            this.splitContainer1.Size = new System.Drawing.Size(1039, 690);
-            this.splitContainer1.SplitterDistance = 390;
+            this.splitContainer1.Size = new System.Drawing.Size(1100, 630);
+            this.splitContainer1.SplitterDistance = 412;
             this.splitContainer1.TabIndex = 0;
             // 
             // splitContainer2
@@ -66,49 +72,89 @@
             // splitContainer2.Panel1
             // 
             this.splitContainer2.Panel1.Controls.Add(this.listView1);
-            this.splitContainer2.Size = new System.Drawing.Size(390, 690);
-            this.splitContainer2.SplitterDistance = 333;
+            // 
+            // splitContainer2.Panel2
+            // 
+            this.splitContainer2.Panel2.Controls.Add(this.listView2);
+            this.splitContainer2.Size = new System.Drawing.Size(412, 630);
+            this.splitContainer2.SplitterDistance = 274;
             this.splitContainer2.TabIndex = 0;
             // 
             // listView1
             // 
-            this.listView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.Projet,
-            this.Niveau,
-            this.Gain,
-            this.Temps});
-            this.listView1.Location = new System.Drawing.Point(3, 41);
+            this.Project,
+            this.LevelRequired,
+            this.EarningsExpected,
+            this.Time});
+            this.listView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listView1.Location = new System.Drawing.Point(0, 0);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(384, 289);
+            this.listView1.Size = new System.Drawing.Size(412, 274);
             this.listView1.TabIndex = 0;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
             // 
-            // Projet
+            // Project
             // 
-            this.Projet.Text = "Projet";
-            this.Projet.Width = 88;
+            this.Project.Text = "Projet proposés";
+            this.Project.Width = 110;
             // 
-            // Niveau
+            // LevelRequired
             // 
-            this.Niveau.Text = "Niveau";
-            this.Niveau.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.Niveau.Width = 87;
+            this.LevelRequired.Text = "Niveau";
+            this.LevelRequired.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.LevelRequired.Width = 85;
             // 
-            // Gain
+            // EarningsExpected
             // 
-            this.Gain.Text = "Gain";
-            this.Gain.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.Gain.Width = 89;
+            this.EarningsExpected.Text = "Gain";
+            this.EarningsExpected.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.EarningsExpected.Width = 85;
             // 
-            // Temps
+            // Time
             // 
-            this.Temps.Text = "Temps";
-            this.Temps.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.Temps.Width = 93;
+            this.Time.Text = "Temps";
+            this.Time.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.Time.Width = 85;
+            // 
+            // listView2
+            // 
+            this.listView2.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.ProjectRunning,
+            this.Level,
+            this.Earnings,
+            this.TimeLeft});
+            this.listView2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listView2.Location = new System.Drawing.Point(0, 0);
+            this.listView2.Name = "listView2";
+            this.listView2.Size = new System.Drawing.Size(412, 352);
+            this.listView2.TabIndex = 0;
+            this.listView2.UseCompatibleStateImageBehavior = false;
+            this.listView2.View = System.Windows.Forms.View.Details;
+            // 
+            // ProjectRunning
+            // 
+            this.ProjectRunning.Text = "Projet";
+            this.ProjectRunning.Width = 110;
+            // 
+            // Level
+            // 
+            this.Level.Text = "Niveau";
+            this.Level.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.Level.Width = 85;
+            // 
+            // Earnings
+            // 
+            this.Earnings.Text = "Gain";
+            this.Earnings.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.Earnings.Width = 85;
+            // 
+            // TimeLeft
+            // 
+            this.TimeLeft.Text = "Temps restant";
+            this.TimeLeft.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.TimeLeft.Width = 105;
             // 
             // UcProjectPage
             // 
@@ -116,11 +162,12 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.splitContainer1);
             this.Name = "UcProjectPage";
-            this.Size = new System.Drawing.Size(1039, 690);
+            this.Size = new System.Drawing.Size(1100, 630);
             this.splitContainer1.Panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
             this.splitContainer2.Panel1.ResumeLayout(false);
+            this.splitContainer2.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -132,10 +179,15 @@
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.SplitContainer splitContainer2;
         private System.Windows.Forms.ListView listView1;
-        private System.Windows.Forms.ColumnHeader Projet;
-        private System.Windows.Forms.ColumnHeader Niveau;
-        private System.Windows.Forms.ColumnHeader Gain;
-        private System.Windows.Forms.ColumnHeader Temps;
+        private System.Windows.Forms.ColumnHeader Project;
+        private System.Windows.Forms.ColumnHeader LevelRequired;
+        private System.Windows.Forms.ColumnHeader EarningsExpected;
+        private System.Windows.Forms.ColumnHeader Time;
+        private System.Windows.Forms.ListView listView2;
+        private System.Windows.Forms.ColumnHeader ProjectRunning;
+        private System.Windows.Forms.ColumnHeader Level;
+        private System.Windows.Forms.ColumnHeader Earnings;
+        private System.Windows.Forms.ColumnHeader TimeLeft;
 
     }
 }

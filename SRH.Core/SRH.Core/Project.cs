@@ -17,7 +17,10 @@ namespace SRH.Core
         readonly Dictionary<string, int> _skillsRequired;
         Dictionary<Employee, string> _employeesAffectedWithSkill;
 
-
+        public string Name
+        {
+            get { return _name; }
+        } 
         public bool Activated
         {
             get { return _activated; }

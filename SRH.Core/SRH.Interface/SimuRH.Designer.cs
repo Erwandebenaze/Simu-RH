@@ -32,15 +32,18 @@
             this.BureauPage = new System.Windows.Forms.TabPage();
             this.EmployésPage = new System.Windows.Forms.TabPage();
             this.ProjetTable = new System.Windows.Forms.TabPage();
+            this.ucProjectPage1 = new SRH.Interface.UcProjectPage();
             this.EntreprisePage = new System.Windows.Forms.TabPage();
             this.ResumeEntreprisePage = new System.Windows.Forms.TabPage();
-            this.ucProjectPage1 = new SRH.Interface.UcProjectPage();
             this.tabControl1.SuspendLayout();
             this.ProjetTable.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
             // 
+            this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControl1.Controls.Add(this.BureauPage);
             this.tabControl1.Controls.Add(this.EmployésPage);
             this.tabControl1.Controls.Add(this.ProjetTable);
@@ -83,6 +86,16 @@
             this.ProjetTable.Text = "Gestion projets";
             this.ProjetTable.UseVisualStyleBackColor = true;
             // 
+            // ucProjectPage1
+            // 
+            this.ucProjectPage1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.ucProjectPage1.Location = new System.Drawing.Point(3, 3);
+            this.ucProjectPage1.Name = "ucProjectPage1";
+            this.ucProjectPage1.Size = new System.Drawing.Size(1003, 592);
+            this.ucProjectPage1.TabIndex = 0;
+            // 
             // EntreprisePage
             // 
             this.EntreprisePage.Location = new System.Drawing.Point(4, 25);
@@ -102,14 +115,6 @@
             this.ResumeEntreprisePage.TabIndex = 4;
             this.ResumeEntreprisePage.Text = "Résumé entreprises";
             this.ResumeEntreprisePage.UseVisualStyleBackColor = true;
-            // 
-            // ucProjectPage1
-            // 
-            this.ucProjectPage1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ucProjectPage1.Location = new System.Drawing.Point(3, 3);
-            this.ucProjectPage1.Name = "ucProjectPage1";
-            this.ucProjectPage1.Size = new System.Drawing.Size(1003, 592);
-            this.ucProjectPage1.TabIndex = 0;
             // 
             // Form1
             // 
