@@ -11,7 +11,7 @@ namespace SRH.Core
 		List<Person> _joblessPersons;
 		Helper _personMaker;
 
-		public LaborMarket()
+		internal LaborMarket()
 		{
 			_joblessPersons = new List<Person>();
 			_personMaker = new Helper( this );

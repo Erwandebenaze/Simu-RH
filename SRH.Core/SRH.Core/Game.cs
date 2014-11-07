@@ -17,28 +17,32 @@ namespace SRH.Core
 		static int _randomSerie;
 		List<Project> _possibleProjects;
 
-		public Game( int Seed, string CompanyName )
+		public Game( int seed, string companyName )
 		{
 			_market = new LaborMarket();
 			_possibleProjects = new List<Project>();
 			_competitors = new List<Competitor>();
-			_randomNumberGenerator = new Random( Seed );
+			_randomNumberGenerator = new Random( seed );
 			_randomSerie = _randomNumberGenerator.Next();
-			_playerCompany = new MyCompany( CompanyName );
+			_playerCompany = new MyCompany( companyName );
 		}
 
         public MyCompany PlayerCompany
         {
             get { return _playerCompany; }
         }
-
-		public Random RandomNumberGenerator
-		{
-			get { return _randomNumberGenerator; }
-		}
 		public static int RandomSerie
 		{
 			get { return _randomSerie; }
+		}
+
+		/// <summary>
+		/// Static method to get a <see cref="RandomGenerator"/>
+		/// </summary>
+		/// <returns>An instance of <see cref="RandomGenerator"/></returns>
+		internal static RandomGenerator GetRandomGenerator()
+		{
+			return new RandomGenerator( _randomNumberGenerator );
 		}
 		public void LoadGame()
 		{
