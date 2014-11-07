@@ -12,6 +12,7 @@ namespace SRH.Core
 		protected int _wealth;
 		protected int _maxEmployees;
 		protected readonly List<Employee> _employees;
+        List<Project> _project;
 		Level _companyLevel;
 		double _maxProjectDifficulty;
 
@@ -25,6 +26,7 @@ namespace SRH.Core
 			_companyLevel = new Level( this );
 			_maxProjectDifficulty = 1;
 			_maxEmployees = 10;
+            _project = new List<Project>();
         }
 
 		public string Name

@@ -37,6 +37,7 @@ namespace SRH.Core
 		public int Age
 		{
 			get { return _age; }
+            private set { _age = value; }
 		}
 
 		public Dictionary<string, Skill> Skills
@@ -52,5 +53,15 @@ namespace SRH.Core
 
 			return s;
 		}
+
+        /// <summary>
+        /// Add a year in the first January of the new year.
+        /// </summary>
+        /// <returns></returns>
+        public int AddAYear()
+        {
+            this.Age += 1;
+            return this.Age;
+        }
 	}
 }

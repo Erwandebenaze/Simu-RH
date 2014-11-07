@@ -30,13 +30,13 @@ namespace SRH.Interface
         protected override void OnLoad( EventArgs e )
         {
             base.OnLoad( e );
-            List<Project> projectsPossible = new List<Project>();
-            projectsPossible.Add( new Project( "Danone", 1, 2, 1000, 3 ) );
-            projectsPossible.Add( new Project( "Nestle", 1, 2, 2000, 4 ) );
-            projectsPossible.Add( new Project( "Accord", 1, 2, 3000, 5 ) );
+            List<Project> possibleProjects = new List<Project>();
+            possibleProjects.Add( new Project( "Danone", 1, 2, 1000, 3 ) );
+            possibleProjects.Add( new Project( "Nestle", 1, 2, 2000, 4 ) );
+            possibleProjects.Add( new Project( "Accord", 1, 2, 3000, 5 ) );
             //list.Add( new Project() { ProjectName = "titi", Duration = "trois semaines", Earnings = "trois cents", Level = "****" } );
 
-            listView1.Items.AddRange( projectsPossible.Select( p => Create( p ) ).ToArray() );
+            listView1.Items.AddRange( possibleProjects.Select( p => Create( p ) ).ToArray() );
 
             // TODO : Ajouter la liste pour les projets en cours lorsque le temps sera définit.
         }

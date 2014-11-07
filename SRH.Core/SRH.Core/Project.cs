@@ -12,40 +12,56 @@ namespace SRH.Core
         readonly int _difficulty;
         readonly int _numberOfWorkers;
         readonly int _duration;
+        private int _timeSpent;
         readonly int _earnings;
         bool _activated;
         readonly Dictionary<string, int> _skillsRequired;
         Dictionary<Employee, string> _employeesAffectedWithSkill;
 
+        #region Getter
         public string Name
         {
             get { return _name; }
-        } 
-        public bool Activated
-        {
-            get { return _activated; }
-            set { _activated = value; }
         }
         public int Difficulty
         {
             get { return _difficulty; }
-        } 
+        }
         public int NumberOfWorkers
         {
             get { return _numberOfWorkers; }
-        } 
+        }
         public int Earnings
         {
             get { return _earnings; }
-        } 
+        }
 
         public int Duration
         {
             get { return _duration; }
         } 
+        #endregion
+        #region GetterSetter
+        public int TimeSpent
+        {
+            get { return _timeSpent; }
+            set { _timeSpent = value; }
+        }
+        public bool Activated
+        {
+            get { return _activated; }
+            set { _activated = value; }
+        } 
+        #endregion
 
-
-
+        /// <summary>
+        /// Initialises a new Project.
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="difficulty">1 to 5</param>
+        /// <param name="numberOfWorkers"> Superior than 1</param>
+        /// <param name="earnings"> Superior than 100</param>
+        /// <param name="duration">In month. Superior than 1 month</param>
         public Project(string name, int difficulty, int numberOfWorkers, int earnings, int duration)
         {
             if( String.IsNullOrWhiteSpace( name ) ) throw new ArgumentNullException( "name" );
@@ -65,6 +81,11 @@ namespace SRH.Core
             GenerateSkillsRequired(numberOfWorkers);
         }
         
+        /// <summary>
+        /// For the moment, add 2 skills Development and ProjMangment. 
+        /// TODO : Random generation of skill which depends of numberOfWorkers
+        /// </summary>
+        /// <param name="numberOfWorkers"></param>
         private void GenerateSkillsRequired(int numberOfWorkers)
         {
             // TODO : Générer aléatoirement les compétences requises pour faire un projet
@@ -73,21 +94,37 @@ namespace SRH.Core
             _skillsRequired.Add( "ProjManagment", 1 );
         }
 
+        /// <summary>
+        /// Affect an employee to a job. That method remove the skillRequired who is passed in parameter. The project is not activated
+        /// </summary>
+        /// <param name="e"></param>
+        /// <param name="skill"></param>
         public void AffectEmployeeToAJob(Employee e, string skill)
         {
-            if( _skillsRequired.ContainsKey( skill ) && e.Worker.Skills.ContainsKey( skill ) ) 
+            if( _skillsRequired.ContainsKey( skill ) && e.Worker.Skills.ContainsKey( skill ) && !this.Activated) 
             _employeesAffectedWithSkill.Add( e, skill );
             _skillsRequired.Remove( skill );
         }
 
+        /// <summary>
+        /// Remove an Employee from a job if the project is not activated. 
+        /// TODO : Put again the skill in skillsRequired  with the good difficulty
+        /// </summary>
+        /// <param name="e"></param>
+        /// <param name="skill"></param>
         public void RemoveEmployeeFromAJob( Employee e, string skill )
         {
-            if( !_skillsRequired.ContainsKey( skill ) && e.Worker.Skills.ContainsKey( skill ) )
+            if( !_skillsRequired.ContainsKey( skill ) && e.Worker.Skills.ContainsKey( skill ) && !this.Activated )
                 _employeesAffectedWithSkill.Remove( e );
             // 1 à mettre en variable
             _skillsRequired.Add( skill, 1 );
         }
 
+        /// <summary>
+        /// Begin the project if he is not activated yet and skillsRequired is empty. 
+        /// Activated become true.
+        /// </summary>
+        /// <returns>Activated</returns>
         public bool BeginProject()
         {
             if( Activated ) throw new InvalidOperationException( "A project can not be lunched if he has been already begin." );
@@ -97,6 +134,11 @@ namespace SRH.Core
             return Activated;
         }
 
+        /// <summary>
+        /// Stop the project if he is activated.
+        /// Activated become fakse.
+        /// </summary>
+        /// <returns>Activated</returns>
         public bool StopProject()
         {
             if( !Activated ) throw new InvalidOperationException( "A project can not be stoped if he is not begun." );

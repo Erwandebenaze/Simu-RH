@@ -36,7 +36,7 @@
             this.EarningsExpected = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Time = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.listView2 = new System.Windows.Forms.ListView();
-            this.ProjectRunning = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.currentProject = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Level = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Earnings = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.TimeLeft = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -121,7 +121,7 @@
             // listView2
             // 
             this.listView2.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.ProjectRunning,
+            this.currentProject,
             this.Level,
             this.Earnings,
             this.TimeLeft});
@@ -133,10 +133,10 @@
             this.listView2.UseCompatibleStateImageBehavior = false;
             this.listView2.View = System.Windows.Forms.View.Details;
             // 
-            // ProjectRunning
+            // currentProject
             // 
-            this.ProjectRunning.Text = "Projet";
-            this.ProjectRunning.Width = 110;
+            this.currentProject.Text = "Projet";
+            this.currentProject.Width = 110;
             // 
             // Level
             // 
@@ -184,7 +184,7 @@
         private System.Windows.Forms.ColumnHeader EarningsExpected;
         private System.Windows.Forms.ColumnHeader Time;
         private System.Windows.Forms.ListView listView2;
-        private System.Windows.Forms.ColumnHeader ProjectRunning;
+        private System.Windows.Forms.ColumnHeader currentProject;
         private System.Windows.Forms.ColumnHeader Level;
         private System.Windows.Forms.ColumnHeader Earnings;
         private System.Windows.Forms.ColumnHeader TimeLeft;
