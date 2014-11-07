@@ -12,17 +12,20 @@ namespace SRH.Core
 		string _firstName;
 		string _lastName;
 		int _age;
-		// TODO : Implémenter le vieillissement des Persons
-		// DateTime _birthDate;
+        readonly DateTime _birthDate;
 		// TODO : Implémenter création aléatoire de skill
 		Dictionary<string, Skill> _skills;
 
-		internal Person( string FirstName, string LastName, int Age )
+
+		internal Person( string firstName, string lastName, int age )
 		{
 			_skills = new Dictionary<string, Skill>();
-			_firstName = FirstName;
-			_lastName = LastName;
-			_age = Age;
+			_firstName = firstName;
+			_lastName = lastName;
+			_age = age;
+            int month = 2;
+            int year = 2015 - age;
+            _birthDate = new DateTime(year,month,01);
 		}
 		public string FirstName
 		{
@@ -33,7 +36,10 @@ namespace SRH.Core
 		{
 			get { return _lastName; }
 		}
-
+        public DateTime BirthDate
+        {
+            get { return _birthDate; }
+        } 
 		public int Age
 		{
 			get { return _age; }

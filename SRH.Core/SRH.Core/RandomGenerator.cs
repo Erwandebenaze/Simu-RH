@@ -50,5 +50,11 @@ namespace SRH.Core
 			Person p = new Person( RandomFirstName, RandomLastName, RandomAge );
 			return p;
 		}
+
+        public int GetRandomMonth()
+        {
+            int month = RandomNumberGenerator.Next( 1, 12 );
+            return month;
+        }
 	}
 }
