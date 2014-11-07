@@ -54,6 +54,19 @@ namespace SRH.Core
 			get { return _maxProjectDifficulty; }
 			private set { _maxProjectDifficulty = value; }
 		}
+
+		internal bool AddEmployee( Person p )
+		{
+			Employee e = new Employee( p );
+			_employees.Add( e );
+			return ( _employees.Exists( x => x.Equals( e ) ) ) && ( p.Lb.RemovePerson( p ) );
+		}
+		internal bool RemoveEmployee( Employee e )
+		{
+			_employees.Remove( e );
+			return !( _employees.Exists( x => x.Equals( e ) ) ) && ( e.Worker.Lb.AddPerson( e.Worker ) );
+		}
+
 		 public void AdjustValuesCompany()
         {
 			if( this.CompanyLevel.CurrentLevel == 1 ) this.MaxEmployees = 10;

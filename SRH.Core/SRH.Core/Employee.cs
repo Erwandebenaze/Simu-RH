@@ -32,7 +32,6 @@ namespace SRH.Core
 
             throw new NotImplementedException();
             //Retourne true ou false si la compétence a été augmenté (problème d'argent, la compétence n'est ps instanciée (exeption)
-            
         }
     }
 }

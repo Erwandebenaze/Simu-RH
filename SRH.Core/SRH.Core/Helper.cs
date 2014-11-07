@@ -6,9 +6,16 @@ using System.Threading.Tasks;
 
 namespace SRH.Core
 {
-		public class Helper
+		internal class Helper
 		{
-			RandomGenerator _randomPersonGenerator = new RandomGenerator();
+			RandomGenerator _randomPersonGenerator;
+			LaborMarket _lb;
+
+			public Helper( LaborMarket Lb)
+			{
+				_randomPersonGenerator = new RandomGenerator();
+				_lb = Lb;
+			}
 
 			/// <summary>
 			/// Creates a random <see cref="Person"/>
@@ -18,7 +25,7 @@ namespace SRH.Core
 			/// <returns></returns>
 			public Person CreatePerson( int ageMin, int ageMax )
 			{
-				return _randomPersonGenerator.GetRandomPerson( ageMin, ageMax);
+				return _randomPersonGenerator.GetRandomPerson( _lb, ageMin, ageMax);
 			}
 		}
 }
