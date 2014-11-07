@@ -16,6 +16,7 @@ namespace SRH.Core
 		// TODO : Implémenter création aléatoire de skill
 		Dictionary<string, Skill> _skills;
 		LaborMarket _lb;
+        Random rand;
 
 
 		internal Person( LaborMarket lb, string firstName, string lastName, int age )
@@ -24,11 +25,29 @@ namespace SRH.Core
 			_firstName = firstName;
 			_lastName = lastName;
 			_age = age;
-            int month = 2;
+            rand = new Random();
+            int month = rand.Next( 1, 12 );
+            GetRandomDay( month );
             int year = 2015 - age;
             _birthDate = new DateTime(year,month,01);
             _lb = lb;
 		}
+
+        private int GetRandomDay( int month )
+        {
+            if( month == 2 )
+            {
+                return rand.Next( 1, 28 );
+            }
+            else if( month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12 )
+            {
+                return rand.Next( 1, 31 );
+            }
+            else
+            {
+                return rand.Next( 1, 30 );
+            }
+        }
 		public string FirstName
 		{
 			get { return _firstName; }
