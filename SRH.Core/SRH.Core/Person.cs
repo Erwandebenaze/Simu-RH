@@ -18,7 +18,7 @@ namespace SRH.Core
 		LaborMarket _lb;
 
 
-		internal Person( string firstName, string lastName, int age )
+		internal Person( LaborMarket lb, string firstName, string lastName, int age )
 		{
 			_skills = new Dictionary<string, Skill>();
 			_firstName = firstName;
@@ -27,6 +27,7 @@ namespace SRH.Core
             int month = 2;
             int year = 2015 - age;
             _birthDate = new DateTime(year,month,01);
+            _lb = lb;
 		}
 		public string FirstName
 		{
