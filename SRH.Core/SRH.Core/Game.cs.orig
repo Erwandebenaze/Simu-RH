@@ -10,6 +10,8 @@ namespace SRH.Core
 	{
 		LaborMarket _market;
         MyCompany _playerCompany;
+
+
 		List<Competitor> _competitors;
 		static Random _randomNumberGenerator;
 		static int _randomSerie;
@@ -20,15 +22,24 @@ namespace SRH.Core
 			_market = new LaborMarket();
 			_possibleProjects = new List<Project>();
 			_competitors = new List<Competitor>();
-			_randomNumberGenerator = new Random(seed);
+			_randomNumberGenerator = new Random( seed );
 			_randomSerie = _randomNumberGenerator.Next();
-			_playerCompany = new MyCompany( companyName );
+<<<<<<< HEAD
+			_playerCompany = new MyCompany( CompanyName );
 		}
 
         public MyCompany PlayerCompany
         {
             get { return _playerCompany; }
         }
+
+		public Random RandomNumberGenerator
+		{
+			get { return _randomNumberGenerator; }
+=======
+			_playerCompany = new MyCompany( companyName );
+>>>>>>> origin/develop
+		}
 		public static int RandomSerie
 		{
 			get { return _randomSerie; }

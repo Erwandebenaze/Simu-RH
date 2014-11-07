@@ -56,7 +56,7 @@ namespace SRH.Core
 			if( ageMax > 60 ) throw new ArgumentException( "The maximum age of a Person must be 60 or less." );
 
 			string RandomFirstName = FirstNames[ RandomNumberGenerator.Next( 0, FirstNames.Count ) ];
-			string RandomLastName = LastNames[ RandomNumberGenerator.Next( 0, FirstNames.Count ) ];
+			string RandomLastName = LastNames[ RandomNumberGenerator.Next( 0, LastNames.Count ) ];
 			int RandomAge = RandomNumberGenerator.Next( ageMin, ageMax );
 
 			Person p = new Person( Lb, RandomFirstName, RandomLastName, RandomAge );
