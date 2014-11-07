@@ -12,6 +12,13 @@ namespace SRH.Core.Tests
     class CompanyTests
     {
         [Test]
+        public void Create_game()
+        {
+            Game myGame = new Game( 1, "IziProj" );
+            Assert.That( myGame, Is.Not.Null );
+        }
+
+        [Test]
         public void Create_company()
         {
             MyCompany c = new MyCompany("SimuRH");
@@ -52,6 +59,13 @@ namespace SRH.Core.Tests
             MyCompany mc = new MyCompany( "Danone" );
             mc.CompanyLevel.IncreaseXp( 101 );
 			Assert.That( mc.CompanyLevel.CurrentLevel, Is.EqualTo( 2 ) );
+        }
+
+        [Test]
+        public void Add_enmployee_to_mycompany()
+        {
+            MyCompany mc = new MyCompany( "Danone" );
+            Assert.That( mc.MaxProjectDifficulty, Is.EqualTo( 1 ) );
         }
     }
 }

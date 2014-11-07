@@ -11,6 +11,8 @@ namespace SRH.Core.Tests
     [TestFixture]
     class ProjectTests
     {
+        Project iz = new Project( "IziProj", 1, 2, 2000, 2 );
+
         [Test]
         public void Create_project()
         {
@@ -52,6 +54,19 @@ namespace SRH.Core.Tests
         {
             Project p = new Project( "SimuRh", 1, 2, 1000, 1 );
         }
+
+        [Test]
+        [ExpectedException( typeof( InvalidOperationException ) )]
+        public void Begin_a_project()
+        {
+            iz.BeginProject();
+        }
+
+        //[Test]
+        //public void Begin_a_project()
+        //{
+        //    iz.BeginProject();
+        //}
 
     }
 }

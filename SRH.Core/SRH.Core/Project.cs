@@ -128,8 +128,9 @@ namespace SRH.Core
         public bool BeginProject()
         {
             if( Activated ) throw new InvalidOperationException( "A project can not be lunched if he has been already begin." );
-            if (_skillsRequired.Count == 0)
+            if( _skillsRequired.Count == 0 )
                 Activated = true;
+            else throw new InvalidOperationException( "Every skills must be taken before begin a project" );
 
             return Activated;
         }

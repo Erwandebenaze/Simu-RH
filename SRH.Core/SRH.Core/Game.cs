@@ -9,7 +9,9 @@ namespace SRH.Core
 	public class Game
 	{
 		LaborMarket _market;
-		MyCompany _playerCompany;
+        MyCompany _playerCompany;
+
+
 		List<Competitor> _competitors;
 		static Random _randomNumberGenerator;
 		static int _randomSerie;
@@ -24,6 +26,11 @@ namespace SRH.Core
 			_randomSerie = _randomNumberGenerator.Next();
 			_playerCompany = new MyCompany( CompanyName );
 		}
+
+        public MyCompany PlayerCompany
+        {
+            get { return _playerCompany; }
+        }
 
 		public Random RandomNumberGenerator
 		{
