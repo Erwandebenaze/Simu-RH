@@ -13,9 +13,13 @@ namespace SRH.Core
 		List<Competitor> _competitors;
 		static Random _randomNumberGenerator;
 		static int _randomSerie;
+		List<Project> _possibleProjects;
 
 		public Game( int Seed, string CompanyName )
 		{
+			_market = new LaborMarket();
+			_possibleProjects = new List<Project>();
+			_competitors = new List<Competitor>();
 			_randomNumberGenerator = new Random( Seed );
 			_randomSerie = _randomNumberGenerator.Next();
 			_playerCompany = new MyCompany( CompanyName );

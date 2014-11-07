@@ -6,19 +6,43 @@ using System.Threading.Tasks;
 
 namespace SRH.Core
 {
-	class LaborMarket
+	internal class LaborMarket
 	{
 		List<Person> _joblessPersons;
 		Helper _personMaker;
+
 		public LaborMarket()
 		{
 			_joblessPersons = new List<Person>();
-			_personMaker = new Helper();
+			_personMaker = new Helper( this );
 			for( int i = 0; i <= 100; i++ )
 			{
 				Person p = _personMaker.CreatePerson( 18, 60 );
-				_joblessPersons.Add( p );
+				if( !( this.AddPerson( p ) ) ) throw new Exception( "A person wasn't added proprely to LoborMarket." );
 			}
 		}
+
+		public Helper PersonMaker
+		{
+			get { return _personMaker; }
+		}
+		public List<Person> JoblessPersons
+		{
+			get { return _joblessPersons; }
+		}
+
+		internal bool AddPerson(Person p)
+		{
+			_joblessPersons.Add( p );
+			return ( _joblessPersons.Exists( x => x.Equals( p ) ) );
+		}
+
+		internal bool RemovePerson(Person p)
+		{
+			_joblessPersons.Remove( p );
+			return !( _joblessPersons.Exists( x => x.Equals( p ) ) );
+		}
+
+
 	}
 }

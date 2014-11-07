@@ -41,13 +41,13 @@ namespace SRH.Core
 			get { return _randomNumberGenerator; }
 		}
 
-		public Person GetRandomPerson( int ageMin, int ageMax )
+		public Person GetRandomPerson( LaborMarket Lb, int ageMin, int ageMax )
 		{
 			string RandomFirstName = FirstNames[ RandomNumberGenerator.Next( 0, FirstNames.Count ) ];
 			string RandomLastName = LastNames[ RandomNumberGenerator.Next( 0, FirstNames.Count ) ];
 			int RandomAge = RandomNumberGenerator.Next( 18, 60 );
 
-			Person p = new Person( RandomFirstName, RandomLastName, RandomAge );
+			Person p = new Person( Lb, RandomFirstName, RandomLastName, RandomAge );
 			return p;
 		}
 

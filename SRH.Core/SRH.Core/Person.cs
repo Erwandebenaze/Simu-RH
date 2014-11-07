@@ -15,6 +15,7 @@ namespace SRH.Core
         readonly DateTime _birthDate;
 		// TODO : Implémenter création aléatoire de skill
 		Dictionary<string, Skill> _skills;
+		LaborMarket _lb;
 
 
 		internal Person( string firstName, string lastName, int age )
@@ -49,6 +50,11 @@ namespace SRH.Core
 		public Dictionary<string, Skill> Skills
 		{
 			get { return _skills; }
+		}
+		
+		internal LaborMarket Lb
+		{
+			get { return _lb; }
 		}
 
 		public T AddSkill<T>( string skillName ) where T : Skill, new()
