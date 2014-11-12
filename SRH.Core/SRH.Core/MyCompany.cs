@@ -59,18 +59,31 @@ namespace SRH.Core
         } 
         #endregion
 
+		/// <summary>
+		/// Adds an <see cref="Employee"/> to <see cref="MyCompany"/>
+		/// </summary>
+		/// <param name="p">The Worker to add, it becomes an <see cref="Employee"/> when added</param>
+		/// <returns>Returns True if the <see cref="Employee"/> was added</returns>
 		internal bool AddEmployee( Person p )
 		{
 			Employee e = new Employee( p );
 			_employees.Add( e );
 			return ( _employees.Exists( x => x.Equals( e ) ) ) && ( p.Lb.RemovePerson( p ) );
 		}
+		/// <summary>
+		/// Removes an <see cref="Employee"/> from <see cref="MyCompany"/>
+		/// </summary>
+		/// <param name="e">The <see cref="Employee"/> to remove</param>
+		/// <returns>Returns True id the <see cref="Employee"/> was removes</returns>
 		internal bool RemoveEmployee( Employee e )
 		{
 			_employees.Remove( e );
 			return !( _employees.Exists( x => x.Equals( e ) ) ) && ( e.Worker.Lb.AddPerson( e.Worker ) );
 		}
 
+		/// <summary>
+		/// Adjust the number of <see cref="MaxEmployees"/> and the <see cref="MaxDifficulty"/> of <see cref="MyCompany"/> depending on its <see cref="Level"/>
+		/// </summary>
 		 public void AdjustValuesCompany()
         {
 			if( this.CompanyLevel.CurrentLevel == 1 ) this.MaxEmployees = 10;

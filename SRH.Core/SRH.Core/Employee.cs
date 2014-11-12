@@ -21,10 +21,12 @@ namespace SRH.Core
 			_worker = Worker;
         }
 
+		#region Getters setters
 		public Person Worker
 		{
 			get { return _worker; }
-		}
+		} 
+		#endregion
         public bool Training()
         {
             // TODO : En fonction de la formation et de son niveau, augmenter le niveau, 
