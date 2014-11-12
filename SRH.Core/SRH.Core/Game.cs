@@ -66,6 +66,7 @@ namespace SRH.Core
             IFormatter formatter = new BinaryFormatter();
             Stream stream = new FileStream( @"..\..\..\Sauvegardes\" + this._playerCompany.Name + ".bin", FileMode.Create, FileAccess.Write, FileShare.None );
             formatter.Serialize( stream, this );
+
             stream.Close();
         }
 	}

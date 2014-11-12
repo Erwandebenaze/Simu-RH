@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using SRH.Core;
 
 namespace SRH.Interface
 {
@@ -14,11 +15,16 @@ namespace SRH.Interface
         [STAThread]
         static void Main()
         {
+            
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault( false );
             Form1 form = new Form1();
+            Options opt = new Options();
             form.WindowState = FormWindowState.Maximized;
-            Application.Run( form );
+            opt.Show();
+            Application.Run(opt);
+            
+
         }
     }
 }

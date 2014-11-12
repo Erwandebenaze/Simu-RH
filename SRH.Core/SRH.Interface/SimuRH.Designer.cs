@@ -124,6 +124,8 @@
             this.Controls.Add(this.tabControl1);
             this.Name = "Form1";
             this.Text = "SimuRH";
+            this.KeyPreview = true;
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
             this.tabControl1.ResumeLayout(false);
             this.ProjetTable.ResumeLayout(false);
             this.ResumeLayout(false);

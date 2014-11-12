@@ -19,11 +19,11 @@ namespace SRH.Core
             _firstNames = new List<string>();
             _lastNames = new List<string>();
 			_randomNumberGenerator = randomNumberGenerator;
-            foreach( string line in File.ReadLines( Directory.GetCurrentDirectory() + @"\Data\FirstNames.txt" ) )
+            foreach( string line in File.ReadLines( Directory.GetCurrentDirectory() + @"..\..\..\..\Data\FirstNames.txt" ) )
             {
                 _firstNames.Add( line );
             }
-            foreach( string line in File.ReadLines( Directory.GetCurrentDirectory() + @"\Data\LastNames.txt" ) )
+            foreach( string line in File.ReadLines( Directory.GetCurrentDirectory() + @"..\..\..\..\Data\LastNames.txt" ) )
             {
                 _lastNames.Add( line );
             }
