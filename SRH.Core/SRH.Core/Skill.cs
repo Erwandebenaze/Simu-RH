@@ -5,6 +5,7 @@ using System.Text;
 
 namespace SRH.Core
 {
+    [Serializable]
     public abstract class Skill
     {
         private Level _level;

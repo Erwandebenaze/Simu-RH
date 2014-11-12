@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace SRH.Core
 {
+    [Serializable]
 	public class MyCompany
 	{
 		protected string _name;

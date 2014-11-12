@@ -5,6 +5,7 @@ using System.Text;
 
 namespace SRH.Core
 {
+    [Serializable]
     public class Employee
     {
 		Person _worker;

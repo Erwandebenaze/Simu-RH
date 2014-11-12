@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace SRH.Core
 {
+    [Serializable]
 	class RandomGenerator
 	{
 		readonly List<string> _firstNames;

@@ -55,6 +55,7 @@
     <Compile Include="ProjSkill.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RandomGenerator.cs" />
+    <Compile Include="Load.cs" />
     <Compile Include="Skill.cs" />
   </ItemGroup>
   <ItemGroup>

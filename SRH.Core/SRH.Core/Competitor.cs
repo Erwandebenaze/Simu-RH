@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace SRH.Core
 {
+    [Serializable]
     internal class Competitor : MyCompany
     {
 

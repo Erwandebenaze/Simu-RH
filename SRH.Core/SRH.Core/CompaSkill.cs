@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace SRH.Core
 {
+    [Serializable]
     class CompaSkill : Skill
     {
         public void FixPriceAndTime()
