@@ -11,18 +11,13 @@ namespace SRH.Core.Tests
     [TestFixture]
     class CompanyTests
     {
-        [Test]
-        public void Create_game()
-        {
-            Game myGame = new Game( 1, "IziProj" );
-            Assert.That( myGame, Is.Not.Null );
-        }
 
         [Test]
-        public void Create_company()
+        public void Create_company_with_name_and_Level()
         {
             MyCompany c = new MyCompany("SimuRH");
-            Assert.That( c, Is.Not.Null);
+            Assert.That( c.Name == "SimuRH" );
+            Assert.That( c.CompanyLevel.CurrentLevel == 1 );
         }
 
         [Test]
@@ -62,10 +57,37 @@ namespace SRH.Core.Tests
         }
 
         [Test]
-        public void Add_enmployee_to_mycompany()
+        public void Create_game_with_a_random_LabourMarket_and_a_company()
         {
-            MyCompany mc = new MyCompany( "Danone" );
-            Assert.That( mc.MaxProjectDifficulty, Is.EqualTo( 1 ) );
+            Game myGame = new Game( 1, "IziProj" );
+
+            Assert.That( myGame.Market.JoblessPersons.Count == 100 );
+            Assert.That( myGame.PlayerCompany.Name == "IziProj" );
+            Assert.That( myGame.PlayerCompany.MaxEmployees == 10 );
+            Assert.That( myGame.PlayerCompany.MaxProjectDifficulty == 1 );
+            Assert.That( myGame.PlayerCompany.Wealth == 15000 );
+        }
+
+        [Test]
+        public void Add_a_Person_to_LabourMarket()
+        {
+            Game myGame = new Game( 1, "SimuRH" );
+
+            Person p = myGame.Market.PersonMaker.CreatePerson( 18, 60 );
+
+            Assert.That( p.Age >= 18 && p.Age <= 60 );
+            Assert.That( myGame.Market.AddPerson( p ) );
+            Assert.That( myGame.Market.JoblessPersons.Contains( p ) );
+        }
+
+        [Test]
+        public void Add_employee_to_mycompany()
+        {
+            Game myGame = new Game( 1, "Danone" );
+
+            Person p = myGame.Market.PersonMaker.CreatePerson( 18, 60 );
+
+            Assert.That( myGame.PlayerCompany.AddEmployee( p ) );
         }
     }
 }

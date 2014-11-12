@@ -9,7 +9,7 @@ namespace SRH.Core
     internal class Competitor : MyCompany
     {
 
-		public Competitor( string Name ) : base ( Name )
+		internal Competitor( string Name ) : base ( Name )
 		{
 		}
 		
