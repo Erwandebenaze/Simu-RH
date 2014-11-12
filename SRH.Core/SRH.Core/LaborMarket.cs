@@ -15,7 +15,7 @@ namespace SRH.Core
 		{
 			_joblessPersons = new List<Person>();
 			_personMaker = new Helper( this );
-			for( int i = 0; i <= 100; i++ )
+			for( int i = 0; i < 100; i++ )
 			{
 				Person p = _personMaker.CreatePerson( 18, 60 );
 				if( !( this.AddPerson( p ) ) ) throw new Exception( "A person wasn't added proprely to LoborMarket." );

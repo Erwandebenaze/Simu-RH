@@ -29,33 +29,35 @@ namespace SRH.Core
             _project = new List<Project>();
         }
 
-		public string Name
-		{
-			get { return _name; }
-		}
-		public int Wealth
-		{
-			get { return _wealth; }
-			private set { _wealth = value; }
-		}
-		public int MaxEmployees
-		{
-			get { return _maxEmployees; }
-			private set { _maxEmployees = value; }
-		}
-		public List<Employee> Employees
-		{
-			get { return _employees; }
-		}
-		public Level CompanyLevel
-		{
-			get { return _companyLevel; }
-		}
-		public double MaxProjectDifficulty
-		{
-			get { return _maxProjectDifficulty; }
-			private set { _maxProjectDifficulty = value; }
-		}
+        #region Getters Setters
+        public string Name
+        {
+            get { return _name; }
+        }
+        public int Wealth
+        {
+            get { return _wealth; }
+            private set { _wealth = value; }
+        }
+        public int MaxEmployees
+        {
+            get { return _maxEmployees; }
+            private set { _maxEmployees = value; }
+        }
+        public List<Employee> Employees
+        {
+            get { return _employees; }
+        }
+        public Level CompanyLevel
+        {
+            get { return _companyLevel; }
+        }
+        public double MaxProjectDifficulty
+        {
+            get { return _maxProjectDifficulty; }
+            private set { _maxProjectDifficulty = value; }
+        } 
+        #endregion
 
 		internal bool AddEmployee( Person p )
 		{
