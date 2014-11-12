@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.IO;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
 
 namespace SRH.Core
 {
+    [Serializable]
 	public class Game
 	{
         LaborMarket _market;
@@ -60,13 +61,12 @@ namespace SRH.Core
             get { return _possibleProjects; }
         } 
         #endregion
-		public void LoadGame()
-		{
-			throw new NotImplementedException();
-		}
-		public void SaveGame()
-		{
-			throw new NotImplementedException();
-		}
+        public void SaveGame()
+        {
+            IFormatter formatter = new BinaryFormatter();
+            Stream stream = new FileStream( @"..\..\..\Sauvegardes\" + this._playerCompany.Name + ".bin", FileMode.Create, FileAccess.Write, FileShare.None );
+            formatter.Serialize( stream, this );
+            stream.Close();
+        }
 	}
 }

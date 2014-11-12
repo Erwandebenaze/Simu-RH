@@ -86,8 +86,50 @@ namespace SRH.Core.Tests
             Game myGame = new Game( 1, "Danone" );
 
             Person p = myGame.Market.PersonMaker.CreatePerson( 18, 60 );
+            myGame.Market.AddPerson( p );
 
             Assert.That( myGame.PlayerCompany.AddEmployee( p ) );
         }
+
+        [Test]
+        public void Save_game()
+        {
+            Game myGame = new Game( 1, "Danone" );
+            myGame.SaveGame();
+        }
+
+        [Test]
+        public void Load_game()
+        {
+            Game myGame = Load.LoadGame( "Danone" );
+
+            Person p = myGame.Market.PersonMaker.CreatePerson( 18, 60 );
+            myGame.Market.AddPerson( p );
+
+            Assert.That( myGame.PlayerCompany.AddEmployee( p ) );
+        }
+
+        [Test]
+        public void Our_company_takes_experience_and_upgrade_his_level_and_can_be_save()
+        {
+            Game myGame = new Game(1, "Nestle" );
+            myGame.PlayerCompany.CompanyLevel.IncreaseXp( 101 );
+            myGame.SaveGame();
+            Game mySavedGame = Load.LoadGame( "Nestle" );
+            Assert.That( mySavedGame.PlayerCompany.CompanyLevel.CurrentLevel, Is.EqualTo( 2 ) );
+        }
+
+        [Test]
+        public void One_save_replace_the_previous_save()
+        {
+            Game myGame = new Game( 1, "Nestle" );
+            myGame.PlayerCompany.CompanyLevel.CurrentLevel += 3;
+            myGame.SaveGame();
+
+            Game mySavedGame = Load.LoadGame( "Nestle" );
+            Assert.That( mySavedGame.PlayerCompany.CompanyLevel.CurrentLevel, Is.EqualTo( 4 ) );
+
+        }
+
     }
 }
