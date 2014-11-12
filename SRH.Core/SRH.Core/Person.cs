@@ -48,6 +48,7 @@ namespace SRH.Core
                 return rand.Next( 1, 30 );
             }
         }
+		#region Getters Setters
 		public string FirstName
 		{
 			get { return _firstName; }
@@ -57,26 +58,33 @@ namespace SRH.Core
 		{
 			get { return _lastName; }
 		}
-        public DateTime BirthDate
-        {
-            get { return _birthDate; }
-        } 
+		public DateTime BirthDate
+		{
+			get { return _birthDate; }
+		}
 		public int Age
 		{
 			get { return _age; }
-            private set { _age = value; }
+			private set { _age = value; }
 		}
 
 		public Dictionary<string, Skill> Skills
 		{
 			get { return _skills; }
 		}
-		
+
 		internal LaborMarket Lb
 		{
 			get { return _lb; }
-		}
+		} 
+		#endregion
 
+		/// <summary>
+		/// Adds a <see cref="Skill"/> to the <see cref="Person"/>
+		/// </summary>
+		/// <typeparam name="T">The type of <see cref="Skill"/>, <see cref="ProjSkill"/> or <see cref="CompaSkill"/></typeparam>
+		/// <param name="skillName">The name of the <see cref="Skill"/></param>
+		/// <returns>Returns the new <see cref="Skill"/></returns>
 		public T AddSkill<T>( string skillName ) where T : Skill, new()
 		{
 			T s = new T();

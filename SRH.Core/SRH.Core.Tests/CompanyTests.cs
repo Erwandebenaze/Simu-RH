@@ -62,7 +62,7 @@ namespace SRH.Core.Tests
         }
 
         [Test]
-        public void Add_enmployee_to_mycompany()
+        public void Add_employee_to_mycompany()
         {
             MyCompany mc = new MyCompany( "Danone" );
             Assert.That( mc.MaxProjectDifficulty, Is.EqualTo( 1 ) );

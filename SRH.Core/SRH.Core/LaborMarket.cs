@@ -22,6 +22,7 @@ namespace SRH.Core
 			}
 		}
 
+		#region Getters
 		public Helper PersonMaker
 		{
 			get { return _personMaker; }
@@ -29,16 +30,28 @@ namespace SRH.Core
 		public List<Person> JoblessPersons
 		{
 			get { return _joblessPersons; }
-		}
+		} 
+		#endregion
 
+		/// <summary>
+		/// Adds a <see cref="Person"/> to the <see cref="LabourMarket"/>
+		/// </summary>
+		/// <param name="p">The <see cref="Person"/>  to add</param>
+		/// <returns>Returns true if the <see cref="Person"/> is in the <see cref="LabourMarket"/></returns>
 		internal bool AddPerson(Person p)
 		{
 			_joblessPersons.Add( p );
 			return ( _joblessPersons.Exists( x => x.Equals( p ) ) );
 		}
 
+		/// <summary>
+		/// Removes a <see cref="Person"/> from the <see cref="LabourMarket"/>
+		/// </summary>
+		/// <param name="p">The <see cref="Person"/>  to remove</param>
+		/// <returns></returns>
 		internal bool RemovePerson(Person p)
 		{
+			if ( !_joblessPersons.Exists( x => x.Equals( p ) ) ) throw new ArgumentException( "The Person to remove must be in the LabourMarket" );
 			_joblessPersons.Remove( p );
 			return !( _joblessPersons.Exists( x => x.Equals( p ) ) );
 		}
