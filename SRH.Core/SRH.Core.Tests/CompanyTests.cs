@@ -86,6 +86,7 @@ namespace SRH.Core.Tests
             Game myGame = new Game( 1, "Danone" );
 
             Person p = myGame.Market.PersonMaker.CreatePerson( 18, 60 );
+			myGame.Market.AddPerson( p );
 
             Assert.That( myGame.PlayerCompany.AddEmployee( p ) );
         }
