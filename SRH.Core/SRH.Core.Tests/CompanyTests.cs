@@ -101,7 +101,7 @@ namespace SRH.Core.Tests
         [Test]
         public void Load_game()
         {
-            Game myGame = Load.LoadGame( "Danone" );
+            Game myGame = GameLoader.Load( "Danone" );
 
             Person p = myGame.Market.PersonMaker.CreatePerson( 18, 60 );
             myGame.Market.AddPerson( p );
@@ -115,7 +115,7 @@ namespace SRH.Core.Tests
             Game myGame = new Game(1, "Nestle" );
             myGame.PlayerCompany.CompanyLevel.IncreaseXp( 101 );
             myGame.SaveGame();
-            Game mySavedGame = Load.LoadGame( "Nestle" );
+            Game mySavedGame = GameLoader.Load( "Nestle" );
             Assert.That( mySavedGame.PlayerCompany.CompanyLevel.CurrentLevel, Is.EqualTo( 2 ) );
         }
 
@@ -126,7 +126,7 @@ namespace SRH.Core.Tests
             myGame.PlayerCompany.CompanyLevel.CurrentLevel += 3;
             myGame.SaveGame();
 
-            Game mySavedGame = Load.LoadGame( "Nestle" );
+            Game mySavedGame = GameLoader.Load( "Nestle" );
             Assert.That( mySavedGame.PlayerCompany.CompanyLevel.CurrentLevel, Is.EqualTo( 4 ) );
 
         }

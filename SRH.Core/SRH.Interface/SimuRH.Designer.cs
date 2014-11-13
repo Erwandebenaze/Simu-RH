@@ -1,6 +1,6 @@
 ﻿namespace SRH.Interface
 {
-    partial class Form1
+    partial class SimuRH
     {
         /// <summary>
         /// Variable nécessaire au concepteur.
@@ -32,7 +32,7 @@
             this.BureauPage = new System.Windows.Forms.TabPage();
             this.EmployésPage = new System.Windows.Forms.TabPage();
             this.ProjetTable = new System.Windows.Forms.TabPage();
-            this.ucProjectPage1 = new SRH.Interface.UcProjectPage();
+            this.ucProjectPage = new SRH.Interface.UcProjectPage();
             this.EntreprisePage = new System.Windows.Forms.TabPage();
             this.ResumeEntreprisePage = new System.Windows.Forms.TabPage();
             this.tabControl1.SuspendLayout();
@@ -77,7 +77,7 @@
             // 
             // ProjetTable
             // 
-            this.ProjetTable.Controls.Add(this.ucProjectPage1);
+            this.ProjetTable.Controls.Add(this.ucProjectPage);
             this.ProjetTable.Location = new System.Drawing.Point(4, 25);
             this.ProjetTable.Name = "ProjetTable";
             this.ProjetTable.Padding = new System.Windows.Forms.Padding(3);
@@ -88,13 +88,13 @@
             // 
             // ucProjectPage1
             // 
-            this.ucProjectPage1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.ucProjectPage.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.ucProjectPage1.Location = new System.Drawing.Point(3, 3);
-            this.ucProjectPage1.Name = "ucProjectPage1";
-            this.ucProjectPage1.Size = new System.Drawing.Size(1003, 592);
-            this.ucProjectPage1.TabIndex = 0;
+            this.ucProjectPage.Location = new System.Drawing.Point(3, 3);
+            this.ucProjectPage.Name = "ucProjectPage";
+            this.ucProjectPage.Size = new System.Drawing.Size(1003, 592);
+            this.ucProjectPage.TabIndex = 0;
             // 
             // EntreprisePage
             // 
@@ -125,7 +125,7 @@
             this.Name = "Form1";
             this.Text = "SimuRH";
             this.KeyPreview = true;
-            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.mainForm_KeyDown);
             this.tabControl1.ResumeLayout(false);
             this.ProjetTable.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -140,7 +140,7 @@
         private System.Windows.Forms.TabPage ProjetTable;
         private System.Windows.Forms.TabPage EntreprisePage;
         private System.Windows.Forms.TabPage ResumeEntreprisePage;
-        private UcProjectPage ucProjectPage1;
+        private UcProjectPage ucProjectPage;
 
     }
 }

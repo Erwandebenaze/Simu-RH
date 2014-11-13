@@ -17,20 +17,18 @@ namespace SRH.Interface
         public UcProjectPage()
         {
             InitializeComponent();
-        }
-        class DemoProject
-        {
-            public string ProjectName { get; set; }
-            public string Level { get; set; }
-            public string Earnings { get; set; }
-            public string Duration { get; set; }
-            
 
         }
+
+        IGameContext GameContext
+        { 
+            get { return (IGameContext)TopLevelControl; } 
+        }
+
         protected override void OnLoad( EventArgs e )
         {
             base.OnLoad( e );
-            List<Project> possibleProjects = new List<Project>();
+            List<Project> possibleProjects = GameContext.CurrentGame.PossibleProjects;
             possibleProjects.Add( new Project( "Danone", 1, 2, 1000, 3 ) );
             possibleProjects.Add( new Project( "Nestle", 1, 2, 2000, 4 ) );
             possibleProjects.Add( new Project( "Accord", 1, 2, 3000, 5 ) );

@@ -15,14 +15,13 @@ namespace SRH.Interface
         [STAThread]
         static void Main()
         {
-            
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault( false );
-            Form1 form = new Form1();
-            Options opt = new Options();
-            form.WindowState = FormWindowState.Maximized;
-            opt.Show();
-            Application.Run(opt);
+            SimuRH gameForm = new SimuRH();
+            gameForm.ShowOptions();
+            gameForm.WindowState = FormWindowState.Maximized;
+            
+            Application.Run(gameForm);
             
 
         }

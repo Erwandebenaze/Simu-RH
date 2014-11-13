@@ -9,9 +9,9 @@ using System.IO;
 
 namespace SRH.Core
 {
-    static public class Load
+    static public class GameLoader
     {
-        static public Game LoadGame( string companyName )
+        static public Game Load( string companyName )
         {
             IFormatter formatter = new BinaryFormatter();
             Stream stream = new FileStream( @"..\..\..\Sauvegardes\" + companyName + ".bin", FileMode.Open, FileAccess.Read, FileShare.Read );
@@ -19,5 +19,7 @@ namespace SRH.Core
             stream.Close();
             return obj;
         }
+
+        //IReadOnlyList<string>
     }
 }

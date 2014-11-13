@@ -7,22 +7,33 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using SRH.Core;
 
 namespace SRH.Interface
 {
     public partial class Options : Form
     {
+
         public Options()
-        {
+        {  
             InitializeComponent();
+        }
+
+        SimuRH MainForm
+        {
+            get { return (SimuRH)Owner; }
         }
 
         private void button1_Click( object sender, EventArgs e )
         {
-            Form2 form = new Form2();
-            this.Hide();
-            form.Show();
-            
+            using( NewGameForm newGameform = new NewGameForm() )
+            {
+                DialogResult r = newGameform.ShowDialog( this );
+                if( r == System.Windows.Forms.DialogResult.OK )
+                {
+                    MainForm.LoadOrCreateGame( newGameform.GameName );
+                }
+            }
         }
 
         private void button1_KeyDown( object sender, KeyEventArgs e )
@@ -30,7 +41,7 @@ namespace SRH.Interface
                  
             if (e.KeyCode == Keys.Escape)
             {
-                this.Close();
+                this.Hide();
             }
         
         }
