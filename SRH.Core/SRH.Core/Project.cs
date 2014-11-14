@@ -15,6 +15,9 @@ namespace SRH.Core
         readonly int _duration;
         private int _timeSpent;
         readonly int _earnings;
+        readonly int _xpPerCompany;
+        readonly int _xpPerPerson;
+
         bool _activated;
         readonly Dictionary<string, int> _skillsRequired;
         Dictionary<Employee, string> _employeesAffectedWithSkill;
@@ -52,6 +55,15 @@ namespace SRH.Core
         {
             get { return _activated; }
             set { _activated = value; }
+        }
+        public int XpPerPerson
+        {
+            get { return _xpPerPerson; }
+        }
+
+        public int XpPerCompany
+        {
+            get { return _xpPerCompany; }
         } 
         #endregion
 
@@ -77,6 +89,8 @@ namespace SRH.Core
             _earnings = earnings;
             _duration = duration;
             _activated = false;
+            _xpPerCompany = 15;
+            _xpPerPerson = 10;
             _skillsRequired = new Dictionary<string, int>();
             _employeesAffectedWithSkill = new Dictionary<Employee, string>();
             GenerateSkillsRequired(numberOfWorkers);

@@ -18,6 +18,8 @@ namespace SRH.Interface
 
         public SimuRH()
         {
+            _myGame = new Game( 1, "INTECH" );
+
             InitializeComponent();
             _optionsForm = new Options();
         }
@@ -30,11 +32,13 @@ namespace SRH.Interface
         internal void LoadOrCreateGame(string name)
         {
             try
-            { 
+            {
                 _myGame = GameLoader.Load( name );
+                MessageBox.Show( "La partie a été chargée." );
             }
             catch (System.IO.FileNotFoundException)
             {
+                MessageBox.Show( "La partie a été créé." );
                 _myGame = new Game( 1,name );
             }
 

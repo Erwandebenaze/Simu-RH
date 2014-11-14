@@ -18,7 +18,7 @@ namespace SRH.Interface
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault( false );
             SimuRH gameForm = new SimuRH();
-            gameForm.ShowOptions();
+            //gameForm.ShowOptions();
             gameForm.WindowState = FormWindowState.Maximized;
             
             Application.Run(gameForm);

@@ -30,18 +30,28 @@
         {
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
-            this.listView1 = new System.Windows.Forms.ListView();
+            this.listPossibleProjects = new System.Windows.Forms.ListView();
             this.Project = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.LevelRequired = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.EarningsExpected = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Time = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.listView2 = new System.Windows.Forms.ListView();
+            this.listCurrentProjects = new System.Windows.Forms.ListView();
             this.currentProject = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Level = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Earnings = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.TimeLeft = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this._projectNameText = new System.Windows.Forms.Label();
+            this.Difficulty = new System.Windows.Forms.Label();
+            this._difficulty = new System.Windows.Forms.Label();
+            this.EarningsText = new System.Windows.Forms.Label();
+            this._earnings = new System.Windows.Forms.Label();
+            this.EstimatedTime = new System.Windows.Forms.Label();
+            this._estimatedTime = new System.Windows.Forms.Label();
+            this.NumberOfWorkers = new System.Windows.Forms.Label();
+            this._numberOfWorkers = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
+            this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
             this.splitContainer2.Panel1.SuspendLayout();
@@ -58,6 +68,18 @@
             // splitContainer1.Panel1
             // 
             this.splitContainer1.Panel1.Controls.Add(this.splitContainer2);
+            // 
+            // splitContainer1.Panel2
+            // 
+            this.splitContainer1.Panel2.Controls.Add(this._numberOfWorkers);
+            this.splitContainer1.Panel2.Controls.Add(this.NumberOfWorkers);
+            this.splitContainer1.Panel2.Controls.Add(this._estimatedTime);
+            this.splitContainer1.Panel2.Controls.Add(this.EstimatedTime);
+            this.splitContainer1.Panel2.Controls.Add(this._earnings);
+            this.splitContainer1.Panel2.Controls.Add(this.EarningsText);
+            this.splitContainer1.Panel2.Controls.Add(this._difficulty);
+            this.splitContainer1.Panel2.Controls.Add(this.Difficulty);
+            this.splitContainer1.Panel2.Controls.Add(this._projectNameText);
             this.splitContainer1.Size = new System.Drawing.Size(1100, 630);
             this.splitContainer1.SplitterDistance = 412;
             this.splitContainer1.TabIndex = 0;
@@ -71,29 +93,31 @@
             // 
             // splitContainer2.Panel1
             // 
-            this.splitContainer2.Panel1.Controls.Add(this.listView1);
+            this.splitContainer2.Panel1.Controls.Add(this.listPossibleProjects);
             // 
             // splitContainer2.Panel2
             // 
-            this.splitContainer2.Panel2.Controls.Add(this.listView2);
+            this.splitContainer2.Panel2.Controls.Add(this.listCurrentProjects);
             this.splitContainer2.Size = new System.Drawing.Size(412, 630);
             this.splitContainer2.SplitterDistance = 274;
             this.splitContainer2.TabIndex = 0;
             // 
-            // listView1
+            // listPossibleProjects
             // 
-            this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.listPossibleProjects.Activation = System.Windows.Forms.ItemActivation.OneClick;
+            this.listPossibleProjects.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.Project,
             this.LevelRequired,
             this.EarningsExpected,
             this.Time});
-            this.listView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.listView1.Location = new System.Drawing.Point(0, 0);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(412, 274);
-            this.listView1.TabIndex = 0;
-            this.listView1.UseCompatibleStateImageBehavior = false;
-            this.listView1.View = System.Windows.Forms.View.Details;
+            this.listPossibleProjects.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listPossibleProjects.Location = new System.Drawing.Point(0, 0);
+            this.listPossibleProjects.Name = "listPossibleProjects";
+            this.listPossibleProjects.Size = new System.Drawing.Size(412, 274);
+            this.listPossibleProjects.TabIndex = 0;
+            this.listPossibleProjects.UseCompatibleStateImageBehavior = false;
+            this.listPossibleProjects.View = System.Windows.Forms.View.Details;
+            this.listPossibleProjects.SelectedIndexChanged += new System.EventHandler(this.listPossibleProjects_SelectedIndexChanged);
             // 
             // Project
             // 
@@ -118,20 +142,20 @@
             this.Time.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.Time.Width = 85;
             // 
-            // listView2
+            // listCurrentProjects
             // 
-            this.listView2.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.listCurrentProjects.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.currentProject,
             this.Level,
             this.Earnings,
             this.TimeLeft});
-            this.listView2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.listView2.Location = new System.Drawing.Point(0, 0);
-            this.listView2.Name = "listView2";
-            this.listView2.Size = new System.Drawing.Size(412, 352);
-            this.listView2.TabIndex = 0;
-            this.listView2.UseCompatibleStateImageBehavior = false;
-            this.listView2.View = System.Windows.Forms.View.Details;
+            this.listCurrentProjects.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listCurrentProjects.Location = new System.Drawing.Point(0, 0);
+            this.listCurrentProjects.Name = "listCurrentProjects";
+            this.listCurrentProjects.Size = new System.Drawing.Size(412, 352);
+            this.listCurrentProjects.TabIndex = 0;
+            this.listCurrentProjects.UseCompatibleStateImageBehavior = false;
+            this.listCurrentProjects.View = System.Windows.Forms.View.Details;
             // 
             // currentProject
             // 
@@ -156,6 +180,91 @@
             this.TimeLeft.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.TimeLeft.Width = 105;
             // 
+            // _projectNameText
+            // 
+            this._projectNameText.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this._projectNameText.AutoSize = true;
+            this._projectNameText.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this._projectNameText.Location = new System.Drawing.Point(250, 16);
+            this._projectNameText.Name = "_projectNameText";
+            this._projectNameText.Size = new System.Drawing.Size(146, 25);
+            this._projectNameText.TabIndex = 2;
+            this._projectNameText.Text = "Nom du projet";
+            this._projectNameText.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // Difficulty
+            // 
+            this.Difficulty.AutoSize = true;
+            this.Difficulty.Location = new System.Drawing.Point(30, 102);
+            this.Difficulty.Name = "Difficulty";
+            this.Difficulty.Size = new System.Drawing.Size(134, 17);
+            this.Difficulty.TabIndex = 3;
+            this.Difficulty.Text = "Difficulté du projet : ";
+            // 
+            // _difficulty
+            // 
+            this._difficulty.AutoSize = true;
+            this._difficulty.Location = new System.Drawing.Point(183, 102);
+            this._difficulty.Name = "_difficulty";
+            this._difficulty.Size = new System.Drawing.Size(17, 17);
+            this._difficulty.TabIndex = 4;
+            this._difficulty.Text = "X";
+            // 
+            // EarningsText
+            // 
+            this.EarningsText.AutoSize = true;
+            this.EarningsText.Location = new System.Drawing.Point(30, 130);
+            this.EarningsText.Name = "EarningsText";
+            this.EarningsText.Size = new System.Drawing.Size(50, 17);
+            this.EarningsText.TabIndex = 5;
+            this.EarningsText.Text = "Gain : ";
+            // 
+            // _earnings
+            // 
+            this._earnings.AutoSize = true;
+            this._earnings.Location = new System.Drawing.Point(183, 130);
+            this._earnings.Name = "_earnings";
+            this._earnings.Size = new System.Drawing.Size(17, 17);
+            this._earnings.TabIndex = 6;
+            this._earnings.Text = "X";
+            // 
+            // EstimatedTime
+            // 
+            this.EstimatedTime.AutoSize = true;
+            this.EstimatedTime.Location = new System.Drawing.Point(30, 160);
+            this.EstimatedTime.Name = "EstimatedTime";
+            this.EstimatedTime.Size = new System.Drawing.Size(108, 17);
+            this.EstimatedTime.TabIndex = 7;
+            this.EstimatedTime.Text = "Temps estimé : ";
+            // 
+            // _estimatedTime
+            // 
+            this._estimatedTime.AutoSize = true;
+            this._estimatedTime.Location = new System.Drawing.Point(183, 160);
+            this._estimatedTime.Name = "_estimatedTime";
+            this._estimatedTime.Size = new System.Drawing.Size(17, 17);
+            this._estimatedTime.TabIndex = 8;
+            this._estimatedTime.Text = "X";
+            // 
+            // NumberOfWorkers
+            // 
+            this.NumberOfWorkers.AutoSize = true;
+            this.NumberOfWorkers.Location = new System.Drawing.Point(30, 195);
+            this.NumberOfWorkers.Name = "NumberOfWorkers";
+            this.NumberOfWorkers.Size = new System.Drawing.Size(152, 17);
+            this.NumberOfWorkers.TabIndex = 9;
+            this.NumberOfWorkers.Text = "Nombre de membres : ";
+            // 
+            // _numberOfWorkers
+            // 
+            this._numberOfWorkers.AutoSize = true;
+            this._numberOfWorkers.Location = new System.Drawing.Point(183, 195);
+            this._numberOfWorkers.Name = "_numberOfWorkers";
+            this._numberOfWorkers.Size = new System.Drawing.Size(17, 17);
+            this._numberOfWorkers.TabIndex = 10;
+            this._numberOfWorkers.Text = "X";
+            // 
             // UcProjectPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -164,6 +273,8 @@
             this.Name = "UcProjectPage";
             this.Size = new System.Drawing.Size(1100, 630);
             this.splitContainer1.Panel1.ResumeLayout(false);
+            this.splitContainer1.Panel2.ResumeLayout(false);
+            this.splitContainer1.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
             this.splitContainer2.Panel1.ResumeLayout(false);
@@ -178,16 +289,25 @@
 
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.SplitContainer splitContainer2;
-        private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.ListView listPossibleProjects;
         private System.Windows.Forms.ColumnHeader Project;
         private System.Windows.Forms.ColumnHeader LevelRequired;
         private System.Windows.Forms.ColumnHeader EarningsExpected;
         private System.Windows.Forms.ColumnHeader Time;
-        private System.Windows.Forms.ListView listView2;
+        private System.Windows.Forms.ListView listCurrentProjects;
         private System.Windows.Forms.ColumnHeader currentProject;
         private System.Windows.Forms.ColumnHeader Level;
         private System.Windows.Forms.ColumnHeader Earnings;
         private System.Windows.Forms.ColumnHeader TimeLeft;
+        private System.Windows.Forms.Label _projectNameText;
+        private System.Windows.Forms.Label Difficulty;
+        private System.Windows.Forms.Label _difficulty;
+        private System.Windows.Forms.Label EarningsText;
+        private System.Windows.Forms.Label _earnings;
+        private System.Windows.Forms.Label EstimatedTime;
+        private System.Windows.Forms.Label _estimatedTime;
+        private System.Windows.Forms.Label NumberOfWorkers;
+        private System.Windows.Forms.Label _numberOfWorkers;
 
     }
 }
