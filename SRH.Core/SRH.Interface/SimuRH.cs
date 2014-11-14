@@ -29,7 +29,16 @@ namespace SRH.Interface
 
         internal void LoadOrCreateGame(string name)
         {
-            _myGame = GameLoader.Load( name );
+            try
+            { 
+                _myGame = GameLoader.Load( name );
+            }
+            catch (System.IO.FileNotFoundException)
+            {
+                _myGame = new Game( 1,name );
+            }
+
+            ShowOptions( false );
         }
 
         private void SaveGame( )

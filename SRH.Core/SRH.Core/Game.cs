@@ -25,6 +25,9 @@ namespace SRH.Core
 			_competitors = new List<Competitor>();
 			_randomSerie = _randomNumberGenerator.Next();
 			_playerCompany = new MyCompany( companyName );
+            _possibleProjects.Add( new Project( "Danone", 1, 2, 1000, 3 ) );
+            _possibleProjects.Add( new Project( "Nestle", 1, 2, 2000, 4 ) );
+            _possibleProjects.Add( new Project( "Accord", 1, 2, 3000, 5 ) );
 		}
 
         #region Getters Setters

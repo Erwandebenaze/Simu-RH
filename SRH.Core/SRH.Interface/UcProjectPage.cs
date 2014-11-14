@@ -29,9 +29,6 @@ namespace SRH.Interface
         {
             base.OnLoad( e );
             List<Project> possibleProjects = GameContext.CurrentGame.PossibleProjects;
-            possibleProjects.Add( new Project( "Danone", 1, 2, 1000, 3 ) );
-            possibleProjects.Add( new Project( "Nestle", 1, 2, 2000, 4 ) );
-            possibleProjects.Add( new Project( "Accord", 1, 2, 3000, 5 ) );
             //list.Add( new Project() { ProjectName = "titi", Duration = "trois semaines", Earnings = "trois cents", Level = "****" } );
 
             listView1.Items.AddRange( possibleProjects.Select( p => Create( p ) ).ToArray() );
