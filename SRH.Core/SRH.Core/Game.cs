@@ -31,7 +31,7 @@ namespace SRH.Core
 		}
 
         #region Getters Setters
-        internal LaborMarket Market
+        public LaborMarket Market
         {
             get { return _market; }
         }
