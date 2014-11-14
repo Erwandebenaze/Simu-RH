@@ -14,6 +14,8 @@ namespace SRH.Core
 		protected int _maxEmployees;
 		protected readonly List<Employee> _employees;
         List<Project> _project;
+
+
 		Level _companyLevel;
 		double _maxProjectDifficulty;
 
@@ -44,6 +46,10 @@ namespace SRH.Core
         {
             get { return _maxEmployees; }
             private set { _maxEmployees = value; }
+        }
+        public List<Project> Project
+        {
+            get { return _project; }
         }
         public List<Employee> Employees
         {

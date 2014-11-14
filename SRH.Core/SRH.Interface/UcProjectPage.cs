@@ -15,6 +15,7 @@ namespace SRH.Interface
     public partial class UcProjectPage : UserControl
     {
         List<Project> _possibleProjects;
+        List<Project> _projects;
         Project _currentProj;
         
 
@@ -35,6 +36,7 @@ namespace SRH.Interface
         protected override void OnLoad( EventArgs e )
         {
             base.OnLoad( e );
+            _projects = GameContext.CurrentGame.PlayerCompany.Project;
             _possibleProjects = GameContext.CurrentGame.PossibleProjects;
             _projectNameText.Text = "";
 
@@ -42,12 +44,12 @@ namespace SRH.Interface
 
             listPossibleProjects.Items.AddRange( PossibleProjects.Select( p => Create( p ) ).ToArray() );
 
-            // TODO : Ajouter la liste pour les projets en cours lorsque le temps sera définit.
+            // TODO : Ajouter la liste pour les projets en cours lorsque le temps sera définis.
         }
 
         static ListViewItem Create( Project p )
         {
-            ListViewItem i = new ListViewItem(p.Name);
+            ListViewItem i = new ListViewItem( p.Name );
             i.Tag = p;
             i.SubItems.Add(new ListViewItem.ListViewSubItem( i, p.Difficulty.ToString() ));
             i.SubItems.Add( new ListViewItem.ListViewSubItem( i, p.Earnings.ToString() ) );
@@ -65,6 +67,29 @@ namespace SRH.Interface
                 _earnings.Text = _currentProj.Earnings.ToString();
                 _estimatedTime.Text = _currentProj.Duration.ToString();
                 _numberOfWorkers.Text = _currentProj.NumberOfWorkers.ToString();
+                if( _currentProj.Activated )
+                {
+                    _startOrStopProject.Text = "Arrêter un projet";
+                } else
+                {
+                    _startOrStopProject.Text = "Lancer un projet";
+                }
+            }
+        }
+
+        private void _startOrStopProject_Click( object sender, EventArgs e )
+        {
+            if( _currentProj.Activated )
+            {
+                _currentProj.StopProject();
+                _startOrStopProject.Text = "Lancer un projet";
+
+            }
+            else
+            {
+                _currentProj.BeginProject();
+                _startOrStopProject.Text = "Arrêter un projet";
+
             }
         }
 

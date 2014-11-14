@@ -17,7 +17,6 @@ namespace SRH.Core
         readonly int _earnings;
         readonly int _xpPerCompany;
         readonly int _xpPerPerson;
-
         bool _activated;
         readonly Dictionary<string, int> _skillsRequired;
         Dictionary<Employee, string> _employeesAffectedWithSkill;

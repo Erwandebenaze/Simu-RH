@@ -21,7 +21,7 @@ namespace SRH.Core
 		{
             _randomNumberGenerator = new Random( seed );
 			_market = new LaborMarket();
-			_possibleProjects = new List<Project>();
+            _possibleProjects = new List<Project>();
 			_competitors = new List<Competitor>();
 			_randomSerie = _randomNumberGenerator.Next();
 			_playerCompany = new MyCompany( companyName );
