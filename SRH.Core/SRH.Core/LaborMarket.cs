@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 namespace SRH.Core
 {
     [Serializable]
-	internal class LaborMarket
+	public class LaborMarket
 	{
 		List<Person> _joblessPersons;
 		Helper _personMaker;
 
-		internal LaborMarket()
+		public LaborMarket()
 		{
 			_joblessPersons = new List<Person>();
 			_personMaker = new Helper( this );
