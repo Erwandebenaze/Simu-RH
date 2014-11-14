@@ -13,7 +13,13 @@ namespace SRH.Core
 		protected int _wealth;
 		protected int _maxEmployees;
 		protected readonly List<Employee> _employees;
-        List<Project> _project;
+        List<Project> _possibleProjects;
+
+        public List<Project> PossibleProjects
+        {
+            get { return _possibleProjects; }
+        }
+        List<Project> _projects;
 
 
 		Level _companyLevel;
@@ -29,7 +35,12 @@ namespace SRH.Core
 			_companyLevel = new Level( this );
 			_maxProjectDifficulty = 1;
 			_maxEmployees = 10;
-            _project = new List<Project>();
+            _projects = new List<Project>();
+            _possibleProjects = new List<Project>();
+            _possibleProjects.Add( new Project( "Danone", 1, 2, 1000, 3 ) );
+            _possibleProjects.Add( new Project( "Nestle", 1, 2, 2000, 4 ) );
+            _possibleProjects.Add( new Project( "Accord", 1, 2, 3000, 5 ) );
+
         }
 
         #region Getters Setters
@@ -47,9 +58,10 @@ namespace SRH.Core
             get { return _maxEmployees; }
             private set { _maxEmployees = value; }
         }
-        public List<Project> Project
+        public List<Project> Projects
         {
-            get { return _project; }
+            get { return _projects; }
+
         }
         public List<Employee> Employees
         {
@@ -91,7 +103,7 @@ namespace SRH.Core
 		/// <summary>
 		/// Adjust the number of <see cref="MaxEmployees"/> and the <see cref="MaxDifficulty"/> of <see cref="MyCompany"/> depending on its <see cref="Level"/>
 		/// </summary>
-		 public void AdjustValuesCompany()
+		public void AdjustValuesCompany()
         {
 			if( this.CompanyLevel.CurrentLevel == 1 ) this.MaxEmployees = 10;
 			this.MaxEmployees = 10 + ( 2 * ( this.CompanyLevel.CurrentLevel - 1 ) );
@@ -99,5 +111,20 @@ namespace SRH.Core
 			if( this.CompanyLevel.CurrentLevel == 1 ) this.MaxProjectDifficulty = 0.5;
 			if( this.CompanyLevel.CurrentLevel % 10 == 0 ) this.MaxProjectDifficulty += 0.5;
         }
+           
+        public void BeginAProject( Project p )
+        {
+            _possibleProjects.Remove( p );
+            _projects.Add( p );
+            p.BeginProject();
+        }
+
+        public void StopAProject( Project p )
+        {
+            PossibleProjects.Add( p );
+            _projects.Remove( p );
+            p.StopProject();
+        }
+
 	}
 }

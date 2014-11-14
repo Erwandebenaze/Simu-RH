@@ -19,7 +19,7 @@ namespace SRH.Interface
         public SimuRH()
         {
             InitializeComponent();
-            //_myGame = new Game( 1, "INTECH" );
+            _myGame = new Game( 1, "INTECH" );
             _optionsForm = new Options();
         }
 

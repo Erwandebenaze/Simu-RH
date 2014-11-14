@@ -17,12 +17,15 @@ namespace SRH.Interface
         List<Project> _possibleProjects;
         List<Project> _projects;
         Project _currentProj;
-        
+
+        public List<Project> Projects
+        {
+            get { return _projects; }
+        }
 
         public UcProjectPage()
         {
             InitializeComponent();
-
         }
         public List<Project> PossibleProjects
         {
@@ -36,13 +39,14 @@ namespace SRH.Interface
         protected override void OnLoad( EventArgs e )
         {
             base.OnLoad( e );
-            _projects = GameContext.CurrentGame.PlayerCompany.Project;
-            _possibleProjects = GameContext.CurrentGame.PossibleProjects;
-            _projectNameText.Text = "";
+           _projects = GameContext.CurrentGame.PlayerCompany.Projects;
+           _possibleProjects = GameContext.CurrentGame.PlayerCompany.PossibleProjects;
+            //_projectNameText.Text = "";
 
             //list.Add( new Project() { ProjectName = "titi", Duration = "trois semaines", Earnings = "trois cents", Level = "****" } );
 
             listPossibleProjects.Items.AddRange( PossibleProjects.Select( p => Create( p ) ).ToArray() );
+            listCurrentProjects.Items.AddRange( Projects.Select( p => Create( p ) ).ToArray() );
 
             // TODO : Ajouter la liste pour les projets en cours lorsque le temps sera définis.
         }
@@ -81,16 +85,22 @@ namespace SRH.Interface
         {
             if( _currentProj.Activated )
             {
-                _currentProj.StopProject();
+                GameContext.CurrentGame.PlayerCompany.StopAProject( _currentProj );
                 _startOrStopProject.Text = "Lancer un projet";
+                listCurrentProjects.Items.RemoveByKey(_currentProj.Name);
+                listPossibleProjects.Items.AddRange( PossibleProjects.Select( p => Create( p ) ).ToArray() );
 
             }
             else
             {
-                _currentProj.BeginProject();
+                GameContext.CurrentGame.PlayerCompany.BeginAProject(_currentProj);
                 _startOrStopProject.Text = "Arrêter un projet";
+                listCurrentProjects.Items.AddRange( Projects.Select( p => Create( p ) ).ToArray() );
+                listPossibleProjects.Items.RemoveByKey( _currentProj.Name );
+
 
             }
+
         }
 
     }
