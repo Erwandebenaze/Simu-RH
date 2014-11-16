@@ -83,7 +83,7 @@ namespace SRH.Core
 		/// </summary>
 		/// <param name="p">The Worker to add, it becomes an <see cref="Employee"/> when added</param>
 		/// <returns>Returns True if the <see cref="Employee"/> was added</returns>
-		internal bool AddEmployee( Person p )
+		public bool AddEmployee( Person p )
 		{
 			Employee e = new Employee( p );
 			_employees.Add( e );
@@ -94,7 +94,7 @@ namespace SRH.Core
 		/// </summary>
 		/// <param name="e">The <see cref="Employee"/> to remove</param>
 		/// <returns>Returns True id the <see cref="Employee"/> was removes</returns>
-		internal bool RemoveEmployee( Employee e )
+		public bool RemoveEmployee( Employee e )
 		{
 			_employees.Remove( e );
 			return !( _employees.Exists( x => x.Equals( e ) ) ) && ( e.Worker.Lb.AddPerson( e.Worker ) );

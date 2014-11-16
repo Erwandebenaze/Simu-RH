@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IGameContext.cs" />
+    <Compile Include="IsInDesignMode.cs" />
     <Compile Include="NewGame.cs">
       <SubType>Form</SubType>
     </Compile>

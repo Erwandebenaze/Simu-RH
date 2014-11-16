@@ -38,17 +38,20 @@ namespace SRH.Interface
 
         protected override void OnLoad( EventArgs e )
         {
-            base.OnLoad( e );
-           _projects = GameContext.CurrentGame.PlayerCompany.Projects;
-           _possibleProjects = GameContext.CurrentGame.PlayerCompany.PossibleProjects;
-            //_projectNameText.Text = "";
+            if( this.IsInRuntimeMode() )
+            {
+                base.OnLoad( e );
+                _projects = GameContext.CurrentGame.PlayerCompany.Projects;
+                _possibleProjects = GameContext.CurrentGame.PlayerCompany.PossibleProjects;
+                //_projectNameText.Text = "";
 
-            //list.Add( new Project() { ProjectName = "titi", Duration = "trois semaines", Earnings = "trois cents", Level = "****" } );
+                //list.Add( new Project() { ProjectName = "titi", Duration = "trois semaines", Earnings = "trois cents", Level = "****" } );
 
-            listPossibleProjects.Items.AddRange( PossibleProjects.Select( p => Create( p ) ).ToArray() );
-            listCurrentProjects.Items.AddRange( Projects.Select( p => Create( p ) ).ToArray() );
+                listPossibleProjects.Items.AddRange( PossibleProjects.Select( p => Create( p ) ).ToArray() );
+                listCurrentProjects.Items.AddRange( Projects.Select( p => Create( p ) ).ToArray() );
 
-            // TODO : Ajouter la liste pour les projets en cours lorsque le temps sera définis.
+                // TODO : Ajouter la liste pour les projets en cours lorsque le temps sera définis.
+            }
         }
 
         static ListViewItem Create( Project p )
