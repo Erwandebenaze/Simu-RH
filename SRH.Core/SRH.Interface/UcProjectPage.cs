@@ -149,8 +149,8 @@ namespace SRH.Interface
 
             }
 
-            listCurrentProjects.Refresh();
-            listPossibleProjects.Refresh();
+            //listCurrentProjects.Refresh();
+            //listPossibleProjects.Refresh();
 
         }
 

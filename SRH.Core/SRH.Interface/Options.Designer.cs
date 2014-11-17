@@ -43,7 +43,6 @@
             this.SaveGameButton.Text = "Sauvegarder la partie";
             this.SaveGameButton.UseVisualStyleBackColor = true;
             this.SaveGameButton.Click += new System.EventHandler(this.SaveGameButton_Click);
-            this.SaveGameButton.KeyDown += new System.Windows.Forms.KeyEventHandler(this.button1_KeyDown);
             // 
             // NewGameButton
             // 
@@ -75,8 +74,10 @@
             this.Controls.Add(this.LoadGameButton);
             this.Controls.Add(this.NewGameButton);
             this.Controls.Add(this.SaveGameButton);
+            this.KeyPreview = true;
             this.Name = "Options";
             this.Text = "Options";
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Options_KeyDown);
             this.ResumeLayout(false);
 
         }

@@ -19,7 +19,7 @@ namespace SRH.Interface
         public SimuRH()
         {
             InitializeComponent();
-            _myGame = new Game( 1, "INTECH" );
+            //_myGame = new Game( 1, "INTECH" );
             _optionsForm = new Options();
         }
 
@@ -44,10 +44,16 @@ namespace SRH.Interface
             ShowOptions( false );
         }
 
-        private void SaveGame( )
+        internal void SaveGame( )
         {
             if( _myGame == null ) throw new InvalidOperationException( "No CurrentGame to save!" );
             _myGame.SaveGame();
+        }
+
+        internal void LoadGame(string game)
+        {
+            _myGame = GameLoader.Load( game );
+            this.Refresh();
         }
 
         public void ShowOptions(bool show = true)
