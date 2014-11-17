@@ -31,6 +31,9 @@
 			System.Windows.Forms.Label SelectedPersonTitle;
 			System.Windows.Forms.Label SelectedPersonNameTitle;
 			System.Windows.Forms.Label SelectedPersonAgeTitle;
+			System.Windows.Forms.Label SelectedEmployeeAgeTitle;
+			System.Windows.Forms.Label SelectedEmployeeNameTitle;
+			System.Windows.Forms.Label SelectedEmployeeTitle;
 			this.PersonList = new System.Windows.Forms.ListView();
 			this.PersonLastnameHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.PersonFirstnameHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -42,12 +45,18 @@
 			this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.splitContainer3 = new System.Windows.Forms.SplitContainer();
+			this.SelectedEmployeeAge = new System.Windows.Forms.Label();
+			this.fireEmployee = new System.Windows.Forms.Button();
+			this.SelectedEmployeeName = new System.Windows.Forms.Label();
 			this.SelectedPersonAge = new System.Windows.Forms.Label();
 			this.SelectedPersonName = new System.Windows.Forms.Label();
 			this.hirePerson = new System.Windows.Forms.Button();
 			SelectedPersonTitle = new System.Windows.Forms.Label();
 			SelectedPersonNameTitle = new System.Windows.Forms.Label();
 			SelectedPersonAgeTitle = new System.Windows.Forms.Label();
+			SelectedEmployeeAgeTitle = new System.Windows.Forms.Label();
+			SelectedEmployeeNameTitle = new System.Windows.Forms.Label();
+			SelectedEmployeeTitle = new System.Windows.Forms.Label();
 			((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
 			this.splitContainer1.Panel1.SuspendLayout();
 			this.splitContainer1.Panel2.SuspendLayout();
@@ -57,6 +66,7 @@
 			this.splitContainer2.Panel2.SuspendLayout();
 			this.splitContainer2.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).BeginInit();
+			this.splitContainer3.Panel1.SuspendLayout();
 			this.splitContainer3.Panel2.SuspendLayout();
 			this.splitContainer3.SuspendLayout();
 			this.SuspendLayout();
@@ -88,6 +98,34 @@
 			SelectedPersonAgeTitle.Size = new System.Drawing.Size(35, 13);
 			SelectedPersonAgeTitle.TabIndex = 3;
 			SelectedPersonAgeTitle.Text = "Age : ";
+			// 
+			// SelectedEmployeeAgeTitle
+			// 
+			SelectedEmployeeAgeTitle.AutoSize = true;
+			SelectedEmployeeAgeTitle.Location = new System.Drawing.Point(14, 87);
+			SelectedEmployeeAgeTitle.Name = "SelectedEmployeeAgeTitle";
+			SelectedEmployeeAgeTitle.Size = new System.Drawing.Size(35, 13);
+			SelectedEmployeeAgeTitle.TabIndex = 8;
+			SelectedEmployeeAgeTitle.Text = "Age : ";
+			// 
+			// SelectedEmployeeNameTitle
+			// 
+			SelectedEmployeeNameTitle.AutoSize = true;
+			SelectedEmployeeNameTitle.Location = new System.Drawing.Point(14, 63);
+			SelectedEmployeeNameTitle.Name = "SelectedEmployeeNameTitle";
+			SelectedEmployeeNameTitle.Size = new System.Drawing.Size(38, 13);
+			SelectedEmployeeNameTitle.TabIndex = 7;
+			SelectedEmployeeNameTitle.Text = "Nom : ";
+			// 
+			// SelectedEmployeeTitle
+			// 
+			SelectedEmployeeTitle.AutoSize = true;
+			SelectedEmployeeTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			SelectedEmployeeTitle.Location = new System.Drawing.Point(164, 17);
+			SelectedEmployeeTitle.Name = "SelectedEmployeeTitle";
+			SelectedEmployeeTitle.Size = new System.Drawing.Size(89, 20);
+			SelectedEmployeeTitle.TabIndex = 6;
+			SelectedEmployeeTitle.Text = "L\'employé";
 			// 
 			// PersonList
 			// 
@@ -166,6 +204,7 @@
 			this.EmployeeList.TabIndex = 1;
 			this.EmployeeList.UseCompatibleStateImageBehavior = false;
 			this.EmployeeList.View = System.Windows.Forms.View.Details;
+			this.EmployeeList.SelectedIndexChanged += new System.EventHandler(this.EmployeeList_SelectedIndexChanged);
 			// 
 			// columnHeader1
 			// 
@@ -187,6 +226,15 @@
 			this.splitContainer3.Name = "splitContainer3";
 			this.splitContainer3.Orientation = System.Windows.Forms.Orientation.Horizontal;
 			// 
+			// splitContainer3.Panel1
+			// 
+			this.splitContainer3.Panel1.Controls.Add(this.SelectedEmployeeAge);
+			this.splitContainer3.Panel1.Controls.Add(this.fireEmployee);
+			this.splitContainer3.Panel1.Controls.Add(this.SelectedEmployeeName);
+			this.splitContainer3.Panel1.Controls.Add(SelectedEmployeeTitle);
+			this.splitContainer3.Panel1.Controls.Add(SelectedEmployeeAgeTitle);
+			this.splitContainer3.Panel1.Controls.Add(SelectedEmployeeNameTitle);
+			// 
 			// splitContainer3.Panel2
 			// 
 			this.splitContainer3.Panel2.Controls.Add(this.SelectedPersonAge);
@@ -199,6 +247,37 @@
 			this.splitContainer3.SplitterDistance = 236;
 			this.splitContainer3.TabIndex = 0;
 			// 
+			// SelectedEmployeeAge
+			// 
+			this.SelectedEmployeeAge.AutoSize = true;
+			this.SelectedEmployeeAge.Location = new System.Drawing.Point(115, 87);
+			this.SelectedEmployeeAge.Name = "SelectedEmployeeAge";
+			this.SelectedEmployeeAge.Size = new System.Drawing.Size(14, 13);
+			this.SelectedEmployeeAge.TabIndex = 10;
+			this.SelectedEmployeeAge.Text = "X";
+			this.SelectedEmployeeAge.Visible = false;
+			// 
+			// fireEmployee
+			// 
+			this.fireEmployee.Enabled = false;
+			this.fireEmployee.Location = new System.Drawing.Point(332, 40);
+			this.fireEmployee.Name = "fireEmployee";
+			this.fireEmployee.Size = new System.Drawing.Size(75, 23);
+			this.fireEmployee.TabIndex = 0;
+			this.fireEmployee.Text = "Renvoyer";
+			this.fireEmployee.UseVisualStyleBackColor = true;
+			this.fireEmployee.Click += new System.EventHandler(this.fireEmployee_Click);
+			// 
+			// SelectedEmployeeName
+			// 
+			this.SelectedEmployeeName.AutoSize = true;
+			this.SelectedEmployeeName.Location = new System.Drawing.Point(115, 63);
+			this.SelectedEmployeeName.Name = "SelectedEmployeeName";
+			this.SelectedEmployeeName.Size = new System.Drawing.Size(14, 13);
+			this.SelectedEmployeeName.TabIndex = 9;
+			this.SelectedEmployeeName.Text = "X";
+			this.SelectedEmployeeName.Visible = false;
+			// 
 			// SelectedPersonAge
 			// 
 			this.SelectedPersonAge.AutoSize = true;
@@ -207,6 +286,7 @@
 			this.SelectedPersonAge.Size = new System.Drawing.Size(14, 13);
 			this.SelectedPersonAge.TabIndex = 5;
 			this.SelectedPersonAge.Text = "X";
+			this.SelectedPersonAge.Visible = false;
 			// 
 			// SelectedPersonName
 			// 
@@ -216,6 +296,7 @@
 			this.SelectedPersonName.Size = new System.Drawing.Size(14, 13);
 			this.SelectedPersonName.TabIndex = 4;
 			this.SelectedPersonName.Text = "X";
+			this.SelectedPersonName.Visible = false;
 			// 
 			// hirePerson
 			// 
@@ -245,6 +326,8 @@
 			this.splitContainer2.Panel2.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
 			this.splitContainer2.ResumeLayout(false);
+			this.splitContainer3.Panel1.ResumeLayout(false);
+			this.splitContainer3.Panel1.PerformLayout();
 			this.splitContainer3.Panel2.ResumeLayout(false);
 			this.splitContainer3.Panel2.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).EndInit();
@@ -269,5 +352,8 @@
         private System.Windows.Forms.Button hirePerson;
         private System.Windows.Forms.Label SelectedPersonAge;
 		private System.Windows.Forms.Label SelectedPersonName;
+		private System.Windows.Forms.Button fireEmployee;
+		private System.Windows.Forms.Label SelectedEmployeeAge;
+		private System.Windows.Forms.Label SelectedEmployeeName;
 	}
 }

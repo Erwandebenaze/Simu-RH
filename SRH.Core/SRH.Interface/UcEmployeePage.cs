@@ -16,6 +16,7 @@ namespace SRH.Interface
         List<Person> _joblessPersons;
         List<Employee> _employees;
         Person _currentPerson;
+		Employee _currentEmployee;
         
         public UcEmployeePage()
         {
@@ -70,16 +71,53 @@ namespace SRH.Interface
                 SelectedPersonName.Text = _currentPerson.FirstName + " " + _currentPerson.LastName;
                 SelectedPersonAge.Text = _currentPerson.Age.ToString();
             }
-            if( !( _currentPerson == null ) ) hirePerson.Enabled = true;
+			if( _currentPerson != null )
+			{
+				hirePerson.Enabled = true;
+
+				SelectedPersonName.Visible = true;
+				SelectedPersonAge.Visible = true;
+			}
         }
+
+		private void EmployeeList_SelectedIndexChanged( object sender, EventArgs e )
+		{
+			if( EmployeeList.SelectedItems.Count > 0 )
+			{
+				_currentEmployee = (Employee)EmployeeList.SelectedItems[ EmployeeList.SelectedItems.Count - 1 ].Tag;
+				SelectedEmployeeName.Text = _currentEmployee.Worker.FirstName + " " + _currentEmployee.Worker.LastName;
+				SelectedEmployeeAge.Text = _currentEmployee.Worker.Age.ToString();
+			}
+
+			if( _currentEmployee != null )
+			{
+				fireEmployee.Enabled = true;
+
+				SelectedEmployeeName.Visible = true;
+				SelectedEmployeeAge.Visible = true;
+			}
+		}
 
         private void hirePerson_Click( object sender, EventArgs e )
         {
             Employee emp = GameContext.CurrentGame.PlayerCompany.AddEmployee( _currentPerson );
-
-
-
 			EmployeeList.Items.Add( CreateEmployee( emp ) );
+
+			var PersonItem = PersonList.Items.Cast<ListViewItem>().Where( item => item.Tag == _currentPerson ).Single();
+			PersonList.Items.Remove( PersonItem );
+			
+			hirePerson.Enabled = false;
         }
+
+		private void fireEmployee_Click( object sender, EventArgs e )
+		{
+			Person p = GameContext.CurrentGame.PlayerCompany.RemoveEmployee( _currentEmployee );
+			PersonList.Items.Add( CreatePerson( p ) );
+
+			var EmployeeItem = EmployeeList.Items.Cast<ListViewItem>().Where( item => item.Tag == _currentEmployee ).Single();
+			EmployeeList.Items.Remove( EmployeeItem );
+
+			fireEmployee.Enabled = false;
+		}
     }
 }
