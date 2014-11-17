@@ -14,6 +14,7 @@ namespace SRH.Interface
     public partial class SimuRH : Form, IGameContext
     {
         Game _myGame;
+        Timer _timer;
         readonly Options _optionsForm;
 
         public SimuRH()
@@ -21,7 +22,23 @@ namespace SRH.Interface
             InitializeComponent();
             //_myGame = new Game( 1, "INTECH" );
             _optionsForm = new Options();
+            _timer = new Timer();
+            _timer.Interval = 1000;
+           
+            //_timer.Tick += _timer_Tick;
+
+            _timer.Start();
         }
+
+        //void _timer_Tick( object sender, EventArgs e )
+        //{
+        //    _button.Location = new Point( _button.Location.X, _button.Location.Y + 1 );
+        //    Height += 1;
+        //    if( _button.Location.Y > Height / 2 ) _timer.Stop();
+        //}
+        
+
+
 
         public Game CurrentGame
         {
