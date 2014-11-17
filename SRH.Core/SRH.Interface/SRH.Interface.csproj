@@ -102,6 +102,8 @@
     <EmbeddedResource Include="UcProjectPage.resx">
       <DependentUpon>UcProjectPage.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="Properties\DataSources\SRH.Core.LaborMarket.datasource" />
+    <None Include="Properties\DataSources\SRH.Core.MyCompany.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

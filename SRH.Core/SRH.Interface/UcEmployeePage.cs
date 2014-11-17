@@ -36,15 +36,16 @@ namespace SRH.Interface
             if( this.IsInRuntimeMode() )
             {
                 base.OnLoad( e );
-                _joblessPersons = GameContext.CurrentGame.Market.JoblessPersons;
-                PersonList.Items.AddRange( _joblessPersons.Select( p => CreatePersons( p ) ).ToArray() );
-                
-                EmployeeList.Items.AddRange( _employees.Select( employee => CreateEmployees( employee ) ).ToArray() );
+				_employees = GameContext.CurrentGame.PlayerCompany.Employees;
+				_joblessPersons = GameContext.CurrentGame.Market.JoblessPersons;
+
+                PersonList.Items.AddRange( _joblessPersons.Select( p => CreatePerson( p ) ).ToArray() );
+                EmployeeList.Items.AddRange( _employees.Select( employee => CreateEmployee( employee ) ).ToArray() );
             }
 
         }
 
-        static ListViewItem CreatePersons ( Person p )
+        static ListViewItem CreatePerson ( Person p )
         {
             ListViewItem i = new ListViewItem( p.LastName );
             i.Tag = p;
@@ -52,7 +53,7 @@ namespace SRH.Interface
             i.SubItems.Add( new ListViewItem.ListViewSubItem( i, p.Age.ToString() ) );
             return i;
         }
-        static ListViewItem CreateEmployees ( Employee e )
+        static ListViewItem CreateEmployee ( Employee e )
         {
             ListViewItem i = new ListViewItem( e.Worker.LastName );
             i.Tag = e;
@@ -74,8 +75,11 @@ namespace SRH.Interface
 
         private void hirePerson_Click( object sender, EventArgs e )
         {
-            GameContext.CurrentGame.PlayerCompany.AddEmployee( _currentPerson );
-            EmployeeList.Items.RemoveByKey( _currentPerson.LastName );
+            Employee emp = GameContext.CurrentGame.PlayerCompany.AddEmployee( _currentPerson );
+
+
+
+			EmployeeList.Items.Add( CreateEmployee( emp ) );
         }
     }
 }
