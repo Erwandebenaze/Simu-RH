@@ -33,7 +33,7 @@ namespace SRH.Interface
             try
             {
                 _myGame = GameLoader.Load( name );
-                MessageBox.Show( "La partie a été chargée." );
+                MessageBox.Show( "La partie est déjà existante. Celle-ci a été chargée." );
             }
             catch (System.IO.FileNotFoundException)
             {
