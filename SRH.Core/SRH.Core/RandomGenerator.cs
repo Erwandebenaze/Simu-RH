@@ -61,8 +61,23 @@ namespace SRH.Core
 			int RandomAge = RandomNumberGenerator.Next( ageMin, ageMax );
 
 			Person p = new Person( Lb, RandomFirstName, RandomLastName, RandomAge );
+
+			
+
 			return p;
 		}
+		
+		///// <summary>
+		///// Generic method that gets a random element of an enum
+		///// </summary>
+		///// <typeparam name="T">The enum from which an random element is taken </typeparam>
+		///// <returns>Returns a random element of the enmu T</returns>
+		//T GetRandomEnum<T>()
+		//{
+		//	System.Array A = System.Enum.GetValues( typeof( T ) );
+		//	T V = (T)A.GetValue( RandomNumberGenerator.Next( 0, A.Length ) );
+		//	return V;
+		//}
 
         public int GetRandomMonth()
         {

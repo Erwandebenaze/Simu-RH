@@ -95,6 +95,12 @@ namespace SRH.Core
 			return s;
 		}
 
+		public ProjSkill AddProjSkill( ProjSkill.SkillName skillName )
+		{
+			ProjSkill ps = new ProjSkill();
+			ps.Initialize()
+		}
+
         /// <summary>
         /// Add a year in the first January of the new year.
         /// </summary>

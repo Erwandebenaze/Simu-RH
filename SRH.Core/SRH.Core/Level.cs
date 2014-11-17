@@ -107,7 +107,7 @@ namespace SRH.Core
                 if (this._currentLevel == 1)
                     _xpRequired = 100;
                 else 
-                    _xpRequired *=2;
+                    _xpRequired *= 2;
             }
         }
         private void IncreaseLevel()
