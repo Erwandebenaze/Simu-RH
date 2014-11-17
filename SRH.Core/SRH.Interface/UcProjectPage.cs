@@ -110,8 +110,6 @@ namespace SRH.Interface
             _numberOfWorkers.Text = _currentProj.NumberOfWorkers.ToString();
         }
 
-
-
         private void _startOrStopProject_Click( object sender, EventArgs e )
         {
             Project pr;
@@ -120,22 +118,11 @@ namespace SRH.Interface
             {
                 pr = GameContext.CurrentGame.PlayerCompany.StopAProject( _currentProj );
                 _startOrStopProject.Text = "Lancer un projet";
-                //ListViewItem projectItem = null;
-                //foreach( ListViewItem pI in listPossibleProjects.Items )
-                //{
-                //    if( pI.Tag == pr )
-                //    {
-                //        if( projectItem != null ) throw new InvalidOperationException( "2 items with the same Tag == project!" );
-                //        projectItem = pI;
-                //    }
-                //}
-                //if( projectItem == null ) throw new InvalidOperationException( "No item with the Tag == project!" );
                 var projectItem = listCurrentProjects.Items.Cast<ListViewItem>().Where( item => item.Tag == pr ).Single();
 
                 listCurrentProjects.Items.Remove( projectItem );
                 listPossibleProjects.Items.Add( projectItem );
 
-                //listPossibleProjects.Items.AddRange( PossibleProjects.Select( p => Create( p ) ).ToArray() );
             }
             else
             {
@@ -148,13 +135,6 @@ namespace SRH.Interface
                 listCurrentProjects.Items.Add( projectItem );
 
             }
-
-            //listCurrentProjects.Refresh();
-            //listPossibleProjects.Refresh();
-
         }
-
-
-
     }
 }

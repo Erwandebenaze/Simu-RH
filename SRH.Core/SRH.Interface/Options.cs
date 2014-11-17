@@ -46,6 +46,7 @@ namespace SRH.Interface
         {
             MainForm.SaveGame();
             MessageBox.Show( "La partie a été sauvegardée." );
+            this.Hide();
         }
 
         private void LoadGameButton_Click( object sender, EventArgs e )
@@ -68,6 +69,7 @@ namespace SRH.Interface
                         {
                             MainForm.LoadGame( d.FileName );
                             MessageBox.Show( "La partie a été chargée" );
+                            this.Hide();
                         }
                     }
                 }
