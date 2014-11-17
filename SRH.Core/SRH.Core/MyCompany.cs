@@ -61,7 +61,6 @@ namespace SRH.Core
         public List<Project> Projects
         {
             get { return _projects; }
-
         }
         public List<Employee> Employees
         {
@@ -83,11 +82,15 @@ namespace SRH.Core
 		/// </summary>
 		/// <param name="p">The Worker to add, it becomes an <see cref="Employee"/> when added</param>
 		/// <returns>Returns True if the <see cref="Employee"/> was added</returns>
-		public bool AddEmployee( Person p )
+		public Employee AddEmployee( Person p )
 		{
 			Employee e = new Employee( p );
 			_employees.Add( e );
-			return ( _employees.Exists( x => x.Equals( e ) ) ) && ( p.Lb.RemovePerson( p ) );
+			
+			if( !( _employees.Exists( x => x.Equals( e ) ) ) ) throw new InvalidOperationException("The Employee wasn't propoerly added to the List.");
+			if( !( p.Lb.RemovePerson( p ) ) ) throw new InvalidOperationException("The Person wasn't propoerly removed from the List.");
+
+			return e;
 		}
 		/// <summary>
 		/// Removes an <see cref="Employee"/> from <see cref="MyCompany"/>

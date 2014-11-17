@@ -87,8 +87,11 @@ namespace SRH.Core.Tests
 
             Person p = myGame.Market.PersonMaker.CreatePerson( 18, 60 );
             myGame.Market.AddPerson( p );
+			Employee e = myGame.PlayerCompany.AddEmployee( p );
 
-            Assert.That( myGame.PlayerCompany.AddEmployee( p ) );
+			Assert.That( e.Worker.LastName == p.LastName );
+			Assert.That( e.Worker.FirstName == p.FirstName );
+			Assert.That( e.Worker.Age == p.Age );
         }
 
         [Test]
@@ -105,8 +108,11 @@ namespace SRH.Core.Tests
 
             Person p = myGame.Market.PersonMaker.CreatePerson( 18, 60 );
             myGame.Market.AddPerson( p );
+			Employee e = myGame.PlayerCompany.AddEmployee( p );
 
-            Assert.That( myGame.PlayerCompany.AddEmployee( p ) );
+			Assert.That( e.Worker.LastName == p.LastName );
+			Assert.That( e.Worker.FirstName == p.FirstName );
+			Assert.That( e.Worker.Age == p.Age );
         }
 
         [Test]
