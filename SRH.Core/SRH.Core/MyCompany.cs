@@ -112,18 +112,20 @@ namespace SRH.Core
 			if( this.CompanyLevel.CurrentLevel % 10 == 0 ) this.MaxProjectDifficulty += 0.5;
         }
            
-        public void BeginAProject( Project p )
+        public Project BeginAProject( Project p )
         {
             _possibleProjects.Remove( p );
             _projects.Add( p );
             p.BeginProject();
+            return p;
         }
 
-        public void StopAProject( Project p )
+        public Project StopAProject( Project p )
         {
             PossibleProjects.Add( p );
             _projects.Remove( p );
             p.StopProject();
+            return p;
         }
 
 	}

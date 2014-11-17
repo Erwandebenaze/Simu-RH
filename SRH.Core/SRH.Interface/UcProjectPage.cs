@@ -47,14 +47,14 @@ namespace SRH.Interface
 
                 //list.Add( new Project() { ProjectName = "titi", Duration = "trois semaines", Earnings = "trois cents", Level = "****" } );
 
-                listPossibleProjects.Items.AddRange( PossibleProjects.Select( p => Create( p ) ).ToArray() );
-                listCurrentProjects.Items.AddRange( Projects.Select( p => Create( p ) ).ToArray() );
+                listPossibleProjects.Items.AddRange( PossibleProjects.Select( p => CreateListItemView( p ) ).ToArray() );
+                listCurrentProjects.Items.AddRange( Projects.Select( p => CreateListItemView( p ) ).ToArray() );
 
                 // TODO : Ajouter la liste pour les projets en cours lorsque le temps sera définis.
             }
         }
 
-        static ListViewItem Create( Project p )
+        static ListViewItem CreateListItemView( Project p )
         {
             ListViewItem i = new ListViewItem( p.Name );
             i.Tag = p;
@@ -69,11 +69,7 @@ namespace SRH.Interface
             if( listPossibleProjects.SelectedItems.Count > 0 )
             {
                 _currentProj = (Project)listPossibleProjects.SelectedItems[listPossibleProjects.SelectedItems.Count - 1].Tag;
-                _projectNameText.Text = _currentProj.Name;
-                _difficulty.Text = _currentProj.Difficulty.ToString();
-                _earnings.Text = _currentProj.Earnings.ToString();
-                _estimatedTime.Text = _currentProj.Duration.ToString();
-                _numberOfWorkers.Text = _currentProj.NumberOfWorkers.ToString();
+                AffectCurrentProjectFields();
                 if( _currentProj.Activated )
                 {
                     _startOrStopProject.Text = "Arrêter un projet";
@@ -84,27 +80,74 @@ namespace SRH.Interface
             }
         }
 
+        private void AffectCurrentProjectFields()
+        {
+            _projectNameText.Text = _currentProj.Name;
+            _difficulty.Text = _currentProj.Difficulty.ToString();
+            _earnings.Text = _currentProj.Earnings.ToString();
+            _estimatedTime.Text = _currentProj.Duration.ToString();
+            _numberOfWorkers.Text = _currentProj.NumberOfWorkers.ToString();
+        }
+
+        private void listCurrentProjects_SelectedIndexChanged( object sender, EventArgs e )
+        {
+            if( listCurrentProjects.SelectedItems.Count > 0 )
+            {
+                _currentProj = (Project)listCurrentProjects.SelectedItems[listCurrentProjects.SelectedItems.Count - 1].Tag;
+                AffectCurrentProjectFields();
+                if( _currentProj.Activated )
+                {
+                    _startOrStopProject.Text = "Arrêter un projet";
+                }
+                else
+                {
+                    _startOrStopProject.Text = "Lancer un projet";
+                }
+            }
+        }
+
         private void _startOrStopProject_Click( object sender, EventArgs e )
         {
+            Project pr;
+
             if( _currentProj.Activated )
             {
-                GameContext.CurrentGame.PlayerCompany.StopAProject( _currentProj );
+                pr = GameContext.CurrentGame.PlayerCompany.StopAProject( _currentProj );
                 _startOrStopProject.Text = "Lancer un projet";
-                listCurrentProjects.Items.RemoveByKey(_currentProj.Name);
-                listPossibleProjects.Items.AddRange( PossibleProjects.Select( p => Create( p ) ).ToArray() );
+                ListViewItem projectItem = null;
+                foreach( ListViewItem pI in listPossibleProjects.Items )
+                {
+                    if( pI.Tag == pr ) 
+                    {
+                        if( projectItem != null ) throw new InvalidOperationException( "2 items with the same Tag == project!" );
+                        projectItem = pI;
+                    }
+                }
+                if( projectItem == null ) throw new InvalidOperationException( "No item with the Tag == project!" );
 
+                listCurrentProjects.Items.Remove( projectItem );
+                listPossibleProjects.Items.Add( projectItem );
+               
+                //listPossibleProjects.Items.AddRange( PossibleProjects.Select( p => Create( p ) ).ToArray() );
             }
             else
             {
-                GameContext.CurrentGame.PlayerCompany.BeginAProject(_currentProj);
+                pr = GameContext.CurrentGame.PlayerCompany.BeginAProject(_currentProj);
                 _startOrStopProject.Text = "Arrêter un projet";
-                listCurrentProjects.Items.AddRange( Projects.Select( p => Create( p ) ).ToArray() );
-                listPossibleProjects.Items.RemoveByKey( _currentProj.Name );
+                
+                var projectItem = listPossibleProjects.Items.Cast<ListViewItem>().Where( item => item.Tag == pr ).Single();
+                listPossibleProjects.Items.Remove( projectItem );
 
+                listCurrentProjects.Items.Add( projectItem );
 
             }
 
+            listCurrentProjects.Refresh();
+            listPossibleProjects.Refresh();
+
         }
+
+
 
     }
 }
