@@ -190,6 +190,7 @@
             // 
             // _startOrStopProject
             // 
+            this._startOrStopProject.Enabled = false;
             this._startOrStopProject.Location = new System.Drawing.Point(531, 121);
             this._startOrStopProject.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this._startOrStopProject.Name = "_startOrStopProject";

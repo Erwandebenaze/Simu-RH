@@ -57,16 +57,12 @@ namespace SRH.Core.Tests
 
         [Test]
         [ExpectedException( typeof( InvalidOperationException ) )]
-        public void Begin_a_project()
+        public void Begin_a_project_who_is_already_begin_throw_invalidOperationException()
         {
+            iz.BeginProject();
             iz.BeginProject();
         }
 
-        //[Test]
-        //public void Begin_a_project()
-        //{
-        //    iz.BeginProject();
-        //}
 
     }
 }

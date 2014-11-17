@@ -32,8 +32,8 @@ namespace SRH.Interface
             get { return _possibleProjects; }
         }
         IGameContext GameContext
-        { 
-            get { return (IGameContext)TopLevelControl; } 
+        {
+            get { return (IGameContext)TopLevelControl; }
         }
 
         protected override void OnLoad( EventArgs e )
@@ -58,7 +58,7 @@ namespace SRH.Interface
         {
             ListViewItem i = new ListViewItem( p.Name );
             i.Tag = p;
-            i.SubItems.Add(new ListViewItem.ListViewSubItem( i, p.Difficulty.ToString() ));
+            i.SubItems.Add( new ListViewItem.ListViewSubItem( i, p.Difficulty.ToString() ) );
             i.SubItems.Add( new ListViewItem.ListViewSubItem( i, p.Earnings.ToString() ) );
             i.SubItems.Add( new ListViewItem.ListViewSubItem( i, p.Duration.ToString() ) );
             return i;
@@ -68,12 +68,33 @@ namespace SRH.Interface
         {
             if( listPossibleProjects.SelectedItems.Count > 0 )
             {
+                _startOrStopProject.Enabled = true;
                 _currentProj = (Project)listPossibleProjects.SelectedItems[listPossibleProjects.SelectedItems.Count - 1].Tag;
                 AffectCurrentProjectFields();
                 if( _currentProj.Activated )
                 {
                     _startOrStopProject.Text = "Arrêter un projet";
-                } else
+                }
+                else
+                {
+                    _startOrStopProject.Text = "Lancer un projet";
+                }
+            }
+        }
+
+        private void listCurrentProjects_SelectedIndexChanged( object sender, EventArgs e )
+        {
+            if( listCurrentProjects.SelectedItems.Count > 0 )
+            {
+                _startOrStopProject.Enabled = true;
+
+                _currentProj = (Project)listCurrentProjects.SelectedItems[listCurrentProjects.SelectedItems.Count - 1].Tag;
+                AffectCurrentProjectFields();
+                if( _currentProj.Activated )
+                {
+                    _startOrStopProject.Text = "Arrêter un projet";
+                }
+                else
                 {
                     _startOrStopProject.Text = "Lancer un projet";
                 }
@@ -89,22 +110,7 @@ namespace SRH.Interface
             _numberOfWorkers.Text = _currentProj.NumberOfWorkers.ToString();
         }
 
-        private void listCurrentProjects_SelectedIndexChanged( object sender, EventArgs e )
-        {
-            if( listCurrentProjects.SelectedItems.Count > 0 )
-            {
-                _currentProj = (Project)listCurrentProjects.SelectedItems[listCurrentProjects.SelectedItems.Count - 1].Tag;
-                AffectCurrentProjectFields();
-                if( _currentProj.Activated )
-                {
-                    _startOrStopProject.Text = "Arrêter un projet";
-                }
-                else
-                {
-                    _startOrStopProject.Text = "Lancer un projet";
-                }
-            }
-        }
+
 
         private void _startOrStopProject_Click( object sender, EventArgs e )
         {
@@ -114,27 +120,28 @@ namespace SRH.Interface
             {
                 pr = GameContext.CurrentGame.PlayerCompany.StopAProject( _currentProj );
                 _startOrStopProject.Text = "Lancer un projet";
-                ListViewItem projectItem = null;
-                foreach( ListViewItem pI in listPossibleProjects.Items )
-                {
-                    if( pI.Tag == pr ) 
-                    {
-                        if( projectItem != null ) throw new InvalidOperationException( "2 items with the same Tag == project!" );
-                        projectItem = pI;
-                    }
-                }
-                if( projectItem == null ) throw new InvalidOperationException( "No item with the Tag == project!" );
+                //ListViewItem projectItem = null;
+                //foreach( ListViewItem pI in listPossibleProjects.Items )
+                //{
+                //    if( pI.Tag == pr )
+                //    {
+                //        if( projectItem != null ) throw new InvalidOperationException( "2 items with the same Tag == project!" );
+                //        projectItem = pI;
+                //    }
+                //}
+                //if( projectItem == null ) throw new InvalidOperationException( "No item with the Tag == project!" );
+                var projectItem = listCurrentProjects.Items.Cast<ListViewItem>().Where( item => item.Tag == pr ).Single();
 
                 listCurrentProjects.Items.Remove( projectItem );
                 listPossibleProjects.Items.Add( projectItem );
-               
+
                 //listPossibleProjects.Items.AddRange( PossibleProjects.Select( p => Create( p ) ).ToArray() );
             }
             else
             {
-                pr = GameContext.CurrentGame.PlayerCompany.BeginAProject(_currentProj);
+                pr = GameContext.CurrentGame.PlayerCompany.BeginAProject( _currentProj );
                 _startOrStopProject.Text = "Arrêter un projet";
-                
+
                 var projectItem = listPossibleProjects.Items.Cast<ListViewItem>().Where( item => item.Tag == pr ).Single();
                 listPossibleProjects.Items.Remove( projectItem );
 
