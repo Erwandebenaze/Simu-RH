@@ -21,7 +21,7 @@ namespace SRH.Core.Tests
         public void Create_GameTime_with_no_paramaters_create_a_2015_01_25_date_time()
         {
             GameTime myGameTime = new GameTime();
-            Assert.That( myGameTime.TimeOfGame == new DateTime( 2015, 01, 26 ) );
+            Assert.That( GameTime.TimeOfGame == new DateTime( 2015, 01, 26 ) );
         }
 
         [Test]
@@ -36,7 +36,7 @@ namespace SRH.Core.Tests
         {
             GameTime myGameTime = new GameTime();
             myGameTime.newDay();
-            Assert.That( myGameTime.TimeOfGame == new DateTime( 2015, 01, 27 ) );
+            Assert.That( GameTime.TimeOfGame == new DateTime( 2015, 01, 27 ) );
         }
 
         [Test]

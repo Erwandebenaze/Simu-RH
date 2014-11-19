@@ -12,6 +12,9 @@ namespace SRH.Core
         LaborMarket _market;
         MyCompany _playerCompany;
         List<Competitor> _competitors;
+        GameTime _timeGame;
+
+
 		static Random _randomNumberGenerator;
 		static int _randomSerie;
         //public List<Project> _possibleProjects;
@@ -24,9 +27,14 @@ namespace SRH.Core
 			_competitors = new List<Competitor>();
 			_randomSerie = _randomNumberGenerator.Next();
 			_playerCompany = new MyCompany( companyName );
+            _timeGame = new GameTime();
 		}
 
         #region Getters Setters
+        public GameTime TimeGame
+        {
+            get { return _timeGame; }
+        }
         public LaborMarket Market
         {
             get { return _market; }

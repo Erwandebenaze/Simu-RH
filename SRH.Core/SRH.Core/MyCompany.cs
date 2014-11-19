@@ -37,9 +37,9 @@ namespace SRH.Core
 			_maxEmployees = 10;
             _projects = new List<Project>();
             _possibleProjects = new List<Project>();
-            _possibleProjects.Add( new Project( "Danone", 1, 2, 1000, 3 ) );
-            _possibleProjects.Add( new Project( "Nestle", 1, 2, 2000, 4 ) );
-            _possibleProjects.Add( new Project( "Accord", 1, 2, 3000, 5 ) );
+            _possibleProjects.Add( new Project( "Danone", 1, 2, 1000, 30 ) );
+            _possibleProjects.Add( new Project( "Nestle", 1, 2, 2000, 60 ) );
+            _possibleProjects.Add( new Project( "Accord", 1, 2, 3000, 90) );
 
         }
 

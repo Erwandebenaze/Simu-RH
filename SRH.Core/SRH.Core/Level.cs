@@ -31,7 +31,14 @@ namespace SRH.Core
             _skill = false;
             this.FixNextXpRequired();
         }
-
+        public int CurrentXp
+        {
+            get { return _currentXp; }
+        }
+        public int XpRequired
+        {
+            get { return _xpRequired; }
+        }
         public int CurrentLevel
         {
             get { return _currentLevel; }
@@ -47,7 +54,7 @@ namespace SRH.Core
             if( this._currentLevel == 4 && xp > 600 ) throw new ArgumentException( "Xp is too big for the level" );
             if( this._currentLevel == 5 && xp > 1000 ) throw new ArgumentException( "Xp is too big for the level" );
             #endregion
-            if (xp + _currentXp >= _xpRequired)
+            if (xp + CurrentXp >= XpRequired)
                 this.IncreaseLevel( mc );
 
             _currentXp += xp;
@@ -102,7 +109,7 @@ namespace SRH.Core
             {
                 if (this._currentLevel == 1)
                     _xpRequired = 100;
-                else 
+                else
                     _xpRequired *= 2;
             }
         }

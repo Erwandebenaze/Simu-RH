@@ -14,6 +14,7 @@ namespace SRH.Core
         readonly int _numberOfWorkers;
         readonly int _duration;
         private int _timeSpent;
+        DateTime? _begginingDate;
         readonly int _earnings;
         readonly int _xpPerCompany;
         readonly int _xpPerPerson;
@@ -42,6 +43,14 @@ namespace SRH.Core
         public int Duration
         {
             get { return _duration; }
+        }
+        public int XpPerPerson
+        {
+            get { return _xpPerPerson; }
+        }
+        public int XpPerCompany
+        {
+            get { return _xpPerCompany; }
         } 
         #endregion
         #region GetterSetter
@@ -55,15 +64,7 @@ namespace SRH.Core
             get { return _activated; }
             set { _activated = value; }
         }
-        public int XpPerPerson
-        {
-            get { return _xpPerPerson; }
-        }
 
-        public int XpPerCompany
-        {
-            get { return _xpPerCompany; }
-        } 
         #endregion
 
         /// <summary>
@@ -142,15 +143,15 @@ namespace SRH.Core
         public bool BeginProject()
         {
             if( Activated ) throw new InvalidOperationException( "A project can not be lunched if he has been already begin." );
-            //if( _skillsRequired.Count == 0 )
-            //{
+            if( _skillsRequired.Count == 0 )
+            {
                 Activated = true;
-                
-            //}
-            //else
-            //{
-            //    throw new InvalidOperationException( "Every skills must be taken before begin a project" );
-            //}
+                _begginingDate = GameTime.TimeOfGame;
+            }
+            else
+            {
+                throw new InvalidOperationException( "Every skills must be taken before begin a project" );
+            }
             return Activated;
         }
 
@@ -163,6 +164,7 @@ namespace SRH.Core
         {
             if( !Activated ) throw new InvalidOperationException( "A project can not be stoped if he is not begun." );
             Activated = false;
+            _begginingDate = null;
             return Activated;
         }
     }

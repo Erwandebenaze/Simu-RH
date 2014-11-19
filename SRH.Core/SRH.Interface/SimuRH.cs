@@ -22,8 +22,10 @@ namespace SRH.Interface
         public SimuRH()
         {
             InitializeComponent();
-            _timeOfGame = new GameTime();
+            _myGame = new Game( 1, "SimuRH" );
+            //_myGame = GameLoader.Load("SimuRH");
             _optionsForm = new Options();
+            _timeOfGame = _myGame.TimeGame;
             _timer = new Timer();
             interval = 2000;
             _timer.Interval = interval;
@@ -31,11 +33,22 @@ namespace SRH.Interface
             _timer.Start();
         }
 
+
         void _timer_Tick( object sender, EventArgs e )
         {
+            BarProgress();
             _timeOfGame.newDay();
-            _dateOfGame.Text = _timeOfGame.TimeOfGame.ToString("d");
+            _dateOfGame.Text = GameTime.TimeOfGame.ToString("d");
             _day.Text = _timeOfGame.FrenchDayOfWeek;
+        }
+
+        private void BarProgress()
+        {
+            _currentCompanyLevel.Text = CurrentGame.PlayerCompany.CompanyLevel.CurrentLevel.ToString();
+            _nextCompanyLevel.Text = (CurrentGame.PlayerCompany.CompanyLevel.CurrentLevel+1).ToString();
+            _companyProgressBar.Minimum = 0;
+            _companyProgressBar.Maximum = CurrentGame.PlayerCompany.CompanyLevel.XpRequired / CurrentGame.PlayerCompany.CompanyLevel.CurrentLevel;
+            _companyProgressBar.Value = CurrentGame.PlayerCompany.CompanyLevel.CurrentXp;
         }
 
         public Game CurrentGame

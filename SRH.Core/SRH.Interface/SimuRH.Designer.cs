@@ -41,6 +41,9 @@
             this._x5Button = new System.Windows.Forms.Button();
             this._x10Button = new System.Windows.Forms.Button();
             this._playButton = new System.Windows.Forms.Button();
+            this._companyProgressBar = new System.Windows.Forms.ProgressBar();
+            this._currentCompanyLevel = new System.Windows.Forms.Label();
+            this._nextCompanyLevel = new System.Windows.Forms.Label();
             this.ucEmployeePage = new SRH.Interface.UcEmployeePage();
             this.ucProjectPage = new SRH.Interface.UcProjectPage();
             this.tabControl1.SuspendLayout();
@@ -191,6 +194,34 @@
             this._playButton.UseVisualStyleBackColor = true;
             this._playButton.Click += new System.EventHandler(this._playButton_Click);
             // 
+            // _companyProgressBar
+            // 
+            this._companyProgressBar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this._companyProgressBar.Location = new System.Drawing.Point(743, 10);
+            this._companyProgressBar.Name = "_companyProgressBar";
+            this._companyProgressBar.Size = new System.Drawing.Size(248, 23);
+            this._companyProgressBar.TabIndex = 8;
+            // 
+            // _currentCompanyLevel
+            // 
+            this._currentCompanyLevel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this._currentCompanyLevel.AutoSize = true;
+            this._currentCompanyLevel.Location = new System.Drawing.Point(720, 13);
+            this._currentCompanyLevel.Name = "_currentCompanyLevel";
+            this._currentCompanyLevel.Size = new System.Drawing.Size(17, 17);
+            this._currentCompanyLevel.TabIndex = 9;
+            this._currentCompanyLevel.Text = "X";
+            // 
+            // _nextCompanyLevel
+            // 
+            this._nextCompanyLevel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this._nextCompanyLevel.AutoSize = true;
+            this._nextCompanyLevel.Location = new System.Drawing.Point(997, 13);
+            this._nextCompanyLevel.Name = "_nextCompanyLevel";
+            this._nextCompanyLevel.Size = new System.Drawing.Size(17, 17);
+            this._nextCompanyLevel.TabIndex = 10;
+            this._nextCompanyLevel.Text = "X";
+            // 
             // ucEmployeePage
             // 
             this.ucEmployeePage.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -219,6 +250,9 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1016, 665);
+            this.Controls.Add(this._nextCompanyLevel);
+            this.Controls.Add(this._currentCompanyLevel);
+            this.Controls.Add(this._companyProgressBar);
             this.Controls.Add(this._playButton);
             this.Controls.Add(this._x10Button);
             this.Controls.Add(this._x5Button);
@@ -258,6 +292,9 @@
         private System.Windows.Forms.Button _x5Button;
         private System.Windows.Forms.Button _x10Button;
         private System.Windows.Forms.Button _playButton;
+        private System.Windows.Forms.ProgressBar _companyProgressBar;
+        private System.Windows.Forms.Label _currentCompanyLevel;
+        private System.Windows.Forms.Label _nextCompanyLevel;
 
     }
 }
