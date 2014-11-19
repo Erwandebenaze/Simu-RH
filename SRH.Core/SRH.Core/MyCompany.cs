@@ -87,8 +87,8 @@ namespace SRH.Core
 			Employee e = new Employee( p );
 			_employees.Add( e );
 			
-			if( !( _employees.Exists( x => x.Equals( e ) ) ) ) throw new InvalidOperationException("The Employee wasn't propoerly added to the List.");
-			if( !( p.Lb.RemovePerson( p ) ) ) throw new InvalidOperationException("The Person wasn't propoerly removed from the List.");
+			if( !( _employees.Exists( x => x.Equals( e ) ) ) ) throw new InvalidOperationException("The Employee wasn't properly added to the List.");
+			if( !( p.Lb.RemovePerson( p ) ) ) throw new InvalidOperationException("The Person wasn't properly removed from the List.");
 
 			return e;
 		}
@@ -97,10 +97,15 @@ namespace SRH.Core
 		/// </summary>
 		/// <param name="e">The <see cref="Employee"/> to remove</param>
 		/// <returns>Returns True id the <see cref="Employee"/> was removes</returns>
-		public bool RemoveEmployee( Employee e )
+		public Person RemoveEmployee( Employee e )
 		{
 			_employees.Remove( e );
-			return !( _employees.Exists( x => x.Equals( e ) ) ) && ( e.Worker.Lb.AddPerson( e.Worker ) );
+			if( _employees.Exists( x => x.Equals( e ) ) )
+				throw new InvalidOperationException( "The Employee was not removed properly from the List." );
+			if( !( e.Worker.Lb.AddPerson( e.Worker ) ) )
+				throw new InvalidOperationException( "The Person was not added properly to te List." );
+
+			return e.Worker;
 		}
 
 		/// <summary>
