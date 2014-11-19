@@ -21,7 +21,7 @@ namespace SRH.Core
         }
         public DateTime TimeOfGame
         {
-            get { return _timeOfGame; }
+            get { return _timeOfGame.Date; }
         }
         public string FrenchDayOfWeek
         {
