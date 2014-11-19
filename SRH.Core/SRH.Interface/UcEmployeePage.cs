@@ -71,15 +71,6 @@ namespace SRH.Interface
 			return i;
 		}
 
-		void AddSkills( Person p )
-		{
-			foreach( Skill s in p.Skills.Values )
-			{
-				SelectedPersonSkillList.Items.Add( s.SkillNameString );
-				SelectedPersonSkillList.Items.Add( s.Level.CurrentLevel.ToString() );
-			}
-		}
-
         private void PersonList_SelectedIndexChanged(object sender, EventArgs e)
         {
             if( PersonList.SelectedItems.Count > 0 )
@@ -89,10 +80,7 @@ namespace SRH.Interface
                 SelectedPersonAge.Text = _currentPerson.Age.ToString();
 
 				SelectedPersonSkillList.Items.Clear();
-
 				SelectedPersonSkillList.Items.AddRange( _currentPerson.Skills.Values.Select( s => AddSkills( s ) ).ToArray() );
-
-				//AddSkills( _currentPerson );
             }
 			if( _currentPerson != null )
 			{
@@ -111,6 +99,9 @@ namespace SRH.Interface
 				_currentEmployee = (Employee)EmployeeList.SelectedItems[ EmployeeList.SelectedItems.Count - 1 ].Tag;
 				SelectedEmployeeName.Text = _currentEmployee.Worker.FirstName + " " + _currentEmployee.Worker.LastName;
 				SelectedEmployeeAge.Text = _currentEmployee.Worker.Age.ToString();
+
+				SelectedEmployeeSkillList.Items.Clear();
+				SelectedEmployeeSkillList.Items.AddRange( _currentEmployee.Worker.Skills.Values.Select( s => AddSkills( s ) ).ToArray() );
 			}
 
 			if( _currentEmployee != null )
