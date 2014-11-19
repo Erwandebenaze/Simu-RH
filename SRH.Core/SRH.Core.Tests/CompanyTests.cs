@@ -52,7 +52,7 @@ namespace SRH.Core.Tests
         public void Our_company_takes_experience_and_upgrade_his_level()
         {
             MyCompany mc = new MyCompany( "Danone" );
-            mc.CompanyLevel.IncreaseXp( 101 );
+            mc.CompanyLevel.IncreaseXp( 101, mc );
 			Assert.That( mc.CompanyLevel.CurrentLevel, Is.EqualTo( 2 ) );
         }
 
@@ -119,7 +119,7 @@ namespace SRH.Core.Tests
         public void Our_company_takes_experience_and_upgrade_his_level_and_can_be_save()
         {
             Game myGame = new Game(1, "Nestle" );
-            myGame.PlayerCompany.CompanyLevel.IncreaseXp( 101 );
+            myGame.PlayerCompany.CompanyLevel.IncreaseXp( 101, myGame.PlayerCompany );
             myGame.SaveGame();
             Game mySavedGame = GameLoader.Load( "Nestle" );
             Assert.That( mySavedGame.PlayerCompany.CompanyLevel.CurrentLevel, Is.EqualTo( 2 ) );
@@ -134,8 +134,28 @@ namespace SRH.Core.Tests
 
             Game mySavedGame = GameLoader.Load( "Nestle" );
             Assert.That( mySavedGame.PlayerCompany.CompanyLevel.CurrentLevel, Is.EqualTo( 4 ) );
-
         }
 
+		[Test]
+		public void Add_a_skill_to_a_Person()
+		{
+			Game myGame = new Game( 1, "Nestle" );
+
+			Person p = myGame.Market.JoblessPersons[ 0 ];
+			ProjSkill ps = (ProjSkill)p.AddSkill( ProjSkill.SkillName.BetaTest, 3 );
+
+			Assert.That( p.Skills.ContainsValue( ps ) );
+			Assert.That( ps.SkillNameString == "BetaTest" );
+			Assert.That( ps.Level.CurrentLevel == 3 );
+		}
+
+		[Test]
+		public void A_randomly_created_Person_has_2_random_skills()
+		{
+			Game myGame = new Game( 1, "Simu\'RH" );
+			Person p = myGame.Market.PersonMaker.CreatePerson( 18, 60 );
+
+			Assert.That( p.Skills.Count == 2 );
+		}
     }
 }

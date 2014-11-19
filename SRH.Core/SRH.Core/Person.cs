@@ -95,10 +95,36 @@ namespace SRH.Core
 			return s;
 		}
 
-		public ProjSkill AddProjSkill( ProjSkill.SkillName skillName )
+		/// <summary>
+		/// Adds a <see cref="ProjSkill"/> to the Person's skills List
+		/// </summary>
+		/// <param name="skillName">The name of the skill, must be an enumerator of ProjSkill.SkillName</param>
+		/// <returns>The ProjSkill added</returns>
+		public Skill AddSkill( ProjSkill.SkillName skillName, int level = 1)
 		{
 			ProjSkill ps = new ProjSkill();
-			ps.Initialize()
+			string skillNameString = Enum.GetName( skillName.GetType(), skillName );
+
+			ps.Initialize( skillNameString, level );
+			Skills.Add( skillNameString, ps );
+
+			return ps;
+		}
+
+		/// <summary>
+		/// Adds a <see cref="CompaSkill"/> to the Person's skills List
+		/// </summary>
+		/// <param name="skillName">The name of the skill, must be an enumerator of CompaSkill.SkillName</param>
+		/// <returns>The CompaSkill added</returns>
+		public Skill AddSkill( CompaSkill.SkillName skillName, int level = 1)
+		{
+			CompaSkill cs = new CompaSkill();
+			string skillNameString = Enum.GetName( skillName.GetType(), skillName );
+
+			cs.Initialize( skillNameString, level );
+			Skills.Add( skillNameString, cs );
+
+			return cs;
 		}
 
         /// <summary>

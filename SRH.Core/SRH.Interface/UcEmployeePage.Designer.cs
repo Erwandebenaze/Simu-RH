@@ -34,6 +34,8 @@
 			System.Windows.Forms.Label SelectedEmployeeAgeTitle;
 			System.Windows.Forms.Label SelectedEmployeeNameTitle;
 			System.Windows.Forms.Label SelectedEmployeeTitle;
+			System.Windows.Forms.Label SelectedPersonSkillsTitle;
+			System.Windows.Forms.Label SelectedEmployeeSkillsTitle;
 			this.PersonList = new System.Windows.Forms.ListView();
 			this.PersonLastnameHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.PersonFirstnameHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -41,22 +43,27 @@
 			this.splitContainer1 = new System.Windows.Forms.SplitContainer();
 			this.splitContainer2 = new System.Windows.Forms.SplitContainer();
 			this.EmployeeList = new System.Windows.Forms.ListView();
-			this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-			this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-			this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+			this.EmployeeLastNameHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+			this.EmployeeFirstNameHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+			this.EmployeeAgeHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.splitContainer3 = new System.Windows.Forms.SplitContainer();
 			this.SelectedEmployeeAge = new System.Windows.Forms.Label();
 			this.fireEmployee = new System.Windows.Forms.Button();
 			this.SelectedEmployeeName = new System.Windows.Forms.Label();
+			this.SelectedPersonSkillList = new System.Windows.Forms.ListView();
 			this.SelectedPersonAge = new System.Windows.Forms.Label();
 			this.SelectedPersonName = new System.Windows.Forms.Label();
 			this.hirePerson = new System.Windows.Forms.Button();
+			this.SelectedEmployeeSkillNameHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+			this.SelectedEmployeeSkillLeverHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			SelectedPersonTitle = new System.Windows.Forms.Label();
 			SelectedPersonNameTitle = new System.Windows.Forms.Label();
 			SelectedPersonAgeTitle = new System.Windows.Forms.Label();
 			SelectedEmployeeAgeTitle = new System.Windows.Forms.Label();
 			SelectedEmployeeNameTitle = new System.Windows.Forms.Label();
 			SelectedEmployeeTitle = new System.Windows.Forms.Label();
+			SelectedPersonSkillsTitle = new System.Windows.Forms.Label();
+			SelectedEmployeeSkillsTitle = new System.Windows.Forms.Label();
 			((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
 			this.splitContainer1.Panel1.SuspendLayout();
 			this.splitContainer1.Panel2.SuspendLayout();
@@ -127,6 +134,26 @@
 			SelectedEmployeeTitle.TabIndex = 6;
 			SelectedEmployeeTitle.Text = "L\'employé";
 			// 
+			// SelectedPersonSkillsTitle
+			// 
+			SelectedPersonSkillsTitle.AutoSize = true;
+			SelectedPersonSkillsTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			SelectedPersonSkillsTitle.Location = new System.Drawing.Point(14, 114);
+			SelectedPersonSkillsTitle.Name = "SelectedPersonSkillsTitle";
+			SelectedPersonSkillsTitle.Size = new System.Drawing.Size(103, 16);
+			SelectedPersonSkillsTitle.TabIndex = 11;
+			SelectedPersonSkillsTitle.Text = "Compétences";
+			// 
+			// SelectedEmployeeSkillsTitle
+			// 
+			SelectedEmployeeSkillsTitle.AutoSize = true;
+			SelectedEmployeeSkillsTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			SelectedEmployeeSkillsTitle.Location = new System.Drawing.Point(14, 117);
+			SelectedEmployeeSkillsTitle.Name = "SelectedEmployeeSkillsTitle";
+			SelectedEmployeeSkillsTitle.Size = new System.Drawing.Size(103, 16);
+			SelectedEmployeeSkillsTitle.TabIndex = 12;
+			SelectedEmployeeSkillsTitle.Text = "Compétences";
+			// 
 			// PersonList
 			// 
 			this.PersonList.Activation = System.Windows.Forms.ItemActivation.OneClick;
@@ -193,9 +220,9 @@
 			// 
 			this.EmployeeList.Activation = System.Windows.Forms.ItemActivation.OneClick;
 			this.EmployeeList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader1,
-            this.columnHeader2,
-            this.columnHeader3});
+            this.EmployeeLastNameHeader,
+            this.EmployeeFirstNameHeader,
+            this.EmployeeAgeHeader});
 			this.EmployeeList.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.EmployeeList.Location = new System.Drawing.Point(0, 0);
 			this.EmployeeList.MultiSelect = false;
@@ -206,18 +233,18 @@
 			this.EmployeeList.View = System.Windows.Forms.View.Details;
 			this.EmployeeList.SelectedIndexChanged += new System.EventHandler(this.EmployeeList_SelectedIndexChanged);
 			// 
-			// columnHeader1
+			// EmployeeLastNameHeader
 			// 
-			this.columnHeader1.Text = "Nom";
+			this.EmployeeLastNameHeader.Text = "Nom";
 			// 
-			// columnHeader2
+			// EmployeeFirstNameHeader
 			// 
-			this.columnHeader2.Text = "Prénom";
+			this.EmployeeFirstNameHeader.Text = "Prénom";
 			// 
-			// columnHeader3
+			// EmployeeAgeHeader
 			// 
-			this.columnHeader3.Text = "Age";
-			this.columnHeader3.Width = 87;
+			this.EmployeeAgeHeader.Text = "Age";
+			this.EmployeeAgeHeader.Width = 87;
 			// 
 			// splitContainer3
 			// 
@@ -228,6 +255,7 @@
 			// 
 			// splitContainer3.Panel1
 			// 
+			this.splitContainer3.Panel1.Controls.Add(SelectedEmployeeSkillsTitle);
 			this.splitContainer3.Panel1.Controls.Add(this.SelectedEmployeeAge);
 			this.splitContainer3.Panel1.Controls.Add(this.fireEmployee);
 			this.splitContainer3.Panel1.Controls.Add(this.SelectedEmployeeName);
@@ -237,6 +265,8 @@
 			// 
 			// splitContainer3.Panel2
 			// 
+			this.splitContainer3.Panel2.Controls.Add(this.SelectedPersonSkillList);
+			this.splitContainer3.Panel2.Controls.Add(SelectedPersonSkillsTitle);
 			this.splitContainer3.Panel2.Controls.Add(this.SelectedPersonAge);
 			this.splitContainer3.Panel2.Controls.Add(this.SelectedPersonName);
 			this.splitContainer3.Panel2.Controls.Add(SelectedPersonAgeTitle);
@@ -278,6 +308,18 @@
 			this.SelectedEmployeeName.Text = "X";
 			this.SelectedEmployeeName.Visible = false;
 			// 
+			// SelectedPersonSkillList
+			// 
+			this.SelectedPersonSkillList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.SelectedEmployeeSkillNameHeader,
+            this.SelectedEmployeeSkillLeverHeader});
+			this.SelectedPersonSkillList.Location = new System.Drawing.Point(17, 133);
+			this.SelectedPersonSkillList.Name = "SelectedPersonSkillList";
+			this.SelectedPersonSkillList.Size = new System.Drawing.Size(413, 132);
+			this.SelectedPersonSkillList.TabIndex = 12;
+			this.SelectedPersonSkillList.UseCompatibleStateImageBehavior = false;
+			this.SelectedPersonSkillList.View = System.Windows.Forms.View.Tile;
+			// 
 			// SelectedPersonAge
 			// 
 			this.SelectedPersonAge.AutoSize = true;
@@ -308,6 +350,16 @@
 			this.hirePerson.Text = "Engager";
 			this.hirePerson.UseVisualStyleBackColor = true;
 			this.hirePerson.Click += new System.EventHandler(this.hirePerson_Click);
+			// 
+			// SelectedEmployeeSkillNameHeader
+			// 
+			this.SelectedEmployeeSkillNameHeader.Text = "Compétence";
+			this.SelectedEmployeeSkillNameHeader.Width = 108;
+			// 
+			// SelectedEmployeeSkillLeverHeader
+			// 
+			this.SelectedEmployeeSkillLeverHeader.Text = "Niveau";
+			this.SelectedEmployeeSkillLeverHeader.Width = 107;
 			// 
 			// UcEmployeePage
 			// 
@@ -345,9 +397,9 @@
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.SplitContainer splitContainer2;
         private System.Windows.Forms.ListView EmployeeList;
-        private System.Windows.Forms.ColumnHeader columnHeader1;
-        private System.Windows.Forms.ColumnHeader columnHeader2;
-        private System.Windows.Forms.ColumnHeader columnHeader3;
+        private System.Windows.Forms.ColumnHeader EmployeeLastNameHeader;
+        private System.Windows.Forms.ColumnHeader EmployeeFirstNameHeader;
+        private System.Windows.Forms.ColumnHeader EmployeeAgeHeader;
         private System.Windows.Forms.SplitContainer splitContainer3;
         private System.Windows.Forms.Button hirePerson;
         private System.Windows.Forms.Label SelectedPersonAge;
@@ -355,5 +407,8 @@
 		private System.Windows.Forms.Button fireEmployee;
 		private System.Windows.Forms.Label SelectedEmployeeAge;
 		private System.Windows.Forms.Label SelectedEmployeeName;
+		private System.Windows.Forms.ListView SelectedPersonSkillList;
+		private System.Windows.Forms.ColumnHeader SelectedEmployeeSkillNameHeader;
+		private System.Windows.Forms.ColumnHeader SelectedEmployeeSkillLeverHeader;
 	}
 }

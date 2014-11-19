@@ -12,8 +12,6 @@ namespace SRH.Core
         int _currentXp;
         int _xpRequired;
         int _currentLevel;
-        Skill _sk;
-        MyCompany _mc;
         private bool _skill;
 
         public Level( Skill s )
@@ -21,7 +19,6 @@ namespace SRH.Core
             // TODO : Trouver le moyen de savoir qui appelle le constructeur pour savoir si c'est la company ou une skill.
 			_currentXp = 0;
             _currentLevel = 1;
-            _sk = s;
             _skill = true;
             this.FixNextXpRequired();
         }
@@ -31,7 +28,6 @@ namespace SRH.Core
             // TODO : Trouver le moyen de savoir qui appelle le constructeur pour savoir si c'est la company ou une skill.
             _currentXp = 0;
             _currentLevel = 1;
-            _mc = c;
             _skill = false;
             this.FixNextXpRequired();
         }
@@ -42,7 +38,7 @@ namespace SRH.Core
             set { _currentLevel = value; }
         }
 
-        public void IncreaseXp( int xp ) 
+        public void IncreaseXp( int xp, MyCompany mc ) 
         {
             #region Exceptions
             if( xp < 1 ) throw new ArgumentException( "Xp must be positive" );
@@ -52,7 +48,7 @@ namespace SRH.Core
             if( this._currentLevel == 5 && xp > 1000 ) throw new ArgumentException( "Xp is too big for the level" );
             #endregion
             if (xp + _currentXp >= _xpRequired)
-                this.IncreaseLevel();
+                this.IncreaseLevel( mc );
 
             _currentXp += xp;
             this.FixNextXpRequired(); 
@@ -110,11 +106,11 @@ namespace SRH.Core
                     _xpRequired *= 2;
             }
         }
-        private void IncreaseLevel()
+        private void IncreaseLevel( MyCompany mc)
         {
              if( !_skill )
              {
-                _mc.AdjustValuesCompany();
+                mc.AdjustValuesCompany();
              }
 			 _currentLevel += 1;
         }

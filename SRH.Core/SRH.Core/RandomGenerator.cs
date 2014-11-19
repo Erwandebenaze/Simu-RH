@@ -62,23 +62,33 @@ namespace SRH.Core
 
 			Person p = new Person( Lb, RandomFirstName, RandomLastName, RandomAge );
 
-			
+			// TODO : add a GetRandomSKill that gives more skills and/or more level of skills (native talent of the Person)
+			int numberOfSKills = 0;
+			while( numberOfSKills < 2 )
+			{
+				ProjSkill.SkillName randomEnum = GetRandomEnum<ProjSkill.SkillName>();
+				if( !( p.Skills.ContainsKey( Enum.GetName( randomEnum.GetType(), randomEnum ) ) ) )
+				{
+					p.AddSkill( randomEnum );
+					numberOfSKills++;
+				}
+			}
 
 			return p;
 		}
-		
-		///// <summary>
-		///// Generic method that gets a random element of an enum
-		///// </summary>
-		///// <typeparam name="T">The enum from which an random element is taken </typeparam>
-		///// <returns>Returns a random element of the enmu T</returns>
-		//T GetRandomEnum<T>()
-		//{
-		//	System.Array A = System.Enum.GetValues( typeof( T ) );
-		//	T V = (T)A.GetValue( RandomNumberGenerator.Next( 0, A.Length ) );
-		//	return V;
-		//}
 
+		/// <summary>
+		/// Generic method that gets a random element of an enum
+		/// </summary>
+		/// <typeparam name="T">The enum from which an random element is taken </typeparam>
+		/// <returns>Returns a random element of the enmu T</returns>
+		T GetRandomEnum<T>()
+		{
+			Array A = System.Enum.GetValues( typeof( T ) );
+			T V = (T)A.GetValue( RandomNumberGenerator.Next( 0, A.Length ) );
+			return V;
+		}
+		
         public int GetRandomMonth()
         {
             int month = RandomNumberGenerator.Next( 1, 12 );

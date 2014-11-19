@@ -63,6 +63,23 @@ namespace SRH.Interface
             return i;
         }
 
+		//static ListViewItem AddSkills( Dictionary<string, Skill> s )
+		//{
+		//	ListViewItem i = new ListViewItem( s.Values.SkillNameString );
+		//	i.Tag = s;
+		//	i.SubItems.Add( new ListViewItem.ListViewSubItem( i, s.Level.CurrentLevel.ToString() ) );
+		//	return i;
+		//}
+
+		//void AddSkills( Person p )
+		//{
+		//	foreach(Skill s in p.Skills.Values)
+		//	{
+		//		SelectedPersonSkillList.Items.Add( s.SkillNameString );
+		//		SelectedPersonSkillList.Items.Add( s.Level.CurrentLevel.ToString() );
+		//	}
+		//}
+
         private void PersonList_SelectedIndexChanged(object sender, EventArgs e)
         {
             if( PersonList.SelectedItems.Count > 0 )
@@ -70,10 +87,17 @@ namespace SRH.Interface
                 _currentPerson = (Person)PersonList.SelectedItems[ PersonList.SelectedItems.Count - 1 ].Tag;
                 SelectedPersonName.Text = _currentPerson.FirstName + " " + _currentPerson.LastName;
                 SelectedPersonAge.Text = _currentPerson.Age.ToString();
+
+				SelectedPersonSkillList.Clear();
+
+				// SelectedPersonSkillList.Items.AddRange( _currentPerson.Select( p => AddSkills( p.Skills ) ).ToArray() );
+
+				// AddSkills( _currentPerson );
             }
 			if( _currentPerson != null )
 			{
 				hirePerson.Enabled = true;
+
 
 				SelectedPersonName.Visible = true;
 				SelectedPersonAge.Visible = true;
