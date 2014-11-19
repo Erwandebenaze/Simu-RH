@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -39,48 +40,53 @@ namespace SRH.Interface
             }
         }
 
-        private void button1_KeyDown( object sender, KeyEventArgs e )
-        {
-                 
-            if (e.KeyCode == Keys.Escape)
-            {
-                this.Hide();
-            }
-        
-        }
+
 
         private void SaveGameButton_Click( object sender, EventArgs e )
         {
-            MainForm.CurrentGame.SaveGame();
+            MainForm.SaveGame();
             MessageBox.Show( "La partie a été sauvegardée." );
+            this.Hide();
         }
 
         private void LoadGameButton_Click( object sender, EventArgs e )
         {
             //System.Diagnostics.Process.Start( @"..\..\..\Sauvegardes" );
             OpenFileDialog d = new OpenFileDialog();
+            Stream myStream = null;
             d.InitialDirectory = @"C:\Dev\Simu-RH\SRH.Core\Sauvegardes";
             d.Filter = "bin files (*.bin)|*.bin";
-            d.ShowDialog();
+           // d.ShowDialog();
 
-            //if( openFileDialog1.ShowDialog() == DialogResult.OK )
-            //{
-            //    try
-            //    {
-            //        if( (myStream = openFileDialog1.OpenFile()) != null )
-            //        {
-            //            using( myStream )
-            //            {
-            //                // Insert code to read the stream here.
-            //            }
-            //        }
-            //    }
-            //    catch( Exception ex )
-            //    {
-            //        MessageBox.Show( "Error: Could not read file from disk. Original error: " + ex.Message );
-            //    }
-            //}
-
+            if( d.ShowDialog() == DialogResult.OK )
+            {
+                try
+                {
+                    
+                    if( (myStream = d.OpenFile()) != null )
+                    {
+                        using( myStream )
+                        {
+                            MainForm.LoadGame( d.FileName );
+                            MessageBox.Show( "La partie a été chargée" );
+                            this.Hide();
+                        }
+                    }
+                }
+                catch( Exception ex )
+                {
+                    MessageBox.Show( "Error: Could not read file from disk. Original error: " + ex.Message );
+                }
+            }
         }
+
+        private void Options_KeyDown( object sender, KeyEventArgs e )
+        {
+            if( e.KeyCode == Keys.Escape )
+            {
+                this.Hide();
+            }
+        }
+
     }
 }

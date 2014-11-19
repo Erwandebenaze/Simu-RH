@@ -14,13 +14,28 @@ namespace SRH.Interface
     public partial class SimuRH : Form, IGameContext
     {
         Game _myGame;
+        Timer _timer;
+        int interval;
         readonly Options _optionsForm;
+        GameTime _timeOfGame;
 
         public SimuRH()
         {
             InitializeComponent();
-            _myGame = new Game( 1, "INTECH" );
+            _timeOfGame = new GameTime();
             _optionsForm = new Options();
+            _timer = new Timer();
+            interval = 2000;
+            _timer.Interval = interval;
+            _timer.Tick += _timer_Tick;
+            _timer.Start();
+        }
+
+        void _timer_Tick( object sender, EventArgs e )
+        {
+            _timeOfGame.newDay();
+            _dateOfGame.Text = _timeOfGame.TimeOfGame.ToString("d");
+            _day.Text = _timeOfGame.FrenchDayOfWeek;
         }
 
         public Game CurrentGame
@@ -44,10 +59,16 @@ namespace SRH.Interface
             ShowOptions( false );
         }
 
-        private void SaveGame( )
+        internal void SaveGame( )
         {
             if( _myGame == null ) throw new InvalidOperationException( "No CurrentGame to save!" );
             _myGame.SaveGame();
+        }
+
+        internal void LoadGame(string game)
+        {
+            _myGame = GameLoader.Load( game );
+            this.Refresh();
         }
 
         public void ShowOptions(bool show = true)
@@ -68,6 +89,54 @@ namespace SRH.Interface
             {
                 ShowOptions();
             }
+        }
+
+
+
+        private void EnabledButtons()
+        {
+            _playButton.Enabled = true;
+            _pauseButton.Enabled = true;
+            _x2Button.Enabled = true;
+            _x5Button.Enabled = true;
+            _x10Button.Enabled = true;
+        }
+        private void _pauseButton_Click( object sender, EventArgs e )
+        {
+            EnabledButtons();
+            _timer.Stop();
+            _pauseButton.Enabled = false;
+        }
+
+
+        private void _playButton_Click( object sender, EventArgs e )
+        {
+            EnabledButtons();
+            _timer.Start();
+            _timer.Interval = interval;
+            _playButton.Enabled = false;
+        }
+
+        private void _x2Button_Click( object sender, EventArgs e )
+        {
+            EnabledButtons();
+            _x2Button.Enabled = false;
+            _timer.Interval = interval/2;
+        }
+
+        private void _x5Button_Click( object sender, EventArgs e )
+        {
+            EnabledButtons();
+
+            _x5Button.Enabled = false;
+            _timer.Interval = interval/5;
+        }
+
+        private void _x10Button_Click( object sender, EventArgs e )
+        {
+            EnabledButtons();
+            _x10Button.Enabled = false;
+            _timer.Interval = interval/10;
         }
     }
 }

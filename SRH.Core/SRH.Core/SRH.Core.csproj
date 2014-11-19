@@ -55,8 +55,9 @@
     <Compile Include="ProjSkill.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RandomGenerator.cs" />
-    <Compile Include="Load.cs" />
+    <Compile Include="GameLoader.cs" />
     <Compile Include="Skill.cs" />
+    <Compile Include="GameTime.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

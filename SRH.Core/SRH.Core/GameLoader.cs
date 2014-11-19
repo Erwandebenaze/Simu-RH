@@ -14,11 +14,21 @@ namespace SRH.Core
         static public Game Load( string companyName )
         {
             IFormatter formatter = new BinaryFormatter();
-            Stream stream = new FileStream( @"..\..\..\Sauvegardes\" + companyName + ".bin", FileMode.Open, FileAccess.Read, FileShare.Read );
+            Stream stream;
+
+            if (companyName.Contains(".bin"))
+            {
+                stream = new FileStream( companyName, FileMode.Open, FileAccess.Read, FileShare.Read );
+            } else
+            {
+                stream = new FileStream( @"..\..\..\Sauvegardes\" + companyName + ".bin", FileMode.Open, FileAccess.Read, FileShare.Read );
+            }
+           
             Game obj = (Game)formatter.Deserialize( stream );
             stream.Close();
             return obj;
         }
+
 
         //IReadOnlyList<string>
     }
