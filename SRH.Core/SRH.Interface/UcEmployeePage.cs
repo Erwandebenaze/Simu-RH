@@ -63,22 +63,22 @@ namespace SRH.Interface
             return i;
         }
 
-		//static ListViewItem AddSkills( Dictionary<string, Skill> s )
-		//{
-		//	ListViewItem i = new ListViewItem( s.Values.SkillNameString );
-		//	i.Tag = s;
-		//	i.SubItems.Add( new ListViewItem.ListViewSubItem( i, s.Level.CurrentLevel.ToString() ) );
-		//	return i;
-		//}
+		static ListViewItem AddSkills( Skill s )
+		{
+			ListViewItem i = new ListViewItem( s.SkillNameString );
+			i.Tag = s;
+			i.SubItems.Add( new ListViewItem.ListViewSubItem( i, s.Level.CurrentLevel.ToString() ) );
+			return i;
+		}
 
-		//void AddSkills( Person p )
-		//{
-		//	foreach(Skill s in p.Skills.Values)
-		//	{
-		//		SelectedPersonSkillList.Items.Add( s.SkillNameString );
-		//		SelectedPersonSkillList.Items.Add( s.Level.CurrentLevel.ToString() );
-		//	}
-		//}
+		void AddSkills( Person p )
+		{
+			foreach( Skill s in p.Skills.Values )
+			{
+				SelectedPersonSkillList.Items.Add( s.SkillNameString );
+				SelectedPersonSkillList.Items.Add( s.Level.CurrentLevel.ToString() );
+			}
+		}
 
         private void PersonList_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -88,11 +88,11 @@ namespace SRH.Interface
                 SelectedPersonName.Text = _currentPerson.FirstName + " " + _currentPerson.LastName;
                 SelectedPersonAge.Text = _currentPerson.Age.ToString();
 
-				SelectedPersonSkillList.Clear();
+				SelectedPersonSkillList.Items.Clear();
 
-				// SelectedPersonSkillList.Items.AddRange( _currentPerson.Select( p => AddSkills( p.Skills ) ).ToArray() );
+				SelectedPersonSkillList.Items.AddRange( _currentPerson.Skills.Values.Select( s => AddSkills( s ) ).ToArray() );
 
-				// AddSkills( _currentPerson );
+				//AddSkills( _currentPerson );
             }
 			if( _currentPerson != null )
 			{
