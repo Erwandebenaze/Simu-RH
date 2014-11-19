@@ -95,7 +95,11 @@ namespace SRH.Core
             _employeesAffectedWithSkill = new Dictionary<Employee, string>();
             GenerateSkillsRequired(numberOfWorkers);
         }
-        
+
+		public Project()
+		{
+			
+		}
         /// <summary>
         /// For the moment, add 2 skills Development and ProjMangment. 
         /// TODO : Random generation of skill which depends of numberOfWorkers
