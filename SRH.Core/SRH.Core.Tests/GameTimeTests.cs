@@ -73,7 +73,7 @@ namespace SRH.Core.Tests
         public void five_days_before_days_return_interval_of_3_days_worked()
         {
             GameTime myGameTime = new GameTime();
-            Assert.That( myGameTime.intervalOfTimeInDays( new DateTime( 2015, 01, 21 ) ) == 3 );
+            Assert.That( GameTime.intervalOfTimeInDays( new DateTime( 2015, 01, 21 ) ) == 3 );
         }
 
 
@@ -81,7 +81,7 @@ namespace SRH.Core.Tests
         public void one_month_before_days_return_interval_of_20_days_worked()
         {
             GameTime myGameTime = new GameTime();
-            Assert.That( myGameTime.intervalOfTimeInDays( new DateTime( 2014, 12, 26 ) ) == 21 );
+            Assert.That( GameTime.intervalOfTimeInDays( new DateTime( 2014, 12, 26 ) ) == 21 );
         }
     }
 }

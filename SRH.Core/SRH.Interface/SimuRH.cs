@@ -38,6 +38,7 @@ namespace SRH.Interface
         {
             BarProgress();
             _timeOfGame.newDay();
+            _myGame.PlayerCompany.EndProjectIfItsFinish();
             _dateOfGame.Text = GameTime.TimeOfGame.ToString("d");
             _day.Text = _timeOfGame.FrenchDayOfWeek;
         }
@@ -48,7 +49,7 @@ namespace SRH.Interface
             _nextCompanyLevel.Text = (CurrentGame.PlayerCompany.CompanyLevel.CurrentLevel+1).ToString();
             _companyProgressBar.Minimum = 0;
             _companyProgressBar.Maximum = CurrentGame.PlayerCompany.CompanyLevel.XpRequired / CurrentGame.PlayerCompany.CompanyLevel.CurrentLevel;
-            _companyProgressBar.Value = CurrentGame.PlayerCompany.CompanyLevel.CurrentXp;
+            _companyProgressBar.Value = CurrentGame.PlayerCompany.CompanyLevel.CurrentXp %_companyProgressBar.Maximum;
         }
 
         public Game CurrentGame

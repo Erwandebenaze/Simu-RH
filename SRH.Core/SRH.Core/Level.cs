@@ -45,7 +45,7 @@ namespace SRH.Core
             set { _currentLevel = value; }
         }
 
-        public void IncreaseXp( int xp, MyCompany mc ) 
+        public void IncreaseXp( int xp, MyCompany mc = null) 
         {
             #region Exceptions
             if( xp < 1 ) throw new ArgumentException( "Xp must be positive" );
@@ -113,7 +113,7 @@ namespace SRH.Core
                     _xpRequired *= 2;
             }
         }
-        private void IncreaseLevel( MyCompany mc)
+        private void IncreaseLevel( MyCompany mc = null)
         {
              if( !_skill )
              {

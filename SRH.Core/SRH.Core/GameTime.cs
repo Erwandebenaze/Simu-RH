@@ -53,12 +53,16 @@ namespace SRH.Core
             }
         }
 
-        public int intervalOfTimeInDays( DateTime beginningDate )
+        static public int intervalOfTimeInDays( DateTime? beginningDateNullable )
         {
             //TimeSpan ts = new TimeSpan();
             //ts = _timeOfGame - beginningDate;
             int days = 0;
-
+            if( beginningDateNullable == null )
+            {
+                return 0;
+            }
+            DateTime beginningDate = (DateTime)beginningDateNullable;
             while (beginningDate < _timeOfGame)
             {
                 if( IsWorkingDay( beginningDate ) )

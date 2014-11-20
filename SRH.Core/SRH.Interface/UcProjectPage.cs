@@ -69,6 +69,8 @@ namespace SRH.Interface
             if( listPossibleProjects.SelectedItems.Count > 0 )
             {
                 _startOrStopProject.Enabled = true;
+                EstimatedTime.Text = "Temps estimé";
+
                 _currentProj = (Project)listPossibleProjects.SelectedItems[listPossibleProjects.SelectedItems.Count - 1].Tag;
                 AffectCurrentProjectFields();
                 if( _currentProj.Activated )
@@ -87,7 +89,7 @@ namespace SRH.Interface
             if( listCurrentProjects.SelectedItems.Count > 0 )
             {
                 _startOrStopProject.Enabled = true;
-
+                EstimatedTime.Text = "Temps restant estimé";
                 _currentProj = (Project)listCurrentProjects.SelectedItems[listCurrentProjects.SelectedItems.Count - 1].Tag;
                 AffectCurrentProjectFields();
                 if( _currentProj.Activated )
@@ -97,6 +99,7 @@ namespace SRH.Interface
                 else
                 {
                     _startOrStopProject.Text = "Lancer un projet";
+                    RemoveEndingProject();
                 }
             }
         }
@@ -106,7 +109,8 @@ namespace SRH.Interface
             _projectNameText.Text = _currentProj.Name;
             _difficulty.Text = _currentProj.Difficulty.ToString();
             _earnings.Text = _currentProj.Earnings.ToString();
-            _estimatedTime.Text = _currentProj.Duration.ToString();
+            if( _currentProj.Activated ) _estimatedTime.Text = _currentProj.TimeLeft.ToString();
+            else _estimatedTime.Text = _currentProj.Duration.ToString();
             _numberOfWorkers.Text = _currentProj.NumberOfWorkers.ToString();
         }
 
@@ -122,7 +126,6 @@ namespace SRH.Interface
 
                 listCurrentProjects.Items.Remove( projectItem );
                 listPossibleProjects.Items.Add( projectItem );
-
             }
             else
             {
@@ -133,7 +136,18 @@ namespace SRH.Interface
                 listPossibleProjects.Items.Remove( projectItem );
 
                 listCurrentProjects.Items.Add( projectItem );
+            }
 
+            //GameContext.CurrentGame.PlayerCompany.MoveProject( pr );
+        }
+
+        public void RemoveEndingProject()
+        {
+            if (!_currentProj.Activated)
+            {
+                var projectItem = listCurrentProjects.Items.Cast<ListViewItem>().Where( item => item.Tag == _currentProj ).Single();
+                listCurrentProjects.Items.Remove( projectItem );
+                listPossibleProjects.Items.Add( projectItem );
             }
         }
     }
