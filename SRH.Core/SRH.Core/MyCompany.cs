@@ -41,6 +41,9 @@ namespace SRH.Core
             _possibleProjects.Add( new Project( "Nestle", 1, 2, 2000, 20 ) );
             _possibleProjects.Add( new Project( "Accord", 1, 2, 3000, 30) );
 
+			//CSV csvImport = new CSV();
+			//_possibleProjects = csvImport.ReadCsv();
+
         }
 
         #region Getters Setters

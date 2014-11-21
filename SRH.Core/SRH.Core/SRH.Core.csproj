@@ -30,6 +30,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="LumenWorks.Framework.IO, Version=3.8.0.0, Culture=neutral, PublicKeyToken=5ad3ea2f85776344, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\CsvReader\LumenWorks.Framework.IO.dll</HintPath>
+    </Reference>
     <Reference Include="nunit.framework">
       <HintPath>..\packages\NUnit.2.6.3\lib\nunit.framework.dll</HintPath>
     </Reference>
@@ -44,6 +48,7 @@
   <ItemGroup>
     <Compile Include="Competitor.cs" />
     <Compile Include="CompaSkill.cs" />
+    <Compile Include="CSV.cs" />
     <Compile Include="Employee.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="Helper.cs" />

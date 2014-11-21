@@ -80,20 +80,20 @@ namespace SRH.Core
 		} 
 		#endregion
 
-		/// <summary>
-		/// Adds a <see cref="Skill"/> to the <see cref="Person"/>
-		/// </summary>
-		/// <typeparam name="T">The type of <see cref="Skill"/>, <see cref="ProjSkill"/> or <see cref="CompaSkill"/></typeparam>
-		/// <param name="skillName">The name of the <see cref="Skill"/></param>
-		/// <returns>Returns the new <see cref="Skill"/></returns>
-		public T AddSkill<T>( string skillName ) where T : Skill, new()
-		{
-			T s = new T();
-			s.Initialize( skillName );
-			Skills.Add( skillName, s );
+		///// <summary>
+		///// Adds a <see cref="Skill"/> to the <see cref="Person"/>
+		///// </summary>
+		///// <typeparam name="T">The type of <see cref="Skill"/>, <see cref="ProjSkill"/> or <see cref="CompaSkill"/></typeparam>
+		///// <param name="skillName">The name of the <see cref="Skill"/></param>
+		///// <returns>Returns the new <see cref="Skill"/></returns>
+		//public T AddSkill<T>( string skillName ) where T : Skill, new()
+		//{
+		//	T s = new T();
+		//	s.Initialize( skillName );
+		//	Skills.Add( skillName, s );
 
-			return s;
-		}
+		//	return s;
+		//}
 
 		/// <summary>
 		/// Adds a <see cref="ProjSkill"/> to the Person's skills List
@@ -102,10 +102,9 @@ namespace SRH.Core
 		/// <returns>The ProjSkill added</returns>
 		public Skill AddSkill( ProjSkill.SkillName skillName, int level = 1)
 		{
-			ProjSkill ps = new ProjSkill();
 			string skillNameString = Enum.GetName( skillName.GetType(), skillName );
+			ProjSkill ps = new ProjSkill( skillNameString, level );
 
-			ps.Initialize( skillNameString, level );
 			Skills.Add( skillNameString, ps );
 
 			return ps;
@@ -118,10 +117,9 @@ namespace SRH.Core
 		/// <returns>The CompaSkill added</returns>
 		public Skill AddSkill( CompaSkill.SkillName skillName, int level = 1)
 		{
-			CompaSkill cs = new CompaSkill();
 			string skillNameString = Enum.GetName( skillName.GetType(), skillName );
+			CompaSkill cs = new CompaSkill( skillNameString );
 
-			cs.Initialize( skillNameString, level );
 			Skills.Add( skillNameString, cs );
 
 			return cs;

@@ -10,7 +10,7 @@ namespace SRH.Core
     public class Project
     {
         readonly string _name;
-        readonly int _difficulty;
+        readonly float _difficulty;
         readonly int _numberOfWorkers;
         readonly int _duration;
         private int _timeSpent;
@@ -30,7 +30,7 @@ namespace SRH.Core
         {
             get { return _name; }
         }
-        public int Difficulty
+        public float Difficulty
         {
             get { return _difficulty; }
         }
@@ -87,7 +87,7 @@ namespace SRH.Core
         /// <param name="numberOfWorkers"> Superior than 1</param>
         /// <param name="earnings"> Superior than 100</param>
         /// <param name="duration">In month. Superior than 1 month</param>
-        public Project(string name, int difficulty, int numberOfWorkers, int earnings, int duration)
+        public Project(string name, float difficulty, int numberOfWorkers, int earnings, Dictionary<Skill,int> SkillsRequired, int duration = 30)
         {
             if( String.IsNullOrWhiteSpace( name ) ) throw new ArgumentNullException( "name" );
             if( difficulty <= 0 ) throw new ArgumentException( "difficulty must be superior than 0." );
@@ -102,10 +102,31 @@ namespace SRH.Core
             _activated = false;
             _xpPerCompany = 45;
             _xpPerPerson = 10;
-            _skillsRequired = new Dictionary<Skill, int>();
+			_skillsRequired = SkillsRequired;
             _employeesAffectedWithSkill = new Dictionary<Employee, Skill>();
             GenerateSkillsRequired(numberOfWorkers);
         }
+
+		// FOR TESTS ONLY (to remove when tests are fixed)
+		public Project( string name, float difficulty, int numberOfWorkers, int earnings, int duration = 30 )
+		{
+			if( String.IsNullOrWhiteSpace( name ) ) throw new ArgumentNullException( "name" );
+            if( difficulty <= 0 ) throw new ArgumentException( "difficulty must be superior than 0." );
+            if( numberOfWorkers <= 1 ) throw new ArgumentException( "numberOfWorkers must be superior than 1." );
+            if( earnings <= 100 ) throw new ArgumentException( "earnings must be superior than 100." );
+            if( duration <= 1 ) throw new ArgumentException( "duration must be superior than 0." );
+            _name = name;
+            _difficulty = difficulty;
+            _numberOfWorkers = numberOfWorkers;
+            _earnings = earnings;
+            _duration = duration;
+            _activated = false;
+            _xpPerCompany = 45;
+            _xpPerPerson = 10;
+            _employeesAffectedWithSkill = new Dictionary<Employee, Skill>();
+            GenerateSkillsRequired(numberOfWorkers);
+		}
+
         
         /// <summary>
         /// For the moment, add 2 skills Development and ProjMangment. 
@@ -153,16 +174,17 @@ namespace SRH.Core
         /// <returns>Activated</returns>
         public bool BeginProject()
         {
+			// TODO : ajouter le skillrequired
             if( Activated ) throw new InvalidOperationException( "A project can not be lunched if he has been already begin." );
-            if( _skillsRequired.Count == 0 )
-            {
+			//if( _skillsRequired.Count == 0 )
+			//{
                 Activated = true;
                 _begginingDate = GameTime.TimeOfGame;
-            }
-            else
-            {
-                throw new InvalidOperationException( "Every skills must be taken before begin a project" );
-            }
+            //}
+			////else
+			//{
+			//	throw new InvalidOperationException( "Every skills must be taken before begin a project" );
+			//}
             return Activated;
         }
 

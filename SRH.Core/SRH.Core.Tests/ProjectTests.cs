@@ -63,6 +63,16 @@ namespace SRH.Core.Tests
             iz.BeginProject();
         }
 
+		[Test]
+		public void Create_the_possible_projects_list_from_CSV()
+		{
+			CSV csv = new CSV();
+			List<Project> list = new List<Project>();
+			
+			list = csv.ReadCsv();
 
+			Assert.That( list[ 0 ].Difficulty == 1.0 );
+			Assert.That( list[ 0 ].Earnings == 2000 );
+		}
     }
 }

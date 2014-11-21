@@ -9,6 +9,10 @@ namespace SRH.Core
     [Serializable]
     public class ProjSkill : Skill
     {
+		public ProjSkill( string skillName, int startLevel = 1 )
+			: base( skillName, startLevel )
+		{
+		}
 		public enum SkillName
 		{
 			Development, // *Développement*

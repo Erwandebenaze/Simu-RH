@@ -177,7 +177,7 @@ namespace SRH.Core.Tests
             myGame.PlayerCompany.BeginAProject( p );
             myGame.PlayerCompany.EndAProject( p );
 
-            Assert.That( myGame.PlayerCompany.CompanyLevel.CurrentXp == 15 );
+            Assert.That( myGame.PlayerCompany.CompanyLevel.CurrentXp == 45 );
         }
     }
 }
