@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace SRH.Core
 {
+    [Serializable]
     public class GameTime
     {
-        DateTime _timeOfGame;
+        static DateTime _timeOfGame;
         DayOfWeek _dayOfTheWeek;
         string _frenchTranslationDay;
 
@@ -19,7 +20,7 @@ namespace SRH.Core
             _timeOfGame = new DateTime(2015,01,26);
             _dayOfTheWeek = _timeOfGame.DayOfWeek; 
         }
-        public DateTime TimeOfGame
+        public static DateTime TimeOfGame
         {
             get { return _timeOfGame.Date; }
         }
@@ -52,12 +53,16 @@ namespace SRH.Core
             }
         }
 
-        public int intervalOfTimeInDays( DateTime beginningDate )
+        static public int intervalOfTimeInDays( DateTime? beginningDateNullable )
         {
             //TimeSpan ts = new TimeSpan();
             //ts = _timeOfGame - beginningDate;
             int days = 0;
-
+            if( beginningDateNullable == null )
+            {
+                return 0;
+            }
+            DateTime beginningDate = (DateTime)beginningDateNullable;
             while (beginningDate < _timeOfGame)
             {
                 if( IsWorkingDay( beginningDate ) )

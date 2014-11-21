@@ -37,9 +37,9 @@ namespace SRH.Core
 			_maxEmployees = 10;
             _projects = new List<Project>();
             _possibleProjects = new List<Project>();
-            _possibleProjects.Add( new Project( "Danone", 1, 2, 1000, 3 ) );
-            _possibleProjects.Add( new Project( "Nestle", 1, 2, 2000, 4 ) );
-            _possibleProjects.Add( new Project( "Accord", 1, 2, 3000, 5 ) );
+            _possibleProjects.Add( new Project( "Danone", 1, 2, 1000, 15 ) );
+            _possibleProjects.Add( new Project( "Nestle", 1, 2, 2000, 20 ) );
+            _possibleProjects.Add( new Project( "Accord", 1, 2, 3000, 30) );
 
         }
 
@@ -51,7 +51,7 @@ namespace SRH.Core
         public int Wealth
         {
             get { return _wealth; }
-            private set { _wealth = value; }
+            internal set { _wealth = value; }
         }
         public int MaxEmployees
         {
@@ -89,7 +89,6 @@ namespace SRH.Core
 			
 			if( !( _employees.Exists( x => x.Equals( e ) ) ) ) throw new InvalidOperationException("The Employee wasn't properly added to the List.");
 			if( !( p.Lb.RemovePerson( p ) ) ) throw new InvalidOperationException("The Person wasn't properly removed from the List.");
-
 			return e;
 		}
 		/// <summary>
@@ -108,6 +107,20 @@ namespace SRH.Core
 			return e.Worker;
 		}
 
+        public void MoveProject(Project p)
+        {
+            if (p.Activated)
+            {
+                _projects.Add( p );
+                _possibleProjects.Remove( p );
+            } else
+            {
+                _possibleProjects.Add( p );
+                _projects.Remove( p );
+            }
+
+        }
+
 		/// <summary>
 		/// Adjust the number of <see cref="MaxEmployees"/> and the <see cref="MaxDifficulty"/> of <see cref="MyCompany"/> depending on its <see cref="Level"/>
 		/// </summary>
@@ -120,6 +133,40 @@ namespace SRH.Core
 			if( this.CompanyLevel.CurrentLevel % 10 == 0 ) this.MaxProjectDifficulty += 0.5;
         }
            
+        public void EndProjectIfItsFinish()
+        {
+            if (_projects.Count > 0 )
+            {
+                foreach (Project p in _projects)
+                { 
+                    if (GameTime.intervalOfTimeInDays( p.BegginingDate ) == p.Duration)
+                    {
+                        EndAProject( p );
+                        p.TimeLeft = 0;
+                        MoveProject( p );
+                        break;
+                    } else
+                    {
+                        p.TimeSpent = GameTime.intervalOfTimeInDays( p.BegginingDate );
+                        p.TimeLeft = p.Duration - p.TimeSpent;            
+                    }
+                }
+            }
+        }
+
+        public void EndAProject( Project p)
+        {
+            p.StopProject();
+            Wealth += p.Earnings;
+            _companyLevel.IncreaseXp( p.XpPerCompany, this );
+            foreach (Employee e in p._employeesAffectedWithSkill.Keys)
+            {
+                foreach (Skill s in p._employeesAffectedWithSkill.Values)
+                {
+                    s.Level.IncreaseXp(p.XpPerPerson);
+                }
+            }
+        }
         public Project BeginAProject( Project p )
         {
             _possibleProjects.Remove( p );

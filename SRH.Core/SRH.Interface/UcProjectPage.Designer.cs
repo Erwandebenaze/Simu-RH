@@ -50,6 +50,9 @@
             this._difficulty = new System.Windows.Forms.Label();
             this.Difficulty = new System.Windows.Forms.Label();
             this._projectNameText = new System.Windows.Forms.Label();
+            this.splitContainer3 = new System.Windows.Forms.SplitContainer();
+            this.listSkillsRequired = new System.Windows.Forms.ListView();
+            this.listSkillsAvailable = new System.Windows.Forms.ListView();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -58,6 +61,10 @@
             this.splitContainer2.Panel1.SuspendLayout();
             this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).BeginInit();
+            this.splitContainer3.Panel1.SuspendLayout();
+            this.splitContainer3.Panel2.SuspendLayout();
+            this.splitContainer3.SuspendLayout();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -73,6 +80,7 @@
             // 
             // splitContainer1.Panel2
             // 
+            this.splitContainer1.Panel2.Controls.Add(this.splitContainer3);
             this.splitContainer1.Panel2.Controls.Add(this._startOrStopProject);
             this.splitContainer1.Panel2.Controls.Add(this._numberOfWorkers);
             this.splitContainer1.Panel2.Controls.Add(this.NumberOfWorkers);
@@ -191,7 +199,7 @@
             // _startOrStopProject
             // 
             this._startOrStopProject.Enabled = false;
-            this._startOrStopProject.Location = new System.Drawing.Point(531, 121);
+            this._startOrStopProject.Location = new System.Drawing.Point(530, 79);
             this._startOrStopProject.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this._startOrStopProject.Name = "_startOrStopProject";
             this._startOrStopProject.Size = new System.Drawing.Size(164, 23);
@@ -203,7 +211,7 @@
             // _numberOfWorkers
             // 
             this._numberOfWorkers.AutoSize = true;
-            this._numberOfWorkers.Location = new System.Drawing.Point(244, 240);
+            this._numberOfWorkers.Location = new System.Drawing.Point(244, 181);
             this._numberOfWorkers.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this._numberOfWorkers.Name = "_numberOfWorkers";
             this._numberOfWorkers.Size = new System.Drawing.Size(17, 17);
@@ -213,7 +221,7 @@
             // NumberOfWorkers
             // 
             this.NumberOfWorkers.AutoSize = true;
-            this.NumberOfWorkers.Location = new System.Drawing.Point(40, 240);
+            this.NumberOfWorkers.Location = new System.Drawing.Point(40, 181);
             this.NumberOfWorkers.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.NumberOfWorkers.Name = "NumberOfWorkers";
             this.NumberOfWorkers.Size = new System.Drawing.Size(152, 17);
@@ -223,7 +231,7 @@
             // _estimatedTime
             // 
             this._estimatedTime.AutoSize = true;
-            this._estimatedTime.Location = new System.Drawing.Point(244, 197);
+            this._estimatedTime.Location = new System.Drawing.Point(244, 146);
             this._estimatedTime.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this._estimatedTime.Name = "_estimatedTime";
             this._estimatedTime.Size = new System.Drawing.Size(17, 17);
@@ -233,7 +241,7 @@
             // EstimatedTime
             // 
             this.EstimatedTime.AutoSize = true;
-            this.EstimatedTime.Location = new System.Drawing.Point(40, 197);
+            this.EstimatedTime.Location = new System.Drawing.Point(40, 146);
             this.EstimatedTime.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.EstimatedTime.Name = "EstimatedTime";
             this.EstimatedTime.Size = new System.Drawing.Size(108, 17);
@@ -243,7 +251,7 @@
             // _earnings
             // 
             this._earnings.AutoSize = true;
-            this._earnings.Location = new System.Drawing.Point(244, 160);
+            this._earnings.Location = new System.Drawing.Point(244, 113);
             this._earnings.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this._earnings.Name = "_earnings";
             this._earnings.Size = new System.Drawing.Size(17, 17);
@@ -253,7 +261,7 @@
             // EarningsText
             // 
             this.EarningsText.AutoSize = true;
-            this.EarningsText.Location = new System.Drawing.Point(40, 160);
+            this.EarningsText.Location = new System.Drawing.Point(40, 113);
             this.EarningsText.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.EarningsText.Name = "EarningsText";
             this.EarningsText.Size = new System.Drawing.Size(50, 17);
@@ -263,7 +271,7 @@
             // _difficulty
             // 
             this._difficulty.AutoSize = true;
-            this._difficulty.Location = new System.Drawing.Point(244, 126);
+            this._difficulty.Location = new System.Drawing.Point(244, 79);
             this._difficulty.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this._difficulty.Name = "_difficulty";
             this._difficulty.Size = new System.Drawing.Size(17, 17);
@@ -273,7 +281,7 @@
             // Difficulty
             // 
             this.Difficulty.AutoSize = true;
-            this.Difficulty.Location = new System.Drawing.Point(40, 126);
+            this.Difficulty.Location = new System.Drawing.Point(40, 79);
             this.Difficulty.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.Difficulty.Name = "Difficulty";
             this.Difficulty.Size = new System.Drawing.Size(134, 17);
@@ -294,6 +302,40 @@
             this._projectNameText.Text = "Nom du projet";
             this._projectNameText.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // splitContainer3
+            // 
+            this.splitContainer3.Location = new System.Drawing.Point(3, 229);
+            this.splitContainer3.Name = "splitContainer3";
+            // 
+            // splitContainer3.Panel1
+            // 
+            this.splitContainer3.Panel1.Controls.Add(this.listSkillsRequired);
+            // 
+            // splitContainer3.Panel2
+            // 
+            this.splitContainer3.Panel2.Controls.Add(this.listSkillsAvailable);
+            this.splitContainer3.Size = new System.Drawing.Size(727, 401);
+            this.splitContainer3.SplitterDistance = 352;
+            this.splitContainer3.TabIndex = 12;
+            // 
+            // listSkillsRequired
+            // 
+            this.listSkillsRequired.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listSkillsRequired.Location = new System.Drawing.Point(0, 0);
+            this.listSkillsRequired.Name = "listSkillsRequired";
+            this.listSkillsRequired.Size = new System.Drawing.Size(352, 401);
+            this.listSkillsRequired.TabIndex = 0;
+            this.listSkillsRequired.UseCompatibleStateImageBehavior = false;
+            // 
+            // listSkillsAvailable
+            // 
+            this.listSkillsAvailable.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listSkillsAvailable.Location = new System.Drawing.Point(0, 0);
+            this.listSkillsAvailable.Name = "listSkillsAvailable";
+            this.listSkillsAvailable.Size = new System.Drawing.Size(371, 401);
+            this.listSkillsAvailable.TabIndex = 0;
+            this.listSkillsAvailable.UseCompatibleStateImageBehavior = false;
+            // 
             // UcProjectPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -311,6 +353,10 @@
             this.splitContainer2.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
+            this.splitContainer3.Panel1.ResumeLayout(false);
+            this.splitContainer3.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).EndInit();
+            this.splitContainer3.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -339,6 +385,9 @@
         private System.Windows.Forms.Label NumberOfWorkers;
         private System.Windows.Forms.Label _numberOfWorkers;
         private System.Windows.Forms.Button _startOrStopProject;
+        private System.Windows.Forms.SplitContainer splitContainer3;
+        private System.Windows.Forms.ListView listSkillsRequired;
+        private System.Windows.Forms.ListView listSkillsAvailable;
 
     }
 }
