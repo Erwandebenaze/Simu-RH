@@ -108,9 +108,9 @@ namespace SRH.Core
         }
 
 		// FOR TESTS ONLY (to remove when tests are fixed)
-		public Project( string name, float difficulty, int numberOfWorkers, int earnings, int duration = 30 )
-		{
-			if( String.IsNullOrWhiteSpace( name ) ) throw new ArgumentNullException( "name" );
+        public Project( string name, float difficulty, int numberOfWorkers, int earnings, int duration = 30 )
+        {
+            if( String.IsNullOrWhiteSpace( name ) ) throw new ArgumentNullException( "name" );
             if( difficulty <= 0 ) throw new ArgumentException( "difficulty must be superior than 0." );
             if( numberOfWorkers <= 1 ) throw new ArgumentException( "numberOfWorkers must be superior than 1." );
             if( earnings <= 100 ) throw new ArgumentException( "earnings must be superior than 100." );
@@ -125,7 +125,7 @@ namespace SRH.Core
             _xpPerPerson = 10;
             _employeesAffectedWithSkill = new Dictionary<Employee, Skill>();
             GenerateSkillsRequired(numberOfWorkers);
-		}
+        }
 
         
         /// <summary>

@@ -14,11 +14,6 @@ namespace SRH.Core
 		protected int _maxEmployees;
 		protected readonly List<Employee> _employees;
         List<Project> _possibleProjects;
-
-        public List<Project> PossibleProjects
-        {
-            get { return _possibleProjects; }
-        }
         List<Project> _projects;
 
 
@@ -36,13 +31,15 @@ namespace SRH.Core
 			_maxProjectDifficulty = 1;
 			_maxEmployees = 10;
             _projects = new List<Project>();
-            _possibleProjects = new List<Project>();
-            _possibleProjects.Add( new Project( "Danone", 1, 2, 1000, 15 ) );
-            _possibleProjects.Add( new Project( "Nestle", 1, 2, 2000, 20 ) );
-            _possibleProjects.Add( new Project( "Accord", 1, 2, 3000, 30) );
+            CSV csvImport = new CSV();
+            _possibleProjects = csvImport.ReadCsv( "../../../Data/data.csv" );
+            
+            //_possibleProjects = new List<Project>();
+            //_possibleProjects.Add( new Project( "Danone", 1, 2, 1000, 15 ) );
+            //_possibleProjects.Add( new Project( "Nestle", 1, 2, 2000, 20 ) );
+            //_possibleProjects.Add( new Project( "Accord", 1, 2, 3000, 30) );
 
-			//CSV csvImport = new CSV();
-			//_possibleProjects = csvImport.ReadCsv();
+            
 
         }
 
@@ -77,7 +74,11 @@ namespace SRH.Core
         {
             get { return _maxProjectDifficulty; }
             private set { _maxProjectDifficulty = value; }
-        } 
+        }
+        public List<Project> PossibleProjects
+        {
+            get { return _possibleProjects; }
+        }
         #endregion
 
 		/// <summary>

@@ -10,17 +10,16 @@ namespace SRH.Core
 {
 	public class CSV
 	{
-		public List<Project> ReadCsv()
+		public List<Project> ReadCsv( string path )
 		{
 			List<Project> possibleProjects = new List<Project>();
 
 			List<string> _list = new List<string>();
 			using( CsvReader csv =
-				   new CsvReader( new StreamReader( "../../../Data/data.csv" ), true, ';', '\'', '\0', '#', ValueTrimmingOptions.None ) )
+                   new CsvReader( new StreamReader( path ), true, ';', '\'', '\0', '#', ValueTrimmingOptions.None ) )
 			{
 				csv.SupportsMultiline = true;
 				csv.SkipEmptyLines = true;
-				string[] headers = csv.GetFieldHeaders();
 				int FieldCount = csv.FieldCount;
 
 				while( csv.ReadNextRecord() )
@@ -31,12 +30,12 @@ namespace SRH.Core
 						{
 							int index = (int)csv.CurrentRecordIndex;
 
-							string projectName = "Bla";
-							float projectDifficulty = 1;
-							// int numberOfTasks; Not implemented yet
-							int projectEarnings = 10;
-							int projectNumberOfWorker = 10;
-							Dictionary<Skill, int> projectRequiredSkill = new Dictionary<Skill, int>(); // TODO : trouver un moyen de lire une deuxième boucle (csv.CurrentRecordIndex)
+							string projectName;
+							float projectDifficulty;
+							// int numberOfTasks; // Not implemented yet
+							int projectEarnings;
+							int projectNumberOfWorker;
+							Dictionary<Skill, int> projectRequiredSkill = new Dictionary<Skill, int>();
 
 							projectName = csv[ "Nom du projet" ];
 							projectDifficulty = float.Parse( csv[ "Difficulté" ] );
