@@ -39,8 +39,29 @@ namespace SRH.Interface
             BarProgress();
             _timeOfGame.newDay();
             _myGame.PlayerCompany.EndProjectIfItsFinish();
+            ClearListsProjects();
             _dateOfGame.Text = GameTime.TimeOfGame.ToString("d");
             _day.Text = _timeOfGame.FrenchDayOfWeek;
+        }
+        static ListViewItem CreateListItemViewProjects( Project p )
+        {
+            ListViewItem i = new ListViewItem( p.Name );
+            i.Tag = p;
+            i.SubItems.Add( new ListViewItem.ListViewSubItem( i, p.Difficulty.ToString() ) );
+            i.SubItems.Add( new ListViewItem.ListViewSubItem( i, p.Earnings.ToString() ) );
+            i.SubItems.Add( new ListViewItem.ListViewSubItem( i, p.Duration.ToString() ) );
+            return i;
+        }
+        private void ClearListsProjects()
+        {
+
+            if (ucProjectPage.Projects != null)
+            {
+                ucProjectPage.listCurrentProjects.Items.Clear();
+                ucProjectPage.listPossibleProjects.Items.Clear();
+                ucProjectPage.listCurrentProjects.Items.AddRange( ucProjectPage.Projects.Select( p => CreateListItemViewProjects( p ) ).ToArray() );
+                ucProjectPage.listPossibleProjects.Items.AddRange( ucProjectPage.PossibleProjects.Select( p => CreateListItemViewProjects( p ) ).ToArray() );
+            }
         }
 
         private void BarProgress()

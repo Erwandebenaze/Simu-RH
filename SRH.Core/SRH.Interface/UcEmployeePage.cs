@@ -28,10 +28,6 @@ namespace SRH.Interface
             get { return (IGameContext)TopLevelControl; }
         }
 
-        private void UcEmployeePage_Load( object sender, EventArgs e )
-        {
-
-        }
         protected override void OnLoad( EventArgs e )
         {
             if( this.IsInRuntimeMode() )

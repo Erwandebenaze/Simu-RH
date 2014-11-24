@@ -31,7 +31,9 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.BureauPage = new System.Windows.Forms.TabPage();
             this.EmployésPage = new System.Windows.Forms.TabPage();
+            this.ucEmployeePage = new SRH.Interface.UcEmployeePage();
             this.ProjetTable = new System.Windows.Forms.TabPage();
+            this.ucProjectPage = new SRH.Interface.UcProjectPage();
             this.EntreprisePage = new System.Windows.Forms.TabPage();
             this.ResumeEntreprisePage = new System.Windows.Forms.TabPage();
             this._dateOfGame = new System.Windows.Forms.Label();
@@ -44,8 +46,6 @@
             this._companyProgressBar = new System.Windows.Forms.ProgressBar();
             this._currentCompanyLevel = new System.Windows.Forms.Label();
             this._nextCompanyLevel = new System.Windows.Forms.Label();
-            this.ucEmployeePage = new SRH.Interface.UcEmployeePage();
-            this.ucProjectPage = new SRH.Interface.UcProjectPage();
             this.tabControl1.SuspendLayout();
             this.EmployésPage.SuspendLayout();
             this.ProjetTable.SuspendLayout();
@@ -91,6 +91,18 @@
             this.EmployésPage.Text = "Employés";
             this.EmployésPage.UseVisualStyleBackColor = true;
             // 
+            // ucEmployeePage
+            // 
+            this.ucEmployeePage.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.ucEmployeePage.AutoSize = true;
+            this.ucEmployeePage.Location = new System.Drawing.Point(0, 0);
+            this.ucEmployeePage.Margin = new System.Windows.Forms.Padding(5);
+            this.ucEmployeePage.Name = "ucEmployeePage";
+            this.ucEmployeePage.Size = new System.Drawing.Size(1467, 780);
+            this.ucEmployeePage.TabIndex = 0;
+            // 
             // ProjetTable
             // 
             this.ProjetTable.Controls.Add(this.ucProjectPage);
@@ -102,6 +114,15 @@
             this.ProjetTable.TabIndex = 2;
             this.ProjetTable.Text = "Gestion projets";
             this.ProjetTable.UseVisualStyleBackColor = true;
+            // 
+            // ucProjectPage
+            // 
+            this.ucProjectPage.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ucProjectPage.Location = new System.Drawing.Point(3, 2);
+            this.ucProjectPage.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.ucProjectPage.Name = "ucProjectPage";
+            this.ucProjectPage.Size = new System.Drawing.Size(1003, 593);
+            this.ucProjectPage.TabIndex = 0;
             // 
             // EntreprisePage
             // 
@@ -221,29 +242,6 @@
             this._nextCompanyLevel.Size = new System.Drawing.Size(17, 17);
             this._nextCompanyLevel.TabIndex = 10;
             this._nextCompanyLevel.Text = "X";
-            // 
-            // ucEmployeePage
-            // 
-            this.ucEmployeePage.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.ucEmployeePage.AutoSize = true;
-            this.ucEmployeePage.Location = new System.Drawing.Point(0, 0);
-            this.ucEmployeePage.Margin = new System.Windows.Forms.Padding(5);
-            this.ucEmployeePage.Name = "ucEmployeePage";
-            this.ucEmployeePage.Size = new System.Drawing.Size(1467, 780);
-            this.ucEmployeePage.TabIndex = 0;
-            // 
-            // ucProjectPage
-            // 
-            this.ucProjectPage.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.ucProjectPage.Location = new System.Drawing.Point(3, 2);
-            this.ucProjectPage.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.ucProjectPage.Name = "ucProjectPage";
-            this.ucProjectPage.Size = new System.Drawing.Size(1003, 592);
-            this.ucProjectPage.TabIndex = 0;
             // 
             // SimuRH
             // 
