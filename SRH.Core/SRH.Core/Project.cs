@@ -23,7 +23,7 @@ namespace SRH.Core
         readonly int _xpPerPerson;
         bool _activated;
         readonly Dictionary<Skill, int> _skillsRequired;
-        internal Dictionary<Employee, Skill> _employeesAffectedWithSkill;
+        private Dictionary<Employee, Skill> _employeesAffectedWithSkill;
 
         #region Getter
         public string Name
@@ -59,6 +59,11 @@ namespace SRH.Core
         {
             get { return _begginingDate; }
         }
+
+        public Dictionary<Skill, int> SkillsRequired
+        {
+            get { return _skillsRequired; }
+        } 
         #endregion
         #region GetterSetter
         public int TimeSpent
@@ -77,6 +82,12 @@ namespace SRH.Core
             set { _activated = value; }
         }
 
+        internal Dictionary<Employee, Skill> EmployeesAffectedWithSkill
+        {
+            get { return _employeesAffectedWithSkill; }
+            set { _employeesAffectedWithSkill = value; }
+        }
+
         #endregion
 
         /// <summary>
@@ -87,7 +98,7 @@ namespace SRH.Core
         /// <param name="numberOfWorkers"> Superior than 1</param>
         /// <param name="earnings"> Superior than 100</param>
         /// <param name="duration">In month. Superior than 1 month</param>
-        public Project(string name, float difficulty, int numberOfWorkers, int earnings, Dictionary<Skill,int> SkillsRequired, int duration = 30)
+        public Project(string name, float difficulty, int numberOfWorkers, int earnings, Dictionary<Skill,int> skillsRequired, int duration = 30)
         {
             if( String.IsNullOrWhiteSpace( name ) ) throw new ArgumentNullException( "name" );
             if( difficulty <= 0 ) throw new ArgumentException( "difficulty must be superior than 0." );
@@ -102,7 +113,7 @@ namespace SRH.Core
             _activated = false;
             _xpPerCompany = 45;
             _xpPerPerson = 10;
-			_skillsRequired = SkillsRequired;
+			_skillsRequired = skillsRequired;
             _employeesAffectedWithSkill = new Dictionary<Employee, Skill>();
             GenerateSkillsRequired(numberOfWorkers);
         }
@@ -148,9 +159,9 @@ namespace SRH.Core
         /// <param name="skill"></param>
         public void AffectEmployeeToAJob(Employee e, Skill s)
         {
-            if( _skillsRequired.ContainsKey( s ) && e.Worker.Skills.ContainsValue(s) && !this.Activated) 
+            if( SkillsRequired.ContainsKey( s ) && e.Worker.Skills.ContainsValue(s) && !this.Activated) 
             _employeesAffectedWithSkill.Add( e, s );
-            _skillsRequired.Remove( s );
+            SkillsRequired.Remove( s );
         }
 
         /// <summary>
@@ -161,10 +172,10 @@ namespace SRH.Core
         /// <param name="skill"></param>
         public void RemoveEmployeeFromAJob( Employee e, Skill s )
         {
-            if( !_skillsRequired.ContainsKey(s) && e.Worker.Skills.ContainsValue(s) && !this.Activated )
+            if( !SkillsRequired.ContainsKey(s) && e.Worker.Skills.ContainsValue(s) && !this.Activated )
                 _employeesAffectedWithSkill.Remove( e );
             // 1 à mettre en variable
-            _skillsRequired.Add( s, 1 );
+            SkillsRequired.Add( s, 1 );
         }
 
         /// <summary>
