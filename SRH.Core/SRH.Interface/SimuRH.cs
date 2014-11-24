@@ -37,19 +37,41 @@ namespace SRH.Interface
         void _timer_Tick( object sender, EventArgs e )
         {
             BarProgress();
+			ExperienceProgress();
+			WealthProgress();
             _timeOfGame.newDay();
             _myGame.PlayerCompany.EndProjectIfItsFinish();
             _dateOfGame.Text = GameTime.TimeOfGame.ToString("d");
             _day.Text = _timeOfGame.FrenchDayOfWeek;
         }
 
+		private void ExperienceProgress()
+		{
+			string companyCurrentXp = CurrentGame.PlayerCompany.CompanyLevel.CurrentXp.ToString();
+			string companyNextXP = CurrentGame.PlayerCompany.CompanyLevel.XpRequired.ToString();
+			companyExperience.Text = companyCurrentXp + " / " + companyNextXP;
+			companyExperience.Visible = true;
+		}
+
+		private void WealthProgress()
+		{
+			CompanyWealth.Text = CurrentGame.PlayerCompany.Wealth.ToString();
+			CompanyWealth.Visible = true;
+		}
+
         private void BarProgress()
         {
             _currentCompanyLevel.Text = CurrentGame.PlayerCompany.CompanyLevel.CurrentLevel.ToString();
             _nextCompanyLevel.Text = (CurrentGame.PlayerCompany.CompanyLevel.CurrentLevel+1).ToString();
-            _companyProgressBar.Minimum = 0;
-            _companyProgressBar.Maximum = CurrentGame.PlayerCompany.CompanyLevel.XpRequired / CurrentGame.PlayerCompany.CompanyLevel.CurrentLevel;
-            _companyProgressBar.Value = CurrentGame.PlayerCompany.CompanyLevel.CurrentXp %_companyProgressBar.Maximum;
+            
+			if( _myGame.PlayerCompany.CompanyLevel.CurrentLevel == 1 )_companyProgressBar.Minimum = 0;
+            else _companyProgressBar.Minimum = CurrentGame.PlayerCompany.CompanyLevel.LastXpRequired;
+
+			_companyProgressBar.Maximum = CurrentGame.PlayerCompany.CompanyLevel.XpRequired;
+			_companyProgressBar.Value = CurrentGame.PlayerCompany.CompanyLevel.CurrentXp;
+
+			_currentCompanyLevel.Visible = true;
+			_nextCompanyLevel.Visible = true;
         }
 
         public Game CurrentGame

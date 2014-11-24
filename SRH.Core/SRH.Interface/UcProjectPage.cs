@@ -42,7 +42,7 @@ namespace SRH.Interface
             {
                 base.OnLoad( e );
                 _projects = GameContext.CurrentGame.PlayerCompany.Projects;
-                _possibleProjects = GameContext.CurrentGame.PlayerCompany.PossibleProjects;
+                _possibleProjects = GameContext.CurrentGame.PlayerCompany.PossibleCompanyProjects;
                 //_projectNameText.Text = "";
 
                 //list.Add( new Project() { ProjectName = "titi", Duration = "trois semaines", Earnings = "trois cents", Level = "****" } );

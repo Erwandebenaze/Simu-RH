@@ -13,9 +13,8 @@ namespace SRH.Core
 		protected int _wealth;
 		protected int _maxEmployees;
 		protected readonly List<Employee> _employees;
-        List<Project> _possibleProjects;
+        List<Project> _possibleCompanyProjects;
         List<Project> _projects;
-
 
 		Level _companyLevel;
 		double _maxProjectDifficulty;
@@ -31,16 +30,6 @@ namespace SRH.Core
 			_maxProjectDifficulty = 1;
 			_maxEmployees = 10;
             _projects = new List<Project>();
-            CSV csvImport = new CSV();
-            _possibleProjects = csvImport.ReadCsv( "../../../Data/data.csv" );
-            
-            //_possibleProjects = new List<Project>();
-            //_possibleProjects.Add( new Project( "Danone", 1, 2, 1000, 15 ) );
-            //_possibleProjects.Add( new Project( "Nestle", 1, 2, 2000, 20 ) );
-            //_possibleProjects.Add( new Project( "Accord", 1, 2, 3000, 30) );
-
-            
-
         }
 
         #region Getters Setters
@@ -75,9 +64,13 @@ namespace SRH.Core
             get { return _maxProjectDifficulty; }
             private set { _maxProjectDifficulty = value; }
         }
-        public List<Project> PossibleProjects
+        public List<Project> PossibleCompanyProjects
         {
-            get { return _possibleProjects; }
+            get 
+			{
+				_possibleCompanyProjects = GetPossibleCompanyProjects();
+				return _possibleCompanyProjects;
+			}
         }
         #endregion
 
@@ -116,10 +109,10 @@ namespace SRH.Core
             if (p.Activated)
             {
                 _projects.Add( p );
-                _possibleProjects.Remove( p );
+                _possibleCompanyProjects.Remove( p );
             } else
             {
-                _possibleProjects.Add( p );
+                _possibleCompanyProjects.Add( p );
                 _projects.Remove( p );
             }
 
@@ -131,10 +124,10 @@ namespace SRH.Core
 		public void AdjustValuesCompany()
         {
 			if( this.CompanyLevel.CurrentLevel == 1 ) this.MaxEmployees = 10;
-			this.MaxEmployees = 10 + ( 2 * ( this.CompanyLevel.CurrentLevel - 1 ) );
+			this.MaxEmployees = 10 + ( 2 * ( this.CompanyLevel.CurrentLevel ) );
 
-			if( this.CompanyLevel.CurrentLevel == 1 ) this.MaxProjectDifficulty = 0.5;
-			if( this.CompanyLevel.CurrentLevel % 10 == 0 ) this.MaxProjectDifficulty += 0.5;
+			if( this.CompanyLevel.CurrentLevel == 1 ) this.MaxProjectDifficulty = 1.0;
+			if( ( this.CompanyLevel.CurrentLevel +1 ) % 10 == 0 ) this.MaxProjectDifficulty += 0.5;
         }
            
         public void EndProjectIfItsFinish()
@@ -173,7 +166,7 @@ namespace SRH.Core
         }
         public Project BeginAProject( Project p )
         {
-            _possibleProjects.Remove( p );
+            _possibleCompanyProjects.Remove( p );
             _projects.Add( p );
             p.BeginProject();
             return p;
@@ -181,11 +174,22 @@ namespace SRH.Core
 
         public Project StopAProject( Project p )
         {
-            PossibleProjects.Add( p );
+            PossibleCompanyProjects.Add( p );
             _projects.Remove( p );
             p.StopProject();
             return p;
         }
 
+		List<Project> GetPossibleCompanyProjects()
+		{
+			List<Project> possible = Game.PossibleProjects;
+			List<Project> finalList = new List<Project>();
+			foreach( Project p in possible )
+			{
+				if( p.Difficulty <= _maxProjectDifficulty ) finalList.Add( p ); 
+			}
+
+			return finalList;
+		}
 	}
 }

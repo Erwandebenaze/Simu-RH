@@ -12,7 +12,7 @@ namespace SRH.Core.Tests
     class ProjectTests
     {
 
-        public Project Create_project()
+		public Dictionary<Skill, int> Create_skills()
         {
             Skill skill1 = new ProjSkill( "WebDevelopment" );
             Skill skill2 = new ProjSkill( "GUInterface" );
@@ -21,8 +21,7 @@ namespace SRH.Core.Tests
             requiredSkills.Add( skill1, 1 );
             requiredSkills.Add( skill2, 2 );
 
-            Project iz = new Project( "SimuRH", 1, 2, 1000, requiredSkills );
-            return iz;
+			return requiredSkills;
             
         }
 
@@ -30,12 +29,7 @@ namespace SRH.Core.Tests
         [ExpectedException( typeof( ArgumentNullException ) )]
         public void Create_project_with_white_space_throw_argument_null_exeption()
         {
-            Skill skill1 = new ProjSkill( "WebDevelopment" );
-            Skill skill2 = new ProjSkill( "GUInterface" );
-
-            Dictionary<Skill, int> requiredSkills = new Dictionary<Skill, int>();
-            requiredSkills.Add( skill1, 1 );
-            requiredSkills.Add( skill2, 2 );
+			Dictionary<Skill, int> requiredSkills = Create_skills();
 
             Project p = new Project( " ", 1, 2, 2000, requiredSkills );
         }
@@ -44,12 +38,7 @@ namespace SRH.Core.Tests
         [ExpectedException( typeof( ArgumentException ) )]
         public void Create_project_with_negative_difficulty_throw_argument_exeption()
         {
-            Skill skill1 = new ProjSkill( "WebDevelopment" );
-            Skill skill2 = new ProjSkill( "GUInterface" );
-
-            Dictionary<Skill, int> requiredSkills = new Dictionary<Skill, int>();
-            requiredSkills.Add( skill1, 1 );
-            requiredSkills.Add( skill2, 2 );
+			Dictionary<Skill, int> requiredSkills = Create_skills();
 
             Project p = new Project( "SimuRh", -1, 2, 2000, requiredSkills );
         }
@@ -58,12 +47,7 @@ namespace SRH.Core.Tests
         [ExpectedException( typeof( ArgumentException ) )]
         public void Create_project_with_negative_numberOfWorkers_throw_argument_exeption()
         {
-            Skill skill1 = new ProjSkill( "WebDevelopment" );
-            Skill skill2 = new ProjSkill( "GUInterface" );
-
-            Dictionary<Skill, int> requiredSkills = new Dictionary<Skill, int>();
-            requiredSkills.Add( skill1, 1 );
-            requiredSkills.Add( skill2, 2 );
+			Dictionary<Skill, int> requiredSkills = Create_skills();
 
             Project p = new Project( "SimuRh", -1, -2, 2000, requiredSkills );
         }
@@ -71,13 +55,8 @@ namespace SRH.Core.Tests
         [Test]
         [ExpectedException( typeof( ArgumentException ) )]
         public void Create_project_with_earnings_inferior_than_100_throw_argument_exeption()
-        {
-            Skill skill1 = new ProjSkill( "WebDevelopment" );
-            Skill skill2 = new ProjSkill( "GUInterface" );
-
-            Dictionary<Skill, int> requiredSkills = new Dictionary<Skill, int>();
-            requiredSkills.Add( skill1, 1 );
-            requiredSkills.Add( skill2, 2 );
+		{
+			Dictionary<Skill, int> requiredSkills = Create_skills();
 
             Project p = new Project( "SimuRh", -1, -2, 10, requiredSkills );
         }
@@ -85,13 +64,8 @@ namespace SRH.Core.Tests
         [Test]
         [ExpectedException( typeof( ArgumentException ) )]
         public void Create_project_with_duration_inferior_than_2_throw_argument_null_exeption()
-        {
-            Skill skill1 = new ProjSkill( "WebDevelopment" );
-            Skill skill2 = new ProjSkill( "GUInterface" );
-
-            Dictionary<Skill, int> requiredSkills = new Dictionary<Skill, int>();
-            requiredSkills.Add( skill1, 1 );
-            requiredSkills.Add( skill2, 2 );
+		{
+			Dictionary<Skill, int> requiredSkills = Create_skills();
 
             Project p = new Project( "SimuRh", -1, -2, 10, requiredSkills, 1 );
         }
@@ -100,10 +74,11 @@ namespace SRH.Core.Tests
         [ExpectedException( typeof( InvalidOperationException ) )]
         public void Begin_a_project_who_is_already_begin_throw_invalidOperationException()
         {
-            Project iz = Create_project();
+			Dictionary<Skill, int> requiredSkills = Create_skills();
+			Project p = new Project( "SimuRh", 1, 2, 2000, requiredSkills );
 
-            iz.BeginProject();
-            iz.BeginProject();
+            p.BeginProject();
+            p.BeginProject();
         }
 
 		[Test]

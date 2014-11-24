@@ -85,8 +85,6 @@ namespace SRH.Interface
 			if( _currentPerson != null )
 			{
 				hirePerson.Enabled = true;
-
-
 				SelectedPersonName.Visible = true;
 				SelectedPersonAge.Visible = true;
 			}
@@ -107,7 +105,6 @@ namespace SRH.Interface
 			if( _currentEmployee != null )
 			{
 				fireEmployee.Enabled = true;
-
 				SelectedEmployeeName.Visible = true;
 				SelectedEmployeeAge.Visible = true;
 			}

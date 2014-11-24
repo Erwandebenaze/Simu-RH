@@ -20,7 +20,7 @@ namespace SRH.Core
 			_currentXp = 0;
             _currentLevel = 1;
             _skill = true;
-            this.FixNextXpRequired();
+            _xpRequired = FixNextXpRequired( _currentLevel);
         }
 
         public Level( MyCompany c )
@@ -29,7 +29,7 @@ namespace SRH.Core
             _currentXp = 0;
             _currentLevel = 1;
             _skill = false;
-            this.FixNextXpRequired();
+			_xpRequired = FixNextXpRequired( _currentLevel );
         }
         public int CurrentXp
         {
@@ -45,6 +45,11 @@ namespace SRH.Core
             set { _currentLevel = value; }
         }
 
+		public int LastXpRequired
+		{
+			get { return FixNextXpRequired( (_currentLevel - 1) ); }
+		}
+
         public void IncreaseXp( int xp, MyCompany mc = null) 
         {
             #region Exceptions
@@ -57,8 +62,8 @@ namespace SRH.Core
             if (xp + CurrentXp >= XpRequired)
                 this.IncreaseLevel( mc );
 
-            _currentXp += xp;
-            this.FixNextXpRequired(); 
+			_currentXp += xp;
+			_xpRequired = FixNextXpRequired( _currentLevel );
         }
 
         //public void IncreaseXp<Company>( int xp )
@@ -77,41 +82,44 @@ namespace SRH.Core
         //    this.FixNextXpRequired();
         //}
 
-        private void FixNextXpRequired()
+        private int FixNextXpRequired( int level)
         {
+			int NextXpRequired = 0;
 
             if( _skill )
             {
                 #region switch
-                switch( this.CurrentLevel )
+                switch( level )
                 {
                     case 1:
-                        _xpRequired = 50;
+						NextXpRequired = 50;
                         break;
                     case 2:
-                        _xpRequired = 100;
+						NextXpRequired = 100;
                         break;
                     case 3:
-                        _xpRequired = 250;
+						NextXpRequired = 250;
                         break;
                     case 4:
-                        _xpRequired = 600;
+						NextXpRequired = 600;
                         break;
                     case 5:
-                        _xpRequired = 1000;
+						NextXpRequired = 1000;
                         break;
                     default:
                         throw new InvalidOperationException("Skill can be only level 1 to 5");
                 }
             }
                 #endregion
-            if( !_skill )
+            else if( !_skill )
             {
-                if (this._currentLevel == 1)
-                    _xpRequired = 100;
-                else
-                    _xpRequired *= 2;
+				if( level == 1 )
+					NextXpRequired = 100;
+				else
+					NextXpRequired = _xpRequired * 2;
             }
+
+			return NextXpRequired;
         }
         private void IncreaseLevel( MyCompany mc = null)
         {
@@ -121,9 +129,5 @@ namespace SRH.Core
              }
 			 _currentLevel += 1;
         }
-
-		// TODO : intégrer directement à IncreaseLevelCompany
-
-
     }
 }

@@ -162,7 +162,7 @@ namespace SRH.Core.Tests
         public void End_a_project_give_money()
         {
             Game myGame = new Game( 1, "Simu\'RH" );
-            Project p = myGame.PlayerCompany.PossibleProjects[ 1 ];
+            Project p = myGame.PlayerCompany.PossibleCompanyProjects[ 1 ];
             myGame.PlayerCompany.BeginAProject(p);
             myGame.PlayerCompany.EndAProject(p);
 
@@ -173,11 +173,24 @@ namespace SRH.Core.Tests
         public void End_a_project_give_xp()
         {
             Game myGame = new Game( 1, "Simu\'RH" );
-            Project p = myGame.PlayerCompany.PossibleProjects[ 1 ];
+            Project p = myGame.PlayerCompany.PossibleCompanyProjects[ 1 ];
             myGame.PlayerCompany.BeginAProject( p );
             myGame.PlayerCompany.EndAProject( p );
             
             Assert.That( myGame.PlayerCompany.CompanyLevel.CurrentXp == 45 );
         }
+
+		[Test]
+		public void Get_the_previous_required_xp()
+		{
+			Game myGame = new Game( 1, "Simu\'RH" );
+			myGame.PlayerCompany.CompanyLevel.IncreaseXp( 101, myGame.PlayerCompany );
+
+			int lastXpRequired = myGame.PlayerCompany.CompanyLevel.LastXpRequired;
+
+			Assert.That( myGame.PlayerCompany.CompanyLevel.CurrentLevel == 2 );
+			Assert.That( myGame.PlayerCompany.CompanyLevel.XpRequired == 200 );
+			Assert.That( lastXpRequired == 100 );
+		}
     }
 }

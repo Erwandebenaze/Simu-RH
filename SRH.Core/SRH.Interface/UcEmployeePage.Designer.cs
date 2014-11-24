@@ -47,6 +47,9 @@
 			this.EmployeeFirstNameHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.EmployeeAgeHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.splitContainer3 = new System.Windows.Forms.SplitContainer();
+			this.SelectedEmployeeSkillList = new System.Windows.Forms.ListView();
+			this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+			this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.SelectedEmployeeAge = new System.Windows.Forms.Label();
 			this.fireEmployee = new System.Windows.Forms.Button();
 			this.SelectedEmployeeName = new System.Windows.Forms.Label();
@@ -56,9 +59,6 @@
 			this.SelectedPersonAge = new System.Windows.Forms.Label();
 			this.SelectedPersonName = new System.Windows.Forms.Label();
 			this.hirePerson = new System.Windows.Forms.Button();
-			this.SelectedEmployeeSkillList = new System.Windows.Forms.ListView();
-			this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-			this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			SelectedPersonTitle = new System.Windows.Forms.Label();
 			SelectedPersonNameTitle = new System.Windows.Forms.Label();
 			SelectedPersonAgeTitle = new System.Windows.Forms.Label();
@@ -168,7 +168,7 @@
 			this.PersonList.Location = new System.Drawing.Point(0, 0);
 			this.PersonList.MultiSelect = false;
 			this.PersonList.Name = "PersonList";
-			this.PersonList.Size = new System.Drawing.Size(376, 269);
+			this.PersonList.Size = new System.Drawing.Size(384, 273);
 			this.PersonList.TabIndex = 0;
 			this.PersonList.UseCompatibleStateImageBehavior = false;
 			this.PersonList.View = System.Windows.Forms.View.Details;
@@ -188,7 +188,8 @@
 			// 
 			// splitContainer1
 			// 
-			this.splitContainer1.Location = new System.Drawing.Point(3, 3);
+			this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.splitContainer1.Location = new System.Drawing.Point(0, 0);
 			this.splitContainer1.Name = "splitContainer1";
 			// 
 			// splitContainer1.Panel1
@@ -198,13 +199,14 @@
 			// splitContainer1.Panel2
 			// 
 			this.splitContainer1.Panel2.Controls.Add(this.splitContainer3);
-			this.splitContainer1.Size = new System.Drawing.Size(819, 509);
-			this.splitContainer1.SplitterDistance = 382;
+			this.splitContainer1.Size = new System.Drawing.Size(825, 515);
+			this.splitContainer1.SplitterDistance = 384;
 			this.splitContainer1.TabIndex = 1;
 			// 
 			// splitContainer2
 			// 
-			this.splitContainer2.Location = new System.Drawing.Point(3, 0);
+			this.splitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.splitContainer2.Location = new System.Drawing.Point(0, 0);
 			this.splitContainer2.Name = "splitContainer2";
 			this.splitContainer2.Orientation = System.Windows.Forms.Orientation.Horizontal;
 			// 
@@ -215,8 +217,8 @@
 			// splitContainer2.Panel2
 			// 
 			this.splitContainer2.Panel2.Controls.Add(this.PersonList);
-			this.splitContainer2.Size = new System.Drawing.Size(376, 509);
-			this.splitContainer2.SplitterDistance = 236;
+			this.splitContainer2.Size = new System.Drawing.Size(384, 515);
+			this.splitContainer2.SplitterDistance = 238;
 			this.splitContainer2.TabIndex = 1;
 			// 
 			// EmployeeList
@@ -230,7 +232,7 @@
 			this.EmployeeList.Location = new System.Drawing.Point(0, 0);
 			this.EmployeeList.MultiSelect = false;
 			this.EmployeeList.Name = "EmployeeList";
-			this.EmployeeList.Size = new System.Drawing.Size(376, 236);
+			this.EmployeeList.Size = new System.Drawing.Size(384, 238);
 			this.EmployeeList.TabIndex = 1;
 			this.EmployeeList.UseCompatibleStateImageBehavior = false;
 			this.EmployeeList.View = System.Windows.Forms.View.Details;
@@ -277,9 +279,31 @@
 			this.splitContainer3.Panel2.Controls.Add(SelectedPersonNameTitle);
 			this.splitContainer3.Panel2.Controls.Add(SelectedPersonTitle);
 			this.splitContainer3.Panel2.Controls.Add(this.hirePerson);
-			this.splitContainer3.Size = new System.Drawing.Size(433, 509);
-			this.splitContainer3.SplitterDistance = 241;
+			this.splitContainer3.Size = new System.Drawing.Size(437, 515);
+			this.splitContainer3.SplitterDistance = 243;
 			this.splitContainer3.TabIndex = 0;
+			// 
+			// SelectedEmployeeSkillList
+			// 
+			this.SelectedEmployeeSkillList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader1,
+            this.columnHeader2});
+			this.SelectedEmployeeSkillList.Location = new System.Drawing.Point(17, 108);
+			this.SelectedEmployeeSkillList.Name = "SelectedEmployeeSkillList";
+			this.SelectedEmployeeSkillList.Size = new System.Drawing.Size(413, 129);
+			this.SelectedEmployeeSkillList.TabIndex = 13;
+			this.SelectedEmployeeSkillList.UseCompatibleStateImageBehavior = false;
+			this.SelectedEmployeeSkillList.View = System.Windows.Forms.View.Tile;
+			// 
+			// columnHeader1
+			// 
+			this.columnHeader1.Text = "Compétence";
+			this.columnHeader1.Width = 108;
+			// 
+			// columnHeader2
+			// 
+			this.columnHeader2.Text = "Niveau";
+			this.columnHeader2.Width = 107;
 			// 
 			// SelectedEmployeeAge
 			// 
@@ -364,28 +388,6 @@
 			this.hirePerson.Text = "Engager";
 			this.hirePerson.UseVisualStyleBackColor = true;
 			this.hirePerson.Click += new System.EventHandler(this.hirePerson_Click);
-			// 
-			// SelectedEmployeeSkillList
-			// 
-			this.SelectedEmployeeSkillList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader1,
-            this.columnHeader2});
-			this.SelectedEmployeeSkillList.Location = new System.Drawing.Point(17, 108);
-			this.SelectedEmployeeSkillList.Name = "SelectedEmployeeSkillList";
-			this.SelectedEmployeeSkillList.Size = new System.Drawing.Size(413, 129);
-			this.SelectedEmployeeSkillList.TabIndex = 13;
-			this.SelectedEmployeeSkillList.UseCompatibleStateImageBehavior = false;
-			this.SelectedEmployeeSkillList.View = System.Windows.Forms.View.Tile;
-			// 
-			// columnHeader1
-			// 
-			this.columnHeader1.Text = "Compétence";
-			this.columnHeader1.Width = 108;
-			// 
-			// columnHeader2
-			// 
-			this.columnHeader2.Text = "Niveau";
-			this.columnHeader2.Width = 107;
 			// 
 			// UcEmployeePage
 			// 
