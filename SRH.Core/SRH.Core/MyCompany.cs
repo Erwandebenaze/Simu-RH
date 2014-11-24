@@ -132,32 +132,22 @@ namespace SRH.Core
            
         public void EndProjectIfItsFinish()
         {
-            bool flag = false;
-            int count = _projects.Count-1;
             if (_projects.Count > 0 )
             {
-                do
-                {
-                    flag = false;
-                    foreach( Project p in _projects )
+                foreach (Project p in _projects)
+                { 
+                    if (GameTime.intervalOfTimeInDays( p.BegginingDate ) == p.Duration)
                     {
-                        if( GameTime.intervalOfTimeInDays( p.BegginingDate ) == p.Duration )
-                        {
-                            EndAProject( p );
-                            p.TimeLeft = 0;
-                            MoveProject( p );
-                            flag = true;
-                            break;
-
-                        }
-                        else
-                        {
-                            p.TimeSpent = GameTime.intervalOfTimeInDays( p.BegginingDate );
-                            p.TimeLeft = p.Duration - p.TimeSpent;
-                        }
-                        count--;
+                        EndAProject( p );
+                        p.TimeLeft = 0;
+                        MoveProject( p );
+                        break;
+                    } else
+                    {
+                        p.TimeSpent = GameTime.intervalOfTimeInDays( p.BegginingDate );
+                        p.TimeLeft = p.Duration - p.TimeSpent;            
                     }
-                } while( flag );
+                }
             }
         }
 
@@ -166,9 +156,9 @@ namespace SRH.Core
             p.StopProject();
             Wealth += p.Earnings;
             _companyLevel.IncreaseXp( p.XpPerCompany, this );
-            foreach (Employee e in p.EmployeesAffectedWithSkill.Keys)
+            foreach (Employee e in p._employeesAffectedWithSkill.Keys)
             {
-                foreach (Skill s in p.EmployeesAffectedWithSkill.Values)
+                foreach (Skill s in p._employeesAffectedWithSkill.Values)
                 {
                     s.Level.IncreaseXp(p.XpPerPerson);
                 }

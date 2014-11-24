@@ -184,7 +184,9 @@ namespace SRH.Core.Tests
 		public void Get_the_previous_required_xp()
 		{
 			Game myGame = new Game( 1, "Simu\'RH" );
-			myGame.PlayerCompany.CompanyLevel.IncreaseXp( 101, myGame.PlayerCompany );
+			myGame.PlayerCompany.CompanyLevel.IncreaseXp( 100, myGame.PlayerCompany );
+			myGame.PlayerCompany.CompanyLevel.IncreaseXp( 100, myGame.PlayerCompany );
+			myGame.PlayerCompany.CompanyLevel.IncreaseXp( 200, myGame.PlayerCompany );
 
 			int lastXpRequired = myGame.PlayerCompany.CompanyLevel.LastXpRequired;
 

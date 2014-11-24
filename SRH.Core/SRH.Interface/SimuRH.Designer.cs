@@ -32,9 +32,9 @@
 			this.tabControl1 = new System.Windows.Forms.TabControl();
 			this.BureauPage = new System.Windows.Forms.TabPage();
 			this.EmployésPage = new System.Windows.Forms.TabPage();
-            this.ucEmployeePage = new SRH.Interface.UcEmployeePage();
+			this.ucEmployeePage = new SRH.Interface.UcEmployeePage();
 			this.ProjetTable = new System.Windows.Forms.TabPage();
-            this.ucProjectPage = new SRH.Interface.UcProjectPage();
+			this.ucProjectPage = new SRH.Interface.UcProjectPage();
 			this.EntreprisePage = new System.Windows.Forms.TabPage();
 			this.ResumeEntreprisePage = new System.Windows.Forms.TabPage();
 			this._dateOfGame = new System.Windows.Forms.Label();
@@ -50,14 +50,21 @@
 			this.companyExperience = new System.Windows.Forms.Label();
 			this.experiencePanel = new System.Windows.Forms.Panel();
 			this.CompanyWealth = new System.Windows.Forms.Label();
-			this.ucEmployeePage = new SRH.Interface.UcEmployeePage();
-			this.ucProjectPage = new SRH.Interface.UcProjectPage();
 			WealthTitle = new System.Windows.Forms.Label();
 			this.tabControl1.SuspendLayout();
 			this.EmployésPage.SuspendLayout();
 			this.ProjetTable.SuspendLayout();
 			this.experiencePanel.SuspendLayout();
 			this.SuspendLayout();
+			// 
+			// WealthTitle
+			// 
+			WealthTitle.AutoSize = true;
+			WealthTitle.Location = new System.Drawing.Point(346, 10);
+			WealthTitle.Name = "WealthTitle";
+			WealthTitle.Size = new System.Drawing.Size(42, 13);
+			WealthTitle.TabIndex = 12;
+			WealthTitle.Text = "Fonds :";
 			// 
 			// tabControl1
 			// 
@@ -99,18 +106,16 @@
 			this.EmployésPage.Text = "Employés";
 			this.EmployésPage.UseVisualStyleBackColor = true;
 			// 
-            // ucEmployeePage
-            // 
-            this.ucEmployeePage.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.ucEmployeePage.AutoSize = true;
-            this.ucEmployeePage.Location = new System.Drawing.Point(0, 0);
-            this.ucEmployeePage.Margin = new System.Windows.Forms.Padding(5);
-            this.ucEmployeePage.Name = "ucEmployeePage";
-            this.ucEmployeePage.Size = new System.Drawing.Size(1467, 780);
-            this.ucEmployeePage.TabIndex = 0;
-            // 
+			// ucEmployeePage
+			// 
+			this.ucEmployeePage.AutoSize = true;
+			this.ucEmployeePage.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.ucEmployeePage.Location = new System.Drawing.Point(2, 2);
+			this.ucEmployeePage.Margin = new System.Windows.Forms.Padding(4);
+			this.ucEmployeePage.Name = "ucEmployeePage";
+			this.ucEmployeePage.Size = new System.Drawing.Size(877, 479);
+			this.ucEmployeePage.TabIndex = 0;
+			// 
 			// ProjetTable
 			// 
 			this.ProjetTable.Controls.Add(this.ucProjectPage);
@@ -123,15 +128,15 @@
 			this.ProjetTable.Text = "Gestion projets";
 			this.ProjetTable.UseVisualStyleBackColor = true;
 			// 
-            // ucProjectPage
-            // 
-            this.ucProjectPage.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ucProjectPage.Location = new System.Drawing.Point(3, 2);
-            this.ucProjectPage.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.ucProjectPage.Name = "ucProjectPage";
-            this.ucProjectPage.Size = new System.Drawing.Size(1003, 593);
-            this.ucProjectPage.TabIndex = 0;
-            // 
+			// ucProjectPage
+			// 
+			this.ucProjectPage.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.ucProjectPage.Location = new System.Drawing.Point(2, 2);
+			this.ucProjectPage.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.ucProjectPage.Name = "ucProjectPage";
+			this.ucProjectPage.Size = new System.Drawing.Size(877, 479);
+			this.ucProjectPage.TabIndex = 0;
+			// 
 			// EntreprisePage
 			// 
 			this.EntreprisePage.Location = new System.Drawing.Point(4, 22);
@@ -286,15 +291,6 @@
 			this.experiencePanel.Size = new System.Drawing.Size(501, 27);
 			this.experiencePanel.TabIndex = 0;
 			// 
-			// WealthTitle
-			// 
-			WealthTitle.AutoSize = true;
-			WealthTitle.Location = new System.Drawing.Point(346, 10);
-			WealthTitle.Name = "WealthTitle";
-			WealthTitle.Size = new System.Drawing.Size(42, 13);
-			WealthTitle.TabIndex = 12;
-			WealthTitle.Text = "Fonds :";
-			// 
 			// CompanyWealth
 			// 
 			this.CompanyWealth.AutoSize = true;
@@ -304,25 +300,6 @@
 			this.CompanyWealth.TabIndex = 13;
 			this.CompanyWealth.Text = "X";
 			this.CompanyWealth.Visible = false;
-			// 
-			// ucEmployeePage
-			// 
-			this.ucEmployeePage.AutoSize = true;
-			this.ucEmployeePage.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.ucEmployeePage.Location = new System.Drawing.Point(2, 2);
-			this.ucEmployeePage.Margin = new System.Windows.Forms.Padding(4);
-			this.ucEmployeePage.Name = "ucEmployeePage";
-			this.ucEmployeePage.Size = new System.Drawing.Size(877, 479);
-			this.ucEmployeePage.TabIndex = 0;
-			// 
-			// ucProjectPage
-			// 
-			this.ucProjectPage.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-			this.ucProjectPage.Location = new System.Drawing.Point(2, 2);
-			this.ucProjectPage.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-			this.ucProjectPage.Name = "ucProjectPage";
-			this.ucProjectPage.Size = new System.Drawing.Size(882, 481);
-			this.ucProjectPage.TabIndex = 0;
 			// 
 			// SimuRH
 			// 

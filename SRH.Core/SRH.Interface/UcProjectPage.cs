@@ -96,7 +96,8 @@ namespace SRH.Interface
                     // Todo : Gestion des affectations des compétences.
                     //SelectedEmployeeSkillList.Items.AddRange( _currentEmployee.Worker.Skills.Values.Select( s => AddSkills( s ) ).ToArray() );
                     //int nbSkillsRequired = _currentProj.SkillsRequired.Count;
-                    //listSkillsRequired.Items.AddRange( _currentProj.SkillsRequired.Select( p => CreateListItemViewSkillsRequired( _currentProj ) ).ToArray() );
+					listSkillsRequired.Items.Clear();
+                    // listSkillsRequired.Items.AddRange( _currentProj.SkillsRequired.Select( p => CreateListItemViewSkillsRequired( _currentProj ) ).ToArray() );
             } 
         }
 

@@ -60,10 +60,12 @@ namespace SRH.Core
             if( this._currentLevel == 5 && xp > 1000 ) throw new ArgumentException( "Xp is too big for the level" );
             #endregion
             if (xp + CurrentXp >= XpRequired)
-                this.IncreaseLevel( mc );
+			{
+				this.IncreaseLevel( mc );
+				_xpRequired = FixNextXpRequired( _currentLevel );
+			}
 
 			_currentXp += xp;
-			_xpRequired = FixNextXpRequired( _currentLevel );
         }
 
         //public void IncreaseXp<Company>( int xp )
@@ -116,7 +118,8 @@ namespace SRH.Core
 				if( level == 1 )
 					NextXpRequired = 100;
 				else
-					NextXpRequired = _xpRequired * 2;
+					NextXpRequired = ( 100 * ( level -1 ) ) * level;
+					
             }
 
 			return NextXpRequired;

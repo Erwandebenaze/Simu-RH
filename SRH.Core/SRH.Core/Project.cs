@@ -23,7 +23,7 @@ namespace SRH.Core
         readonly int _xpPerPerson;
         bool _activated;
         readonly Dictionary<Skill, int> _skillsRequired;
-        private Dictionary<Employee, Skill> _employeesAffectedWithSkill;
+        public Dictionary<Employee, Skill> _employeesAffectedWithSkill;
 
         #region Getter
         public string Name
