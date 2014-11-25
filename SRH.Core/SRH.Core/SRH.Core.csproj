@@ -51,7 +51,6 @@
     <Compile Include="CSV.cs" />
     <Compile Include="Employee.cs" />
     <Compile Include="Game.cs" />
-    <Compile Include="Helper.cs" />
     <Compile Include="LaborMarket.cs" />
     <Compile Include="Level.cs" />
     <Compile Include="MyCompany.cs" />

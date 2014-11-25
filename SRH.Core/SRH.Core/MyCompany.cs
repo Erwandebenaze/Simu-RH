@@ -85,7 +85,7 @@ namespace SRH.Core
 		/// <returns>Returns True if the <see cref="Employee"/> was added</returns>
         public Employee AddEmployee( Person p )
 		{
-			Employee e = new Employee( p );
+			Employee e = new Employee(this, p );
 			_employees.Add( e );
 			
 			if( !( _employees.Exists( x => x.Equals( e ) ) ) ) throw new InvalidOperationException("The Employee wasn't properly added to the List.");

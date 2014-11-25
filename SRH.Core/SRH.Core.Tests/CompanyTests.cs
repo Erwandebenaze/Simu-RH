@@ -73,7 +73,6 @@ namespace SRH.Core.Tests
         public void Add_a_Person_to_LabourMarket()
         {
             Game myGame = new Game( 1, "SimuRH" );
-
             Person p = myGame.Market.PersonMaker.CreatePerson( 18, 60 );
 
             Assert.That( p.Age >= 18 && p.Age <= 60 );
