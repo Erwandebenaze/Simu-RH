@@ -104,8 +104,10 @@ namespace SRH.Interface
         {
             try
             {
+                this.Refresh();
                 _myGame = GameLoader.Load( name );
                 MessageBox.Show( "La partie est déjà existante. Celle-ci a été chargée." );
+                this.Refresh();
             }
             catch (System.IO.FileNotFoundException)
             {
@@ -124,6 +126,7 @@ namespace SRH.Interface
 
         internal void LoadGame(string game)
         {
+            this.Refresh();
             _myGame = GameLoader.Load( game );
             this.Refresh();
         }

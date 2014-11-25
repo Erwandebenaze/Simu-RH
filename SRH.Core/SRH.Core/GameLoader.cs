@@ -24,9 +24,9 @@ namespace SRH.Core
                 stream = new FileStream( @"..\..\..\Sauvegardes\" + companyName + ".bin", FileMode.Open, FileAccess.Read, FileShare.Read );
             }
            
-            Game obj = (Game)formatter.Deserialize( stream );
+            Game myGame = (Game)formatter.Deserialize( stream );
             stream.Close();
-            return obj;
+            return myGame;
         }
 
 

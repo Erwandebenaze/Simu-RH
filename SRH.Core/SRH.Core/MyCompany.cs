@@ -174,7 +174,7 @@ namespace SRH.Core
 
         public Project StopAProject( Project p )
         {
-            PossibleCompanyProjects.Add( p );
+            _possibleCompanyProjects.Add( p );
             _projects.Remove( p );
             p.StopProject();
             return p;

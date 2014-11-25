@@ -23,7 +23,7 @@ namespace SRH.Core
         readonly int _xpPerPerson;
         bool _activated;
         readonly Dictionary<Skill, int> _skillsRequired;
-        public Dictionary<Employee, Skill> _employeesAffectedWithSkill;
+        Dictionary<Employee, Skill> _employeesAffectedWithSkill;
 
         #region Getter
         public string Name
@@ -115,7 +115,13 @@ namespace SRH.Core
             _xpPerPerson = 10;
 			_skillsRequired = skillsRequired;
             _employeesAffectedWithSkill = new Dictionary<Employee, Skill>();
-            GenerateSkillsRequired(numberOfWorkers);
+            GenerateSkillsRequired(numberOfWorkers );
+            // TODO : Lier le game aux projets. Il faut connecter les différents projets entre eux
+            // Constructeur internal, objet "parent" en param pour retrouver le contexte dans lequel
+            // il est appelé.
+            // Le projet pourrait ainsi savoir les meilleurs employees disponibles avec telle compétence
+            // Si on connecte nos neurones on pourrait même dire qui il faut recruter pour accomplir le projet
+            
         }
 
 		// FOR TESTS ONLY (to remove when tests are fixed)

@@ -14,7 +14,8 @@ namespace SRH.Core
 
 			public Helper( LaborMarket Lb)
 			{
-				_randomPersonGenerator = Game.GetRandomGenerator();
+				_randomPersonGenerator = Lb.Game.GetRandomGenerator();
+                // TODO : Enlever gamegenerator static
 				_lb = Lb;
 			}
 

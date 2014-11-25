@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="NameAndType">
+  <Class Name="SRH.Core.Game">
+    <Position X="0.5" Y="0.5" Width="3" />
+    <Members>
+      <Field Name="_competitors" Hidden="true" />
+      <Field Name="_market" Hidden="true" />
+      <Field Name="_playerCompany" Hidden="true" />
+      <Field Name="_possibleProjects" Hidden="true" />
+      <Field Name="_randomNumberGenerator" Hidden="true" />
+      <Field Name="_randomSerie" Hidden="true" />
+      <Field Name="_timeGame" Hidden="true" />
+    </Members>
+    <AssociationLine Name="Competitors" Type="SRH.Core.Competitor" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="3.5" Y="1.835" />
+        <Point X="3.875" Y="1.835" />
+        <Point X="3.875" Y="4.937" />
+        <Point X="2.5" Y="4.937" />
+        <Point X="2.5" Y="4.562" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true" ManuallySized="true">
+        <Position X="0.927" Y="0.427" Height="0.182" Width="1.22" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AQAAAAAAIAERAAgAAAAgAQABAAAAACEAAAAAAAIgAQA=</HashCode>
+      <FileName>Game.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="PlayerCompany" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="Competitors" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="SRH.Core.Competitor" Collapsed="true">
+    <Position X="1.75" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Competitor.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SRH.Core.MyCompany">
+    <Position X="5" Y="0.5" Width="2.75" />
+    <Members>
+      <Field Name="_companyLevel" Hidden="true" />
+      <Field Name="_employees" Hidden="true" />
+      <Field Name="_maxEmployees" Hidden="true" />
+      <Field Name="_maxProjectDifficulty" Hidden="true" />
+      <Field Name="_name" Hidden="true" />
+      <Field Name="_possibleCompanyProjects" Hidden="true" />
+      <Field Name="_projects" Hidden="true" />
+      <Field Name="_wealth" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AAAAIUAgAIAAAAIAACCCAAwiGGAAAAGAAAAAIAAgIQA=</HashCode>
+      <FileName>MyCompany.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

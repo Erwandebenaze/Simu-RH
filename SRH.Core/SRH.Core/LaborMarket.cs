@@ -11,11 +11,14 @@ namespace SRH.Core
 	{
 		List<Person> _joblessPersons;
 		Helper _personMaker;
+        readonly Game _game;
 
-		public LaborMarket()
+		public LaborMarket(Game myGame)
 		{
 			_joblessPersons = new List<Person>();
 			_personMaker = new Helper( this );
+            _game = myGame;
+
 			for( int i = 0; i < 100; i++ )
 			{
 				Person p = _personMaker.CreatePerson( 18, 60 );
@@ -28,7 +31,11 @@ namespace SRH.Core
 		{
 			get { return _personMaker; }
 		}
-		public List<Person> JoblessPersons
+        public Game Game
+        {
+            get { return _game; }
+        }
+        public List<Person> JoblessPersons
 		{
 			get { return _joblessPersons; }
 		} 

@@ -14,15 +14,15 @@ namespace SRH.Core
         List<Competitor> _competitors;
         GameTime _timeGame;
 
-		static Random _randomNumberGenerator;
-		static int _randomSerie;
+		 Random _randomNumberGenerator;
+		static it _randomSerie;
         static List<Project> _possibleProjects;
         
 
 		public Game( int seed, string companyName )
 		{
             _randomNumberGenerator = new Random( seed );
-			_market = new LaborMarket();
+			_market = new LaborMarket(this);
 			_competitors = new List<Competitor>();
 			_randomSerie = _randomNumberGenerator.Next();
 
@@ -48,7 +48,7 @@ namespace SRH.Core
             get { return _playerCompany; }
         }
 
-        internal List<Competitor> Competitors
+        public IReadOnlyList<Competitor> Competitors
         {
             get { return _competitors; }
         }
