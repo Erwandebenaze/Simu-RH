@@ -1,0 +1,117 @@
+﻿Nom du projet;Difficulté;Nombre de tâches;Gains;Compétences demandées;Niveau recommandé;Nombre de compétences
+Jeu éducatif simple;1;1000;2000;ProjManangement;1;3
+;;;;Developement;1;
+;;;;GUInterface;1;
+Calculatrice interactive;1;1000;2000;ProjManangement;1;3
+;;;;Developement;1;
+;;;;TechSupport;1;
+Site pour enfants;1;1200;2500;ProjManangement;1;3
+;;;;WebDevelopement;1;
+;;;;Design;1;
+Jeu pour enfant;1,5;2000;4000;ProjManangement;1;5
+;;;;Developement;1;
+;;;;Developement;1;
+;;;;Design;1;
+;;;;GUInterface;2;
+Calculatrice scientifique;1,5;2000;4000;ProjManangement;1;4
+;;;;Developement;2;
+;;;;Developement;2;
+;;;;TechSupport;1;
+Application météo;2;3000;6000;ProjManangement;2;5
+;;;;WebDevelopement;1;
+;;;;WebDevelopement;2;
+;;;;Networking;1;
+;;;;GUInterface;1;
+Bloc-Notes;2;3300;6500;ProjManangement;2;5
+;;;;Developement;2;
+;;;;Developement;2;
+;;;;DataBase;1;
+;;;;GUInterface;2;
+Petit jeu mobile;2,5;4000;8000;ProjManangement;2;8
+;;;;Developement;2;
+;;;;Developement;2;
+;;;;Developement;2;
+;;;;Networking;2;
+;;;;Networking;2;
+;;;;BetaTest;1;
+;;;;GUInterface;3;
+Logiciel pour robots simple;2,5;4500;9000;ProjManangement;3;6
+;;;;Developement;2;
+;;;;Developement;2;
+;;;;DataBase;2;
+;;;;SystemAnalyst;1;
+;;;;TechSupport;2;
+Calculateur spatial;3;6000;10000;ProjManangement;3;8
+;;;;Developement;3;
+;;;;Developement;3;
+;;;;Developement;3;
+;;;;Networking;2;
+;;;;Networking;2;
+;;;;BetaTest;2;
+;;;;GUInterface;3;
+Simulation d'entreprise;3;6500;12000;ProjManangement;3;6
+;;;;Developement;3;
+;;;;Developement;2;
+;;;;DataBase;3;
+;;;;SystemAnalyst;2;
+;;;;TechSupport;3;
+Jeu grand public;3,5;8000;18000;ProjManangement;3;10
+;;;;Developement;4;
+;;;;Developement;4;
+;;;;Developement;3;
+;;;;Security;2;
+;;;;SystemAnalyst;3;
+;;;;SystemAnalyst;3;
+;;;;TechSupport;3;
+;;;;TechSupport;2;
+;;;;GUInterface;4;
+Logiciel pour robot Japonais;4;12000;25000;ProjManangement;4;11
+;;;;Developement;4;
+;;;;Developement;4;
+;;;;Developement;4;
+;;;;Security;3;
+;;;;Security;3;
+;;;;SystemAnalyst;4;
+;;;;TechSupport;3;
+;;;;TechSupport;3;
+;;;;BetaTest;3;
+;;;;DataBase;3;
+Système d'exploitation;4,5;15000;40000;ProjManangement;4;16
+;;;;Developement;5;
+;;;;Developement;5;
+;;;;Developement;5;
+;;;;Developement;5;
+;;;;Security;3;
+;;;;Security;3;
+;;;;Security;3;
+;;;;SystemAnalyst;4;
+;;;;SystemAnalyst;4;
+;;;;TechSupport ;4;
+;;;;TechSupport ;4;
+;;;;BetaTest;4;
+;;;;DataBase;4;
+;;;;GUInterface;4;
+;;;;GUInterface;4;
+Intelligence Artificielle;5;25000;60000;ProjManangement;5;23
+;;;;Developement;5;
+;;;;Developement;5;
+;;;;Developement;5;
+;;;;Developement;5;
+;;;;Developement;5;
+;;;;Security;4;
+;;;;Security;4;
+;;;;Security;4;
+;;;;SystemAnalyst;4;
+;;;;SystemAnalyst;4;
+;;;;TechSupport;5;
+;;;;TechSupport;5;
+;;;;BetaTest;5;
+;;;;BetaTest;5;
+;;;;DataBase;4;
+;;;;GUInterface;5;
+;;;;GUInterface;5;
+;;;;GUInterface;5;
+;;;;Networking;4;
+;;;;Networking;4;
+;;;;Design;4;
+;;;;Design;4;
