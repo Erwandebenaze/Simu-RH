@@ -42,7 +42,7 @@ namespace SRH.Interface
             _timeOfGame.newDay();
             _myGame.PlayerCompany.EndProjectIfItsFinish();
             ClearListsProjects();
-            _dateOfGame.Text = GameTime.TimeOfGame.ToString("d");
+            _dateOfGame.Text = _myGame.TimeGame.TimeOfGame.ToString("d");
             _day.Text = _timeOfGame.FrenchDayOfWeek;
         }
         static ListViewItem CreateListItemViewProjects( Project p )

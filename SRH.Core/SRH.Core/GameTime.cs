@@ -9,20 +9,21 @@ namespace SRH.Core
     [Serializable]
     public class GameTime
     {
-        static DateTime _timeOfGame;
+        DateTime _timeOfGame;
         DayOfWeek _dayOfTheWeek;
         string _frenchTranslationDay;
-
+        Game _myGame;
       
 
-        public GameTime()
+        public GameTime(Game myGame)
         {
+            _myGame = myGame;
             _timeOfGame = new DateTime(2015,01,26);
             _dayOfTheWeek = _timeOfGame.DayOfWeek; 
         }
-        public static DateTime TimeOfGame
+        public DateTime TimeOfGame
         {
-            get { return _timeOfGame.Date; }
+            get { return _timeOfGame; }
         }
         public string FrenchDayOfWeek
         {
@@ -53,7 +54,7 @@ namespace SRH.Core
             }
         }
 
-        static public int intervalOfTimeInDays( DateTime? beginningDateNullable )
+        public int intervalOfTimeInDays( DateTime? beginningDateNullable )
         {
             //TimeSpan ts = new TimeSpan();
             //ts = _timeOfGame - beginningDate;

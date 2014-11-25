@@ -24,6 +24,7 @@ namespace SRH.Core
         bool _activated;
         readonly Dictionary<Skill, int> _skillsRequired;
         Dictionary<Employee, Skill> _employeesAffectedWithSkill;
+        MyCompany _myComp;
 
         #region Getter
         public string Name
@@ -98,13 +99,15 @@ namespace SRH.Core
         /// <param name="numberOfWorkers"> Superior than 1</param>
         /// <param name="earnings"> Superior than 100</param>
         /// <param name="duration">In month. Superior than 1 month</param>
-        public Project(string name, float difficulty, int numberOfWorkers, int earnings, Dictionary<Skill,int> skillsRequired, int duration = 30)
+        public Project(MyCompany myComp, string name, float difficulty, int numberOfWorkers, int earnings, Dictionary<Skill,int> skillsRequired, int duration = 30)
         {
             if( String.IsNullOrWhiteSpace( name ) ) throw new ArgumentNullException( "name" );
             if( difficulty <= 0 ) throw new ArgumentException( "difficulty must be superior than 0." );
             if( numberOfWorkers <= 1 ) throw new ArgumentException( "numberOfWorkers must be superior than 1." );
             if( earnings <= 100 ) throw new ArgumentException( "earnings must be superior than 100." );
             if( duration <= 1 ) throw new ArgumentException( "duration must be superior than 0." );
+            if( myComp == null ) throw new ArgumentException( "myComp == null." );
+            _myComp = myComp;
             _name = name;
             _difficulty = difficulty;
             _numberOfWorkers = numberOfWorkers;
@@ -196,7 +199,7 @@ namespace SRH.Core
 			//if( _skillsRequired.Count == 0 )
 			//{
                 Activated = true;
-                _begginingDate = GameTime.TimeOfGame;
+                _begginingDate = _myComp.MyGame.TimeGame.TimeOfGame;
             //}
 			////else
 			//{

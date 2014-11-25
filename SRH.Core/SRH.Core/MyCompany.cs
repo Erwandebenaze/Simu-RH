@@ -15,15 +15,17 @@ namespace SRH.Core
 		protected readonly List<Employee> _employees;
         List<Project> _possibleCompanyProjects;
         List<Project> _projects;
-
+        readonly Game _myGame;
 		Level _companyLevel;
 		double _maxProjectDifficulty;
 
-		public MyCompany( string Name )
+
+		public MyCompany( Game game, string name )
         {
-			if( String.IsNullOrWhiteSpace( Name ) ) throw new ArgumentNullException( "The company name cannot be null or a whitespace" );
+			if( String.IsNullOrWhiteSpace( name ) ) throw new ArgumentNullException( "The company name cannot be null or a whitespace" );
 			//TODO : Check if the name is already existing (saved)
-			_name = Name;
+			_name = name;
+            _myGame = game;
 			_employees = new List<Employee>();
             _wealth = 15000;
 			_companyLevel = new Level( this );
@@ -47,6 +49,10 @@ namespace SRH.Core
             get { return _maxEmployees; }
             private set { _maxEmployees = value; }
         }
+        public Game MyGame
+        {
+            get { return _myGame; }
+        } 
         public List<Project> Projects
         {
             get { return _projects; }
@@ -135,8 +141,8 @@ namespace SRH.Core
             if (_projects.Count > 0 )
             {
                 foreach (Project p in _projects)
-                { 
-                    if (GameTime.intervalOfTimeInDays( p.BegginingDate ) == p.Duration)
+                {
+                    if( _myGame.TimeGame.intervalOfTimeInDays( p.BegginingDate ) == p.Duration )
                     {
                         EndAProject( p );
                         p.TimeLeft = 0;
@@ -144,7 +150,7 @@ namespace SRH.Core
                         break;
                     } else
                     {
-                        p.TimeSpent = GameTime.intervalOfTimeInDays( p.BegginingDate );
+                        p.TimeSpent = _myGame.TimeGame.intervalOfTimeInDays( p.BegginingDate );
                         p.TimeLeft = p.Duration - p.TimeSpent;            
                     }
                 }
@@ -156,9 +162,9 @@ namespace SRH.Core
             p.StopProject();
             Wealth += p.Earnings;
             _companyLevel.IncreaseXp( p.XpPerCompany, this );
-            foreach (Employee e in p._employeesAffectedWithSkill.Keys)
+            foreach( Employee e in p.EmployeesAffectedWithSkill.Keys )
             {
-                foreach (Skill s in p._employeesAffectedWithSkill.Values)
+                foreach( Skill s in p.EmployeesAffectedWithSkill.Values )
                 {
                     s.Level.IncreaseXp(p.XpPerPerson);
                 }
@@ -182,7 +188,7 @@ namespace SRH.Core
 
 		List<Project> GetPossibleCompanyProjects()
 		{
-			List<Project> possible = Game.PossibleProjects;
+			List<Project> possible = _myGame.PossibleProjects;
 			List<Project> finalList = new List<Project>();
 			foreach( Project p in possible )
 			{

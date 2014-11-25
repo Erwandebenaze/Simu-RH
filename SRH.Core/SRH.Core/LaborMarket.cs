@@ -16,8 +16,8 @@ namespace SRH.Core
 		public LaborMarket(Game myGame)
 		{
 			_joblessPersons = new List<Person>();
-			_personMaker = new Helper( this );
             _game = myGame;
+            _personMaker = new Helper( this );
 
 			for( int i = 0; i < 100; i++ )
 			{

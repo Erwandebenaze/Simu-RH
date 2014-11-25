@@ -14,9 +14,8 @@ namespace SRH.Core
         List<Competitor> _competitors;
         GameTime _timeGame;
 
-		 Random _randomNumberGenerator;
-		static it _randomSerie;
-        static List<Project> _possibleProjects;
+		Random _randomNumberGenerator;
+        List<Project> _possibleProjects;
         
 
 		public Game( int seed, string companyName )
@@ -24,13 +23,12 @@ namespace SRH.Core
             _randomNumberGenerator = new Random( seed );
 			_market = new LaborMarket(this);
 			_competitors = new List<Competitor>();
-			_randomSerie = _randomNumberGenerator.Next();
 
-			CSV csvImport = new CSV();
-			_possibleProjects = csvImport.ReadCsv( "../../../Data/data.csv" );
+            _playerCompany = new MyCompany( this, companyName );
+            CSV csvImport = new CSV();
+			_possibleProjects = csvImport.ReadCsv(_playerCompany, "../../../Data/data.csv" );
 
-			_playerCompany = new MyCompany( companyName );
-            _timeGame = new GameTime();
+            _timeGame = new GameTime(this);
 		}
 
         #region Getters Setters
@@ -52,21 +50,17 @@ namespace SRH.Core
         {
             get { return _competitors; }
         }
-        public static int RandomSerie
-        {
-            get { return _randomSerie; }
-        }
 
         /// <summary>
         /// Static method to get a <see cref="RandomGenerator"/>
         /// </summary>
         /// <returns>A static instance of <see cref="RandomGenerator"/></returns>
-		internal static RandomGenerator GetRandomGenerator()
+		internal RandomGenerator GetRandomGenerator()
 		{
 			return new RandomGenerator( _randomNumberGenerator );
 		}
 
-		internal static List<Project> PossibleProjects
+		internal List<Project> PossibleProjects
 		{
 			get { return _possibleProjects; }
 		}

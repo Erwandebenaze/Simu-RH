@@ -8,54 +8,45 @@
       <Field Name="_playerCompany" Hidden="true" />
       <Field Name="_possibleProjects" Hidden="true" />
       <Field Name="_randomNumberGenerator" Hidden="true" />
-      <Field Name="_randomSerie" Hidden="true" />
       <Field Name="_timeGame" Hidden="true" />
     </Members>
-    <AssociationLine Name="Competitors" Type="SRH.Core.Competitor" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
-      <Path>
-        <Point X="3.5" Y="1.835" />
-        <Point X="3.875" Y="1.835" />
-        <Point X="3.875" Y="4.937" />
-        <Point X="2.5" Y="4.937" />
-        <Point X="2.5" Y="4.562" />
-      </Path>
-      <MemberNameLabel ManuallyPlaced="true" ManuallySized="true">
-        <Position X="0.927" Y="0.427" Height="0.182" Width="1.22" />
-      </MemberNameLabel>
-    </AssociationLine>
     <TypeIdentifier>
-      <HashCode>AQAAAAAAIAERAAgAAAAgAQABAAAAACEAAAAAAAIgAQA=</HashCode>
+      <HashCode>AQAAAAAAIAEQAAgAAAAgAQABAAAAACEAAAAAAAIgAQA=</HashCode>
       <FileName>Game.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
       <Property Name="PlayerCompany" />
+      <Property Name="Market" />
     </ShowAsAssociation>
-    <ShowAsCollectionAssociation>
-      <Property Name="Competitors" />
-    </ShowAsCollectionAssociation>
-  </Class>
-  <Class Name="SRH.Core.Competitor" Collapsed="true">
-    <Position X="1.75" Y="4" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Competitor.cs</FileName>
-    </TypeIdentifier>
   </Class>
   <Class Name="SRH.Core.MyCompany">
-    <Position X="5" Y="0.5" Width="2.75" />
+    <Position X="7.25" Y="0.5" Width="2.75" />
     <Members>
       <Field Name="_companyLevel" Hidden="true" />
       <Field Name="_employees" Hidden="true" />
       <Field Name="_maxEmployees" Hidden="true" />
       <Field Name="_maxProjectDifficulty" Hidden="true" />
+      <Field Name="_myGame" Hidden="true" />
       <Field Name="_name" Hidden="true" />
       <Field Name="_possibleCompanyProjects" Hidden="true" />
       <Field Name="_projects" Hidden="true" />
       <Field Name="_wealth" Hidden="true" />
     </Members>
     <TypeIdentifier>
-      <HashCode>AAAAIUAgAIAAAAIAACCCAAwiGGAAAAGAAAAAIAAgIQA=</HashCode>
+      <HashCode>AAAAIWAgAIAAAAIAACCCAAwiGGAAAAGAAAAAYAAgIQA=</HashCode>
       <FileName>MyCompany.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SRH.Core.LaborMarket">
+    <Position X="4" Y="1.25" Width="3" />
+    <Members>
+      <Field Name="_game" Hidden="true" />
+      <Field Name="_joblessPersons" Hidden="true" />
+      <Field Name="_personMaker" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>QAAAAAAAAACAAAAAACAAAAgAAAiAAAAAAAAAAAAAAEQ=</HashCode>
+      <FileName>LaborMarket.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />

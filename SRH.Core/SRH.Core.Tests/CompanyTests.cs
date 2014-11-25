@@ -11,47 +11,48 @@ namespace SRH.Core.Tests
     [TestFixture]
     class CompanyTests
     {
+        Game myGame = new Game( 1, "Dannone" );
 
         [Test]
         public void Create_company_with_name_and_Level()
         {
-            MyCompany c = new MyCompany("SimuRH");
+            MyCompany c = new MyCompany(myGame, "SimuRH");
             Assert.That( c.Name == "SimuRH" );
             Assert.That( c.CompanyLevel.CurrentLevel == 1 );
         }
 
-        [Test]
-        public void Create_competitor()
-        {
-            Competitor c = new Competitor("Danone");
-            Assert.That( c, Is.Not.Null );
-        }
+        //[Test]
+        //public void Create_competitor()
+        //{
+        //    Competitor c = new Competitor("Danone");
+        //    Assert.That( c, Is.Not.Null );
+        //}
 
         [Test]
         [ExpectedException( typeof( ArgumentNullException ) )]
         public void Create_mycompany_with_white_space_throw_argument_null_exeption()
         {
-            MyCompany mc = new MyCompany( " " );
+            MyCompany mc = new MyCompany(myGame, " " );
         }
 
         [Test]
         public void New_company_have_10_max_employees()
         {
-            MyCompany mc = new MyCompany( "Danone" );
+            MyCompany mc = new MyCompany(myGame, "Danone" );
             Assert.That( mc.MaxEmployees, Is.EqualTo(10) );
         }
 
         [Test]
         public void New_company_have_1_max_project_difficulty()
         {
-            MyCompany mc = new MyCompany( "Danone" );
+            MyCompany mc = new MyCompany( myGame, "Danone" );
             Assert.That( mc.MaxProjectDifficulty, Is.EqualTo( 1 ) );
         }
 
         [Test]
         public void Our_company_takes_experience_and_upgrade_his_level()
         {
-            MyCompany mc = new MyCompany( "Danone" );
+            MyCompany mc = new MyCompany( myGame, "Danone" );
             mc.CompanyLevel.IncreaseXp( 101, mc );
 			Assert.That( mc.CompanyLevel.CurrentLevel, Is.EqualTo( 2 ) );
         }
@@ -185,9 +186,7 @@ namespace SRH.Core.Tests
 		{
 			Game myGame = new Game( 1, "Simu\'RH" );
 			myGame.PlayerCompany.CompanyLevel.IncreaseXp( 100, myGame.PlayerCompany );
-			myGame.PlayerCompany.CompanyLevel.IncreaseXp( 100, myGame.PlayerCompany );
-			myGame.PlayerCompany.CompanyLevel.IncreaseXp( 200, myGame.PlayerCompany );
-
+			
 			int lastXpRequired = myGame.PlayerCompany.CompanyLevel.LastXpRequired;
 
 			Assert.That( myGame.PlayerCompany.CompanyLevel.CurrentLevel == 2 );

@@ -12,11 +12,11 @@ namespace SRH.Core
 			RandomGenerator _randomPersonGenerator;
 			LaborMarket _lb;
 
-			public Helper( LaborMarket Lb)
+			public Helper( LaborMarket lb)
 			{
-				_randomPersonGenerator = Lb.Game.GetRandomGenerator();
+                _randomPersonGenerator = lb.Game.GetRandomGenerator();
                 // TODO : Enlever gamegenerator static
-				_lb = Lb;
+				_lb = lb;
 			}
 
 			/// <summary>
