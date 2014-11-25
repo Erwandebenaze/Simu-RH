@@ -8,9 +8,9 @@ using LumenWorks.Framework.IO.Csv;
 
 namespace SRH.Core
 {
-	public class CSV
+    internal class CSV
 	{
-		public List<Project> ReadCsv( string path )
+		public List<Project> ReadCsv(MyCompany myComp, string path )
 		{
 			List<Project> possibleProjects = new List<Project>();
 
@@ -50,7 +50,7 @@ namespace SRH.Core
 								projectRequiredSkill.Add( new ProjSkill(skillName) , skillLevel );
 							}
 
-							Project p = new Project( projectName, projectDifficulty, projectNumberOfWorker, projectEarnings, projectRequiredSkill );
+							Project p = new Project(myComp, projectName, projectDifficulty, projectNumberOfWorker, projectEarnings, projectRequiredSkill );
 							possibleProjects.Add( p );
 						}
 					}

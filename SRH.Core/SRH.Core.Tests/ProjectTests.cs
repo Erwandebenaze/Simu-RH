@@ -11,7 +11,7 @@ namespace SRH.Core.Tests
     [TestFixture]
     class ProjectTests
     {
-
+        Game myGame = new Game( 1, "Dannone" );
 		public Dictionary<Skill, int> Create_skills()
         {
             Skill skill1 = new ProjSkill( "WebDevelopment" );
@@ -31,7 +31,7 @@ namespace SRH.Core.Tests
         {
 			Dictionary<Skill, int> requiredSkills = Create_skills();
 
-            Project p = new Project( " ", 1, 2, 2000, requiredSkills );
+            Project p = new Project(myGame.PlayerCompany, " ", 1, 2, 2000, requiredSkills );
         }
 
         [Test]
@@ -40,7 +40,7 @@ namespace SRH.Core.Tests
         {
 			Dictionary<Skill, int> requiredSkills = Create_skills();
 
-            Project p = new Project( "SimuRh", -1, 2, 2000, requiredSkills );
+            Project p = new Project( myGame.PlayerCompany, "SimuRh", -1, 2, 2000, requiredSkills );
         }
 
         [Test]
@@ -49,7 +49,7 @@ namespace SRH.Core.Tests
         {
 			Dictionary<Skill, int> requiredSkills = Create_skills();
 
-            Project p = new Project( "SimuRh", -1, -2, 2000, requiredSkills );
+            Project p = new Project( myGame.PlayerCompany, "SimuRh", -1, -2, 2000, requiredSkills );
         }
 
         [Test]
@@ -58,7 +58,7 @@ namespace SRH.Core.Tests
 		{
 			Dictionary<Skill, int> requiredSkills = Create_skills();
 
-            Project p = new Project( "SimuRh", -1, -2, 10, requiredSkills );
+            Project p = new Project( myGame.PlayerCompany, "SimuRh", -1, -2, 10, requiredSkills );
         }
 
         [Test]
@@ -67,7 +67,7 @@ namespace SRH.Core.Tests
 		{
 			Dictionary<Skill, int> requiredSkills = Create_skills();
 
-            Project p = new Project( "SimuRh", -1, -2, 10, requiredSkills, 1 );
+            Project p = new Project( myGame.PlayerCompany, "SimuRh", -1, -2, 10, requiredSkills, 1 );
         }
 
         [Test]
@@ -75,7 +75,7 @@ namespace SRH.Core.Tests
         public void Begin_a_project_who_is_already_begin_throw_invalidOperationException()
         {
 			Dictionary<Skill, int> requiredSkills = Create_skills();
-			Project p = new Project( "SimuRh", 1, 2, 2000, requiredSkills );
+            Project p = new Project( myGame.PlayerCompany, "SimuRh", 1, 2, 2000, requiredSkills );
 
             p.BeginProject();
             p.BeginProject();
@@ -87,7 +87,7 @@ namespace SRH.Core.Tests
 			CSV csv = new CSV();
 			List<Project> list = new List<Project>();
 
-            list = csv.ReadCsv( "../../../Data/data.csv" );
+            list = csv.ReadCsv( myGame.PlayerCompany, "../../../Data/data.csv" );
 
 			Assert.That( list[ 0 ].Difficulty == 1.0 );
 			Assert.That( list[ 0 ].Earnings == 2000 );

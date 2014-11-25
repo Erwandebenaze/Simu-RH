@@ -23,7 +23,8 @@ namespace SRH.Core
         readonly int _xpPerPerson;
         bool _activated;
         readonly Dictionary<Skill, int> _skillsRequired;
-        public Dictionary<Employee, Skill> _employeesAffectedWithSkill;
+        Dictionary<Employee, Skill> _employeesAffectedWithSkill;
+        MyCompany _myComp;
 
         #region Getter
         public string Name
@@ -98,13 +99,15 @@ namespace SRH.Core
         /// <param name="numberOfWorkers"> Superior than 1</param>
         /// <param name="earnings"> Superior than 100</param>
         /// <param name="duration">In month. Superior than 1 month</param>
-        public Project(string name, float difficulty, int numberOfWorkers, int earnings, Dictionary<Skill,int> skillsRequired, int duration = 30)
+        internal Project(MyCompany myComp, string name, float difficulty, int numberOfWorkers, int earnings, Dictionary<Skill,int> skillsRequired, int duration = 30)
         {
             if( String.IsNullOrWhiteSpace( name ) ) throw new ArgumentNullException( "name" );
             if( difficulty <= 0 ) throw new ArgumentException( "difficulty must be superior than 0." );
             if( numberOfWorkers <= 1 ) throw new ArgumentException( "numberOfWorkers must be superior than 1." );
             if( earnings <= 100 ) throw new ArgumentException( "earnings must be superior than 100." );
             if( duration <= 1 ) throw new ArgumentException( "duration must be superior than 0." );
+            if( myComp == null ) throw new ArgumentException( "myComp == null." );
+            _myComp = myComp;
             _name = name;
             _difficulty = difficulty;
             _numberOfWorkers = numberOfWorkers;
@@ -115,29 +118,14 @@ namespace SRH.Core
             _xpPerPerson = 10;
 			_skillsRequired = skillsRequired;
             _employeesAffectedWithSkill = new Dictionary<Employee, Skill>();
-            GenerateSkillsRequired(numberOfWorkers);
+            GenerateSkillsRequired(numberOfWorkers );
+            // TODO : Lier le game aux projets. Il faut connecter les différents projets entre eux
+            // Constructeur internal, objet "parent" en param pour retrouver le contexte dans lequel
+            // il est appelé.
+            // Le projet pourrait ainsi savoir les meilleurs employees disponibles avec telle compétence
+            // Si on connecte nos neurones on pourrait même dire qui il faut recruter pour accomplir le projet
+            
         }
-
-		// FOR TESTS ONLY (to remove when tests are fixed)
-        public Project( string name, float difficulty, int numberOfWorkers, int earnings, int duration = 30 )
-        {
-            if( String.IsNullOrWhiteSpace( name ) ) throw new ArgumentNullException( "name" );
-            if( difficulty <= 0 ) throw new ArgumentException( "difficulty must be superior than 0." );
-            if( numberOfWorkers <= 1 ) throw new ArgumentException( "numberOfWorkers must be superior than 1." );
-            if( earnings <= 100 ) throw new ArgumentException( "earnings must be superior than 100." );
-            if( duration <= 1 ) throw new ArgumentException( "duration must be superior than 0." );
-            _name = name;
-            _difficulty = difficulty;
-            _numberOfWorkers = numberOfWorkers;
-            _earnings = earnings;
-            _duration = duration;
-            _activated = false;
-            _xpPerCompany = 45;
-            _xpPerPerson = 10;
-            _employeesAffectedWithSkill = new Dictionary<Employee, Skill>();
-            GenerateSkillsRequired(numberOfWorkers);
-        }
-
         
         /// <summary>
         /// For the moment, add 2 skills Development and ProjMangment. 
@@ -190,7 +178,7 @@ namespace SRH.Core
 			//if( _skillsRequired.Count == 0 )
 			//{
                 Activated = true;
-                _begginingDate = GameTime.TimeOfGame;
+                _begginingDate = _myComp.MyGame.TimeGame.CurrentTimeOfGame;
             //}
 			////else
 			//{

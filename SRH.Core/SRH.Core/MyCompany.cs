@@ -9,21 +9,23 @@ namespace SRH.Core
     [Serializable]
 	public class MyCompany
 	{
-		protected string _name;
-		protected int _wealth;
-		protected int _maxEmployees;
-		protected readonly List<Employee> _employees;
+		readonly string _name;
+        int _wealth;
+        int _maxEmployees;
+		readonly List<Employee> _employees;
         List<Project> _possibleCompanyProjects;
-        List<Project> _projects;
+        readonly List<Project> _projects;
+        readonly Game _myGame;
+        readonly Level _companyLevel;
+        double _maxProjectDifficulty;
 
-		Level _companyLevel;
-		double _maxProjectDifficulty;
 
-		public MyCompany( string Name )
+		internal MyCompany( Game game, string name )
         {
-			if( String.IsNullOrWhiteSpace( Name ) ) throw new ArgumentNullException( "The company name cannot be null or a whitespace" );
+			if( String.IsNullOrWhiteSpace( name ) ) throw new ArgumentNullException( "The company name cannot be null or a whitespace" );
 			//TODO : Check if the name is already existing (saved)
-			_name = Name;
+			_name = name;
+            _myGame = game;
 			_employees = new List<Employee>();
             _wealth = 15000;
 			_companyLevel = new Level( this );
@@ -45,7 +47,10 @@ namespace SRH.Core
         public int MaxEmployees
         {
             get { return _maxEmployees; }
-            private set { _maxEmployees = value; }
+        }
+        public Game MyGame
+        {
+            get { return _myGame; }
         }
         public List<Project> Projects
         {
@@ -62,7 +67,6 @@ namespace SRH.Core
         public double MaxProjectDifficulty
         {
             get { return _maxProjectDifficulty; }
-            private set { _maxProjectDifficulty = value; }
         }
         public List<Project> PossibleCompanyProjects
         {
@@ -79,7 +83,7 @@ namespace SRH.Core
 		/// </summary>
 		/// <param name="p">The Worker to add, it becomes an <see cref="Employee"/> when added</param>
 		/// <returns>Returns True if the <see cref="Employee"/> was added</returns>
-		public Employee AddEmployee( Person p )
+        public Employee AddEmployee( Person p )
 		{
 			Employee e = new Employee( p );
 			_employees.Add( e );
@@ -93,7 +97,7 @@ namespace SRH.Core
 		/// </summary>
 		/// <param name="e">The <see cref="Employee"/> to remove</param>
 		/// <returns>Returns True id the <see cref="Employee"/> was removes</returns>
-		public Person RemoveEmployee( Employee e )
+        public Person RemoveEmployee( Employee e )
 		{
 			_employees.Remove( e );
 			if( _employees.Exists( x => x.Equals( e ) ) )
@@ -104,7 +108,7 @@ namespace SRH.Core
 			return e.Worker;
 		}
 
-        public void MoveProject(Project p)
+        public void MoveProject( Project p )
         {
             if (p.Activated)
             {
@@ -115,28 +119,27 @@ namespace SRH.Core
                 _possibleCompanyProjects.Add( p );
                 _projects.Remove( p );
             }
-
         }
 
 		/// <summary>
 		/// Adjust the number of <see cref="MaxEmployees"/> and the <see cref="MaxDifficulty"/> of <see cref="MyCompany"/> depending on its <see cref="Level"/>
 		/// </summary>
-		public void AdjustValuesCompany()
+        public void AdjustValuesCompany()
         {
-			if( this.CompanyLevel.CurrentLevel == 1 ) this.MaxEmployees = 10;
-			this.MaxEmployees = 10 + ( 2 * ( this.CompanyLevel.CurrentLevel ) );
+			if( this.CompanyLevel.CurrentLevel == 1 ) _maxEmployees = 10;
+            _maxEmployees = 10 + (2 * (this.CompanyLevel.CurrentLevel));
 
-			if( this.CompanyLevel.CurrentLevel == 1 ) this.MaxProjectDifficulty = 1.0;
-			if( ( this.CompanyLevel.CurrentLevel +1 ) % 10 == 0 ) this.MaxProjectDifficulty += 0.5;
+			if( this.CompanyLevel.CurrentLevel == 1 ) _maxProjectDifficulty = 1.0;
+			if( ( this.CompanyLevel.CurrentLevel +1 ) % 10 == 0 ) _maxProjectDifficulty += 0.5;
         }
-           
+
         public void EndProjectIfItsFinish()
         {
             if (_projects.Count > 0 )
             {
                 foreach (Project p in _projects)
-                { 
-                    if (GameTime.intervalOfTimeInDays( p.BegginingDate ) == p.Duration)
+                {
+                    if( _myGame.TimeGame.intervalOfTimeInDays( p.BegginingDate ) == p.Duration )
                     {
                         EndAProject( p );
                         p.TimeLeft = 0;
@@ -144,21 +147,21 @@ namespace SRH.Core
                         break;
                     } else
                     {
-                        p.TimeSpent = GameTime.intervalOfTimeInDays( p.BegginingDate );
+                        p.TimeSpent = _myGame.TimeGame.intervalOfTimeInDays( p.BegginingDate );
                         p.TimeLeft = p.Duration - p.TimeSpent;            
                     }
                 }
             }
         }
 
-        public void EndAProject( Project p)
+        public void EndAProject( Project p )
         {
             p.StopProject();
             Wealth += p.Earnings;
             _companyLevel.IncreaseXp( p.XpPerCompany, this );
-            foreach (Employee e in p._employeesAffectedWithSkill.Keys)
+            foreach( Employee e in p.EmployeesAffectedWithSkill.Keys )
             {
-                foreach (Skill s in p._employeesAffectedWithSkill.Values)
+                foreach( Skill s in p.EmployeesAffectedWithSkill.Values )
                 {
                     s.Level.IncreaseXp(p.XpPerPerson);
                 }
@@ -174,7 +177,7 @@ namespace SRH.Core
 
         public Project StopAProject( Project p )
         {
-            PossibleCompanyProjects.Add( p );
+            _possibleCompanyProjects.Add( p );
             _projects.Remove( p );
             p.StopProject();
             return p;
@@ -182,7 +185,7 @@ namespace SRH.Core
 
 		List<Project> GetPossibleCompanyProjects()
 		{
-			List<Project> possible = Game.PossibleProjects;
+			List<Project> possible = (List<Project>)_myGame.PossibleProjects;
 			List<Project> finalList = new List<Project>();
 			foreach( Project p in possible )
 			{

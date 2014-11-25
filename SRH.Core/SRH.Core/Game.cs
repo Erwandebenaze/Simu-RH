@@ -9,28 +9,26 @@ namespace SRH.Core
     [Serializable]
 	public class Game
 	{
-        LaborMarket _market;
-        MyCompany _playerCompany;
-        List<Competitor> _competitors;
-        GameTime _timeGame;
+        readonly LaborMarket _market;
+        readonly MyCompany _playerCompany;
+        readonly List<Competitor> _competitors;
+        readonly GameTime _timeGame;
 
-		static Random _randomNumberGenerator;
-		static int _randomSerie;
-        static List<Project> _possibleProjects;
+        readonly Random _randomNumberGenerator;
+        readonly List<Project> _possibleProjects;
         
 
 		public Game( int seed, string companyName )
 		{
             _randomNumberGenerator = new Random( seed );
-			_market = new LaborMarket();
+			_market = new LaborMarket(this);
 			_competitors = new List<Competitor>();
-			_randomSerie = _randomNumberGenerator.Next();
 
-			CSV csvImport = new CSV();
-			_possibleProjects = csvImport.ReadCsv( "../../../Data/data.csv" );
+            _playerCompany = new MyCompany( this, companyName );
+            CSV csvImport = new CSV();
+			_possibleProjects = csvImport.ReadCsv(_playerCompany, "../../../Data/data.csv" );
 
-			_playerCompany = new MyCompany( companyName );
-            _timeGame = new GameTime();
+            _timeGame = new GameTime(this);
 		}
 
         #region Getters Setters
@@ -48,30 +46,24 @@ namespace SRH.Core
             get { return _playerCompany; }
         }
 
-        internal List<Competitor> Competitors
+        public IReadOnlyList<Competitor> Competitors
         {
             get { return _competitors; }
-        }
-        public static int RandomSerie
-        {
-            get { return _randomSerie; }
         }
 
         /// <summary>
         /// Static method to get a <see cref="RandomGenerator"/>
         /// </summary>
         /// <returns>A static instance of <see cref="RandomGenerator"/></returns>
-		internal static RandomGenerator GetRandomGenerator()
+		internal RandomGenerator GetRandomGenerator()
 		{
 			return new RandomGenerator( _randomNumberGenerator );
 		}
 
-		internal static List<Project> PossibleProjects
+        internal IReadOnlyList<Project> PossibleProjects
 		{
 			get { return _possibleProjects; }
 		}
-
-         
         #endregion
         public void SaveGame()
         {

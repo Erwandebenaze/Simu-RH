@@ -7,15 +7,16 @@ using System.Threading.Tasks;
 namespace SRH.Core
 {
     [Serializable]
-		public class Helper
+    public class Helper
 		{
 			RandomGenerator _randomPersonGenerator;
 			LaborMarket _lb;
 
-			public Helper( LaborMarket Lb)
+			public Helper( LaborMarket lb)
 			{
-				_randomPersonGenerator = Game.GetRandomGenerator();
-				_lb = Lb;
+                _randomPersonGenerator = lb.Game.GetRandomGenerator();
+                // TODO : Enlever gamegenerator static
+				_lb = lb;
 			}
 
 			/// <summary>

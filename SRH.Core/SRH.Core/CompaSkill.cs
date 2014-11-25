@@ -9,11 +9,11 @@ namespace SRH.Core
     [Serializable]
     public class CompaSkill : Skill
     {
-		public CompaSkill( string skillName, int startLevel = 1 )
+        internal CompaSkill( string skillName, int startLevel = 1 )
 			: base( skillName, startLevel )
 		{
 		}
-		public enum SkillName
+        public enum SkillName
 		{
 			SalesRep, // *Commercial*, increase 20 projects earnings.
 			HumansRessources, // *Ressources humaines*, descrease recruting and laying off cost.

@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 namespace SRH.Core
 {
     [Serializable]
-    internal class Competitor : MyCompany
+    public class Competitor
     {
 
-		internal Competitor( string Name ) : base ( Name )
-		{
-		}
+        //internal Competitor( string Name ) : base ( Name )
+        //{
+        //}
 		
     }
 }

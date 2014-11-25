@@ -14,7 +14,7 @@ namespace SRH.Core
         int _currentLevel;
         private bool _skill;
 
-        public Level( Skill s )
+        internal Level( Skill s )
         {
             // TODO : Trouver le moyen de savoir qui appelle le constructeur pour savoir si c'est la company ou une skill.
 			_currentXp = 0;
@@ -45,12 +45,12 @@ namespace SRH.Core
             set { _currentLevel = value; }
         }
 
-		public int LastXpRequired
+        public int LastXpRequired
 		{
 			get { return FixNextXpRequired( (_currentLevel - 1) ); }
 		}
 
-        public void IncreaseXp( int xp, MyCompany mc = null) 
+        public void IncreaseXp( int xp, MyCompany mc = null ) 
         {
             #region Exceptions
             if( xp < 1 ) throw new ArgumentException( "Xp must be positive" );

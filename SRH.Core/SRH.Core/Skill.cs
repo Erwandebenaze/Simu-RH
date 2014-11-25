@@ -13,7 +13,7 @@ namespace SRH.Core
         protected int _upgradePrice;
         protected int _timeToUpgrade;
 
-		public Skill( string skillName, int startLevel = 1 )
+        internal Skill( string skillName, int startLevel = 1 )
 		{
 			_level = new Level( this );
 			_skillName = skillName;

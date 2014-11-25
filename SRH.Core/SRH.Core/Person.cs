@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace SRH.Core
 {
     [Serializable]
-	public class Person
+    public class Person
 	{
 
 		string _firstName;

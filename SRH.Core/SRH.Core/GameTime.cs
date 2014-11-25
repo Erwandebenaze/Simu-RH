@@ -9,34 +9,35 @@ namespace SRH.Core
     [Serializable]
     public class GameTime
     {
-        static DateTime _timeOfGame;
+        DateTime _currentTimeOfGame;
         DayOfWeek _dayOfTheWeek;
         string _frenchTranslationDay;
+        Game _myGame;
 
-      
 
-        public GameTime()
+        internal GameTime( Game myGame )
         {
-            _timeOfGame = new DateTime(2015,01,26);
-            _dayOfTheWeek = _timeOfGame.DayOfWeek; 
+            _myGame = myGame;
+            _currentTimeOfGame = new DateTime(2015,01,26);
+            _dayOfTheWeek = _currentTimeOfGame.DayOfWeek; 
         }
-        public static DateTime TimeOfGame
+        public DateTime CurrentTimeOfGame
         {
-            get { return _timeOfGame.Date; }
+            get { return _currentTimeOfGame; }
         }
         public string FrenchDayOfWeek
         {
             get
             {
-                if( _timeOfGame.DayOfWeek == DayOfWeek.Monday )
+                if( _currentTimeOfGame.DayOfWeek == DayOfWeek.Monday )
                     _frenchTranslationDay = "Lundi";
-                else if( _timeOfGame.DayOfWeek == DayOfWeek.Tuesday )
+                else if( _currentTimeOfGame.DayOfWeek == DayOfWeek.Tuesday )
                     _frenchTranslationDay = "Mardi";
-                else if( _timeOfGame.DayOfWeek == DayOfWeek.Wednesday )
+                else if( _currentTimeOfGame.DayOfWeek == DayOfWeek.Wednesday )
                     _frenchTranslationDay = "Mercredi";
-                else if( _timeOfGame.DayOfWeek == DayOfWeek.Thursday )
+                else if( _currentTimeOfGame.DayOfWeek == DayOfWeek.Thursday )
                     _frenchTranslationDay = "Jeudi";
-                else if( _timeOfGame.DayOfWeek == DayOfWeek.Friday )
+                else if( _currentTimeOfGame.DayOfWeek == DayOfWeek.Friday )
                     _frenchTranslationDay = "Vendredi";
 
                 return _frenchTranslationDay;
@@ -45,15 +46,15 @@ namespace SRH.Core
 
         public void newDay()
         {
-            _timeOfGame = _timeOfGame.AddDays( 1 );
+            _currentTimeOfGame = _currentTimeOfGame.AddDays( 1 );
             
-            if( _timeOfGame.DayOfWeek == DayOfWeek.Saturday )
+            if( _currentTimeOfGame.DayOfWeek == DayOfWeek.Saturday )
             {
-                _timeOfGame = _timeOfGame.AddDays( 2 );
+                _currentTimeOfGame = _currentTimeOfGame.AddDays( 2 );
             }
         }
 
-        static public int intervalOfTimeInDays( DateTime? beginningDateNullable )
+        public int intervalOfTimeInDays( DateTime? beginningDateNullable )
         {
             //TimeSpan ts = new TimeSpan();
             //ts = _timeOfGame - beginningDate;
@@ -63,7 +64,7 @@ namespace SRH.Core
                 return 0;
             }
             DateTime beginningDate = (DateTime)beginningDateNullable;
-            while (beginningDate < _timeOfGame)
+            while (beginningDate < _currentTimeOfGame)
             {
                 if( IsWorkingDay( beginningDate ) )
                 {
