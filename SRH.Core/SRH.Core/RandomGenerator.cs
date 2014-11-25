@@ -14,7 +14,7 @@ namespace SRH.Core
 		readonly List<string> _lastNames;
 		Random _randomNumberGenerator;
 
-		public RandomGenerator ( Random randomNumberGenerator )
+        internal RandomGenerator( Random randomNumberGenerator )
 		{
             _firstNames = new List<string>();
             _lastNames = new List<string>();

@@ -25,7 +25,7 @@ namespace SRH.Core.Tests
         {
             Game myGame = new Game( 1, "Dannone" );
             GameTime myGameTime = new GameTime( myGame );
-            Assert.That( myGame.TimeGame.TimeOfGame == new DateTime( 2015, 01, 26 ) );
+            Assert.That( myGame.TimeGame.CurrentTimeOfGame == new DateTime( 2015, 01, 26 ) );
         }
 
         [Test]
@@ -41,7 +41,7 @@ namespace SRH.Core.Tests
         {
             Game myGame = new Game( 1, "Dannone" );
             myGame.TimeGame.newDay();
-            Assert.That( myGame.TimeGame.TimeOfGame == new DateTime( 2015, 01, 27 ) );
+            Assert.That( myGame.TimeGame.CurrentTimeOfGame == new DateTime( 2015, 01, 27 ) );
         }
 
         [Test]

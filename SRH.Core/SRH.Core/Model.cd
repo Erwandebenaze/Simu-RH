@@ -10,6 +10,23 @@
       <Field Name="_randomNumberGenerator" Hidden="true" />
       <Field Name="_timeGame" Hidden="true" />
     </Members>
+    <AssociationLine Name="Market" Type="SRH.Core.LaborMarket" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="3.5" Y="1.986" />
+        <Point X="4.117" Y="1.986" />
+        <Point X="4.117" Y="3.558" />
+        <Point X="4.125" Y="3.558" />
+        <Point X="4.125" Y="3.75" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true" ManuallySized="true">
+        <Position X="-0.149" Y="0.903" Height="0.182" Width="0.667" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="PossibleProjects" Type="SRH.Core.Project">
+      <MemberNameLabel ManuallyPlaced="true" ManuallySized="true">
+        <Position X="0.628" Y="0.06" Height="0.182" Width="1.217" />
+      </MemberNameLabel>
+    </AssociationLine>
     <TypeIdentifier>
       <HashCode>AQAAAAAAIAEQAAgAAAAgAQABAAAAACEAAAAAAAIgAQA=</HashCode>
       <FileName>Game.cs</FileName>
@@ -17,10 +34,14 @@
     <ShowAsAssociation>
       <Property Name="PlayerCompany" />
       <Property Name="Market" />
+      <Property Name="TimeGame" />
     </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="PossibleProjects" />
+    </ShowAsCollectionAssociation>
   </Class>
   <Class Name="SRH.Core.MyCompany">
-    <Position X="7.25" Y="0.5" Width="2.75" />
+    <Position X="7.5" Y="3.25" Width="2.75" />
     <Members>
       <Field Name="_companyLevel" Hidden="true" />
       <Field Name="_employees" Hidden="true" />
@@ -38,15 +59,67 @@
     </TypeIdentifier>
   </Class>
   <Class Name="SRH.Core.LaborMarket">
-    <Position X="4" Y="1.25" Width="3" />
+    <Position X="3.5" Y="3.75" Width="3" />
     <Members>
       <Field Name="_game" Hidden="true" />
       <Field Name="_joblessPersons" Hidden="true" />
       <Field Name="_personMaker" Hidden="true" />
     </Members>
+    <AssociationLine Name="Game" Type="SRH.Core.Game" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="3.938" Y="3.75" />
+        <Point X="3.938" Y="2.125" />
+        <Point X="3.5" Y="2.125" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.115" Y="-0.507" />
+      </MemberNameLabel>
+    </AssociationLine>
     <TypeIdentifier>
       <HashCode>QAAAAAAAAACAAAAAACAAAAgAAAiAAAAAAAAAAAAAAEQ=</HashCode>
       <FileName>LaborMarket.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Game" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="SRH.Core.GameTime">
+    <Position X="0.5" Y="3.5" Width="1.5" />
+    <Members>
+      <Field Name="_currentTimeOfGame" Hidden="true" />
+      <Field Name="_dayOfTheWeek" Hidden="true" />
+      <Field Name="_frenchTranslationDay" Hidden="true" />
+      <Field Name="_myGame" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>ABAAACAAAAACAAIAEAAAAAAgAgAAAAAAQAAAAAAAAAg=</HashCode>
+      <FileName>GameTime.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SRH.Core.Project">
+    <Position X="5.25" Y="0.5" Width="1.5" />
+    <Members>
+      <Field Name="_activated" Hidden="true" />
+      <Field Name="_begginingDate" Hidden="true" />
+      <Field Name="_difficulty" Hidden="true" />
+      <Field Name="_duration" Hidden="true" />
+      <Field Name="_earnings" Hidden="true" />
+      <Field Name="_employeesAffectedWithSkill" Hidden="true" />
+      <Field Name="_myComp" Hidden="true" />
+      <Field Name="_name" Hidden="true" />
+      <Field Name="_numberOfWorkers" Hidden="true" />
+      <Field Name="_skillsRequired" Hidden="true" />
+      <Field Name="_timeLeft" Hidden="true" />
+      <Field Name="_timeSpent" Hidden="true" />
+      <Field Name="_xpPerCompany" Hidden="true" />
+      <Field Name="_xpPerPerson" Hidden="true" />
+    </Members>
+    <Compartments>
+      <Compartment Name="Properties" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>CAgEJABBQAFCEQBAAhAAACQEAAAABIggxBAACEYBAAA=</HashCode>
+      <FileName>Project.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />

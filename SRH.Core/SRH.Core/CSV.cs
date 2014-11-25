@@ -8,7 +8,7 @@ using LumenWorks.Framework.IO.Csv;
 
 namespace SRH.Core
 {
-	public class CSV
+    internal class CSV
 	{
 		public List<Project> ReadCsv(MyCompany myComp, string path )
 		{

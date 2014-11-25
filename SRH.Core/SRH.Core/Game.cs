@@ -9,13 +9,13 @@ namespace SRH.Core
     [Serializable]
 	public class Game
 	{
-        LaborMarket _market;
-        MyCompany _playerCompany;
-        List<Competitor> _competitors;
-        GameTime _timeGame;
+        readonly LaborMarket _market;
+        readonly MyCompany _playerCompany;
+        readonly List<Competitor> _competitors;
+        readonly GameTime _timeGame;
 
-		Random _randomNumberGenerator;
-        List<Project> _possibleProjects;
+        readonly Random _randomNumberGenerator;
+        readonly List<Project> _possibleProjects;
         
 
 		public Game( int seed, string companyName )
@@ -60,12 +60,10 @@ namespace SRH.Core
 			return new RandomGenerator( _randomNumberGenerator );
 		}
 
-		internal List<Project> PossibleProjects
+        internal IReadOnlyList<Project> PossibleProjects
 		{
 			get { return _possibleProjects; }
 		}
-
-         
         #endregion
         public void SaveGame()
         {

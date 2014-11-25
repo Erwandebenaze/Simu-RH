@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 namespace SRH.Core
 {
     [Serializable]
-	public class LaborMarket
+    public class LaborMarket
 	{
 		List<Person> _joblessPersons;
 		Helper _personMaker;
         readonly Game _game;
 
-		public LaborMarket(Game myGame)
+        internal LaborMarket( Game myGame )
 		{
 			_joblessPersons = new List<Person>();
             _game = myGame;
@@ -27,7 +27,7 @@ namespace SRH.Core
 		}
 
 		#region Getters
-		public Helper PersonMaker
+        public Helper PersonMaker
 		{
 			get { return _personMaker; }
 		}
@@ -46,7 +46,7 @@ namespace SRH.Core
 		/// </summary>
 		/// <param name="p">The <see cref="Person"/>  to add</param>
 		/// <returns>Returns true if the <see cref="Person"/> is in the <see cref="LabourMarket"/></returns>
-		internal bool AddPerson(Person p)
+        public bool AddPerson( Person p )
 		{
 			_joblessPersons.Add( p );
 			return ( _joblessPersons.Exists( x => x.Equals( p ) ) );
@@ -57,7 +57,7 @@ namespace SRH.Core
 		/// </summary>
 		/// <param name="p">The <see cref="Person"/>  to remove</param>
 		/// <returns></returns>
-		internal bool RemovePerson(Person p)
+        public bool RemovePerson( Person p )
 		{
 			if ( !_joblessPersons.Exists( x => x.Equals( p ) ) ) throw new ArgumentException( "The Person to remove must be in the LabourMarket" );
 			_joblessPersons.Remove( p );

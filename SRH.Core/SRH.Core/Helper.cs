@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace SRH.Core
 {
     [Serializable]
-		public class Helper
+    public class Helper
 		{
 			RandomGenerator _randomPersonGenerator;
 			LaborMarket _lb;

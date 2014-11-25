@@ -42,7 +42,7 @@ namespace SRH.Interface
             _timeOfGame.newDay();
             _myGame.PlayerCompany.EndProjectIfItsFinish();
             ClearListsProjects();
-            _dateOfGame.Text = _myGame.TimeGame.TimeOfGame.ToString("d");
+            _dateOfGame.Text = _myGame.TimeGame.CurrentTimeOfGame.ToString("d");
             _day.Text = _timeOfGame.FrenchDayOfWeek;
         }
         static ListViewItem CreateListItemViewProjects( Project p )
@@ -100,7 +100,7 @@ namespace SRH.Interface
             get { return _myGame; }
         }
 
-        internal void LoadOrCreateGame(string name)
+        public void LoadOrCreateGame( string name )
         {
             try
             {
@@ -118,13 +118,13 @@ namespace SRH.Interface
             ShowOptions( false );
         }
 
-        internal void SaveGame( )
+        public void SaveGame()
         {
             if( _myGame == null ) throw new InvalidOperationException( "No CurrentGame to save!" );
             _myGame.SaveGame();
         }
 
-        internal void LoadGame(string game)
+        public void LoadGame( string game )
         {
             this.Refresh();
             _myGame = GameLoader.Load( game );
