@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Company.cs" />
     <Compile Include="Competitor.cs" />
     <Compile Include="CompaSkill.cs" />
     <Compile Include="CSV.cs" />

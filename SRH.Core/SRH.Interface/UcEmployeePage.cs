@@ -34,7 +34,7 @@ namespace SRH.Interface
             {
                 base.OnLoad( e );
 				_employees = GameContext.CurrentGame.PlayerCompany.Employees;
-				_joblessPersons = GameContext.CurrentGame.Market.JoblessPersons;
+				_joblessPersons = (List<Person>)GameContext.CurrentGame.Market.JoblessPersons;
 
                 PersonList.Items.AddRange( _joblessPersons.Select( p => CreatePerson( p ) ).ToArray() );
                 EmployeeList.Items.AddRange( _employees.Select( employee => CreateEmployee( employee ) ).ToArray() );
