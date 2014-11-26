@@ -42,7 +42,13 @@
             this.TimeLeft = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.splitContainer3 = new System.Windows.Forms.SplitContainer();
             this.listSkillsRequired = new System.Windows.Forms.ListView();
+            this.ProjectEmployeeName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.ProjectSkillRequired = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.ProjectLevelRecommanded = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.listSkillsAvailable = new System.Windows.Forms.ListView();
+            this.EmployeeName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.EmployeeSkill = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.EmployeeLevel = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this._startOrStopProject = new System.Windows.Forms.Button();
             this._numberOfWorkers = new System.Windows.Forms.Label();
             this.NumberOfWorkers = new System.Windows.Forms.Label();
@@ -53,12 +59,6 @@
             this._difficulty = new System.Windows.Forms.Label();
             this.Difficulty = new System.Windows.Forms.Label();
             this._projectNameText = new System.Windows.Forms.Label();
-            this.ProjectEmployeeName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.ProjectSkillRequired = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.ProjectLevelRecommanded = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.EmployeeName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.EmployeeSkill = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.EmployeeLevel = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -232,6 +232,22 @@
             this.listSkillsRequired.TabIndex = 0;
             this.listSkillsRequired.UseCompatibleStateImageBehavior = false;
             this.listSkillsRequired.View = System.Windows.Forms.View.Details;
+            this.listSkillsRequired.SelectedIndexChanged += new System.EventHandler(this.listSkillsRequired_SelectedIndexChanged);
+            // 
+            // ProjectEmployeeName
+            // 
+            this.ProjectEmployeeName.Text = "Nom de l\'employée";
+            this.ProjectEmployeeName.Width = 154;
+            // 
+            // ProjectSkillRequired
+            // 
+            this.ProjectSkillRequired.Text = "Compétence";
+            this.ProjectSkillRequired.Width = 113;
+            // 
+            // ProjectLevelRecommanded
+            // 
+            this.ProjectLevelRecommanded.Text = "Niveau recommandé (réel)";
+            this.ProjectLevelRecommanded.Width = 205;
             // 
             // listSkillsAvailable
             // 
@@ -246,6 +262,21 @@
             this.listSkillsAvailable.TabIndex = 0;
             this.listSkillsAvailable.UseCompatibleStateImageBehavior = false;
             this.listSkillsAvailable.View = System.Windows.Forms.View.Details;
+            // 
+            // EmployeeName
+            // 
+            this.EmployeeName.Text = "Nom de l\'employée";
+            this.EmployeeName.Width = 152;
+            // 
+            // EmployeeSkill
+            // 
+            this.EmployeeSkill.Text = "Compétence";
+            this.EmployeeSkill.Width = 106;
+            // 
+            // EmployeeLevel
+            // 
+            this.EmployeeLevel.Text = "Niveau";
+            this.EmployeeLevel.Width = 106;
             // 
             // _startOrStopProject
             // 
@@ -352,36 +383,6 @@
             this._projectNameText.TabIndex = 2;
             this._projectNameText.Text = "Nom du projet";
             this._projectNameText.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // ProjectEmployeeName
-            // 
-            this.ProjectEmployeeName.Text = "Nom de l\'employée";
-            this.ProjectEmployeeName.Width = 154;
-            // 
-            // ProjectSkillRequired
-            // 
-            this.ProjectSkillRequired.Text = "Compétence";
-            this.ProjectSkillRequired.Width = 113;
-            // 
-            // ProjectLevelRecommanded
-            // 
-            this.ProjectLevelRecommanded.Text = "Niveau recommandé (réel)";
-            this.ProjectLevelRecommanded.Width = 205;
-            // 
-            // EmployeeName
-            // 
-            this.EmployeeName.Text = "Nom de l\'employée";
-            this.EmployeeName.Width = 152;
-            // 
-            // EmployeeSkill
-            // 
-            this.EmployeeSkill.Text = "Compétence";
-            this.EmployeeSkill.Width = 106;
-            // 
-            // EmployeeLevel
-            // 
-            this.EmployeeLevel.Text = "Niveau";
-            this.EmployeeLevel.Width = 106;
             // 
             // UcProjectPage
             // 
