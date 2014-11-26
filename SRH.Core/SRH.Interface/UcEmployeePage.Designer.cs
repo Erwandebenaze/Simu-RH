@@ -398,6 +398,7 @@
 			this.Margin = new System.Windows.Forms.Padding(2);
 			this.Name = "UcEmployeePage";
 			this.Size = new System.Drawing.Size(825, 515);
+			// this.Load += new System.EventHandler(this.UcEmployeePage_Load);
 			this.splitContainer1.Panel1.ResumeLayout(false);
 			this.splitContainer1.Panel2.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();

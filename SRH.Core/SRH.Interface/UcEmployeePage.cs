@@ -28,19 +28,24 @@ namespace SRH.Interface
             get { return (IGameContext)TopLevelControl; }
         }
 
-        protected override void OnLoad( EventArgs e )
-        {
-            if( this.IsInRuntimeMode() )
-            {
-                base.OnLoad( e );
-				_employees = GameContext.CurrentGame.PlayerCompany.Employees;
-				_joblessPersons = (List<Person>)GameContext.CurrentGame.Market.JoblessPersons;
+		protected override void OnLoad( EventArgs e )
+		{
+			if( this.IsInRuntimeMode() )
+			{
+				base.OnLoad( e );
+				LoadPage();
+			}
+		}
 
-                PersonList.Items.AddRange( _joblessPersons.Select( p => CreatePerson( p ) ).ToArray() );
-                EmployeeList.Items.AddRange( _employees.Select( employee => CreateEmployee( employee ) ).ToArray() );
-            }
+		internal void LoadPage()
+		{
+			_employees = GameContext.CurrentGame.PlayerCompany.Employees;
+			_joblessPersons = (List<Person>)GameContext.CurrentGame.Market.JoblessPersons;
 
-        }
+			PersonList.Items.AddRange( _joblessPersons.Select( p => CreatePerson( p ) ).ToArray() );
+			EmployeeList.Items.AddRange( _employees.Select( employee => CreateEmployee( employee ) ).ToArray() );
+			this.Refresh();
+		}
 
         static ListViewItem CreatePerson ( Person p )
         {

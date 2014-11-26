@@ -33,6 +33,11 @@ namespace SRH.Interface
             _timer.Start();
         }
 
+		void Reload()
+		{
+			this.ucEmployeePage.LoadPage();
+			// this.ucProjectPage.LoadPage();
+		}
 
         void _timer_Tick( object sender, EventArgs e )
         {
@@ -104,15 +109,15 @@ namespace SRH.Interface
         {
             try
             {
-                this.Refresh();
                 _myGame = GameLoader.Load( name );
                 MessageBox.Show( "La partie est déjà existante. Celle-ci a été chargée." );
-                this.Refresh();
+				Reload();
             }
             catch (System.IO.FileNotFoundException)
             {
                 MessageBox.Show( "La partie a été créé." );
                 _myGame = new Game( 1,name );
+				Reload();
             }
 
             ShowOptions( false );
@@ -126,9 +131,8 @@ namespace SRH.Interface
 
         public void LoadGame( string game )
         {
-            this.Refresh();
             _myGame = GameLoader.Load( game );
-            this.Refresh();
+			Reload();
         }
 
         public void ShowOptions(bool show = true)
@@ -198,5 +202,10 @@ namespace SRH.Interface
             _x10Button.Enabled = false;
             _timer.Interval = interval/10;
         }
+
+		private void SimuRH_Load()
+		{
+
+		}
     }
 }
