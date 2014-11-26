@@ -10,6 +10,7 @@ namespace SRH.Core
     {
         Level _level;
 		private string _skillName;
+		private string _frenchSkillName;
         protected int _upgradePrice;
         protected int _timeToUpgrade;
 
@@ -24,9 +25,64 @@ namespace SRH.Core
         {
             get { return _level;}
         }
-		public string SkillNameString
+
+		public string FrenchSkillName
 		{
-			get { return _skillName; }
+			get
+			{
+				switch( _skillName )
+				{
+					case "Development" :
+						_frenchSkillName = "Développement";
+						break;
+					case "Design" :
+						_frenchSkillName = "Design";
+						break;
+					case "ProjManagement" :
+						_frenchSkillName = "Management de projet";
+						break;
+					case "SystemsAnalyst" :
+						_frenchSkillName = "Analyste fonctionnel";
+						break;
+					case "TechSupport" :
+						_frenchSkillName = "Infrastucture";
+						break;
+					case "BetaTest" :
+						_frenchSkillName = "Béta testeur";
+						break;
+					case "DataBase" :
+						_frenchSkillName = "Base de données";
+						break;
+					case "GUInterface" :
+						_frenchSkillName = "Interface graphique";
+						break;
+					case "WebDevelopment" :
+						_frenchSkillName = "Développement web";
+						break;
+					case "Networking" :
+						_frenchSkillName = "Réseau";
+						break;
+					case "Security" :
+						_frenchSkillName = "Sécurité";
+						break;
+					case "SalesRep" :
+						_frenchSkillName = "Commercial";
+						break;
+					case "HumansRessources" :
+						_frenchSkillName = "Ressources humaines";
+						break;
+					case "ProjDirection" :
+						_frenchSkillName = "Directeur de projets";
+						break;
+					case "ContractManagement" :
+						_frenchSkillName = "Gestion de contrat";
+						break;
+					default :
+						_frenchSkillName = "Animation";
+						break;
+				}
+				return _frenchSkillName;
+			}
 		}
     }
 }

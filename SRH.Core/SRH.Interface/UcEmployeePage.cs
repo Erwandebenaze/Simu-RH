@@ -61,7 +61,7 @@ namespace SRH.Interface
 
 		static ListViewItem AddSkills( Skill s )
 		{
-			ListViewItem i = new ListViewItem( s.SkillNameString );
+			ListViewItem i = new ListViewItem( s.FrenchSkillName );
 			i.Tag = s;
 			i.SubItems.Add( new ListViewItem.ListViewSubItem( i, s.Level.CurrentLevel.ToString() ) );
 			return i;

@@ -16,7 +16,8 @@ namespace SRH.Core.Tests
         [Test]
         public void Create_company_with_name_and_Level()
         {
-            MyCompany c = new MyCompany(myGame, "SimuRH");
+			MyCompany c = new MyCompany( myGame, "SimuRH" );
+
             Assert.That( c.Name == "SimuRH" );
             Assert.That( c.CompanyLevel.CurrentLevel == 1 );
         }
@@ -145,7 +146,7 @@ namespace SRH.Core.Tests
 			ProjSkill ps = (ProjSkill)p.AddSkill( ProjSkill.SkillName.BetaTest, 3 );
 
 			Assert.That( p.Skills.ContainsValue( ps ) );
-			Assert.That( ps.SkillNameString == "BetaTest" );
+			Assert.That( ps.FrenchSkillName == "Béta testeur" );
 			Assert.That( ps.Level.CurrentLevel == 3 );
 		}
 
