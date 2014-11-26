@@ -9,7 +9,7 @@ namespace SRH.Core
     [Serializable]
     public class LaborMarket
 	{
-		List<Person> _joblessPersons;
+		readonly List<Person> _joblessPersons;
         readonly Game _game;
         RandomGenerator _random;
 
@@ -22,8 +22,7 @@ namespace SRH.Core
 			for( int i = 0; i < 100; i++ )
 			{
 				Person p = _random.GetRandomPerson(this, 18, 60);
-
-				if( !( this.AddPerson( p ) ) ) throw new Exception( "A person wasn't added proprely to LoborMarket." );
+				if( !( this.AddPerson( p ) ) ) throw new Exception( "A person wasn't added proprely to LaborMarket." );
 			}
 		}
 

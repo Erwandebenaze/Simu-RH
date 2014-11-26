@@ -13,7 +13,7 @@ namespace SRH.Interface
 {
     public partial class UcEmployeePage : UserControl
     {
-        List<Person> _joblessPersons;
+        IReadOnlyList<Person> _joblessPersons;
         List<Employee> _employees;
         Person _currentPerson;
 		Employee _currentEmployee;

@@ -80,21 +80,6 @@ namespace SRH.Core
 		} 
 		#endregion
 
-		///// <summary>
-		///// Adds a <see cref="Skill"/> to the <see cref="Person"/>
-		///// </summary>
-		///// <typeparam name="T">The type of <see cref="Skill"/>, <see cref="ProjSkill"/> or <see cref="CompaSkill"/></typeparam>
-		///// <param name="skillName">The name of the <see cref="Skill"/></param>
-		///// <returns>Returns the new <see cref="Skill"/></returns>
-		//public T AddSkill<T>( string skillName ) where T : Skill, new()
-		//{
-		//	T s = new T();
-		//	s.Initialize( skillName );
-		//	Skills.Add( skillName, s );
-
-		//	return s;
-		//}
-
 		/// <summary>
 		/// Adds a <see cref="ProjSkill"/> to the Person's skills List
 		/// </summary>

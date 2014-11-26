@@ -74,20 +74,23 @@ namespace SRH.Core.Tests
         public void Add_a_Person_to_LabourMarket()
         {
             Game myGame = new Game( 1, "SimuRH" );
-            Person p = myGame.Market.PersonMaker.CreatePerson( 18, 60 );
+			Person p = new Person( myGame.Market, "André", "LeGéant", 30 );
 
-            Assert.That( p.Age >= 18 && p.Age <= 60 );
-            Assert.That( myGame.Market.AddPerson( p ) );
+			bool success = myGame.Market.AddPerson( p );
+
+            Assert.That( p.Age == 30 );
+            Assert.That( success );
             Assert.That( myGame.Market.JoblessPersons.Contains( p ) );
         }
+
 
         [Test]
         public void Add_employee_to_mycompany()
         {
             Game myGame = new Game( 1, "Danone" );
-
-            Person p = myGame.Market.PersonMaker.CreatePerson( 18, 60 );
+			Person p = new Person(myGame.Market, "André", "LeGéant", 50);
             myGame.Market.AddPerson( p );
+			
 			Employee e = myGame.PlayerCompany.AddEmployee( p );
 
 			Assert.That( e.Worker.LastName == p.LastName );
@@ -106,9 +109,9 @@ namespace SRH.Core.Tests
         public void Load_game()
         {
             Game myGame = GameLoader.Load( "Danone" );
+			Person p = new Person( myGame.Market, "André", "LeGéant", 50 );
+			myGame.Market.AddPerson( p );
 
-            Person p = myGame.Market.PersonMaker.CreatePerson( 18, 60 );
-            myGame.Market.AddPerson( p );
 			Employee e = myGame.PlayerCompany.AddEmployee( p );
 
 			Assert.That( e.Worker.LastName == p.LastName );
@@ -154,7 +157,9 @@ namespace SRH.Core.Tests
 		public void A_randomly_created_Person_has_2_random_skills()
 		{
 			Game myGame = new Game( 1, "Simu\'RH" );
-			Person p = myGame.Market.PersonMaker.CreatePerson( 18, 60 );
+
+			RandomGenerator random = myGame.GetRandomGenerator();
+			Person p = random.GetRandomPerson(myGame.Market, 18, 60);
 
 			Assert.That( p.Skills.Count == 2 );
 		}
