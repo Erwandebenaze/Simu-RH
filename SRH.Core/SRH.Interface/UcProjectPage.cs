@@ -42,18 +42,21 @@ namespace SRH.Interface
             if( this.IsInRuntimeMode() )
             {
                 base.OnLoad( e );
-                _projects = GameContext.CurrentGame.PlayerCompany.Projects;
-                _possibleProjects = GameContext.CurrentGame.PlayerCompany.PossibleCompanyProjects;
-                //_projectNameText.Text = "";
-
-                //list.Add( new Project() { ProjectName = "titi", Duration = "trois semaines", Earnings = "trois cents", Level = "****" } );
-
-                listPossibleProjects.Items.AddRange( PossibleProjects.Select( p => CreateListItemViewProjects( p ) ).ToArray() );
-                listCurrentProjects.Items.AddRange( Projects.Select( p => CreateListItemViewProjects( p ) ).ToArray() );
-
-                // TODO : Ajouter la liste pour les projets en cours lorsque le temps sera définis.
+				LoadPage();
             }
         }
+		internal void LoadPage()
+		{
+			_projects = GameContext.CurrentGame.PlayerCompany.Projects;
+			_possibleProjects = GameContext.CurrentGame.PlayerCompany.PossibleCompanyProjects;
+
+			listPossibleProjects.Items.Clear();
+			listCurrentProjects.Items.Clear();
+			listPossibleProjects.Items.AddRange( PossibleProjects.Select( p => CreateListItemViewProjects( p ) ).ToArray() );
+			listCurrentProjects.Items.AddRange( Projects.Select( p => CreateListItemViewProjects( p ) ).ToArray() );
+			// TODO : Ajouter la liste pour les projets en cours lorsque le temps sera définis.
+			// TODO : si un projet était en cours, ne pas le loader de nouveau dans la liste des projets possibles
+		}
 
         static ListViewItem CreateListItemViewProjects( Project p )
         {

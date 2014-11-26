@@ -36,7 +36,7 @@ namespace SRH.Interface
 		void Reload()
 		{
 			this.ucEmployeePage.LoadPage();
-			// this.ucProjectPage.LoadPage();
+			this.ucProjectPage.LoadPage();
 		}
 
         void _timer_Tick( object sender, EventArgs e )
@@ -75,7 +75,7 @@ namespace SRH.Interface
 		{
 			string companyCurrentXp = CurrentGame.PlayerCompany.CompanyLevel.CurrentXp.ToString();
 			string companyNextXP = CurrentGame.PlayerCompany.CompanyLevel.XpRequired.ToString();
-			companyExperience.Text = companyCurrentXp + " / " + companyNextXP;
+			companyExperience.Text = companyCurrentXp + " / " + companyNextXP +" Exp";
 			companyExperience.Visible = true;
 		}
 

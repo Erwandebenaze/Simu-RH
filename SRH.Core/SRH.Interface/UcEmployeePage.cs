@@ -42,9 +42,11 @@ namespace SRH.Interface
 			_employees = GameContext.CurrentGame.PlayerCompany.Employees;
 			_joblessPersons = (List<Person>)GameContext.CurrentGame.Market.JoblessPersons;
 
+			PersonList.Items.Clear();
+			EmployeeList.Items.Clear();
 			PersonList.Items.AddRange( _joblessPersons.Select( p => CreatePerson( p ) ).ToArray() );
 			EmployeeList.Items.AddRange( _employees.Select( employee => CreateEmployee( employee ) ).ToArray() );
-			this.Refresh();
+			
 		}
 
         static ListViewItem CreatePerson ( Person p )
