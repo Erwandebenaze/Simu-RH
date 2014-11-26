@@ -8,7 +8,9 @@ namespace SRH.Core
     [Serializable]
     public class Employee
     {
-		Person _worker;
+        Person _worker;
+        readonly MyCompany _myComp;
+
 
         /// <summary>
 		/// Creates an <see cref="Employee"/>
@@ -16,9 +18,10 @@ namespace SRH.Core
         /// <param name="name"></param>
 		/// <param name="firstName"></param>
 		/// <param name="age">Cannot inferior to 18 or superiror to 62</param>
-        public Employee( Person Worker )
+        internal Employee(MyCompany myComp, Person Worker )
         {
             //exeptions
+            _myComp = myComp;
 			_worker = Worker;
         }
 
@@ -26,7 +29,11 @@ namespace SRH.Core
 		public Person Worker
 		{
 			get { return _worker; }
-		} 
+		}
+        public MyCompany MyComp
+        {
+            get { return _myComp; }
+        }
 		#endregion
         public bool Training()
         {

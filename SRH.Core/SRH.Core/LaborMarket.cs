@@ -10,32 +10,29 @@ namespace SRH.Core
     public class LaborMarket
 	{
 		List<Person> _joblessPersons;
-		Helper _personMaker;
         readonly Game _game;
+        RandomGenerator _random;
 
         internal LaborMarket( Game myGame )
 		{
 			_joblessPersons = new List<Person>();
             _game = myGame;
-            _personMaker = new Helper( this );
+            _random = Game.GetRandomGenerator();
 
 			for( int i = 0; i < 100; i++ )
 			{
-				Person p = _personMaker.CreatePerson( 18, 60 );
+				Person p = _random.GetRandomPerson(this, 18, 60);
+
 				if( !( this.AddPerson( p ) ) ) throw new Exception( "A person wasn't added proprely to LoborMarket." );
 			}
 		}
 
 		#region Getters
-        public Helper PersonMaker
-		{
-			get { return _personMaker; }
-		}
         public Game Game
         {
             get { return _game; }
         }
-        public List<Person> JoblessPersons
+        public IReadOnlyList<Person> JoblessPersons
 		{
 			get { return _joblessPersons; }
 		} 
