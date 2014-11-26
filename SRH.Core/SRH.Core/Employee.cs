@@ -9,7 +9,7 @@ namespace SRH.Core
     public class Employee
     {
         Person _worker;
-        readonly MyCompany _myComp;
+        readonly Company _comp;
 
 
         /// <summary>
@@ -18,10 +18,10 @@ namespace SRH.Core
         /// <param name="name"></param>
 		/// <param name="firstName"></param>
 		/// <param name="age">Cannot inferior to 18 or superiror to 62</param>
-        internal Employee(MyCompany myComp, Person Worker )
+        internal Employee(Company comp, Person Worker )
         {
             //exeptions
-            _myComp = myComp;
+            _comp = comp;
 			_worker = Worker;
         }
 
@@ -30,9 +30,9 @@ namespace SRH.Core
 		{
 			get { return _worker; }
 		}
-        public MyCompany MyComp
+        public Company Comp
         {
-            get { return _myComp; }
+            get { return _comp; }
         }
 		#endregion
         public bool Training()

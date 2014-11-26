@@ -7,47 +7,26 @@ using System.Threading.Tasks;
 namespace SRH.Core
 {
     [Serializable]
-	public class MyCompany
+	public class MyCompany : Company
 	{
-		readonly string _name;
-        int _wealth;
-        int _maxEmployees;
-		readonly List<Employee> _employees;
         List<Project> _possibleCompanyProjects;
         readonly List<Project> _projects;
         readonly Game _myGame;
-        readonly Level _companyLevel;
         double _maxProjectDifficulty;
+        readonly Level _companyLevel;
 
-
-		internal MyCompany( Game game, string name )
+		internal MyCompany( Game game, string name ) : base( name )
         {
 			if( String.IsNullOrWhiteSpace( name ) ) throw new ArgumentNullException( "The company name cannot be null or a whitespace" );
-			//TODO : Check if the name is already existing (saved)
-			_name = name;
             _myGame = game;
-			_employees = new List<Employee>();
             _wealth = 15000;
 			_companyLevel = new Level( this );
 			_maxProjectDifficulty = 1;
-			_maxEmployees = 10;
             _projects = new List<Project>();
         }
 
         #region Getters Setters
-        public string Name
-        {
-            get { return _name; }
-        }
-        public int Wealth
-        {
-            get { return _wealth; }
-            internal set { _wealth = value; }
-        }
-        public int MaxEmployees
-        {
-            get { return _maxEmployees; }
-        }
+
         public Game MyGame
         {
             get { return _myGame; }
@@ -56,10 +35,7 @@ namespace SRH.Core
         {
             get { return _projects; }
         }
-        public List<Employee> Employees
-        {
-            get { return _employees; }
-        }
+
         public Level CompanyLevel
         {
             get { return _companyLevel; }
@@ -77,37 +53,6 @@ namespace SRH.Core
 			}
         }
         #endregion
-
-		/// <summary>
-		/// Adds an <see cref="Employee"/> to <see cref="MyCompany"/>
-		/// </summary>
-		/// <param name="p">The Worker to add, it becomes an <see cref="Employee"/> when added</param>
-		/// <returns>Returns True if the <see cref="Employee"/> was added</returns>
-        public Employee AddEmployee( Person p )
-		{
-			Employee e = new Employee(this, p );
-			_employees.Add( e );
-			
-			if( !( _employees.Exists( x => x.Equals( e ) ) ) ) throw new InvalidOperationException("The Employee wasn't properly added to the List.");
-			if( !( p.Lb.RemovePerson( p ) ) ) throw new InvalidOperationException("The Person wasn't properly removed from the List.");
-			return e;
-		}
-		/// <summary>
-		/// Removes an <see cref="Employee"/> from <see cref="MyCompany"/>
-		/// </summary>
-		/// <param name="e">The <see cref="Employee"/> to remove</param>
-		/// <returns>Returns True id the <see cref="Employee"/> was removes</returns>
-        public Person RemoveEmployee( Employee e )
-		{
-			_employees.Remove( e );
-			if( _employees.Exists( x => x.Equals( e ) ) )
-				throw new InvalidOperationException( "The Employee was not removed properly from the List." );
-			if( !( e.Worker.Lb.AddPerson( e.Worker ) ) )
-				throw new InvalidOperationException( "The Person was not added properly to te List." );
-
-			return e.Worker;
-		}
-
         public void MoveProject( Project p )
         {
             if (p.Activated)
