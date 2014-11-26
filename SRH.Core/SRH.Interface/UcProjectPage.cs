@@ -17,6 +17,7 @@ namespace SRH.Interface
         List<Project> _possibleProjects;
         List<Project> _projects;
         Project _currentProj;
+        Skill _currentSkill;
 
         public List<Project> Projects
         {
@@ -64,16 +65,6 @@ namespace SRH.Interface
             return i;
         }
 
-        static ListViewItem CreateListItemViewSkillsRequired( Project p )
-        {
-            ListViewItem i = new ListViewItem( p.Name );
-            i.Tag = p;
-            //i.SubItems.Add( new ListViewItem.ListViewSubItem( i, p.SkillsRequired.Keys. ) );
-            i.SubItems.Add( new ListViewItem.ListViewSubItem( i, p.SkillsRequired.Values.ToString() ) );
-            //i.SubItems.Add( new ListViewItem.ListViewSubItem( i, p.Duration.ToString() ) );
-            return i;
-        }
-
 
 
         private void listPossibleProjects_SelectedIndexChanged( object sender, EventArgs e )
@@ -97,8 +88,19 @@ namespace SRH.Interface
                     //SelectedEmployeeSkillList.Items.AddRange( _currentEmployee.Worker.Skills.Values.Select( s => AddSkills( s ) ).ToArray() );
                     //int nbSkillsRequired = _currentProj.SkillsRequired.Count;
 					listSkillsRequired.Items.Clear();
-                    // listSkillsRequired.Items.AddRange( _currentProj.SkillsRequired.Select( p => CreateListItemViewSkillsRequired( _currentProj ) ).ToArray() );
+                    
+                    listSkillsRequired.Items.AddRange( _currentProj.SkillsRequired.Select( k => CreateListItemViewSkillsRequired( k.Key, k.Value ) ).ToArray() );
+
             } 
+        }
+
+        private ListViewItem CreateListItemViewSkillsRequired( Skill skill, int level )
+        {
+            ListViewItem i = new ListViewItem(skill.SkillNameEnglish + "("+level.ToString()+")");
+            i.Tag = skill;
+            i.SubItems.Add( new ListViewItem.ListViewSubItem( i, skill.SkillNameEnglish ) );
+            i.SubItems.Add( new ListViewItem.ListViewSubItem( i, level.ToString() ) );
+            return i;
         }
 
         private void listCurrentProjects_SelectedIndexChanged( object sender, EventArgs e )
@@ -164,6 +166,17 @@ namespace SRH.Interface
             var projectItem = listCurrentProjects.Items.Cast<ListViewItem>().Where( item => item.Tag == p ).Single();
             listCurrentProjects.Items.Remove( projectItem );
             listPossibleProjects.Items.Add( projectItem );
+        }
+
+        private void listSkillsRequired_SelectedIndexChanged( object sender, EventArgs e )
+        {
+            if( listSkillsRequired.SelectedItems.Count > 0 )
+            {
+                //listSkillsRequired.Items.AddRange( _currentProj.SkillsRequired.Select( k => CreateListItemViewSkillsRequired( k.Key, k.Value ) ).ToArray() );
+                _currentSkill = (Skill)listSkillsRequired.SelectedItems[listSkillsRequired.SelectedItems.Count - 1].Tag;
+                
+                //listSkillsAvailable.Items.AddRange( _currentSkill.)
+            }
         }
     }
 }

@@ -9,7 +9,13 @@ namespace SRH.Core
     public abstract class Skill
     {
         Level _level;
-		private string _skillName;
+        private string _skillName;
+
+        public string SkillNameEnglish
+        {
+            get { return _skillName; }
+            set { _skillName = value; }
+        }
 		private string _frenchSkillName;
         protected int _upgradePrice;
         protected int _timeToUpgrade;
