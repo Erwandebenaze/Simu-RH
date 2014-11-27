@@ -36,6 +36,7 @@
 			System.Windows.Forms.Label SelectedEmployeeTitle;
 			System.Windows.Forms.Label SelectedPersonSkillsTitle;
 			System.Windows.Forms.Label SelectedEmployeeSkillsTitle;
+			System.Windows.Forms.Label SelectedSkillTrainCostTitle;
 			this.PersonList = new System.Windows.Forms.ListView();
 			this.PersonLastnameHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.PersonFirstnameHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -47,6 +48,9 @@
 			this.EmployeeFirstNameHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.EmployeeAgeHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.splitContainer3 = new System.Windows.Forms.SplitContainer();
+			this.SelectedSkillToTrainCost = new System.Windows.Forms.Label();
+			this.SelectedEmployeeSkillsToTrain = new System.Windows.Forms.ComboBox();
+			this.SelectedEmployeeTrain = new System.Windows.Forms.Button();
 			this.SelectedEmployeeSkillList = new System.Windows.Forms.ListView();
 			this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -67,6 +71,7 @@
 			SelectedEmployeeTitle = new System.Windows.Forms.Label();
 			SelectedPersonSkillsTitle = new System.Windows.Forms.Label();
 			SelectedEmployeeSkillsTitle = new System.Windows.Forms.Label();
+			SelectedSkillTrainCostTitle = new System.Windows.Forms.Label();
 			((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
 			this.splitContainer1.Panel1.SuspendLayout();
 			this.splitContainer1.Panel2.SuspendLayout();
@@ -157,6 +162,15 @@
 			SelectedEmployeeSkillsTitle.TabIndex = 12;
 			SelectedEmployeeSkillsTitle.Text = "Compétences";
 			// 
+			// SelectedSkillTrainCostTitle
+			// 
+			SelectedSkillTrainCostTitle.AutoSize = true;
+			SelectedSkillTrainCostTitle.Location = new System.Drawing.Point(280, 43);
+			SelectedSkillTrainCostTitle.Name = "SelectedSkillTrainCostTitle";
+			SelectedSkillTrainCostTitle.Size = new System.Drawing.Size(38, 13);
+			SelectedSkillTrainCostTitle.TabIndex = 16;
+			SelectedSkillTrainCostTitle.Text = "Coût : ";
+			// 
 			// PersonList
 			// 
 			this.PersonList.Activation = System.Windows.Forms.ItemActivation.OneClick;
@@ -168,7 +182,7 @@
 			this.PersonList.Location = new System.Drawing.Point(0, 0);
 			this.PersonList.MultiSelect = false;
 			this.PersonList.Name = "PersonList";
-			this.PersonList.Size = new System.Drawing.Size(384, 273);
+			this.PersonList.Size = new System.Drawing.Size(419, 273);
 			this.PersonList.TabIndex = 0;
 			this.PersonList.UseCompatibleStateImageBehavior = false;
 			this.PersonList.View = System.Windows.Forms.View.Details;
@@ -199,8 +213,8 @@
 			// splitContainer1.Panel2
 			// 
 			this.splitContainer1.Panel2.Controls.Add(this.splitContainer3);
-			this.splitContainer1.Size = new System.Drawing.Size(825, 515);
-			this.splitContainer1.SplitterDistance = 384;
+			this.splitContainer1.Size = new System.Drawing.Size(902, 515);
+			this.splitContainer1.SplitterDistance = 419;
 			this.splitContainer1.TabIndex = 1;
 			// 
 			// splitContainer2
@@ -217,7 +231,7 @@
 			// splitContainer2.Panel2
 			// 
 			this.splitContainer2.Panel2.Controls.Add(this.PersonList);
-			this.splitContainer2.Size = new System.Drawing.Size(384, 515);
+			this.splitContainer2.Size = new System.Drawing.Size(419, 515);
 			this.splitContainer2.SplitterDistance = 238;
 			this.splitContainer2.TabIndex = 1;
 			// 
@@ -232,7 +246,7 @@
 			this.EmployeeList.Location = new System.Drawing.Point(0, 0);
 			this.EmployeeList.MultiSelect = false;
 			this.EmployeeList.Name = "EmployeeList";
-			this.EmployeeList.Size = new System.Drawing.Size(384, 238);
+			this.EmployeeList.Size = new System.Drawing.Size(419, 238);
 			this.EmployeeList.TabIndex = 1;
 			this.EmployeeList.UseCompatibleStateImageBehavior = false;
 			this.EmployeeList.View = System.Windows.Forms.View.Details;
@@ -260,6 +274,10 @@
 			// 
 			// splitContainer3.Panel1
 			// 
+			this.splitContainer3.Panel1.Controls.Add(this.SelectedSkillToTrainCost);
+			this.splitContainer3.Panel1.Controls.Add(SelectedSkillTrainCostTitle);
+			this.splitContainer3.Panel1.Controls.Add(this.SelectedEmployeeSkillsToTrain);
+			this.splitContainer3.Panel1.Controls.Add(this.SelectedEmployeeTrain);
 			this.splitContainer3.Panel1.Controls.Add(this.SelectedEmployeeSkillList);
 			this.splitContainer3.Panel1.Controls.Add(SelectedEmployeeSkillsTitle);
 			this.splitContainer3.Panel1.Controls.Add(this.SelectedEmployeeAge);
@@ -279,9 +297,38 @@
 			this.splitContainer3.Panel2.Controls.Add(SelectedPersonNameTitle);
 			this.splitContainer3.Panel2.Controls.Add(SelectedPersonTitle);
 			this.splitContainer3.Panel2.Controls.Add(this.hirePerson);
-			this.splitContainer3.Size = new System.Drawing.Size(437, 515);
+			this.splitContainer3.Size = new System.Drawing.Size(479, 515);
 			this.splitContainer3.SplitterDistance = 243;
 			this.splitContainer3.TabIndex = 0;
+			// 
+			// SelectedSkillToTrainCost
+			// 
+			this.SelectedSkillToTrainCost.AutoSize = true;
+			this.SelectedSkillToTrainCost.Location = new System.Drawing.Point(329, 45);
+			this.SelectedSkillToTrainCost.Name = "SelectedSkillToTrainCost";
+			this.SelectedSkillToTrainCost.Size = new System.Drawing.Size(14, 13);
+			this.SelectedSkillToTrainCost.TabIndex = 17;
+			this.SelectedSkillToTrainCost.Text = "X";
+			this.SelectedSkillToTrainCost.Visible = false;
+			// 
+			// SelectedEmployeeSkillsToTrain
+			// 
+			this.SelectedEmployeeSkillsToTrain.FormattingEnabled = true;
+			this.SelectedEmployeeSkillsToTrain.Location = new System.Drawing.Point(153, 40);
+			this.SelectedEmployeeSkillsToTrain.Name = "SelectedEmployeeSkillsToTrain";
+			this.SelectedEmployeeSkillsToTrain.Size = new System.Drawing.Size(121, 21);
+			this.SelectedEmployeeSkillsToTrain.TabIndex = 15;
+			this.SelectedEmployeeSkillsToTrain.SelectedIndexChanged += new System.EventHandler(this.SelectedEmployeeSkillsToTrain_SelectedIndexChanged);
+			// 
+			// SelectedEmployeeTrain
+			// 
+			this.SelectedEmployeeTrain.Enabled = false;
+			this.SelectedEmployeeTrain.Location = new System.Drawing.Point(392, 40);
+			this.SelectedEmployeeTrain.Name = "SelectedEmployeeTrain";
+			this.SelectedEmployeeTrain.Size = new System.Drawing.Size(75, 23);
+			this.SelectedEmployeeTrain.TabIndex = 14;
+			this.SelectedEmployeeTrain.Text = "Former";
+			this.SelectedEmployeeTrain.UseVisualStyleBackColor = true;
 			// 
 			// SelectedEmployeeSkillList
 			// 
@@ -318,7 +365,7 @@
 			// fireEmployee
 			// 
 			this.fireEmployee.Enabled = false;
-			this.fireEmployee.Location = new System.Drawing.Point(332, 40);
+			this.fireEmployee.Location = new System.Drawing.Point(392, 79);
 			this.fireEmployee.Name = "fireEmployee";
 			this.fireEmployee.Size = new System.Drawing.Size(75, 23);
 			this.fireEmployee.TabIndex = 0;
@@ -397,8 +444,7 @@
 			this.Controls.Add(this.splitContainer1);
 			this.Margin = new System.Windows.Forms.Padding(2);
 			this.Name = "UcEmployeePage";
-			this.Size = new System.Drawing.Size(825, 515);
-			// this.Load += new System.EventHandler(this.UcEmployeePage_Load);
+			this.Size = new System.Drawing.Size(902, 515);
 			this.splitContainer1.Panel1.ResumeLayout(false);
 			this.splitContainer1.Panel2.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
@@ -442,5 +488,8 @@
 		private System.Windows.Forms.ListView SelectedEmployeeSkillList;
 		private System.Windows.Forms.ColumnHeader columnHeader1;
 		private System.Windows.Forms.ColumnHeader columnHeader2;
+		private System.Windows.Forms.Label SelectedSkillToTrainCost;
+		private System.Windows.Forms.ComboBox SelectedEmployeeSkillsToTrain;
+		private System.Windows.Forms.Button SelectedEmployeeTrain;
 	}
 }

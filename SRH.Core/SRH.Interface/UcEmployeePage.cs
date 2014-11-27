@@ -17,6 +17,7 @@ namespace SRH.Interface
         List<Employee> _employees;
         Person _currentPerson;
 		Employee _currentEmployee;
+		Skill _currentSkillToTrain;
         
         public UcEmployeePage()
         {
@@ -74,6 +75,13 @@ namespace SRH.Interface
 			return i;
 		}
 
+		static List<string> AddSkillsToTrain( Skill s )
+		{
+			List<string> i = new List<String>();
+			i.Add( s.FrenchSkillName );
+			return i;
+		}
+
         private void PersonList_SelectedIndexChanged(object sender, EventArgs e)
         {
             if( PersonList.SelectedItems.Count > 0 )
@@ -103,6 +111,9 @@ namespace SRH.Interface
 
 				SelectedEmployeeSkillList.Items.Clear();
 				SelectedEmployeeSkillList.Items.AddRange( _currentEmployee.Worker.Skills.Values.Select( s => AddSkills( s ) ).ToArray() );
+				// SelectedEmployeeSkillsToTrain.Items.AddRange( _currentEmployee.Worker.Skills.Values
+					// .Where( s => s.Level.CurrentLevel < 5 )
+					// .Select( s => AddSkillToTrain(s) ) );
 			}
 
 			if( _currentEmployee != null )
@@ -111,6 +122,12 @@ namespace SRH.Interface
 				SelectedEmployeeName.Visible = true;
 				SelectedEmployeeAge.Visible = true;
 			}
+		}
+
+		private void SelectedEmployeeSkillsToTrain_SelectedIndexChanged( object sender, EventArgs e )
+		{
+			//_currentSkillToTrain = (Skill)SelectedEmployeeSkillsToTrain.SelectedItem;
+			//SelectedSkillToTrainCost.Text = _currentSkillToTrain.UpgradePrice.ToString();
 		}
 
         private void hirePerson_Click( object sender, EventArgs e )
