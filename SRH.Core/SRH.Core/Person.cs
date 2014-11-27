@@ -15,14 +15,14 @@ namespace SRH.Core
 		int _age;
         readonly DateTime _birthDate;
 		// TODO : Implémenter création aléatoire de skill
-		Dictionary<string, Skill> _skills;
+		List<Skill> _skills;
 		LaborMarket _lb;
         Random rand;
 
 
 		internal Person( LaborMarket lb, string firstName, string lastName, int age )
 		{
-			_skills = new Dictionary<string, Skill>();
+			_skills = new List<Skill>();
 			_firstName = firstName;
 			_lastName = lastName;
 			_age = age;
@@ -69,7 +69,7 @@ namespace SRH.Core
 			private set { _age = value; }
 		}
 
-		public Dictionary<string, Skill> Skills
+		public List<Skill> Skills
 		{
 			get { return _skills; }
 		}
@@ -90,7 +90,7 @@ namespace SRH.Core
 			string skillNameString = Enum.GetName( skillName.GetType(), skillName );
 			ProjSkill ps = new ProjSkill( skillNameString, level );
 
-			Skills.Add( skillNameString, ps );
+			_skills.Add(ps );
 
 			return ps;
 		}
@@ -105,7 +105,7 @@ namespace SRH.Core
 			string skillNameString = Enum.GetName( skillName.GetType(), skillName );
 			CompaSkill cs = new CompaSkill( skillNameString );
 
-			Skills.Add( skillNameString, cs );
+			_skills.Add(cs );
 
 			return cs;
 		}

@@ -83,7 +83,7 @@ namespace SRH.Interface
                 SelectedPersonAge.Text = _currentPerson.Age.ToString();
 
 				SelectedPersonSkillList.Items.Clear();
-				SelectedPersonSkillList.Items.AddRange( _currentPerson.Skills.Values.Select( s => AddSkills( s ) ).ToArray() );
+				SelectedPersonSkillList.Items.AddRange( _currentPerson.Skills.Select( s => AddSkills( s ) ).ToArray() );
             }
 			if( _currentPerson != null )
 			{
@@ -102,7 +102,7 @@ namespace SRH.Interface
 				SelectedEmployeeAge.Text = _currentEmployee.Worker.Age.ToString();
 
 				SelectedEmployeeSkillList.Items.Clear();
-				SelectedEmployeeSkillList.Items.AddRange( _currentEmployee.Worker.Skills.Values.Select( s => AddSkills( s ) ).ToArray() );
+				SelectedEmployeeSkillList.Items.AddRange( _currentEmployee.Worker.Skills.Select( s => AddSkills( s ) ).ToArray() );
 			}
 
 			if( _currentEmployee != null )

@@ -16,15 +16,15 @@ namespace SRH.Core
         private int _timeSpent;
         private int _timeLeft;
         DateTime? _begginingDate;
-
-
         readonly int _earnings;
         readonly int _xpPerCompany;
         readonly int _xpPerPerson;
         bool _activated;
         readonly Dictionary<Skill, int> _skillsRequired;
         Dictionary<Employee, Skill> _employeesAffectedWithSkill;
-        MyCompany _myComp;
+        readonly MyCompany _myComp;
+
+
 
         #region Getter
         public string Name
@@ -60,7 +60,10 @@ namespace SRH.Core
         {
             get { return _begginingDate; }
         }
-
+        public MyCompany MyComp
+        {
+            get { return _myComp; }
+        } 
         public Dictionary<Skill, int> SkillsRequired
         {
             get { return _skillsRequired; }
@@ -147,7 +150,7 @@ namespace SRH.Core
         /// <param name="skill"></param>
         public void AffectEmployeeToAJob(Employee e, Skill s)
         {
-            if( SkillsRequired.ContainsKey( s ) && e.Worker.Skills.ContainsValue(s) && !this.Activated) 
+            if( SkillsRequired.ContainsKey( s ) && e.Worker.Skills.Contains(s) && !this.Activated) 
             _employeesAffectedWithSkill.Add( e, s );
             SkillsRequired.Remove( s );
         }
@@ -160,7 +163,7 @@ namespace SRH.Core
         /// <param name="skill"></param>
         public void RemoveEmployeeFromAJob( Employee e, Skill s )
         {
-            if( !SkillsRequired.ContainsKey(s) && e.Worker.Skills.ContainsValue(s) && !this.Activated )
+            if( !SkillsRequired.ContainsKey(s) && e.Worker.Skills.Contains(s) && !this.Activated )
                 _employeesAffectedWithSkill.Remove( e );
             // 1 à mettre en variable
             SkillsRequired.Add( s, 1 );
