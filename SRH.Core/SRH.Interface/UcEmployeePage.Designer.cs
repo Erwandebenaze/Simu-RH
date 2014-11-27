@@ -309,7 +309,6 @@
 			this.SelectedSkillToTrainCost.Size = new System.Drawing.Size(14, 13);
 			this.SelectedSkillToTrainCost.TabIndex = 17;
 			this.SelectedSkillToTrainCost.Text = "X";
-			this.SelectedSkillToTrainCost.Visible = false;
 			// 
 			// SelectedEmployeeSkillsToTrain
 			// 
