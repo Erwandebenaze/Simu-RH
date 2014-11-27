@@ -17,8 +17,8 @@ namespace SRH.Core
             set { _skillName = value; }
         }
 		private string _frenchSkillName;
-        protected int _upgradePrice;
-        protected int _timeToUpgrade;
+		private int _upgradePrice;
+		private int _timeToUpgrade;
 
         internal Skill( string skillName, int startLevel = 1 )
 		{
@@ -27,10 +27,21 @@ namespace SRH.Core
 			_level.CurrentLevel = startLevel;
 		}
 
-        public Level Level
-        {
-            get { return _level;}
-        }
+		#region Getters Setters
+		public Level Level
+		{
+			get { return _level; }
+		}
+		public int UpgradePrice
+		{
+			get { return _upgradePrice; }
+			protected set { _upgradePrice = value; }
+		}
+		public int TimeToUpgrade
+		{
+			get { return _timeToUpgrade; }
+			protected set { _timeToUpgrade = value; }
+		}
 
 		public string FrenchSkillName
 		{
@@ -38,57 +49,58 @@ namespace SRH.Core
 			{
 				switch( _skillName )
 				{
-					case "Development" :
+					case "Development":
 						_frenchSkillName = "Développement";
 						break;
-					case "Design" :
+					case "Design":
 						_frenchSkillName = "Design";
 						break;
-					case "ProjManagement" :
+					case "ProjManagement":
 						_frenchSkillName = "Management de projet";
 						break;
-					case "SystemsAnalyst" :
+					case "SystemsAnalyst":
 						_frenchSkillName = "Analyste fonctionnel";
 						break;
-					case "TechSupport" :
+					case "TechSupport":
 						_frenchSkillName = "Infrastucture";
 						break;
-					case "BetaTest" :
+					case "BetaTest":
 						_frenchSkillName = "Béta testeur";
 						break;
-					case "DataBase" :
+					case "DataBase":
 						_frenchSkillName = "Base de données";
 						break;
-					case "GUInterface" :
+					case "GUInterface":
 						_frenchSkillName = "Interface graphique";
 						break;
-					case "WebDevelopment" :
+					case "WebDevelopment":
 						_frenchSkillName = "Développement web";
 						break;
-					case "Networking" :
+					case "Networking":
 						_frenchSkillName = "Réseau";
 						break;
-					case "Security" :
+					case "Security":
 						_frenchSkillName = "Sécurité";
 						break;
-					case "SalesRep" :
+					case "SalesRep":
 						_frenchSkillName = "Commercial";
 						break;
-					case "HumansRessources" :
+					case "HumansRessources":
 						_frenchSkillName = "Ressources humaines";
 						break;
-					case "ProjDirection" :
+					case "ProjDirection":
 						_frenchSkillName = "Directeur de projets";
 						break;
-					case "ContractManagement" :
+					case "ContractManagement":
 						_frenchSkillName = "Gestion de contrat";
 						break;
-					default :
+					default:
 						_frenchSkillName = "Animation";
 						break;
 				}
 				return _frenchSkillName;
 			}
-		}
+		} 
+		#endregion
     }
 }

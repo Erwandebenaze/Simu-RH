@@ -110,10 +110,14 @@ namespace SRH.Interface
 				SelectedEmployeeAge.Text = _currentEmployee.Worker.Age.ToString();
 
 				SelectedEmployeeSkillList.Items.Clear();
+<<<<<<< HEAD
 				SelectedEmployeeSkillList.Items.AddRange( _currentEmployee.Worker.Skills.Select( s => AddSkills( s ) ).ToArray() );
+=======
+				SelectedEmployeeSkillList.Items.AddRange( _currentEmployee.Worker.Skills.Values.Select( s => AddSkills( s ) ).ToArray() );
 				// SelectedEmployeeSkillsToTrain.Items.AddRange( _currentEmployee.Worker.Skills.Values
 					// .Where( s => s.Level.CurrentLevel < 5 )
 					// .Select( s => AddSkillToTrain(s) ) );
+>>>>>>> origin/develop
 			}
 
 			if( _currentEmployee != null )
