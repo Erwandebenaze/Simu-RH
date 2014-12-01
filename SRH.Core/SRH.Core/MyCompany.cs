@@ -104,7 +104,7 @@ namespace SRH.Core
             p.StopProject();
             Wealth += p.Earnings;
             _companyLevel.IncreaseXp( p.XpPerCompany, this );
-            foreach( Person pers in p.EmployeesAffectedWithSkill.Keys )
+            foreach( Employee e in p.EmployeesAffectedWithSkill.Keys )
             {
                 foreach( Skill s in p.EmployeesAffectedWithSkill.Values )
                 {

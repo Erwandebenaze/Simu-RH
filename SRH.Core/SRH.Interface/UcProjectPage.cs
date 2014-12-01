@@ -18,7 +18,7 @@ namespace SRH.Interface
         List<Project> _projects;
         Project _currentProj;
         Skill _currentSkill;
-        Person _currentPerson;
+        Employee _currentEmployee;
 
         #region Getter
         public List<Project> Projects
@@ -80,6 +80,8 @@ namespace SRH.Interface
         {
             if( listPossibleProjects.SelectedItems.Count > 0 )
             {
+                listSkillsAvailable.Items.Clear();
+
                 _startOrStopProject.Enabled = true;
                 EstimatedTime.Text = "Temps estimé";
 
@@ -114,7 +116,7 @@ namespace SRH.Interface
                 _currentSkill = (Skill)listSkillsRequired.SelectedItems[listSkillsRequired.SelectedItems.Count - 1].Tag;
 
                 listSkillsAvailable.Items.AddRange( _currentProj.MyComp.Employees.Where(emp => emp.Worker.Skills.Any( s => s.SkillNameEnglish == _currentSkill.SkillNameEnglish))
-                                                                                 .Select( emp => CreateListItemViewEmployeeWithSkill( emp.Worker, _currentSkill ) )                                                                 
+                                                                                 .Select( emp => CreateListItemViewEmployeeWithSkill( emp, _currentSkill ) )                                                                 
                                                                                  .OrderBy(emp => _currentSkill.Level.CurrentLevel)
                                                                                  .ToArray() );
             }
@@ -135,18 +137,17 @@ namespace SRH.Interface
         //    i.SubItems.Add( new ListViewItem.ListViewSubItem( i, skill.Level.CurrentLevel.ToString() ) );
         //    return i;
         //}
-        private ListViewItem CreateListItemViewEmployeeWithSkill( Person pers, Skill s )
+        private ListViewItem CreateListItemViewEmployeeWithSkill( Employee emp, Skill s )
         {
-            ListViewItem i = new ListViewItem( pers.FirstName + " " + pers.LastName );
-            foreach (Skill sk in pers.Skills)
+            ListViewItem i = new ListViewItem( emp.Worker.FirstName + " " + emp.Worker.LastName );
+            foreach( Skill sk in emp.Worker.Skills )
             {
-                    i.Tag = pers;
+                    i.Tag = emp;
                     i.SubItems.Add( new ListViewItem.ListViewSubItem( i, s.FrenchSkillName ) );
                     i.SubItems.Add( new ListViewItem.ListViewSubItem( i, s.Level.CurrentLevel.ToString() ) );     
             }
             return i;
         }
-
         private void listCurrentProjects_SelectedIndexChanged( object sender, EventArgs e )
         {
             if( listCurrentProjects.SelectedItems.Count > 0 )
@@ -175,7 +176,6 @@ namespace SRH.Interface
             else _estimatedTime.Text = _currentProj.Duration.ToString();
             _numberOfWorkers.Text = _currentProj.NumberOfWorkers.ToString();
         }
-
         private void _startOrStopProject_Click( object sender, EventArgs e )
         {
             Project pr;
@@ -203,7 +203,6 @@ namespace SRH.Interface
 
             //GameContext.CurrentGame.PlayerCompany.MoveProject( pr );
         }
-
         public void RemoveEndingProject(Project p)
         {
             var projectItem = listCurrentProjects.Items.Cast<ListViewItem>().Where( item => item.Tag == p ).Single();
@@ -213,8 +212,8 @@ namespace SRH.Interface
 
         private void listSkillsAvailable_MouseDoubleClick( object sender, MouseEventArgs e )
         {
-            _currentPerson = (Person)listSkillsAvailable.SelectedItems[listSkillsRequired.SelectedItems.Count - 1].Tag;
-            _currentProj.AffectEmployeeToAJob( _currentPerson, _currentSkill );
+            _currentEmployee = (Employee)listSkillsAvailable.SelectedItems[listSkillsRequired.SelectedItems.Count - 1].Tag;
+            _currentProj.AffectEmployeeToAJob( _currentEmployee, _currentSkill );
 
         }
 

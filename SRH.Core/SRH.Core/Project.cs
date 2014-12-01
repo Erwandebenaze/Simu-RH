@@ -21,7 +21,7 @@ namespace SRH.Core
         readonly int _xpPerPerson;
         bool _activated;
         readonly Dictionary<Skill, int> _skillsRequired;
-        Dictionary<Person, Skill> _employeesAffectedWithSkill;
+        Dictionary<Employee, Skill> _employeesAffectedWithSkill;
         readonly MyCompany _myComp;
 
 
@@ -85,7 +85,7 @@ namespace SRH.Core
             set { _activated = value; }
         }
 
-        public Dictionary<Person, Skill> EmployeesAffectedWithSkill
+        public Dictionary<Employee, Skill> EmployeesAffectedWithSkill
         {
             get { return _employeesAffectedWithSkill; }
             //set { _employeesAffectedWithSkill = value; }
@@ -119,7 +119,7 @@ namespace SRH.Core
             _xpPerCompany = 45;
             _xpPerPerson = 10;
 			_skillsRequired = skillsRequired;
-            _employeesAffectedWithSkill = new Dictionary<Person, Skill>();
+            _employeesAffectedWithSkill = new Dictionary<Employee, Skill>();
             GenerateSkillsRequired(numberOfWorkers );
             // TODO : Lier le game aux projets. Il faut connecter les différents projets entre eux
             // Constructeur internal, objet "parent" en param pour retrouver le contexte dans lequel
@@ -147,11 +147,11 @@ namespace SRH.Core
         /// </summary>
         /// <param name="p"></param>
         /// <param name="skill"></param>
-        public void AffectEmployeeToAJob(Person p, Skill s)
+        public void AffectEmployeeToAJob( Employee e, Skill s )
         {
             
-            if( SkillsRequired.ContainsKey( s ) && p.Skills.Contains(s) && !this.Activated) 
-            _employeesAffectedWithSkill.Add( p, s );
+            if( SkillsRequired.ContainsKey( s ) && e.Worker.Skills.Contains(s) && !this.Activated) 
+            _employeesAffectedWithSkill.Add( e, s );
             SkillsRequired.Remove( s );
         }
 
@@ -161,12 +161,12 @@ namespace SRH.Core
         /// </summary>
         /// <param name="e"></param>
         /// <param name="skill"></param>
-        public void RemoveEmployeeFromAJob( Person p, Skill s )
+        public void RemoveEmployeeFromAJob( Employee e, Skill s )
         {
-            if( !SkillsRequired.ContainsKey(s) && p.Skills.Contains(s) && !this.Activated )
-                _employeesAffectedWithSkill.Remove( p );
+            if( !SkillsRequired.ContainsKey(s) && e.Worker.Skills.Contains(s) && !this.Activated )
+                _employeesAffectedWithSkill.Remove( e );
             int nb = 0;
-            foreach (Skill sk in p.Skills)
+            foreach (Skill sk in e.Worker.Skills)
             {
                 if (sk.SkillNameEnglish == s.SkillNameEnglish)
                     nb = sk.Level.CurrentLevel; 
