@@ -152,6 +152,7 @@ namespace SRH.Core
             
             if( SkillsRequired.ContainsKey( s ) && e.Worker.Skills.Contains(s) && !this.Activated) 
             _employeesAffectedWithSkill.Add( e, s );
+            e.Busy = true;
             SkillsRequired.Remove( s );
         }
 
@@ -166,6 +167,7 @@ namespace SRH.Core
             if( !SkillsRequired.ContainsKey(s) && e.Worker.Skills.Contains(s) && !this.Activated )
                 _employeesAffectedWithSkill.Remove( e );
             int nb = 0;
+            e.Busy = false;
             foreach (Skill sk in e.Worker.Skills)
             {
                 if (sk.SkillNameEnglish == s.SkillNameEnglish)

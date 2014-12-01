@@ -97,10 +97,17 @@ namespace SRH.Interface
                 //else
                 //{         
                 #endregion
+                    if (_currentProj.SkillsRequired.Count != 0)
+                    {
+                        _startOrStopProject.Enabled = false;
+                        _startOrStopProject.Text = "Affectez les employés avant de lancer.";
+                    } else
+                    {
+                        _startOrStopProject.Enabled = true;
+                        _startOrStopProject.Text = "Lancer un projet";
 
-                    _startOrStopProject.Text = "Lancer un projet";
+                    }
 					listSkillsRequired.Items.Clear();
-
                     listSkillsRequired.Items.AddRange( _currentProj.SkillsRequired.Select( k => CreateListItemViewSkillsRequired( k.Key, k.Value ) ).ToArray() );
             } 
         }
@@ -116,6 +123,7 @@ namespace SRH.Interface
                 _currentSkill = (Skill)listSkillsRequired.SelectedItems[listSkillsRequired.SelectedItems.Count - 1].Tag;
 
                 listSkillsAvailable.Items.AddRange( _currentProj.MyComp.Employees.Where(emp => emp.Worker.Skills.Any( s => s.SkillNameEnglish == _currentSkill.SkillNameEnglish))
+                                                                                 .Where(emp => !emp.Busy)
                                                                                  .Select( emp => CreateListItemViewEmployeeWithSkill( emp, _currentSkill ) )                                                                 
                                                                                  .OrderBy(emp => _currentSkill.Level.CurrentLevel)
                                                                                  .ToArray() );
@@ -214,7 +222,27 @@ namespace SRH.Interface
         {
             _currentEmployee = (Employee)listSkillsAvailable.SelectedItems[listSkillsRequired.SelectedItems.Count - 1].Tag;
             _currentProj.AffectEmployeeToAJob( _currentEmployee, _currentSkill );
+            listSkillsRequired.Items.Clear();
+            listSkillsRequired.Items.AddRange( _currentProj.SkillsRequired.Select( k => CreateListItemViewSkillsRequired( k.Key, k.Value ) ).ToArray() );
+            
+            listSkillsAvailable.Items.Clear();
+            listSkillsAvailable.Items.AddRange( _currentProj.MyComp.Employees.Where( emp => emp.Worker.Skills.Any( s => s.SkillNameEnglish == _currentSkill.SkillNameEnglish ) )
+                                                                                 .Where( emp => !emp.Busy )
+                                                                                 .Select( emp => CreateListItemViewEmployeeWithSkill( emp, _currentSkill ) )
+                                                                                 .OrderBy( emp => _currentSkill.Level.CurrentLevel )
+                                                                                 .ToArray() );
+            if( _currentProj.SkillsRequired.Count != 0 )
+            {
+                _startOrStopProject.Enabled = false;
+                _startOrStopProject.Text = "Affectez les employés avant de lancer.";
+            }
+            else
+            {
+                _startOrStopProject.Enabled = true;
+                _startOrStopProject.Text = "Lancer un projet";
+            }
 
+          
         }
 
 
