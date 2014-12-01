@@ -14,20 +14,20 @@ namespace SRH.Core
         int _currentLevel;
         private bool _skill;
 
-        internal Level( Skill s )
+        internal Level( Skill s, int startLevel )
         {
             // TODO : Trouver le moyen de savoir qui appelle le constructeur pour savoir si c'est la company ou une skill.
 			_currentXp = 0;
-            _currentLevel = 1;
+            _currentLevel = startLevel;
             _skill = true;
             _xpRequired = FixNextXpRequired( _currentLevel);
         }
 
-        public Level( MyCompany c )
+		public Level( MyCompany c, int startLevel )
         {
             // TODO : Trouver le moyen de savoir qui appelle le constructeur pour savoir si c'est la company ou une skill.
             _currentXp = 0;
-            _currentLevel = 1;
+            _currentLevel = startLevel;
             _skill = false;
 			_xpRequired = FixNextXpRequired( _currentLevel );
         }
@@ -50,6 +50,11 @@ namespace SRH.Core
 			get { return FixNextXpRequired( (_currentLevel - 1) ); }
 		}
 
+		public int NextXpRequired
+		{
+			get { return FixNextXpRequired( _currentLevel ); }
+		}
+
         public void IncreaseXp( int xp, MyCompany mc = null ) 
         {
             #region Exceptions
@@ -67,22 +72,6 @@ namespace SRH.Core
 
 			_currentXp += xp;
         }
-
-        //public void IncreaseXp<Company>( int xp )
-        //{
-        //    #region Exceptions
-        //    if( xp < 1 ) throw new ArgumentException( "Xp must be positive" );
-        //    if( this._currentLevel == 2 && xp > 100 ) throw new ArgumentException( "Xp is too big for the level" );
-        //    if( this._currentLevel == 3 && xp > 250 ) throw new ArgumentException( "Xp is too big for the level" );
-        //    if( this._currentLevel == 4 && xp > 600 ) throw new ArgumentException( "Xp is too big for the level" );
-        //    if( this._currentLevel == 5 && xp > 1000 ) throw new ArgumentException( "Xp is too big for the level" );
-        //    #endregion
-        //    if( xp + _currentXp >= _xpRequired )
-        //        this.IncreaseLevel();
-
-        //    _currentXp += xp;
-        //    this.FixNextXpRequired();
-        //}
 
         private int FixNextXpRequired( int level)
         {

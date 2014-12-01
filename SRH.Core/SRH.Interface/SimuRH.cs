@@ -23,7 +23,6 @@ namespace SRH.Interface
         {
             InitializeComponent();
             _myGame = new Game( 1, "SimuRH" );
-			_myGame.Market.JoblessPersons[ 0 ].Skills[ "WebDevelopment" ].Level.CurrentLevel = 5;
             //_myGame = GameLoader.Load("SimuRH");
             _optionsForm = new Options();
             _timeOfGame = _myGame.TimeGame;

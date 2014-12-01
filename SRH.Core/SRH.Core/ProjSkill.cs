@@ -27,7 +27,7 @@ namespace SRH.Core
 			Networking, // *Réseau*
 			Security // *Sécurité*
 		}
-        public void FixPriceAndTime()
+		public override void FixPriceAndTime()
         {
             switch( Level.CurrentLevel )
             {

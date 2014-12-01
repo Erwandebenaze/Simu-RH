@@ -38,6 +38,9 @@ namespace SRH.Interface
 			}
 		}
 
+		/// <summary>
+		/// Loads the User Control
+		/// </summary>
 		internal void LoadPage()
 		{
 			_employees = GameContext.CurrentGame.PlayerCompany.Employees;
@@ -50,36 +53,11 @@ namespace SRH.Interface
 			
 		}
 
-        static ListViewItem CreatePerson ( Person p )
-        {
-            ListViewItem i = new ListViewItem( p.LastName );
-            i.Tag = p;
-            i.SubItems.Add( new ListViewItem.ListViewSubItem( i, p.FirstName ) );
-            i.SubItems.Add( new ListViewItem.ListViewSubItem( i, p.Age.ToString() ) );
-            return i;
-        }
-        static ListViewItem CreateEmployee ( Employee e )
-        {
-            ListViewItem i = new ListViewItem( e.Worker.LastName );
-            i.Tag = e;
-            i.SubItems.Add( new ListViewItem.ListViewSubItem( i, e.Worker.FirstName ) );
-            i.SubItems.Add( new ListViewItem.ListViewSubItem( i, e.Worker.Age.ToString() ) );
-            return i;
-        }
-
-		static ListViewItem AddSkills( Skill s )
-		{
-			ListViewItem i = new ListViewItem( s.FrenchSkillName );
-			i.Tag = s;
-			i.SubItems.Add( new ListViewItem.ListViewSubItem( i, s.Level.CurrentLevel.ToString() ) );
-			return i;
-		}
-
-		static object AddSkillsToTrain( Skill s )
-		{
-			return (object)s.FrenchSkillName;
-		}
-
+		/// <summary>
+		/// Displays the information about the selected Person
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
         private void PersonList_SelectedIndexChanged(object sender, EventArgs e)
         {
             if( PersonList.SelectedItems.Count > 0 )
@@ -88,8 +66,8 @@ namespace SRH.Interface
                 SelectedPersonName.Text = _currentPerson.FirstName + " " + _currentPerson.LastName;
                 SelectedPersonAge.Text = _currentPerson.Age.ToString();
 
-				SelectedPersonSkillList.Items.Clear();
-				SelectedPersonSkillList.Items.AddRange( _currentPerson.Skills.Values.Select( s => AddSkills( s ) ).ToArray() );
+				SetSkillsInForm( _currentPerson, SelectedPersonSkillList );
+
             }
 			if( _currentPerson != null )
 			{
@@ -99,6 +77,11 @@ namespace SRH.Interface
 			}
         }
 
+		/// <summary>
+		/// Displays the information about the selected Employee
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void EmployeeList_SelectedIndexChanged( object sender, EventArgs e )
 		{
 			if( EmployeeList.SelectedItems.Count > 0 )
@@ -107,8 +90,8 @@ namespace SRH.Interface
 				SelectedEmployeeName.Text = _currentEmployee.Worker.FirstName + " " + _currentEmployee.Worker.LastName;
 				SelectedEmployeeAge.Text = _currentEmployee.Worker.Age.ToString();
 
-				SelectedEmployeeSkillList.Items.Clear();
-				SelectedEmployeeSkillList.Items.AddRange( _currentEmployee.Worker.Skills.Values.Select( s => AddSkills( s ) ).ToArray() );
+				SetSkillsInForm( _currentEmployee.Worker, SelectedEmployeeSkillList );
+
 				SelectedEmployeeSkillsToTrain.Items.Clear();
 				SelectedEmployeeSkillsToTrain.Items.AddRange( _currentEmployee.Worker.Skills.Values
 					.Where( s => s.Level.CurrentLevel < 5 )
@@ -124,14 +107,25 @@ namespace SRH.Interface
 			}
 		}
 
+		/// <summary>
+		/// Displays the information about the selected Skill to train (Cost and Time)
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void SelectedEmployeeSkillsToTrain_SelectedIndexChanged( object sender, EventArgs e )
 		{
 			_currentSkillToTrain = _currentEmployee.Worker.Skills.Values
 				.Where( s => s.FrenchSkillName == (string)SelectedEmployeeSkillsToTrain.SelectedItem )
 				.Single();
-			SelectedSkillToTrainCost.Text = _currentSkillToTrain.UpgradePrice.ToString();
+			SetTrainingValuesInForm( _currentSkillToTrain );
+			Train.Enabled = true;
 		}
 
+		/// <summary>
+		/// Hires the selected Person, who becomes an Employee available in MyCompany
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
         private void hirePerson_Click( object sender, EventArgs e )
         {
             Employee emp = GameContext.CurrentGame.PlayerCompany.AddEmployee( _currentPerson );
@@ -143,6 +137,11 @@ namespace SRH.Interface
 			hirePerson.Enabled = false;
         }
 
+		/// <summary>
+		/// Fires the selected Employee, who becomes a Person in the LabourMarket and is no longer available in MyCompany
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void fireEmployee_Click( object sender, EventArgs e )
 		{
 			Person p = GameContext.CurrentGame.PlayerCompany.RemoveEmployee( _currentEmployee );
@@ -152,6 +151,66 @@ namespace SRH.Interface
 			EmployeeList.Items.Remove( EmployeeItem );
 
 			fireEmployee.Enabled = false;
+		}
+
+		/// <summary>
+		/// The selected Employee gains a level in the selected Skill
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		private void Train_Click( object sender, EventArgs e )
+		{
+			int xpToNextLevel = _currentSkillToTrain.Level.NextXpRequired - _currentSkillToTrain.Level.CurrentXp;
+			_currentSkillToTrain.Level.IncreaseXp( xpToNextLevel );
+
+			SetTrainingValuesInForm( _currentSkillToTrain );
+			SetSkillsInForm( _currentEmployee.Worker, SelectedEmployeeSkillList );
+
+		}
+
+		/// <summary>
+		/// Creates a List
+		/// </summary>
+		/// <param name="p"></param>
+		/// <returns></returns>
+		static ListViewItem CreatePerson( Person p )
+		{
+			ListViewItem i = new ListViewItem( p.LastName );
+			i.Tag = p;
+			i.SubItems.Add( new ListViewItem.ListViewSubItem( i, p.FirstName ) );
+			i.SubItems.Add( new ListViewItem.ListViewSubItem( i, p.Age.ToString() ) );
+			return i;
+		}
+
+		static ListViewItem CreateEmployee( Employee e )
+		{
+			ListViewItem i = new ListViewItem( e.Worker.LastName );
+			i.Tag = e;
+			i.SubItems.Add( new ListViewItem.ListViewSubItem( i, e.Worker.FirstName ) );
+			i.SubItems.Add( new ListViewItem.ListViewSubItem( i, e.Worker.Age.ToString() ) );
+			return i;
+		}
+
+		static ListViewItem AddSkills( Skill s )
+		{
+			ListViewItem i = new ListViewItem( s.FrenchSkillName );
+			i.Tag = s;
+			i.SubItems.Add( new ListViewItem.ListViewSubItem( i, s.Level.CurrentLevel.ToString() ) );
+			return i;
+		}
+
+		private void SetSkillsInForm( Person p, ListView l )
+		{
+			l.Items.Clear();
+			l.Items.AddRange( p.Skills.Values.Select( s => AddSkills( s ) ).ToArray() );
+		}
+
+		private void SetTrainingValuesInForm( Skill s )
+		{
+			s.FixPriceAndTime();
+
+			SelectedSkillToTrainCost.Text = s.UpgradePrice.ToString();
+			SelectedSkillToTrainTime.Text = s.TimeToUpgrade.ToString();
 		}
     }
 }
