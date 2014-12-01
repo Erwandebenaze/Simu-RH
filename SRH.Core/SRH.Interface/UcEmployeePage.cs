@@ -17,7 +17,7 @@ namespace SRH.Interface
         List<Employee> _employees;
         Person _currentPerson;
 		Employee _currentEmployee;
-		Skill _currentSkillToTrain;
+		//Skill _currentSkillToTrain;
         
         public UcEmployeePage()
         {

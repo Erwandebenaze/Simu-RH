@@ -22,7 +22,7 @@ namespace SRH.Interface
         public SimuRH()
         {
             InitializeComponent();
-            //_myGame = new Game( 1, "SimuRH" );
+            //_myGame = new Game( 1, "Erwan" );
             _myGame = GameLoader.Load("Erwan");
             _optionsForm = new Options();
             _timeOfGame = _myGame.TimeGame;
