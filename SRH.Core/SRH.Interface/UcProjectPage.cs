@@ -97,18 +97,13 @@ namespace SRH.Interface
                 //else
                 //{         
                 #endregion
-                    if (_currentProj.SkillsRequired.Count != 0)
-                    {
-                        _startOrStopProject.Enabled = false;
-                        _startOrStopProject.Text = "Affectez les employés avant de lancer.";
-                    } else
-                    {
-                        _startOrStopProject.Enabled = true;
-                        _startOrStopProject.Text = "Lancer un projet";
-
-                    }
+                AffectStartButtonFields();
 					listSkillsRequired.Items.Clear();
                     listSkillsRequired.Items.AddRange( _currentProj.SkillsRequired.Select( k => CreateListItemViewSkillsRequired( k.Key, k.Value ) ).ToArray() );
+                    if ( _currentProj.EmployeesAffectedWithSkill.Count != 0 )
+                    {
+                        listSkillsRequired.Items.AddRange( _currentProj.EmployeesAffectedWithSkill.Select( k => CompleteListItemViewSkillsRequired( k.Key, k.Value ) ).ToArray() );
+                    }
             } 
         }
 
@@ -121,38 +116,43 @@ namespace SRH.Interface
                 listSkillsAvailable.Items.Clear();
 
                 _currentSkill = (Skill)listSkillsRequired.SelectedItems[listSkillsRequired.SelectedItems.Count - 1].Tag;
+                if (_currentProj.SkillsRequired.ContainsKey(_currentSkill))
+                {
+                    listSkillsAvailable.Items.AddRange( _currentProj.MyComp.Employees.Where( emp => emp.Worker.Skills.Any( s => s.SkillNameEnglish == _currentSkill.SkillNameEnglish ) )
+                                                                 .Where( emp => !emp.Busy )
+                                                                 .Select( emp => CreateListItemViewEmployeeWithSkill( emp, _currentSkill ) )
+                                                                 .OrderBy( emp => _currentSkill.Level.CurrentLevel )
+                                                                 .ToArray() );
+                }
 
-                listSkillsAvailable.Items.AddRange( _currentProj.MyComp.Employees.Where(emp => emp.Worker.Skills.Any( s => s.SkillNameEnglish == _currentSkill.SkillNameEnglish))
-                                                                                 .Where(emp => !emp.Busy)
-                                                                                 .Select( emp => CreateListItemViewEmployeeWithSkill( emp, _currentSkill ) )                                                                 
-                                                                                 .OrderBy(emp => _currentSkill.Level.CurrentLevel)
-                                                                                 .ToArray() );
             }
         }
         private ListViewItem CreateListItemViewSkillsRequired( Skill skill, int level )
         {
-            ListViewItem i = new ListViewItem(skill.SkillNameEnglish + "("+level.ToString()+")");
+            ListViewItem i = new ListViewItem(skill.FrenchSkillName + "("+level.ToString()+")");
             i.Tag = skill;
-            i.SubItems.Add( new ListViewItem.ListViewSubItem( i, skill.SkillNameEnglish ) );
+            i.SubItems.Add( new ListViewItem.ListViewSubItem( i, skill.FrenchSkillName ) );
             i.SubItems.Add( new ListViewItem.ListViewSubItem( i, "0 ("+level.ToString()+")" ) );
             return i;
         }
-        //private ListViewItem CompleteListItemViewSkillsRequired( Employee e, Skill skill )
-        //{
-        //    ListViewItem i = new ListViewItem( e.Worker.FirstName + " " + e.Worker.LastName );
-        //    i.Tag = skill;
-        //    i.SubItems.Add( new ListViewItem.ListViewSubItem( i, skill.SkillNameEnglish ) );
-        //    i.SubItems.Add( new ListViewItem.ListViewSubItem( i, skill.Level.CurrentLevel.ToString() ) );
-        //    return i;
-        //}
+        private ListViewItem CompleteListItemViewSkillsRequired( Employee e, Skill skill )
+        {
+            ListViewItem i = new ListViewItem( e.Worker.FirstName + " " + e.Worker.LastName );
+            i.Tag = skill;
+            i.SubItems.Add( new ListViewItem.ListViewSubItem( i, skill.FrenchSkillName ) );
+            i.SubItems.Add( new ListViewItem.ListViewSubItem( i, skill.Level.CurrentLevel.ToString() + " (" + _currentSkill.Level.CurrentLevel + ")" ) );
+           // Risque de problème sur le level entre parenthèses.
+            return i;
+        }
         private ListViewItem CreateListItemViewEmployeeWithSkill( Employee emp, Skill s )
         {
             ListViewItem i = new ListViewItem( emp.Worker.FirstName + " " + emp.Worker.LastName );
             foreach( Skill sk in emp.Worker.Skills )
             {
-                    i.Tag = emp;
-                    i.SubItems.Add( new ListViewItem.ListViewSubItem( i, s.FrenchSkillName ) );
-                    i.SubItems.Add( new ListViewItem.ListViewSubItem( i, s.Level.CurrentLevel.ToString() ) );     
+                
+                i.Tag = emp;
+                i.SubItems.Add( new ListViewItem.ListViewSubItem( i, s.FrenchSkillName ) );
+                i.SubItems.Add( new ListViewItem.ListViewSubItem( i, s.Level.CurrentLevel.ToString() ) );     
             }
             return i;
         }
@@ -170,7 +170,7 @@ namespace SRH.Interface
                 }
                 else
                 {
-                    _startOrStopProject.Text = "Lancer un projet";
+                    AffectStartButtonFields();
                     
                 }
             }
@@ -222,15 +222,21 @@ namespace SRH.Interface
         {
             _currentEmployee = (Employee)listSkillsAvailable.SelectedItems[listSkillsRequired.SelectedItems.Count - 1].Tag;
             _currentProj.AffectEmployeeToAJob( _currentEmployee, _currentSkill );
+            
             listSkillsRequired.Items.Clear();
             listSkillsRequired.Items.AddRange( _currentProj.SkillsRequired.Select( k => CreateListItemViewSkillsRequired( k.Key, k.Value ) ).ToArray() );
+            listSkillsRequired.Items.AddRange( _currentProj.EmployeesAffectedWithSkill.Select( k => CompleteListItemViewSkillsRequired( k.Key, k.Value ) ).ToArray() );
             
             listSkillsAvailable.Items.Clear();
-            listSkillsAvailable.Items.AddRange( _currentProj.MyComp.Employees.Where( emp => emp.Worker.Skills.Any( s => s.SkillNameEnglish == _currentSkill.SkillNameEnglish ) )
-                                                                                 .Where( emp => !emp.Busy )
-                                                                                 .Select( emp => CreateListItemViewEmployeeWithSkill( emp, _currentSkill ) )
-                                                                                 .OrderBy( emp => _currentSkill.Level.CurrentLevel )
-                                                                                 .ToArray() );
+
+            AffectStartButtonFields();
+
+          
+        }
+
+        private void AffectStartButtonFields()
+        {
+
             if( _currentProj.SkillsRequired.Count != 0 )
             {
                 _startOrStopProject.Enabled = false;
@@ -241,8 +247,40 @@ namespace SRH.Interface
                 _startOrStopProject.Enabled = true;
                 _startOrStopProject.Text = "Lancer un projet";
             }
+        }
 
-          
+        private void listSkillsRequired_MouseDoubleClick( object sender, MouseEventArgs e )
+        {
+
+            if( !_currentProj.SkillsRequired.ContainsKey( _currentSkill ) )
+            {
+                if (_currentProj.EmployeesAffectedWithSkill.Count != 0)
+                {
+                    foreach( Employee emp in _currentProj.EmployeesAffectedWithSkill.Keys )
+                    {
+                        if( _currentProj.EmployeesAffectedWithSkill.ContainsValue( _currentSkill ) )
+                        {
+                            _currentProj.RemoveEmployeeFromAJob( emp, _currentSkill );
+                            break;
+                        }
+                    }
+                }
+                AffectStartButtonFields();
+
+
+                listSkillsRequired.Items.Clear();
+                listSkillsRequired.Items.AddRange( _currentProj.SkillsRequired.Select( k => CreateListItemViewSkillsRequired( k.Key, k.Value ) ).ToArray() );
+                listSkillsRequired.Items.AddRange( _currentProj.EmployeesAffectedWithSkill.Select( k => CompleteListItemViewSkillsRequired( k.Key, k.Value ) ).ToArray() );
+
+                listSkillsAvailable.Items.Clear();
+                listSkillsAvailable.Items.AddRange( _currentProj.MyComp.Employees.Where( emp => emp.Worker.Skills.Any( s => s.SkillNameEnglish == _currentSkill.SkillNameEnglish ) )
+                                             .Where( emp => !emp.Busy )
+                                             .Select( emp => CreateListItemViewEmployeeWithSkill( emp, _currentSkill ) )
+                                             .OrderBy( emp => _currentSkill.Level.CurrentLevel )
+                                             .ToArray() );
+
+            }
+
         }
 
 

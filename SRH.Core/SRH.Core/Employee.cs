@@ -11,11 +11,6 @@ namespace SRH.Core
         Person _worker;
         readonly Company _comp;
         private bool busy;
-        
-
-
-
-
 
 
         /// <summary>
