@@ -20,7 +20,7 @@ namespace SRH.Core
 			if( String.IsNullOrWhiteSpace( name ) ) throw new ArgumentNullException( "The company name cannot be null or a whitespace" );
             _myGame = game;
             _wealth = 15000;
-			_companyLevel = new Level( this );
+			_companyLevel = new Level( this, 1 );
 			_maxProjectDifficulty = 1;
             _projects = new List<Project>();
         }

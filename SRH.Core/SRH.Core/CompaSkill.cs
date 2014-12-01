@@ -22,7 +22,7 @@ namespace SRH.Core
 			Animation // *Animation*, inscrease 30 employees hapiness
 		}
 
-        public void FixPriceAndTime()
+        public override void FixPriceAndTime()
         {
             switch( Level.CurrentLevel )
             {

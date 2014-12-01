@@ -10,22 +10,17 @@ namespace SRH.Core
     {
         Level _level;
         private string _skillName;
-
-        public string SkillNameEnglish
-        {
-            get { return _skillName; }
-            set { _skillName = value; }
-        }
 		private string _frenchSkillName;
 		private int _upgradePrice;
 		private int _timeToUpgrade;
 
         internal Skill( string skillName, int startLevel = 1 )
 		{
-			_level = new Level( this );
+			_level = new Level( this, startLevel );
 			_skillName = skillName;
-			_level.CurrentLevel = startLevel;
 		}
+
+		abstract public void FixPriceAndTime();
 
 		#region Getters Setters
 		public Level Level
@@ -43,6 +38,11 @@ namespace SRH.Core
 			protected set { _timeToUpgrade = value; }
 		}
 
+		public string SkillNameEnglish
+		{
+			get { return _skillName; }
+			set { _skillName = value; }
+		}
 		public string FrenchSkillName
 		{
 			get
