@@ -87,7 +87,7 @@ namespace SRH.Core
 		/// <returns>The ProjSkill added</returns>
 		public Skill AddSkill( ProjSkill.SkillName skillName, int level = 1)
 		{
-			string skillNameString = Enum.GetName( skillName.GetType(), skillName );
+			string skillNameString = skillName.ToString();
 			ProjSkill ps = new ProjSkill( skillNameString, level );
 
 			_skills.Add(ps );
@@ -102,7 +102,7 @@ namespace SRH.Core
 		/// <returns>The CompaSkill added</returns>
 		public Skill AddSkill( CompaSkill.SkillName skillName, int level = 1)
 		{
-			string skillNameString = Enum.GetName( skillName.GetType(), skillName );
+			string skillNameString = skillName.ToString();
 			CompaSkill cs = new CompaSkill( skillNameString );
 
 			_skills.Add(cs );

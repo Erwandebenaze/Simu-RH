@@ -11,12 +11,6 @@ namespace SRH.Core
         Person _worker;
         readonly Company _comp;
         private bool busy;
-        
-
-
-
-
-
 
         /// <summary>
 		/// Creates an <see cref="Employee"/>
@@ -49,13 +43,22 @@ namespace SRH.Core
             get { return _comp; }
         }
 		#endregion
-        public bool Training()
-        {
-            // TODO : En fonction de la formation et de son niveau, augmenter le niveau, 
-            // si l'employé n'a pas la compétence, il doit l'ajouter, sinon il l'augmente.
-
-            throw new NotImplementedException();
-            //Retourne true ou false si la compétence a été augmenté (problème d'argent, la compétence n'est ps instanciée (exeption)
-        }
+		//public bool Train( ProjSkill.SkillName s )
+		//{
+		//	// TODO : En fonction de la formation et de son niveau, augmenter le niveau, 
+		//	// si l'employé n'a pas la compétence, il doit l'ajouter, sinon il l'augmente.
+		//	if( _worker.Skills.Contains( Enum.GetName( s.GetType(), s ) ) )
+		//	{
+		//		ProjSkill.SkillName s = (SomeEnum)Enum.Parse(typeof(SomeEnum), "EnumValue");
+		//		int xpToNextLevel = s.Level.NextXpRequired - s.Level.CurrentXp;
+		//		s.Level.IncreaseXp( xpToNextLevel );
+		//	}
+		//	else
+		//	{
+		//		_worker.AddSkill()
+		//	}
+			
+		//	//Retourne true ou false si la compétence a été augmentée (problème d'argent, la compétence n'est ps instanciée (exeption)
+		//}
     }
 }

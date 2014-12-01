@@ -17,7 +17,7 @@ namespace SRH.Interface
         List<Employee> _employees;
         Person _currentPerson;
 		Employee _currentEmployee;
-		//Skill _currentSkillToTrain;
+		Skill _currentSkillToTrain;
         
         public UcEmployeePage()
         {
@@ -93,7 +93,7 @@ namespace SRH.Interface
 				SetSkillsInForm( _currentEmployee.Worker, SelectedEmployeeSkillList );
 
 				SelectedEmployeeSkillsToTrain.Items.Clear();
-				SelectedEmployeeSkillsToTrain.Items.AddRange( _currentEmployee.Worker.Skills.Values
+				SelectedEmployeeSkillsToTrain.Items.AddRange( _currentEmployee.Worker.Skills
 					.Where( s => s.Level.CurrentLevel < 5 )
 					.Select( s => (object)s.FrenchSkillName )
 					.ToArray() );
@@ -114,9 +114,10 @@ namespace SRH.Interface
 		/// <param name="e"></param>
 		private void SelectedEmployeeSkillsToTrain_SelectedIndexChanged( object sender, EventArgs e )
 		{
-			_currentSkillToTrain = _currentEmployee.Worker.Skills.Values
+			_currentSkillToTrain = _currentEmployee.Worker.Skills
 				.Where( s => s.FrenchSkillName == (string)SelectedEmployeeSkillsToTrain.SelectedItem )
 				.Single();
+
 			SetTrainingValuesInForm( _currentSkillToTrain );
 			Train.Enabled = true;
 		}
@@ -165,14 +166,13 @@ namespace SRH.Interface
 
 			SetTrainingValuesInForm( _currentSkillToTrain );
 			SetSkillsInForm( _currentEmployee.Worker, SelectedEmployeeSkillList );
-
 		}
 
 		/// <summary>
-		/// Creates a List
+		/// Creates a Person Item for the PersonList
 		/// </summary>
-		/// <param name="p"></param>
-		/// <returns></returns>
+		/// <param name="p">The Person to display</param>
+		/// <returns>A ListViewItem containing the information to display about a Person</returns>
 		static ListViewItem CreatePerson( Person p )
 		{
 			ListViewItem i = new ListViewItem( p.LastName );
@@ -182,6 +182,11 @@ namespace SRH.Interface
 			return i;
 		}
 
+		/// <summary>
+		/// Creates an Employee Item for the EmployeeList
+		/// </summary>
+		/// <param name="e">The Employee to display</param>
+		/// <returns>A ListViewItem containing the information to display about an Employee</returns>
 		static ListViewItem CreateEmployee( Employee e )
 		{
 			ListViewItem i = new ListViewItem( e.Worker.LastName );
@@ -191,6 +196,11 @@ namespace SRH.Interface
 			return i;
 		}
 
+		/// <summary>
+		/// Creates a Skill Item for the SelectedPerson or SelectedEMployee
+		/// </summary>
+		/// <param name="s">The Skill to display</param>
+		/// <returns>A ListViewItem containing the information to display about a Skill</returns>
 		static ListViewItem AddSkills( Skill s )
 		{
 			ListViewItem i = new ListViewItem( s.FrenchSkillName );
@@ -199,12 +209,21 @@ namespace SRH.Interface
 			return i;
 		}
 
+		/// <summary>
+		/// Sets the informations to display about a Person's Skills
+		/// </summary>
+		/// <param name="p">The Person who's Skill to display</param>
+		/// <param name="l">The ListView to edit</param>
 		private void SetSkillsInForm( Person p, ListView l )
 		{
 			l.Items.Clear();
-			l.Items.AddRange( p.Skills.Values.Select( s => AddSkills( s ) ).ToArray() );
+			l.Items.AddRange( p.Skills.Select( s => AddSkills( s ) ).ToArray() );
 		}
 
+		/// <summary>
+		/// Sets the Cost and Time to train a Skill and displays it
+		/// </summary>
+		/// <param name="s">The Skill to train</param>
 		private void SetTrainingValuesInForm( Skill s )
 		{
 			s.FixPriceAndTime();

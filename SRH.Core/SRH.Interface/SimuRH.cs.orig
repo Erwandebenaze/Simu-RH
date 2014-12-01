@@ -23,12 +23,11 @@ namespace SRH.Interface
         {
             InitializeComponent();
 <<<<<<< HEAD
-            //_myGame = new Game( 1, "SimuRH" );
-            _myGame = GameLoader.Load("Erwan");
-=======
             _myGame = new Game( 1, "SimuRH" );
-			_myGame.Market.JoblessPersons[ 0 ].Skills[ "WebDevelopment" ].Level.CurrentLevel = 5;
             //_myGame = GameLoader.Load("SimuRH");
+=======
+            //_myGame = new Game( 1, "Erwan" );
+            _myGame = GameLoader.Load("Erwan");
 >>>>>>> origin/develop
             _optionsForm = new Options();
             _timeOfGame = _myGame.TimeGame;

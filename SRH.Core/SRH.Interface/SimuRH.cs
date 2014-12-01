@@ -21,8 +21,10 @@ namespace SRH.Interface
 
         public SimuRH()
         {
+
+			// BITE AU CUL
             InitializeComponent();
-            //_myGame = new Game( 1, "Erwan" );
+            _myGame = new Game( 1, "Erwan" );
             _optionsForm = new Options();
             _timeOfGame = _myGame.TimeGame;
             _timer = new Timer();
@@ -38,6 +40,7 @@ namespace SRH.Interface
 			this.ucProjectPage.LoadPage();
 		}
 
+		
         void _timer_Tick( object sender, EventArgs e )
         {
             BarProgress();
@@ -205,6 +208,18 @@ namespace SRH.Interface
 		private void SimuRH_Load()
 		{
 
+		}
+
+		private void tabControl1_SelectedIndexChanged( object sender, EventArgs e )
+		{
+			if( tabControl1.SelectedTab == tabControl1.TabPages[ "Employees" ] )
+			{
+				this.ucEmployeePage.LoadPage();
+			}
+			else if( tabControl1.SelectedTab == tabControl1.TabPages[ "Projects" ] )
+			{
+				this.ucProjectPage.LoadPage();
+			}
 		}
     }
 }
