@@ -233,6 +233,7 @@
             this.listSkillsRequired.UseCompatibleStateImageBehavior = false;
             this.listSkillsRequired.View = System.Windows.Forms.View.Details;
             this.listSkillsRequired.SelectedIndexChanged += new System.EventHandler(this.listSkillsRequired_SelectedIndexChanged);
+            this.listSkillsRequired.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listSkillsRequired_MouseDoubleClick);
             // 
             // ProjectEmployeeName
             // 

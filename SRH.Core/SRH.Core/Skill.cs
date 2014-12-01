@@ -103,11 +103,19 @@ namespace SRH.Core
 		} 
 		#endregion
 
-        //public override bool Equals( object obj )
-        //{
-        //    if( obj == null ) throw Exception();
-        //    this.SkillNameEnglish == obj.skll
+        public override bool Equals( object obj )
+        {
+            if( obj == null ) throw new ArgumentNullException("obj == null");
+            Skill other = obj as Skill;
+            if( other == null) throw new ArgumentException( "obj != skill" );
+                
+            return( this.SkillNameEnglish == other.SkillNameEnglish );
 
+        }
+
+        //public override int GetHashCode()
+        //{
+        //    return SkillNameEnglish.GetHashCode();
         //}
     }
 }

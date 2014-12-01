@@ -134,7 +134,7 @@ namespace SRH.Interface
 
 			var PersonItem = PersonList.Items.Cast<ListViewItem>().Where( item => item.Tag == _currentPerson ).Single();
 			PersonList.Items.Remove( PersonItem );
-			
+		
 			hirePerson.Enabled = false;
         }
 
