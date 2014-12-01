@@ -10,6 +10,12 @@ namespace SRH.Core
     {
         Person _worker;
         readonly Company _comp;
+        private bool busy;
+        
+
+
+
+
 
 
         /// <summary>
@@ -18,11 +24,14 @@ namespace SRH.Core
         /// <param name="name"></param>
 		/// <param name="firstName"></param>
 		/// <param name="age">Cannot inferior to 18 or superiror to 62</param>
-        internal Employee(Company comp, Person Worker )
+        internal Employee(Company comp, Person worker )
         {
-            //exeptions
+            if( comp == null ) throw new ArgumentNullException( "Company is null" );
+            if( worker == null ) throw new ArgumentNullException( "worker is null" );
+
+            busy = false;
             _comp = comp;
-			_worker = Worker;
+			_worker = worker;
         }
 
 		#region Getters setters
@@ -30,6 +39,11 @@ namespace SRH.Core
 		{
 			get { return _worker; }
 		}
+        public bool Busy
+        {
+            get { return busy; }
+            internal set { busy = value; }
+        }
         public Company Comp
         {
             get { return _comp; }

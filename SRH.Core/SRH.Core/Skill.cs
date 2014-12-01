@@ -102,5 +102,12 @@ namespace SRH.Core
 			}
 		} 
 		#endregion
+
+        //public override bool Equals( object obj )
+        //{
+        //    if( obj == null ) throw Exception();
+        //    this.SkillNameEnglish == obj.skll
+
+        //}
     }
 }

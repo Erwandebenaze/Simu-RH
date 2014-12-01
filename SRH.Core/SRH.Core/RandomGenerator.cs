@@ -67,7 +67,8 @@ namespace SRH.Core
 			while( numberOfSKills < 2 )
 			{
 				ProjSkill.SkillName randomEnum = GetRandomEnum<ProjSkill.SkillName>();
-				if( !( p.Skills.ContainsKey( Enum.GetName( randomEnum.GetType(), randomEnum ) ) ) )
+                Skill s = new ProjSkill( randomEnum.ToString() );
+				if( !( p.Skills.Contains(  s ) ) )
 				{
 					p.AddSkill( randomEnum );
 					numberOfSKills++;

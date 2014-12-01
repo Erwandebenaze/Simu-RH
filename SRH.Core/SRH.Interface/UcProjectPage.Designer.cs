@@ -246,7 +246,7 @@
             // 
             // ProjectLevelRecommanded
             // 
-            this.ProjectLevelRecommanded.Text = "Niveau recommandé (réel)";
+            this.ProjectLevelRecommanded.Text = "Niveau réel (recommandé)";
             this.ProjectLevelRecommanded.Width = 205;
             // 
             // listSkillsAvailable
@@ -262,6 +262,7 @@
             this.listSkillsAvailable.TabIndex = 0;
             this.listSkillsAvailable.UseCompatibleStateImageBehavior = false;
             this.listSkillsAvailable.View = System.Windows.Forms.View.Details;
+            this.listSkillsAvailable.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listSkillsAvailable_MouseDoubleClick);
             // 
             // EmployeeName
             // 

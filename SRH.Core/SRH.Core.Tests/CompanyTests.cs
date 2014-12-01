@@ -148,7 +148,7 @@ namespace SRH.Core.Tests
 			Person p = myGame.Market.JoblessPersons[ 0 ];
 			ProjSkill ps = (ProjSkill)p.AddSkill( ProjSkill.SkillName.BetaTest, 3 );
 
-			Assert.That( p.Skills.ContainsValue( ps ) );
+			Assert.That( p.Skills.Contains( ps ) );
 			Assert.That( ps.FrenchSkillName == "Béta testeur" );
 			Assert.That( ps.Level.CurrentLevel == 3 );
 		}

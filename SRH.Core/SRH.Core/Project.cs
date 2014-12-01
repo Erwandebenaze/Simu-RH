@@ -16,15 +16,14 @@ namespace SRH.Core
         private int _timeSpent;
         private int _timeLeft;
         DateTime? _begginingDate;
-
-
         readonly int _earnings;
         readonly int _xpPerCompany;
         readonly int _xpPerPerson;
         bool _activated;
         readonly Dictionary<Skill, int> _skillsRequired;
         Dictionary<Employee, Skill> _employeesAffectedWithSkill;
-        MyCompany _myComp;
+        readonly MyCompany _myComp;
+
 
         #region Getter
         public string Name
@@ -60,7 +59,10 @@ namespace SRH.Core
         {
             get { return _begginingDate; }
         }
-
+        public MyCompany MyComp
+        {
+            get { return _myComp; }
+        } 
         public Dictionary<Skill, int> SkillsRequired
         {
             get { return _skillsRequired; }
@@ -83,10 +85,10 @@ namespace SRH.Core
             set { _activated = value; }
         }
 
-        internal Dictionary<Employee, Skill> EmployeesAffectedWithSkill
+        public Dictionary<Employee, Skill> EmployeesAffectedWithSkill
         {
             get { return _employeesAffectedWithSkill; }
-            set { _employeesAffectedWithSkill = value; }
+            //set { _employeesAffectedWithSkill = value; }
         }
 
         #endregion
@@ -143,12 +145,14 @@ namespace SRH.Core
         /// <summary>
         /// Affect an employee to a job. That method remove the skillRequired who is passed in parameter. The project is not activated
         /// </summary>
-        /// <param name="e"></param>
+        /// <param name="p"></param>
         /// <param name="skill"></param>
-        public void AffectEmployeeToAJob(Employee e, Skill s)
+        public void AffectEmployeeToAJob( Employee e, Skill s )
         {
-            if( SkillsRequired.ContainsKey( s ) && e.Worker.Skills.ContainsValue(s) && !this.Activated) 
+            
+            if( SkillsRequired.ContainsKey( s ) && e.Worker.Skills.Contains(s) && !this.Activated) 
             _employeesAffectedWithSkill.Add( e, s );
+            e.Busy = true;
             SkillsRequired.Remove( s );
         }
 
@@ -160,10 +164,16 @@ namespace SRH.Core
         /// <param name="skill"></param>
         public void RemoveEmployeeFromAJob( Employee e, Skill s )
         {
-            if( !SkillsRequired.ContainsKey(s) && e.Worker.Skills.ContainsValue(s) && !this.Activated )
+            if( !SkillsRequired.ContainsKey(s) && e.Worker.Skills.Contains(s) && !this.Activated )
                 _employeesAffectedWithSkill.Remove( e );
-            // 1 à mettre en variable
-            SkillsRequired.Add( s, 1 );
+            int nb = 0;
+            e.Busy = false;
+            foreach (Skill sk in e.Worker.Skills)
+            {
+                if (sk.SkillNameEnglish == s.SkillNameEnglish)
+                    nb = sk.Level.CurrentLevel; 
+            }
+            SkillsRequired.Add( s, nb );
         }
 
         /// <summary>
