@@ -13,11 +13,13 @@ namespace SRH.Core
         protected int _maxEmployees;
         protected int _wealth;
         private readonly List<Employee> _employees;
+        readonly protected Game _myGame;
 
 
-        public Company( string name )
+        public Company( Game game, string name )
         {
             _name = name;
+            _myGame = game;
             _maxEmployees = 10;
             _employees = new List<Employee>();
         }

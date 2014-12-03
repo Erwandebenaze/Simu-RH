@@ -21,6 +21,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>true</UseVSHostingProcess>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -78,6 +79,12 @@
     <Compile Include="UcProjectPage.Designer.cs">
       <DependentUpon>UcProjectPage.cs</DependentUpon>
     </Compile>
+    <Compile Include="UcStatistics.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UcStatistics.Designer.cs">
+      <DependentUpon>UcStatistics.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="NewGame.resx">
       <DependentUpon>NewGame.cs</DependentUpon>
     </EmbeddedResource>
@@ -101,6 +108,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UcProjectPage.resx">
       <DependentUpon>UcProjectPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UcStatistics.resx">
+      <DependentUpon>UcStatistics.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

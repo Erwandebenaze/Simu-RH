@@ -84,8 +84,8 @@
 
         #endregion
 
-        private System.Windows.Forms.Button SaveGameButton;
         private System.Windows.Forms.Button NewGameButton;
         private System.Windows.Forms.Button LoadGameButton;
+        internal System.Windows.Forms.Button SaveGameButton;
     }
 }

@@ -17,7 +17,7 @@ namespace SRH.Interface
         List<Employee> _employees;
         Person _currentPerson;
 		Employee _currentEmployee;
-		//Skill _currentSkillToTrain;
+		Skill _currentSkillToTrain;
         
         public UcEmployeePage()
         {
@@ -93,7 +93,7 @@ namespace SRH.Interface
 				SetSkillsInForm( _currentEmployee.Worker, SelectedEmployeeSkillList );
 
 				SelectedEmployeeSkillsToTrain.Items.Clear();
-				SelectedEmployeeSkillsToTrain.Items.AddRange( _currentEmployee.Worker.Skills.Values
+				SelectedEmployeeSkillsToTrain.Items.AddRange( _currentEmployee.Worker.Skills
 					.Where( s => s.Level.CurrentLevel < 5 )
 					.Select( s => (object)s.FrenchSkillName )
 					.ToArray() );
@@ -114,7 +114,7 @@ namespace SRH.Interface
 		/// <param name="e"></param>
 		private void SelectedEmployeeSkillsToTrain_SelectedIndexChanged( object sender, EventArgs e )
 		{
-			_currentSkillToTrain = _currentEmployee.Worker.Skills.Values
+			_currentSkillToTrain = _currentEmployee.Worker.Skills
 				.Where( s => s.FrenchSkillName == (string)SelectedEmployeeSkillsToTrain.SelectedItem )
 				.Single();
 			SetTrainingValuesInForm( _currentSkillToTrain );
@@ -202,7 +202,7 @@ namespace SRH.Interface
 		private void SetSkillsInForm( Person p, ListView l )
 		{
 			l.Items.Clear();
-			l.Items.AddRange( p.Skills.Values.Select( s => AddSkills( s ) ).ToArray() );
+			l.Items.AddRange( p.Skills.Select( s => AddSkills( s ) ).ToArray() );
 		}
 
 		private void SetTrainingValuesInForm( Skill s )
