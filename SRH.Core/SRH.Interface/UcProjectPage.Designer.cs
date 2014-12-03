@@ -130,6 +130,7 @@
             this.EarningsExpected,
             this.Time});
             this.listPossibleProjects.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listPossibleProjects.FullRowSelect = true;
             this.listPossibleProjects.Location = new System.Drawing.Point(0, 0);
             this.listPossibleProjects.Margin = new System.Windows.Forms.Padding(4);
             this.listPossibleProjects.Name = "listPossibleProjects";
@@ -170,6 +171,7 @@
             this.Earnings,
             this.TimeLeft});
             this.listCurrentProjects.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listCurrentProjects.FullRowSelect = true;
             this.listCurrentProjects.Location = new System.Drawing.Point(0, 0);
             this.listCurrentProjects.Margin = new System.Windows.Forms.Padding(4);
             this.listCurrentProjects.Name = "listCurrentProjects";
@@ -226,6 +228,7 @@
             this.ProjectSkillRequired,
             this.ProjectLevelRecommanded});
             this.listSkillsRequired.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listSkillsRequired.FullRowSelect = true;
             this.listSkillsRequired.Location = new System.Drawing.Point(0, 0);
             this.listSkillsRequired.Name = "listSkillsRequired";
             this.listSkillsRequired.Size = new System.Drawing.Size(296, 447);
@@ -257,6 +260,7 @@
             this.EmployeeSkill,
             this.EmployeeLevel});
             this.listSkillsAvailable.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listSkillsAvailable.FullRowSelect = true;
             this.listSkillsAvailable.Location = new System.Drawing.Point(0, 0);
             this.listSkillsAvailable.Name = "listSkillsAvailable";
             this.listSkillsAvailable.Size = new System.Drawing.Size(430, 447);

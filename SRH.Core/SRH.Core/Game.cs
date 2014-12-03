@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization;
@@ -13,7 +14,6 @@ namespace SRH.Core
         readonly MyCompany _playerCompany;
         readonly List<Competitor> _competitors;
         readonly GameTime _timeGame;
-
         readonly Random _randomNumberGenerator;
         readonly List<Project> _possibleProjects;
 		List<KeyValuePair<string, string>> _skillNames;
@@ -24,14 +24,25 @@ namespace SRH.Core
 			
 			CreateSkillNames();
 			_market = new LaborMarket(this);
+            _timeGame = new GameTime( this );
+
 			_competitors = new List<Competitor>();
 
             _playerCompany = new MyCompany( this, companyName );
             CSV csvImport = new CSV();
 			_possibleProjects = csvImport.ReadCsv(_playerCompany, "../../../Data/data.csv" );
+            AddCompetitors();
 
-            _timeGame = new GameTime(this);
 		}
+
+        private void AddCompetitors()
+        {
+            _competitors.Add( new Competitor( this, "Capgemini", 50000, 100 ) );
+            _competitors.Add( new Competitor( this, "Atos", 40000, 80 ) );
+            _competitors.Add( new Competitor( this, "Sopra", 30000, 60 ) );
+            _competitors.Add( new Competitor( this, "Altran", 20000, 40 ) );
+            _competitors.Add( new Competitor( this, "Steria", 10000, 20 ) );
+        }
 
         #region Getters Setters
         public GameTime TimeGame

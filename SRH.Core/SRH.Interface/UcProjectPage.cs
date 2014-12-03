@@ -61,7 +61,6 @@ namespace SRH.Interface
 			listCurrentProjects.Items.AddRange( Projects.Select( p => CreateListItemViewProjects( p ) ).ToArray() );
             #region TODO
             // TODO : Ajouter la liste pour les projets en cours lorsque le temps sera définis.
-            // TODO : si un projet était en cours, ne pas le loader de nouveau dans la liste des projets possibles 
             #endregion
 
 		}
@@ -72,7 +71,7 @@ namespace SRH.Interface
             i.Tag = p;
             i.SubItems.Add( new ListViewItem.ListViewSubItem( i, p.Difficulty.ToString() ) );
             i.SubItems.Add( new ListViewItem.ListViewSubItem( i, p.Earnings.ToString() ) );
-            i.SubItems.Add( new ListViewItem.ListViewSubItem( i, p.Duration.ToString() ) );
+            i.SubItems.Add( new ListViewItem.ListViewSubItem( i, p.TimeLeft.ToString() ) );
             return i;
         }
 
@@ -87,16 +86,7 @@ namespace SRH.Interface
 
                 _currentProj = (Project)listPossibleProjects.SelectedItems[listPossibleProjects.SelectedItems.Count - 1].Tag;
                 AffectCurrentProjectFields();
-                #region TODO
-                //if( _currentProj.Activated )
-                //{
-                //    _startOrStopProject.Text = "Arrêter un projet";
-                //    // TODO : Disable tous les élèments d'affectation aux compétences.
-                //listSkillsRequired.Items.AddRange( _currentProj.EmployeesAffectedWithSkill.Select( k => CompleteListItemViewSkillsRequired( k.Key, k.Value ) ).ToArray() );
-                //}
-                //else
-                //{         
-                #endregion
+
                 AffectStartButtonFields();
 					listSkillsRequired.Items.Clear();
                     listSkillsRequired.Items.AddRange( _currentProj.SkillsRequired.Select( k => CreateListItemViewSkillsRequired( k.Key, k.Value ) ).ToArray() );
@@ -207,9 +197,6 @@ namespace SRH.Interface
                 listCurrentProjects.Items.Add( projectItem );
             }
             _projects = GameContext.CurrentGame.PlayerCompany.Projects;
-
-
-            //GameContext.CurrentGame.PlayerCompany.MoveProject( pr );
         }
         public void RemoveEndingProject(Project p)
         {
@@ -236,17 +223,20 @@ namespace SRH.Interface
 
         private void AffectStartButtonFields()
         {
+            if (!_currentProj.Activated)
+            {
+                if( _currentProj.SkillsRequired.Count != 0 )
+                {
+                    _startOrStopProject.Enabled = false;
+                    _startOrStopProject.Text = "Affectez les employés avant de lancer.";
+                }
+                else
+                {
+                    _startOrStopProject.Enabled = true;
+                    _startOrStopProject.Text = "Lancer un projet";
+                }
+            }
 
-            if( _currentProj.SkillsRequired.Count != 0 )
-            {
-                _startOrStopProject.Enabled = false;
-                _startOrStopProject.Text = "Affectez les employés avant de lancer.";
-            }
-            else
-            {
-                _startOrStopProject.Enabled = true;
-                _startOrStopProject.Text = "Lancer un projet";
-            }
         }
 
         private void listSkillsRequired_MouseDoubleClick( object sender, MouseEventArgs e )

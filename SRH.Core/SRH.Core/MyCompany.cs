@@ -11,14 +11,12 @@ namespace SRH.Core
 	{
         List<Project> _possibleCompanyProjects;
         readonly List<Project> _projects;
-        readonly Game _myGame;
         double _maxProjectDifficulty;
         readonly Level _companyLevel;
 
 		internal MyCompany( Game game, string name ) : base( game, name )
         {
 			if( String.IsNullOrWhiteSpace( name ) ) throw new ArgumentNullException( "The company name cannot be null or a whitespace" );
-            _myGame = game;
             _wealth = 15000;
 			_companyLevel = new Level( this, 1 );
 			_maxProjectDifficulty = 1;
@@ -109,7 +107,9 @@ namespace SRH.Core
                 foreach( Skill s in p.EmployeesAffectedWithSkill.Values )
                 {
                     s.Level.IncreaseXp(p.XpPerPerson);
+                    
                 }
+                e.Busy = false;
             }
         }
         public Project BeginAProject( Project p )
@@ -123,6 +123,11 @@ namespace SRH.Core
         public Project StopAProject( Project p )
         {
             _possibleCompanyProjects.Add( p );
+            foreach( Employee e in p.EmployeesAffectedWithSkill.Keys )
+            {
+
+                e.Busy = false;
+            }
             _projects.Remove( p );
             p.StopProject();
             return p;

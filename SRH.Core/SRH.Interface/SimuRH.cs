@@ -24,7 +24,8 @@ namespace SRH.Interface
 
 			// BITE AU CUL
             InitializeComponent();
-            _myGame = new Game( 1, "Erwan" );
+            //_myGame = new Game( 1, "Erwan" );
+            _myGame = GameLoader.Load( "Erfive" );
             _optionsForm = new Options();
             _timeOfGame = _myGame.TimeGame;
             _timer = new Timer();
@@ -43,14 +44,30 @@ namespace SRH.Interface
 		
         void _timer_Tick( object sender, EventArgs e )
         {
-            BarProgress();
-			ExperienceProgress();
-			WealthProgress();
-            _timeOfGame.newDay();
-            _myGame.PlayerCompany.EndProjectIfItsFinish();
-            ClearListsProjects();
-            _dateOfGame.Text = _myGame.TimeGame.CurrentTimeOfGame.ToString("d");
-            _day.Text = _timeOfGame.FrenchDayOfWeek;
+            if( _myGame.PlayerCompany.Wealth < -50000 )
+            {
+                _timer.Stop();
+
+                MessageBox.Show( "Vous avez perdu. Votre dette a dépassé 50 000€ ! Retentez votre chance ou chargez une partie." );
+                _optionsForm.SaveGameButton.Enabled = false;
+                ShowOptions();
+            } else
+            {
+                BarProgress();
+                ExperienceProgress();
+                WealthProgress();
+                _timeOfGame.newDay();
+                _myGame.PlayerCompany.EndProjectIfItsFinish();
+                ClearListsProjects();
+                _dateOfGame.Text = _myGame.TimeGame.CurrentTimeOfGame.ToString( "d" );
+                _day.Text = _timeOfGame.FrenchDayOfWeek;
+
+                foreach( Competitor competitor in _myGame.Competitors )
+                {
+                    competitor.TryToAddMoneyAndEmployee();
+                }
+            }
+
         }
         static ListViewItem CreateListItemViewProjects( Project p )
         {
