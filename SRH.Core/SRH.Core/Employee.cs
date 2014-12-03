@@ -51,13 +51,12 @@ namespace SRH.Core
 		/// <returns>False if the Company has inadequate wealth</returns>
 		public bool Train( string skillName )
 		{
-			// Check if skillName is valid and what type of skill it is
+			// Check if skillName is valid
 			_comp.Game.ValidateSkillName( skillName );
-			bool isProjSkill = _comp.Game.IsProjSkill( skillName );
 
 			// Set a candidate skill to test
 			Skill candidate = null;
-			if( isProjSkill ) candidate = new ProjSkill( skillName );
+			if( _comp.Game.IsProjSkill( skillName ) ) candidate = new ProjSkill( skillName );
 			else candidate = new CompaSkill( skillName );
 
 			if( _worker.Skills.Contains( candidate ) )
@@ -76,10 +75,10 @@ namespace SRH.Core
 			}
 			else
 			{
-				if( _comp.Wealth >= candidate.BasePriceToTrain )
+				if( _comp.Wealth >= candidate.BaseCostToTrain )
 				{
 					Skill newSkill = _worker.AddSkill( skillName );
-					_comp.Wealth -= newSkill.BasePriceToTrain;
+					_comp.Wealth -= newSkill.BaseCostToTrain;
 					return true;
 				}
 				else

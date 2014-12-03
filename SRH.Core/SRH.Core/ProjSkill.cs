@@ -12,7 +12,7 @@ namespace SRH.Core
         internal ProjSkill( string skillName, int startLevel = 1 )
 			: base( skillName, startLevel )
 		{
-			_basePriceToTrain = 1000;
+			_baseCostToTrain = 1000;
 		}
 
 		public override void FixPriceAndTime()

@@ -12,7 +12,8 @@ namespace SRH.Core
         private string _skillName;
 		private int _upgradePrice;
 		private int _timeToUpgrade;
-		protected int _basePriceToTrain;
+		protected int _baseCostToTrain;
+		protected int _baseTimeToTrain;
 
         internal Skill( string skillName, int startLevel = 1 )
 		{
@@ -45,10 +46,16 @@ namespace SRH.Core
 		}
 		#endregion
 
-		internal int BasePriceToTrain
+		public int BaseCostToTrain
 		{
-			get { return _basePriceToTrain; }
-		} 
+			get { return _baseCostToTrain; }
+		}
+
+		public int BaseTimeToTrain
+		{
+			get { return _baseTimeToTrain; }
+			set { _baseTimeToTrain = value; }
+		}
 
         public override bool Equals( object obj )
         {

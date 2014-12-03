@@ -18,6 +18,7 @@ namespace SRH.Interface
         Person _currentPerson;
 		Employee _currentEmployee;
 		Skill _currentSkillToTrain;
+		string _newSkillToAddName;
         
         public UcEmployeePage()
         {
@@ -91,12 +92,7 @@ namespace SRH.Interface
 				SelectedEmployeeAge.Text = _currentEmployee.Worker.Age.ToString();
 
 				SetSkillsInForm( _currentEmployee.Worker, SelectedEmployeeSkillList );
-
-				SelectedEmployeeSkillsToTrain.Items.Clear();
-				SelectedEmployeeSkillsToTrain.Items.AddRange( _currentEmployee.Worker.Skills
-					.Where( s => s.Level.CurrentLevel < 5 )
-					.Select( s => (object)s.SkillName )
-					.ToArray() );
+				CreateSkillsToTrainComboBox();
 			}
 
 			if( _currentEmployee != null )
@@ -114,12 +110,23 @@ namespace SRH.Interface
 		/// <param name="e"></param>
 		private void SelectedEmployeeSkillsToTrain_SelectedIndexChanged( object sender, EventArgs e )
 		{
-			_currentSkillToTrain = _currentEmployee.Worker.Skills
-				.Where( s => s.SkillName == (string)SelectedEmployeeSkillsToTrain.SelectedItem )
-				.Single();
-
-			SetTrainingValuesInForm( _currentSkillToTrain );
 			Train.Enabled = true;
+			string selectedSkill = (string)SelectedEmployeeSkillsToTrain.SelectedItem;
+			_currentSkillToTrain = _currentEmployee.Worker.Skills
+				.Where( s => s.SkillName == selectedSkill )
+				.SingleOrDefault();
+			if( _currentSkillToTrain == null )
+			{
+				_newSkillToAddName = selectedSkill;
+				SetTrainingValuesInForm( selectedSkill );
+			}
+			else
+				if( _currentSkillToTrain.Level.CurrentLevel < 5 )
+				{
+					SetTrainingValuesInForm( _currentSkillToTrain );
+				}
+				else
+					Train.Enabled = false;
 		}
 
 		/// <summary>
@@ -155,15 +162,32 @@ namespace SRH.Interface
 		}
 
 		/// <summary>
-		/// The selected Employee gains a level in the selected Skill
+		/// The selected Employee gains a level in the selected Skill if he already has it, or gains a new Skill at level 1
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
 		private void Train_Click( object sender, EventArgs e )
 		{
-			_currentEmployee.Train( _currentSkillToTrain.SkillName );
+			Train.Enabled = true;
+			if( _currentSkillToTrain == null ) 
+			{
+				_currentEmployee.Train( _newSkillToAddName );
+				_currentSkillToTrain = _currentEmployee.Worker.Skills
+				.Where( s => s.SkillName == _newSkillToAddName )
+				.SingleOrDefault();
+			}
+			else
+			{
+				_currentEmployee.Train( _currentSkillToTrain.SkillName );
+				if( _currentSkillToTrain.Level.CurrentLevel < 5 ) //TODO : || _currentEmployee.busy == false
+				{
+					SetTrainingValuesInForm( _currentSkillToTrain );
+				}
+				else
+					Train.Enabled = false;
+			}
 
-			SetTrainingValuesInForm( _currentSkillToTrain );
+			CreateSkillsToTrainComboBox();
 			SetSkillsInForm( _currentEmployee.Worker, SelectedEmployeeSkillList );
 		}
 
@@ -229,6 +253,35 @@ namespace SRH.Interface
 
 			SelectedSkillToTrainCost.Text = s.UpgradePrice.ToString();
 			SelectedSkillToTrainTime.Text = s.TimeToUpgrade.ToString();
+		}
+
+		private void SetTrainingValuesInForm( string skillName )
+		{
+			// TODO : trouver le moyen de ne pas le mettre à la mimine !!!
+			if( GameContext.CurrentGame.IsProjSkill( skillName ) )
+			{
+				SelectedSkillToTrainCost.Text = "1000";
+				SelectedSkillToTrainTime.Text = "2";
+			}
+			else
+			{
+				SelectedSkillToTrainCost.Text = "1500";
+				SelectedSkillToTrainTime.Text = "4";
+			}
+		}
+
+		private void CreateSkillsToTrainComboBox()
+		{
+			SelectedEmployeeSkillsToTrain.Items.Clear();
+			IEnumerable<string> presentSkills = _currentEmployee.Worker.Skills
+				.Where( s => s.Level.CurrentLevel < 5 )
+				.Select( s => s.SkillName );
+			SelectedEmployeeSkillsToTrain.Items.AddRange( presentSkills.ToArray() );
+
+			SelectedEmployeeSkillsToTrain.Items.AddRange( GameContext.CurrentGame.SkillNames
+				.Select( s => s.Value )
+				.Where( s => !( _currentEmployee.Worker.Skills.Any( ps => ps.SkillName == s ) ) )
+				.ToArray() );
 		}
     }
 }

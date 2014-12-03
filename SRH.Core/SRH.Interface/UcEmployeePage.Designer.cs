@@ -49,6 +49,7 @@
 			this.EmployeeFirstNameHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.EmployeeAgeHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.splitContainer3 = new System.Windows.Forms.SplitContainer();
+			this.SelectedSkillToTrainTime = new System.Windows.Forms.Label();
 			this.SelectedSkillToTrainCost = new System.Windows.Forms.Label();
 			this.SelectedEmployeeSkillsToTrain = new System.Windows.Forms.ComboBox();
 			this.Train = new System.Windows.Forms.Button();
@@ -64,7 +65,6 @@
 			this.SelectedPersonAge = new System.Windows.Forms.Label();
 			this.SelectedPersonName = new System.Windows.Forms.Label();
 			this.hirePerson = new System.Windows.Forms.Button();
-			this.SelectedSkillToTrainTime = new System.Windows.Forms.Label();
 			SelectedPersonTitle = new System.Windows.Forms.Label();
 			SelectedPersonNameTitle = new System.Windows.Forms.Label();
 			SelectedPersonAgeTitle = new System.Windows.Forms.Label();
@@ -174,6 +174,15 @@
 			SelectedSkillTrainCostTitle.TabIndex = 16;
 			SelectedSkillTrainCostTitle.Text = "Coût : ";
 			// 
+			// SelectedSkillTrainTimeTitle
+			// 
+			SelectedSkillTrainTimeTitle.AutoSize = true;
+			SelectedSkillTrainTimeTitle.Location = new System.Drawing.Point(268, 79);
+			SelectedSkillTrainTimeTitle.Name = "SelectedSkillTrainTimeTitle";
+			SelectedSkillTrainTimeTitle.Size = new System.Drawing.Size(48, 13);
+			SelectedSkillTrainTimeTitle.TabIndex = 18;
+			SelectedSkillTrainTimeTitle.Text = "Temps : ";
+			// 
 			// PersonList
 			// 
 			this.PersonList.Activation = System.Windows.Forms.ItemActivation.OneClick;
@@ -182,6 +191,7 @@
             this.PersonFirstnameHeader,
             this.PersonAgeHeader});
 			this.PersonList.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.PersonList.FullRowSelect = true;
 			this.PersonList.Location = new System.Drawing.Point(0, 0);
 			this.PersonList.MultiSelect = false;
 			this.PersonList.Name = "PersonList";
@@ -246,6 +256,7 @@
             this.EmployeeFirstNameHeader,
             this.EmployeeAgeHeader});
 			this.EmployeeList.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.EmployeeList.FullRowSelect = true;
 			this.EmployeeList.Location = new System.Drawing.Point(0, 0);
 			this.EmployeeList.MultiSelect = false;
 			this.EmployeeList.Name = "EmployeeList";
@@ -305,6 +316,15 @@
 			this.splitContainer3.Size = new System.Drawing.Size(479, 515);
 			this.splitContainer3.SplitterDistance = 243;
 			this.splitContainer3.TabIndex = 0;
+			// 
+			// SelectedSkillToTrainTime
+			// 
+			this.SelectedSkillToTrainTime.AutoSize = true;
+			this.SelectedSkillToTrainTime.Location = new System.Drawing.Point(312, 79);
+			this.SelectedSkillToTrainTime.Name = "SelectedSkillToTrainTime";
+			this.SelectedSkillToTrainTime.Size = new System.Drawing.Size(14, 13);
+			this.SelectedSkillToTrainTime.TabIndex = 19;
+			this.SelectedSkillToTrainTime.Text = "X";
 			// 
 			// SelectedSkillToTrainCost
 			// 
@@ -442,24 +462,6 @@
 			this.hirePerson.Text = "Engager";
 			this.hirePerson.UseVisualStyleBackColor = true;
 			this.hirePerson.Click += new System.EventHandler(this.hirePerson_Click);
-			// 
-			// SelectedSkillToTrainTime
-			// 
-			this.SelectedSkillToTrainTime.AutoSize = true;
-			this.SelectedSkillToTrainTime.Location = new System.Drawing.Point(312, 79);
-			this.SelectedSkillToTrainTime.Name = "SelectedSkillToTrainTime";
-			this.SelectedSkillToTrainTime.Size = new System.Drawing.Size(14, 13);
-			this.SelectedSkillToTrainTime.TabIndex = 19;
-			this.SelectedSkillToTrainTime.Text = "X";
-			// 
-			// SelectedSkillTrainTimeTitle
-			// 
-			SelectedSkillTrainTimeTitle.AutoSize = true;
-			SelectedSkillTrainTimeTitle.Location = new System.Drawing.Point(268, 79);
-			SelectedSkillTrainTimeTitle.Name = "SelectedSkillTrainTimeTitle";
-			SelectedSkillTrainTimeTitle.Size = new System.Drawing.Size(48, 13);
-			SelectedSkillTrainTimeTitle.TabIndex = 18;
-			SelectedSkillTrainTimeTitle.Text = "Temps : ";
 			// 
 			// UcEmployeePage
 			// 

@@ -126,7 +126,7 @@ namespace SRH.Core
 		/// </summary>
 		/// <param name="skillName"></param>
 		/// <returns>True if the string represents an ProjSkill, false if not</returns>
-		internal bool IsProjSkill( string skillName )
+		public bool IsProjSkill( string skillName )
 		{
 			bool isProjSkill = true;
 			foreach( KeyValuePair<string, string> kvp in _skillNames )

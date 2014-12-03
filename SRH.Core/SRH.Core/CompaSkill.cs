@@ -12,7 +12,7 @@ namespace SRH.Core
         internal CompaSkill( string skillName, int startLevel = 1 )
 			: base( skillName, startLevel )
 		{
-			_basePriceToTrain = 1500;
+			_baseCostToTrain = 1500;
 		}
 
         public override void FixPriceAndTime()
