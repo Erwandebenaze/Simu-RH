@@ -118,7 +118,7 @@ namespace SRH.Interface
                 _currentSkill = (Skill)listSkillsRequired.SelectedItems[listSkillsRequired.SelectedItems.Count - 1].Tag;
                 if (_currentProj.SkillsRequired.ContainsKey(_currentSkill))
                 {
-                    listSkillsAvailable.Items.AddRange( _currentProj.MyComp.Employees.Where( emp => emp.Worker.Skills.Any( s => s.SkillNameEnglish == _currentSkill.SkillNameEnglish ) )
+                    listSkillsAvailable.Items.AddRange( _currentProj.MyComp.Employees.Where( emp => emp.Worker.Skills.Any( s => s.SkillName == _currentSkill.SkillName ) )
                                                                  .Where( emp => !emp.Busy )
                                                                  .Select( emp => CreateListItemViewEmployeeWithSkill( emp, _currentSkill ) )
                                                                  .OrderBy( emp => _currentSkill.Level.CurrentLevel )
@@ -129,9 +129,9 @@ namespace SRH.Interface
         }
         private ListViewItem CreateListItemViewSkillsRequired( Skill skill, int level )
         {
-            ListViewItem i = new ListViewItem(skill.FrenchSkillName + "("+level.ToString()+")");
+            ListViewItem i = new ListViewItem(skill.SkillName + "("+level.ToString()+")");
             i.Tag = skill;
-            i.SubItems.Add( new ListViewItem.ListViewSubItem( i, skill.FrenchSkillName ) );
+            i.SubItems.Add( new ListViewItem.ListViewSubItem( i, skill.SkillName ) );
             i.SubItems.Add( new ListViewItem.ListViewSubItem( i, "0 ("+level.ToString()+")" ) );
             return i;
         }
@@ -139,7 +139,7 @@ namespace SRH.Interface
         {
             ListViewItem i = new ListViewItem( e.Worker.FirstName + " " + e.Worker.LastName );
             i.Tag = skill;
-            i.SubItems.Add( new ListViewItem.ListViewSubItem( i, skill.FrenchSkillName ) );
+            i.SubItems.Add( new ListViewItem.ListViewSubItem( i, skill.SkillName ) );
             i.SubItems.Add( new ListViewItem.ListViewSubItem( i, skill.Level.CurrentLevel.ToString() + " (" + _currentSkill.Level.CurrentLevel + ")" ) );
            // Risque de problème sur le level entre parenthèses.
             return i;
@@ -151,7 +151,7 @@ namespace SRH.Interface
             {
                 
                 i.Tag = emp;
-                i.SubItems.Add( new ListViewItem.ListViewSubItem( i, s.FrenchSkillName ) );
+                i.SubItems.Add( new ListViewItem.ListViewSubItem( i, s.SkillName ) );
                 i.SubItems.Add( new ListViewItem.ListViewSubItem( i, s.Level.CurrentLevel.ToString() ) );     
             }
             return i;
@@ -273,7 +273,7 @@ namespace SRH.Interface
                 listSkillsRequired.Items.AddRange( _currentProj.EmployeesAffectedWithSkill.Select( k => CompleteListItemViewSkillsRequired( k.Key, k.Value ) ).ToArray() );
 
                 listSkillsAvailable.Items.Clear();
-                listSkillsAvailable.Items.AddRange( _currentProj.MyComp.Employees.Where( emp => emp.Worker.Skills.Any( s => s.SkillNameEnglish == _currentSkill.SkillNameEnglish ) )
+                listSkillsAvailable.Items.AddRange( _currentProj.MyComp.Employees.Where( emp => emp.Worker.Skills.Any( s => s.SkillName == _currentSkill.SkillName ) )
                                              .Where( emp => !emp.Busy )
                                              .Select( emp => CreateListItemViewEmployeeWithSkill( emp, _currentSkill ) )
                                              .OrderBy( emp => _currentSkill.Level.CurrentLevel )

@@ -9,18 +9,26 @@ namespace SRH.Core
     [Serializable]
     public abstract class Company
     {
+		protected readonly Game _game;
         protected readonly string _name;
         protected int _maxEmployees;
         protected int _wealth;
         private readonly List<Employee> _employees;
 
 
-        public Company( string name )
+        public Company( Game game, string name )
         {
+			_game = game;
             _name = name;
             _maxEmployees = 10;
             _employees = new List<Employee>();
         }
+
+		internal Game Game
+		{
+			get { return _game; }
+		} 
+
         public List<Employee> Employees
         {
             get { return _employees; }

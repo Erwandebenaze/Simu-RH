@@ -16,11 +16,13 @@ namespace SRH.Core
 
         readonly Random _randomNumberGenerator;
         readonly List<Project> _possibleProjects;
-        
+		List<KeyValuePair<string, string>> _skillNames;
 
 		public Game( int seed, string companyName )
 		{
             _randomNumberGenerator = new Random( seed );
+			
+			CreateSkillNames();
 			_market = new LaborMarket(this);
 			_competitors = new List<Competitor>();
 
@@ -51,13 +53,17 @@ namespace SRH.Core
             get { return _competitors; }
         }
 
+		public IReadOnlyList<KeyValuePair<string, string>> SkillNames
+		{
+			get { return _skillNames; }
+		}
         /// <summary>
         /// Static method to get a <see cref="RandomGenerator"/>
         /// </summary>
         /// <returns>A static instance of <see cref="RandomGenerator"/></returns>
 		internal RandomGenerator GetRandomGenerator()
 		{
-			return new RandomGenerator( _randomNumberGenerator );
+			return new RandomGenerator(this, _randomNumberGenerator );
 		}
 
         internal IReadOnlyList<Project> PossibleProjects
@@ -74,6 +80,65 @@ namespace SRH.Core
             stream.Close();
         }
 
+		/// <summary>
+		/// Sets the list of Ivariant skill names
+		/// </summary>
+		private void CreateSkillNames()
+		{
+			_skillNames = new List<KeyValuePair<string, string>>();
 
+			_skillNames.Add( new KeyValuePair<string, string>( "proj", "Développement" ) );
+			_skillNames.Add( new KeyValuePair<string, string>( "proj", "Conception" ) );
+			_skillNames.Add( new KeyValuePair<string, string>( "proj", "Management de projet" ) );
+			_skillNames.Add( new KeyValuePair<string, string>( "proj", "Analyse fonctionnelle" ) );
+			_skillNames.Add( new KeyValuePair<string, string>( "proj", "Technicien d'infrastucture" ) );
+			_skillNames.Add( new KeyValuePair<string, string>( "proj", "Béta testeur" ) );
+			_skillNames.Add( new KeyValuePair<string, string>( "proj", "Base de données" ) );
+			_skillNames.Add( new KeyValuePair<string, string>( "proj", "Interface graphique" ) );
+			_skillNames.Add( new KeyValuePair<string, string>( "proj", "Développement web" ) );
+			_skillNames.Add( new KeyValuePair<string, string>( "proj", "Réseau" ) );
+			_skillNames.Add( new KeyValuePair<string, string>( "proj", "Sécurité" ) );
+
+			_skillNames.Add( new KeyValuePair<string, string>( "compa", "Commercial" ) );
+			_skillNames.Add( new KeyValuePair<string, string>( "compa", "Ressources humaines" ) );
+			_skillNames.Add( new KeyValuePair<string, string>( "compa", "Directeur de projets" ) );
+			_skillNames.Add( new KeyValuePair<string, string>( "compa", "Gestion de contrat" ) );
+			_skillNames.Add( new KeyValuePair<string, string>( "compa", "Animation" ) );
+		}
+
+		/// <summary>
+		/// Checks if a string is a proper Skill name, if not, throw an ArgumentException
+		/// </summary>
+		/// <param name="skillName">The string to test</param>
+		internal void ValidateSkillName( string skillName )
+		{
+			bool valid = false;
+			foreach(KeyValuePair<string, string> kvp in _skillNames)
+			{
+				if( kvp.Value == skillName ) valid = true;
+			}
+			if( !valid )
+				throw new ArgumentException( "The skill name must exist in Game.SkillNames." );
+		}
+
+		/// <summary>
+		/// Cheks if a string represents a ProjSkill or not
+		/// </summary>
+		/// <param name="skillName"></param>
+		/// <returns>True if the string represents an ProjSkill, false if not</returns>
+		internal bool IsProjSkill( string skillName )
+		{
+			bool isProjSkill = true;
+			foreach( KeyValuePair<string, string> kvp in _skillNames )
+			{
+				if( kvp.Value == skillName )
+				{
+					if( kvp.Key == "compa" )
+						isProjSkill = false;
+					break;
+				}
+			}
+			return isProjSkill;
+		}
 	}
 }

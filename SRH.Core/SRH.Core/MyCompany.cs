@@ -15,7 +15,7 @@ namespace SRH.Core
         double _maxProjectDifficulty;
         readonly Level _companyLevel;
 
-		internal MyCompany( Game game, string name ) : base( name )
+		internal MyCompany( Game game, string name ) : base( game, name )
         {
 			if( String.IsNullOrWhiteSpace( name ) ) throw new ArgumentNullException( "The company name cannot be null or a whitespace" );
             _myGame = game;

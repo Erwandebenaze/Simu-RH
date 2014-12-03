@@ -81,33 +81,27 @@ namespace SRH.Core
 		#endregion
 
 		/// <summary>
-		/// Adds a <see cref="ProjSkill"/> to the Person's skills List
+		/// Adds a <see cref="Skill"/> to the Person's skills List
 		/// </summary>
-		/// <param name="skillName">The name of the skill, must be an enumerator of ProjSkill.SkillName</param>
-		/// <returns>The ProjSkill added</returns>
-		public Skill AddSkill( ProjSkill.SkillName skillName, int level = 1)
+		/// <param name="skillName">The name of the skill, must be present in the SkillList</param>
+		/// <returns>The Skill added</returns>
+		public Skill AddSkill( string skillName, int level = 1)
 		{
-			string skillNameString = skillName.ToString();
-			ProjSkill ps = new ProjSkill( skillNameString, level );
+			_lb.Game.ValidateSkillName( skillName );
 
-			_skills.Add(ps );
+			foreach( Skill s in _skills )
+			{
+				if( skillName == s.SkillName )
+					throw new ArgumentException( "The Person already has this Skill." );
+			}
 
-			return ps;
-		}
+			Skill newSkill = null;
+			if( _lb.Game.IsProjSkill( skillName ) ) newSkill = new ProjSkill( skillName );
+			else newSkill = new CompaSkill( skillName );
 
-		/// <summary>
-		/// Adds a <see cref="CompaSkill"/> to the Person's skills List
-		/// </summary>
-		/// <param name="skillName">The name of the skill, must be an enumerator of CompaSkill.SkillName</param>
-		/// <returns>The CompaSkill added</returns>
-		public Skill AddSkill( CompaSkill.SkillName skillName, int level = 1)
-		{
-			string skillNameString = skillName.ToString();
-			CompaSkill cs = new CompaSkill( skillNameString );
-
-			_skills.Add(cs );
-
-			return cs;
+			newSkill.Level.CurrentLevel = level;
+			_skills.Add( newSkill );
+			return newSkill;
 		}
 
         /// <summary>

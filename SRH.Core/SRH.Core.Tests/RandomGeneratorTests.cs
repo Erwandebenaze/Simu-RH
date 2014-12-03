@@ -16,7 +16,7 @@ namespace SRH.Core.Tests
         [Test]
         public void Create_RandomGenerator()
         {
-            RandomGenerator r = new RandomGenerator( new Random() );
+            RandomGenerator r = new RandomGenerator(myGame, new Random() );
 
             Assert.NotNull( r );
         }
@@ -24,7 +24,7 @@ namespace SRH.Core.Tests
         [Test]
         public void Create_a_random_Person()
         {
-            RandomGenerator r = new RandomGenerator( new Random() );
+            RandomGenerator r = new RandomGenerator(myGame, new Random() );
             LaborMarket lb = new LaborMarket( myGame );
             
             Person p = r.GetRandomPerson( lb, 18, 60 );

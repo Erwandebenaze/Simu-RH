@@ -43,22 +43,48 @@ namespace SRH.Core
             get { return _comp; }
         }
 		#endregion
-		//public bool Train( ProjSkill.SkillName s )
-		//{
-		//	// TODO : En fonction de la formation et de son niveau, augmenter le niveau, 
-		//	// si l'employé n'a pas la compétence, il doit l'ajouter, sinon il l'augmente.
-		//	if( _worker.Skills.Contains( Enum.GetName( s.GetType(), s ) ) )
-		//	{
-		//		ProjSkill.SkillName s = (SomeEnum)Enum.Parse(typeof(SomeEnum), "EnumValue");
-		//		int xpToNextLevel = s.Level.NextXpRequired - s.Level.CurrentXp;
-		//		s.Level.IncreaseXp( xpToNextLevel );
-		//	}
-		//	else
-		//	{
-		//		_worker.AddSkill()
-		//	}
-			
-		//	//Retourne true ou false si la compétence a été augmentée (problème d'argent, la compétence n'est ps instanciée (exeption)
-		//}
+
+		/// <summary>
+		/// Adds a Skill if the Employee doesn't have it, or increases it by 1 level.
+		/// </summary>
+		/// <param name="skillName"></param>
+		/// <returns>False if the Company has inadequate wealth</returns>
+		public bool Train( string skillName )
+		{
+			// Check if skillName is valid and what type of skill it is
+			_comp.Game.ValidateSkillName( skillName );
+			bool isProjSkill = _comp.Game.IsProjSkill( skillName );
+
+			// Set a candidate skill to test
+			Skill candidate = null;
+			if( isProjSkill ) candidate = new ProjSkill( skillName );
+			else candidate = new CompaSkill( skillName );
+
+			if( _worker.Skills.Contains( candidate ) )
+			{
+				Skill skillToTrain = _worker.Skills.Where( s => s.SkillName == skillName ).Single();
+
+				if( _comp.Wealth >= skillToTrain.UpgradePrice )
+				{
+					int xpToNextLevel = skillToTrain.Level.NextXpRequired - skillToTrain.Level.CurrentXp;
+					skillToTrain.Level.IncreaseXp( xpToNextLevel );
+					_comp.Wealth -= skillToTrain.UpgradePrice;
+					return true;
+				}
+				else 
+					return false;
+			}
+			else
+			{
+				if( _comp.Wealth >= candidate.BasePriceToTrain )
+				{
+					Skill newSkill = _worker.AddSkill( skillName );
+					_comp.Wealth -= newSkill.BasePriceToTrain;
+					return true;
+				}
+				else
+					return false;
+			}
+		}
     }
 }

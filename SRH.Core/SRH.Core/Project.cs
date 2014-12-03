@@ -170,7 +170,7 @@ namespace SRH.Core
             e.Busy = false;
             foreach (Skill sk in e.Worker.Skills)
             {
-                if (sk.SkillNameEnglish == s.SkillNameEnglish)
+                if (sk.SkillName == s.SkillName)
                     nb = sk.Level.CurrentLevel; 
             }
             _skillsRequired.Add( s, nb );

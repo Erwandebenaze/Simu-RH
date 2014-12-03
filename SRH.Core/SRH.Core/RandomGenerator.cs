@@ -10,12 +10,14 @@ namespace SRH.Core
     [Serializable]
 	class RandomGenerator
 	{
+		readonly Game _game;
 		readonly List<string> _firstNames;
 		readonly List<string> _lastNames;
 		Random _randomNumberGenerator;
 
-        internal RandomGenerator( Random randomNumberGenerator )
+        internal RandomGenerator(Game game, Random randomNumberGenerator )
 		{
+			_game = game;
             _firstNames = new List<string>();
             _lastNames = new List<string>();
 			_randomNumberGenerator = randomNumberGenerator;
@@ -51,7 +53,7 @@ namespace SRH.Core
 		/// <param name="ageMin"></param>
 		/// <param name="ageMax"></param>
 		/// <returns>A Person with a random name and a random age between ageMin and ageMax</returns>
-		public Person GetRandomPerson( LaborMarket Lb, int ageMin, int ageMax )
+		internal Person GetRandomPerson( LaborMarket Lb, int ageMin, int ageMax )
 		{
 			if( ageMin < 18 ) throw new ArgumentException( "The minimum age of a Person must be at least 18." );
 			if( ageMax > 60 ) throw new ArgumentException( "The maximum age of a Person must be 60 or less." );
@@ -66,11 +68,10 @@ namespace SRH.Core
 			int numberOfSKills = 0;
 			while( numberOfSKills < 2 )
 			{
-				ProjSkill.SkillName randomEnum = GetRandomEnum<ProjSkill.SkillName>();
-                Skill s = new ProjSkill( randomEnum.ToString() );
-				if( !( p.Skills.Contains(  s ) ) )
+				string randomSkillName = GetRandomSkillName();
+				if( !(bool)p.Skills.Select(s => s.SkillName == randomSkillName).SingleOrDefault()  )
 				{
-					p.AddSkill( randomEnum );
+					p.AddSkill( randomSkillName );
 					numberOfSKills++;
 				}
 			}
@@ -78,18 +79,10 @@ namespace SRH.Core
 			return p;
 		}
 
-		/// <summary>
-		/// Generic method that gets a random element of an enum
-		/// </summary>
-		/// <typeparam name="T">The enum from which an random element is taken </typeparam>
-		/// <returns>Returns a random element of the enmu T</returns>
-		T GetRandomEnum<T>()
+		string GetRandomSkillName()
 		{
-			Array A = System.Enum.GetValues( typeof( T ) );
-			T V = (T)A.GetValue( RandomNumberGenerator.Next( 0, A.Length ) );
-			return V;
+			return _game.SkillNames[ _randomNumberGenerator.Next( 0, _game.SkillNames.Count ) ].Value;
 		}
-		
         public int GetRandomMonth()
         {
             int month = RandomNumberGenerator.Next( 1, 12 );

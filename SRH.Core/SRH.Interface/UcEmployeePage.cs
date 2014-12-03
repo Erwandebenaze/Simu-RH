@@ -95,7 +95,7 @@ namespace SRH.Interface
 				SelectedEmployeeSkillsToTrain.Items.Clear();
 				SelectedEmployeeSkillsToTrain.Items.AddRange( _currentEmployee.Worker.Skills
 					.Where( s => s.Level.CurrentLevel < 5 )
-					.Select( s => (object)s.FrenchSkillName )
+					.Select( s => (object)s.SkillName )
 					.ToArray() );
 			}
 
@@ -115,7 +115,7 @@ namespace SRH.Interface
 		private void SelectedEmployeeSkillsToTrain_SelectedIndexChanged( object sender, EventArgs e )
 		{
 			_currentSkillToTrain = _currentEmployee.Worker.Skills
-				.Where( s => s.FrenchSkillName == (string)SelectedEmployeeSkillsToTrain.SelectedItem )
+				.Where( s => s.SkillName == (string)SelectedEmployeeSkillsToTrain.SelectedItem )
 				.Single();
 
 			SetTrainingValuesInForm( _currentSkillToTrain );
@@ -161,8 +161,7 @@ namespace SRH.Interface
 		/// <param name="e"></param>
 		private void Train_Click( object sender, EventArgs e )
 		{
-			int xpToNextLevel = _currentSkillToTrain.Level.NextXpRequired - _currentSkillToTrain.Level.CurrentXp;
-			_currentSkillToTrain.Level.IncreaseXp( xpToNextLevel );
+			_currentEmployee.Train( _currentSkillToTrain.SkillName );
 
 			SetTrainingValuesInForm( _currentSkillToTrain );
 			SetSkillsInForm( _currentEmployee.Worker, SelectedEmployeeSkillList );
@@ -203,7 +202,7 @@ namespace SRH.Interface
 		/// <returns>A ListViewItem containing the information to display about a Skill</returns>
 		static ListViewItem AddSkills( Skill s )
 		{
-			ListViewItem i = new ListViewItem( s.FrenchSkillName );
+			ListViewItem i = new ListViewItem( s.SkillName );
 			i.Tag = s;
 			i.SubItems.Add( new ListViewItem.ListViewSubItem( i, s.Level.CurrentLevel.ToString() ) );
 			return i;
