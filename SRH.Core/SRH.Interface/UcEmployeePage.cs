@@ -91,8 +91,17 @@ namespace SRH.Interface
 				SelectedEmployeeName.Text = _currentEmployee.Worker.FirstName + " " + _currentEmployee.Worker.LastName;
 				SelectedEmployeeAge.Text = _currentEmployee.Worker.Age.ToString();
 
-				SetSkillsInForm( _currentEmployee.Worker, SelectedEmployeeSkillList );
-				CreateSkillsToTrainComboBox();
+				if(!_currentEmployee.Busy)
+				{
+					SetSkillsInForm( _currentEmployee.Worker, SelectedEmployeeSkillList );
+					CreateSkillsToTrainComboBox();
+					EnableTrainingDisplay( true );
+				}
+				else
+				{
+					EnableTrainingDisplay( false );
+				}
+				
 			}
 
 			if( _currentEmployee != null )
@@ -179,7 +188,7 @@ namespace SRH.Interface
 			else
 			{
 				_currentEmployee.Train( _currentSkillToTrain.SkillName );
-				if( _currentSkillToTrain.Level.CurrentLevel < 5 ) //TODO : || _currentEmployee.busy == false
+				if( _currentSkillToTrain.Level.CurrentLevel < 5 )
 				{
 					SetTrainingValuesInForm( _currentSkillToTrain );
 				}
@@ -282,6 +291,26 @@ namespace SRH.Interface
 				.Select( s => s.Value )
 				.Where( s => !( _currentEmployee.Worker.Skills.Any( ps => ps.SkillName == s ) ) )
 				.ToArray() );
+		}
+
+		private void EnableTrainingDisplay( bool enabled )
+		{
+			if(enabled)
+			{
+				SelectedEmployeeSkillsToTrain.Visible = true;
+				SelectedSkillTrainCostTitle.Visible = true;
+				SelectedSkillToTrainCost.Visible = true;
+				SelectedSkillTrainTimeTitle.Visible = true;
+				SelectedSkillToTrainTime.Visible = true;
+			}
+			else
+			{
+				SelectedEmployeeSkillsToTrain.Visible = false;
+				SelectedSkillTrainCostTitle.Visible = false;
+				SelectedSkillToTrainCost.Visible = false;
+				SelectedSkillTrainTimeTitle.Visible = false;
+				SelectedSkillToTrainTime.Visible = false;
+			}
 		}
     }
 }

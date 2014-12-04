@@ -21,13 +21,14 @@ namespace SRH.Interface
 
         public SimuRH()
         {
+
+			// BITE AU CUL
             InitializeComponent();
 <<<<<<< HEAD
-            _myGame = new Game( 1, "SimuRH" );
-            //_myGame = GameLoader.Load("SimuRH");
+            _myGame = new Game( 1, "Erwan" );
 =======
-            //_myGame = new Game( 1, "Erwan" );
-            _myGame = GameLoader.Load("Erwan");
+            //_myGame = new Game( 1, "Erfive" );
+            _myGame = GameLoader.Load( "Erfive" );
 >>>>>>> origin/develop
             _optionsForm = new Options();
             _timeOfGame = _myGame.TimeGame;
@@ -44,16 +45,33 @@ namespace SRH.Interface
 			this.ucProjectPage.LoadPage();
 		}
 
+		
         void _timer_Tick( object sender, EventArgs e )
         {
-            BarProgress();
-			ExperienceProgress();
-			WealthProgress();
-            _timeOfGame.newDay();
-            _myGame.PlayerCompany.EndProjectIfItsFinish();
-            ClearListsProjects();
-            _dateOfGame.Text = _myGame.TimeGame.CurrentTimeOfGame.ToString("d");
-            _day.Text = _timeOfGame.FrenchDayOfWeek;
+            if( _myGame.PlayerCompany.Wealth < -50000 )
+            {
+                _timer.Stop();
+
+                MessageBox.Show( "Vous avez perdu. Votre dette a dépassé 50 000€ ! Retentez votre chance ou chargez une partie." );
+                _optionsForm.SaveGameButton.Enabled = false;
+                ShowOptions();
+            } else
+            {
+                BarProgress();
+                ExperienceProgress();
+                WealthProgress();
+                _timeOfGame.newDay();
+                _myGame.PlayerCompany.EndProjectIfItsFinish();
+                ClearListsProjects();
+                _dateOfGame.Text = _myGame.TimeGame.CurrentTimeOfGame.ToString( "d" );
+                _day.Text = _timeOfGame.FrenchDayOfWeek;
+
+                foreach( Competitor competitor in _myGame.Competitors )
+                {
+                    competitor.TryToAddMoneyAndEmployee();
+                }
+            }
+
         }
         static ListViewItem CreateListItemViewProjects( Project p )
         {
@@ -211,6 +229,18 @@ namespace SRH.Interface
 		private void SimuRH_Load()
 		{
 
+		}
+
+		private void tabControl1_SelectedIndexChanged( object sender, EventArgs e )
+		{
+			if( tabControl1.SelectedTab == tabControl1.TabPages[ "Employees" ] )
+			{
+				this.ucEmployeePage.LoadPage();
+			}
+			else if( tabControl1.SelectedTab == tabControl1.TabPages[ "Projects" ] )
+			{
+				this.ucProjectPage.LoadPage();
+			}
 		}
     }
 }

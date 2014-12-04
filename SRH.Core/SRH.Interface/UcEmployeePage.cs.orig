@@ -17,7 +17,11 @@ namespace SRH.Interface
         List<Employee> _employees;
         Person _currentPerson;
 		Employee _currentEmployee;
-		//Skill _currentSkillToTrain;
+		Skill _currentSkillToTrain;
+<<<<<<< HEAD
+		string _newSkillToAddName;
+=======
+>>>>>>> origin/develop
         
         public UcEmployeePage()
         {
@@ -66,13 +70,8 @@ namespace SRH.Interface
                 SelectedPersonName.Text = _currentPerson.FirstName + " " + _currentPerson.LastName;
                 SelectedPersonAge.Text = _currentPerson.Age.ToString();
 
-<<<<<<< HEAD
 				SetSkillsInForm( _currentPerson, SelectedPersonSkillList );
 
-=======
-				SelectedPersonSkillList.Items.Clear();
-				SelectedPersonSkillList.Items.AddRange( _currentPerson.Skills.Select( s => AddSkills( s ) ).ToArray() );
->>>>>>> origin/develop
             }
 			if( _currentPerson != null )
 			{
@@ -95,20 +94,16 @@ namespace SRH.Interface
 				SelectedEmployeeName.Text = _currentEmployee.Worker.FirstName + " " + _currentEmployee.Worker.LastName;
 				SelectedEmployeeAge.Text = _currentEmployee.Worker.Age.ToString();
 
-<<<<<<< HEAD
 				SetSkillsInForm( _currentEmployee.Worker, SelectedEmployeeSkillList );
+<<<<<<< HEAD
+				CreateSkillsToTrainComboBox();
+=======
 
 				SelectedEmployeeSkillsToTrain.Items.Clear();
-				SelectedEmployeeSkillsToTrain.Items.AddRange( _currentEmployee.Worker.Skills.Values
+				SelectedEmployeeSkillsToTrain.Items.AddRange( _currentEmployee.Worker.Skills
 					.Where( s => s.Level.CurrentLevel < 5 )
 					.Select( s => (object)s.FrenchSkillName )
 					.ToArray() );
-=======
-				SelectedEmployeeSkillList.Items.Clear();
-				SelectedEmployeeSkillList.Items.AddRange( _currentEmployee.Worker.Skills.Select( s => AddSkills( s ) ).ToArray() );
-				// SelectedEmployeeSkillsToTrain.Items.AddRange( _currentEmployee.Worker.Skills.Values
-					// .Where( s => s.Level.CurrentLevel < 5 )
-					// .Select( s => AddSkillToTrain(s) ) );
 >>>>>>> origin/develop
 			}
 
@@ -127,11 +122,30 @@ namespace SRH.Interface
 		/// <param name="e"></param>
 		private void SelectedEmployeeSkillsToTrain_SelectedIndexChanged( object sender, EventArgs e )
 		{
-			_currentSkillToTrain = _currentEmployee.Worker.Skills.Values
+<<<<<<< HEAD
+=======
+			_currentSkillToTrain = _currentEmployee.Worker.Skills
 				.Where( s => s.FrenchSkillName == (string)SelectedEmployeeSkillsToTrain.SelectedItem )
 				.Single();
 			SetTrainingValuesInForm( _currentSkillToTrain );
+>>>>>>> origin/develop
 			Train.Enabled = true;
+			string selectedSkill = (string)SelectedEmployeeSkillsToTrain.SelectedItem;
+			_currentSkillToTrain = _currentEmployee.Worker.Skills
+				.Where( s => s.SkillName == selectedSkill )
+				.SingleOrDefault();
+			if( _currentSkillToTrain == null )
+			{
+				_newSkillToAddName = selectedSkill;
+				SetTrainingValuesInForm( selectedSkill );
+			}
+			else
+				if( _currentSkillToTrain.Level.CurrentLevel < 5 )
+				{
+					SetTrainingValuesInForm( _currentSkillToTrain );
+				}
+				else
+					Train.Enabled = false;
 		}
 
 		/// <summary>
@@ -146,7 +160,7 @@ namespace SRH.Interface
 
 			var PersonItem = PersonList.Items.Cast<ListViewItem>().Where( item => item.Tag == _currentPerson ).Single();
 			PersonList.Items.Remove( PersonItem );
-			
+		
 			hirePerson.Enabled = false;
         }
 
@@ -167,25 +181,40 @@ namespace SRH.Interface
 		}
 
 		/// <summary>
-		/// The selected Employee gains a level in the selected Skill
+		/// The selected Employee gains a level in the selected Skill if he already has it, or gains a new Skill at level 1
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
 		private void Train_Click( object sender, EventArgs e )
 		{
-			int xpToNextLevel = _currentSkillToTrain.Level.NextXpRequired - _currentSkillToTrain.Level.CurrentXp;
-			_currentSkillToTrain.Level.IncreaseXp( xpToNextLevel );
+			Train.Enabled = true;
+			if( _currentSkillToTrain == null ) 
+			{
+				_currentEmployee.Train( _newSkillToAddName );
+				_currentSkillToTrain = _currentEmployee.Worker.Skills
+				.Where( s => s.SkillName == _newSkillToAddName )
+				.SingleOrDefault();
+			}
+			else
+			{
+				_currentEmployee.Train( _currentSkillToTrain.SkillName );
+				if( _currentSkillToTrain.Level.CurrentLevel < 5 ) //TODO : || _currentEmployee.busy == false
+				{
+					SetTrainingValuesInForm( _currentSkillToTrain );
+				}
+				else
+					Train.Enabled = false;
+			}
 
-			SetTrainingValuesInForm( _currentSkillToTrain );
+			CreateSkillsToTrainComboBox();
 			SetSkillsInForm( _currentEmployee.Worker, SelectedEmployeeSkillList );
-
 		}
 
 		/// <summary>
-		/// Creates a List
+		/// Creates a Person Item for the PersonList
 		/// </summary>
-		/// <param name="p"></param>
-		/// <returns></returns>
+		/// <param name="p">The Person to display</param>
+		/// <returns>A ListViewItem containing the information to display about a Person</returns>
 		static ListViewItem CreatePerson( Person p )
 		{
 			ListViewItem i = new ListViewItem( p.LastName );
@@ -195,6 +224,11 @@ namespace SRH.Interface
 			return i;
 		}
 
+		/// <summary>
+		/// Creates an Employee Item for the EmployeeList
+		/// </summary>
+		/// <param name="e">The Employee to display</param>
+		/// <returns>A ListViewItem containing the information to display about an Employee</returns>
 		static ListViewItem CreateEmployee( Employee e )
 		{
 			ListViewItem i = new ListViewItem( e.Worker.LastName );
@@ -204,26 +238,69 @@ namespace SRH.Interface
 			return i;
 		}
 
+		/// <summary>
+		/// Creates a Skill Item for the SelectedPerson or SelectedEMployee
+		/// </summary>
+		/// <param name="s">The Skill to display</param>
+		/// <returns>A ListViewItem containing the information to display about a Skill</returns>
 		static ListViewItem AddSkills( Skill s )
 		{
-			ListViewItem i = new ListViewItem( s.FrenchSkillName );
+			ListViewItem i = new ListViewItem( s.SkillName );
 			i.Tag = s;
 			i.SubItems.Add( new ListViewItem.ListViewSubItem( i, s.Level.CurrentLevel.ToString() ) );
 			return i;
 		}
 
+		/// <summary>
+		/// Sets the informations to display about a Person's Skills
+		/// </summary>
+		/// <param name="p">The Person who's Skill to display</param>
+		/// <param name="l">The ListView to edit</param>
 		private void SetSkillsInForm( Person p, ListView l )
 		{
 			l.Items.Clear();
-			l.Items.AddRange( p.Skills.Values.Select( s => AddSkills( s ) ).ToArray() );
+			l.Items.AddRange( p.Skills.Select( s => AddSkills( s ) ).ToArray() );
 		}
 
+		/// <summary>
+		/// Sets the Cost and Time to train a Skill and displays it
+		/// </summary>
+		/// <param name="s">The Skill to train</param>
 		private void SetTrainingValuesInForm( Skill s )
 		{
 			s.FixPriceAndTime();
 
 			SelectedSkillToTrainCost.Text = s.UpgradePrice.ToString();
 			SelectedSkillToTrainTime.Text = s.TimeToUpgrade.ToString();
+		}
+
+		private void SetTrainingValuesInForm( string skillName )
+		{
+			// TODO : trouver le moyen de ne pas le mettre à la mimine !!!
+			if( GameContext.CurrentGame.IsProjSkill( skillName ) )
+			{
+				SelectedSkillToTrainCost.Text = "1000";
+				SelectedSkillToTrainTime.Text = "2";
+			}
+			else
+			{
+				SelectedSkillToTrainCost.Text = "1500";
+				SelectedSkillToTrainTime.Text = "4";
+			}
+		}
+
+		private void CreateSkillsToTrainComboBox()
+		{
+			SelectedEmployeeSkillsToTrain.Items.Clear();
+			IEnumerable<string> presentSkills = _currentEmployee.Worker.Skills
+				.Where( s => s.Level.CurrentLevel < 5 )
+				.Select( s => s.SkillName );
+			SelectedEmployeeSkillsToTrain.Items.AddRange( presentSkills.ToArray() );
+
+			SelectedEmployeeSkillsToTrain.Items.AddRange( GameContext.CurrentGame.SkillNames
+				.Select( s => s.Value )
+				.Where( s => !( _currentEmployee.Worker.Skills.Any( ps => ps.SkillName == s ) ) )
+				.ToArray() );
 		}
     }
 }
