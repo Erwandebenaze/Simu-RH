@@ -110,13 +110,13 @@ namespace SRH.Core
 			_skillNames.Add( new KeyValuePair<string, string>( "proj", "Réseau" ) );
 			_skillNames.Add( new KeyValuePair<string, string>( "proj", "Sécurité" ) );
 
-			_skillNames.Add( new KeyValuePair<string, string>( "compa", "Commercial" ) );
-			_skillNames.Add( new KeyValuePair<string, string>( "compa", "Ressources humaines" ) );
-			_skillNames.Add( new KeyValuePair<string, string>( "compa", "Directeur de projets" ) );
-			_skillNames.Add( new KeyValuePair<string, string>( "compa", "Gestion de contrat" ) );
-			_skillNames.Add( new KeyValuePair<string, string>( "compa", "Animation" ) );
+			_skillNames.Add( new KeyValuePair<string, string>( "compa", "Commercial" ) ); // *Commercial*, increase 20 projects earnings.
+			_skillNames.Add( new KeyValuePair<string, string>( "compa", "Ressources humaines" ) ); // *Ressources humaines*, descrease recruting and laying off cost.
+			_skillNames.Add( new KeyValuePair<string, string>( "compa", "Directeur de projets" ) ); // *Directeur de projets*, decrease the duration of 20 projects.
+			_skillNames.Add( new KeyValuePair<string, string>( "compa", "Gestion de contrat" ) ); // *Gestion de contrat*, decrease the duration of 30 projects.
+			_skillNames.Add( new KeyValuePair<string, string>( "compa", "Animation" ) ); // *Animation*, inscrease 30 employees hapiness
 		}
-
+		
 		/// <summary>
 		/// Checks if a string is a proper Skill name, if not, throw an ArgumentException
 		/// </summary>
