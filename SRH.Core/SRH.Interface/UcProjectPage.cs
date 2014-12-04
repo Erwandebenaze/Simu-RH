@@ -80,6 +80,8 @@ namespace SRH.Interface
             if( listPossibleProjects.SelectedItems.Count > 0 )
             {
                 listSkillsAvailable.Items.Clear();
+                listSkillsRequired.Enabled = true;
+
 
                 _startOrStopProject.Enabled = true;
                 EstimatedTime.Text = "Temps estimé";
@@ -101,18 +103,24 @@ namespace SRH.Interface
 
         private void listSkillsRequired_SelectedIndexChanged( object sender, EventArgs e )
         {
+
             if( listSkillsRequired.SelectedItems.Count > 0 )
             {
-                listSkillsAvailable.Items.Clear();
-
-                _currentSkill = (Skill)listSkillsRequired.SelectedItems[listSkillsRequired.SelectedItems.Count - 1].Tag;
-                if (_currentProj.SkillsRequired.ContainsKey(_currentSkill))
+                if (!_currentProj.Activated)
                 {
-                    listSkillsAvailable.Items.AddRange( _currentProj.MyComp.Employees.Where( emp => emp.Worker.Skills.Any( s => s.SkillName == _currentSkill.SkillName ) )
-                                                                 .Where( emp => !emp.Busy )
-                                                                 .Select( emp => CreateListItemViewEmployeeWithSkill( emp, _currentSkill ) )
-                                                                 .OrderBy( emp => _currentSkill.Level.CurrentLevel )
-                                                                 .ToArray() );
+
+                
+                    listSkillsAvailable.Items.Clear();
+
+                    _currentSkill = (Skill)listSkillsRequired.SelectedItems[listSkillsRequired.SelectedItems.Count - 1].Tag;
+                    if (_currentProj.SkillsRequired.ContainsKey(_currentSkill))
+                    {
+                        listSkillsAvailable.Items.AddRange( _currentProj.MyComp.Employees.Where( emp => emp.Worker.Skills.Any( s => s.SkillName == _currentSkill.SkillName ) )
+                                                                     .Where( emp => !emp.Busy )
+                                                                     .Select( emp => CreateListItemViewEmployeeWithSkill( emp, _currentSkill ) )
+                                                                     .OrderBy( emp => _currentSkill.Level.CurrentLevel )
+                                                                     .ToArray() );
+                    }
                 }
 
             }
@@ -149,7 +157,9 @@ namespace SRH.Interface
         {
             if( listCurrentProjects.SelectedItems.Count > 0 )
             {
-                _startOrStopProject.Enabled = true;
+                
+                listSkillsRequired.Enabled = false;
+
                 EstimatedTime.Text = "Temps restant estimé";
                 _currentProj = (Project)listCurrentProjects.SelectedItems[listCurrentProjects.SelectedItems.Count - 1].Tag;
                 AffectCurrentProjectFields();
@@ -179,6 +189,7 @@ namespace SRH.Interface
 
             if( _currentProj.Activated )
             {
+                listSkillsRequired.Enabled = true;
                 pr = GameContext.CurrentGame.PlayerCompany.StopAProject( _currentProj );
                 _startOrStopProject.Text = "Lancer un projet";
                 var projectItem = listCurrentProjects.Items.Cast<ListViewItem>().Where( item => item.Tag == pr ).Single();
@@ -190,6 +201,7 @@ namespace SRH.Interface
             {
                 pr = GameContext.CurrentGame.PlayerCompany.BeginAProject( _currentProj );
                 _startOrStopProject.Text = "Arrêter un projet";
+                listSkillsRequired.Enabled = false;
 
                 var projectItem = listPossibleProjects.Items.Cast<ListViewItem>().Where( item => item.Tag == pr ).Single();
                 listPossibleProjects.Items.Remove( projectItem );
@@ -228,12 +240,15 @@ namespace SRH.Interface
                 {
                     _startOrStopProject.Enabled = false;
                     _startOrStopProject.Text = "Affectez les employés avant de lancer.";
+
                 }
                 else
                 {
                     _startOrStopProject.Enabled = true;
                     _startOrStopProject.Text = "Lancer un projet";
                 }
+                listSkillsRequired.Enabled = true;
+
             }
 
         }
