@@ -137,12 +137,11 @@ namespace SRH.Interface
         private ListViewItem CreateListItemViewEmployeeWithSkill( Employee emp, Skill s )
         {
             ListViewItem i = new ListViewItem( emp.Worker.FirstName + " " + emp.Worker.LastName );
-            foreach( Skill sk in emp.Worker.Skills )
+            foreach( Skill sk in emp.Worker.Skills.Where(ski => ski.SkillName == s.SkillName) )
             {
-                
                 i.Tag = emp;
                 i.SubItems.Add( new ListViewItem.ListViewSubItem( i, s.SkillName ) );
-                i.SubItems.Add( new ListViewItem.ListViewSubItem( i, s.Level.CurrentLevel.ToString() ) );     
+                i.SubItems.Add( new ListViewItem.ListViewSubItem( i, sk.Level.CurrentLevel.ToString() ) );     
             }
             return i;
         }

@@ -30,13 +30,14 @@
         {
             System.Windows.Forms.Label WealthTitle;
             this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.BureauPage = new System.Windows.Forms.TabPage();
-            this.EmployésPage = new System.Windows.Forms.TabPage();
+            this.Board = new System.Windows.Forms.TabPage();
+            this.Employees = new System.Windows.Forms.TabPage();
             this.ucEmployeePage = new SRH.Interface.UcEmployeePage();
-            this.ProjetTable = new System.Windows.Forms.TabPage();
+            this.Projets = new System.Windows.Forms.TabPage();
             this.ucProjectPage = new SRH.Interface.UcProjectPage();
-            this.EntreprisePage = new System.Windows.Forms.TabPage();
-            this.ResumeEntreprisePage = new System.Windows.Forms.TabPage();
+            this.CompanyManagement = new System.Windows.Forms.TabPage();
+            this.Statistics = new System.Windows.Forms.TabPage();
+            this.ucStatistics1 = new SRH.Interface.UcStatistics();
             this._dateOfGame = new System.Windows.Forms.Label();
             this._day = new System.Windows.Forms.Label();
             this._pauseButton = new System.Windows.Forms.Button();
@@ -50,12 +51,11 @@
             this.companyExperience = new System.Windows.Forms.Label();
             this.experiencePanel = new System.Windows.Forms.Panel();
             this.CompanyWealth = new System.Windows.Forms.Label();
-            this.ucStatistics1 = new SRH.Interface.UcStatistics();
             WealthTitle = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
-            this.EmployésPage.SuspendLayout();
-            this.ProjetTable.SuspendLayout();
-            this.ResumeEntreprisePage.SuspendLayout();
+            this.Employees.SuspendLayout();
+            this.Projets.SuspendLayout();
+            this.Statistics.SuspendLayout();
             this.experiencePanel.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -74,11 +74,11 @@
             this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tabControl1.Controls.Add(this.BureauPage);
-            this.tabControl1.Controls.Add(this.EmployésPage);
-            this.tabControl1.Controls.Add(this.ProjetTable);
-            this.tabControl1.Controls.Add(this.EntreprisePage);
-            this.tabControl1.Controls.Add(this.ResumeEntreprisePage);
+            this.tabControl1.Controls.Add(this.Board);
+            this.tabControl1.Controls.Add(this.Employees);
+            this.tabControl1.Controls.Add(this.Projets);
+            this.tabControl1.Controls.Add(this.CompanyManagement);
+            this.tabControl1.Controls.Add(this.Statistics);
             this.tabControl1.Location = new System.Drawing.Point(1, 38);
             this.tabControl1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tabControl1.Name = "tabControl1";
@@ -86,50 +86,50 @@
             this.tabControl1.Size = new System.Drawing.Size(1185, 626);
             this.tabControl1.TabIndex = 0;
             // 
-            // BureauPage
+            // Board
             // 
-            this.BureauPage.Location = new System.Drawing.Point(4, 25);
-            this.BureauPage.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.BureauPage.Name = "BureauPage";
-            this.BureauPage.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.BureauPage.Size = new System.Drawing.Size(1177, 597);
-            this.BureauPage.TabIndex = 0;
-            this.BureauPage.Text = "Bureau";
-            this.BureauPage.UseVisualStyleBackColor = true;
+            this.Board.Location = new System.Drawing.Point(4, 25);
+            this.Board.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Board.Name = "Board";
+            this.Board.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Board.Size = new System.Drawing.Size(1177, 597);
+            this.Board.TabIndex = 0;
+            this.Board.Text = "Bureau";
+            this.Board.UseVisualStyleBackColor = true;
             // 
-            // EmployésPage
+            // Employees
             // 
-            this.EmployésPage.Controls.Add(this.ucEmployeePage);
-            this.EmployésPage.Location = new System.Drawing.Point(4, 25);
-            this.EmployésPage.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.EmployésPage.Name = "EmployésPage";
-            this.EmployésPage.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.EmployésPage.Size = new System.Drawing.Size(1177, 597);
-            this.EmployésPage.TabIndex = 1;
-            this.EmployésPage.Text = "Employés";
-            this.EmployésPage.UseVisualStyleBackColor = true;
+            this.Employees.Controls.Add(this.ucEmployeePage);
+            this.Employees.Location = new System.Drawing.Point(4, 25);
+            this.Employees.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Employees.Name = "Employees";
+            this.Employees.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Employees.Size = new System.Drawing.Size(1177, 597);
+            this.Employees.TabIndex = 1;
+            this.Employees.Text = "Employés";
+            this.Employees.UseVisualStyleBackColor = true;
             // 
             // ucEmployeePage
             // 
             this.ucEmployeePage.AutoSize = true;
             this.ucEmployeePage.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ucEmployeePage.Location = new System.Drawing.Point(3, 2);
-            this.ucEmployeePage.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.ucEmployeePage.Margin = new System.Windows.Forms.Padding(5);
             this.ucEmployeePage.Name = "ucEmployeePage";
             this.ucEmployeePage.Size = new System.Drawing.Size(1171, 593);
             this.ucEmployeePage.TabIndex = 0;
             // 
-            // ProjetTable
+            // Projets
             // 
-            this.ProjetTable.Controls.Add(this.ucProjectPage);
-            this.ProjetTable.Location = new System.Drawing.Point(4, 25);
-            this.ProjetTable.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.ProjetTable.Name = "ProjetTable";
-            this.ProjetTable.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.ProjetTable.Size = new System.Drawing.Size(1177, 597);
-            this.ProjetTable.TabIndex = 2;
-            this.ProjetTable.Text = "Gestion projets";
-            this.ProjetTable.UseVisualStyleBackColor = true;
+            this.Projets.Controls.Add(this.ucProjectPage);
+            this.Projets.Location = new System.Drawing.Point(4, 25);
+            this.Projets.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Projets.Name = "Projets";
+            this.Projets.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Projets.Size = new System.Drawing.Size(1177, 597);
+            this.Projets.TabIndex = 2;
+            this.Projets.Text = "Gestion projets";
+            this.Projets.UseVisualStyleBackColor = true;
             // 
             // ucProjectPage
             // 
@@ -140,28 +140,37 @@
             this.ucProjectPage.Size = new System.Drawing.Size(1171, 593);
             this.ucProjectPage.TabIndex = 0;
             // 
-            // EntreprisePage
+            // CompanyManagement
             // 
-            this.EntreprisePage.Location = new System.Drawing.Point(4, 25);
-            this.EntreprisePage.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.EntreprisePage.Name = "EntreprisePage";
-            this.EntreprisePage.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.EntreprisePage.Size = new System.Drawing.Size(1177, 597);
-            this.EntreprisePage.TabIndex = 3;
-            this.EntreprisePage.Text = "Gestion entreprise";
-            this.EntreprisePage.UseVisualStyleBackColor = true;
+            this.CompanyManagement.Location = new System.Drawing.Point(4, 25);
+            this.CompanyManagement.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.CompanyManagement.Name = "CompanyManagement";
+            this.CompanyManagement.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.CompanyManagement.Size = new System.Drawing.Size(1177, 597);
+            this.CompanyManagement.TabIndex = 3;
+            this.CompanyManagement.Text = "Gestion entreprise";
+            this.CompanyManagement.UseVisualStyleBackColor = true;
             // 
-            // ResumeEntreprisePage
+            // Statistics
             // 
-            this.ResumeEntreprisePage.Controls.Add(this.ucStatistics1);
-            this.ResumeEntreprisePage.Location = new System.Drawing.Point(4, 25);
-            this.ResumeEntreprisePage.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.ResumeEntreprisePage.Name = "ResumeEntreprisePage";
-            this.ResumeEntreprisePage.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.ResumeEntreprisePage.Size = new System.Drawing.Size(1177, 597);
-            this.ResumeEntreprisePage.TabIndex = 4;
-            this.ResumeEntreprisePage.Text = "Résumé entreprises";
-            this.ResumeEntreprisePage.UseVisualStyleBackColor = true;
+            this.Statistics.Controls.Add(this.ucStatistics1);
+            this.Statistics.Location = new System.Drawing.Point(4, 25);
+            this.Statistics.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Statistics.Name = "Statistics";
+            this.Statistics.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Statistics.Size = new System.Drawing.Size(1177, 597);
+            this.Statistics.TabIndex = 4;
+            this.Statistics.Text = "Résumé entreprises";
+            this.Statistics.UseVisualStyleBackColor = true;
+            // 
+            // ucStatistics1
+            // 
+            this.ucStatistics1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ucStatistics1.Location = new System.Drawing.Point(3, 2);
+            this.ucStatistics1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.ucStatistics1.Name = "ucStatistics1";
+            this.ucStatistics1.Size = new System.Drawing.Size(1171, 593);
+            this.ucStatistics1.TabIndex = 0;
             // 
             // _dateOfGame
             // 
@@ -288,7 +297,7 @@
             this.experiencePanel.Controls.Add(this._currentCompanyLevel);
             this.experiencePanel.Controls.Add(this._companyProgressBar);
             this.experiencePanel.Location = new System.Drawing.Point(472, 0);
-            this.experiencePanel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.experiencePanel.Margin = new System.Windows.Forms.Padding(4);
             this.experiencePanel.Name = "experiencePanel";
             this.experiencePanel.Size = new System.Drawing.Size(668, 33);
             this.experiencePanel.TabIndex = 0;
@@ -303,15 +312,6 @@
             this.CompanyWealth.TabIndex = 13;
             this.CompanyWealth.Text = "X";
             this.CompanyWealth.Visible = false;
-            // 
-            // ucStatistics1
-            // 
-            this.ucStatistics1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ucStatistics1.Location = new System.Drawing.Point(3, 2);
-            this.ucStatistics1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.ucStatistics1.Name = "ucStatistics1";
-            this.ucStatistics1.Size = new System.Drawing.Size(1171, 593);
-            this.ucStatistics1.TabIndex = 0;
             // 
             // SimuRH
             // 
@@ -333,10 +333,10 @@
             this.Text = "SimuRH";
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.mainForm_KeyDown);
             this.tabControl1.ResumeLayout(false);
-            this.EmployésPage.ResumeLayout(false);
-            this.EmployésPage.PerformLayout();
-            this.ProjetTable.ResumeLayout(false);
-            this.ResumeEntreprisePage.ResumeLayout(false);
+            this.Employees.ResumeLayout(false);
+            this.Employees.PerformLayout();
+            this.Projets.ResumeLayout(false);
+            this.Statistics.ResumeLayout(false);
             this.experiencePanel.ResumeLayout(false);
             this.experiencePanel.PerformLayout();
             this.ResumeLayout(false);
@@ -347,11 +347,11 @@
         #endregion
 
         private System.Windows.Forms.TabControl tabControl1;
-        private System.Windows.Forms.TabPage BureauPage;
-        private System.Windows.Forms.TabPage EmployésPage;
-        private System.Windows.Forms.TabPage ProjetTable;
-        private System.Windows.Forms.TabPage EntreprisePage;
-        private System.Windows.Forms.TabPage ResumeEntreprisePage;
+        private System.Windows.Forms.TabPage Board;
+        private System.Windows.Forms.TabPage Employees;
+        private System.Windows.Forms.TabPage Projets;
+        private System.Windows.Forms.TabPage CompanyManagement;
+        private System.Windows.Forms.TabPage Statistics;
 		private UcProjectPage ucProjectPage;
 		private UcEmployeePage ucEmployeePage;
         private System.Windows.Forms.Label _dateOfGame;

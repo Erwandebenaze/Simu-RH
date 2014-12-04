@@ -67,6 +67,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UcCompanyManagement.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UcCompanyManagement.Designer.cs">
+      <DependentUpon>UcCompanyManagement.cs</DependentUpon>
+    </Compile>
     <Compile Include="UcEmployeePage.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -103,6 +109,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="UcCompanyManagement.resx">
+      <DependentUpon>UcCompanyManagement.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UcEmployeePage.resx">
       <DependentUpon>UcEmployeePage.cs</DependentUpon>
     </EmbeddedResource>
