@@ -43,7 +43,7 @@ namespace SRH.Interface
 		/// </summary>
 		internal void LoadPage()
 		{
-			_joblessPersons = (List<Person>)GameContext.CurrentGame.Market.JoblessPersons;
+			_joblessPersons = GameContext.CurrentGame.Market.JoblessPersons;
 			PersonList.Items.Clear();
 			PersonList.Items.AddRange( _joblessPersons.Select( p => CreatePerson( p ) ).ToArray() );
 		}
@@ -244,11 +244,12 @@ namespace SRH.Interface
 		private void CreateSkillsToTrainComboBox()
 		{
 			SelectedEmployeeSkillsToTrain.Items.Clear();
-			IEnumerable<string> presentSkills = UcEmployeeList1.CurrentEmployee.Worker.Skills
-				.Where( s => s.Level.CurrentLevel < 5 )
-				.Select( s => s.SkillName );
-			SelectedEmployeeSkillsToTrain.Items.AddRange( presentSkills.ToArray() );
 
+			// Add the Employee's already present Skills
+			SelectedEmployeeSkillsToTrain.Items.AddRange( UcEmployeeList1.CurrentEmployee.Worker.Skills
+				.Where( s => s.Level.CurrentLevel < 5 )
+				.Select( s => s.SkillName ).ToArray() );
+			// Add the other Skills, without the Employee's already present Skills
 			SelectedEmployeeSkillsToTrain.Items.AddRange( GameContext.CurrentGame.SkillNames
 				.Select( s => s.Value )
 				.Where( s => !( UcEmployeeList1.CurrentEmployee.Worker.Skills.Any( ps => ps.SkillName == s ) ) )
