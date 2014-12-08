@@ -120,7 +120,7 @@ namespace SRH.Core
             _xpPerPerson = 10;
 			_skillsRequired = skillsRequired;
             _employeesAffectedWithSkill = new Dictionary<Employee, Skill>();
-            GenerateSkillsRequired(numberOfWorkers );
+            GenerateSkillsRequired( numberOfWorkers );
             // TODO : Lier le game aux projets. Il faut connecter les différents projets entre eux
             // Constructeur internal, objet "parent" en param pour retrouver le contexte dans lequel
             // il est appelé.

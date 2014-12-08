@@ -28,16 +28,13 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
-			this.components = new System.ComponentModel.Container();
 			System.Windows.Forms.Label SelectedPersonTitle;
 			System.Windows.Forms.Label SelectedPersonNameTitle;
 			System.Windows.Forms.Label SelectedPersonAgeTitle;
 			System.Windows.Forms.Label SelectedEmployeeAgeTitle;
 			System.Windows.Forms.Label SelectedEmployeeNameTitle;
 			System.Windows.Forms.Label SelectedEmployeeTitle;
-			System.Windows.Forms.Label SelectedPersonSkillsTitle;
-			System.Windows.Forms.Label SelectedEmployeeSkillsTitle;
-			System.Windows.Forms.Label IsBusyTitle;
+			this.IsBusyTitle = new System.Windows.Forms.Label();
 			this.SelectedSkillTrainCostTitle = new System.Windows.Forms.Label();
 			this.SelectedSkillTrainTimeTitle = new System.Windows.Forms.Label();
 			this.PersonList = new System.Windows.Forms.ListView();
@@ -46,39 +43,27 @@
 			this.PersonAgeHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.splitContainer1 = new System.Windows.Forms.SplitContainer();
 			this.splitContainer2 = new System.Windows.Forms.SplitContainer();
-			this.EmployeeList = new System.Windows.Forms.ListView();
-			this.EmployeeLastNameHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-			this.EmployeeFirstNameHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-			this.EmployeeAgeHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.splitContainer3 = new System.Windows.Forms.SplitContainer();
 			this.IsBusy = new System.Windows.Forms.Label();
 			this.SelectedSkillToTrainTime = new System.Windows.Forms.Label();
 			this.SelectedSkillToTrainCost = new System.Windows.Forms.Label();
 			this.SelectedEmployeeSkillsToTrain = new System.Windows.Forms.ComboBox();
 			this.Train = new System.Windows.Forms.Button();
-			this.SelectedEmployeeSkillList = new System.Windows.Forms.ListView();
-			this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-			this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.SelectedEmployeeAge = new System.Windows.Forms.Label();
 			this.fireEmployee = new System.Windows.Forms.Button();
 			this.SelectedEmployeeName = new System.Windows.Forms.Label();
-			this.SelectedPersonSkillList = new System.Windows.Forms.ListView();
-			this.SelectedEmployeeSkillNameHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-			this.SelectedEmployeeSkillLeverHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.SelectedPersonAge = new System.Windows.Forms.Label();
 			this.SelectedPersonName = new System.Windows.Forms.Label();
 			this.hirePerson = new System.Windows.Forms.Button();
-			this.myToolTip = new System.Windows.Forms.ToolTip(this.components);
-			this.progressBar1 = new System.Windows.Forms.ProgressBar();
+			this.UcEmployeeList1 = new SRH.Interface.UcEmployeeList();
+			this.ucSkillsDisplayEmployee = new SRH.Interface.UcSkillsDisplay();
+			this.ucSkillsDisplayPerson = new SRH.Interface.UcSkillsDisplay();
 			SelectedPersonTitle = new System.Windows.Forms.Label();
 			SelectedPersonNameTitle = new System.Windows.Forms.Label();
 			SelectedPersonAgeTitle = new System.Windows.Forms.Label();
 			SelectedEmployeeAgeTitle = new System.Windows.Forms.Label();
 			SelectedEmployeeNameTitle = new System.Windows.Forms.Label();
 			SelectedEmployeeTitle = new System.Windows.Forms.Label();
-			SelectedPersonSkillsTitle = new System.Windows.Forms.Label();
-			SelectedEmployeeSkillsTitle = new System.Windows.Forms.Label();
-			IsBusyTitle = new System.Windows.Forms.Label();
 			((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
 			this.splitContainer1.Panel1.SuspendLayout();
 			this.splitContainer1.Panel2.SuspendLayout();
@@ -149,34 +134,15 @@
 			SelectedEmployeeTitle.TabIndex = 6;
 			SelectedEmployeeTitle.Text = "L\'employé";
 			// 
-			// SelectedPersonSkillsTitle
-			// 
-			SelectedPersonSkillsTitle.AutoSize = true;
-			SelectedPersonSkillsTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			SelectedPersonSkillsTitle.Location = new System.Drawing.Point(14, 110);
-			SelectedPersonSkillsTitle.Name = "SelectedPersonSkillsTitle";
-			SelectedPersonSkillsTitle.Size = new System.Drawing.Size(103, 16);
-			SelectedPersonSkillsTitle.TabIndex = 11;
-			SelectedPersonSkillsTitle.Text = "Compétences";
-			// 
-			// SelectedEmployeeSkillsTitle
-			// 
-			SelectedEmployeeSkillsTitle.AutoSize = true;
-			SelectedEmployeeSkillsTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			SelectedEmployeeSkillsTitle.Location = new System.Drawing.Point(14, 89);
-			SelectedEmployeeSkillsTitle.Name = "SelectedEmployeeSkillsTitle";
-			SelectedEmployeeSkillsTitle.Size = new System.Drawing.Size(103, 16);
-			SelectedEmployeeSkillsTitle.TabIndex = 12;
-			SelectedEmployeeSkillsTitle.Text = "Compétences";
-			// 
 			// IsBusyTitle
 			// 
-			IsBusyTitle.AutoSize = true;
-			IsBusyTitle.Location = new System.Drawing.Point(165, 79);
-			IsBusyTitle.Name = "IsBusyTitle";
-			IsBusyTitle.Size = new System.Drawing.Size(45, 13);
-			IsBusyTitle.TabIndex = 20;
-			IsBusyTitle.Text = "Occupé";
+			this.IsBusyTitle.AutoSize = true;
+			this.IsBusyTitle.Location = new System.Drawing.Point(165, 79);
+			this.IsBusyTitle.Name = "IsBusyTitle";
+			this.IsBusyTitle.Size = new System.Drawing.Size(51, 13);
+			this.IsBusyTitle.TabIndex = 20;
+			this.IsBusyTitle.Text = "Occupé :";
+			this.IsBusyTitle.Visible = false;
 			// 
 			// SelectedSkillTrainCostTitle
 			// 
@@ -186,6 +152,7 @@
 			this.SelectedSkillTrainCostTitle.Size = new System.Drawing.Size(38, 13);
 			this.SelectedSkillTrainCostTitle.TabIndex = 16;
 			this.SelectedSkillTrainCostTitle.Text = "Coût : ";
+			this.SelectedSkillTrainCostTitle.Visible = false;
 			// 
 			// SelectedSkillTrainTimeTitle
 			// 
@@ -195,6 +162,7 @@
 			this.SelectedSkillTrainTimeTitle.Size = new System.Drawing.Size(48, 13);
 			this.SelectedSkillTrainTimeTitle.TabIndex = 18;
 			this.SelectedSkillTrainTimeTitle.Text = "Temps : ";
+			this.SelectedSkillTrainTimeTitle.Visible = false;
 			// 
 			// PersonList
 			// 
@@ -253,7 +221,7 @@
 			// 
 			// splitContainer2.Panel1
 			// 
-			this.splitContainer2.Panel1.Controls.Add(this.EmployeeList);
+			this.splitContainer2.Panel1.Controls.Add(this.UcEmployeeList1);
 			// 
 			// splitContainer2.Panel2
 			// 
@@ -261,37 +229,6 @@
 			this.splitContainer2.Size = new System.Drawing.Size(419, 515);
 			this.splitContainer2.SplitterDistance = 238;
 			this.splitContainer2.TabIndex = 1;
-			// 
-			// EmployeeList
-			// 
-			this.EmployeeList.Activation = System.Windows.Forms.ItemActivation.OneClick;
-			this.EmployeeList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.EmployeeLastNameHeader,
-            this.EmployeeFirstNameHeader,
-            this.EmployeeAgeHeader});
-			this.EmployeeList.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.EmployeeList.FullRowSelect = true;
-			this.EmployeeList.Location = new System.Drawing.Point(0, 0);
-			this.EmployeeList.MultiSelect = false;
-			this.EmployeeList.Name = "EmployeeList";
-			this.EmployeeList.Size = new System.Drawing.Size(419, 238);
-			this.EmployeeList.TabIndex = 1;
-			this.EmployeeList.UseCompatibleStateImageBehavior = false;
-			this.EmployeeList.View = System.Windows.Forms.View.Details;
-			this.EmployeeList.SelectedIndexChanged += new System.EventHandler(this.EmployeeList_SelectedIndexChanged);
-			// 
-			// EmployeeLastNameHeader
-			// 
-			this.EmployeeLastNameHeader.Text = "Nom";
-			// 
-			// EmployeeFirstNameHeader
-			// 
-			this.EmployeeFirstNameHeader.Text = "Prénom";
-			// 
-			// EmployeeAgeHeader
-			// 
-			this.EmployeeAgeHeader.Text = "Age";
-			this.EmployeeAgeHeader.Width = 87;
 			// 
 			// splitContainer3
 			// 
@@ -302,28 +239,25 @@
 			// 
 			// splitContainer3.Panel1
 			// 
-			this.splitContainer3.Panel1.Controls.Add(this.progressBar1);
 			this.splitContainer3.Panel1.Controls.Add(this.IsBusy);
-			this.splitContainer3.Panel1.Controls.Add(IsBusyTitle);
+			this.splitContainer3.Panel1.Controls.Add(this.IsBusyTitle);
 			this.splitContainer3.Panel1.Controls.Add(this.SelectedSkillToTrainTime);
 			this.splitContainer3.Panel1.Controls.Add(this.SelectedSkillTrainTimeTitle);
 			this.splitContainer3.Panel1.Controls.Add(this.SelectedSkillToTrainCost);
 			this.splitContainer3.Panel1.Controls.Add(this.SelectedSkillTrainCostTitle);
 			this.splitContainer3.Panel1.Controls.Add(this.SelectedEmployeeSkillsToTrain);
 			this.splitContainer3.Panel1.Controls.Add(this.Train);
-			this.splitContainer3.Panel1.Controls.Add(this.SelectedEmployeeSkillList);
-			this.splitContainer3.Panel1.Controls.Add(SelectedEmployeeSkillsTitle);
 			this.splitContainer3.Panel1.Controls.Add(this.SelectedEmployeeAge);
 			this.splitContainer3.Panel1.Controls.Add(this.fireEmployee);
 			this.splitContainer3.Panel1.Controls.Add(this.SelectedEmployeeName);
 			this.splitContainer3.Panel1.Controls.Add(SelectedEmployeeTitle);
 			this.splitContainer3.Panel1.Controls.Add(SelectedEmployeeAgeTitle);
 			this.splitContainer3.Panel1.Controls.Add(SelectedEmployeeNameTitle);
+			this.splitContainer3.Panel1.Controls.Add(this.ucSkillsDisplayEmployee);
 			// 
 			// splitContainer3.Panel2
 			// 
-			this.splitContainer3.Panel2.Controls.Add(this.SelectedPersonSkillList);
-			this.splitContainer3.Panel2.Controls.Add(SelectedPersonSkillsTitle);
+			this.splitContainer3.Panel2.Controls.Add(this.ucSkillsDisplayPerson);
 			this.splitContainer3.Panel2.Controls.Add(this.SelectedPersonAge);
 			this.splitContainer3.Panel2.Controls.Add(this.SelectedPersonName);
 			this.splitContainer3.Panel2.Controls.Add(SelectedPersonAgeTitle);
@@ -342,6 +276,7 @@
 			this.IsBusy.Size = new System.Drawing.Size(14, 13);
 			this.IsBusy.TabIndex = 21;
 			this.IsBusy.Text = "X";
+			this.IsBusy.Visible = false;
 			// 
 			// SelectedSkillToTrainTime
 			// 
@@ -351,6 +286,7 @@
 			this.SelectedSkillToTrainTime.Size = new System.Drawing.Size(14, 13);
 			this.SelectedSkillToTrainTime.TabIndex = 19;
 			this.SelectedSkillToTrainTime.Text = "X";
+			this.SelectedSkillToTrainTime.Visible = false;
 			// 
 			// SelectedSkillToTrainCost
 			// 
@@ -360,6 +296,7 @@
 			this.SelectedSkillToTrainCost.Size = new System.Drawing.Size(14, 13);
 			this.SelectedSkillToTrainCost.TabIndex = 17;
 			this.SelectedSkillToTrainCost.Text = "X";
+			this.SelectedSkillToTrainCost.Visible = false;
 			// 
 			// SelectedEmployeeSkillsToTrain
 			// 
@@ -368,6 +305,7 @@
 			this.SelectedEmployeeSkillsToTrain.Name = "SelectedEmployeeSkillsToTrain";
 			this.SelectedEmployeeSkillsToTrain.Size = new System.Drawing.Size(106, 21);
 			this.SelectedEmployeeSkillsToTrain.TabIndex = 15;
+			this.SelectedEmployeeSkillsToTrain.Visible = false;
 			this.SelectedEmployeeSkillsToTrain.SelectedIndexChanged += new System.EventHandler(this.SelectedEmployeeSkillsToTrain_SelectedIndexChanged);
 			// 
 			// Train
@@ -380,28 +318,6 @@
 			this.Train.Text = "Former";
 			this.Train.UseVisualStyleBackColor = true;
 			this.Train.Click += new System.EventHandler(this.Train_Click);
-			// 
-			// SelectedEmployeeSkillList
-			// 
-			this.SelectedEmployeeSkillList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader1,
-            this.columnHeader2});
-			this.SelectedEmployeeSkillList.Location = new System.Drawing.Point(17, 108);
-			this.SelectedEmployeeSkillList.Name = "SelectedEmployeeSkillList";
-			this.SelectedEmployeeSkillList.Size = new System.Drawing.Size(413, 129);
-			this.SelectedEmployeeSkillList.TabIndex = 13;
-			this.SelectedEmployeeSkillList.UseCompatibleStateImageBehavior = false;
-			this.SelectedEmployeeSkillList.View = System.Windows.Forms.View.Tile;
-			// 
-			// columnHeader1
-			// 
-			this.columnHeader1.Text = "Compétence";
-			this.columnHeader1.Width = 108;
-			// 
-			// columnHeader2
-			// 
-			this.columnHeader2.Text = "Niveau";
-			this.columnHeader2.Width = 107;
 			// 
 			// SelectedEmployeeAge
 			// 
@@ -436,28 +352,6 @@
 			this.SelectedEmployeeName.TextAlign = System.Drawing.ContentAlignment.TopRight;
 			this.SelectedEmployeeName.Visible = false;
 			// 
-			// SelectedPersonSkillList
-			// 
-			this.SelectedPersonSkillList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.SelectedEmployeeSkillNameHeader,
-            this.SelectedEmployeeSkillLeverHeader});
-			this.SelectedPersonSkillList.Location = new System.Drawing.Point(17, 133);
-			this.SelectedPersonSkillList.Name = "SelectedPersonSkillList";
-			this.SelectedPersonSkillList.Size = new System.Drawing.Size(413, 129);
-			this.SelectedPersonSkillList.TabIndex = 12;
-			this.SelectedPersonSkillList.UseCompatibleStateImageBehavior = false;
-			this.SelectedPersonSkillList.View = System.Windows.Forms.View.Tile;
-			// 
-			// SelectedEmployeeSkillNameHeader
-			// 
-			this.SelectedEmployeeSkillNameHeader.Text = "Compétence";
-			this.SelectedEmployeeSkillNameHeader.Width = 108;
-			// 
-			// SelectedEmployeeSkillLeverHeader
-			// 
-			this.SelectedEmployeeSkillLeverHeader.Text = "Niveau";
-			this.SelectedEmployeeSkillLeverHeader.Width = 107;
-			// 
 			// SelectedPersonAge
 			// 
 			this.SelectedPersonAge.AutoSize = true;
@@ -489,17 +383,29 @@
 			this.hirePerson.UseVisualStyleBackColor = true;
 			this.hirePerson.Click += new System.EventHandler(this.hirePerson_Click);
 			// 
-			// myToolTip
+			// UcEmployeeList1
 			// 
-			this.myToolTip.IsBalloon = true;
-			this.myToolTip.ToolTipTitle = "Aide";
+			this.UcEmployeeList1.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.UcEmployeeList1.Location = new System.Drawing.Point(0, 0);
+			this.UcEmployeeList1.Name = "UcEmployeeList1";
+			this.UcEmployeeList1.Size = new System.Drawing.Size(419, 238);
+			this.UcEmployeeList1.TabIndex = 1;
 			// 
-			// progressBar1
+			// ucSkillsDisplayEmployee
 			// 
-			this.progressBar1.Location = new System.Drawing.Point(29, 160);
-			this.progressBar1.Name = "progressBar1";
-			this.progressBar1.Size = new System.Drawing.Size(70, 10);
-			this.progressBar1.TabIndex = 22;
+			this.ucSkillsDisplayEmployee.CurrentPerson = null;
+			this.ucSkillsDisplayEmployee.Location = new System.Drawing.Point(3, 100);
+			this.ucSkillsDisplayEmployee.Name = "ucSkillsDisplayEmployee";
+			this.ucSkillsDisplayEmployee.Size = new System.Drawing.Size(447, 140);
+			this.ucSkillsDisplayEmployee.TabIndex = 22;
+			// 
+			// ucSkillsDisplayPerson
+			// 
+			this.ucSkillsDisplayPerson.CurrentPerson = null;
+			this.ucSkillsDisplayPerson.Location = new System.Drawing.Point(3, 125);
+			this.ucSkillsDisplayPerson.Name = "ucSkillsDisplayPerson";
+			this.ucSkillsDisplayPerson.Size = new System.Drawing.Size(447, 140);
+			this.ucSkillsDisplayPerson.TabIndex = 23;
 			// 
 			// UcEmployeePage
 			// 
@@ -510,7 +416,6 @@
 			this.Margin = new System.Windows.Forms.Padding(2);
 			this.Name = "UcEmployeePage";
 			this.Size = new System.Drawing.Size(902, 515);
-			this.myToolTip.SetToolTip(this, "TEMPETE DE MERDE !!\r\nEt puis ça aussi.");
 			this.splitContainer1.Panel1.ResumeLayout(false);
 			this.splitContainer1.Panel2.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
@@ -536,11 +441,7 @@
 		private System.Windows.Forms.ColumnHeader PersonFirstnameHeader;
         private System.Windows.Forms.ColumnHeader PersonAgeHeader;
         private System.Windows.Forms.SplitContainer splitContainer1;
-        private System.Windows.Forms.SplitContainer splitContainer2;
-        private System.Windows.Forms.ListView EmployeeList;
-        private System.Windows.Forms.ColumnHeader EmployeeLastNameHeader;
-        private System.Windows.Forms.ColumnHeader EmployeeFirstNameHeader;
-        private System.Windows.Forms.ColumnHeader EmployeeAgeHeader;
+		private System.Windows.Forms.SplitContainer splitContainer2;
         private System.Windows.Forms.SplitContainer splitContainer3;
         private System.Windows.Forms.Button hirePerson;
         private System.Windows.Forms.Label SelectedPersonAge;
@@ -548,12 +449,6 @@
 		private System.Windows.Forms.Button fireEmployee;
 		private System.Windows.Forms.Label SelectedEmployeeAge;
 		private System.Windows.Forms.Label SelectedEmployeeName;
-		private System.Windows.Forms.ListView SelectedPersonSkillList;
-		private System.Windows.Forms.ColumnHeader SelectedEmployeeSkillNameHeader;
-		private System.Windows.Forms.ColumnHeader SelectedEmployeeSkillLeverHeader;
-		private System.Windows.Forms.ListView SelectedEmployeeSkillList;
-		private System.Windows.Forms.ColumnHeader columnHeader1;
-		private System.Windows.Forms.ColumnHeader columnHeader2;
 		private System.Windows.Forms.Label SelectedSkillToTrainCost;
 		private System.Windows.Forms.ComboBox SelectedEmployeeSkillsToTrain;
 		private System.Windows.Forms.Button Train;
@@ -561,7 +456,9 @@
 		private System.Windows.Forms.Label IsBusy;
 		private System.Windows.Forms.Label SelectedSkillTrainCostTitle;
 		private System.Windows.Forms.Label SelectedSkillTrainTimeTitle;
-		private System.Windows.Forms.ToolTip myToolTip;
-		private System.Windows.Forms.ProgressBar progressBar1;
+		private UcEmployeeList UcEmployeeList1;
+		private UcSkillsDisplay ucSkillsDisplayEmployee;
+		private UcSkillsDisplay ucSkillsDisplayPerson;
+		private System.Windows.Forms.Label IsBusyTitle;
 	}
 }

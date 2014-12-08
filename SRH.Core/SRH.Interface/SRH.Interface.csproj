@@ -67,6 +67,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UcEmployeeList.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UcEmployeeList.Designer.cs">
+      <DependentUpon>UcEmployeeList.cs</DependentUpon>
+    </Compile>
     <Compile Include="UcEmployeePage.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -78,6 +84,12 @@
     </Compile>
     <Compile Include="UcProjectPage.Designer.cs">
       <DependentUpon>UcProjectPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UcSkillsDisplay.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UcSkillsDisplay.Designer.cs">
+      <DependentUpon>UcSkillsDisplay.cs</DependentUpon>
     </Compile>
     <Compile Include="UcStatistics.cs">
       <SubType>UserControl</SubType>
@@ -103,11 +115,17 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="UcEmployeeList.resx">
+      <DependentUpon>UcEmployeeList.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UcEmployeePage.resx">
       <DependentUpon>UcEmployeePage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UcProjectPage.resx">
       <DependentUpon>UcProjectPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UcSkillsDisplay.resx">
+      <DependentUpon>UcSkillsDisplay.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UcStatistics.resx">
       <DependentUpon>UcStatistics.cs</DependentUpon>
