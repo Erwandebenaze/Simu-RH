@@ -75,10 +75,10 @@ namespace SRH.Core
             if (p.Activated)
             {
                 _projects.Add( p );
-                _possibleCompanyProjects.Remove( p );
+                //_possibleCompanyProjects.Remove( p );
             } else
             {
-                _possibleCompanyProjects.Add( p );
+               // _possibleCompanyProjects.Add( p );
                 _projects.Remove( p );
             }
         }
@@ -133,7 +133,7 @@ namespace SRH.Core
         }
         public Project BeginAProject( Project p )
         {
-            _possibleCompanyProjects.Remove( p );
+            //_possibleCompanyProjects.Remove( p );
             _projects.Add( p );
             p.BeginProject();
             return p;
@@ -141,7 +141,7 @@ namespace SRH.Core
 
         public Project StopAProject( Project p )
         {
-            _possibleCompanyProjects.Add( p );
+            //_possibleCompanyProjects.Add( p );
             foreach( Employee e in p.EmployeesAffectedWithSkill.Keys )
             {
 
