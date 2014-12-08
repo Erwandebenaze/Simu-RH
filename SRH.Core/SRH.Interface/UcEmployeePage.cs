@@ -33,6 +33,7 @@ namespace SRH.Interface
 			if( this.IsInRuntimeMode() )
 			{
 				base.OnLoad( e );
+				UcEmployeeList1.Changed += UpdateSkillsDisplay;
 				LoadPage();
 			}
 		}
@@ -42,16 +43,30 @@ namespace SRH.Interface
 		/// </summary>
 		internal void LoadPage()
 		{
-			_joblessPersons = (List<Person>)GameContext.CurrentGame.Market.JoblessPersons;
+			_joblessPersons = GameContext.CurrentGame.Market.JoblessPersons;
 			PersonList.Items.Clear();
 			PersonList.Items.AddRange( _joblessPersons.Select( p => CreatePerson( p ) ).ToArray() );
-			
-			UcEmployeeList1.Changed += EmployeeList_Changed;
 		}
 
-		private void EmployeeList_Changed()
+		private void UpdateSkillsDisplay()
 		{
-			ucSkillsDisplayEmployee.CurrentPerson = UcEmployeeList1.CurrentEmployee.Worker;
+			Employee e = UcEmployeeList1.CurrentEmployee;
+
+			ucSkillsDisplayEmployee.CurrentPerson = e.Worker;
+			SelectedEmployeeName.Text = e.Worker.FirstName + " " + e.Worker.LastName;
+			SelectedEmployeeAge.Text = e.Worker.Age.ToString();
+
+			if( !e.Busy )
+			{
+				IsBusy.Text = "Non";
+				EnableEmployeeInfo();
+				EnableTrainingDisplay( true );
+				CreateSkillsToTrainComboBox();
+			}
+			else
+			{
+				IsBusy.Text = "Oui";
+			}
 			ucSkillsDisplayEmployee.LoadUc();
 		}
 
@@ -78,39 +93,12 @@ namespace SRH.Interface
 			}
         }
 
-		///// <summary>
-		///// Displays the information about the selected Employee
-		///// </summary>
-		///// <param name="sender"></param>
-		///// <param name="e"></param>
-		//private void EmployeeList_SelectedIndexChanged( object sender, EventArgs e )
-		//{
-		//	if( _employeeList.SelectedItems.Count > 0 )
-		//	{
-		//		ucEmployeeList1.CurrentEmployee = (Employee)_employeeList.SelectedItems[ _employeeList.SelectedItems.Count - 1 ].Tag;
-		//		SelectedEmployeeName.Text = ucEmployeeList1.SelectedEmployeeName;
-		//		SelectedEmployeeAge.Text = ucEmployeeList1.SelectedEmployeeName;
-
-		//		if(!ucEmployeeList1.CurrentEmployee.Busy)
-		//		{
-		//			SetSkillsInForm( ucEmployeeList1.CurrentEmployee.Worker,  );
-		//			CreateSkillsToTrainComboBox();
-		//			EnableTrainingDisplay( true );
-		//		}
-		//		else
-		//		{
-		//			EnableTrainingDisplay( false );
-		//		}
-				
-		//	}
-
-		//	if( ucEmployeeList1.CurrentEmployee != null )
-		//	{
-		//		fireEmployee.Enabled = true;
-		//		SelectedEmployeeName.Visible = true;
-		//		SelectedEmployeeAge.Visible = true;
-		//	}
-		//}
+		private void EnableEmployeeInfo()
+		{
+			fireEmployee.Enabled = true;
+			SelectedEmployeeName.Visible = true;
+			SelectedEmployeeAge.Visible = true;
+		}
 
 		/// <summary>
 		/// Displays the information about the selected Skill to train (Cost and Time)
@@ -146,11 +134,10 @@ namespace SRH.Interface
         private void hirePerson_Click( object sender, EventArgs e )
         {
             Employee emp = GameContext.CurrentGame.PlayerCompany.AddEmployee( _currentPerson );
-			UcEmployeeList1.EmployeeList.Items.Add( CreateEmployee( emp ) );
-
 			var PersonItem = PersonList.Items.Cast<ListViewItem>().Where( item => item.Tag == _currentPerson ).Single();
 			PersonList.Items.Remove( PersonItem );
-		
+
+			UcEmployeeList1.LoadUc();
 			hirePerson.Enabled = false;
         }
 
@@ -196,7 +183,7 @@ namespace SRH.Interface
 					Train.Enabled = false;
 			}
 
-			CreateSkillsToTrainComboBox();
+			UpdateSkillsDisplay();
 		}
 
 		/// <summary>
@@ -257,11 +244,12 @@ namespace SRH.Interface
 		private void CreateSkillsToTrainComboBox()
 		{
 			SelectedEmployeeSkillsToTrain.Items.Clear();
-			IEnumerable<string> presentSkills = UcEmployeeList1.CurrentEmployee.Worker.Skills
-				.Where( s => s.Level.CurrentLevel < 5 )
-				.Select( s => s.SkillName );
-			SelectedEmployeeSkillsToTrain.Items.AddRange( presentSkills.ToArray() );
 
+			// Add the Employee's already present Skills
+			SelectedEmployeeSkillsToTrain.Items.AddRange( UcEmployeeList1.CurrentEmployee.Worker.Skills
+				.Where( s => s.Level.CurrentLevel < 5 )
+				.Select( s => s.SkillName ).ToArray() );
+			// Add the other Skills, without the Employee's already present Skills
 			SelectedEmployeeSkillsToTrain.Items.AddRange( GameContext.CurrentGame.SkillNames
 				.Select( s => s.Value )
 				.Where( s => !( UcEmployeeList1.CurrentEmployee.Worker.Skills.Any( ps => ps.SkillName == s ) ) )
@@ -277,6 +265,8 @@ namespace SRH.Interface
 				SelectedSkillToTrainCost.Visible = true;
 				SelectedSkillTrainTimeTitle.Visible = true;
 				SelectedSkillToTrainTime.Visible = true;
+				IsBusyTitle.Visible = true;
+				IsBusy.Visible = true;
 			}
 			else
 			{
@@ -285,6 +275,8 @@ namespace SRH.Interface
 				SelectedSkillToTrainCost.Visible = false;
 				SelectedSkillTrainTimeTitle.Visible = false;
 				SelectedSkillToTrainTime.Visible = false;
+				IsBusyTitle.Visible = false;
+				IsBusy.Visible = false;
 			}
 		}
 

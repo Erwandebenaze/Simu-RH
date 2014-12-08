@@ -14,7 +14,6 @@ namespace SRH.Interface
 	public partial class UcEmployeeList : UserControl
 	{
 		List<Employee> _employees;
-		ListView _employeeList;
 		Employee _currentEmployee;
 		string _selectedEmployeeName;
 		string _selectedEmployeeAge;
@@ -30,12 +29,6 @@ namespace SRH.Interface
 			}
 		}
 
-		//public event EventHandler SelectedIndexChanged
-		//{
-		//	add { employeeList.SelectedIndexChanged += value; }
-		//	remove { employeeList.SelectedIndexChanged -= value; }
-		//}
-
 		#region Getters Setters
 		public UcEmployeeList()
 		{
@@ -49,7 +42,7 @@ namespace SRH.Interface
 
 		internal ListView EmployeeList
 		{
-			get { return _employeeList = employeeList; }
+			get { return employeeList; }
 		}
 
 		internal Employee CurrentEmployee
@@ -82,9 +75,30 @@ namespace SRH.Interface
 			if( this.IsInRuntimeMode() )
 			{
 				base.OnLoad( e );
-				_employees = GameContext.CurrentGame.PlayerCompany.Employees;
-				employeeList.Items.AddRange( _employees.Select( employee => CreateEmployee( employee ) ).ToArray() );
+				LoadUc();
 			}
+		}
+
+		internal void LoadUc()
+		{
+			_employees = GameContext.CurrentGame.PlayerCompany.Employees;
+			Func<bool, IEnumerable<Employee>> f = GetProjEmployees;
+
+			employeeList.Items.Clear();
+			employeeList.Items.AddRange( f( true ).Select( employee => CreateEmployee( employee ) ).ToArray() );
+		}
+
+		private IEnumerable<Employee> GetProjEmployees( bool arg )
+		{
+
+			if( !arg )
+			{
+				return _employees.Where( e => e.Worker.Skills
+				.Any( s => !GameContext.CurrentGame.IsProjSkill( s.SkillName ) ) )
+				.Select( e => e );
+			}
+			else
+				return _employees.Select( e => e );
 		}
 
 		private void employeeList_SelectedIndexChanged( object sender, EventArgs e )

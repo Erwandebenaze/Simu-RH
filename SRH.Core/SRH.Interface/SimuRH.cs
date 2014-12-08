@@ -18,12 +18,14 @@ namespace SRH.Interface
         int interval;
         readonly Options _optionsForm;
         GameTime _timeOfGame;
+        DateTime? _begginingDebt;
+        bool _debt;
 
         public SimuRH()
         {
             InitializeComponent();
-            _myGame = new Game( 1, "Erwan" );
-            // _myGame = GameLoader.Load( "Erfive" );
+            //_myGame = new Game( 1, "Erwan" );
+            _myGame = GameLoader.Load( "Erwan" );
             _optionsForm = new Options();
             _timeOfGame = _myGame.TimeGame;
             _timer = new Timer();
@@ -63,6 +65,23 @@ namespace SRH.Interface
 				// Current date display
                 _dateOfGame.Text = _myGame.TimeGame.CurrentTimeOfGame.ToString( "d" );
                 _day.Text = _timeOfGame.FrenchDayOfWeek;
+                if( _myGame.PlayerCompany.Wealth < 0 && !_debt)
+                {
+                    _begginingDebt = _myGame.TimeGame.CurrentTimeOfGame;
+                    _debt = true;
+                }
+                else if( _myGame.PlayerCompany.Wealth < 0 && _debt )
+                {
+                    if( _myGame.TimeGame.intervalOfTimeInDays( _begginingDebt ) % 20 == 0 ) 
+                    {
+                        
+                        _myGame.PlayerCompany.Wealth -= _myGame.PlayerCompany.Wealth / 100 * 5 ;
+                    }
+
+                } else if (!_debt)
+                {
+                    _begginingDebt = null;
+                }
 
                 foreach( Competitor competitor in _myGame.Competitors )
                 {

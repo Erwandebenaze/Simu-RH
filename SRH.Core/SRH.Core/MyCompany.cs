@@ -13,6 +13,14 @@ namespace SRH.Core
         readonly List<Project> _projects;
         double _maxProjectDifficulty;
         readonly Level _companyLevel;
+        Dictionary<Employee, Skill> _managers;
+        List<Employee> _commerciaux;
+        List<Employee> _animation;
+        List<Employee> _ressourcesHumaines;
+        List<Employee> _directeursProjets;
+        List<Employee> _gestionnairesContrat;
+
+
 
 		internal MyCompany( Game game, string name ) : base( game, name )
         {
@@ -21,6 +29,13 @@ namespace SRH.Core
 			_companyLevel = new Level( this, 1 );
 			_maxProjectDifficulty = 1;
             _projects = new List<Project>();
+            _managers = new Dictionary<Employee,Skill>();
+            _commerciaux = new List<Employee>();
+            _animation = new List<Employee>();
+            _ressourcesHumaines = new List<Employee>();
+            _directeursProjets = new List<Employee>();
+            _gestionnairesContrat = new List<Employee>();
+
         }
 
         #region Getters Setters
@@ -28,6 +43,10 @@ namespace SRH.Core
         public Game MyGame
         {
             get { return _myGame; }
+        }
+        public Dictionary<Employee, Skill> Managers
+        {
+            get { return _managers; }
         }
         public List<Project> Projects
         {
@@ -56,10 +75,10 @@ namespace SRH.Core
             if (p.Activated)
             {
                 _projects.Add( p );
-                _possibleCompanyProjects.Remove( p );
+                //_possibleCompanyProjects.Remove( p );
             } else
             {
-                _possibleCompanyProjects.Add( p );
+               // _possibleCompanyProjects.Add( p );
                 _projects.Remove( p );
             }
         }
@@ -114,7 +133,7 @@ namespace SRH.Core
         }
         public Project BeginAProject( Project p )
         {
-            _possibleCompanyProjects.Remove( p );
+            //_possibleCompanyProjects.Remove( p );
             _projects.Add( p );
             p.BeginProject();
             return p;
@@ -122,7 +141,7 @@ namespace SRH.Core
 
         public Project StopAProject( Project p )
         {
-            _possibleCompanyProjects.Add( p );
+            //_possibleCompanyProjects.Add( p );
             foreach( Employee e in p.EmployeesAffectedWithSkill.Keys )
             {
 
@@ -144,5 +163,33 @@ namespace SRH.Core
 
 			return finalList;
 		}
+
+        public void AffectManagers()
+        {
+
+            if( _managers.Count != 0 )
+            {
+                foreach( KeyValuePair<Employee, Skill> dico in _managers)
+                {
+                    if( dico.Value.SkillName == "Commercial" ) _commerciaux.Add(dico.Key);
+                    if( dico.Value.SkillName == "Animation" ) _animation.Add( dico.Key );
+                    if( dico.Value.SkillName == "Gestion de contrat" ) _gestionnairesContrat.Add( dico.Key );
+                    if( dico.Value.SkillName == "Directeur de projets" ) _directeursProjets.Add( dico.Key );
+                    if( dico.Value.SkillName == "Ressources humaines" ) _ressourcesHumaines.Add( dico.Key );
+                }
+            }
+        }
+
+        public void UseManagers()
+        {
+            int pourcentCommerciaux = 0;
+            if( _commerciaux.Count > 0)
+            {
+                foreach( Employee emp in _commerciaux )
+                {
+                    pourcentCommerciaux += (emp.Worker.Skills.Where( e => e.SkillName == "Commercial" ).Select( e => e.Level.CurrentLevel ).Single()) * 2;
+                }
+            }
+        }
 	}
 }

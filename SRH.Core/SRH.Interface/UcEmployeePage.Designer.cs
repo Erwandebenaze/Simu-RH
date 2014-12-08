@@ -34,7 +34,7 @@
 			System.Windows.Forms.Label SelectedEmployeeAgeTitle;
 			System.Windows.Forms.Label SelectedEmployeeNameTitle;
 			System.Windows.Forms.Label SelectedEmployeeTitle;
-			System.Windows.Forms.Label IsBusyTitle;
+			this.IsBusyTitle = new System.Windows.Forms.Label();
 			this.SelectedSkillTrainCostTitle = new System.Windows.Forms.Label();
 			this.SelectedSkillTrainTimeTitle = new System.Windows.Forms.Label();
 			this.PersonList = new System.Windows.Forms.ListView();
@@ -64,7 +64,6 @@
 			SelectedEmployeeAgeTitle = new System.Windows.Forms.Label();
 			SelectedEmployeeNameTitle = new System.Windows.Forms.Label();
 			SelectedEmployeeTitle = new System.Windows.Forms.Label();
-			IsBusyTitle = new System.Windows.Forms.Label();
 			((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
 			this.splitContainer1.Panel1.SuspendLayout();
 			this.splitContainer1.Panel2.SuspendLayout();
@@ -137,12 +136,13 @@
 			// 
 			// IsBusyTitle
 			// 
-			IsBusyTitle.AutoSize = true;
-			IsBusyTitle.Location = new System.Drawing.Point(165, 79);
-			IsBusyTitle.Name = "IsBusyTitle";
-			IsBusyTitle.Size = new System.Drawing.Size(45, 13);
-			IsBusyTitle.TabIndex = 20;
-			IsBusyTitle.Text = "Occupé";
+			this.IsBusyTitle.AutoSize = true;
+			this.IsBusyTitle.Location = new System.Drawing.Point(165, 79);
+			this.IsBusyTitle.Name = "IsBusyTitle";
+			this.IsBusyTitle.Size = new System.Drawing.Size(51, 13);
+			this.IsBusyTitle.TabIndex = 20;
+			this.IsBusyTitle.Text = "Occupé :";
+			this.IsBusyTitle.Visible = false;
 			// 
 			// SelectedSkillTrainCostTitle
 			// 
@@ -152,6 +152,7 @@
 			this.SelectedSkillTrainCostTitle.Size = new System.Drawing.Size(38, 13);
 			this.SelectedSkillTrainCostTitle.TabIndex = 16;
 			this.SelectedSkillTrainCostTitle.Text = "Coût : ";
+			this.SelectedSkillTrainCostTitle.Visible = false;
 			// 
 			// SelectedSkillTrainTimeTitle
 			// 
@@ -161,6 +162,7 @@
 			this.SelectedSkillTrainTimeTitle.Size = new System.Drawing.Size(48, 13);
 			this.SelectedSkillTrainTimeTitle.TabIndex = 18;
 			this.SelectedSkillTrainTimeTitle.Text = "Temps : ";
+			this.SelectedSkillTrainTimeTitle.Visible = false;
 			// 
 			// PersonList
 			// 
@@ -238,7 +240,7 @@
 			// splitContainer3.Panel1
 			// 
 			this.splitContainer3.Panel1.Controls.Add(this.IsBusy);
-			this.splitContainer3.Panel1.Controls.Add(IsBusyTitle);
+			this.splitContainer3.Panel1.Controls.Add(this.IsBusyTitle);
 			this.splitContainer3.Panel1.Controls.Add(this.SelectedSkillToTrainTime);
 			this.splitContainer3.Panel1.Controls.Add(this.SelectedSkillTrainTimeTitle);
 			this.splitContainer3.Panel1.Controls.Add(this.SelectedSkillToTrainCost);
@@ -274,6 +276,7 @@
 			this.IsBusy.Size = new System.Drawing.Size(14, 13);
 			this.IsBusy.TabIndex = 21;
 			this.IsBusy.Text = "X";
+			this.IsBusy.Visible = false;
 			// 
 			// SelectedSkillToTrainTime
 			// 
@@ -283,6 +286,7 @@
 			this.SelectedSkillToTrainTime.Size = new System.Drawing.Size(14, 13);
 			this.SelectedSkillToTrainTime.TabIndex = 19;
 			this.SelectedSkillToTrainTime.Text = "X";
+			this.SelectedSkillToTrainTime.Visible = false;
 			// 
 			// SelectedSkillToTrainCost
 			// 
@@ -292,6 +296,7 @@
 			this.SelectedSkillToTrainCost.Size = new System.Drawing.Size(14, 13);
 			this.SelectedSkillToTrainCost.TabIndex = 17;
 			this.SelectedSkillToTrainCost.Text = "X";
+			this.SelectedSkillToTrainCost.Visible = false;
 			// 
 			// SelectedEmployeeSkillsToTrain
 			// 
@@ -300,6 +305,7 @@
 			this.SelectedEmployeeSkillsToTrain.Name = "SelectedEmployeeSkillsToTrain";
 			this.SelectedEmployeeSkillsToTrain.Size = new System.Drawing.Size(106, 21);
 			this.SelectedEmployeeSkillsToTrain.TabIndex = 15;
+			this.SelectedEmployeeSkillsToTrain.Visible = false;
 			this.SelectedEmployeeSkillsToTrain.SelectedIndexChanged += new System.EventHandler(this.SelectedEmployeeSkillsToTrain_SelectedIndexChanged);
 			// 
 			// Train
@@ -453,5 +459,6 @@
 		private UcEmployeeList UcEmployeeList1;
 		private UcSkillsDisplay ucSkillsDisplayEmployee;
 		private UcSkillsDisplay ucSkillsDisplayPerson;
+		private System.Windows.Forms.Label IsBusyTitle;
 	}
 }
