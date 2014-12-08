@@ -206,9 +206,8 @@ namespace SRH.Core
 
         public Project Clone()
         {
-            Project project = new Project( _myComp, _name, _difficulty, _numberOfWorkers, _earnings, _skillsRequired, _duration );
-            
-            return project;
+          Project project = new Project( _myComp, _name, _difficulty, _numberOfWorkers, _earnings, new Dictionary<Skill, int>( _skillsRequired ), _duration );
+          return project;
         } 
 
     }

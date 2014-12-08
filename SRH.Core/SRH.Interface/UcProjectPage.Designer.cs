@@ -133,6 +133,7 @@
             this.listPossibleProjects.FullRowSelect = true;
             this.listPossibleProjects.Location = new System.Drawing.Point(0, 0);
             this.listPossibleProjects.Margin = new System.Windows.Forms.Padding(4);
+            this.listPossibleProjects.MultiSelect = false;
             this.listPossibleProjects.Name = "listPossibleProjects";
             this.listPossibleProjects.Size = new System.Drawing.Size(365, 271);
             this.listPossibleProjects.TabIndex = 0;

@@ -60,11 +60,11 @@ namespace SRH.Interface
 			listPossibleProjects.Items.AddRange( _possibleProjects.Select( p => CreateListItemViewProjects( p ) ).ToArray() );
 			listCurrentProjects.Items.AddRange( _projects.Select( p => CreateListItemViewProjects( p ) ).ToArray() );
             #region TODO
-            // TODO : Ajouter la liste pour les projets en cours lorsque le temps sera définis.
+            // TODO : Ajouter la liste pour les projets en cours lorsque le temps sera défini.
             #endregion
 
 		}
-        static ListViewItem CreateListItemViewProjects( Project project )
+        private ListViewItem CreateListItemViewProjects( Project project )
         {
             Project p = project.Clone();
             ListViewItem i = new ListViewItem( p.Name );
@@ -82,6 +82,7 @@ namespace SRH.Interface
                 listSkillsRequired.Enabled = true;
 
 
+
                 _startOrStopProject.Enabled = true;
                 EstimatedTime.Text = "Temps estimé";
 
@@ -89,12 +90,16 @@ namespace SRH.Interface
                 AffectCurrentProjectFields();
 
                 AffectStartButtonFields();
-					listSkillsRequired.Items.Clear();
-                    listSkillsRequired.Items.AddRange( _currentProj.SkillsRequired.Select( k => CreateListItemViewSkillsRequired( k.Key, k.Value ) ).ToArray() );
-                    if ( _currentProj.EmployeesAffectedWithSkill.Count != 0 )
-                    {
-                        listSkillsRequired.Items.AddRange( _currentProj.EmployeesAffectedWithSkill.Select( k => CompleteListItemViewSkillsRequired( k.Key, k.Value ) ).ToArray() );
-                    }
+				listSkillsRequired.Items.Clear();
+                listSkillsRequired.Items.AddRange( _currentProj.SkillsRequired.Select( k => CreateListItemViewSkillsRequired( k.Key, k.Value ) ).ToArray() );
+                if ( _currentProj.EmployeesAffectedWithSkill.Count != 0 )
+                {
+                    listSkillsRequired.Items.AddRange( _currentProj.EmployeesAffectedWithSkill.Select( k => CompleteListItemViewSkillsRequired( k.Key, k.Value ) ).ToArray() );
+                }
+
+                listPossibleProjects.Items.Clear();
+                listPossibleProjects.Items.AddRange( _possibleProjects.Select( p => CreateListItemViewProjects( p ) ).ToArray() );
+            
             } 
         }
         private void listSkillsRequired_SelectedIndexChanged( object sender, EventArgs e )
