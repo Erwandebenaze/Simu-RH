@@ -141,9 +141,9 @@ namespace SRH.Core
         /// <param name="p"></param>
         /// <param name="skill"></param>
         public void AffectEmployeeToAJob( Employee e, Skill s )
-        {  
-            if( SkillsRequired.ContainsKey( s ) && e.Worker.Skills.Contains(s) && !this.Activated) 
-            _employeesAffectedWithSkill.Add( e, s );
+        {
+            if( SkillsRequired.ContainsKey( s ) && e.Worker.Skills.Contains( s ) && !this.Activated )
+                _employeesAffectedWithSkill.Add( e, e.Worker.Skills.Where( sk => sk.Equals( s ) ).Single() );
             e.Busy = true;
             _skillsRequired.Remove( s );
         }
