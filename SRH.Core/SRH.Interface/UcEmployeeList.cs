@@ -88,10 +88,9 @@ namespace SRH.Interface
 		internal void LoadUc()
 		{
 			_employees = GameContext.CurrentGame.PlayerCompany.Employees;
-			Func<bool, IEnumerable<Employee>> f = GetProjEmployees;
 
 			employeeList.Items.Clear();
-			employeeList.Items.AddRange( f( _showProj ).Select( employee => CreateEmployee( employee ) ).ToArray() );
+			employeeList.Items.AddRange( GetProjEmployees( _showProj ).Select( employee => CreateEmployee( employee ) ).ToArray() );
 		}
 
 		private IEnumerable<Employee> GetProjEmployees( bool arg )
@@ -99,7 +98,7 @@ namespace SRH.Interface
 			if( !arg )
 			{
 				return _employees.Where( e => e.Worker.Skills
-				.Any( s => !GameContext.CurrentGame.IsProjSkill( s.SkillName ) ) );
+				.Any( s => !(s is ProjSkill ) ) );
 			}
 			else
 				return _employees;
@@ -136,7 +135,7 @@ namespace SRH.Interface
 			{
 				i.SubItems.Add( new ListViewItem.ListViewSubItem( i, 
 					e.Worker.Skills
-				.Where( s => !GameContext.CurrentGame.IsProjSkill( s.SkillName ) )
+				.Where( s => !( s is ProjSkill ) )
 				.Where( s => s.Level.CurrentXp == e.Worker.Skills.Max( sk => sk.Level.CurrentXp ) )
 				.Select( s => s.SkillName )
 				.FirstOrDefault() ) );

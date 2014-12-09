@@ -29,28 +29,33 @@
         private void InitializeComponent()
         {
 			this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-			this.gestionnairesContratsList = new System.Windows.Forms.ListView();
+			this.contractHandlerList = new System.Windows.Forms.ListView();
 			this.NameGestionnaire = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.lvlGestionnaire = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-			this.ressourcesHumainesList = new System.Windows.Forms.ListView();
+			this.humanResourcesList = new System.Windows.Forms.ListView();
 			this.NameRessources = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.lvlRessources = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-			this.directeurProjetsList = new System.Windows.Forms.ListView();
+			this.projDirectorList = new System.Windows.Forms.ListView();
 			this.NameDirecteurs = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.lvlDirecteur = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.animationList = new System.Windows.Forms.ListView();
 			this.NameAnimation = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.lvlAnimation = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.label2 = new System.Windows.Forms.Label();
-			this.commerciauxList = new System.Windows.Forms.ListView();
+			this.commercialList = new System.Windows.Forms.ListView();
 			this.NameCommerciaux = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.lvlOfCommerciaux = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.label5 = new System.Windows.Forms.Label();
 			this.label4 = new System.Windows.Forms.Label();
 			this.label3 = new System.Windows.Forms.Label();
 			this.label1 = new System.Windows.Forms.Label();
-			this.UcEmployeeList1 = new SRH.Interface.UcEmployeeList();
+			this.SkillsToAffect = new System.Windows.Forms.ComboBox();
+			this.SelectedManagerAffectTitle = new System.Windows.Forms.Label();
+			this.Affect_Manager = new System.Windows.Forms.Button();
+			this.IsBusyTitle = new System.Windows.Forms.Label();
+			this.IsBusy = new System.Windows.Forms.Label();
 			this.UcSkillsDisplay1 = new SRH.Interface.UcSkillsDisplay();
+			this.UcEmployeeList1 = new SRH.Interface.UcEmployeeList();
 			((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
 			this.splitContainer1.Panel1.SuspendLayout();
 			this.splitContainer1.Panel2.SuspendLayout();
@@ -61,17 +66,17 @@
 			// 
 			this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.splitContainer1.Location = new System.Drawing.Point(0, 0);
-			this.splitContainer1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.splitContainer1.Margin = new System.Windows.Forms.Padding(2);
 			this.splitContainer1.Name = "splitContainer1";
 			// 
 			// splitContainer1.Panel1
 			// 
-			this.splitContainer1.Panel1.Controls.Add(this.gestionnairesContratsList);
-			this.splitContainer1.Panel1.Controls.Add(this.ressourcesHumainesList);
-			this.splitContainer1.Panel1.Controls.Add(this.directeurProjetsList);
+			this.splitContainer1.Panel1.Controls.Add(this.contractHandlerList);
+			this.splitContainer1.Panel1.Controls.Add(this.humanResourcesList);
+			this.splitContainer1.Panel1.Controls.Add(this.projDirectorList);
 			this.splitContainer1.Panel1.Controls.Add(this.animationList);
 			this.splitContainer1.Panel1.Controls.Add(this.label2);
-			this.splitContainer1.Panel1.Controls.Add(this.commerciauxList);
+			this.splitContainer1.Panel1.Controls.Add(this.commercialList);
 			this.splitContainer1.Panel1.Controls.Add(this.label5);
 			this.splitContainer1.Panel1.Controls.Add(this.label4);
 			this.splitContainer1.Panel1.Controls.Add(this.label3);
@@ -79,6 +84,11 @@
 			// 
 			// splitContainer1.Panel2
 			// 
+			this.splitContainer1.Panel2.Controls.Add(this.IsBusy);
+			this.splitContainer1.Panel2.Controls.Add(this.IsBusyTitle);
+			this.splitContainer1.Panel2.Controls.Add(this.Affect_Manager);
+			this.splitContainer1.Panel2.Controls.Add(this.SelectedManagerAffectTitle);
+			this.splitContainer1.Panel2.Controls.Add(this.SkillsToAffect);
 			this.splitContainer1.Panel2.Controls.Add(this.UcSkillsDisplay1);
 			this.splitContainer1.Panel2.Controls.Add(this.UcEmployeeList1);
 			this.splitContainer1.Size = new System.Drawing.Size(825, 512);
@@ -86,18 +96,18 @@
 			this.splitContainer1.SplitterWidth = 3;
 			this.splitContainer1.TabIndex = 0;
 			// 
-			// gestionnairesContratsList
+			// contractHandlerList
 			// 
-			this.gestionnairesContratsList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+			this.contractHandlerList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.NameGestionnaire,
             this.lvlGestionnaire});
-			this.gestionnairesContratsList.Location = new System.Drawing.Point(2, 436);
-			this.gestionnairesContratsList.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-			this.gestionnairesContratsList.Name = "gestionnairesContratsList";
-			this.gestionnairesContratsList.Size = new System.Drawing.Size(346, 80);
-			this.gestionnairesContratsList.TabIndex = 14;
-			this.gestionnairesContratsList.UseCompatibleStateImageBehavior = false;
-			this.gestionnairesContratsList.View = System.Windows.Forms.View.Details;
+			this.contractHandlerList.Location = new System.Drawing.Point(2, 436);
+			this.contractHandlerList.Margin = new System.Windows.Forms.Padding(2);
+			this.contractHandlerList.Name = "contractHandlerList";
+			this.contractHandlerList.Size = new System.Drawing.Size(346, 80);
+			this.contractHandlerList.TabIndex = 14;
+			this.contractHandlerList.UseCompatibleStateImageBehavior = false;
+			this.contractHandlerList.View = System.Windows.Forms.View.Details;
 			// 
 			// NameGestionnaire
 			// 
@@ -109,18 +119,18 @@
 			this.lvlGestionnaire.Text = "Niveau de la compétence";
 			this.lvlGestionnaire.Width = 184;
 			// 
-			// ressourcesHumainesList
+			// humanResourcesList
 			// 
-			this.ressourcesHumainesList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+			this.humanResourcesList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.NameRessources,
             this.lvlRessources});
-			this.ressourcesHumainesList.Location = new System.Drawing.Point(3, 338);
-			this.ressourcesHumainesList.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-			this.ressourcesHumainesList.Name = "ressourcesHumainesList";
-			this.ressourcesHumainesList.Size = new System.Drawing.Size(345, 80);
-			this.ressourcesHumainesList.TabIndex = 13;
-			this.ressourcesHumainesList.UseCompatibleStateImageBehavior = false;
-			this.ressourcesHumainesList.View = System.Windows.Forms.View.Details;
+			this.humanResourcesList.Location = new System.Drawing.Point(3, 338);
+			this.humanResourcesList.Margin = new System.Windows.Forms.Padding(2);
+			this.humanResourcesList.Name = "humanResourcesList";
+			this.humanResourcesList.Size = new System.Drawing.Size(345, 80);
+			this.humanResourcesList.TabIndex = 13;
+			this.humanResourcesList.UseCompatibleStateImageBehavior = false;
+			this.humanResourcesList.View = System.Windows.Forms.View.Details;
 			// 
 			// NameRessources
 			// 
@@ -132,18 +142,18 @@
 			this.lvlRessources.Text = "Niveau de la compétence";
 			this.lvlRessources.Width = 184;
 			// 
-			// directeurProjetsList
+			// projDirectorList
 			// 
-			this.directeurProjetsList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+			this.projDirectorList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.NameDirecteurs,
             this.lvlDirecteur});
-			this.directeurProjetsList.Location = new System.Drawing.Point(2, 231);
-			this.directeurProjetsList.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-			this.directeurProjetsList.Name = "directeurProjetsList";
-			this.directeurProjetsList.Size = new System.Drawing.Size(346, 80);
-			this.directeurProjetsList.TabIndex = 12;
-			this.directeurProjetsList.UseCompatibleStateImageBehavior = false;
-			this.directeurProjetsList.View = System.Windows.Forms.View.Details;
+			this.projDirectorList.Location = new System.Drawing.Point(2, 231);
+			this.projDirectorList.Margin = new System.Windows.Forms.Padding(2);
+			this.projDirectorList.Name = "projDirectorList";
+			this.projDirectorList.Size = new System.Drawing.Size(346, 80);
+			this.projDirectorList.TabIndex = 12;
+			this.projDirectorList.UseCompatibleStateImageBehavior = false;
+			this.projDirectorList.View = System.Windows.Forms.View.Details;
 			// 
 			// NameDirecteurs
 			// 
@@ -161,7 +171,7 @@
             this.NameAnimation,
             this.lvlAnimation});
 			this.animationList.Location = new System.Drawing.Point(2, 125);
-			this.animationList.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.animationList.Margin = new System.Windows.Forms.Padding(2);
 			this.animationList.Name = "animationList";
 			this.animationList.Size = new System.Drawing.Size(345, 80);
 			this.animationList.TabIndex = 11;
@@ -188,18 +198,18 @@
 			this.label2.TabIndex = 10;
 			this.label2.Text = "Gestionnaires de contrats";
 			// 
-			// commerciauxList
+			// commercialList
 			// 
-			this.commerciauxList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+			this.commercialList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.NameCommerciaux,
             this.lvlOfCommerciaux});
-			this.commerciauxList.Location = new System.Drawing.Point(3, 16);
-			this.commerciauxList.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-			this.commerciauxList.Name = "commerciauxList";
-			this.commerciauxList.Size = new System.Drawing.Size(345, 80);
-			this.commerciauxList.TabIndex = 5;
-			this.commerciauxList.UseCompatibleStateImageBehavior = false;
-			this.commerciauxList.View = System.Windows.Forms.View.Details;
+			this.commercialList.Location = new System.Drawing.Point(3, 16);
+			this.commercialList.Margin = new System.Windows.Forms.Padding(2);
+			this.commercialList.Name = "commercialList";
+			this.commercialList.Size = new System.Drawing.Size(345, 80);
+			this.commercialList.TabIndex = 5;
+			this.commercialList.UseCompatibleStateImageBehavior = false;
+			this.commercialList.View = System.Windows.Forms.View.Details;
 			// 
 			// NameCommerciaux
 			// 
@@ -251,12 +261,57 @@
 			this.label1.TabIndex = 0;
 			this.label1.Text = "Commerciaux";
 			// 
-			// UcEmployeeList1
+			// SkillsToAffect
 			// 
-			this.UcEmployeeList1.Location = new System.Drawing.Point(25, 30);
-			this.UcEmployeeList1.Name = "UcEmployeeList1";
-			this.UcEmployeeList1.Size = new System.Drawing.Size(432, 249);
-			this.UcEmployeeList1.TabIndex = 0;
+			this.SkillsToAffect.FormattingEnabled = true;
+			this.SkillsToAffect.Location = new System.Drawing.Point(154, 436);
+			this.SkillsToAffect.Name = "SkillsToAffect";
+			this.SkillsToAffect.Size = new System.Drawing.Size(213, 21);
+			this.SkillsToAffect.TabIndex = 2;
+			this.SkillsToAffect.Visible = false;
+			this.SkillsToAffect.SelectedIndexChanged += new System.EventHandler(this.SkillsToAffect_SelectedIndexChanged);
+			// 
+			// SelectedManagerAffectTitle
+			// 
+			this.SelectedManagerAffectTitle.AutoSize = true;
+			this.SelectedManagerAffectTitle.Location = new System.Drawing.Point(33, 439);
+			this.SelectedManagerAffectTitle.Name = "SelectedManagerAffectTitle";
+			this.SelectedManagerAffectTitle.Size = new System.Drawing.Size(115, 13);
+			this.SelectedManagerAffectTitle.TabIndex = 3;
+			this.SelectedManagerAffectTitle.Text = "Compétence à affecter";
+			this.SelectedManagerAffectTitle.Visible = false;
+			// 
+			// Affect_Manager
+			// 
+			this.Affect_Manager.Enabled = false;
+			this.Affect_Manager.Location = new System.Drawing.Point(382, 434);
+			this.Affect_Manager.Name = "Affect_Manager";
+			this.Affect_Manager.Size = new System.Drawing.Size(75, 23);
+			this.Affect_Manager.TabIndex = 4;
+			this.Affect_Manager.Text = "Affecter";
+			this.Affect_Manager.UseVisualStyleBackColor = true;
+			this.Affect_Manager.Visible = false;
+			this.Affect_Manager.Click += new System.EventHandler(this.Affect_Manager_Click);
+			// 
+			// IsBusyTitle
+			// 
+			this.IsBusyTitle.AutoSize = true;
+			this.IsBusyTitle.Location = new System.Drawing.Point(36, 483);
+			this.IsBusyTitle.Name = "IsBusyTitle";
+			this.IsBusyTitle.Size = new System.Drawing.Size(51, 13);
+			this.IsBusyTitle.TabIndex = 5;
+			this.IsBusyTitle.Text = "Occupé :";
+			this.IsBusyTitle.Visible = false;
+			// 
+			// IsBusy
+			// 
+			this.IsBusy.AutoSize = true;
+			this.IsBusy.Location = new System.Drawing.Point(93, 483);
+			this.IsBusy.Name = "IsBusy";
+			this.IsBusy.Size = new System.Drawing.Size(14, 13);
+			this.IsBusy.TabIndex = 6;
+			this.IsBusy.Text = "X";
+			this.IsBusy.Visible = false;
 			// 
 			// UcSkillsDisplay1
 			// 
@@ -266,17 +321,25 @@
 			this.UcSkillsDisplay1.Size = new System.Drawing.Size(437, 138);
 			this.UcSkillsDisplay1.TabIndex = 1;
 			// 
+			// UcEmployeeList1
+			// 
+			this.UcEmployeeList1.Location = new System.Drawing.Point(25, 30);
+			this.UcEmployeeList1.Name = "UcEmployeeList1";
+			this.UcEmployeeList1.Size = new System.Drawing.Size(432, 249);
+			this.UcEmployeeList1.TabIndex = 0;
+			// 
 			// UcCompanyManagement
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.Controls.Add(this.splitContainer1);
-			this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.Margin = new System.Windows.Forms.Padding(2);
 			this.Name = "UcCompanyManagement";
 			this.Size = new System.Drawing.Size(825, 512);
 			this.splitContainer1.Panel1.ResumeLayout(false);
 			this.splitContainer1.Panel1.PerformLayout();
 			this.splitContainer1.Panel2.ResumeLayout(false);
+			this.splitContainer1.Panel2.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
 			this.splitContainer1.ResumeLayout(false);
 			this.ResumeLayout(false);
@@ -290,14 +353,14 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.ListView commerciauxList;
-        private System.Windows.Forms.ListView gestionnairesContratsList;
+        private System.Windows.Forms.ListView commercialList;
+        private System.Windows.Forms.ListView contractHandlerList;
         private System.Windows.Forms.ColumnHeader NameGestionnaire;
         private System.Windows.Forms.ColumnHeader lvlGestionnaire;
-        private System.Windows.Forms.ListView ressourcesHumainesList;
+        private System.Windows.Forms.ListView humanResourcesList;
         private System.Windows.Forms.ColumnHeader NameRessources;
         private System.Windows.Forms.ColumnHeader lvlRessources;
-        private System.Windows.Forms.ListView directeurProjetsList;
+        private System.Windows.Forms.ListView projDirectorList;
         private System.Windows.Forms.ColumnHeader NameDirecteurs;
         private System.Windows.Forms.ColumnHeader lvlDirecteur;
         private System.Windows.Forms.ListView animationList;
@@ -308,5 +371,10 @@
         private System.Windows.Forms.ColumnHeader lvlOfCommerciaux;
 		private UcSkillsDisplay UcSkillsDisplay1;
 		private UcEmployeeList UcEmployeeList1;
+		private System.Windows.Forms.ComboBox SkillsToAffect;
+		private System.Windows.Forms.Button Affect_Manager;
+		private System.Windows.Forms.Label IsBusy;
+		private System.Windows.Forms.Label IsBusyTitle;
+		private System.Windows.Forms.Label SelectedManagerAffectTitle;
     }
 }

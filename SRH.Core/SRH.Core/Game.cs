@@ -16,13 +16,11 @@ namespace SRH.Core
         readonly GameTime _timeGame;
         readonly Random _randomNumberGenerator;
         readonly List<Project> _possibleProjects;
-		List<KeyValuePair<string, string>> _skillNames;
+		static List<KeyValuePair<string, string>> _skillNames = CreateSkillNames();
 
 		public Game( int seed, string companyName )
 		{
-            _randomNumberGenerator = new Random( seed );
-			
-			CreateSkillNames();
+			_randomNumberGenerator = new Random( seed );
 			_market = new LaborMarket(this);
             _timeGame = new GameTime( this );
 
@@ -64,7 +62,7 @@ namespace SRH.Core
             get { return _competitors; }
         }
 
-		public IReadOnlyList<KeyValuePair<string, string>> SkillNames
+		public static IReadOnlyList<KeyValuePair<string, string>> SkillNames
 		{
 			get { return _skillNames; }
 		}
@@ -94,27 +92,29 @@ namespace SRH.Core
 		/// <summary>
 		/// Sets the list of Ivariant skill names
 		/// </summary>
-		private void CreateSkillNames()
+		private static List<KeyValuePair<string, string>> CreateSkillNames()
 		{
-			_skillNames = new List<KeyValuePair<string, string>>();
+			List<KeyValuePair<string, string>> skillnames = new List<KeyValuePair<string, string>>();
 
-			_skillNames.Add( new KeyValuePair<string, string>( "proj", "Développement" ) );
-			_skillNames.Add( new KeyValuePair<string, string>( "proj", "Conception" ) );
-			_skillNames.Add( new KeyValuePair<string, string>( "proj", "Analyse fonctionnelle" ) );
-			_skillNames.Add( new KeyValuePair<string, string>( "proj", "Technicien d'infrastucture" ) );
-			_skillNames.Add( new KeyValuePair<string, string>( "proj", "Béta testeur" ) );
-			_skillNames.Add( new KeyValuePair<string, string>( "proj", "Base de données" ) );
-			_skillNames.Add( new KeyValuePair<string, string>( "proj", "Interface graphique" ) );
-			_skillNames.Add( new KeyValuePair<string, string>( "proj", "Développement web" ) );
-			_skillNames.Add( new KeyValuePair<string, string>( "proj", "Réseau" ) );
-			_skillNames.Add( new KeyValuePair<string, string>( "proj", "Sécurité" ) );
-			_skillNames.Add( new KeyValuePair<string, string>( "proj", "Management de projet" ) );
+			skillnames.Add( new KeyValuePair<string, string>( "proj", "Développement" ) );
+			skillnames.Add( new KeyValuePair<string, string>( "proj", "Conception" ) );
+			skillnames.Add( new KeyValuePair<string, string>( "proj", "Analyse fonctionnelle" ) );
+			skillnames.Add( new KeyValuePair<string, string>( "proj", "Technicien d'infrastucture" ) );
+			skillnames.Add( new KeyValuePair<string, string>( "proj", "Béta testeur" ) );
+			skillnames.Add( new KeyValuePair<string, string>( "proj", "Base de données" ) );
+			skillnames.Add( new KeyValuePair<string, string>( "proj", "Interface graphique" ) );
+			skillnames.Add( new KeyValuePair<string, string>( "proj", "Développement web" ) );
+			skillnames.Add( new KeyValuePair<string, string>( "proj", "Réseau" ) );
+			skillnames.Add( new KeyValuePair<string, string>( "proj", "Sécurité" ) );
+			skillnames.Add( new KeyValuePair<string, string>( "proj", "Management de projet" ) );
 
-			_skillNames.Add( new KeyValuePair<string, string>( "compa", "Commercial" ) ); // *Commercial*, increase 20 projects earnings.
-			_skillNames.Add( new KeyValuePair<string, string>( "compa", "Ressources humaines" ) ); // *Ressources humaines*, descrease recruting and laying off cost.
-			_skillNames.Add( new KeyValuePair<string, string>( "compa", "Directeur de projets" ) ); // *Directeur de projets*, decrease the duration of 20 projects.
-			_skillNames.Add( new KeyValuePair<string, string>( "compa", "Gestion de contrat" ) ); // *Gestion de contrat*, decrease the duration of 30 projects.
-			_skillNames.Add( new KeyValuePair<string, string>( "compa", "Animation" ) ); // *Animation*, inscrease 30 employees hapiness
+			skillnames.Add( new KeyValuePair<string, string>( "compa", "Commercial" ) ); // *Commercial*, increase 20 projects earnings.
+			skillnames.Add( new KeyValuePair<string, string>( "compa", "Ressources humaines" ) ); // *Ressources humaines*, descrease recruting and laying off cost.
+			skillnames.Add( new KeyValuePair<string, string>( "compa", "Directeur de projets" ) ); // *Directeur de projets*, decrease the duration of 20 projects.
+			skillnames.Add( new KeyValuePair<string, string>( "compa", "Gestion de contrat" ) ); // *Gestion de contrat*, decrease the duration of 30 projects.
+			skillnames.Add( new KeyValuePair<string, string>( "compa", "Animation" ) ); // *Animation*, inscrease 30 employees hapiness
+
+			return skillnames;
 		}
 		
 		/// <summary>
@@ -130,26 +130,6 @@ namespace SRH.Core
 			}
 			if( !valid )
 				throw new ArgumentException( "The skill name must exist in Game.SkillNames." );
-		}
-
-		/// <summary>
-		/// Cheks if a string represents a ProjSkill or not
-		/// </summary>
-		/// <param name="skillName"></param>
-		/// <returns>True if the string represents an ProjSkill, false if not</returns>
-		public bool IsProjSkill( string skillName )
-		{
-			bool isProjSkill = true;
-			foreach( KeyValuePair<string, string> kvp in _skillNames )
-			{
-				if( kvp.Value == skillName )
-				{
-					if( kvp.Key == "compa" )
-						isProjSkill = false;
-					break;
-				}
-			}
-			return isProjSkill;
 		}
 	}
 }

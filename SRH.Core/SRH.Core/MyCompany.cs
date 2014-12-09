@@ -47,7 +47,7 @@ namespace SRH.Core
         }
         public Dictionary<Employee, Skill> Managers
         {
-            get { return _managers; }
+			get { return _managers; }
         }
         public List<Project> Projects
         {
@@ -183,7 +183,6 @@ namespace SRH.Core
         /// </summary>
         public void AffectManagers()
         {
-
             if( _managers.Count != 0 )
             {
                 foreach( KeyValuePair<Employee, Skill> dico in _managers)
@@ -196,6 +195,11 @@ namespace SRH.Core
                 }
             }
         }
+
+		public void AddManager(Employee e, Skill s)
+		{
+			_managers.Add( e, s );
+		}
 
         /// <summary>
         /// Use the different skill of the managers.

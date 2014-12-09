@@ -60,7 +60,7 @@ namespace SRH.Interface
 		private IEnumerable<Skill> GetProjSkills( bool arg )
 		{
 			if( !arg )
-				return _currentPerson.Skills.Where( s => !GameContext.CurrentGame.IsProjSkill( s.SkillName ) );
+				return _currentPerson.Skills.Where( s => !( s is ProjSkill ) );
 			else
 				return _currentPerson.Skills;
 		}

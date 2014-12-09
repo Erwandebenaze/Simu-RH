@@ -96,7 +96,8 @@ namespace SRH.Core
 			}
 
 			Skill newSkill = null;
-			if( _lb.Game.IsProjSkill( skillName ) ) newSkill = new ProjSkill( skillName );
+			if( skillName.IsProjSkill() )
+				newSkill = new ProjSkill( skillName );
 			else newSkill = new CompaSkill( skillName );
 
 			newSkill.Level.CurrentLevel = level;
