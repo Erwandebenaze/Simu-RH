@@ -170,6 +170,14 @@ namespace SRH.Core
             _skillsRequired.Add( s, nb );
         }
 
+        public void AnBusyEmployees()
+        {
+            foreach( Employee emplo in this.EmployeesAffectedWithSkill.Keys )
+            {
+                emplo.Busy = false;
+            }
+        }
+
         /// <summary>
         /// Begin the project if he is not activated yet and skillsRequired is empty. 
         /// Activated become true.

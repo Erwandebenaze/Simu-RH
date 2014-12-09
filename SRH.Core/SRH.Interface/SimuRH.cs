@@ -60,7 +60,7 @@ namespace SRH.Interface
 
                 _timeOfGame.newDay();
                 _myGame.PlayerCompany.EndProjectIfItsFinish();
-              //  ClearListsProjects();
+                ClearListsProjects();
 
 				// Current date display
                 _dateOfGame.Text = _myGame.TimeGame.CurrentTimeOfGame.ToString( "d" );
@@ -91,17 +91,15 @@ namespace SRH.Interface
 
         }
 
-        //private void ClearListsProjects()
-        //{
+        private void ClearListsProjects()
+        {
 
-        //    if( ucProjectPage.Projects != null )
-        //    {
-        //        ucProjectPage.listCurrentProjects.Items.Clear();
-        //        ucProjectPage.listPossibleProjects.Items.Clear();
-        //        ucProjectPage.listCurrentProjects.Items.AddRange( ucProjectPage.Projects.Select( p => ucProjectPage.CreateListItemViewProjects( p ) ).ToArray() );
-        //        ucProjectPage.listPossibleProjects.Items.AddRange( ucProjectPage.PossibleProjects.Select( p => CreateListItemViewProjects( p ) ).ToArray() );
-        //    }
-        //}
+            if( ucProjectPage.Projects != null )
+            {
+                ucProjectPage.listCurrentProjects.Items.Clear();
+                ucProjectPage.listCurrentProjects.Items.AddRange( ucProjectPage.Projects.Select( p => ucProjectPage.CreateListItemViewCurrentProjects( p ) ).ToArray() );
+            }
+        }
 
 		private void ExperienceProgress()
 		{

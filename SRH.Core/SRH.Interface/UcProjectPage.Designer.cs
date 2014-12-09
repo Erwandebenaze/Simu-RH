@@ -242,12 +242,12 @@
             // ProjectEmployeeName
             // 
             this.ProjectEmployeeName.Text = "Nom de l\'employée";
-            this.ProjectEmployeeName.Width = 154;
+            this.ProjectEmployeeName.Width = 97;
             // 
             // ProjectSkillRequired
             // 
             this.ProjectSkillRequired.Text = "Compétence";
-            this.ProjectSkillRequired.Width = 113;
+            this.ProjectSkillRequired.Width = 162;
             // 
             // ProjectLevelRecommanded
             // 
