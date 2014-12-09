@@ -9,6 +9,7 @@ namespace SRH.Core
     [Serializable]
     public class Project
     {
+        #region Initialisation
         readonly string _name;
         readonly float _difficulty;
         readonly int _numberOfWorkers;
@@ -22,8 +23,8 @@ namespace SRH.Core
         bool _activated;
         readonly Dictionary<Skill, int> _skillsRequired;
         Dictionary<Employee, Skill> _employeesAffectedWithSkill;
-        readonly MyCompany _myComp;
-
+        readonly MyCompany _myComp; 
+        #endregion
 
         #region Getter
         public string Name
@@ -121,8 +122,7 @@ namespace SRH.Core
 			_skillsRequired = skillsRequired;
             _employeesAffectedWithSkill = new Dictionary<Employee, Skill>();
             GenerateSkillsRequired(numberOfWorkers );            
-        }
-        
+        }     
         /// <summary>
         /// For the moment, add 2 skills Development and ProjMangment. 
         /// TODO : Random generation of skill which depends of numberOfWorkers
@@ -135,21 +135,18 @@ namespace SRH.Core
             //_skillsRequired.Add( new Skill(), 1 );
             //_skillsRequired.Add( "ProjManagment", 1 );
         }
-
         /// <summary>
         /// Affect an employee to a job. That method remove the skillRequired who is passed in parameter. The project is not activated
         /// </summary>
         /// <param name="p"></param>
         /// <param name="skill"></param>
         public void AffectEmployeeToAJob( Employee e, Skill s )
-        {
-            
+        {  
             if( SkillsRequired.ContainsKey( s ) && e.Worker.Skills.Contains(s) && !this.Activated) 
             _employeesAffectedWithSkill.Add( e, s );
             e.Busy = true;
             _skillsRequired.Remove( s );
         }
-
         /// <summary>
         /// Remove an Employee from a job if the project is not activated. 
         /// TODO : Put again the skill in skillsRequired  with the good difficulty
@@ -169,7 +166,9 @@ namespace SRH.Core
             }
             _skillsRequired.Add( s, nb );
         }
-
+        /// <summary>
+        /// Free every employees of the project.
+        /// </summary>
         public void AnBusyEmployees()
         {
             foreach( Employee emplo in this.EmployeesAffectedWithSkill.Keys )
@@ -177,13 +176,12 @@ namespace SRH.Core
                 emplo.Busy = false;
             }
         }
-
         /// <summary>
         /// Begin the project if he is not activated yet and skillsRequired is empty. 
         /// Activated become true.
         /// </summary>
         /// <returns>Activated</returns>
-        public bool BeginProject()
+        internal bool BeginProject()
         {
 			// TODO : ajouter le skillrequired
             if( Activated ) throw new InvalidOperationException( "A project can not be lunched if he has been already begin." );
@@ -198,25 +196,28 @@ namespace SRH.Core
 			}
             return Activated;
         }
-
         /// <summary>
         /// Stop the project if he is activated.
         /// Activated become fakse.
         /// </summary>
         /// <returns>Activated</returns>
-        public void StopProject()
+        internal void StopProject()
         {
             if( !Activated ) throw new InvalidOperationException( "A project can not be stoped if he is not begun." );
             Activated = false;
             _begginingDate = null;
             
         }
-
-        public Project Clone()
+        /// <summary>
+        /// Return the same project with differents references.
+        /// Add a int parameter to upgrade the earnings of X pourcent.
+        /// </summary>
+        /// <param name="pourcentCommerciaux">Int</param>
+        /// <returns>The new Projetc</returns>
+        public Project Clone( int pourcentCommerciaux = 100)
         {
-          Project project = new Project( _myComp, _name, _difficulty, _numberOfWorkers, _earnings, new Dictionary<Skill, int>( _skillsRequired ), _duration );
+          Project project = new Project( _myComp, _name, _difficulty, _numberOfWorkers, _earnings + (_earnings * pourcentCommerciaux / 100) , new Dictionary<Skill, int>( _skillsRequired ), _duration );
           return project;
         } 
-
     }
 }

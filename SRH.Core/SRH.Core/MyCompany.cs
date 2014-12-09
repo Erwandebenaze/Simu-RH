@@ -19,6 +19,7 @@ namespace SRH.Core
         List<Employee> _ressourcesHumaines;
         List<Employee> _directeursProjets;
         List<Employee> _gestionnairesContrat;
+        int _pourcentCommerciaux = 0;
 
 
 
@@ -72,15 +73,10 @@ namespace SRH.Core
         #endregion
         public void MoveProject( Project p )
         {
-            if (p.Activated)
-            {
+            if (p.Activated)  
                 _projects.Add( p );
-                //_possibleCompanyProjects.Remove( p );
-            } else
-            {
-               // _possibleCompanyProjects.Add( p );
+            else 
                 _projects.Remove( p );
-            }
         }
 
 		/// <summary>
@@ -95,6 +91,10 @@ namespace SRH.Core
 			if( ( this.CompanyLevel.CurrentLevel +1 ) % 10 == 0 ) _maxProjectDifficulty += 0.5;
         }
 
+        /// <summary>
+        ///  Check if the interval of days equals the duration of every projects. If a project is over, call the EndAProject function.
+        ///  If the project isn't over, it up to date the TimeLeft variable.
+        /// </summary>
         public void EndProjectIfItsFinish()
         {
             if (_projects.Count > 0 )
@@ -115,7 +115,10 @@ namespace SRH.Core
                 }
             }
         }
-
+        /// <summary>
+        /// End a project and give the earnings. XP/Person, XP/Company and earnings. Free the employees of the project.
+        /// </summary>
+        /// <param name="p"></param>
         public void EndAProject( Project p )
         {
             p.StopProject();
@@ -131,6 +134,10 @@ namespace SRH.Core
                 e.Busy = false;
             }
         }
+        /// <summary>
+        /// Begin a project
+        /// </summary>
+        /// <param name="p"></param>
         public void BeginAProject( Project p )
         {
             //_possibleCompanyProjects.Remove( p );
@@ -138,12 +145,16 @@ namespace SRH.Core
             p.BeginProject();
         }
 
+        /// <summary>
+        /// Stop a project. Free the employees of the project
+        /// </summary>
+        /// <param name="p"></param>
+        /// <returns></returns>
         public Project StopAProject( Project p )
         {
             //_possibleCompanyProjects.Add( p );
             foreach( Employee e in p.EmployeesAffectedWithSkill.Keys )
             {
-
                 e.Busy = false;
             }
             _projects.Remove( p );
@@ -151,6 +162,10 @@ namespace SRH.Core
             return p;
         }
 
+        /// <summary>
+        /// Get the list of possible project of the company
+        /// </summary>
+        /// <returns>The List of project available for the company</returns>
 		List<Project> GetPossibleCompanyProjects()
 		{
 			List<Project> possible = (List<Project>)_myGame.PossibleProjects;
@@ -163,6 +178,9 @@ namespace SRH.Core
 			return finalList;
 		}
 
+        /// <summary>
+        /// Affect the differents managers to their own task.
+        /// </summary>
         public void AffectManagers()
         {
             if( _managers.Count != 0 )
@@ -183,15 +201,39 @@ namespace SRH.Core
 			_managers.Add( e, s );
 		}
 
-        public void UseManagers()
+        /// <summary>
+        /// Use the different skill of the managers.
+        /// </summary>
+        private void UseManagers()
         {
-            int pourcentCommerciaux = 0;
+            int newPourcentCommerciaux = 0;
             if( _commerciaux.Count > 0)
             {
                 foreach( Employee emp in _commerciaux )
                 {
-                    pourcentCommerciaux += (emp.Worker.Skills.Where( e => e.SkillName == "Commercial" ).Select( e => e.Level.CurrentLevel ).Single()) * 2;
+                    newPourcentCommerciaux += ( emp.Worker.Skills.Where( e => e.SkillName == "Commercial" ).Select( e => e.Level.CurrentLevel ).Single()) * 2;
                 }
+
+                if( newPourcentCommerciaux > _pourcentCommerciaux )
+                {
+                    _pourcentCommerciaux = newPourcentCommerciaux;
+                    _possibleCompanyProjects = GetPossibleCompanyProjects();
+                    AddPourcentCommerciaux();
+                }
+
+            }
+        }
+
+        /// <summary>
+        /// Use the commerciaux skill. Add a pourcent on every projects of the company.
+        /// </summary>
+        private void AddPourcentCommerciaux()
+        {
+            foreach( Project p in _projects )
+            {
+                _projects.Remove( p );
+                _projects.Add( p.Clone( _pourcentCommerciaux ) );
+
             }
         }
 	}
