@@ -95,7 +95,7 @@ namespace SRH.Interface
 
                 _startOrStopProject.Enabled = true;
                 EstimatedTime.Text = "Temps estimé";
-                if( _currentProj != null )
+                if( _currentProj != null && !_currentProj.Activated )
                 {
                     _currentProj.AnBusyEmployees();
                 }
@@ -233,38 +233,19 @@ namespace SRH.Interface
         }
         private void listSkillsAvailable_MouseDoubleClick( object sender, MouseEventArgs e )
         {
-            _currentEmployee = (Employee)listSkillsAvailable.SelectedItems[listSkillsRequired.SelectedItems.Count - 1].Tag;
-            _currentProj.AffectEmployeeToAJob( _currentEmployee, _currentSkill );
-            
-            listSkillsRequired.Items.Clear();
-            listSkillsRequired.Items.AddRange( _currentProj.SkillsRequired.Select( k => CreateListItemViewSkillsRequired( k.Key, k.Value ) ).ToArray() );
-            listSkillsRequired.Items.AddRange( _currentProj.EmployeesAffectedWithSkill.Select( k => CompleteListItemViewSkillsRequired( k.Key, k.Value ) ).ToArray() );
-            
-            listSkillsAvailable.Items.Clear();
-
-            AffectStartButtonFields();
-
-          
-        }
-        private void AffectStartButtonFields()
-        {
-            if (!_currentProj.Activated)
+            if( listSkillsAvailable.SelectedItems.Count > 0 )
             {
-                if( _currentProj.SkillsRequired.Count != 0 )
-                {
-                    _startOrStopProject.Enabled = false;
-                    _startOrStopProject.Text = "Affectez les employés avant de lancer.";
+                _currentEmployee = (Employee)listSkillsAvailable.SelectedItems[listSkillsAvailable.SelectedItems.Count - 1].Tag;
+                _currentProj.AffectEmployeeToAJob( _currentEmployee, _currentSkill ); 
+                //listSkillsAvailable.Enabled = false;
+                listSkillsAvailable.Items.Clear();
 
-                }
-                else
-                {
-                    _startOrStopProject.Enabled = true;
-                    _startOrStopProject.Text = "Lancer un projet";
-                }
-                listSkillsRequired.Enabled = true;
+                listSkillsRequired.Items.Clear();
+                listSkillsRequired.Items.AddRange( _currentProj.SkillsRequired.Select( k => CreateListItemViewSkillsRequired( k.Key, k.Value ) ).ToArray() );
+                listSkillsRequired.Items.AddRange( _currentProj.EmployeesAffectedWithSkill.Select( k => CompleteListItemViewSkillsRequired( k.Key, k.Value ) ).ToArray() );
 
-            }
-
+                AffectStartButtonFields();
+            }  
         }
         private void listSkillsRequired_MouseDoubleClick( object sender, MouseEventArgs e )
         {
@@ -282,8 +263,9 @@ namespace SRH.Interface
                         }
                     }
                 }
-                AffectStartButtonFields();
+                //_currentEmployee = (Employee)listSkillsRequired.SelectedItems[listSkillsRequired.SelectedItems.Count - 1].Tag;
 
+                AffectStartButtonFields();
 
                 listSkillsRequired.Items.Clear();
                 listSkillsRequired.Items.AddRange( _currentProj.SkillsRequired.Select( k => CreateListItemViewSkillsRequired( k.Key, k.Value ) ).ToArray() );
@@ -295,11 +277,29 @@ namespace SRH.Interface
                                              .Select( emp => CreateListItemViewEmployeeWithSkill( emp, _currentSkill ) )
                                              .OrderBy( emp => _currentSkill.Level.CurrentLevel )
                                              .ToArray() );
+            }
+
+        }
+        private void AffectStartButtonFields()
+        {
+            if( !_currentProj.Activated )
+            {
+                if( _currentProj.SkillsRequired.Count != 0 )
+                {
+                    _startOrStopProject.Enabled = false;
+                    _startOrStopProject.Text = "Affectez les employés avant de lancer.";
+
+                }
+                else
+                {
+                    _startOrStopProject.Enabled = true;
+                    _startOrStopProject.Text = "Lancer un projet";
+                }
+                listSkillsRequired.Enabled = true;
 
             }
 
         }
-
 
     }
 }

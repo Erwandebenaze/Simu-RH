@@ -69,7 +69,7 @@ namespace SRH.Core
 
         //public override int GetHashCode()
         //{
-        //    return SkillNameEnglish.GetHashCode();
+        //    return SkillName.GetHashCode();
         //}
     }
 }
