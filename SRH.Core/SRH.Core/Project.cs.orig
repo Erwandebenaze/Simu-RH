@@ -10,27 +10,27 @@ namespace SRH.Core
     public class Project
     {
         readonly string _name;
-        readonly int _difficulty;
+        readonly float _difficulty;
         readonly int _numberOfWorkers;
         readonly int _duration;
         private int _timeSpent;
         private int _timeLeft;
         DateTime? _begginingDate;
-
-
         readonly int _earnings;
         readonly int _xpPerCompany;
         readonly int _xpPerPerson;
         bool _activated;
         readonly Dictionary<Skill, int> _skillsRequired;
-        internal Dictionary<Employee, Skill> _employeesAffectedWithSkill;
+        Dictionary<Employee, Skill> _employeesAffectedWithSkill;
+        readonly MyCompany _myComp;
+
 
         #region Getter
         public string Name
         {
             get { return _name; }
         }
-        public int Difficulty
+        public float Difficulty
         {
             get { return _difficulty; }
         }
@@ -59,6 +59,14 @@ namespace SRH.Core
         {
             get { return _begginingDate; }
         }
+        public MyCompany MyComp
+        {
+            get { return _myComp; }
+        } 
+        public Dictionary<Skill, int> SkillsRequired
+        {
+            get { return _skillsRequired; }
+        } 
         #endregion
         #region GetterSetter
         public int TimeSpent
@@ -77,6 +85,12 @@ namespace SRH.Core
             set { _activated = value; }
         }
 
+        public Dictionary<Employee, Skill> EmployeesAffectedWithSkill
+        {
+            get { return _employeesAffectedWithSkill; }
+            //set { _employeesAffectedWithSkill = value; }
+        }
+
         #endregion
 
         /// <summary>
@@ -87,13 +101,15 @@ namespace SRH.Core
         /// <param name="numberOfWorkers"> Superior than 1</param>
         /// <param name="earnings"> Superior than 100</param>
         /// <param name="duration">In month. Superior than 1 month</param>
-        public Project(string name, int difficulty, int numberOfWorkers, int earnings, int duration)
+        internal Project(MyCompany myComp, string name, float difficulty, int numberOfWorkers, int earnings, Dictionary<Skill,int> skillsRequired, int duration = 30)
         {
             if( String.IsNullOrWhiteSpace( name ) ) throw new ArgumentNullException( "name" );
             if( difficulty <= 0 ) throw new ArgumentException( "difficulty must be superior than 0." );
             if( numberOfWorkers <= 1 ) throw new ArgumentException( "numberOfWorkers must be superior than 1." );
             if( earnings <= 100 ) throw new ArgumentException( "earnings must be superior than 100." );
             if( duration <= 1 ) throw new ArgumentException( "duration must be superior than 0." );
+            if( myComp == null ) throw new ArgumentException( "myComp == null." );
+            _myComp = myComp;
             _name = name;
             _difficulty = difficulty;
             _numberOfWorkers = numberOfWorkers;
@@ -102,15 +118,20 @@ namespace SRH.Core
             _activated = false;
             _xpPerCompany = 45;
             _xpPerPerson = 10;
-            _skillsRequired = new Dictionary<Skill, int>();
+			_skillsRequired = skillsRequired;
             _employeesAffectedWithSkill = new Dictionary<Employee, Skill>();
-            GenerateSkillsRequired(numberOfWorkers);
-        }
+            GenerateSkillsRequired( numberOfWorkers );
 <<<<<<< HEAD
-        
 =======
-
->>>>>>> origin/develop
+            // TODO : Lier le game aux projets. Il faut connecter les différents projets entre eux
+            // Constructeur internal, objet "parent" en param pour retrouver le contexte dans lequel
+            // il est appelé.
+            // Le projet pourrait ainsi savoir les meilleurs employees disponibles avec telle compétence
+            // Si on connecte nos neurones on pourrait même dire qui il faut recruter pour accomplir le projet
+            
+>>>>>>> develop
+        }
+        
         /// <summary>
         /// For the moment, add 2 skills Development and ProjMangment. 
         /// TODO : Random generation of skill which depends of numberOfWorkers
@@ -127,12 +148,14 @@ namespace SRH.Core
         /// <summary>
         /// Affect an employee to a job. That method remove the skillRequired who is passed in parameter. The project is not activated
         /// </summary>
-        /// <param name="e"></param>
+        /// <param name="p"></param>
         /// <param name="skill"></param>
-        public void AffectEmployeeToAJob(Employee e, Skill s)
+        public void AffectEmployeeToAJob( Employee e, Skill s )
         {
-            if( _skillsRequired.ContainsKey( s ) && e.Worker.Skills.ContainsValue(s) && !this.Activated) 
+            
+            if( SkillsRequired.ContainsKey( s ) && e.Worker.Skills.Contains(s) && !this.Activated) 
             _employeesAffectedWithSkill.Add( e, s );
+            e.Busy = true;
             _skillsRequired.Remove( s );
         }
 
@@ -144,10 +167,16 @@ namespace SRH.Core
         /// <param name="skill"></param>
         public void RemoveEmployeeFromAJob( Employee e, Skill s )
         {
-            if( !_skillsRequired.ContainsKey(s) && e.Worker.Skills.ContainsValue(s) && !this.Activated )
+            if( !SkillsRequired.ContainsKey(s) && e.Worker.Skills.Contains(s) && !this.Activated )
                 _employeesAffectedWithSkill.Remove( e );
-            // 1 à mettre en variable
-            _skillsRequired.Add( s, 1 );
+            int nb = 0;
+            e.Busy = false;
+            foreach (Skill sk in e.Worker.Skills)
+            {
+                if (sk.SkillName == s.SkillName)
+                    nb = sk.Level.CurrentLevel; 
+            }
+            _skillsRequired.Add( s, nb );
         }
 
         /// <summary>
@@ -157,16 +186,17 @@ namespace SRH.Core
         /// <returns>Activated</returns>
         public bool BeginProject()
         {
+			// TODO : ajouter le skillrequired
             if( Activated ) throw new InvalidOperationException( "A project can not be lunched if he has been already begin." );
-            if( _skillsRequired.Count == 0 )
-            {
+			if( _skillsRequired.Count == 0 )
+			{
                 Activated = true;
-                _begginingDate = GameTime.TimeOfGame;
+                _begginingDate = _myComp.MyGame.TimeGame.CurrentTimeOfGame;
             }
-            else
-            {
-                throw new InvalidOperationException( "Every skills must be taken before begin a project" );
-            }
+			else
+			{
+				throw new InvalidOperationException( "Every skills must be taken before begin a project" );
+			}
             return Activated;
         }
 
@@ -182,6 +212,13 @@ namespace SRH.Core
             _begginingDate = null;
             
         }
+
+        public Project Clone()
+        {
+            Project project = new Project( _myComp, _name, _difficulty, _numberOfWorkers, _earnings, _skillsRequired, _duration );
+            
+            return project;
+        } 
 
     }
 }

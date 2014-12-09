@@ -121,12 +121,6 @@ namespace SRH.Core
 			_skillsRequired = skillsRequired;
             _employeesAffectedWithSkill = new Dictionary<Employee, Skill>();
             GenerateSkillsRequired( numberOfWorkers );
-            // TODO : Lier le game aux projets. Il faut connecter les différents projets entre eux
-            // Constructeur internal, objet "parent" en param pour retrouver le contexte dans lequel
-            // il est appelé.
-            // Le projet pourrait ainsi savoir les meilleurs employees disponibles avec telle compétence
-            // Si on connecte nos neurones on pourrait même dire qui il faut recruter pour accomplir le projet
-            
         }
         
         /// <summary>
@@ -185,15 +179,15 @@ namespace SRH.Core
         {
 			// TODO : ajouter le skillrequired
             if( Activated ) throw new InvalidOperationException( "A project can not be lunched if he has been already begin." );
-			//if( _skillsRequired.Count == 0 )
-			//{
+			if( _skillsRequired.Count == 0 )
+			{
                 Activated = true;
                 _begginingDate = _myComp.MyGame.TimeGame.CurrentTimeOfGame;
-            //}
-			////else
-			//{
-			//	throw new InvalidOperationException( "Every skills must be taken before begin a project" );
-			//}
+            }
+			else
+			{
+				throw new InvalidOperationException( "Every skills must be taken before begin a project" );
+			}
             return Activated;
         }
 
@@ -209,6 +203,13 @@ namespace SRH.Core
             _begginingDate = null;
             
         }
+
+        public Project Clone()
+        {
+            Project project = new Project( _myComp, _name, _difficulty, _numberOfWorkers, _earnings, _skillsRequired, _duration );
+            
+            return project;
+        } 
 
     }
 }

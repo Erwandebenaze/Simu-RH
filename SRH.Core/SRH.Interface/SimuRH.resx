@@ -120,4 +120,727 @@
   <metadata name="WealthTitle.GenerateMember" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>False</value>
   </metadata>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="WealthTitle.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="WealthTitle.Location" type="System.Drawing.Point, System.Drawing">
+    <value>346, 10</value>
+  </data>
+  <data name="WealthTitle.Size" type="System.Drawing.Size, System.Drawing">
+    <value>42, 13</value>
+  </data>
+  <data name="WealthTitle.TabIndex" type="System.Int32, mscorlib">
+    <value>12</value>
+  </data>
+  <data name="WealthTitle.Text" xml:space="preserve">
+    <value>Fonds :</value>
+  </data>
+  <data name="&gt;&gt;WealthTitle.Name" xml:space="preserve">
+    <value>WealthTitle</value>
+  </data>
+  <data name="&gt;&gt;WealthTitle.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;WealthTitle.Parent" xml:space="preserve">
+    <value>experiencePanel</value>
+  </data>
+  <data name="&gt;&gt;WealthTitle.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="tabControl1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
+  </data>
+  <data name="Board.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
+  </data>
+  <data name="Board.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 2, 3, 2</value>
+  </data>
+  <data name="Board.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 2, 3, 2</value>
+  </data>
+  <data name="Board.Size" type="System.Drawing.Size, System.Drawing">
+    <value>881, 483</value>
+  </data>
+  <data name="Board.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="Board.Text" xml:space="preserve">
+    <value>Bureau</value>
+  </data>
+  <data name="&gt;&gt;Board.Name" xml:space="preserve">
+    <value>Board</value>
+  </data>
+  <data name="&gt;&gt;Board.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Board.Parent" xml:space="preserve">
+    <value>tabControl1</value>
+  </data>
+  <data name="&gt;&gt;Board.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="ucEmployeePage.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="ucEmployeePage.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="ucEmployeePage.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 2</value>
+  </data>
+  <data name="ucEmployeePage.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="ucEmployeePage.Size" type="System.Drawing.Size, System.Drawing">
+    <value>875, 479</value>
+  </data>
+  <data name="ucEmployeePage.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;ucEmployeePage.Name" xml:space="preserve">
+    <value>ucEmployeePage</value>
+  </data>
+  <data name="&gt;&gt;ucEmployeePage.Type" xml:space="preserve">
+    <value>SRH.Interface.UcEmployeePage, SRH.Interface, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucEmployeePage.Parent" xml:space="preserve">
+    <value>Employees</value>
+  </data>
+  <data name="&gt;&gt;ucEmployeePage.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="Employees.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
+  </data>
+  <data name="Employees.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 2, 3, 2</value>
+  </data>
+  <data name="Employees.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 2, 3, 2</value>
+  </data>
+  <data name="Employees.Size" type="System.Drawing.Size, System.Drawing">
+    <value>881, 483</value>
+  </data>
+  <data name="Employees.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="Employees.Text" xml:space="preserve">
+    <value>Employés</value>
+  </data>
+  <data name="&gt;&gt;Employees.Name" xml:space="preserve">
+    <value>Employees</value>
+  </data>
+  <data name="&gt;&gt;Employees.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Employees.Parent" xml:space="preserve">
+    <value>tabControl1</value>
+  </data>
+  <data name="&gt;&gt;Employees.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="ucProjectPage.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="ucProjectPage.Location" type="System.Drawing.Point, System.Drawing">
+    <value>2, 2</value>
+  </data>
+  <data name="ucProjectPage.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
+  </data>
+  <data name="ucProjectPage.Size" type="System.Drawing.Size, System.Drawing">
+    <value>877, 479</value>
+  </data>
+  <data name="ucProjectPage.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;ucProjectPage.Name" xml:space="preserve">
+    <value>ucProjectPage</value>
+  </data>
+  <data name="&gt;&gt;ucProjectPage.Type" xml:space="preserve">
+    <value>SRH.Interface.UcProjectPage, SRH.Interface, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucProjectPage.Parent" xml:space="preserve">
+    <value>Projects</value>
+  </data>
+  <data name="&gt;&gt;ucProjectPage.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="Projects.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
+  </data>
+  <data name="Projects.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
+  </data>
+  <data name="Projects.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
+  </data>
+  <data name="Projects.Size" type="System.Drawing.Size, System.Drawing">
+    <value>881, 483</value>
+  </data>
+  <data name="Projects.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="Projects.Text" xml:space="preserve">
+    <value>Gestion projets</value>
+  </data>
+  <data name="&gt;&gt;Projects.Name" xml:space="preserve">
+    <value>Projects</value>
+  </data>
+  <data name="&gt;&gt;Projects.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Projects.Parent" xml:space="preserve">
+    <value>tabControl1</value>
+  </data>
+  <data name="&gt;&gt;Projects.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="ucCompanyManagement1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="ucCompanyManagement1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 2</value>
+  </data>
+  <data name="ucCompanyManagement1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
+  </data>
+  <data name="ucCompanyManagement1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>875, 479</value>
+  </data>
+  <data name="ucCompanyManagement1.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;ucCompanyManagement1.Name" xml:space="preserve">
+    <value>ucCompanyManagement1</value>
+  </data>
+  <data name="&gt;&gt;ucCompanyManagement1.Type" xml:space="preserve">
+    <value>SRH.Interface.UcCompanyManagement, SRH.Interface, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucCompanyManagement1.Parent" xml:space="preserve">
+    <value>CompanyManagement</value>
+  </data>
+  <data name="&gt;&gt;ucCompanyManagement1.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="CompanyManagement.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
+  </data>
+  <data name="CompanyManagement.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 2, 3, 2</value>
+  </data>
+  <data name="CompanyManagement.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 2, 3, 2</value>
+  </data>
+  <data name="CompanyManagement.Size" type="System.Drawing.Size, System.Drawing">
+    <value>881, 483</value>
+  </data>
+  <data name="CompanyManagement.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="CompanyManagement.Text" xml:space="preserve">
+    <value>Gestion entreprise</value>
+  </data>
+  <data name="&gt;&gt;CompanyManagement.Name" xml:space="preserve">
+    <value>CompanyManagement</value>
+  </data>
+  <data name="&gt;&gt;CompanyManagement.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;CompanyManagement.Parent" xml:space="preserve">
+    <value>tabControl1</value>
+  </data>
+  <data name="&gt;&gt;CompanyManagement.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="ucStatistics1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="ucStatistics1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 2</value>
+  </data>
+  <data name="ucStatistics1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
+  </data>
+  <data name="ucStatistics1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>875, 479</value>
+  </data>
+  <data name="ucStatistics1.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;ucStatistics1.Name" xml:space="preserve">
+    <value>ucStatistics1</value>
+  </data>
+  <data name="&gt;&gt;ucStatistics1.Type" xml:space="preserve">
+    <value>SRH.Interface.UcStatistics, SRH.Interface, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucStatistics1.Parent" xml:space="preserve">
+    <value>Statistics</value>
+  </data>
+  <data name="&gt;&gt;ucStatistics1.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="Statistics.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
+  </data>
+  <data name="Statistics.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 2, 3, 2</value>
+  </data>
+  <data name="Statistics.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 2, 3, 2</value>
+  </data>
+  <data name="Statistics.Size" type="System.Drawing.Size, System.Drawing">
+    <value>881, 483</value>
+  </data>
+  <data name="Statistics.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="Statistics.Text" xml:space="preserve">
+    <value>Résumé entreprises</value>
+  </data>
+  <data name="&gt;&gt;Statistics.Name" xml:space="preserve">
+    <value>Statistics</value>
+  </data>
+  <data name="&gt;&gt;Statistics.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Statistics.Parent" xml:space="preserve">
+    <value>tabControl1</value>
+  </data>
+  <data name="&gt;&gt;Statistics.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="tabControl1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>1, 31</value>
+  </data>
+  <data name="tabControl1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
+  </data>
+  <data name="tabControl1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>889, 509</value>
+  </data>
+  <data name="tabControl1.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;tabControl1.Name" xml:space="preserve">
+    <value>tabControl1</value>
+  </data>
+  <data name="&gt;&gt;tabControl1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tabControl1.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;tabControl1.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="_dateOfGame.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="_dateOfGame.Location" type="System.Drawing.Point, System.Drawing">
+    <value>91, 9</value>
+  </data>
+  <data name="_dateOfGame.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 0, 2, 0</value>
+  </data>
+  <data name="_dateOfGame.Size" type="System.Drawing.Size, System.Drawing">
+    <value>30, 13</value>
+  </data>
+  <data name="_dateOfGame.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="_dateOfGame.Text" xml:space="preserve">
+    <value>Date</value>
+  </data>
+  <data name="&gt;&gt;_dateOfGame.Name" xml:space="preserve">
+    <value>_dateOfGame</value>
+  </data>
+  <data name="&gt;&gt;_dateOfGame.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;_dateOfGame.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;_dateOfGame.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="_day.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="_day.Location" type="System.Drawing.Point, System.Drawing">
+    <value>28, 9</value>
+  </data>
+  <data name="_day.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 0, 2, 0</value>
+  </data>
+  <data name="_day.Size" type="System.Drawing.Size, System.Drawing">
+    <value>27, 13</value>
+  </data>
+  <data name="_day.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="_day.Text" xml:space="preserve">
+    <value>Jour</value>
+  </data>
+  <data name="&gt;&gt;_day.Name" xml:space="preserve">
+    <value>_day</value>
+  </data>
+  <data name="&gt;&gt;_day.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;_day.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;_day.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="_pauseButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>248, 9</value>
+  </data>
+  <data name="_pauseButton.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 2, 3, 2</value>
+  </data>
+  <data name="_pauseButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>40, 25</value>
+  </data>
+  <data name="_pauseButton.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="_pauseButton.Text" xml:space="preserve">
+    <value>||</value>
+  </data>
+  <data name="&gt;&gt;_pauseButton.Name" xml:space="preserve">
+    <value>_pauseButton</value>
+  </data>
+  <data name="&gt;&gt;_pauseButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;_pauseButton.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;_pauseButton.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="_x2Button.Location" type="System.Drawing.Point, System.Drawing">
+    <value>293, 9</value>
+  </data>
+  <data name="_x2Button.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 2, 3, 2</value>
+  </data>
+  <data name="_x2Button.Size" type="System.Drawing.Size, System.Drawing">
+    <value>45, 25</value>
+  </data>
+  <data name="_x2Button.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="_x2Button.Text" xml:space="preserve">
+    <value>X2</value>
+  </data>
+  <data name="&gt;&gt;_x2Button.Name" xml:space="preserve">
+    <value>_x2Button</value>
+  </data>
+  <data name="&gt;&gt;_x2Button.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;_x2Button.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;_x2Button.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="_x5Button.Location" type="System.Drawing.Point, System.Drawing">
+    <value>347, 9</value>
+  </data>
+  <data name="_x5Button.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 2, 3, 2</value>
+  </data>
+  <data name="_x5Button.Size" type="System.Drawing.Size, System.Drawing">
+    <value>49, 25</value>
+  </data>
+  <data name="_x5Button.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="_x5Button.Text" xml:space="preserve">
+    <value>X5</value>
+  </data>
+  <data name="&gt;&gt;_x5Button.Name" xml:space="preserve">
+    <value>_x5Button</value>
+  </data>
+  <data name="&gt;&gt;_x5Button.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;_x5Button.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;_x5Button.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="_x10Button.Location" type="System.Drawing.Point, System.Drawing">
+    <value>401, 9</value>
+  </data>
+  <data name="_x10Button.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 2, 3, 2</value>
+  </data>
+  <data name="_x10Button.Size" type="System.Drawing.Size, System.Drawing">
+    <value>51, 25</value>
+  </data>
+  <data name="_x10Button.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="_x10Button.Text" xml:space="preserve">
+    <value>X10</value>
+  </data>
+  <data name="&gt;&gt;_x10Button.Name" xml:space="preserve">
+    <value>_x10Button</value>
+  </data>
+  <data name="&gt;&gt;_x10Button.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;_x10Button.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;_x10Button.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="_playButton.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="_playButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>203, 9</value>
+  </data>
+  <data name="_playButton.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 2, 3, 2</value>
+  </data>
+  <data name="_playButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>40, 25</value>
+  </data>
+  <data name="_playButton.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="_playButton.Text" xml:space="preserve">
+    <value>►</value>
+  </data>
+  <data name="&gt;&gt;_playButton.Name" xml:space="preserve">
+    <value>_playButton</value>
+  </data>
+  <data name="&gt;&gt;_playButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;_playButton.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;_playButton.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="_companyProgressBar.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="_companyProgressBar.Location" type="System.Drawing.Point, System.Drawing">
+    <value>55, 9</value>
+  </data>
+  <data name="_companyProgressBar.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 2, 3, 2</value>
+  </data>
+  <data name="_companyProgressBar.Size" type="System.Drawing.Size, System.Drawing">
+    <value>248, 23</value>
+  </data>
+  <data name="_companyProgressBar.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="&gt;&gt;_companyProgressBar.Name" xml:space="preserve">
+    <value>_companyProgressBar</value>
+  </data>
+  <data name="&gt;&gt;_companyProgressBar.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ProgressBar, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;_companyProgressBar.Parent" xml:space="preserve">
+    <value>experiencePanel</value>
+  </data>
+  <data name="&gt;&gt;_companyProgressBar.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="_currentCompanyLevel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="_currentCompanyLevel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="_currentCompanyLevel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>32, 12</value>
+  </data>
+  <data name="_currentCompanyLevel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 0, 2, 0</value>
+  </data>
+  <data name="_currentCompanyLevel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>14, 13</value>
+  </data>
+  <data name="_currentCompanyLevel.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="_currentCompanyLevel.Text" xml:space="preserve">
+    <value>X</value>
+  </data>
+  <data name="_currentCompanyLevel.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;_currentCompanyLevel.Name" xml:space="preserve">
+    <value>_currentCompanyLevel</value>
+  </data>
+  <data name="&gt;&gt;_currentCompanyLevel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;_currentCompanyLevel.Parent" xml:space="preserve">
+    <value>experiencePanel</value>
+  </data>
+  <data name="&gt;&gt;_currentCompanyLevel.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="_nextCompanyLevel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="_nextCompanyLevel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="_nextCompanyLevel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>309, 12</value>
+  </data>
+  <data name="_nextCompanyLevel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 0, 2, 0</value>
+  </data>
+  <data name="_nextCompanyLevel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>14, 13</value>
+  </data>
+  <data name="_nextCompanyLevel.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="_nextCompanyLevel.Text" xml:space="preserve">
+    <value>X</value>
+  </data>
+  <data name="_nextCompanyLevel.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;_nextCompanyLevel.Name" xml:space="preserve">
+    <value>_nextCompanyLevel</value>
+  </data>
+  <data name="&gt;&gt;_nextCompanyLevel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;_nextCompanyLevel.Parent" xml:space="preserve">
+    <value>experiencePanel</value>
+  </data>
+  <data name="&gt;&gt;_nextCompanyLevel.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="companyExperience.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="companyExperience.Location" type="System.Drawing.Point, System.Drawing">
+    <value>359, 14</value>
+  </data>
+  <data name="companyExperience.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="companyExperience.Size" type="System.Drawing.Size, System.Drawing">
+    <value>14, 13</value>
+  </data>
+  <data name="companyExperience.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="companyExperience.Text" xml:space="preserve">
+    <value>X</value>
+  </data>
+  <data name="companyExperience.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;companyExperience.Name" xml:space="preserve">
+    <value>companyExperience</value>
+  </data>
+  <data name="&gt;&gt;companyExperience.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;companyExperience.Parent" xml:space="preserve">
+    <value>experiencePanel</value>
+  </data>
+  <data name="&gt;&gt;companyExperience.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="CompanyWealth.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="CompanyWealth.Location" type="System.Drawing.Point, System.Drawing">
+    <value>410, 11</value>
+  </data>
+  <data name="CompanyWealth.Size" type="System.Drawing.Size, System.Drawing">
+    <value>14, 13</value>
+  </data>
+  <data name="CompanyWealth.TabIndex" type="System.Int32, mscorlib">
+    <value>13</value>
+  </data>
+  <data name="CompanyWealth.Text" xml:space="preserve">
+    <value>X</value>
+  </data>
+  <data name="CompanyWealth.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;CompanyWealth.Name" xml:space="preserve">
+    <value>CompanyWealth</value>
+  </data>
+  <data name="&gt;&gt;CompanyWealth.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;CompanyWealth.Parent" xml:space="preserve">
+    <value>experiencePanel</value>
+  </data>
+  <data name="&gt;&gt;CompanyWealth.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="experiencePanel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>472, 0</value>
+  </data>
+  <data name="experiencePanel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="experiencePanel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>501, 27</value>
+  </data>
+  <data name="experiencePanel.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;experiencePanel.Name" xml:space="preserve">
+    <value>experiencePanel</value>
+  </data>
+  <data name="&gt;&gt;experiencePanel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;experiencePanel.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;experiencePanel.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>888, 540</value>
+  </data>
+  <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>SimuRH</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>SimuRH</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
 </root>

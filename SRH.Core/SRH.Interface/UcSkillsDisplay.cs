@@ -14,16 +14,27 @@ namespace SRH.Interface
 	public partial class UcSkillsDisplay : UserControl
 	{
 		Person _currentPerson;
+		bool _showProj = true;
 
 		public UcSkillsDisplay()
 		{
 			InitializeComponent();
 		}
 
+		IGameContext GameContext
+		{
+			get { return (IGameContext)TopLevelControl; }
+		}
+
 		public Person CurrentPerson
 		{
 			get { return _currentPerson; }
 			set { _currentPerson = value; }
+		}
+
+		public bool ShowProj
+		{
+			set { _showProj = value; }
 		}
 
 		protected override void OnLoad( EventArgs e )
@@ -39,9 +50,19 @@ namespace SRH.Interface
 		{
 			if( _currentPerson != null )
 			{
+				Func<bool, IEnumerable<Skill>> f = GetProjSkills;
+
 				selectedPersonSkillList.Items.Clear();
-				selectedPersonSkillList.Items.AddRange( _currentPerson.Skills.Select( s => AddSkills( s ) ).ToArray() );
+				selectedPersonSkillList.Items.AddRange( f( _showProj ).Select( s => AddSkills( s ) ).ToArray() );
 			}
+		}
+
+		private IEnumerable<Skill> GetProjSkills( bool arg )
+		{
+			if( !arg )
+				return _currentPerson.Skills.Where( s => !GameContext.CurrentGame.IsProjSkill( s.SkillName ) );
+			else
+				return _currentPerson.Skills;
 		}
 
 		/// <summary>
@@ -55,17 +76,6 @@ namespace SRH.Interface
 			i.Tag = s;
 			i.SubItems.Add( new ListViewItem.ListViewSubItem( i, s.Level.CurrentLevel.ToString() ) );
 			return i;
-		}
-
-		/// <summary>
-		/// Sets the informations to display about a Person's Skills
-		/// </summary>
-		/// <param name="p">The Person who's Skill to display</param>
-		/// <param name="l">The ListView to edit</param>
-		private void SetSkillsInForm( Person p, ListView l )
-		{
-			l.Items.Clear();
-			l.Items.AddRange( p.Skills.Select( s => AddSkills( s ) ).ToArray() );
 		}
 	}
 }

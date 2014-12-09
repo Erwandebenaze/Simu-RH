@@ -17,6 +17,7 @@ namespace SRH.Interface
 		Employee _currentEmployee;
 		string _selectedEmployeeName;
 		string _selectedEmployeeAge;
+		bool _showProj = true;
 
 		public delegate void SelectedIndexChanged();
 		public event SelectedIndexChanged Changed;
@@ -69,6 +70,11 @@ namespace SRH.Interface
 		{
 			get { return _selectedEmployeeAge; }
 		}
+
+		public bool ShowProj
+		{
+			set { _showProj = value; }
+		}
 		#endregion
 		protected override void OnLoad( EventArgs e )
 		{
@@ -85,20 +91,18 @@ namespace SRH.Interface
 			Func<bool, IEnumerable<Employee>> f = GetProjEmployees;
 
 			employeeList.Items.Clear();
-			employeeList.Items.AddRange( f( true ).Select( employee => CreateEmployee( employee ) ).ToArray() );
+			employeeList.Items.AddRange( f( _showProj ).Select( employee => CreateEmployee( employee ) ).ToArray() );
 		}
 
 		private IEnumerable<Employee> GetProjEmployees( bool arg )
 		{
-
 			if( !arg )
 			{
 				return _employees.Where( e => e.Worker.Skills
-				.Any( s => !GameContext.CurrentGame.IsProjSkill( s.SkillName ) ) )
-				.Select( e => e );
+				.Any( s => !GameContext.CurrentGame.IsProjSkill( s.SkillName ) ) );
 			}
 			else
-				return _employees.Select( e => e );
+				return _employees;
 		}
 
 		private void employeeList_SelectedIndexChanged( object sender, EventArgs e )
@@ -114,12 +118,30 @@ namespace SRH.Interface
 			}
 		}
 
-		static ListViewItem CreateEmployee( Employee e )
+		ListViewItem CreateEmployee( Employee e )
 		{
 			ListViewItem i = new ListViewItem( e.Worker.LastName );
 			i.Tag = e;
 			i.SubItems.Add( new ListViewItem.ListViewSubItem( i, e.Worker.FirstName ) );
 			i.SubItems.Add( new ListViewItem.ListViewSubItem( i, e.Worker.Age.ToString() ) );
+
+			if( _showProj )
+			{
+				i.SubItems.Add( new ListViewItem.ListViewSubItem( i, e.Worker.Skills
+				.Where( s => s.Level.CurrentXp == e.Worker.Skills.Max( sk => sk.Level.CurrentXp ) )
+				.Select( s => s.SkillName )
+				.FirstOrDefault() ) );
+			}
+			else
+			{
+				i.SubItems.Add( new ListViewItem.ListViewSubItem( i, 
+					e.Worker.Skills
+				.Where( s => !GameContext.CurrentGame.IsProjSkill( s.SkillName ) )
+				.Where( s => s.Level.CurrentXp == e.Worker.Skills.Max( sk => sk.Level.CurrentXp ) )
+				.Select( s => s.SkillName )
+				.FirstOrDefault() ) );
+			}
+			
 			return i;
 		}
 	}
