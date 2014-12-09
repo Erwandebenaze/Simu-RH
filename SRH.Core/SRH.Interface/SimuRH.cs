@@ -24,8 +24,8 @@ namespace SRH.Interface
         public SimuRH()
         {
             InitializeComponent();
-            _myGame = new Game( 1, "Tristan" );
-            //_myGame = GameLoader.Load( "Erwan" );
+            //_myGame = new Game( 1, "Erwan" );
+            _myGame = GameLoader.Load( "Erwan" );
             _optionsForm = new Options();
             _timeOfGame = _myGame.TimeGame;
             _timer = new Timer();
@@ -90,24 +90,14 @@ namespace SRH.Interface
             }
 
         }
-        static ListViewItem CreateListItemViewProjects( Project p )
-        {
-            ListViewItem i = new ListViewItem( p.Name );
-            i.Tag = p;
-            i.SubItems.Add( new ListViewItem.ListViewSubItem( i, p.Difficulty.ToString() ) );
-            i.SubItems.Add( new ListViewItem.ListViewSubItem( i, p.Earnings.ToString() ) );
-            i.SubItems.Add( new ListViewItem.ListViewSubItem( i, p.Duration.ToString() ) );
-            return i;
-        }
+
         private void ClearListsProjects()
         {
 
-            if (ucProjectPage.Projects != null)
+            if( ucProjectPage.Projects != null )
             {
                 ucProjectPage.listCurrentProjects.Items.Clear();
-                ucProjectPage.listPossibleProjects.Items.Clear();
-                ucProjectPage.listCurrentProjects.Items.AddRange( ucProjectPage.Projects.Select( p => CreateListItemViewProjects( p ) ).ToArray() );
-                ucProjectPage.listPossibleProjects.Items.AddRange( ucProjectPage.PossibleProjects.Select( p => CreateListItemViewProjects( p ) ).ToArray() );
+                ucProjectPage.listCurrentProjects.Items.AddRange( ucProjectPage.Projects.Select( p => ucProjectPage.CreateListItemViewCurrentProjects( p ) ).ToArray() );
             }
         }
 

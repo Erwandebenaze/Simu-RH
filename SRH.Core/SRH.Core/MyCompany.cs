@@ -131,12 +131,11 @@ namespace SRH.Core
                 e.Busy = false;
             }
         }
-        public Project BeginAProject( Project p )
+        public void BeginAProject( Project p )
         {
             //_possibleCompanyProjects.Remove( p );
             _projects.Add( p );
             p.BeginProject();
-            return p;
         }
 
         public Project StopAProject( Project p )

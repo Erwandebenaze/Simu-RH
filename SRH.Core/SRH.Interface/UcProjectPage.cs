@@ -19,6 +19,7 @@ namespace SRH.Interface
         Project _currentProj;
         Skill _currentSkill;
         Employee _currentEmployee;
+        ListViewItem _projectItem;
 
         #region Getter
         public List<Project> Projects
@@ -60,13 +61,22 @@ namespace SRH.Interface
 			listPossibleProjects.Items.AddRange( _possibleProjects.Select( p => CreateListItemViewProjects( p ) ).ToArray() );
 			listCurrentProjects.Items.AddRange( _projects.Select( p => CreateListItemViewProjects( p ) ).ToArray() );
             #region TODO
-            // TODO : Ajouter la liste pour les projets en cours lorsque le temps sera définis.
+            // TODO : Ajouter la liste pour les projets en cours lorsque le temps sera défini.
             #endregion
 
 		}
-        static ListViewItem CreateListItemViewProjects( Project project )
+        private ListViewItem CreateListItemViewProjects( Project project )
         {
             Project p = project.Clone();
+            ListViewItem i = new ListViewItem( p.Name );
+            i.Tag = p;
+            i.SubItems.Add( new ListViewItem.ListViewSubItem( i, p.Difficulty.ToString() ) );
+            i.SubItems.Add( new ListViewItem.ListViewSubItem( i, p.Earnings.ToString() ) );
+            i.SubItems.Add( new ListViewItem.ListViewSubItem( i, p.TimeLeft.ToString() ) );
+            return i;
+        }
+        internal ListViewItem CreateListItemViewCurrentProjects( Project p )
+        {
             ListViewItem i = new ListViewItem( p.Name );
             i.Tag = p;
             i.SubItems.Add( new ListViewItem.ListViewSubItem( i, p.Difficulty.ToString() ) );
@@ -82,19 +92,30 @@ namespace SRH.Interface
                 listSkillsRequired.Enabled = true;
 
 
+
                 _startOrStopProject.Enabled = true;
                 EstimatedTime.Text = "Temps estimé";
+                if( _currentProj != null )
+                {
+                    _currentProj.AnBusyEmployees();
+                }
 
                 _currentProj = (Project)listPossibleProjects.SelectedItems[listPossibleProjects.SelectedItems.Count - 1].Tag;
+                _projectItem = listPossibleProjects.SelectedItems[listPossibleProjects.SelectedItems.Count - 1];
+
                 AffectCurrentProjectFields();
 
                 AffectStartButtonFields();
-					listSkillsRequired.Items.Clear();
-                    listSkillsRequired.Items.AddRange( _currentProj.SkillsRequired.Select( k => CreateListItemViewSkillsRequired( k.Key, k.Value ) ).ToArray() );
-                    if ( _currentProj.EmployeesAffectedWithSkill.Count != 0 )
-                    {
-                        listSkillsRequired.Items.AddRange( _currentProj.EmployeesAffectedWithSkill.Select( k => CompleteListItemViewSkillsRequired( k.Key, k.Value ) ).ToArray() );
-                    }
+				listSkillsRequired.Items.Clear();
+                listSkillsRequired.Items.AddRange( _currentProj.SkillsRequired.Select( k => CreateListItemViewSkillsRequired( k.Key, k.Value ) ).ToArray() );
+                if ( _currentProj.EmployeesAffectedWithSkill.Count != 0 )
+                {
+                    listSkillsRequired.Items.AddRange( _currentProj.EmployeesAffectedWithSkill.Select( k => CompleteListItemViewSkillsRequired( k.Key, k.Value ) ).ToArray() );
+                }
+
+                listPossibleProjects.Items.Clear();
+                listPossibleProjects.Items.AddRange( _possibleProjects.Select( p => CreateListItemViewProjects( p ) ).ToArray() );
+            
             } 
         }
         private void listSkillsRequired_SelectedIndexChanged( object sender, EventArgs e )
@@ -123,7 +144,8 @@ namespace SRH.Interface
         }
         private ListViewItem CreateListItemViewSkillsRequired( Skill skill, int level )
         {
-            ListViewItem i = new ListViewItem(skill.SkillName + "("+level.ToString()+")");
+            ListViewItem i = new ListViewItem();
+//            ListViewItem i = new ListViewItem( skill.SkillName + "(" + level.ToString() + ")" );
             i.Tag = skill;
             i.SubItems.Add( new ListViewItem.ListViewSubItem( i, skill.SkillName ) );
             i.SubItems.Add( new ListViewItem.ListViewSubItem( i, "0 ("+level.ToString()+")" ) );
@@ -158,15 +180,20 @@ namespace SRH.Interface
 
                 EstimatedTime.Text = "Temps restant estimé";
                 _currentProj = (Project)listCurrentProjects.SelectedItems[listCurrentProjects.SelectedItems.Count - 1].Tag;
+                //_projectItem = listCurrentProjects.SelectedItems[listCurrentProjects.SelectedItems.Count - 1];
+
                 AffectCurrentProjectFields();
+              
                 if( _currentProj.Activated )
                 {
                     _startOrStopProject.Text = "Arrêter un projet";
+                    listSkillsRequired.Items.Clear();
+                    listSkillsRequired.Items.AddRange( _currentProj.EmployeesAffectedWithSkill.Select( k => CompleteListItemViewSkillsRequired( k.Key, k.Value ) ).ToArray() );
+
                 }
                 else
                 {
                     AffectStartButtonFields();
-                    
                 }
             }
         }
@@ -195,14 +222,12 @@ namespace SRH.Interface
             }
             else
             {
-                pr = GameContext.CurrentGame.PlayerCompany.BeginAProject( _currentProj );
+               GameContext.CurrentGame.PlayerCompany.BeginAProject( _currentProj );
                 _startOrStopProject.Text = "Arrêter un projet";
                 listSkillsRequired.Enabled = false;
-
-                var projectItem = listPossibleProjects.Items.Cast<ListViewItem>().Where( item => item.Tag == pr ).Single();
                 //listPossibleProjects.Items.Remove( projectItem );
-                var projectItemCopy = (ListViewItem)projectItem.Clone();
-                listCurrentProjects.Items.Add( projectItemCopy );
+                //var projectItemCopy = (ListViewItem)projectItem.Clone();
+                listCurrentProjects.Items.Add( _projectItem );
             }
             //_projects = GameContext.CurrentGame.PlayerCompany.Projects;
         }

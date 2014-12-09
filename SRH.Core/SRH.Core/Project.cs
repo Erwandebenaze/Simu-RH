@@ -120,7 +120,7 @@ namespace SRH.Core
             _xpPerPerson = 10;
 			_skillsRequired = skillsRequired;
             _employeesAffectedWithSkill = new Dictionary<Employee, Skill>();
-            GenerateSkillsRequired( numberOfWorkers );
+            GenerateSkillsRequired(numberOfWorkers );            
         }
         
         /// <summary>
@@ -170,6 +170,14 @@ namespace SRH.Core
             _skillsRequired.Add( s, nb );
         }
 
+        public void AnBusyEmployees()
+        {
+            foreach( Employee emplo in this.EmployeesAffectedWithSkill.Keys )
+            {
+                emplo.Busy = false;
+            }
+        }
+
         /// <summary>
         /// Begin the project if he is not activated yet and skillsRequired is empty. 
         /// Activated become true.
@@ -206,9 +214,8 @@ namespace SRH.Core
 
         public Project Clone()
         {
-            Project project = new Project( _myComp, _name, _difficulty, _numberOfWorkers, _earnings, _skillsRequired, _duration );
-            
-            return project;
+          Project project = new Project( _myComp, _name, _difficulty, _numberOfWorkers, _earnings, new Dictionary<Skill, int>( _skillsRequired ), _duration );
+          return project;
         } 
 
     }

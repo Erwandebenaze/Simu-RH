@@ -23,16 +23,14 @@ namespace SRH.Interface
 
         public SimuRH()
         {
-<<<<<<< HEAD
-
             InitializeComponent();
+<<<<<<< HEAD
+            _myGame = new Game( 1, "Tristan" );
+            //_myGame = GameLoader.Load( "Erwan" );
+=======
             //_myGame = new Game( 1, "Erwan" );
             _myGame = GameLoader.Load( "Erwan" );
-=======
-            InitializeComponent();
-            _myGame = new Game( 1, "Erwan" );
-            // _myGame = GameLoader.Load( "Erfive" );
->>>>>>> 887236f875054f68dc968d893006013ff5694f5e
+>>>>>>> origin/develop
             _optionsForm = new Options();
             _timeOfGame = _myGame.TimeGame;
             _timer = new Timer();
@@ -97,24 +95,14 @@ namespace SRH.Interface
             }
 
         }
-        static ListViewItem CreateListItemViewProjects( Project p )
-        {
-            ListViewItem i = new ListViewItem( p.Name );
-            i.Tag = p;
-            i.SubItems.Add( new ListViewItem.ListViewSubItem( i, p.Difficulty.ToString() ) );
-            i.SubItems.Add( new ListViewItem.ListViewSubItem( i, p.Earnings.ToString() ) );
-            i.SubItems.Add( new ListViewItem.ListViewSubItem( i, p.Duration.ToString() ) );
-            return i;
-        }
+
         private void ClearListsProjects()
         {
 
-            if (ucProjectPage.Projects != null)
+            if( ucProjectPage.Projects != null )
             {
                 ucProjectPage.listCurrentProjects.Items.Clear();
-                ucProjectPage.listPossibleProjects.Items.Clear();
-                ucProjectPage.listCurrentProjects.Items.AddRange( ucProjectPage.Projects.Select( p => CreateListItemViewProjects( p ) ).ToArray() );
-                ucProjectPage.listPossibleProjects.Items.AddRange( ucProjectPage.PossibleProjects.Select( p => CreateListItemViewProjects( p ) ).ToArray() );
+                ucProjectPage.listCurrentProjects.Items.AddRange( ucProjectPage.Projects.Select( p => ucProjectPage.CreateListItemViewCurrentProjects( p ) ).ToArray() );
             }
         }
 
@@ -255,8 +243,15 @@ namespace SRH.Interface
 
 		}
 
-		private void tabControl1_SelectedIndexChanged( object sender, EventArgs e )
+		private void tabControl1_SelectedIndexChanged( object sender, TabControlEventArgs e )
 		{
+			//
+			// TODO : Add Load methods when Uc are implemented
+			//
+			//if( tabControl1.SelectedTab == tabControl1.TabPages[ "Board" ] )
+			//{
+			//	this.ucBoardPage.LoadPage();
+			//}
 			if( tabControl1.SelectedTab == tabControl1.TabPages[ "Employees" ] )
 			{
 				this.ucEmployeePage.LoadPage();
@@ -265,6 +260,14 @@ namespace SRH.Interface
 			{
 				this.ucProjectPage.LoadPage();
 			}
+			else if( tabControl1.SelectedTab == tabControl1.TabPages[ "CompanyManagement" ] )
+			{
+				this.ucCompanyManagement1.LoadPage();
+			}
+			//else if( tabControl1.SelectedTab == tabControl1.TabPages[ "Statistics" ] )
+			//{
+			//	this.ucStatistics.LoadPage();
+			//}
 		}
     }
 }
