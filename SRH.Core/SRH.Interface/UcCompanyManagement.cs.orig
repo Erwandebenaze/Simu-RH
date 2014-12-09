@@ -7,7 +7,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+<<<<<<< HEAD
 using SRH.Core;
+=======
+>>>>>>> origin/develop
 
 namespace SRH.Interface
 {
@@ -16,6 +19,7 @@ namespace SRH.Interface
         public UcCompanyManagement()
         {
             InitializeComponent();
+<<<<<<< HEAD
 			UcEmployeeList1.ShowProj = false;
 			UcSkillsDisplay1.ShowProj = false;
         }
@@ -54,5 +58,8 @@ namespace SRH.Interface
 			//}
 			UcSkillsDisplay1.LoadUc();
 		}
+=======
+        }
+>>>>>>> origin/develop
     }
 }

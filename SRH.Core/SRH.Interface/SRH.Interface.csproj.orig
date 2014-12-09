@@ -73,12 +73,15 @@
     <Compile Include="UcCompanyManagement.Designer.cs">
       <DependentUpon>UcCompanyManagement.cs</DependentUpon>
     </Compile>
+<<<<<<< HEAD
     <Compile Include="UcEmployeeList.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="UcEmployeeList.Designer.cs">
       <DependentUpon>UcEmployeeList.cs</DependentUpon>
     </Compile>
+=======
+>>>>>>> origin/develop
     <Compile Include="UcEmployeePage.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -122,9 +125,12 @@
     <EmbeddedResource Include="UcCompanyManagement.resx">
       <DependentUpon>UcCompanyManagement.cs</DependentUpon>
     </EmbeddedResource>
+<<<<<<< HEAD
     <EmbeddedResource Include="UcEmployeeList.resx">
       <DependentUpon>UcEmployeeList.cs</DependentUpon>
     </EmbeddedResource>
+=======
+>>>>>>> origin/develop
     <EmbeddedResource Include="UcEmployeePage.resx">
       <DependentUpon>UcEmployeePage.cs</DependentUpon>
     </EmbeddedResource>

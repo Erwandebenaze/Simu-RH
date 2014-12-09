@@ -15,7 +15,7 @@ namespace SRH.Core
 		int _age;
         readonly DateTime _birthDate;
 		// TODO : Implémenter création aléatoire de skill
-		List<Skill> _skills;
+		readonly List<Skill> _skills;
 		LaborMarket _lb;
         Random rand;
 
@@ -102,6 +102,11 @@ namespace SRH.Core
 			newSkill.Level.CurrentLevel = level;
 			_skills.Add( newSkill );
 			return newSkill;
+		}
+
+		public void RemoveSkill( Skill skill )
+		{
+			_skills.Remove( skill );
 		}
 
         /// <summary>
