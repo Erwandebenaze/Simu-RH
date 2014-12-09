@@ -33,6 +33,7 @@
 			this.EmployeeLastNameHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.EmployeeFirstNameHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.EmployeeAgeHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+			this.EmployeeBestSkillHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.SuspendLayout();
 			// 
 			// employeeList
@@ -41,7 +42,8 @@
 			this.employeeList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.EmployeeLastNameHeader,
             this.EmployeeFirstNameHeader,
-            this.EmployeeAgeHeader});
+            this.EmployeeAgeHeader,
+            this.EmployeeBestSkillHeader});
 			resources.ApplyResources(this.employeeList, "employeeList");
 			this.employeeList.FullRowSelect = true;
 			this.employeeList.MultiSelect = false;
@@ -62,6 +64,10 @@
 			// 
 			resources.ApplyResources(this.EmployeeAgeHeader, "EmployeeAgeHeader");
 			// 
+			// EmployeeBestSkillHeader
+			// 
+			resources.ApplyResources(this.EmployeeBestSkillHeader, "EmployeeBestSkillHeader");
+			// 
 			// UcEmployeeList
 			// 
 			resources.ApplyResources(this, "$this");
@@ -78,5 +84,6 @@
 		private System.Windows.Forms.ColumnHeader EmployeeLastNameHeader;
 		private System.Windows.Forms.ColumnHeader EmployeeFirstNameHeader;
 		private System.Windows.Forms.ColumnHeader EmployeeAgeHeader;
+		private System.Windows.Forms.ColumnHeader EmployeeBestSkillHeader;
 	}
 }

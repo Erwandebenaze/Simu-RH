@@ -184,6 +184,7 @@ namespace SRH.Interface
 			}
 
 			UpdateSkillsDisplay();
+			UcEmployeeList1.LoadUc();
 		}
 
 		/// <summary>
@@ -197,20 +198,6 @@ namespace SRH.Interface
 			i.Tag = p;
 			i.SubItems.Add( new ListViewItem.ListViewSubItem( i, p.FirstName ) );
 			i.SubItems.Add( new ListViewItem.ListViewSubItem( i, p.Age.ToString() ) );
-			return i;
-		}
-
-		/// <summary>
-		/// Creates an Employee Item for the EmployeeList
-		/// </summary>
-		/// <param name="e">The Employee to display</param>
-		/// <returns>A ListViewItem containing the information to display about an Employee</returns>
-		static ListViewItem CreateEmployee( Employee e )
-		{
-			ListViewItem i = new ListViewItem( e.Worker.LastName );
-			i.Tag = e;
-			i.SubItems.Add( new ListViewItem.ListViewSubItem( i, e.Worker.FirstName ) );
-			i.SubItems.Add( new ListViewItem.ListViewSubItem( i, e.Worker.Age.ToString() ) );
 			return i;
 		}
 

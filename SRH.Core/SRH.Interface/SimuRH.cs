@@ -24,8 +24,8 @@ namespace SRH.Interface
         public SimuRH()
         {
             InitializeComponent();
-            //_myGame = new Game( 1, "Erwan" );
-            _myGame = GameLoader.Load( "Erwan" );
+            _myGame = new Game( 1, "Tristan" );
+            //_myGame = GameLoader.Load( "Erwan" );
             _optionsForm = new Options();
             _timeOfGame = _myGame.TimeGame;
             _timer = new Timer();
@@ -248,8 +248,15 @@ namespace SRH.Interface
 
 		}
 
-		private void tabControl1_SelectedIndexChanged( object sender, EventArgs e )
+		private void tabControl1_SelectedIndexChanged( object sender, TabControlEventArgs e )
 		{
+			//
+			// TODO : Add Load methods when Uc are implemented
+			//
+			//if( tabControl1.SelectedTab == tabControl1.TabPages[ "Board" ] )
+			//{
+			//	this.ucBoardPage.LoadPage();
+			//}
 			if( tabControl1.SelectedTab == tabControl1.TabPages[ "Employees" ] )
 			{
 				this.ucEmployeePage.LoadPage();
@@ -258,6 +265,14 @@ namespace SRH.Interface
 			{
 				this.ucProjectPage.LoadPage();
 			}
+			else if( tabControl1.SelectedTab == tabControl1.TabPages[ "CompanyManagement" ] )
+			{
+				this.ucCompanyManagement1.LoadPage();
+			}
+			//else if( tabControl1.SelectedTab == tabControl1.TabPages[ "Statistics" ] )
+			//{
+			//	this.ucStatistics.LoadPage();
+			//}
 		}
     }
 }

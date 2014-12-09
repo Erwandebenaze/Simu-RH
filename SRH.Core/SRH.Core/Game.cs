@@ -100,7 +100,6 @@ namespace SRH.Core
 
 			_skillNames.Add( new KeyValuePair<string, string>( "proj", "Développement" ) );
 			_skillNames.Add( new KeyValuePair<string, string>( "proj", "Conception" ) );
-			_skillNames.Add( new KeyValuePair<string, string>( "proj", "Management de projet" ) );
 			_skillNames.Add( new KeyValuePair<string, string>( "proj", "Analyse fonctionnelle" ) );
 			_skillNames.Add( new KeyValuePair<string, string>( "proj", "Technicien d'infrastucture" ) );
 			_skillNames.Add( new KeyValuePair<string, string>( "proj", "Béta testeur" ) );
@@ -109,6 +108,7 @@ namespace SRH.Core
 			_skillNames.Add( new KeyValuePair<string, string>( "proj", "Développement web" ) );
 			_skillNames.Add( new KeyValuePair<string, string>( "proj", "Réseau" ) );
 			_skillNames.Add( new KeyValuePair<string, string>( "proj", "Sécurité" ) );
+			_skillNames.Add( new KeyValuePair<string, string>( "proj", "Management de projet" ) );
 
 			_skillNames.Add( new KeyValuePair<string, string>( "compa", "Commercial" ) ); // *Commercial*, increase 20 projects earnings.
 			_skillNames.Add( new KeyValuePair<string, string>( "compa", "Ressources humaines" ) ); // *Ressources humaines*, descrease recruting and laying off cost.
