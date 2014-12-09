@@ -10,7 +10,8 @@ namespace SRH.Core
     {
         Person _worker;
         readonly Company _comp;
-        private bool busy;
+        private bool _busy;
+		private Skill _skillAffectedToCompany;
 
         /// <summary>
 		/// Creates an <see cref="Employee"/>
@@ -23,7 +24,7 @@ namespace SRH.Core
             if( comp == null ) throw new ArgumentNullException( "Company is null" );
             if( worker == null ) throw new ArgumentNullException( "worker is null" );
 
-            busy = false;
+            _busy = false;
             _comp = comp;
 			_worker = worker;
         }
@@ -35,8 +36,8 @@ namespace SRH.Core
 		}
         public bool Busy
         {
-            get { return busy; }
-            internal set { busy = value; }
+            get { return _busy; }
+            internal set { _busy = value; }
         }
         public Company Comp
         {
@@ -56,7 +57,7 @@ namespace SRH.Core
 
 			// Set a candidate skill to test
 			Skill candidate = null;
-			if( _comp.Game.IsProjSkill( skillName ) ) candidate = new ProjSkill( skillName );
+			if( skillName.IsProjSkill() ) candidate = new ProjSkill( skillName );
 			else candidate = new CompaSkill( skillName );
 
 			if( _worker.Skills.Contains( candidate ) )

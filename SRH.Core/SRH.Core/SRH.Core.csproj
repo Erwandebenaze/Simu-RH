@@ -64,6 +64,7 @@
     <Compile Include="GameLoader.cs" />
     <Compile Include="Skill.cs" />
     <Compile Include="GameTime.cs" />
+    <Compile Include="StringExtension.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Model.cd" />

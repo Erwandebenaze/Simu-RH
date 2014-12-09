@@ -81,7 +81,7 @@ namespace SRH.Core
 
 		string GetRandomSkillName()
 		{
-			return _game.SkillNames[ _randomNumberGenerator.Next( 0, _game.SkillNames.Count ) ].Value;
+			return Game.SkillNames[ _randomNumberGenerator.Next( 0, Game.SkillNames.Count ) ].Value;
 		}
         public int GetRandomMonth()
         {

@@ -216,7 +216,7 @@ namespace SRH.Interface
 		private void SetTrainingValuesInForm( string skillName )
 		{
 			// TODO : trouver le moyen de ne pas le mettre à la mimine !!!
-			if( GameContext.CurrentGame.IsProjSkill( skillName ) )
+			if( skillName.IsProjSkill() )
 			{
 				SelectedSkillToTrainCost.Text = "1000";
 				SelectedSkillToTrainTime.Text = "2";
@@ -237,7 +237,7 @@ namespace SRH.Interface
 				.Where( s => s.Level.CurrentLevel < 5 )
 				.Select( s => s.SkillName ).ToArray() );
 			// Add the other Skills, without the Employee's already present Skills
-			SelectedEmployeeSkillsToTrain.Items.AddRange( GameContext.CurrentGame.SkillNames
+			SelectedEmployeeSkillsToTrain.Items.AddRange( Game.SkillNames
 				.Select( s => s.Value )
 				.Where( s => !( UcEmployeeList1.CurrentEmployee.Worker.Skills.Any( ps => ps.SkillName == s ) ) )
 				.ToArray() );
