@@ -12,7 +12,7 @@ namespace SRH.Core
         private string _skillName;
 		private int _upgradePrice;
 		private int _timeToUpgrade;
-		protected int _baseCostToTrain;
+		static protected int _baseCostToTrain;
 		protected int _baseTimeToTrain;
 
         internal Skill( string skillName, int startLevel = 1 )

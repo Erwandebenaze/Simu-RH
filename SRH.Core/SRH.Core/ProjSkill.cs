@@ -13,6 +13,7 @@ namespace SRH.Core
 			: base( skillName, startLevel )
 		{
 			_baseCostToTrain = 1000;
+			_baseTimeToTrain = 3;
 		}
 
 		public override void FixPriceAndTime()

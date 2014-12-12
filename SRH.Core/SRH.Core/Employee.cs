@@ -8,10 +8,13 @@ namespace SRH.Core
     [Serializable]
     public class Employee
     {
-        Person _worker;
-        readonly Company _comp;
+		private Person _worker;
+        private readonly Company _comp;
         private bool _busy;
 		private Skill _skillAffectedToCompany;
+		private string _skillInTraining;
+		private DateTime _traininigBegginingDate;
+		private int _trainingDuration;
 
         /// <summary>
 		/// Creates an <see cref="Employee"/>
@@ -43,6 +46,30 @@ namespace SRH.Core
         {
             get { return _comp; }
         }
+
+		public Skill SkillAffectedToCompany
+		{
+			get { return _skillAffectedToCompany; }
+			set { _skillAffectedToCompany = value; }
+		}
+
+		public string SkillInTraining
+		{
+			get { return _skillInTraining; }
+			set { _skillInTraining = value; }
+		}
+
+		public DateTime TraininigBegginingDate
+		{
+			get { return _traininigBegginingDate; }
+			set { _traininigBegginingDate = value; }
+		}
+
+		public int TrainingDuration
+		{
+			get { return _trainingDuration; }
+			set { _trainingDuration = value; }
+		}
 		#endregion
 
 		/// <summary>
@@ -63,23 +90,65 @@ namespace SRH.Core
 			if( _worker.Skills.Contains( candidate ) )
 			{
 				Skill skillToTrain = _worker.Skills.Where( s => s.SkillName == skillName ).Single();
+				int xpToNextLevel = skillToTrain.Level.NextXpRequired - skillToTrain.Level.CurrentXp;
+				skillToTrain.Level.IncreaseXp( xpToNextLevel );
+				_comp.Wealth -= skillToTrain.UpgradePrice;
 
-				if( _comp.Wealth >= skillToTrain.UpgradePrice )
+				_skillInTraining = null;
+				_busy = false;
+				return true;
+			}
+			else
+			{
+				Skill newSkill = _worker.AddSkill( skillName );
+				return true;
+			}
+		}
+
+		/// <summary>
+		/// Checks if Employee in training is finished, if he is, the skill is added/upgraded
+		/// </summary>
+		/// <returns>The time left </returns>
+		public int UpdateTraining()
+		{
+			if( _comp.Game.TimeGame.intervalOfTimeInDays( _traininigBegginingDate ) == _trainingDuration )
+			{
+				Train( _skillInTraining );
+			}
+
+			int timeLeft = _trainingDuration - _comp.Game.TimeGame.intervalOfTimeInDays( _traininigBegginingDate );
+			return timeLeft;
+		}
+
+		public bool StartTraining( string skillName )
+		{
+			_skillInTraining = skillName;
+			_traininigBegginingDate = _comp.Game.TimeGame.CurrentTimeOfGame;
+
+			// Set a candidate skill to test
+			Skill candidate = null;
+			if( skillName.IsProjSkill() ) candidate = new ProjSkill( skillName );
+			else candidate = new CompaSkill( skillName );
+			
+			Skill currentSkill = _worker.Skills.Where( s => s.SkillName == skillName ).SingleOrDefault();
+
+			if( currentSkill == null )
+			{
+				if( _comp.Wealth >= candidate.BaseCostToTrain )
 				{
-					int xpToNextLevel = skillToTrain.Level.NextXpRequired - skillToTrain.Level.CurrentXp;
-					skillToTrain.Level.IncreaseXp( xpToNextLevel );
-					_comp.Wealth -= skillToTrain.UpgradePrice;
+					_trainingDuration = candidate.BaseTimeToTrain;
+					_comp.Wealth -= candidate.BaseCostToTrain;
 					return true;
 				}
-				else 
+				else
 					return false;
 			}
 			else
 			{
-				if( _comp.Wealth >= candidate.BaseCostToTrain )
+				if( _comp.Wealth >= currentSkill.BaseCostToTrain )
 				{
-					Skill newSkill = _worker.AddSkill( skillName );
-					_comp.Wealth -= newSkill.BaseCostToTrain;
+					_trainingDuration = currentSkill.TimeToUpgrade;
+					_comp.Wealth -= currentSkill.BaseCostToTrain;
 					return true;
 				}
 				else

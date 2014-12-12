@@ -60,6 +60,7 @@ namespace SRH.Interface
 
                 _timeOfGame.newDay();
                 _myGame.PlayerCompany.EndProjectIfItsFinish();
+				UpdateTraining();
                 ClearListsProjects();
 
 				// Current date display
@@ -91,6 +92,22 @@ namespace SRH.Interface
 
         }
 
+		private void UpdateTraining()
+		{
+			int timeLeft;
+			foreach( Employee e in _myGame.PlayerCompany.Employees.Where( emp => emp.SkillInTraining != null ) )
+			{
+				timeLeft = e.UpdateTraining();
+			}
+		}
+
+		//private void UpdateTraining()
+		//{
+		//	foreach( Employee e in _myGame.PlayerCompany.Employees.Where( emp => emp.InTraining ) )
+		//	{
+
+		//	}
+		//}
         private void ClearListsProjects()
         {
 

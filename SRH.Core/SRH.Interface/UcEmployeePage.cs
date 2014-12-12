@@ -165,16 +165,14 @@ namespace SRH.Interface
 		private void Train_Click( object sender, EventArgs e )
 		{
 			Train.Enabled = true;
+
 			if( _currentSkillToTrain == null ) 
 			{
-				UcEmployeeList1.CurrentEmployee.Train( _newSkillToAddName );
-				_currentSkillToTrain = UcEmployeeList1.CurrentEmployee.Worker.Skills
-				.Where( s => s.SkillName == _newSkillToAddName )
-				.SingleOrDefault();
+				UcEmployeeList1.CurrentEmployee.StartTraining( _newSkillToAddName );
 			}
 			else
 			{
-				UcEmployeeList1.CurrentEmployee.Train( _currentSkillToTrain.SkillName );
+				UcEmployeeList1.CurrentEmployee.StartTraining( _currentSkillToTrain.SkillName );
 				if( _currentSkillToTrain.Level.CurrentLevel < 5 )
 				{
 					SetTrainingValuesInForm( _currentSkillToTrain );
@@ -182,9 +180,7 @@ namespace SRH.Interface
 				else
 					Train.Enabled = false;
 			}
-
-			UpdateSkillsDisplay();
-			UcEmployeeList1.LoadUc();
+			LoadPage();
 		}
 
 		/// <summary>
@@ -241,6 +237,7 @@ namespace SRH.Interface
 				.Select( s => s.Value )
 				.Where( s => !( UcEmployeeList1.CurrentEmployee.Worker.Skills.Any( ps => ps.SkillName == s ) ) )
 				.ToArray() );
+			SelectedEmployeeSkillsToTrain.SelectedIndex = 0;
 		}
 
 		private void EnableTrainingDisplay( bool enabled )

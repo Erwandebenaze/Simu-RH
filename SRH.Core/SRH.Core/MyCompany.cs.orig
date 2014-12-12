@@ -196,29 +196,19 @@ namespace SRH.Core
             }
         }
 
+<<<<<<< HEAD
 		public void AddManager(Employee e, Skill s)
 		{
 			_managers.Add( e, s );
-			e.SkillAffectedToCompany = s;
-			e.Busy = true;
 		}
 
-		public void RemoveManager( Employee e )
-		{
-			if( _managers.ContainsKey( e ) )
-			{
-				_managers.Remove( e );
-				e.Busy = false;
-				e.SkillAffectedToCompany = null;
-			}
-			else
-				throw new ArgumentException( "You connot remove a manager that is not in the Disctionnary." );
-		}
-
+        public void UseManagers()
+=======
         /// <summary>
         /// Use the different skill of the managers.
         /// </summary>
         private void UseManagers()
+>>>>>>> origin/develop
         {
             int newPourcentCommerciaux = 0;
             if( _commerciaux.Count > 0)
