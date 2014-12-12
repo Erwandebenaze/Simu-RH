@@ -72,7 +72,7 @@ namespace SRH.Interface
             i.Tag = p;
             i.SubItems.Add( new ListViewItem.ListViewSubItem( i, p.Difficulty.ToString() ) );
             i.SubItems.Add( new ListViewItem.ListViewSubItem( i, p.Earnings.ToString() ) );
-            i.SubItems.Add( new ListViewItem.ListViewSubItem( i, p.TimeLeft.ToString() ) );
+            i.SubItems.Add( new ListViewItem.ListViewSubItem( i, p.Duration.ToString() ) );
             return i;
         }
         internal ListViewItem CreateListItemViewCurrentProjects( Project p )
@@ -145,7 +145,6 @@ namespace SRH.Interface
         private ListViewItem CreateListItemViewSkillsRequired( Skill skill, int level )
         {
             ListViewItem i = new ListViewItem();
-//            ListViewItem i = new ListViewItem( skill.SkillName + "(" + level.ToString() + ")" );
             i.Tag = skill;
             i.SubItems.Add( new ListViewItem.ListViewSubItem( i, skill.SkillName ) );
             i.SubItems.Add( new ListViewItem.ListViewSubItem( i, "0 ("+level.ToString()+")" ) );
@@ -177,7 +176,6 @@ namespace SRH.Interface
             {
                 
                 listSkillsRequired.Enabled = false;
-
                 EstimatedTime.Text = "Temps restant estimé";
                 _currentProj = (Project)listCurrentProjects.SelectedItems[listCurrentProjects.SelectedItems.Count - 1].Tag;
                 //_projectItem = listCurrentProjects.SelectedItems[listCurrentProjects.SelectedItems.Count - 1];
@@ -202,9 +200,32 @@ namespace SRH.Interface
             _projectNameText.Text = _currentProj.Name;
             _difficulty.Text = _currentProj.Difficulty.ToString();
             _earnings.Text = _currentProj.Earnings.ToString();
-            if( _currentProj.Activated ) _estimatedTime.Text = _currentProj.TimeLeft.ToString();
-            else _estimatedTime.Text = _currentProj.Duration.ToString();
+            AffectVariableFields();
             _numberOfWorkers.Text = _currentProj.NumberOfWorkers.ToString();
+        }
+
+        internal void AffectVariableFields()
+        {
+            if( _currentProj != null )
+            {
+
+                if( _currentProj.Activated )
+                {
+
+                    _estimatedTime.Text = _currentProj.TimeLeft.ToString();
+                    projectProgressBar.Minimum = 0;
+                    projectProgressBar.Maximum = _currentProj.ProjectTasks;
+                    projectProgressBar.Value = (_currentProj.ProjectTasks - _currentProj.ActualTasks);
+                }
+                else
+                {
+                    _estimatedTime.Text = _currentProj.Duration.ToString();
+                    projectProgressBar.Value = 0;
+                    //listSkillsRequired.Items.Clear();
+                    //listSkillsRequired.Enabled = true;
+                    
+                }
+            }
         }
         private void _startOrStopProject_Click( object sender, EventArgs e )
         {

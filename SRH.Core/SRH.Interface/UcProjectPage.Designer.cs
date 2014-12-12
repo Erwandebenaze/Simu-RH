@@ -59,6 +59,7 @@
             this._difficulty = new System.Windows.Forms.Label();
             this.Difficulty = new System.Windows.Forms.Label();
             this._projectNameText = new System.Windows.Forms.Label();
+            this.projectProgressBar = new System.Windows.Forms.ProgressBar();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -86,6 +87,7 @@
             // 
             // splitContainer1.Panel2
             // 
+            this.splitContainer1.Panel2.Controls.Add(this.projectProgressBar);
             this.splitContainer1.Panel2.Controls.Add(this.splitContainer3);
             this.splitContainer1.Panel2.Controls.Add(this._startOrStopProject);
             this.splitContainer1.Panel2.Controls.Add(this._numberOfWorkers);
@@ -391,6 +393,13 @@
             this._projectNameText.Text = "Nom du projet";
             this._projectNameText.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // projectProgressBar
+            // 
+            this.projectProgressBar.Location = new System.Drawing.Point(33, 215);
+            this.projectProgressBar.Name = "projectProgressBar";
+            this.projectProgressBar.Size = new System.Drawing.Size(658, 23);
+            this.projectProgressBar.TabIndex = 13;
+            // 
             // UcProjectPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -449,6 +458,7 @@
         public System.Windows.Forms.ListView listCurrentProjects;
         public System.Windows.Forms.ListView listSkillsRequired;
         public System.Windows.Forms.ListView listSkillsAvailable;
+        private System.Windows.Forms.ProgressBar projectProgressBar;
 
     }
 }
