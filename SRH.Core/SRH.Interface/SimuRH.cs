@@ -24,7 +24,7 @@ namespace SRH.Interface
         public SimuRH()
         {
             InitializeComponent();
-            // _myGame = new Game( 1, "Erwan" );
+            //_myGame = new Game( 1, "Erwan" );
             _myGame = GameLoader.Load( "Erwan" );
             _optionsForm = new Options();
             _timeOfGame = _myGame.TimeGame;
@@ -57,6 +57,8 @@ namespace SRH.Interface
                 BarProgress();
                 ExperienceProgress();
                 WealthProgress();
+
+
 
                 _timeOfGame.newDay();
                 _myGame.PlayerCompany.EndProjectIfItsFinish();
@@ -98,6 +100,7 @@ namespace SRH.Interface
             {
                 ucProjectPage.listCurrentProjects.Items.Clear();
                 ucProjectPage.listCurrentProjects.Items.AddRange( ucProjectPage.Projects.Select( p => ucProjectPage.CreateListItemViewCurrentProjects( p ) ).ToArray() );
+                ucProjectPage.AffectVariableFields();
             }
         }
 

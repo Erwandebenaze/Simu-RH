@@ -101,16 +101,19 @@ namespace SRH.Core
             {
                 foreach (Project p in _projects)
                 {
-                    if( _myGame.TimeGame.intervalOfTimeInDays( p.BegginingDate ) == p.Duration )
+                    if( p.ActualTasks > 0 )
+                    {
+                        //p.TimeSpent = _myGame.TimeGame.intervalOfTimeInDays( p.BegginingDate );
+                        p.RefreshDuration();
+                        p.TimeLeft = p.Duration;
+                        if( p.TimeLeft < 0 ) p.TimeLeft = 0;
+                        p.RefreshActualsTasks();
+                    } else
                     {
                         EndAProject( p );
                         p.TimeLeft = 0;
                         MoveProject( p );
                         break;
-                    } else
-                    {
-                        p.TimeSpent = _myGame.TimeGame.intervalOfTimeInDays( p.BegginingDate );
-                        p.TimeLeft = p.Duration - p.TimeSpent;            
                     }
                 }
             }
@@ -199,6 +202,8 @@ namespace SRH.Core
 		public void AddManager(Employee e, Skill s)
 		{
 			_managers.Add( e, s );
+            AffectManagers();
+            UseManagers();
 		}
 
         /// <summary>
@@ -213,7 +218,26 @@ namespace SRH.Core
                 {
                     newPourcentCommerciaux += ( emp.Worker.Skills.Where( e => e.SkillName == "Commercial" ).Select( e => e.Level.CurrentLevel ).Single()) * 2;
                 }
-
+                switch( PossibleCompanyProjects.Count / 3 )
+                {
+                    case 1:
+                        if( newPourcentCommerciaux > 5 ) newPourcentCommerciaux = 5;
+                        break;
+                    case 2: 
+                        if( newPourcentCommerciaux > 10 ) newPourcentCommerciaux = 10;
+                        break;
+                    case 3:
+                        if( newPourcentCommerciaux > 15 ) newPourcentCommerciaux = 15;
+                        break;
+                    case 4:
+                        if( newPourcentCommerciaux > 20 ) newPourcentCommerciaux = 20;
+                        break;
+                    case 5:
+                        if( newPourcentCommerciaux > 25 ) newPourcentCommerciaux = 25;
+                        break;
+                    default :
+                        throw new InvalidOperationException("Error in the switch.");
+                }
                 if( newPourcentCommerciaux > _pourcentCommerciaux )
                 {
                     _pourcentCommerciaux = newPourcentCommerciaux;

@@ -13,7 +13,7 @@ namespace SRH.Core
         readonly string _name;
         readonly float _difficulty;
         readonly int _numberOfWorkers;
-        readonly int _duration;
+        int _duration;
         private int _timeSpent;
         private int _timeLeft;
         DateTime? _begginingDate;
@@ -23,7 +23,12 @@ namespace SRH.Core
         bool _activated;
         readonly Dictionary<Skill, int> _skillsRequired;
         Dictionary<Employee, Skill> _employeesAffectedWithSkill;
-        readonly MyCompany _myComp; 
+        readonly MyCompany _myComp;
+        readonly int _initialTasks;
+        int _projectTasks;
+        int _actualTasks;
+
+
         #endregion
 
         #region Getter
@@ -43,7 +48,10 @@ namespace SRH.Core
         {
             get { return _earnings; }
         }
-
+        public int ProjectTasks
+        {
+            get { return _projectTasks; }
+        }
         public int Duration
         {
             get { return _duration; }
@@ -67,7 +75,11 @@ namespace SRH.Core
         public Dictionary<Skill, int> SkillsRequired
         {
             get { return _skillsRequired; }
-        } 
+        }
+        public int ActualTasks
+        {
+            get { return _actualTasks; }
+        }
         #endregion
         #region GetterSetter
         public int TimeSpent
@@ -102,38 +114,68 @@ namespace SRH.Core
         /// <param name="numberOfWorkers"> Superior than 1</param>
         /// <param name="earnings"> Superior than 100</param>
         /// <param name="duration">In month. Superior than 1 month</param>
-        internal Project(MyCompany myComp, string name, float difficulty, int numberOfWorkers, int earnings, Dictionary<Skill,int> skillsRequired, int duration = 30)
+        internal Project(MyCompany myComp, string name, float difficulty, int numberOfWorkers, int earnings, Dictionary<Skill,int> skillsRequired)
         {
             if( String.IsNullOrWhiteSpace( name ) ) throw new ArgumentNullException( "name" );
             if( difficulty <= 0 ) throw new ArgumentException( "difficulty must be superior than 0." );
             if( numberOfWorkers <= 1 ) throw new ArgumentException( "numberOfWorkers must be superior than 1." );
             if( earnings <= 100 ) throw new ArgumentException( "earnings must be superior than 100." );
-            if( duration <= 1 ) throw new ArgumentException( "duration must be superior than 0." );
             if( myComp == null ) throw new ArgumentException( "myComp == null." );
             _myComp = myComp;
             _name = name;
             _difficulty = difficulty;
             _numberOfWorkers = numberOfWorkers;
             _earnings = earnings;
-            _duration = duration;
             _activated = false;
             _xpPerCompany = 45;
             _xpPerPerson = 10;
 			_skillsRequired = skillsRequired;
             _employeesAffectedWithSkill = new Dictionary<Employee, Skill>();
-            GenerateSkillsRequired(numberOfWorkers );            
-        }     
-        /// <summary>
-        /// For the moment, add 2 skills Development and ProjMangment. 
-        /// TODO : Random generation of skill which depends of numberOfWorkers
-        /// </summary>
-        /// <param name="numberOfWorkers"></param>
-        private void GenerateSkillsRequired(int numberOfWorkers)
+            _initialTasks = GenerateNumberOfTasks();
+            _projectTasks = _initialTasks;
+            _actualTasks = _projectTasks;
+            GenerateDuration();
+
+        }
+        internal void GenerateDuration()
         {
-            // TODO : Générer aléatoirement les compétences requises pour faire un projet
-            // selon le nombre de travailleurs.
-            //_skillsRequired.Add( new Skill(), 1 );
-            //_skillsRequired.Add( "ProjManagment", 1 );
+            int duration = 0;
+            foreach( int i in _skillsRequired.Values )
+            {
+                duration += i;
+            }
+            duration *= 10;
+            if( duration != 0 ) _duration = (_actualTasks / duration);
+        }
+        internal void RefreshDuration()
+        {
+            int duration = 0;
+            foreach( Skill s in _employeesAffectedWithSkill.Values)
+            {
+                duration += s.Level.CurrentLevel;
+            }
+            duration *= 10;
+            _duration = ( _actualTasks / duration );
+        }
+
+        private int GenerateNumberOfTasks()
+        {
+            int initialTasks = 0;
+            foreach( int i in _skillsRequired.Values)
+            {
+                int j = i * i * 1000;
+                initialTasks += j;
+            }
+
+            return initialTasks;
+        }
+        internal void RefreshActualsTasks()
+        {
+            if( Activated == false ) throw new InvalidOperationException( "You can't actualize tasks of a project which isn't begin." );
+            foreach( Skill s in _employeesAffectedWithSkill.Values )
+            {
+                _actualTasks -= s.Level.CurrentLevel * 10;
+            }
         }
         /// <summary>
         /// Affect an employee to a job. That method remove the skillRequired who is passed in parameter. The project is not activated
@@ -216,8 +258,10 @@ namespace SRH.Core
         /// <returns>The new Projetc</returns>
         public Project Clone( int pourcentCommerciaux = 100)
         {
-          Project project = new Project( _myComp, _name, _difficulty, _numberOfWorkers, _earnings + (_earnings * pourcentCommerciaux / 100) , new Dictionary<Skill, int>( _skillsRequired ), _duration );
+          Project project = new Project( _myComp, _name, _difficulty, _numberOfWorkers, _earnings + (_earnings * pourcentCommerciaux / 100) , new Dictionary<Skill, int>( _skillsRequired ) );
           return project;
-        } 
+        }
+
+
     }
 }
