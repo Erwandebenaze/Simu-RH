@@ -24,8 +24,8 @@ namespace SRH.Interface
         public SimuRH()
         {
             InitializeComponent();
-            //_myGame = new Game( 1, "Erwan" );
-            _myGame = GameLoader.Load( "Erwan" );
+            _myGame = new Game( 1, "Erwan" );
+            // _myGame = GameLoader.Load( "Erwan" );
             _optionsForm = new Options();
             _timeOfGame = _myGame.TimeGame;
             _timer = new Timer();
@@ -68,6 +68,11 @@ namespace SRH.Interface
 				// Current date display
                 _dateOfGame.Text = _myGame.TimeGame.CurrentTimeOfGame.ToString( "d" );
                 _day.Text = _timeOfGame.FrenchDayOfWeek;
+
+				// Pay employees
+				PayEmployees();
+
+				// Wealth check and consequences
                 if( _myGame.PlayerCompany.Wealth < 0 && !_debt)
                 {
                     _begginingDebt = _myGame.TimeGame.CurrentTimeOfGame;
@@ -93,6 +98,17 @@ namespace SRH.Interface
             }
 
         }
+
+		private void PayEmployees()
+		{
+			if( _myGame.TimeGame.CurrentTimeOfGame.Month != _myGame.TimeGame.TryAddDay().Month )
+			{
+				foreach( Employee e in _myGame.PlayerCompany.Employees )
+				{
+					_myGame.PlayerCompany.Wealth -= e.Salary;
+				}
+			}
+		}
 
 		private void UpdateTraining()
 		{

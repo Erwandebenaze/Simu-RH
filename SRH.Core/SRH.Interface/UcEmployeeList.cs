@@ -100,8 +100,8 @@ namespace SRH.Interface
 		{
 			if( !arg )
 			{
-				return _employees.Where( e => e.Worker.Skills
-				.Any( s => !(s is ProjSkill ) ) );
+				return _employees.Where(e => e.SkillAffectedToCompany == null)
+					.Where( e => e.Worker.Skills.Any( s => !(s is ProjSkill ) ) );
 			}
 			else
 				return _employees;

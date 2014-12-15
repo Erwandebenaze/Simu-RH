@@ -10,6 +10,8 @@ namespace SRH.Core
     {
 		private Person _worker;
         private readonly Company _comp;
+		private int _salary;
+		private int _salaryAdjustment;
         private bool _busy;
 		private Skill _skillAffectedToCompany;
 		private string _skillInTraining;
@@ -30,6 +32,7 @@ namespace SRH.Core
             _busy = false;
             _comp = comp;
 			_worker = worker;
+			_salary = GenerateSalary();
         }
 
 		#region Getters setters
@@ -70,7 +73,26 @@ namespace SRH.Core
 			get { return _trainingDuration; }
 			set { _trainingDuration = value; }
 		}
+
+		public int Salary
+		{
+			get { return GenerateSalary(); }
+		}
+
+		public int SalaryAdjustment
+		{
+			get { return _salaryAdjustment; }
+			set { _salaryAdjustment = value; }
+		}
 		#endregion
+
+		internal int GenerateSalary()
+		{
+			int salary = _worker.ExpectedSalary;
+			salary += _salaryAdjustment;
+
+			return salary;
+		}
 
 		/// <summary>
 		/// Adds a Skill if the Employee doesn't have it, or increases it by 1 level.
@@ -96,12 +118,14 @@ namespace SRH.Core
 
 				_skillInTraining = null;
 				_busy = false;
+				_worker.GenerateExpectedSalary();
 				return true;
 			}
 			else
 			{
 				Skill newSkill = _worker.AddSkill( skillName );
 				_busy = false;
+				_worker.GenerateExpectedSalary();
 				return true;
 			}
 		}

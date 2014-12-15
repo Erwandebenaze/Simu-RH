@@ -82,9 +82,10 @@ namespace SRH.Interface
 			_currentEmployee = UcEmployeeList1.CurrentEmployee;
 
 			ucSkillsDisplayEmployee.CurrentPerson = _currentEmployee.Worker;
-			SelectedEmployeeName.Text = _currentEmployee.Worker.FirstName + " " + _currentEmployee.Worker.LastName;
-			SelectedEmployeeAge.Text = _currentEmployee.Worker.Age.ToString();
+			employeeName.Text = _currentEmployee.Worker.FirstName + " " + _currentEmployee.Worker.LastName;
+			employeeAge.Text = _currentEmployee.Worker.Age.ToString();
 			occupation.Text = GetCurrentOccupationText( _currentEmployee );
+			GetSalaryDisplay();
 
 			if( !_currentEmployee.Busy )
 			{
@@ -107,6 +108,18 @@ namespace SRH.Interface
 			ucSkillsDisplayEmployee.LoadUc();
 		}
 
+		private void GetSalaryDisplay()
+		{
+			salary.Text = _currentEmployee.Salary.ToString();
+			if( _currentEmployee.Salary == _currentEmployee.Worker.ExpectedSalary )
+				salary.ForeColor = Color.Black;
+			else if( _currentEmployee.Salary < _currentEmployee.Worker.ExpectedSalary )
+				salary.ForeColor = Color.Red;
+			else
+				salary.ForeColor = Color.Green;
+
+		}
+
 		internal void SetTrainingProgress( Employee e )
 		{
 			timeLeft.Visible = true;
@@ -126,25 +139,26 @@ namespace SRH.Interface
             if( PersonList.SelectedItems.Count > 0 )
             {
                 _currentPerson = (Person)PersonList.SelectedItems[ PersonList.SelectedItems.Count - 1 ].Tag;
-                SelectedPersonName.Text = _currentPerson.FirstName + " " + _currentPerson.LastName;
-                SelectedPersonAge.Text = _currentPerson.Age.ToString();
+                personName.Text = _currentPerson.FirstName + " " + _currentPerson.LastName;
+                personAge.Text = _currentPerson.Age.ToString();
 				ucSkillsDisplayPerson.CurrentPerson = _currentPerson;
 				ucSkillsDisplayPerson.LoadUc();
             }
 			if( _currentPerson != null )
 			{
 				hirePerson.Enabled = true;
-				SelectedPersonName.Visible = true;
-				SelectedPersonAge.Visible = true;
+				personName.Visible = true;
+				personAge.Visible = true;
 			}
         }
 
 		private void EnableEmployeeInfo()
 		{
 			fireEmployee.Enabled = true;
-			SelectedEmployeeName.Visible = true;
-			SelectedEmployeeAge.Visible = true;
+			employeeName.Visible = true;
+			employeeAge.Visible = true;
 			occupation.Visible = true;
+			salary.Visible = true;
 		}
 
 		/// <summary>
@@ -306,6 +320,20 @@ namespace SRH.Interface
 
 			return currentOccupation;
 
+		}
+
+		private void increaseSalary_Click( object sender, EventArgs e )
+		{
+			double salaryIncrease = _currentEmployee.Worker.ExpectedSalary * 0.05;
+			_currentEmployee.SalaryAdjustment += (int)salaryIncrease;
+			UpdateEmployeeDisplay();
+		}
+
+		private void decreaseSalary_Click( object sender, EventArgs e )
+		{
+			double salaryIncrease = _currentEmployee.Worker.ExpectedSalary * 0.05;
+			_currentEmployee.SalaryAdjustment -= (int)salaryIncrease;
+			UpdateEmployeeDisplay();
 		}
     }
 }

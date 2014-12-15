@@ -45,8 +45,8 @@ namespace SRH.Interface
 			UcEmployeeList1.LoadUc();
 
 			managerList.Items.Clear();
-			_managers = GameContext.CurrentGame.PlayerCompany.Employees.
-				Where( e => e.SkillAffectedToCompany != null );
+			_managers = GameContext.CurrentGame.PlayerCompany.Employees
+				.Where( e => e.SkillAffectedToCompany != null );
 			managerList.Items.AddRange( _managers.Select( m => CreateManager( m ) ).ToArray() );
 
 		}
@@ -135,6 +135,8 @@ namespace SRH.Interface
 			if( managerList.SelectedItems.Count > 0 )
 			{
 				_currentManager = (Employee)managerList.SelectedItems[ 0 ].Tag;
+				UcSkillsDisplay1.CurrentPerson = _currentManager.Worker;
+				UcSkillsDisplay1.LoadUc();
 				DesaffectManager.Enabled = true;
 			}
 		}
