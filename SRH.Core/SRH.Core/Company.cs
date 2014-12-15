@@ -13,6 +13,7 @@ namespace SRH.Core
         protected readonly string _name;
         protected int _maxEmployees;
         protected int _wealth;
+        protected int _maxWealth;
         private readonly List<Employee> _employees;
         readonly protected Game _myGame;
 
@@ -44,13 +45,22 @@ namespace SRH.Core
         public int Wealth
         {
             get { return _wealth; }
-            set { _wealth = value; }
+            set 
+            {
+                if( _wealth + value > _maxWealth) 
+                {
+                    _maxWealth = _wealth + value;
+                }
+                _wealth = value;
+            }
         }
-
+        public int MaxWealth
+        {
+            get { return _maxWealth; }
+        }
         public int MaxEmployees
         {
             get { return _maxEmployees; }
-            set { _maxEmployees = value; }
         }
 
         /// <summary>
