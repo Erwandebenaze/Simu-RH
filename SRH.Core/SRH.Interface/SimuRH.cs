@@ -63,7 +63,7 @@ namespace SRH.Interface
 
                 _timeOfGame.newDay();
                 _myGame.PlayerCompany.EndProjectIfItsFinish();
-				UpdateTraining();
+				UpdateTraining(); 
                 ClearListsProjects();
 
 				// Current date display
