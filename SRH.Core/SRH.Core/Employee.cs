@@ -8,10 +8,15 @@ namespace SRH.Core
     [Serializable]
     public class Employee
     {
-        Person _worker;
-        readonly Company _comp;
+		private Person _worker;
+        private readonly Company _comp;
+		private int _salary;
+		private int _salaryAdjustment;
         private bool _busy;
 		private Skill _skillAffectedToCompany;
+		private string _skillInTraining;
+		private DateTime _traininigBegginingDate;
+		private int _trainingDuration;
 
         /// <summary>
 		/// Creates an <see cref="Employee"/>
@@ -27,6 +32,7 @@ namespace SRH.Core
             _busy = false;
             _comp = comp;
 			_worker = worker;
+			_salary = GenerateSalary();
         }
 
 		#region Getters setters
@@ -43,7 +49,50 @@ namespace SRH.Core
         {
             get { return _comp; }
         }
+
+		public Skill SkillAffectedToCompany
+		{
+			get { return _skillAffectedToCompany; }
+			set { _skillAffectedToCompany = value; }
+		}
+
+		public string SkillInTraining
+		{
+			get { return _skillInTraining; }
+			set { _skillInTraining = value; }
+		}
+
+		public DateTime TraininigBegginingDate
+		{
+			get { return _traininigBegginingDate; }
+			set { _traininigBegginingDate = value; }
+		}
+
+		public int TrainingDuration
+		{
+			get { return _trainingDuration; }
+			set { _trainingDuration = value; }
+		}
+
+		public int Salary
+		{
+			get { return GenerateSalary(); }
+		}
+
+		public int SalaryAdjustment
+		{
+			get { return _salaryAdjustment; }
+			set { _salaryAdjustment = value; }
+		}
 		#endregion
+
+		internal int GenerateSalary()
+		{
+			int salary = _worker.ExpectedSalary;
+			salary += _salaryAdjustment;
+
+			return salary;
+		}
 
 		/// <summary>
 		/// Adds a Skill if the Employee doesn't have it, or increases it by 1 level.
@@ -63,23 +112,70 @@ namespace SRH.Core
 			if( _worker.Skills.Contains( candidate ) )
 			{
 				Skill skillToTrain = _worker.Skills.Where( s => s.SkillName == skillName ).Single();
+				int xpToNextLevel = skillToTrain.Level.NextXpRequired - skillToTrain.Level.CurrentXp;
+				skillToTrain.Level.IncreaseXp( xpToNextLevel );
+				_comp.Wealth -= skillToTrain.UpgradePrice;
 
-				if( _comp.Wealth >= skillToTrain.UpgradePrice )
+				_skillInTraining = null;
+				_busy = false;
+				_worker.GenerateExpectedSalary();
+				return true;
+			}
+			else
+			{
+				Skill newSkill = _worker.AddSkill( skillName );
+				_busy = false;
+				_worker.GenerateExpectedSalary();
+				return true;
+			}
+		}
+
+		/// <summary>
+		/// Checks if Employee in training is finished, if he is, the skill is added/upgraded
+		/// </summary>
+		/// <returns>The time left </returns>
+		public int UpdateEmployeeTraining()
+		{
+			if( _comp.Game.TimeGame.intervalOfTimeInDays( _traininigBegginingDate ) == _trainingDuration )
+			{
+				Train( _skillInTraining );
+			}
+
+			int timeLeft = _trainingDuration - _comp.Game.TimeGame.intervalOfTimeInDays( _traininigBegginingDate );
+			return timeLeft;
+		}
+
+		public bool StartTraining( string skillName )
+		{
+			_skillInTraining = skillName;
+			_traininigBegginingDate = _comp.Game.TimeGame.CurrentTimeOfGame;
+
+			// Set a candidate skill to test
+			Skill candidate = null;
+			if( skillName.IsProjSkill() ) candidate = new ProjSkill( skillName );
+			else candidate = new CompaSkill( skillName );
+			
+			Skill currentSkill = _worker.Skills.Where( s => s.SkillName == skillName ).SingleOrDefault();
+
+			if( currentSkill == null )
+			{
+				if( _comp.Wealth >= candidate.BaseCostToTrain )
 				{
-					int xpToNextLevel = skillToTrain.Level.NextXpRequired - skillToTrain.Level.CurrentXp;
-					skillToTrain.Level.IncreaseXp( xpToNextLevel );
-					_comp.Wealth -= skillToTrain.UpgradePrice;
+					_trainingDuration = candidate.BaseTimeToTrain;
+					_comp.Wealth -= candidate.BaseCostToTrain;
+					_busy = true;
 					return true;
 				}
-				else 
+				else
 					return false;
 			}
 			else
 			{
-				if( _comp.Wealth >= candidate.BaseCostToTrain )
+				if( _comp.Wealth >= currentSkill.BaseCostToTrain )
 				{
-					Skill newSkill = _worker.AddSkill( skillName );
-					_comp.Wealth -= newSkill.BaseCostToTrain;
+					_trainingDuration = currentSkill.TimeToUpgrade;
+					_comp.Wealth -= currentSkill.BaseCostToTrain;
+					_busy = true;
 					return true;
 				}
 				else

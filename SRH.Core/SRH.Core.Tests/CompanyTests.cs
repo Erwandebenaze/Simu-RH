@@ -198,5 +198,14 @@ namespace SRH.Core.Tests
 			Assert.That( myGame.PlayerCompany.CompanyLevel.XpRequired == 200 );
 			Assert.That( lastXpRequired == 100 );
 		}
+
+		[Test]
+		public void An_Employee_can_be_traines()
+		{
+			Game myGame = new Game( 1, "Simu\'RH" );
+			Employee e = myGame.PlayerCompany.AddEmployee( myGame.Market.JoblessPersons[ 0 ] );
+
+			e.Train( "Animation" );
+		}
     }
 }

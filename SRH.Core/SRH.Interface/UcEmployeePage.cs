@@ -15,25 +15,54 @@ namespace SRH.Interface
     {
         IReadOnlyList<Person> _joblessPersons;
         Person _currentPerson;
+		Employee _currentEmployee;
 		Skill _currentSkillToTrain;
 		string _newSkillToAddName;
+		int _currentTrainingProgress;
+		int _maximumTrainingProgress;
+		int _trainingTimeLeft;
         
         public UcEmployeePage()
         {
             InitializeComponent();
         }
 
-        IGameContext GameContext
-        {
-            get { return (IGameContext)TopLevelControl; }
-        }
+		#region Getters Setters
+		IGameContext GameContext
+		{
+			get { return (IGameContext)TopLevelControl; }
+		}
+
+		public Employee CurrentEmployee
+		{
+			get { return _currentEmployee; }
+		}
+
+		public int CurrentTrainingProgress
+		{
+			get { return _currentTrainingProgress; }
+			set { _currentTrainingProgress = value; }
+		}
+
+		public int MaximumTrainingProgress
+		{
+			get { return _maximumTrainingProgress; }
+			set { _maximumTrainingProgress = value; }
+		}
+
+		public int TrainingTimeLeft
+		{
+			get { return _trainingTimeLeft; }
+			set { _trainingTimeLeft = value; }
+		}
+		#endregion
 
 		protected override void OnLoad( EventArgs e )
 		{
 			if( this.IsInRuntimeMode() )
 			{
 				base.OnLoad( e );
-				UcEmployeeList1.Changed += UpdateSkillsDisplay;
+				UcEmployeeList1.Changed += UpdateEmployeeDisplay;
 				LoadPage();
 			}
 		}
@@ -48,26 +77,56 @@ namespace SRH.Interface
 			PersonList.Items.AddRange( _joblessPersons.Select( p => CreatePerson( p ) ).ToArray() );
 		}
 
-		private void UpdateSkillsDisplay()
+		private void UpdateEmployeeDisplay()
 		{
-			Employee e = UcEmployeeList1.CurrentEmployee;
+			_currentEmployee = UcEmployeeList1.CurrentEmployee;
 
-			ucSkillsDisplayEmployee.CurrentPerson = e.Worker;
-			SelectedEmployeeName.Text = e.Worker.FirstName + " " + e.Worker.LastName;
-			SelectedEmployeeAge.Text = e.Worker.Age.ToString();
+			ucSkillsDisplayEmployee.CurrentPerson = _currentEmployee.Worker;
+			employeeName.Text = _currentEmployee.Worker.FirstName + " " + _currentEmployee.Worker.LastName;
+			employeeAge.Text = _currentEmployee.Worker.Age.ToString();
+			occupation.Text = GetCurrentOccupationText( _currentEmployee );
+			GetSalaryDisplay();
 
-			if( !e.Busy )
+			if( !_currentEmployee.Busy )
 			{
-				IsBusy.Text = "Non";
 				EnableEmployeeInfo();
-				EnableTrainingDisplay( true );
+				trainingPanel.Visible = true;
+				currentTrainingPanel.Visible = false;
 				CreateSkillsToTrainComboBox();
+			}
+			else if( _currentEmployee.Busy && ( _currentEmployee.SkillInTraining != null ) )
+			{
+				EnableEmployeeInfo();
+				trainingPanel.Visible = false;
+				currentTrainingPanel.Visible = true;
 			}
 			else
 			{
-				IsBusy.Text = "Oui";
+				trainingPanel.Visible = false;
+				Train.Enabled = false;
 			}
 			ucSkillsDisplayEmployee.LoadUc();
+		}
+
+		private void GetSalaryDisplay()
+		{
+			salary.Text = _currentEmployee.Salary.ToString();
+			if( _currentEmployee.Salary == _currentEmployee.Worker.ExpectedSalary )
+				salary.ForeColor = Color.Black;
+			else if( _currentEmployee.Salary < _currentEmployee.Worker.ExpectedSalary )
+				salary.ForeColor = Color.Red;
+			else
+				salary.ForeColor = Color.Green;
+
+		}
+
+		internal void SetTrainingProgress( Employee e )
+		{
+			timeLeft.Visible = true;
+			timeLeft.Text = _trainingTimeLeft.ToString();
+			trainingProgress.Minimum = 0;
+			trainingProgress.Maximum = _currentEmployee.TrainingDuration;
+			trainingProgress.Value = _currentEmployee.TrainingDuration - _trainingTimeLeft;
 		}
 
 		/// <summary>
@@ -80,24 +139,26 @@ namespace SRH.Interface
             if( PersonList.SelectedItems.Count > 0 )
             {
                 _currentPerson = (Person)PersonList.SelectedItems[ PersonList.SelectedItems.Count - 1 ].Tag;
-                SelectedPersonName.Text = _currentPerson.FirstName + " " + _currentPerson.LastName;
-                SelectedPersonAge.Text = _currentPerson.Age.ToString();
+                personName.Text = _currentPerson.FirstName + " " + _currentPerson.LastName;
+                personAge.Text = _currentPerson.Age.ToString();
 				ucSkillsDisplayPerson.CurrentPerson = _currentPerson;
 				ucSkillsDisplayPerson.LoadUc();
             }
 			if( _currentPerson != null )
 			{
 				hirePerson.Enabled = true;
-				SelectedPersonName.Visible = true;
-				SelectedPersonAge.Visible = true;
+				personName.Visible = true;
+				personAge.Visible = true;
 			}
         }
 
 		private void EnableEmployeeInfo()
 		{
 			fireEmployee.Enabled = true;
-			SelectedEmployeeName.Visible = true;
-			SelectedEmployeeAge.Visible = true;
+			employeeName.Visible = true;
+			employeeAge.Visible = true;
+			occupation.Visible = true;
+			salary.Visible = true;
 		}
 
 		/// <summary>
@@ -109,7 +170,7 @@ namespace SRH.Interface
 		{
 			Train.Enabled = true;
 			string selectedSkill = (string)SelectedEmployeeSkillsToTrain.SelectedItem;
-			_currentSkillToTrain = UcEmployeeList1.CurrentEmployee.Worker.Skills
+			_currentSkillToTrain = _currentEmployee.Worker.Skills
 				.Where( s => s.SkillName == selectedSkill )
 				.SingleOrDefault();
 			if( _currentSkillToTrain == null )
@@ -118,7 +179,7 @@ namespace SRH.Interface
 				SetTrainingValuesInForm( selectedSkill );
 			}
 			else
-				if( _currentSkillToTrain.Level.CurrentLevel < 5 )
+				if( _currentSkillToTrain.Level.CurrentLevel < 5 && !( _currentEmployee.Busy ) )
 				{
 					SetTrainingValuesInForm( _currentSkillToTrain );
 				}
@@ -148,10 +209,10 @@ namespace SRH.Interface
 		/// <param name="e"></param>
 		private void fireEmployee_Click( object sender, EventArgs e )
 		{
-			Person p = GameContext.CurrentGame.PlayerCompany.RemoveEmployee( UcEmployeeList1.CurrentEmployee );
+			Person p = GameContext.CurrentGame.PlayerCompany.RemoveEmployee( _currentEmployee );
 			PersonList.Items.Add( CreatePerson( p ) );
 
-			var EmployeeItem = UcEmployeeList1.EmployeeList.Items.Cast<ListViewItem>().Where( item => item.Tag == UcEmployeeList1.CurrentEmployee ).Single();
+			var EmployeeItem = UcEmployeeList1.EmployeeList.Items.Cast<ListViewItem>().Where( item => item.Tag == _currentEmployee ).Single();
 			UcEmployeeList1.EmployeeList.Items.Remove( EmployeeItem );
 
 			fireEmployee.Enabled = false;
@@ -165,26 +226,26 @@ namespace SRH.Interface
 		private void Train_Click( object sender, EventArgs e )
 		{
 			Train.Enabled = true;
+
 			if( _currentSkillToTrain == null ) 
 			{
-				UcEmployeeList1.CurrentEmployee.Train( _newSkillToAddName );
-				_currentSkillToTrain = UcEmployeeList1.CurrentEmployee.Worker.Skills
-				.Where( s => s.SkillName == _newSkillToAddName )
-				.SingleOrDefault();
+				_currentEmployee.StartTraining( _newSkillToAddName );
+				Train.Enabled = false;
+				UpdateEmployeeDisplay();
 			}
 			else
 			{
-				UcEmployeeList1.CurrentEmployee.Train( _currentSkillToTrain.SkillName );
 				if( _currentSkillToTrain.Level.CurrentLevel < 5 )
 				{
+					_currentEmployee.StartTraining( _currentSkillToTrain.SkillName );
 					SetTrainingValuesInForm( _currentSkillToTrain );
+					Train.Enabled = false;
+					UpdateEmployeeDisplay();
 				}
 				else
 					Train.Enabled = false;
 			}
-
-			UpdateSkillsDisplay();
-			UcEmployeeList1.LoadUc();
+			LoadPage();
 		}
 
 		/// <summary>
@@ -219,12 +280,12 @@ namespace SRH.Interface
 			if( skillName.IsProjSkill() )
 			{
 				SelectedSkillToTrainCost.Text = "1000";
-				SelectedSkillToTrainTime.Text = "2";
+				SelectedSkillToTrainTime.Text = "15";
 			}
 			else
 			{
 				SelectedSkillToTrainCost.Text = "1500";
-				SelectedSkillToTrainTime.Text = "4";
+				SelectedSkillToTrainTime.Text = "20";
 			}
 		}
 
@@ -233,46 +294,46 @@ namespace SRH.Interface
 			SelectedEmployeeSkillsToTrain.Items.Clear();
 
 			// Add the Employee's already present Skills
-			SelectedEmployeeSkillsToTrain.Items.AddRange( UcEmployeeList1.CurrentEmployee.Worker.Skills
+			SelectedEmployeeSkillsToTrain.Items.AddRange( _currentEmployee.Worker.Skills
 				.Where( s => s.Level.CurrentLevel < 5 )
 				.Select( s => s.SkillName ).ToArray() );
 			// Add the other Skills, without the Employee's already present Skills
 			SelectedEmployeeSkillsToTrain.Items.AddRange( Game.SkillNames
 				.Select( s => s.Value )
-				.Where( s => !( UcEmployeeList1.CurrentEmployee.Worker.Skills.Any( ps => ps.SkillName == s ) ) )
+				.Where( s => !( _currentEmployee.Worker.Skills.Any( ps => ps.SkillName == s ) ) )
 				.ToArray() );
+			SelectedEmployeeSkillsToTrain.SelectedIndex = 0;
 		}
 
-		private void EnableTrainingDisplay( bool enabled )
+		private string GetCurrentOccupationText( Employee e )
 		{
-			if(enabled)
-			{
-				SelectedEmployeeSkillsToTrain.Visible = true;
-				SelectedSkillTrainCostTitle.Visible = true;
-				SelectedSkillToTrainCost.Visible = true;
-				SelectedSkillTrainTimeTitle.Visible = true;
-				SelectedSkillToTrainTime.Visible = true;
-				IsBusyTitle.Visible = true;
-				IsBusy.Visible = true;
-			}
+			string currentOccupation;
+
+			if( e.Busy && ( e.SkillAffectedToCompany != null ) )
+				currentOccupation = "En poste Fixe (" + e.SkillAffectedToCompany.SkillName + ")";
+			else if( e.Busy && ( e.SkillInTraining != null ) )
+				currentOccupation = "En formation (" + e.SkillInTraining + ")";
+			else if( e.Busy )
+				currentOccupation = "En projet";
 			else
-			{
-				SelectedEmployeeSkillsToTrain.Visible = false;
-				SelectedSkillTrainCostTitle.Visible = false;
-				SelectedSkillToTrainCost.Visible = false;
-				SelectedSkillTrainTimeTitle.Visible = false;
-				SelectedSkillToTrainTime.Visible = false;
-				IsBusyTitle.Visible = false;
-				IsBusy.Visible = false;
-			}
+				currentOccupation = "Aucune";
+
+			return currentOccupation;
+
 		}
 
-		private void EnableButtons()
+		private void increaseSalary_Click( object sender, EventArgs e )
 		{
-			if( UcEmployeeList1.CurrentEmployee != null )
-			{
-				fireEmployee.Enabled = true;
-			}
+			double salaryIncrease = _currentEmployee.Worker.ExpectedSalary * 0.05;
+			_currentEmployee.SalaryAdjustment += (int)salaryIncrease;
+			UpdateEmployeeDisplay();
+		}
+
+		private void decreaseSalary_Click( object sender, EventArgs e )
+		{
+			double salaryIncrease = _currentEmployee.Worker.ExpectedSalary * 0.05;
+			_currentEmployee.SalaryAdjustment -= (int)salaryIncrease;
+			UpdateEmployeeDisplay();
 		}
     }
 }

@@ -14,8 +14,8 @@ namespace SRH.Core
 		string _lastName;
 		int _age;
         readonly DateTime _birthDate;
-		// TODO : Implémenter création aléatoire de skill
 		readonly List<Skill> _skills;
+		int _expectedSalary;
 		LaborMarket _lb;
         Random rand;
 
@@ -32,6 +32,7 @@ namespace SRH.Core
             int year = 2015 - age;
             _birthDate = new DateTime(year,month,01);
             _lb = lb;
+			GenerateExpectedSalary();
 		}
 
         private int GetRandomDay( int month )
@@ -77,7 +78,12 @@ namespace SRH.Core
 		internal LaborMarket Lb
 		{
 			get { return _lb; }
-		} 
+		}
+
+		public int ExpectedSalary
+		{
+			get { return _expectedSalary; }
+		}
 		#endregion
 
 		/// <summary>
@@ -102,12 +108,14 @@ namespace SRH.Core
 
 			newSkill.Level.CurrentLevel = level;
 			_skills.Add( newSkill );
+			GenerateExpectedSalary();
 			return newSkill;
 		}
 
 		public void RemoveSkill( Skill skill )
 		{
 			_skills.Remove( skill );
+			GenerateExpectedSalary();
 		}
 
         /// <summary>
@@ -119,5 +127,15 @@ namespace SRH.Core
             this.Age += 1;
             return this.Age;
         }
+
+		internal void GenerateExpectedSalary()
+		{
+			int totalLevels = 0;
+			foreach( Skill s in _skills )
+			{
+				totalLevels += s.Level.CurrentLevel;
+			}
+			_expectedSalary = 1000 + ( totalLevels * 100 );
+		}
 	}
 }

@@ -90,15 +90,18 @@ namespace SRH.Interface
 			_employees = GameContext.CurrentGame.PlayerCompany.Employees;
 
 			employeeList.Items.Clear();
-			employeeList.Items.AddRange( GetProjEmployees( _showProj ).Select( employee => CreateEmployee( employee ) ).ToArray() );
+			employeeList.Items.AddRange( GetProjEmployees( _showProj )
+				.Select( employee => CreateEmployee( employee ) )
+				.OrderBy( employee => employee.Text)
+				.ToArray() );
 		}
 
 		private IEnumerable<Employee> GetProjEmployees( bool arg )
 		{
 			if( !arg )
 			{
-				return _employees.Where( e => e.Worker.Skills
-				.Any( s => !(s is ProjSkill ) ) );
+				return _employees.Where(e => e.SkillAffectedToCompany == null)
+					.Where( e => e.Worker.Skills.Any( s => !(s is ProjSkill ) ) );
 			}
 			else
 				return _employees;

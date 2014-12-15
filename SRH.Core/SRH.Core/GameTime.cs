@@ -54,6 +54,18 @@ namespace SRH.Core
             }
         }
 
+		public DateTime TryAddDay()
+		{
+			DateTime currentDate = _currentTimeOfGame;
+			
+			currentDate = currentDate.AddDays( 1 );
+			if( currentDate.DayOfWeek == DayOfWeek.Saturday )
+			{
+				currentDate = currentDate.AddDays( 2 );
+			}
+			return currentDate;
+		}
+
         public int intervalOfTimeInDays( DateTime? beginningDateNullable )
         {
             //TimeSpan ts = new TimeSpan();

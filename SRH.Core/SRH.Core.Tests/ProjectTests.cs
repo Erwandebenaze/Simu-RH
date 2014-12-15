@@ -67,7 +67,7 @@ namespace SRH.Core.Tests
 		{
 			Dictionary<Skill, int> requiredSkills = Create_skills();
 
-            Project p = new Project( myGame.PlayerCompany, "SimuRh", -1, -2, 10, requiredSkills, 1 );
+            Project p = new Project( myGame.PlayerCompany, "SimuRh", -1, -2, 10, requiredSkills );
         }
 
         [Test]
