@@ -35,7 +35,7 @@ namespace SRH.Interface
 			if( this.IsInRuntimeMode() )
 			{
 				base.OnLoad( e );
-				UcEmployeeList1.Changed += UpdateSkillsDisplay;
+				UcEmployeeList1.Changed += UpdateEmployeeDisplay;
 				LoadPage();
 			}
 		}
@@ -92,22 +92,21 @@ namespace SRH.Interface
 				i.Group = groupToAffect;
 		}
 
-		// TODO : find a better name for this method
-		private void UpdateSkillsDisplay()
+		private void UpdateEmployeeDisplay()
 		{
 			_currentEmployee = UcEmployeeList1.CurrentEmployee;
 			UcSkillsDisplay1.CurrentPerson = _currentEmployee.Worker;
 			
-			Affect_Manager.Enabled = false;
+			AffectManager.Enabled = false;
 			if( !_currentEmployee.Busy )
 			{
 				IsBusy.Text = "Non";
-				Affect_Manager.Enabled = true;
+				AffectManager.Enabled = true;
 			}
 			else
 			{
 				IsBusy.Text = "Oui";
-				Affect_Manager.Enabled = false;
+				AffectManager.Enabled = false;
 			}
 
 			UcSkillsDisplay1.LoadUc();
@@ -119,7 +118,7 @@ namespace SRH.Interface
 		{
 			MyCompany playerCompany = (MyCompany)_currentEmployee.Comp;
 			playerCompany.AddManager( _currentEmployee, _currentSkillToAffect );
-			Affect_Manager.Enabled = false;
+			AffectManager.Enabled = false;
 			LoadPage();
 		}
 
@@ -136,6 +135,7 @@ namespace SRH.Interface
 			if( managerList.SelectedItems.Count > 0 )
 			{
 				_currentManager = (Employee)managerList.SelectedItems[ 0 ].Tag;
+				DesaffectManager.Enabled = true;
 			}
 		}
 
@@ -145,7 +145,7 @@ namespace SRH.Interface
 			IsBusy.Visible = enable;
 			SelectedManagerAffectTitle.Visible = enable;
 			SkillsToAffect.Visible = enable;
-			Affect_Manager.Visible = enable;
+			AffectManager.Visible = enable;
 		}
 
 		private void SkillsToAffect_SelectedIndexChanged( object sender, EventArgs e )

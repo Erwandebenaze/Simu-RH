@@ -101,6 +101,7 @@ namespace SRH.Core
 			else
 			{
 				Skill newSkill = _worker.AddSkill( skillName );
+				_busy = false;
 				return true;
 			}
 		}
@@ -109,7 +110,7 @@ namespace SRH.Core
 		/// Checks if Employee in training is finished, if he is, the skill is added/upgraded
 		/// </summary>
 		/// <returns>The time left </returns>
-		public int UpdateTraining()
+		public int UpdateEmployeeTraining()
 		{
 			if( _comp.Game.TimeGame.intervalOfTimeInDays( _traininigBegginingDate ) == _trainingDuration )
 			{
@@ -138,6 +139,7 @@ namespace SRH.Core
 				{
 					_trainingDuration = candidate.BaseTimeToTrain;
 					_comp.Wealth -= candidate.BaseCostToTrain;
+					_busy = true;
 					return true;
 				}
 				else
@@ -149,6 +151,7 @@ namespace SRH.Core
 				{
 					_trainingDuration = currentSkill.TimeToUpgrade;
 					_comp.Wealth -= currentSkill.BaseCostToTrain;
+					_busy = true;
 					return true;
 				}
 				else

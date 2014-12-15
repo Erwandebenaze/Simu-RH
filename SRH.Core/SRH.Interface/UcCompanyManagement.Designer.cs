@@ -34,27 +34,27 @@
 			System.Windows.Forms.ListViewGroup listViewGroup4 = new System.Windows.Forms.ListViewGroup("Gestionnaires de contrats", System.Windows.Forms.HorizontalAlignment.Left);
 			System.Windows.Forms.ListViewGroup listViewGroup5 = new System.Windows.Forms.ListViewGroup("Membres du comité d\'entreprise", System.Windows.Forms.HorizontalAlignment.Left);
 			this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-			this.IsBusy = new System.Windows.Forms.Label();
-			this.IsBusyTitle = new System.Windows.Forms.Label();
-			this.Affect_Manager = new System.Windows.Forms.Button();
-			this.SelectedManagerAffectTitle = new System.Windows.Forms.Label();
-			this.SkillsToAffect = new System.Windows.Forms.ComboBox();
+			this.panel2 = new System.Windows.Forms.Panel();
 			this.managerList = new System.Windows.Forms.ListView();
 			this.managerName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.managerAge = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.managerUsedSkill = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.managerUsedSkillLevel = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.panel1 = new System.Windows.Forms.Panel();
-			this.panel2 = new System.Windows.Forms.Panel();
 			this.DesaffectManager = new System.Windows.Forms.Button();
+			this.IsBusy = new System.Windows.Forms.Label();
+			this.IsBusyTitle = new System.Windows.Forms.Label();
+			this.AffectManager = new System.Windows.Forms.Button();
+			this.SelectedManagerAffectTitle = new System.Windows.Forms.Label();
+			this.SkillsToAffect = new System.Windows.Forms.ComboBox();
 			this.UcSkillsDisplay1 = new SRH.Interface.UcSkillsDisplay();
 			this.UcEmployeeList1 = new SRH.Interface.UcEmployeeList();
 			((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
 			this.splitContainer1.Panel1.SuspendLayout();
 			this.splitContainer1.Panel2.SuspendLayout();
 			this.splitContainer1.SuspendLayout();
-			this.panel1.SuspendLayout();
 			this.panel2.SuspendLayout();
+			this.panel1.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// splitContainer1
@@ -73,7 +73,7 @@
 			// 
 			this.splitContainer1.Panel2.Controls.Add(this.IsBusy);
 			this.splitContainer1.Panel2.Controls.Add(this.IsBusyTitle);
-			this.splitContainer1.Panel2.Controls.Add(this.Affect_Manager);
+			this.splitContainer1.Panel2.Controls.Add(this.AffectManager);
 			this.splitContainer1.Panel2.Controls.Add(this.SelectedManagerAffectTitle);
 			this.splitContainer1.Panel2.Controls.Add(this.SkillsToAffect);
 			this.splitContainer1.Panel2.Controls.Add(this.UcSkillsDisplay1);
@@ -83,57 +83,13 @@
 			this.splitContainer1.SplitterWidth = 3;
 			this.splitContainer1.TabIndex = 0;
 			// 
-			// IsBusy
+			// panel2
 			// 
-			this.IsBusy.AutoSize = true;
-			this.IsBusy.Location = new System.Drawing.Point(93, 483);
-			this.IsBusy.Name = "IsBusy";
-			this.IsBusy.Size = new System.Drawing.Size(14, 13);
-			this.IsBusy.TabIndex = 6;
-			this.IsBusy.Text = "X";
-			this.IsBusy.Visible = false;
-			// 
-			// IsBusyTitle
-			// 
-			this.IsBusyTitle.AutoSize = true;
-			this.IsBusyTitle.Location = new System.Drawing.Point(36, 483);
-			this.IsBusyTitle.Name = "IsBusyTitle";
-			this.IsBusyTitle.Size = new System.Drawing.Size(51, 13);
-			this.IsBusyTitle.TabIndex = 5;
-			this.IsBusyTitle.Text = "Occupé :";
-			this.IsBusyTitle.Visible = false;
-			// 
-			// Affect_Manager
-			// 
-			this.Affect_Manager.Enabled = false;
-			this.Affect_Manager.Location = new System.Drawing.Point(382, 434);
-			this.Affect_Manager.Name = "Affect_Manager";
-			this.Affect_Manager.Size = new System.Drawing.Size(75, 23);
-			this.Affect_Manager.TabIndex = 4;
-			this.Affect_Manager.Text = "Affecter";
-			this.Affect_Manager.UseVisualStyleBackColor = true;
-			this.Affect_Manager.Visible = false;
-			this.Affect_Manager.Click += new System.EventHandler(this.Affect_Manager_Click);
-			// 
-			// SelectedManagerAffectTitle
-			// 
-			this.SelectedManagerAffectTitle.AutoSize = true;
-			this.SelectedManagerAffectTitle.Location = new System.Drawing.Point(33, 439);
-			this.SelectedManagerAffectTitle.Name = "SelectedManagerAffectTitle";
-			this.SelectedManagerAffectTitle.Size = new System.Drawing.Size(115, 13);
-			this.SelectedManagerAffectTitle.TabIndex = 3;
-			this.SelectedManagerAffectTitle.Text = "Compétence à affecter";
-			this.SelectedManagerAffectTitle.Visible = false;
-			// 
-			// SkillsToAffect
-			// 
-			this.SkillsToAffect.FormattingEnabled = true;
-			this.SkillsToAffect.Location = new System.Drawing.Point(154, 436);
-			this.SkillsToAffect.Name = "SkillsToAffect";
-			this.SkillsToAffect.Size = new System.Drawing.Size(213, 21);
-			this.SkillsToAffect.TabIndex = 2;
-			this.SkillsToAffect.Visible = false;
-			this.SkillsToAffect.SelectedIndexChanged += new System.EventHandler(this.SkillsToAffect_SelectedIndexChanged);
+			this.panel2.Controls.Add(this.managerList);
+			this.panel2.Location = new System.Drawing.Point(3, 3);
+			this.panel2.Name = "panel2";
+			this.panel2.Size = new System.Drawing.Size(303, 389);
+			this.panel2.TabIndex = 9;
 			// 
 			// managerList
 			// 
@@ -193,14 +149,6 @@
 			this.panel1.Size = new System.Drawing.Size(303, 114);
 			this.panel1.TabIndex = 8;
 			// 
-			// panel2
-			// 
-			this.panel2.Controls.Add(this.managerList);
-			this.panel2.Location = new System.Drawing.Point(3, 3);
-			this.panel2.Name = "panel2";
-			this.panel2.Size = new System.Drawing.Size(303, 389);
-			this.panel2.TabIndex = 9;
-			// 
 			// DesaffectManager
 			// 
 			this.DesaffectManager.Location = new System.Drawing.Point(216, 31);
@@ -210,6 +158,58 @@
 			this.DesaffectManager.Text = "Retirer";
 			this.DesaffectManager.UseVisualStyleBackColor = true;
 			this.DesaffectManager.Click += new System.EventHandler(this.DesaffectManager_Click);
+			// 
+			// IsBusy
+			// 
+			this.IsBusy.AutoSize = true;
+			this.IsBusy.Location = new System.Drawing.Point(93, 483);
+			this.IsBusy.Name = "IsBusy";
+			this.IsBusy.Size = new System.Drawing.Size(14, 13);
+			this.IsBusy.TabIndex = 6;
+			this.IsBusy.Text = "X";
+			this.IsBusy.Visible = false;
+			// 
+			// IsBusyTitle
+			// 
+			this.IsBusyTitle.AutoSize = true;
+			this.IsBusyTitle.Location = new System.Drawing.Point(36, 483);
+			this.IsBusyTitle.Name = "IsBusyTitle";
+			this.IsBusyTitle.Size = new System.Drawing.Size(51, 13);
+			this.IsBusyTitle.TabIndex = 5;
+			this.IsBusyTitle.Text = "Occupé :";
+			this.IsBusyTitle.Visible = false;
+			// 
+			// AffectManager
+			// 
+			this.AffectManager.Enabled = false;
+			this.AffectManager.Location = new System.Drawing.Point(382, 434);
+			this.AffectManager.Name = "AffectManager";
+			this.AffectManager.Size = new System.Drawing.Size(75, 23);
+			this.AffectManager.TabIndex = 4;
+			this.AffectManager.Text = "Affecter";
+			this.AffectManager.UseVisualStyleBackColor = true;
+			this.AffectManager.Visible = false;
+			this.AffectManager.Click += new System.EventHandler(this.Affect_Manager_Click);
+			// 
+			// SelectedManagerAffectTitle
+			// 
+			this.SelectedManagerAffectTitle.AutoSize = true;
+			this.SelectedManagerAffectTitle.Location = new System.Drawing.Point(33, 439);
+			this.SelectedManagerAffectTitle.Name = "SelectedManagerAffectTitle";
+			this.SelectedManagerAffectTitle.Size = new System.Drawing.Size(115, 13);
+			this.SelectedManagerAffectTitle.TabIndex = 3;
+			this.SelectedManagerAffectTitle.Text = "Compétence à affecter";
+			this.SelectedManagerAffectTitle.Visible = false;
+			// 
+			// SkillsToAffect
+			// 
+			this.SkillsToAffect.FormattingEnabled = true;
+			this.SkillsToAffect.Location = new System.Drawing.Point(154, 436);
+			this.SkillsToAffect.Name = "SkillsToAffect";
+			this.SkillsToAffect.Size = new System.Drawing.Size(213, 21);
+			this.SkillsToAffect.TabIndex = 2;
+			this.SkillsToAffect.Visible = false;
+			this.SkillsToAffect.SelectedIndexChanged += new System.EventHandler(this.SkillsToAffect_SelectedIndexChanged);
 			// 
 			// UcSkillsDisplay1
 			// 
@@ -239,8 +239,8 @@
 			this.splitContainer1.Panel2.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
 			this.splitContainer1.ResumeLayout(false);
-			this.panel1.ResumeLayout(false);
 			this.panel2.ResumeLayout(false);
+			this.panel1.ResumeLayout(false);
 			this.ResumeLayout(false);
 
         }
@@ -251,7 +251,7 @@
 		private UcSkillsDisplay UcSkillsDisplay1;
 		private UcEmployeeList UcEmployeeList1;
 		private System.Windows.Forms.ComboBox SkillsToAffect;
-		private System.Windows.Forms.Button Affect_Manager;
+		private System.Windows.Forms.Button AffectManager;
 		private System.Windows.Forms.Label IsBusy;
 		private System.Windows.Forms.Label IsBusyTitle;
 		private System.Windows.Forms.Label SelectedManagerAffectTitle;

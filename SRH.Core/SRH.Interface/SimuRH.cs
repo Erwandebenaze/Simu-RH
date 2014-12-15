@@ -99,17 +99,15 @@ namespace SRH.Interface
 			int timeLeft;
 			foreach( Employee e in _myGame.PlayerCompany.Employees.Where( emp => emp.SkillInTraining != null ) )
 			{
-				timeLeft = e.UpdateTraining();
+				timeLeft = e.UpdateEmployeeTraining();
+				if( e == ucEmployeePage.CurrentEmployee )
+				{
+					ucEmployeePage.TrainingTimeLeft = timeLeft;
+					ucEmployeePage.SetTrainingProgress( e );
+				}
 			}
 		}
 
-		//private void UpdateTraining()
-		//{
-		//	foreach( Employee e in _myGame.PlayerCompany.Employees.Where( emp => emp.InTraining ) )
-		//	{
-
-		//	}
-		//}
         private void ClearListsProjects()
         {
 

@@ -13,7 +13,7 @@ namespace SRH.Core
 			: base( skillName, startLevel )
 		{
 			_baseCostToTrain = 1000;
-			_baseTimeToTrain = 3;
+			_baseTimeToTrain = 15;
 		}
 
 		public override void FixPriceAndTime()
@@ -22,19 +22,19 @@ namespace SRH.Core
             {
                 case 1 :
 					UpgradePrice = 1250;
-                    TimeToUpgrade = 3;
+                    TimeToUpgrade = 20;
                     break;
                 case 2 :
 					UpgradePrice = 1500;
-                    TimeToUpgrade = 4;
+                    TimeToUpgrade = 25;
                     break;
                 case 3 :
 					UpgradePrice = 1750;
-                    TimeToUpgrade = 5;
+                    TimeToUpgrade = 30;
                     break;
                 case 4 : 
                     UpgradePrice = 2000;
-                    TimeToUpgrade = 8;
+                    TimeToUpgrade = 35;
                     break;
                 default :
                     throw new InvalidOperationException();

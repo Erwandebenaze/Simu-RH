@@ -75,6 +75,7 @@ namespace SRH.Interface
 			ListViewItem i = new ListViewItem( s.SkillName );
 			i.Tag = s;
 			i.SubItems.Add( new ListViewItem.ListViewSubItem( i, s.Level.CurrentLevel.ToString() ) );
+			i.SubItems.Add( new ListViewItem.ListViewSubItem( i, s.Level.CurrentLevel.ToString() ) );
 			return i;
 		}
 	}
