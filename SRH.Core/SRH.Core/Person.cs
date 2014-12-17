@@ -84,6 +84,15 @@ namespace SRH.Core
 		{
 			get { return _expectedSalary; }
 		}
+
+		public int HiringCost
+		{
+			get
+			{
+				double cost = _expectedSalary * 0.1;
+				return (int)cost;
+			}
+		}
 		#endregion
 
 		/// <summary>
@@ -91,7 +100,7 @@ namespace SRH.Core
 		/// </summary>
 		/// <param name="skillName">The name of the skill, must be present in the SkillList</param>
 		/// <returns>The Skill added</returns>
-		public Skill AddSkill( string skillName, int level = 1)
+		public Skill AddSkill( Person p, string skillName, int level = 1)
 		{
 			_lb.Game.ValidateSkillName( skillName );
 
@@ -130,12 +139,15 @@ namespace SRH.Core
 
 		internal void GenerateExpectedSalary()
 		{
-			int totalLevels = 0;
+			int totalLevelsCost = 0;
 			foreach( Skill s in _skills )
 			{
-				totalLevels += s.Level.CurrentLevel;
+				if( s is CompaSkill ) 
+					totalLevelsCost += s.Level.CurrentLevel * 200;
+				else
+					totalLevelsCost += s.Level.CurrentLevel * 100;
 			}
-			_expectedSalary = 1000 + ( totalLevels * 100 );
+			_expectedSalary = 1000 + totalLevelsCost;
 		}
 	}
 }

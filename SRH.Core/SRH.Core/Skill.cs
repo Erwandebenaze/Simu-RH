@@ -8,6 +8,7 @@ namespace SRH.Core
     [Serializable]
     public abstract class Skill
     {
+		Person _person;
         Level _level;
         private string _skillName;
 		private int _upgradePrice;
@@ -15,15 +16,26 @@ namespace SRH.Core
 		static protected int _baseCostToTrain;
 		protected int _baseTimeToTrain;
 
-        internal Skill( string skillName, int startLevel = 1 )
+		internal Skill( Person p, string skillName, int startLevel = 1 )
 		{
+			_person = p;
 			_level = new Level( this, startLevel );
 			_skillName = skillName;
+		}
+
+        internal Skill( string skillName, int startLevel = 1 )
+			:this( null, skillName, startLevel )
+		{
 		}
 
 		abstract public void FixPriceAndTime();
 
 		#region Getters Setters
+		public Person Person
+		{
+			get { return _person; }
+		}
+
 		public Level Level
 		{
 			get { return _level; }
