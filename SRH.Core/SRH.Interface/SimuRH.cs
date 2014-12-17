@@ -20,6 +20,7 @@ namespace SRH.Interface
         GameTime _timeOfGame;
         DateTime? _begginingDebt;
         bool _debt;
+        int _interest;
 
         public SimuRH()
         {
@@ -57,12 +58,12 @@ namespace SRH.Interface
                 BarProgress();
                 ExperienceProgress();
                 WealthProgress();
-
+                ucOffice.AffectOfficeFields();
 
 
                 _timeOfGame.newDay();
                 _myGame.PlayerCompany.EndProjectIfItsFinish();
-				UpdateTraining();
+				UpdateTraining(); 
                 ClearListsProjects();
 
 				// Current date display
@@ -96,6 +97,8 @@ namespace SRH.Interface
                     competitor.TryToAddMoneyAndEmployee();
                 }
             }
+
+            _interest = _myGame.PlayerCompany.ApplyInterests();
 
         }
 

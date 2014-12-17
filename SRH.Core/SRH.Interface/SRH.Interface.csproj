@@ -85,6 +85,12 @@
     <Compile Include="UcEmployeePage.Designer.cs">
       <DependentUpon>UcEmployeePage.cs</DependentUpon>
     </Compile>
+    <Compile Include="UcOffice.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UcOffice.Designer.cs">
+      <DependentUpon>UcOffice.cs</DependentUpon>
+    </Compile>
     <Compile Include="UcProjectPage.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -129,6 +135,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UcEmployeePage.resx">
       <DependentUpon>UcEmployeePage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UcOffice.resx">
+      <DependentUpon>UcOffice.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UcProjectPage.resx">
       <DependentUpon>UcProjectPage.cs</DependentUpon>

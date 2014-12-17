@@ -18,15 +18,16 @@ namespace SRH.Core
         List<Employee> _animation;
         List<Employee> _ressourcesHumaines;
         List<Employee> _directeursProjets;
-        List<Employee> _gestionnairesContrat;
+        List<Employee> _recruteur;
         int _pourcentCommerciaux = 0;
-
+        int _decreaseRecruting = 0;
 
 
 		internal MyCompany( Game game, string name ) : base( game, name )
         {
 			if( String.IsNullOrWhiteSpace( name ) ) throw new ArgumentNullException( "The company name cannot be null or a whitespace" );
             _wealth = 15000;
+            _maxWealth = _wealth;
 			_companyLevel = new Level( this, 1 );
 			_maxProjectDifficulty = 1;
             _projects = new List<Project>();
@@ -35,7 +36,7 @@ namespace SRH.Core
             _animation = new List<Employee>();
             _ressourcesHumaines = new List<Employee>();
             _directeursProjets = new List<Employee>();
-            _gestionnairesContrat = new List<Employee>();
+            _recruteur = new List<Employee>();
 
         }
 
@@ -118,6 +119,17 @@ namespace SRH.Core
                 }
             }
         }
+
+        public int ApplyInterests()
+        {
+            int interest = 0;
+            if( _wealth < 0 )
+            {
+                interest = (int)(-(_wealth * 3.5));
+            }
+            _wealth -= interest;
+            return interest;
+        }
         /// <summary>
         /// End a project and give the earnings. XP/Person, XP/Company and earnings. Free the employees of the project.
         /// </summary>
@@ -192,7 +204,7 @@ namespace SRH.Core
                 {
                     if( dico.Value.SkillName == "Commercial" ) _commerciaux.Add(dico.Key);
                     if( dico.Value.SkillName == "Animation" ) _animation.Add( dico.Key );
-                    if( dico.Value.SkillName == "Gestion de contrat" ) _gestionnairesContrat.Add( dico.Key );
+                    if( dico.Value.SkillName == "Recruteur" ) _recruteur.Add( dico.Key );
                     if( dico.Value.SkillName == "Directeur de projets" ) _directeursProjets.Add( dico.Key );
                     if( dico.Value.SkillName == "Ressources humaines" ) _ressourcesHumaines.Add( dico.Key );
                 }
@@ -224,6 +236,7 @@ namespace SRH.Core
         private void UseManagers()
         {
             int newPourcentCommerciaux = 0;
+            int newDecreaseRecruting = 0;
             if( _commerciaux.Count > 0)
             {
                 foreach( Employee emp in _commerciaux )
@@ -250,13 +263,39 @@ namespace SRH.Core
                     default :
                         throw new InvalidOperationException("Error in the switch.");
                 }
-                if( newPourcentCommerciaux > _pourcentCommerciaux )
+                if( newPourcentCommerciaux != _pourcentCommerciaux )
                 {
                     _pourcentCommerciaux = newPourcentCommerciaux;
                     _possibleCompanyProjects = GetPossibleCompanyProjects();
                     AddPourcentCommerciaux();
                 }
 
+            }
+            if( _ressourcesHumaines.Count > 0 )
+            {
+                foreach( Employee emp in _ressourcesHumaines )
+                {
+                    newDecreaseRecruting += (emp.Worker.Skills.Where( e => e.SkillName == "Ressources humaines" ).Select( e => e.Level.CurrentLevel ).Single()) * 2;
+                }
+
+                if(newDecreaseRecruting > _decreaseRecruting )
+                {
+                    _decreaseRecruting = newDecreaseRecruting;
+                    // TODO : Implémentation lorsqu'il y aura un coût de recrutement et de renvoi.
+                }
+            }
+            if( _directeursProjets.Count > 0 )
+            {
+                foreach( Employee emp in _directeursProjets )
+                {
+                    newDecreaseRecruting += (emp.Worker.Skills.Where( e => e.SkillName == "Ressources humaines" ).Select( e => e.Level.CurrentLevel ).Single()) * 2;
+                }
+
+                if( newDecreaseRecruting > _decreaseRecruting )
+                {
+                    _decreaseRecruting = newDecreaseRecruting;
+                    // TODO : Implémentation lorsqu'il y aura un coût de recrutement et de renvoi.
+                }
             }
         }
 

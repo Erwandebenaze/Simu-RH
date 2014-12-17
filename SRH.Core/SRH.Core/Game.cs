@@ -108,11 +108,11 @@ namespace SRH.Core
 			skillnames.Add( new KeyValuePair<string, string>( "proj", "Sécurité" ) );
 			skillnames.Add( new KeyValuePair<string, string>( "proj", "Management de projet" ) );
 
-			skillnames.Add( new KeyValuePair<string, string>( "compa", "Commercial" ) ); // *Commercial*, increase 20 projects earnings.
-			skillnames.Add( new KeyValuePair<string, string>( "compa", "Ressources humaines" ) ); // *Ressources humaines *, descrease recruting and laying off cost.
-			skillnames.Add( new KeyValuePair<string, string>( "compa", "Directeur de projets" ) ); // *Directeur de projets*, decrease the duration of 20 projects.
-			skillnames.Add( new KeyValuePair<string, string>( "compa", "Gestion de contrat" ) ); // *Gestion de contrat*, decrease the duration of 30 projects.
-			skillnames.Add( new KeyValuePair<string, string>( "compa", "Animation" ) ); // *Animation*, inscrease 30 employees hapiness
+			skillnames.Add( new KeyValuePair<string, string>( "compa", "Commercial" ) ); // *Commercial*, increase projects earnings.
+			skillnames.Add( new KeyValuePair<string, string>( "compa", "Recruteur" ) ); // *Recruteur *, descrease recruting and laying off cost.
+			skillnames.Add( new KeyValuePair<string, string>( "compa", "Directeur de projets" ) ); // *Directeur de projets*, decrease the duration of the projects.
+            skillnames.Add( new KeyValuePair<string, string>( "compa", "Ressources humaines" ) ); // *Ressources humaines*, decrease the salary of employees.
+			skillnames.Add( new KeyValuePair<string, string>( "compa", "Animation" ) ); // *Animation*, inscrease employees' hapiness.
 
 			return skillnames;
 		}
