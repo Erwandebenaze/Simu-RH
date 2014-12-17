@@ -38,6 +38,7 @@
 			System.Windows.Forms.Label employeeSalaryTitle;
 			System.Windows.Forms.Label personExpectedSalaryTitle;
 			System.Windows.Forms.Label firingCostTitle;
+			System.Windows.Forms.Label hiringCostTitle;
 			this.SelectedSkillTrainCostTitle = new System.Windows.Forms.Label();
 			this.SelectedSkillTrainTimeTitle = new System.Windows.Forms.Label();
 			this.PersonList = new System.Windows.Forms.ListView();
@@ -66,14 +67,15 @@
 			this.personAge = new System.Windows.Forms.Label();
 			this.personName = new System.Windows.Forms.Label();
 			this.hirePerson = new System.Windows.Forms.Button();
-			this.UcEmployeeList1 = new SRH.Interface.UcEmployeeList();
-			this.ucSkillsDisplayEmployee = new SRH.Interface.UcSkillsDisplay();
-			this.ucSkillsDisplayPerson = new SRH.Interface.UcSkillsDisplay();
 			this.currentTrainingPanel = new System.Windows.Forms.Panel();
 			this.timeLeft = new System.Windows.Forms.Label();
 			this.cancelTraining = new System.Windows.Forms.Button();
 			this.trainingTimeLeftTitle = new System.Windows.Forms.Label();
 			this.trainingProgress = new System.Windows.Forms.ProgressBar();
+			this.UcEmployeeList1 = new SRH.Interface.UcEmployeeList();
+			this.ucSkillsDisplayEmployee = new SRH.Interface.UcSkillsDisplay();
+			this.ucSkillsDisplayPerson = new SRH.Interface.UcSkillsDisplay();
+			this.hiringCost = new System.Windows.Forms.Label();
 			SelectedPersonTitle = new System.Windows.Forms.Label();
 			personNameTitle = new System.Windows.Forms.Label();
 			personAgeTitle = new System.Windows.Forms.Label();
@@ -84,6 +86,7 @@
 			employeeSalaryTitle = new System.Windows.Forms.Label();
 			personExpectedSalaryTitle = new System.Windows.Forms.Label();
 			firingCostTitle = new System.Windows.Forms.Label();
+			hiringCostTitle = new System.Windows.Forms.Label();
 			((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
 			this.splitContainer1.Panel1.SuspendLayout();
 			this.splitContainer1.Panel2.SuspendLayout();
@@ -315,7 +318,9 @@
 			// 
 			// splitContainer3.Panel2
 			// 
+			this.splitContainer3.Panel2.Controls.Add(this.hiringCost);
 			this.splitContainer3.Panel2.Controls.Add(this.personExpectedSalary);
+			this.splitContainer3.Panel2.Controls.Add(hiringCostTitle);
 			this.splitContainer3.Panel2.Controls.Add(personExpectedSalaryTitle);
 			this.splitContainer3.Panel2.Controls.Add(this.ucSkillsDisplayPerson);
 			this.splitContainer3.Panel2.Controls.Add(this.personAge);
@@ -512,30 +517,6 @@
 			this.hirePerson.UseVisualStyleBackColor = true;
 			this.hirePerson.Click += new System.EventHandler(this.hirePerson_Click);
 			// 
-			// UcEmployeeList1
-			// 
-			this.UcEmployeeList1.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.UcEmployeeList1.Location = new System.Drawing.Point(0, 0);
-			this.UcEmployeeList1.Name = "UcEmployeeList1";
-			this.UcEmployeeList1.Size = new System.Drawing.Size(432, 259);
-			this.UcEmployeeList1.TabIndex = 1;
-			// 
-			// ucSkillsDisplayEmployee
-			// 
-			this.ucSkillsDisplayEmployee.CurrentPerson = null;
-			this.ucSkillsDisplayEmployee.Location = new System.Drawing.Point(140, 114);
-			this.ucSkillsDisplayEmployee.Name = "ucSkillsDisplayEmployee";
-			this.ucSkillsDisplayEmployee.Size = new System.Drawing.Size(438, 140);
-			this.ucSkillsDisplayEmployee.TabIndex = 22;
-			// 
-			// ucSkillsDisplayPerson
-			// 
-			this.ucSkillsDisplayPerson.CurrentPerson = null;
-			this.ucSkillsDisplayPerson.Location = new System.Drawing.Point(138, 157);
-			this.ucSkillsDisplayPerson.Name = "ucSkillsDisplayPerson";
-			this.ucSkillsDisplayPerson.Size = new System.Drawing.Size(440, 140);
-			this.ucSkillsDisplayPerson.TabIndex = 23;
-			// 
 			// currentTrainingPanel
 			// 
 			this.currentTrainingPanel.Controls.Add(this.timeLeft);
@@ -582,6 +563,50 @@
 			this.trainingProgress.Name = "trainingProgress";
 			this.trainingProgress.Size = new System.Drawing.Size(212, 16);
 			this.trainingProgress.TabIndex = 0;
+			// 
+			// UcEmployeeList1
+			// 
+			this.UcEmployeeList1.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.UcEmployeeList1.Location = new System.Drawing.Point(0, 0);
+			this.UcEmployeeList1.Name = "UcEmployeeList1";
+			this.UcEmployeeList1.Size = new System.Drawing.Size(432, 259);
+			this.UcEmployeeList1.TabIndex = 1;
+			// 
+			// ucSkillsDisplayEmployee
+			// 
+			this.ucSkillsDisplayEmployee.CurrentPerson = null;
+			this.ucSkillsDisplayEmployee.Location = new System.Drawing.Point(140, 114);
+			this.ucSkillsDisplayEmployee.Name = "ucSkillsDisplayEmployee";
+			this.ucSkillsDisplayEmployee.Size = new System.Drawing.Size(438, 140);
+			this.ucSkillsDisplayEmployee.TabIndex = 22;
+			// 
+			// ucSkillsDisplayPerson
+			// 
+			this.ucSkillsDisplayPerson.CurrentPerson = null;
+			this.ucSkillsDisplayPerson.Location = new System.Drawing.Point(138, 157);
+			this.ucSkillsDisplayPerson.Name = "ucSkillsDisplayPerson";
+			this.ucSkillsDisplayPerson.Size = new System.Drawing.Size(440, 140);
+			this.ucSkillsDisplayPerson.TabIndex = 23;
+			// 
+			// hiringCost
+			// 
+			this.hiringCost.AutoSize = true;
+			this.hiringCost.Location = new System.Drawing.Point(370, 83);
+			this.hiringCost.Name = "hiringCost";
+			this.hiringCost.Size = new System.Drawing.Size(14, 13);
+			this.hiringCost.TabIndex = 34;
+			this.hiringCost.Text = "X";
+			this.hiringCost.TextAlign = System.Drawing.ContentAlignment.TopRight;
+			this.hiringCost.Visible = false;
+			// 
+			// hiringCostTitle
+			// 
+			hiringCostTitle.AutoSize = true;
+			hiringCostTitle.Location = new System.Drawing.Point(334, 83);
+			hiringCostTitle.Name = "hiringCostTitle";
+			hiringCostTitle.Size = new System.Drawing.Size(35, 13);
+			hiringCostTitle.TabIndex = 33;
+			hiringCostTitle.Text = "Coût :";
 			// 
 			// UcEmployeePage
 			// 
@@ -652,5 +677,6 @@
 		private System.Windows.Forms.Button cancelTraining;
 		private System.Windows.Forms.Label trainingTimeLeftTitle;
 		private System.Windows.Forms.ProgressBar trainingProgress;
+		private System.Windows.Forms.Label hiringCost;
 	}
 }

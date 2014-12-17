@@ -76,6 +76,15 @@ namespace SRH.Core
 			get { return _salaryAdjustment; }
 			set { _salaryAdjustment = value; }
 		}
+
+		public int FiringCost
+		{
+			get
+			{
+				double cost = Salary * 0.5;
+				return (int)cost;
+			}
+		}
 		#endregion
 
 		internal int GenerateSalary()
@@ -97,11 +106,11 @@ namespace SRH.Core
 			_comp.Game.ValidateSkillName( skillName );
 			Skill candidate = _comp.Game.GetSkillCandidate( skillName );
 
-			Skill skillToTrain = _worker.Skills.Where( s => s.SkillName == skillName ).SingleOrDefault();
+			Skill skillToTrain = _worker.Skills.Where( s => s.Person == _worker ).SingleOrDefault();
 
 			if( skillToTrain == null )
 			{
-				Skill newSkill = _worker.AddSkill( skillName );
+				Skill newSkill = _worker.AddSkill( _worker, skillName );
 				_busy = false;
 				_worker.GenerateExpectedSalary();
 				return true;
@@ -142,7 +151,7 @@ namespace SRH.Core
 			// Set a candidate skill to test
 			Skill candidate = _comp.Game.GetSkillCandidate( skillName );
 			
-			Skill skillToTrain = _worker.Skills.Where( s => s.SkillName == skillName ).SingleOrDefault();
+			Skill skillToTrain = _worker.Skills.Where( s => s.Person == _worker ).SingleOrDefault();
 
 			if( skillToTrain == null )
 			{

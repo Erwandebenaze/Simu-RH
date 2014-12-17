@@ -85,6 +85,7 @@ namespace SRH.Interface
 			employeeName.Text = _currentEmployee.Worker.FirstName + " " + _currentEmployee.Worker.LastName;
 			employeeAge.Text = _currentEmployee.Worker.Age.ToString();
 			employeeOccupation.Text = GetCurrentOccupationText( _currentEmployee );
+			firingCost.Text = _currentEmployee.FiringCost.ToString();
 			GetSalaryDisplay();
 
 			if( !_currentEmployee.Busy )
@@ -142,6 +143,7 @@ namespace SRH.Interface
                 personName.Text = _currentPerson.FirstName + " " + _currentPerson.LastName;
                 personAge.Text = _currentPerson.Age.ToString();
 				personExpectedSalary.Text = _currentPerson.ExpectedSalary.ToString();
+				hiringCost.Text = _currentPerson.HiringCost.ToString();
 				ucSkillsDisplayPerson.CurrentPerson = _currentPerson;
 				ucSkillsDisplayPerson.LoadUc();
             }
@@ -150,6 +152,8 @@ namespace SRH.Interface
 				hirePerson.Enabled = true;
 				personName.Visible = true;
 				personAge.Visible = true;
+				hiringCost.Visible = true;
+				personExpectedSalary.Visible = true;
 			}
         }
 
@@ -160,6 +164,7 @@ namespace SRH.Interface
 			employeeAge.Visible = true;
 			employeeOccupation.Visible = true;
 			employeeSalary.Visible = true;
+			firingCost.Visible = true;
 		}
 
 		/// <summary>
@@ -172,7 +177,7 @@ namespace SRH.Interface
 			Train.Enabled = true;
 			string selectedSkill = (string)SelectedEmployeeSkillsToTrain.SelectedItem;
 			_currentSkillToTrain = _currentEmployee.Worker.Skills
-				.Where( s => s.SkillName == selectedSkill )
+				.Where( s => s.Person == _currentEmployee.Worker )
 				.SingleOrDefault();
 			if( _currentSkillToTrain == null )
 			{
@@ -331,7 +336,7 @@ namespace SRH.Interface
 			// Add the other Skills, without the Employee's already present Skills
 			SelectedEmployeeSkillsToTrain.Items.AddRange( Game.SkillNames
 				.Select( s => s.Value )
-				.Where( s => !( _currentEmployee.Worker.Skills.Any( ps => ps.SkillName == s ) ) )
+				.Where( s => !( _currentEmployee.Worker.Skills.Any( ps => ps.Person == _currentEmployee.Worker ) ) )
 				.ToArray() );
 			SelectedEmployeeSkillsToTrain.SelectedIndex = 0;
 		}

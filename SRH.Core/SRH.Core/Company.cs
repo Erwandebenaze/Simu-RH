@@ -97,10 +97,10 @@ namespace SRH.Core
 
 		public bool HireEmployee(Person p)
 		{
-			double cost = p.ExpectedSalary * 0.1;
+			int cost = p.HiringCost;
 			if( _wealth >= cost )
 			{
-				_wealth -= (int)cost;
+				_wealth -= cost;
 				AddEmployee( p );
 				return true;
 			}
@@ -109,10 +109,10 @@ namespace SRH.Core
 
 		public bool FireEmployee( Employee e )
 		{
-			double cost = e.Salary* 0.5;
+			int cost = e.FiringCost;
 			if( _wealth >= cost )
 			{
-				_wealth -= (int)cost;
+				_wealth -= cost;
 				RemoveEmployee( e );
 				return true;
 			}

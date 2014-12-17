@@ -146,7 +146,7 @@ namespace SRH.Core.Tests
 			Game myGame = new Game( 1, "Nestle" );
 
 			Person p = myGame.Market.JoblessPersons[ 0 ];
-			ProjSkill ps = (ProjSkill)p.AddSkill( "Développement", 3 );
+			ProjSkill ps = (ProjSkill)p.AddSkill( p, "Développement", 3 );
 
 			Assert.That( p.Skills.Contains( ps ) );
 			Assert.That( ps.SkillName == "Développement" );
