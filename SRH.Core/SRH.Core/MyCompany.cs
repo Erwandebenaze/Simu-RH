@@ -139,6 +139,7 @@ namespace SRH.Core
         public void EndAProject( Project p )
         {
             p.StopProject();
+            AddPourcentCommerciaux( p );
             Wealth += p.Earnings;
             _companyLevel.IncreaseXp( p.XpPerCompany, this );
             foreach( Employee e in p.EmployeesAffectedWithSkill.Keys )
@@ -202,6 +203,11 @@ namespace SRH.Core
         {
             if( _managers.Count != 0 )
             {
+                _commerciaux.Clear();
+                _animation.Clear();
+                _recruteur.Clear();
+                _directeursProjets.Clear();
+                _ressourcesHumaines.Clear();
                 foreach( KeyValuePair<Employee, Skill> dico in _managers)
                 {
                     if( dico.Value.SkillName == "Commercial" ) _commerciaux.Add(dico.Key);
@@ -255,8 +261,6 @@ namespace SRH.Core
                 if( _pourcentCommerciaux != SwitchCommerciaux( newPourcentCommerciaux ) )
                 {
                     _pourcentCommerciaux = SwitchCommerciaux( newPourcentCommerciaux );
-                    _possibleCompanyProjects = GetPossibleCompanyProjects();
-                    AddPourcentCommerciaux();
                 }
 
             } 
@@ -328,10 +332,14 @@ namespace SRH.Core
 
         private void UseDirecteursProjets()
         {
-            foreach( Project p in _possibleCompanyProjects)
+            if( _directeursProjets.Count != 0 )
             {
-                p.ProjectTasks -= (int)(p.ProjectTasks * (_decreaseTasks / 100));
+                foreach( Project p in _possibleCompanyProjects )
+                {
+                    p.ProjectTasks -= (int)(p.ProjectTasks * (_decreaseTasks / 100));
+                }
             }
+           
         }
 
 
@@ -339,9 +347,13 @@ namespace SRH.Core
         internal void UseRessourcesHumaines( Employee emp )
         {
             // À implémenter à chaque recrutement d'un employé.
-            _decreaseSalary = SwitchRessourcesHumaines( _decreaseSalary );
-			double salaryDecrease = emp.Worker.ExpectedSalary * ( _decreaseSalary/100 );
-            emp.SalaryAdjustment -= (int)salaryDecrease;
+            if( _ressourcesHumaines.Count != 0 )
+            {
+                _decreaseSalary = SwitchRessourcesHumaines( _decreaseSalary );
+                double salaryDecrease = emp.Worker.ExpectedSalary * (_decreaseSalary / 100);
+                emp.SalaryAdjustment -= (int)salaryDecrease;
+            }
+
         }
         private double SwitchCommerciaux( double newPourcentCommerciaux )
         {
@@ -425,13 +437,18 @@ namespace SRH.Core
         /// <summary>
         /// Use the commerciaux skill. Add a pourcent on every projects of the company.
         /// </summary>
-        private void AddPourcentCommerciaux()
+        private void AddPourcentCommerciaux( Project p )
         {
-            foreach( Project p in _projects )
+            if( _commerciaux.Count != 0 )
             {
-                _projects.Remove( p );
-                _projects.Add( p.Clone( _pourcentCommerciaux ) );
+                p.Earnings = (int)(p.Earnings + (p.Earnings * (_pourcentCommerciaux / 100)));
             }
+        }
+
+        public int EstimatePourcentCommerciaux( Project p )
+        {
+            if( _commerciaux.Count != 0 ) return (int)(p.Earnings + (p.Earnings * (_pourcentCommerciaux / 100)));
+            else return p.Earnings;
         }
 	}
 }
