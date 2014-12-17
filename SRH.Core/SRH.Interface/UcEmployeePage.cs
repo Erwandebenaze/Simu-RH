@@ -84,7 +84,7 @@ namespace SRH.Interface
 			ucSkillsDisplayEmployee.CurrentPerson = _currentEmployee.Worker;
 			employeeName.Text = _currentEmployee.Worker.FirstName + " " + _currentEmployee.Worker.LastName;
 			employeeAge.Text = _currentEmployee.Worker.Age.ToString();
-			occupation.Text = GetCurrentOccupationText( _currentEmployee );
+			employeeOccupation.Text = GetCurrentOccupationText( _currentEmployee );
 			GetSalaryDisplay();
 
 			if( !_currentEmployee.Busy )
@@ -110,13 +110,13 @@ namespace SRH.Interface
 
 		private void GetSalaryDisplay()
 		{
-			salary.Text = _currentEmployee.Salary.ToString();
+			employeeSalary.Text = _currentEmployee.Salary.ToString();
 			if( _currentEmployee.Salary == _currentEmployee.Worker.ExpectedSalary )
-				salary.ForeColor = Color.Black;
+				employeeSalary.ForeColor = Color.Black;
 			else if( _currentEmployee.Salary < _currentEmployee.Worker.ExpectedSalary )
-				salary.ForeColor = Color.Red;
+				employeeSalary.ForeColor = Color.Red;
 			else
-				salary.ForeColor = Color.Green;
+				employeeSalary.ForeColor = Color.Green;
 
 		}
 
@@ -141,6 +141,7 @@ namespace SRH.Interface
                 _currentPerson = (Person)PersonList.SelectedItems[ PersonList.SelectedItems.Count - 1 ].Tag;
                 personName.Text = _currentPerson.FirstName + " " + _currentPerson.LastName;
                 personAge.Text = _currentPerson.Age.ToString();
+				personExpectedSalary.Text = _currentPerson.ExpectedSalary.ToString();
 				ucSkillsDisplayPerson.CurrentPerson = _currentPerson;
 				ucSkillsDisplayPerson.LoadUc();
             }
@@ -157,8 +158,8 @@ namespace SRH.Interface
 			fireEmployee.Enabled = true;
 			employeeName.Visible = true;
 			employeeAge.Visible = true;
-			occupation.Visible = true;
-			salary.Visible = true;
+			employeeOccupation.Visible = true;
+			employeeSalary.Visible = true;
 		}
 
 		/// <summary>
@@ -333,6 +334,12 @@ namespace SRH.Interface
 		{
 			double salaryIncrease = _currentEmployee.Worker.ExpectedSalary * 0.05;
 			_currentEmployee.SalaryAdjustment -= (int)salaryIncrease;
+			UpdateEmployeeDisplay();
+		}
+
+		private void cancelTraining_Click( object sender, EventArgs e )
+		{
+			_currentEmployee.CancelTraining();
 			UpdateEmployeeDisplay();
 		}
     }
