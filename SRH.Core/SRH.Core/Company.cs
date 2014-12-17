@@ -14,7 +14,7 @@ namespace SRH.Core
         protected int _maxEmployees;
         protected int _wealth;
         protected int _maxWealth;
-        private readonly List<Employee> _employees;
+        protected readonly List<Employee> _employees;
         readonly protected Game _myGame;
 
 

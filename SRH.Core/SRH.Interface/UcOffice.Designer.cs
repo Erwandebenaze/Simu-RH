@@ -32,18 +32,18 @@
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.splitContainer4 = new System.Windows.Forms.SplitContainer();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this._currentLevelCompany = new System.Windows.Forms.Label();
-            this._nextLevelCompany = new System.Windows.Forms.Label();
-            this._progressBarCompany = new System.Windows.Forms.ProgressBar();
-            this.label2 = new System.Windows.Forms.Label();
-            this._limitEmployees = new System.Windows.Forms.Label();
-            this._nextLimitEmployees = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this._maxDifficultyProject = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
             this._maxWealthText = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this._maxDifficultyProject = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this._nextLimitEmployees = new System.Windows.Forms.Label();
+            this._limitEmployees = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this._progressBarCompany = new System.Windows.Forms.ProgressBar();
+            this._nextLevelCompany = new System.Windows.Forms.Label();
+            this._currentLevelCompany = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.SuspendLayout();
@@ -118,93 +118,14 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Mon entreprise";
             // 
-            // label1
+            // _maxWealthText
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(7, 35);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(158, 17);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Niveau de l\'entreprise : ";
-            // 
-            // _currentLevelCompany
-            // 
-            this._currentLevelCompany.AutoSize = true;
-            this._currentLevelCompany.Location = new System.Drawing.Point(10, 66);
-            this._currentLevelCompany.Name = "_currentLevelCompany";
-            this._currentLevelCompany.Size = new System.Drawing.Size(17, 17);
-            this._currentLevelCompany.TabIndex = 1;
-            this._currentLevelCompany.Text = "X";
-            // 
-            // _nextLevelCompany
-            // 
-            this._nextLevelCompany.AutoSize = true;
-            this._nextLevelCompany.Location = new System.Drawing.Point(400, 66);
-            this._nextLevelCompany.Name = "_nextLevelCompany";
-            this._nextLevelCompany.Size = new System.Drawing.Size(17, 17);
-            this._nextLevelCompany.TabIndex = 2;
-            this._nextLevelCompany.Text = "X";
-            // 
-            // _progressBarCompany
-            // 
-            this._progressBarCompany.Location = new System.Drawing.Point(36, 66);
-            this._progressBarCompany.Name = "_progressBarCompany";
-            this._progressBarCompany.Size = new System.Drawing.Size(348, 23);
-            this._progressBarCompany.TabIndex = 3;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(10, 111);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(185, 17);
-            this.label2.TabIndex = 4;
-            this.label2.Text = "Limite d\'employés actuelle : ";
-            // 
-            // _limitEmployees
-            // 
-            this._limitEmployees.AutoSize = true;
-            this._limitEmployees.Location = new System.Drawing.Point(244, 111);
-            this._limitEmployees.Name = "_limitEmployees";
-            this._limitEmployees.Size = new System.Drawing.Size(17, 17);
-            this._limitEmployees.TabIndex = 5;
-            this._limitEmployees.Text = "X";
-            // 
-            // _nextLimitEmployees
-            // 
-            this._nextLimitEmployees.AutoSize = true;
-            this._nextLimitEmployees.Location = new System.Drawing.Point(244, 133);
-            this._nextLimitEmployees.Name = "_nextLimitEmployees";
-            this._nextLimitEmployees.Size = new System.Drawing.Size(17, 17);
-            this._nextLimitEmployees.TabIndex = 6;
-            this._nextLimitEmployees.Text = "X";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(10, 133);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(237, 17);
-            this.label3.TabIndex = 7;
-            this.label3.Text = "Limite d\'employés prochain niveau : ";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(10, 158);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(196, 17);
-            this.label4.TabIndex = 8;
-            this.label4.Text = "Difficulté maximale de projet : ";
-            // 
-            // _maxDifficultyProject
-            // 
-            this._maxDifficultyProject.AutoSize = true;
-            this._maxDifficultyProject.Location = new System.Drawing.Point(244, 159);
-            this._maxDifficultyProject.Name = "_maxDifficultyProject";
-            this._maxDifficultyProject.Size = new System.Drawing.Size(17, 17);
-            this._maxDifficultyProject.TabIndex = 9;
-            this._maxDifficultyProject.Text = "X";
+            this._maxWealthText.AutoSize = true;
+            this._maxWealthText.Location = new System.Drawing.Point(244, 180);
+            this._maxWealthText.Name = "_maxWealthText";
+            this._maxWealthText.Size = new System.Drawing.Size(17, 17);
+            this._maxWealthText.TabIndex = 11;
+            this._maxWealthText.Text = "X";
             // 
             // label5
             // 
@@ -215,14 +136,93 @@
             this.label5.TabIndex = 10;
             this.label5.Text = "Record de fortune : ";
             // 
-            // _maxWealthText
+            // _maxDifficultyProject
             // 
-            this._maxWealthText.AutoSize = true;
-            this._maxWealthText.Location = new System.Drawing.Point(244, 180);
-            this._maxWealthText.Name = "_maxWealthText";
-            this._maxWealthText.Size = new System.Drawing.Size(17, 17);
-            this._maxWealthText.TabIndex = 11;
-            this._maxWealthText.Text = "X";
+            this._maxDifficultyProject.AutoSize = true;
+            this._maxDifficultyProject.Location = new System.Drawing.Point(244, 159);
+            this._maxDifficultyProject.Name = "_maxDifficultyProject";
+            this._maxDifficultyProject.Size = new System.Drawing.Size(17, 17);
+            this._maxDifficultyProject.TabIndex = 9;
+            this._maxDifficultyProject.Text = "X";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(10, 158);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(196, 17);
+            this.label4.TabIndex = 8;
+            this.label4.Text = "Difficulté maximale de projet : ";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(10, 133);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(237, 17);
+            this.label3.TabIndex = 7;
+            this.label3.Text = "Limite d\'employés prochain niveau : ";
+            // 
+            // _nextLimitEmployees
+            // 
+            this._nextLimitEmployees.AutoSize = true;
+            this._nextLimitEmployees.Location = new System.Drawing.Point(244, 133);
+            this._nextLimitEmployees.Name = "_nextLimitEmployees";
+            this._nextLimitEmployees.Size = new System.Drawing.Size(17, 17);
+            this._nextLimitEmployees.TabIndex = 6;
+            this._nextLimitEmployees.Text = "X";
+            // 
+            // _limitEmployees
+            // 
+            this._limitEmployees.AutoSize = true;
+            this._limitEmployees.Location = new System.Drawing.Point(244, 111);
+            this._limitEmployees.Name = "_limitEmployees";
+            this._limitEmployees.Size = new System.Drawing.Size(17, 17);
+            this._limitEmployees.TabIndex = 5;
+            this._limitEmployees.Text = "X";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(10, 111);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(185, 17);
+            this.label2.TabIndex = 4;
+            this.label2.Text = "Limite d\'employés actuelle : ";
+            // 
+            // _progressBarCompany
+            // 
+            this._progressBarCompany.Location = new System.Drawing.Point(36, 66);
+            this._progressBarCompany.Name = "_progressBarCompany";
+            this._progressBarCompany.Size = new System.Drawing.Size(348, 23);
+            this._progressBarCompany.TabIndex = 3;
+            // 
+            // _nextLevelCompany
+            // 
+            this._nextLevelCompany.AutoSize = true;
+            this._nextLevelCompany.Location = new System.Drawing.Point(400, 66);
+            this._nextLevelCompany.Name = "_nextLevelCompany";
+            this._nextLevelCompany.Size = new System.Drawing.Size(17, 17);
+            this._nextLevelCompany.TabIndex = 2;
+            this._nextLevelCompany.Text = "X";
+            // 
+            // _currentLevelCompany
+            // 
+            this._currentLevelCompany.AutoSize = true;
+            this._currentLevelCompany.Location = new System.Drawing.Point(10, 66);
+            this._currentLevelCompany.Name = "_currentLevelCompany";
+            this._currentLevelCompany.Size = new System.Drawing.Size(17, 17);
+            this._currentLevelCompany.TabIndex = 1;
+            this._currentLevelCompany.Text = "X";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(7, 35);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(158, 17);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Niveau de l\'entreprise : ";
             // 
             // UcOffice
             // 

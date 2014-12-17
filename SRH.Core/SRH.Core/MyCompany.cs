@@ -19,14 +19,16 @@ namespace SRH.Core
         List<Employee> _ressourcesHumaines;
         List<Employee> _directeursProjets;
         List<Employee> _recruteur;
-        int _pourcentCommerciaux = 0;
-        int _decreaseRecruting = 0;
+        double _pourcentCommerciaux = 0;
+        double _decreaseRecruting = 0;
+        double _decreaseSalary = 0;
+        double _decreaseTasks = 0;
 
 
 		internal MyCompany( Game game, string name ) : base( game, name )
         {
 			if( String.IsNullOrWhiteSpace( name ) ) throw new ArgumentNullException( "The company name cannot be null or a whitespace" );
-            _wealth = 15000;
+            _wealth = 30000;
             _maxWealth = _wealth;
 			_companyLevel = new Level( this, 1 );
 			_maxProjectDifficulty = 1;
@@ -125,7 +127,7 @@ namespace SRH.Core
             int interest = 0;
             if( _wealth < 0 )
             {
-                interest = (int)(-(_wealth * 3.5));
+                interest = (int)(-(_wealth * (3.5/100)));
             }
             _wealth -= interest;
             return interest;
@@ -216,6 +218,8 @@ namespace SRH.Core
 			_managers.Add( e, s );
 			e.SkillAffectedToCompany = s;
 			e.Busy = true;
+            AffectManagers();
+            UseManagers();
 		}
 
 		public void RemoveManager( Employee e )
@@ -235,60 +239,83 @@ namespace SRH.Core
         /// </summary>
         private void UseManagers()
         {
-            int newPourcentCommerciaux = 0;
-            int newDecreaseRecruting = 0;
-            if( _commerciaux.Count > 0)
+            double newPourcentCommerciaux = 0;
+            double newDecreaseRecruting = 0;
+            double newDecreaseSalary = 0;
+            double newDecreaseTasks = 0;
+
+            #region Commerciaux
+		    if( _commerciaux.Count > 0)
             {
+                // Commerciaux increase the earnings of projects.
                 foreach( Employee emp in _commerciaux )
                 {
                     newPourcentCommerciaux += ( emp.Worker.Skills.Where( e => e.SkillName == "Commercial" ).Select( e => e.Level.CurrentLevel ).Single()) * 2;
                 }
-                switch( PossibleCompanyProjects.Count / 3 )
+                if( _pourcentCommerciaux != SwitchCommerciaux( newPourcentCommerciaux ) )
                 {
-                    case 1:
-                        if( newPourcentCommerciaux > 5 ) newPourcentCommerciaux = 5;
-                        break;
-                    case 2: 
-                        if( newPourcentCommerciaux > 10 ) newPourcentCommerciaux = 10;
-                        break;
-                    case 3:
-                        if( newPourcentCommerciaux > 15 ) newPourcentCommerciaux = 15;
-                        break;
-                    case 4:
-                        if( newPourcentCommerciaux > 20 ) newPourcentCommerciaux = 20;
-                        break;
-                    case 5:
-                        if( newPourcentCommerciaux > 25 ) newPourcentCommerciaux = 25;
-                        break;
-                    default :
-                        throw new InvalidOperationException("Error in the switch.");
-                }
-                if( newPourcentCommerciaux != _pourcentCommerciaux )
-                {
-                    _pourcentCommerciaux = newPourcentCommerciaux;
+                    _pourcentCommerciaux = SwitchCommerciaux( newPourcentCommerciaux );
                     _possibleCompanyProjects = GetPossibleCompanyProjects();
                     AddPourcentCommerciaux();
                 }
 
-            }
+            } 
+	        #endregion
+
+            #region Ressources humaines
             if( _ressourcesHumaines.Count > 0 )
             {
+                // Ressources humaines, descrease the salary of employees.
                 foreach( Employee emp in _ressourcesHumaines )
                 {
-                    newDecreaseRecruting += (emp.Worker.Skills.Where( e => e.SkillName == "Ressources humaines" ).Select( e => e.Level.CurrentLevel ).Single()) * 2;
+                    newDecreaseSalary += (emp.Worker.Skills.Where( e => e.SkillName == "Ressources humaines" ).Select( e => e.Level.CurrentLevel ).Single()) * 2;
                 }
 
-                if(newDecreaseRecruting > _decreaseRecruting )
+                if( _decreaseSalary != SwitchRessourcesHumaines( newDecreaseSalary ) )
+                {
+                    _decreaseSalary = SwitchRessourcesHumaines( newDecreaseSalary );
+                    foreach( Employee emp in _employees )
+                    {
+                        UseRessourcesHumaines( emp );
+                    }
+                }
+            } 
+            #endregion
+
+            if( _directeursProjets.Count > 0 )
+            {
+                // Directeur de projets decrease the number of tasks of the projects.
+                foreach( Employee emp in _directeursProjets )
+                {
+                    newDecreaseTasks += (emp.Worker.Skills.Where( e => e.SkillName == "Directeur de projets" ).Select( e => e.Level.CurrentLevel ).Single()) * 2;
+                }
+
+                if( _decreaseTasks != SwitchDirecteursProjets( newDecreaseTasks ) )
+                {
+                    _decreaseTasks = SwitchDirecteursProjets( newDecreaseTasks );
+                    UseDirecteursProjets();
+                }
+            }
+            if( _animation.Count > 0 )
+            {
+                // Animation increase the happiness of the employees.
+                foreach( Employee emp in _directeursProjets )
+                {
+                    newDecreaseRecruting += (emp.Worker.Skills.Where( e => e.SkillName == "Animation" ).Select( e => e.Level.CurrentLevel ).Single()) * 2;
+                }
+
+                if( newDecreaseRecruting > _decreaseRecruting )
                 {
                     _decreaseRecruting = newDecreaseRecruting;
                     // TODO : Implémentation lorsqu'il y aura un coût de recrutement et de renvoi.
                 }
             }
-            if( _directeursProjets.Count > 0 )
+            if( _recruteur.Count > 0 )
             {
-                foreach( Employee emp in _directeursProjets )
+                // Recruteur decrease the cost of hiring and laying off.
+                foreach( Employee emp in _recruteur )
                 {
-                    newDecreaseRecruting += (emp.Worker.Skills.Where( e => e.SkillName == "Ressources humaines" ).Select( e => e.Level.CurrentLevel ).Single()) * 2;
+                    newDecreaseRecruting += (emp.Worker.Skills.Where( e => e.SkillName == "Recruteur" ).Select( e => e.Level.CurrentLevel ).Single()) * 2;
                 }
 
                 if( newDecreaseRecruting > _decreaseRecruting )
@@ -299,6 +326,102 @@ namespace SRH.Core
             }
         }
 
+        private void UseDirecteursProjets()
+        {
+            foreach( Project p in _possibleCompanyProjects)
+            {
+                p.ProjectTasks -= (int)(p.ProjectTasks * (_decreaseTasks / 100));
+            }
+        }
+
+
+
+        internal void UseRessourcesHumaines( Employee emp )
+        {
+            // À implémenter à chaque recrutement d'un employé.
+            _decreaseSalary = SwitchRessourcesHumaines( _decreaseSalary );
+			double salaryDecrease = emp.Worker.ExpectedSalary * ( _decreaseSalary/100 );
+            emp.SalaryAdjustment -= (int)salaryDecrease;
+        }
+        private double SwitchCommerciaux( double newPourcentCommerciaux )
+        {
+            switch( PossibleCompanyProjects.Count / 3 )
+            {
+                case 1:
+                    if( newPourcentCommerciaux > 5 ) newPourcentCommerciaux = 5;
+                    break;
+                case 2:
+                    if( newPourcentCommerciaux > 10 ) newPourcentCommerciaux = 10;
+                    break;
+                case 3:
+                    if( newPourcentCommerciaux > 15 ) newPourcentCommerciaux = 15;
+                    break;
+                case 4:
+                    if( newPourcentCommerciaux > 20 ) newPourcentCommerciaux = 20;
+                    break;
+                case 5:
+                    if( newPourcentCommerciaux > 25 ) newPourcentCommerciaux = 25;
+                    break;
+                default:
+                    throw new InvalidOperationException( "Error in the switch." );
+            }
+            return newPourcentCommerciaux;
+        }
+        private double SwitchRessourcesHumaines( double descreaseSalary )
+        {
+            switch( _employees.Count / 10 )
+            {
+                // Un seuil est établi pour tous les 10 employés dans l'entreprise.
+                case 0:
+                    if( descreaseSalary > 2 ) descreaseSalary = 2;
+                    break;
+                case 1:
+                    if( descreaseSalary > 5 ) descreaseSalary = 5;
+                    break;
+                case 2:
+                    if( descreaseSalary > 10 ) descreaseSalary = 10;
+                    break;
+                case 3:
+                    if( descreaseSalary > 15 ) descreaseSalary = 15;
+                    break;
+                case 4:
+                    if( descreaseSalary > 20 ) descreaseSalary = 20;
+                    break;
+                case 5:
+                    if( descreaseSalary > 25 ) descreaseSalary = 25;
+                    break;
+                default:
+                    if( descreaseSalary > 30 ) descreaseSalary = 30;
+                    break;
+            }
+            return descreaseSalary;
+        }
+        private double SwitchDirecteursProjets( double decreaseTasks )
+        {
+            switch( PossibleCompanyProjects.Count / 3)
+            {
+                case 1:
+                    if( decreaseTasks > 5 ) decreaseTasks = 5;
+                    break;
+                case 2:
+                    if( decreaseTasks > 10 ) decreaseTasks = 10;
+                    break;
+                case 3:
+                    if( decreaseTasks > 15 ) decreaseTasks = 15;
+                    break;
+                case 4:
+                    if( decreaseTasks > 20 ) decreaseTasks = 20;
+                    break;
+                case 5:
+                    if( decreaseTasks > 25 ) decreaseTasks = 25;
+                    break;
+                default:
+                    throw new InvalidOperationException( "Error in the switch." );
+            }
+            return decreaseTasks;
+        }
+
+
         /// <summary>
         /// Use the commerciaux skill. Add a pourcent on every projects of the company.
         /// </summary>
@@ -308,7 +431,6 @@ namespace SRH.Core
             {
                 _projects.Remove( p );
                 _projects.Add( p.Clone( _pourcentCommerciaux ) );
-
             }
         }
 	}

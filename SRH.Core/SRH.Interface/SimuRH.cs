@@ -26,7 +26,7 @@ namespace SRH.Interface
         {
             InitializeComponent();
             _myGame = new Game( 1, "Erwan" );
-            // _myGame = GameLoader.Load( "Erwan" );
+            //_myGame = GameLoader.Load( "Erwan" );
             _optionsForm = new Options();
             _timeOfGame = _myGame.TimeGame;
             _timer = new Timer();
@@ -97,8 +97,10 @@ namespace SRH.Interface
                     competitor.TryToAddMoneyAndEmployee();
                 }
             }
-
-            _interest = _myGame.PlayerCompany.ApplyInterests();
+            if( _myGame.TimeGame.CurrentTimeOfGame.Month != _myGame.TimeGame.TryAddDay().Month && (_myGame.PlayerCompany.Wealth < 0) )
+            {
+                _interest = _myGame.PlayerCompany.ApplyInterests();
+            }
 
         }
 

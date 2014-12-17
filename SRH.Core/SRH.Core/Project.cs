@@ -51,6 +51,7 @@ namespace SRH.Core
         public int ProjectTasks
         {
             get { return _projectTasks; }
+            internal set { _projectTasks = value; }
         }
         public int Duration
         {
@@ -256,9 +257,9 @@ namespace SRH.Core
         /// </summary>
         /// <param name="pourcentCommerciaux">Int</param>
         /// <returns>The new Projetc</returns>
-        public Project Clone( int pourcentCommerciaux = 100)
+        public Project Clone( double pourcentCommerciaux = 100)
         {
-          Project project = new Project( _myComp, _name, _difficulty, _numberOfWorkers, _earnings + (_earnings * pourcentCommerciaux / 100) , new Dictionary<Skill, int>( _skillsRequired ) );
+          Project project = new Project( _myComp, _name, _difficulty, _numberOfWorkers, _earnings + (int)(_earnings * (pourcentCommerciaux / 100)) , new Dictionary<Skill, int>( _skillsRequired ) );
           return project;
         }
 
