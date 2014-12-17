@@ -27,48 +27,50 @@ namespace SRH.Core
             _employees = new List<Employee>();
         }
 
+		#region Getters Setters
 		internal Game Game
 		{
 			get { return _game; }
+		}
+
+		public List<Employee> Employees
+		{
+			get { return _employees; }
+		}
+
+		public string Name
+		{
+			get { return _name; }
+		}
+
+		public int Wealth
+		{
+			get { return _wealth; }
+			set
+			{
+				if( _wealth + value > _maxWealth )
+				{
+					_maxWealth = _wealth + value;
+				}
+				_wealth = value;
+			}
+		}
+		public int MaxWealth
+		{
+			get { return _maxWealth; }
+		}
+		public int MaxEmployees
+		{
+			get { return _maxEmployees; }
 		} 
-
-        public List<Employee> Employees
-        {
-            get { return _employees; }
-        } 
-
-        public string Name
-        {
-            get { return _name; }
-        }
-
-        public int Wealth
-        {
-            get { return _wealth; }
-            set 
-            {
-                if( _wealth + value > _maxWealth) 
-                {
-                    _maxWealth = _wealth + value;
-                }
-                _wealth = value;
-            }
-        }
-        public int MaxWealth
-        {
-            get { return _maxWealth; }
-        }
-        public int MaxEmployees
-        {
-            get { return _maxEmployees; }
-        }
+		#endregion
 
         /// <summary>
         /// Adds an <see cref="Employee"/> to <see cref="MyCompany"/>
         /// </summary>
         /// <param name="p">The Worker to add, it becomes an <see cref="Employee"/> when added</param>
         /// <returns>Returns True if the <see cref="Employee"/> was added</returns>
-        public Employee AddEmployee( Person p )
+        internal Employee AddEmployee( Person p )
         {
             Employee e = new Employee( this, p );
             _employees.Add( e );
@@ -82,7 +84,7 @@ namespace SRH.Core
         /// </summary>
         /// <param name="e">The <see cref="Employee"/> to remove</param>
         /// <returns>Returns True id the <see cref="Employee"/> was removes</returns>
-        public Person RemoveEmployee( Employee e )
+        internal Person RemoveEmployee( Employee e )
         {
             _employees.Remove( e );
             if( _employees.Exists( x => x.Equals( e ) ) )
@@ -92,6 +94,31 @@ namespace SRH.Core
 
             return e.Worker;
         }
+
+		public bool HireEmployee(Person p)
+		{
+			double cost = p.ExpectedSalary * 0.1;
+			if( _wealth >= cost )
+			{
+				_wealth -= (int)cost;
+				AddEmployee( p );
+				return true;
+			}
+			else return false;
+		}
+
+		public bool FireEmployee( Employee e )
+		{
+			double cost = e.Salary* 0.5;
+			if( _wealth >= cost )
+			{
+				_wealth -= (int)cost;
+				RemoveEmployee( e );
+				return true;
+			}
+			else
+				return false;
+		}
 
     }
 }

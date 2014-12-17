@@ -126,6 +126,8 @@ namespace SRH.Interface
 					ucEmployeePage.TrainingTimeLeft = timeLeft;
 					ucEmployeePage.SetTrainingProgress( e );
 				}
+
+				if(timeLeft == 0) ucEmployeePage.UpdateEmployeeDisplay();
 			}
 		}
 

@@ -15,8 +15,8 @@ namespace SRH.Core
         private bool _busy;
 		private Skill _skillAffectedToCompany;
 		private string _skillInTraining;
-		private DateTime _traininigBegginingDate;
-		private int _trainingDuration;
+		private DateTime? _traininigBegginingDate;
+		private int? _trainingDuration;
 
         /// <summary>
 		/// Creates an <see cref="Employee"/>
@@ -59,19 +59,11 @@ namespace SRH.Core
 		public string SkillInTraining
 		{
 			get { return _skillInTraining; }
-			set { _skillInTraining = value; }
-		}
-
-		public DateTime TraininigBegginingDate
-		{
-			get { return _traininigBegginingDate; }
-			set { _traininigBegginingDate = value; }
 		}
 
 		public int TrainingDuration
 		{
-			get { return _trainingDuration; }
-			set { _trainingDuration = value; }
+			get { return _trainingDuration.Value; }
 		}
 
 		public int Salary
@@ -103,15 +95,19 @@ namespace SRH.Core
 		{
 			// Check if skillName is valid
 			_comp.Game.ValidateSkillName( skillName );
+			Skill candidate = _comp.Game.GetSkillCandidate( skillName );
 
-			// Set a candidate skill to test
-			Skill candidate = null;
-			if( skillName.IsProjSkill() ) candidate = new ProjSkill( skillName );
-			else candidate = new CompaSkill( skillName );
+			Skill skillToTrain = _worker.Skills.Where( s => s.SkillName == skillName ).SingleOrDefault();
 
-			if( _worker.Skills.Contains( candidate ) )
+			if( skillToTrain == null )
 			{
-				Skill skillToTrain = _worker.Skills.Where( s => s.SkillName == skillName ).Single();
+				Skill newSkill = _worker.AddSkill( skillName );
+				_busy = false;
+				_worker.GenerateExpectedSalary();
+				return true;
+			}
+			else
+			{
 				int xpToNextLevel = skillToTrain.Level.NextXpRequired - skillToTrain.Level.CurrentXp;
 				skillToTrain.Level.IncreaseXp( xpToNextLevel );
 				_comp.Wealth -= skillToTrain.UpgradePrice;
@@ -121,19 +117,12 @@ namespace SRH.Core
 				_worker.GenerateExpectedSalary();
 				return true;
 			}
-			else
-			{
-				Skill newSkill = _worker.AddSkill( skillName );
-				_busy = false;
-				_worker.GenerateExpectedSalary();
-				return true;
-			}
 		}
 
 		/// <summary>
 		/// Checks if Employee in training is finished, if he is, the skill is added/upgraded
 		/// </summary>
-		/// <returns>The time left </returns>
+		/// <returns>The time left</returns>
 		public int UpdateEmployeeTraining()
 		{
 			if( _comp.Game.TimeGame.intervalOfTimeInDays( _traininigBegginingDate ) == _trainingDuration )
@@ -141,7 +130,7 @@ namespace SRH.Core
 				Train( _skillInTraining );
 			}
 
-			int timeLeft = _trainingDuration - _comp.Game.TimeGame.intervalOfTimeInDays( _traininigBegginingDate );
+			int timeLeft = _trainingDuration.Value - _comp.Game.TimeGame.intervalOfTimeInDays( _traininigBegginingDate );
 			return timeLeft;
 		}
 
@@ -151,13 +140,11 @@ namespace SRH.Core
 			_traininigBegginingDate = _comp.Game.TimeGame.CurrentTimeOfGame;
 
 			// Set a candidate skill to test
-			Skill candidate = null;
-			if( skillName.IsProjSkill() ) candidate = new ProjSkill( skillName );
-			else candidate = new CompaSkill( skillName );
+			Skill candidate = _comp.Game.GetSkillCandidate( skillName );
 			
-			Skill currentSkill = _worker.Skills.Where( s => s.SkillName == skillName ).SingleOrDefault();
+			Skill skillToTrain = _worker.Skills.Where( s => s.SkillName == skillName ).SingleOrDefault();
 
-			if( currentSkill == null )
+			if( skillToTrain == null )
 			{
 				if( _comp.Wealth >= candidate.BaseCostToTrain )
 				{
@@ -171,10 +158,10 @@ namespace SRH.Core
 			}
 			else
 			{
-				if( _comp.Wealth >= currentSkill.BaseCostToTrain )
+				if( _comp.Wealth >= skillToTrain.UpgradePrice )
 				{
-					_trainingDuration = currentSkill.TimeToUpgrade;
-					_comp.Wealth -= currentSkill.BaseCostToTrain;
+					_trainingDuration = skillToTrain.TimeToUpgrade;
+					_comp.Wealth -= skillToTrain.UpgradePrice;
 					_busy = true;
 					return true;
 				}
@@ -182,5 +169,13 @@ namespace SRH.Core
 					return false;
 			}
 		}
-    }
+
+		public void CancelTraining()
+		{
+			_busy = false;
+			_skillInTraining = null;
+			_trainingDuration = null;
+			_traininigBegginingDate = null;
+		}
+	}
 }

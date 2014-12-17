@@ -120,21 +120,30 @@
   <data name="EmployeeLastNameHeader.Text" xml:space="preserve">
     <value>Nom</value>
   </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="EmployeeLastNameHeader.Width" type="System.Int32, mscorlib">
+    <value>107</value>
+  </data>
   <data name="EmployeeFirstNameHeader.Text" xml:space="preserve">
     <value>Prénom</value>
+  </data>
+  <data name="EmployeeFirstNameHeader.Width" type="System.Int32, mscorlib">
+    <value>126</value>
   </data>
   <data name="EmployeeAgeHeader.Text" xml:space="preserve">
     <value>Age</value>
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="EmployeeAgeHeader.Width" type="System.Int32, mscorlib">
-    <value>87</value>
+    <value>56</value>
   </data>
   <data name="EmployeeBestSkillHeader.Text" xml:space="preserve">
     <value>Meilleure compétence</value>
   </data>
   <data name="EmployeeBestSkillHeader.Width" type="System.Int32, mscorlib">
-    <value>128</value>
+    <value>233</value>
+  </data>
+  <data name="EmployeeBestSkillLevelHeader.Text" xml:space="preserve">
+    <value>Niveau</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="employeeList.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -145,7 +154,7 @@
     <value>0, 0</value>
   </data>
   <data name="employeeList.Size" type="System.Drawing.Size, System.Drawing">
-    <value>432, 249</value>
+    <value>510, 249</value>
   </data>
   <data name="employeeList.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -169,7 +178,7 @@
     <value>6, 13</value>
   </data>
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
-    <value>432, 249</value>
+    <value>510, 249</value>
   </data>
   <data name="&gt;&gt;EmployeeLastNameHeader.Name" xml:space="preserve">
     <value>EmployeeLastNameHeader</value>
@@ -193,6 +202,12 @@
     <value>EmployeeBestSkillHeader</value>
   </data>
   <data name="&gt;&gt;EmployeeBestSkillHeader.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;EmployeeBestSkillLevelHeader.Name" xml:space="preserve">
+    <value>EmployeeBestSkillLevelHeader</value>
+  </data>
+  <data name="&gt;&gt;EmployeeBestSkillLevelHeader.Type" xml:space="preserve">
     <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
