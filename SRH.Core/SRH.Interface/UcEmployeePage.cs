@@ -77,7 +77,7 @@ namespace SRH.Interface
 			PersonList.Items.AddRange( _joblessPersons.Select( p => CreatePerson( p ) ).ToArray() );
 		}
 
-		private void UpdateEmployeeDisplay()
+		internal void UpdateEmployeeDisplay()
 		{
 			_currentEmployee = UcEmployeeList1.CurrentEmployee;
 
@@ -195,7 +195,8 @@ namespace SRH.Interface
 		/// <param name="e"></param>
         private void hirePerson_Click( object sender, EventArgs e )
         {
-            Employee emp = GameContext.CurrentGame.PlayerCompany.AddEmployee( _currentPerson );
+			// TODO : deny/prevent hiring if MyCompany doesn't have enough money
+            GameContext.CurrentGame.PlayerCompany.HireEmployee( _currentPerson );
 			var PersonItem = PersonList.Items.Cast<ListViewItem>().Where( item => item.Tag == _currentPerson ).Single();
 			PersonList.Items.Remove( PersonItem );
 
@@ -210,8 +211,9 @@ namespace SRH.Interface
 		/// <param name="e"></param>
 		private void fireEmployee_Click( object sender, EventArgs e )
 		{
-			Person p = GameContext.CurrentGame.PlayerCompany.RemoveEmployee( _currentEmployee );
-			PersonList.Items.Add( CreatePerson( p ) );
+			// TODO : deny/prevent firing if MyCompany doesn't have enough money
+			GameContext.CurrentGame.PlayerCompany.FireEmployee( _currentEmployee );
+			PersonList.Items.Add( CreatePerson( _currentEmployee.Worker ) );
 
 			var EmployeeItem = UcEmployeeList1.EmployeeList.Items.Cast<ListViewItem>().Where( item => item.Tag == _currentEmployee ).Single();
 			UcEmployeeList1.EmployeeList.Items.Remove( EmployeeItem );
@@ -249,6 +251,26 @@ namespace SRH.Interface
 			LoadPage();
 		}
 
+		private void cancelTraining_Click( object sender, EventArgs e )
+		{
+			_currentEmployee.CancelTraining();
+			UpdateEmployeeDisplay();
+		}
+
+		private void increaseSalary_Click( object sender, EventArgs e )
+		{
+			double salaryIncrease = _currentEmployee.Worker.ExpectedSalary * 0.05;
+			_currentEmployee.SalaryAdjustment += (int)salaryIncrease;
+			UpdateEmployeeDisplay();
+		}
+
+		private void decreaseSalary_Click( object sender, EventArgs e )
+		{
+			double salaryIncrease = _currentEmployee.Worker.ExpectedSalary * 0.05;
+			_currentEmployee.SalaryAdjustment -= (int)salaryIncrease;
+			UpdateEmployeeDisplay();
+		}
+
 		/// <summary>
 		/// Creates a Person Item for the PersonList
 		/// </summary>
@@ -260,6 +282,14 @@ namespace SRH.Interface
 			i.Tag = p;
 			i.SubItems.Add( new ListViewItem.ListViewSubItem( i, p.FirstName ) );
 			i.SubItems.Add( new ListViewItem.ListViewSubItem( i, p.Age.ToString() ) );
+
+			Skill personBestSkill = p.Skills
+				.Where( s => s.Level.CurrentXp == p.Skills.Max( sk => sk.Level.CurrentXp ) )
+				.FirstOrDefault();
+
+			i.SubItems.Add( new ListViewItem.ListViewSubItem( i, personBestSkill.SkillName ) );
+			i.SubItems.Add( new ListViewItem.ListViewSubItem( i, personBestSkill.Level.CurrentLevel.ToString() ) );
+
 			return i;
 		}
 
@@ -321,26 +351,6 @@ namespace SRH.Interface
 
 			return currentOccupation;
 
-		}
-
-		private void increaseSalary_Click( object sender, EventArgs e )
-		{
-			double salaryIncrease = _currentEmployee.Worker.ExpectedSalary * 0.05;
-			_currentEmployee.SalaryAdjustment += (int)salaryIncrease;
-			UpdateEmployeeDisplay();
-		}
-
-		private void decreaseSalary_Click( object sender, EventArgs e )
-		{
-			double salaryIncrease = _currentEmployee.Worker.ExpectedSalary * 0.05;
-			_currentEmployee.SalaryAdjustment -= (int)salaryIncrease;
-			UpdateEmployeeDisplay();
-		}
-
-		private void cancelTraining_Click( object sender, EventArgs e )
-		{
-			_currentEmployee.CancelTraining();
-			UpdateEmployeeDisplay();
 		}
     }
 }

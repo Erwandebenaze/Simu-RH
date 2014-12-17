@@ -37,39 +37,43 @@
 			System.Windows.Forms.Label employeeOcupationTitle;
 			System.Windows.Forms.Label employeeSalaryTitle;
 			System.Windows.Forms.Label personExpectedSalaryTitle;
+			System.Windows.Forms.Label firingCostTitle;
 			this.SelectedSkillTrainCostTitle = new System.Windows.Forms.Label();
 			this.SelectedSkillTrainTimeTitle = new System.Windows.Forms.Label();
 			this.PersonList = new System.Windows.Forms.ListView();
 			this.PersonLastnameHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.PersonFirstnameHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.PersonAgeHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+			this.PersonBestSkillHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+			this.PersonBestSkillLevelHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.splitContainer1 = new System.Windows.Forms.SplitContainer();
 			this.splitContainer2 = new System.Windows.Forms.SplitContainer();
 			this.splitContainer3 = new System.Windows.Forms.SplitContainer();
-			this.decreaseSalary = new System.Windows.Forms.Button();
-			this.increaseSalary = new System.Windows.Forms.Button();
-			this.employeeSalary = new System.Windows.Forms.Label();
-			this.employeeOccupation = new System.Windows.Forms.Label();
-			this.currentTrainingPanel = new System.Windows.Forms.Panel();
-			this.timeLeft = new System.Windows.Forms.Label();
-			this.cancelTraining = new System.Windows.Forms.Button();
-			this.trainingTimeLeftTitle = new System.Windows.Forms.Label();
-			this.trainingProgress = new System.Windows.Forms.ProgressBar();
-			this.employeeAge = new System.Windows.Forms.Label();
-			this.employeeName = new System.Windows.Forms.Label();
 			this.trainingPanel = new System.Windows.Forms.Panel();
+			this.firingCost = new System.Windows.Forms.Label();
 			this.Train = new System.Windows.Forms.Button();
 			this.fireEmployee = new System.Windows.Forms.Button();
 			this.SelectedSkillToTrainCost = new System.Windows.Forms.Label();
 			this.SelectedSkillToTrainTime = new System.Windows.Forms.Label();
 			this.SelectedEmployeeSkillsToTrain = new System.Windows.Forms.ComboBox();
+			this.decreaseSalary = new System.Windows.Forms.Button();
+			this.increaseSalary = new System.Windows.Forms.Button();
+			this.employeeSalary = new System.Windows.Forms.Label();
+			this.employeeOccupation = new System.Windows.Forms.Label();
+			this.employeeAge = new System.Windows.Forms.Label();
+			this.employeeName = new System.Windows.Forms.Label();
+			this.personExpectedSalary = new System.Windows.Forms.Label();
 			this.personAge = new System.Windows.Forms.Label();
 			this.personName = new System.Windows.Forms.Label();
 			this.hirePerson = new System.Windows.Forms.Button();
-			this.personExpectedSalary = new System.Windows.Forms.Label();
 			this.UcEmployeeList1 = new SRH.Interface.UcEmployeeList();
 			this.ucSkillsDisplayEmployee = new SRH.Interface.UcSkillsDisplay();
 			this.ucSkillsDisplayPerson = new SRH.Interface.UcSkillsDisplay();
+			this.currentTrainingPanel = new System.Windows.Forms.Panel();
+			this.timeLeft = new System.Windows.Forms.Label();
+			this.cancelTraining = new System.Windows.Forms.Button();
+			this.trainingTimeLeftTitle = new System.Windows.Forms.Label();
+			this.trainingProgress = new System.Windows.Forms.ProgressBar();
 			SelectedPersonTitle = new System.Windows.Forms.Label();
 			personNameTitle = new System.Windows.Forms.Label();
 			personAgeTitle = new System.Windows.Forms.Label();
@@ -79,6 +83,7 @@
 			employeeOcupationTitle = new System.Windows.Forms.Label();
 			employeeSalaryTitle = new System.Windows.Forms.Label();
 			personExpectedSalaryTitle = new System.Windows.Forms.Label();
+			firingCostTitle = new System.Windows.Forms.Label();
 			((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
 			this.splitContainer1.Panel1.SuspendLayout();
 			this.splitContainer1.Panel2.SuspendLayout();
@@ -91,8 +96,8 @@
 			this.splitContainer3.Panel1.SuspendLayout();
 			this.splitContainer3.Panel2.SuspendLayout();
 			this.splitContainer3.SuspendLayout();
-			this.currentTrainingPanel.SuspendLayout();
 			this.trainingPanel.SuspendLayout();
+			this.currentTrainingPanel.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// SelectedPersonTitle
@@ -169,10 +174,28 @@
 			employeeSalaryTitle.TabIndex = 27;
 			employeeSalaryTitle.Text = "Salaire :";
 			// 
+			// personExpectedSalaryTitle
+			// 
+			personExpectedSalaryTitle.AutoSize = true;
+			personExpectedSalaryTitle.Location = new System.Drawing.Point(14, 112);
+			personExpectedSalaryTitle.Name = "personExpectedSalaryTitle";
+			personExpectedSalaryTitle.Size = new System.Drawing.Size(84, 13);
+			personExpectedSalaryTitle.TabIndex = 31;
+			personExpectedSalaryTitle.Text = "Salaire attendu :";
+			// 
+			// firingCostTitle
+			// 
+			firingCostTitle.AutoSize = true;
+			firingCostTitle.Location = new System.Drawing.Point(265, 37);
+			firingCostTitle.Name = "firingCostTitle";
+			firingCostTitle.Size = new System.Drawing.Size(35, 13);
+			firingCostTitle.TabIndex = 31;
+			firingCostTitle.Text = "Coût :";
+			// 
 			// SelectedSkillTrainCostTitle
 			// 
 			this.SelectedSkillTrainCostTitle.AutoSize = true;
-			this.SelectedSkillTrainCostTitle.Location = new System.Drawing.Point(169, 8);
+			this.SelectedSkillTrainCostTitle.Location = new System.Drawing.Point(3, 37);
 			this.SelectedSkillTrainCostTitle.Name = "SelectedSkillTrainCostTitle";
 			this.SelectedSkillTrainCostTitle.Size = new System.Drawing.Size(38, 13);
 			this.SelectedSkillTrainCostTitle.TabIndex = 16;
@@ -181,7 +204,7 @@
 			// SelectedSkillTrainTimeTitle
 			// 
 			this.SelectedSkillTrainTimeTitle.AutoSize = true;
-			this.SelectedSkillTrainTimeTitle.Location = new System.Drawing.Point(169, 42);
+			this.SelectedSkillTrainTimeTitle.Location = new System.Drawing.Point(115, 37);
 			this.SelectedSkillTrainTimeTitle.Name = "SelectedSkillTrainTimeTitle";
 			this.SelectedSkillTrainTimeTitle.Size = new System.Drawing.Size(48, 13);
 			this.SelectedSkillTrainTimeTitle.TabIndex = 18;
@@ -193,13 +216,15 @@
 			this.PersonList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.PersonLastnameHeader,
             this.PersonFirstnameHeader,
-            this.PersonAgeHeader});
+            this.PersonAgeHeader,
+            this.PersonBestSkillHeader,
+            this.PersonBestSkillLevelHeader});
 			this.PersonList.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.PersonList.FullRowSelect = true;
 			this.PersonList.Location = new System.Drawing.Point(0, 0);
 			this.PersonList.MultiSelect = false;
 			this.PersonList.Name = "PersonList";
-			this.PersonList.Size = new System.Drawing.Size(504, 298);
+			this.PersonList.Size = new System.Drawing.Size(432, 298);
 			this.PersonList.TabIndex = 0;
 			this.PersonList.UseCompatibleStateImageBehavior = false;
 			this.PersonList.View = System.Windows.Forms.View.Details;
@@ -209,16 +234,25 @@
 			// PersonLastnameHeader
 			// 
 			this.PersonLastnameHeader.Text = "Nom";
-			this.PersonLastnameHeader.Width = 142;
+			this.PersonLastnameHeader.Width = 114;
 			// 
 			// PersonFirstnameHeader
 			// 
 			this.PersonFirstnameHeader.Text = "Prénom";
-			this.PersonFirstnameHeader.Width = 117;
+			this.PersonFirstnameHeader.Width = 109;
 			// 
 			// PersonAgeHeader
 			// 
 			this.PersonAgeHeader.Text = "Age";
+			// 
+			// PersonBestSkillHeader
+			// 
+			this.PersonBestSkillHeader.Text = "Meilleure compétence";
+			this.PersonBestSkillHeader.Width = 235;
+			// 
+			// PersonBestSkillLevelHeader
+			// 
+			this.PersonBestSkillLevelHeader.Text = "Niveau";
 			// 
 			// splitContainer1
 			// 
@@ -233,8 +267,8 @@
 			// splitContainer1.Panel2
 			// 
 			this.splitContainer1.Panel2.Controls.Add(this.splitContainer3);
-			this.splitContainer1.Size = new System.Drawing.Size(1086, 561);
-			this.splitContainer1.SplitterDistance = 504;
+			this.splitContainer1.Size = new System.Drawing.Size(1013, 561);
+			this.splitContainer1.SplitterDistance = 432;
 			this.splitContainer1.TabIndex = 1;
 			// 
 			// splitContainer2
@@ -251,7 +285,7 @@
 			// splitContainer2.Panel2
 			// 
 			this.splitContainer2.Panel2.Controls.Add(this.PersonList);
-			this.splitContainer2.Size = new System.Drawing.Size(504, 561);
+			this.splitContainer2.Size = new System.Drawing.Size(432, 561);
 			this.splitContainer2.SplitterDistance = 259;
 			this.splitContainer2.TabIndex = 1;
 			// 
@@ -264,20 +298,20 @@
 			// 
 			// splitContainer3.Panel1
 			// 
+			this.splitContainer3.Panel1.Controls.Add(this.trainingPanel);
+			this.splitContainer3.Panel1.Controls.Add(this.currentTrainingPanel);
 			this.splitContainer3.Panel1.Controls.Add(this.decreaseSalary);
 			this.splitContainer3.Panel1.Controls.Add(this.increaseSalary);
 			this.splitContainer3.Panel1.Controls.Add(this.employeeSalary);
 			this.splitContainer3.Panel1.Controls.Add(employeeSalaryTitle);
 			this.splitContainer3.Panel1.Controls.Add(this.employeeOccupation);
 			this.splitContainer3.Panel1.Controls.Add(employeeOcupationTitle);
-			this.splitContainer3.Panel1.Controls.Add(this.currentTrainingPanel);
 			this.splitContainer3.Panel1.Controls.Add(this.employeeAge);
 			this.splitContainer3.Panel1.Controls.Add(this.employeeName);
 			this.splitContainer3.Panel1.Controls.Add(SelectedEmployeeTitle);
 			this.splitContainer3.Panel1.Controls.Add(employeeAgeTitle);
 			this.splitContainer3.Panel1.Controls.Add(employeeNameTitle);
 			this.splitContainer3.Panel1.Controls.Add(this.ucSkillsDisplayEmployee);
-			this.splitContainer3.Panel1.Controls.Add(this.trainingPanel);
 			// 
 			// splitContainer3.Panel2
 			// 
@@ -290,9 +324,86 @@
 			this.splitContainer3.Panel2.Controls.Add(personNameTitle);
 			this.splitContainer3.Panel2.Controls.Add(SelectedPersonTitle);
 			this.splitContainer3.Panel2.Controls.Add(this.hirePerson);
-			this.splitContainer3.Size = new System.Drawing.Size(578, 561);
+			this.splitContainer3.Size = new System.Drawing.Size(577, 561);
 			this.splitContainer3.SplitterDistance = 257;
 			this.splitContainer3.TabIndex = 0;
+			// 
+			// trainingPanel
+			// 
+			this.trainingPanel.Controls.Add(this.firingCost);
+			this.trainingPanel.Controls.Add(this.Train);
+			this.trainingPanel.Controls.Add(firingCostTitle);
+			this.trainingPanel.Controls.Add(this.fireEmployee);
+			this.trainingPanel.Controls.Add(this.SelectedSkillToTrainCost);
+			this.trainingPanel.Controls.Add(this.SelectedSkillToTrainTime);
+			this.trainingPanel.Controls.Add(this.SelectedSkillTrainCostTitle);
+			this.trainingPanel.Controls.Add(this.SelectedSkillTrainTimeTitle);
+			this.trainingPanel.Controls.Add(this.SelectedEmployeeSkillsToTrain);
+			this.trainingPanel.Location = new System.Drawing.Point(206, 34);
+			this.trainingPanel.Name = "trainingPanel";
+			this.trainingPanel.Size = new System.Drawing.Size(371, 74);
+			this.trainingPanel.TabIndex = 23;
+			this.trainingPanel.Visible = false;
+			// 
+			// firingCost
+			// 
+			this.firingCost.AutoSize = true;
+			this.firingCost.Location = new System.Drawing.Point(301, 37);
+			this.firingCost.Name = "firingCost";
+			this.firingCost.Size = new System.Drawing.Size(14, 13);
+			this.firingCost.TabIndex = 32;
+			this.firingCost.Text = "X";
+			this.firingCost.TextAlign = System.Drawing.ContentAlignment.TopRight;
+			this.firingCost.Visible = false;
+			// 
+			// Train
+			// 
+			this.Train.Enabled = false;
+			this.Train.Location = new System.Drawing.Point(185, 3);
+			this.Train.Name = "Train";
+			this.Train.Size = new System.Drawing.Size(75, 23);
+			this.Train.TabIndex = 14;
+			this.Train.Text = "Former";
+			this.Train.UseVisualStyleBackColor = true;
+			this.Train.Click += new System.EventHandler(this.Train_Click);
+			// 
+			// fireEmployee
+			// 
+			this.fireEmployee.Enabled = false;
+			this.fireEmployee.Location = new System.Drawing.Point(293, 3);
+			this.fireEmployee.Name = "fireEmployee";
+			this.fireEmployee.Size = new System.Drawing.Size(75, 23);
+			this.fireEmployee.TabIndex = 0;
+			this.fireEmployee.Text = "Renvoyer";
+			this.fireEmployee.UseVisualStyleBackColor = true;
+			this.fireEmployee.Click += new System.EventHandler(this.fireEmployee_Click);
+			// 
+			// SelectedSkillToTrainCost
+			// 
+			this.SelectedSkillToTrainCost.AutoSize = true;
+			this.SelectedSkillToTrainCost.Location = new System.Drawing.Point(37, 37);
+			this.SelectedSkillToTrainCost.Name = "SelectedSkillToTrainCost";
+			this.SelectedSkillToTrainCost.Size = new System.Drawing.Size(14, 13);
+			this.SelectedSkillToTrainCost.TabIndex = 17;
+			this.SelectedSkillToTrainCost.Text = "X";
+			// 
+			// SelectedSkillToTrainTime
+			// 
+			this.SelectedSkillToTrainTime.AutoSize = true;
+			this.SelectedSkillToTrainTime.Location = new System.Drawing.Point(160, 37);
+			this.SelectedSkillToTrainTime.Name = "SelectedSkillToTrainTime";
+			this.SelectedSkillToTrainTime.Size = new System.Drawing.Size(14, 13);
+			this.SelectedSkillToTrainTime.TabIndex = 19;
+			this.SelectedSkillToTrainTime.Text = "X";
+			// 
+			// SelectedEmployeeSkillsToTrain
+			// 
+			this.SelectedEmployeeSkillsToTrain.FormattingEnabled = true;
+			this.SelectedEmployeeSkillsToTrain.Location = new System.Drawing.Point(3, 3);
+			this.SelectedEmployeeSkillsToTrain.Name = "SelectedEmployeeSkillsToTrain";
+			this.SelectedEmployeeSkillsToTrain.Size = new System.Drawing.Size(160, 21);
+			this.SelectedEmployeeSkillsToTrain.TabIndex = 15;
+			this.SelectedEmployeeSkillsToTrain.SelectedIndexChanged += new System.EventHandler(this.SelectedEmployeeSkillsToTrain_SelectedIndexChanged);
 			// 
 			// decreaseSalary
 			// 
@@ -338,54 +449,6 @@
 			this.employeeOccupation.TextAlign = System.Drawing.ContentAlignment.TopRight;
 			this.employeeOccupation.Visible = false;
 			// 
-			// currentTrainingPanel
-			// 
-			this.currentTrainingPanel.Controls.Add(this.timeLeft);
-			this.currentTrainingPanel.Controls.Add(this.cancelTraining);
-			this.currentTrainingPanel.Controls.Add(this.trainingTimeLeftTitle);
-			this.currentTrainingPanel.Controls.Add(this.trainingProgress);
-			this.currentTrainingPanel.Location = new System.Drawing.Point(193, 40);
-			this.currentTrainingPanel.Name = "currentTrainingPanel";
-			this.currentTrainingPanel.Size = new System.Drawing.Size(368, 68);
-			this.currentTrainingPanel.TabIndex = 24;
-			this.currentTrainingPanel.Visible = false;
-			// 
-			// timeLeft
-			// 
-			this.timeLeft.AutoSize = true;
-			this.timeLeft.Location = new System.Drawing.Point(100, 55);
-			this.timeLeft.Name = "timeLeft";
-			this.timeLeft.Size = new System.Drawing.Size(14, 13);
-			this.timeLeft.TabIndex = 4;
-			this.timeLeft.Text = "X";
-			this.timeLeft.Visible = false;
-			// 
-			// cancelTraining
-			// 
-			this.cancelTraining.Location = new System.Drawing.Point(256, 18);
-			this.cancelTraining.Name = "cancelTraining";
-			this.cancelTraining.Size = new System.Drawing.Size(75, 23);
-			this.cancelTraining.TabIndex = 3;
-			this.cancelTraining.Text = "Annuler";
-			this.cancelTraining.UseVisualStyleBackColor = true;
-			this.cancelTraining.Click += new System.EventHandler(this.cancelTraining_Click);
-			// 
-			// trainingTimeLeftTitle
-			// 
-			this.trainingTimeLeftTitle.AutoSize = true;
-			this.trainingTimeLeftTitle.Location = new System.Drawing.Point(13, 55);
-			this.trainingTimeLeftTitle.Name = "trainingTimeLeftTitle";
-			this.trainingTimeLeftTitle.Size = new System.Drawing.Size(80, 13);
-			this.trainingTimeLeftTitle.TabIndex = 1;
-			this.trainingTimeLeftTitle.Text = "Temps restant :";
-			// 
-			// trainingProgress
-			// 
-			this.trainingProgress.Location = new System.Drawing.Point(16, 18);
-			this.trainingProgress.Name = "trainingProgress";
-			this.trainingProgress.Size = new System.Drawing.Size(212, 16);
-			this.trainingProgress.TabIndex = 0;
-			// 
 			// employeeAge
 			// 
 			this.employeeAge.AutoSize = true;
@@ -408,69 +471,15 @@
 			this.employeeName.TextAlign = System.Drawing.ContentAlignment.TopRight;
 			this.employeeName.Visible = false;
 			// 
-			// trainingPanel
+			// personExpectedSalary
 			// 
-			this.trainingPanel.Controls.Add(this.Train);
-			this.trainingPanel.Controls.Add(this.fireEmployee);
-			this.trainingPanel.Controls.Add(this.SelectedSkillToTrainCost);
-			this.trainingPanel.Controls.Add(this.SelectedSkillToTrainTime);
-			this.trainingPanel.Controls.Add(this.SelectedSkillTrainCostTitle);
-			this.trainingPanel.Controls.Add(this.SelectedSkillTrainTimeTitle);
-			this.trainingPanel.Controls.Add(this.SelectedEmployeeSkillsToTrain);
-			this.trainingPanel.Location = new System.Drawing.Point(193, 40);
-			this.trainingPanel.Name = "trainingPanel";
-			this.trainingPanel.Size = new System.Drawing.Size(371, 68);
-			this.trainingPanel.TabIndex = 23;
-			this.trainingPanel.Visible = false;
-			// 
-			// Train
-			// 
-			this.Train.Enabled = false;
-			this.Train.Location = new System.Drawing.Point(293, 3);
-			this.Train.Name = "Train";
-			this.Train.Size = new System.Drawing.Size(75, 23);
-			this.Train.TabIndex = 14;
-			this.Train.Text = "Former";
-			this.Train.UseVisualStyleBackColor = true;
-			this.Train.Click += new System.EventHandler(this.Train_Click);
-			// 
-			// fireEmployee
-			// 
-			this.fireEmployee.Enabled = false;
-			this.fireEmployee.Location = new System.Drawing.Point(293, 42);
-			this.fireEmployee.Name = "fireEmployee";
-			this.fireEmployee.Size = new System.Drawing.Size(75, 23);
-			this.fireEmployee.TabIndex = 0;
-			this.fireEmployee.Text = "Renvoyer";
-			this.fireEmployee.UseVisualStyleBackColor = true;
-			this.fireEmployee.Click += new System.EventHandler(this.fireEmployee_Click);
-			// 
-			// SelectedSkillToTrainCost
-			// 
-			this.SelectedSkillToTrainCost.AutoSize = true;
-			this.SelectedSkillToTrainCost.Location = new System.Drawing.Point(203, 8);
-			this.SelectedSkillToTrainCost.Name = "SelectedSkillToTrainCost";
-			this.SelectedSkillToTrainCost.Size = new System.Drawing.Size(14, 13);
-			this.SelectedSkillToTrainCost.TabIndex = 17;
-			this.SelectedSkillToTrainCost.Text = "X";
-			// 
-			// SelectedSkillToTrainTime
-			// 
-			this.SelectedSkillToTrainTime.AutoSize = true;
-			this.SelectedSkillToTrainTime.Location = new System.Drawing.Point(214, 42);
-			this.SelectedSkillToTrainTime.Name = "SelectedSkillToTrainTime";
-			this.SelectedSkillToTrainTime.Size = new System.Drawing.Size(14, 13);
-			this.SelectedSkillToTrainTime.TabIndex = 19;
-			this.SelectedSkillToTrainTime.Text = "X";
-			// 
-			// SelectedEmployeeSkillsToTrain
-			// 
-			this.SelectedEmployeeSkillsToTrain.FormattingEnabled = true;
-			this.SelectedEmployeeSkillsToTrain.Location = new System.Drawing.Point(3, 3);
-			this.SelectedEmployeeSkillsToTrain.Name = "SelectedEmployeeSkillsToTrain";
-			this.SelectedEmployeeSkillsToTrain.Size = new System.Drawing.Size(160, 21);
-			this.SelectedEmployeeSkillsToTrain.TabIndex = 15;
-			this.SelectedEmployeeSkillsToTrain.SelectedIndexChanged += new System.EventHandler(this.SelectedEmployeeSkillsToTrain_SelectedIndexChanged);
+			this.personExpectedSalary.AutoSize = true;
+			this.personExpectedSalary.Location = new System.Drawing.Point(104, 112);
+			this.personExpectedSalary.Name = "personExpectedSalary";
+			this.personExpectedSalary.Size = new System.Drawing.Size(14, 13);
+			this.personExpectedSalary.TabIndex = 32;
+			this.personExpectedSalary.Text = "X";
+			this.personExpectedSalary.Visible = false;
 			// 
 			// personAge
 			// 
@@ -503,31 +512,12 @@
 			this.hirePerson.UseVisualStyleBackColor = true;
 			this.hirePerson.Click += new System.EventHandler(this.hirePerson_Click);
 			// 
-			// personExpectedSalaryTitle
-			// 
-			personExpectedSalaryTitle.AutoSize = true;
-			personExpectedSalaryTitle.Location = new System.Drawing.Point(14, 112);
-			personExpectedSalaryTitle.Name = "personExpectedSalaryTitle";
-			personExpectedSalaryTitle.Size = new System.Drawing.Size(84, 13);
-			personExpectedSalaryTitle.TabIndex = 31;
-			personExpectedSalaryTitle.Text = "Salaire attendu :";
-			// 
-			// personExpectedSalary
-			// 
-			this.personExpectedSalary.AutoSize = true;
-			this.personExpectedSalary.Location = new System.Drawing.Point(104, 112);
-			this.personExpectedSalary.Name = "personExpectedSalary";
-			this.personExpectedSalary.Size = new System.Drawing.Size(14, 13);
-			this.personExpectedSalary.TabIndex = 32;
-			this.personExpectedSalary.Text = "X";
-			this.personExpectedSalary.Visible = false;
-			// 
 			// UcEmployeeList1
 			// 
 			this.UcEmployeeList1.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.UcEmployeeList1.Location = new System.Drawing.Point(0, 0);
 			this.UcEmployeeList1.Name = "UcEmployeeList1";
-			this.UcEmployeeList1.Size = new System.Drawing.Size(504, 259);
+			this.UcEmployeeList1.Size = new System.Drawing.Size(432, 259);
 			this.UcEmployeeList1.TabIndex = 1;
 			// 
 			// ucSkillsDisplayEmployee
@@ -541,10 +531,57 @@
 			// ucSkillsDisplayPerson
 			// 
 			this.ucSkillsDisplayPerson.CurrentPerson = null;
-			this.ucSkillsDisplayPerson.Location = new System.Drawing.Point(135, 157);
+			this.ucSkillsDisplayPerson.Location = new System.Drawing.Point(138, 157);
 			this.ucSkillsDisplayPerson.Name = "ucSkillsDisplayPerson";
 			this.ucSkillsDisplayPerson.Size = new System.Drawing.Size(440, 140);
 			this.ucSkillsDisplayPerson.TabIndex = 23;
+			// 
+			// currentTrainingPanel
+			// 
+			this.currentTrainingPanel.Controls.Add(this.timeLeft);
+			this.currentTrainingPanel.Controls.Add(this.cancelTraining);
+			this.currentTrainingPanel.Controls.Add(this.trainingTimeLeftTitle);
+			this.currentTrainingPanel.Controls.Add(this.trainingProgress);
+			this.currentTrainingPanel.Location = new System.Drawing.Point(206, 34);
+			this.currentTrainingPanel.Name = "currentTrainingPanel";
+			this.currentTrainingPanel.Size = new System.Drawing.Size(368, 74);
+			this.currentTrainingPanel.TabIndex = 25;
+			this.currentTrainingPanel.Visible = false;
+			// 
+			// timeLeft
+			// 
+			this.timeLeft.AutoSize = true;
+			this.timeLeft.Location = new System.Drawing.Point(100, 55);
+			this.timeLeft.Name = "timeLeft";
+			this.timeLeft.Size = new System.Drawing.Size(14, 13);
+			this.timeLeft.TabIndex = 4;
+			this.timeLeft.Text = "X";
+			this.timeLeft.Visible = false;
+			// 
+			// cancelTraining
+			// 
+			this.cancelTraining.Location = new System.Drawing.Point(245, 11);
+			this.cancelTraining.Name = "cancelTraining";
+			this.cancelTraining.Size = new System.Drawing.Size(103, 23);
+			this.cancelTraining.TabIndex = 3;
+			this.cancelTraining.Text = "Annuler formation";
+			this.cancelTraining.UseVisualStyleBackColor = true;
+			// 
+			// trainingTimeLeftTitle
+			// 
+			this.trainingTimeLeftTitle.AutoSize = true;
+			this.trainingTimeLeftTitle.Location = new System.Drawing.Point(13, 55);
+			this.trainingTimeLeftTitle.Name = "trainingTimeLeftTitle";
+			this.trainingTimeLeftTitle.Size = new System.Drawing.Size(80, 13);
+			this.trainingTimeLeftTitle.TabIndex = 1;
+			this.trainingTimeLeftTitle.Text = "Temps restant :";
+			// 
+			// trainingProgress
+			// 
+			this.trainingProgress.Location = new System.Drawing.Point(16, 18);
+			this.trainingProgress.Name = "trainingProgress";
+			this.trainingProgress.Size = new System.Drawing.Size(212, 16);
+			this.trainingProgress.TabIndex = 0;
 			// 
 			// UcEmployeePage
 			// 
@@ -554,7 +591,7 @@
 			this.Controls.Add(this.splitContainer1);
 			this.Margin = new System.Windows.Forms.Padding(2);
 			this.Name = "UcEmployeePage";
-			this.Size = new System.Drawing.Size(1086, 561);
+			this.Size = new System.Drawing.Size(1013, 561);
 			this.splitContainer1.Panel1.ResumeLayout(false);
 			this.splitContainer1.Panel2.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
@@ -569,10 +606,10 @@
 			this.splitContainer3.Panel2.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).EndInit();
 			this.splitContainer3.ResumeLayout(false);
-			this.currentTrainingPanel.ResumeLayout(false);
-			this.currentTrainingPanel.PerformLayout();
 			this.trainingPanel.ResumeLayout(false);
 			this.trainingPanel.PerformLayout();
+			this.currentTrainingPanel.ResumeLayout(false);
+			this.currentTrainingPanel.PerformLayout();
 			this.ResumeLayout(false);
 
 		}
@@ -602,15 +639,18 @@
 		private UcSkillsDisplay ucSkillsDisplayEmployee;
 		private UcSkillsDisplay ucSkillsDisplayPerson;
 		private System.Windows.Forms.Panel trainingPanel;
-		private System.Windows.Forms.Panel currentTrainingPanel;
-		private System.Windows.Forms.Label trainingTimeLeftTitle;
-		private System.Windows.Forms.ProgressBar trainingProgress;
-		private System.Windows.Forms.Button cancelTraining;
 		private System.Windows.Forms.Label employeeOccupation;
-		private System.Windows.Forms.Label timeLeft;
 		private System.Windows.Forms.Label employeeSalary;
 		private System.Windows.Forms.Button decreaseSalary;
 		private System.Windows.Forms.Button increaseSalary;
 		private System.Windows.Forms.Label personExpectedSalary;
+		private System.Windows.Forms.ColumnHeader PersonBestSkillHeader;
+		private System.Windows.Forms.ColumnHeader PersonBestSkillLevelHeader;
+		private System.Windows.Forms.Label firingCost;
+		private System.Windows.Forms.Panel currentTrainingPanel;
+		private System.Windows.Forms.Label timeLeft;
+		private System.Windows.Forms.Button cancelTraining;
+		private System.Windows.Forms.Label trainingTimeLeftTitle;
+		private System.Windows.Forms.ProgressBar trainingProgress;
 	}
 }

@@ -95,11 +95,7 @@ namespace SRH.Core
 		{
 			// Check if skillName is valid
 			_comp.Game.ValidateSkillName( skillName );
-
-			// Set a candidate skill to test
-			Skill candidate = null;
-			if( skillName.IsProjSkill() ) candidate = new ProjSkill( skillName );
-			else candidate = new CompaSkill( skillName );
+			Skill candidate = _comp.Game.GetSkillCandidate( skillName );
 
 			Skill skillToTrain = _worker.Skills.Where( s => s.SkillName == skillName ).SingleOrDefault();
 
@@ -144,9 +140,7 @@ namespace SRH.Core
 			_traininigBegginingDate = _comp.Game.TimeGame.CurrentTimeOfGame;
 
 			// Set a candidate skill to test
-			Skill candidate = null;
-			if( skillName.IsProjSkill() ) candidate = new ProjSkill( skillName );
-			else candidate = new CompaSkill( skillName );
+			Skill candidate = _comp.Game.GetSkillCandidate( skillName );
 			
 			Skill skillToTrain = _worker.Skills.Where( s => s.SkillName == skillName ).SingleOrDefault();
 

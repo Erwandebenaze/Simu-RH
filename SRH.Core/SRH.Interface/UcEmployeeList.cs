@@ -129,19 +129,21 @@ namespace SRH.Interface
 
 			if( _showProj )
 			{
-				i.SubItems.Add( new ListViewItem.ListViewSubItem( i, e.Worker.Skills
+				Skill employeeBestSkill = e.Worker.Skills
 				.Where( s => s.Level.CurrentXp == e.Worker.Skills.Max( sk => sk.Level.CurrentXp ) )
-				.Select( s => s.SkillName )
-				.FirstOrDefault() ) );
+				.FirstOrDefault();
+				i.SubItems.Add( new ListViewItem.ListViewSubItem( i, employeeBestSkill.SkillName ) );
+				i.SubItems.Add( new ListViewItem.ListViewSubItem( i, employeeBestSkill.Level.CurrentLevel.ToString() ) );
 			}
 			else
 			{
-				i.SubItems.Add( new ListViewItem.ListViewSubItem( i, 
-					e.Worker.Skills
+				Skill employeeBestSkill = e.Worker.Skills
 				.Where( s => !( s is ProjSkill ) )
 				.Where( s => s.Level.CurrentXp == e.Worker.Skills.Max( sk => sk.Level.CurrentXp ) )
-				.Select( s => s.SkillName )
-				.FirstOrDefault() ) );
+				.FirstOrDefault();
+
+				i.SubItems.Add( new ListViewItem.ListViewSubItem( i, employeeBestSkill.SkillName ) );
+				i.SubItems.Add( new ListViewItem.ListViewSubItem( i, employeeBestSkill.Level.CurrentLevel.ToString() ) );
 			}
 			
 			return i;

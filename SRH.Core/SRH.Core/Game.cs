@@ -131,5 +131,20 @@ namespace SRH.Core
 			if( !valid )
 				throw new ArgumentException( "The skill name must exist in Game.SkillNames." );
 		}
+
+		/// <summary>
+		/// Creates a new Skill whose type depends on the skillName
+		/// </summary>
+		/// <param name="skillName">The name of the skill to create</param>
+		/// <returns>A new candidate Skill</returns>
+		internal Skill GetSkillCandidate( string skillName )
+		{
+			Skill candidate = null;
+
+			if( skillName.IsProjSkill() ) candidate = new ProjSkill( skillName );
+			else candidate = new CompaSkill( skillName );
+			
+			return candidate;
+		}
 	}
 }
