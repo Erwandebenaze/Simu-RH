@@ -51,14 +51,7 @@ namespace SRH.Interface
 			get 
 			{ return _currentEmployee; }
 			set
-			{
-				if( Changed != null )
-				{
-					Changed();
-				}
-				_currentEmployee = value;
-
-			}
+			{ _currentEmployee = value; }
 		}
 
 		internal string SelectedEmployeeName
@@ -141,7 +134,6 @@ namespace SRH.Interface
 				.Where( s => !( s is ProjSkill ) )
 				.Where( s => s.Level.CurrentXp == e.Worker.Skills.Max( sk => sk.Level.CurrentXp ) )
 				.FirstOrDefault();
-
 				i.SubItems.Add( new ListViewItem.ListViewSubItem( i, employeeBestSkill.SkillName ) );
 				i.SubItems.Add( new ListViewItem.ListViewSubItem( i, employeeBestSkill.Level.CurrentLevel.ToString() ) );
 			}

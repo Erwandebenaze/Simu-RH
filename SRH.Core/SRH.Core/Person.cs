@@ -112,8 +112,8 @@ namespace SRH.Core
 
 			Skill newSkill = null;
 			if( skillName.IsProjSkill() )
-				newSkill = new ProjSkill( skillName );
-			else newSkill = new CompaSkill( skillName );
+				newSkill = new ProjSkill( p, skillName );
+			else newSkill = new CompaSkill( p, skillName );
 
 			newSkill.Level.CurrentLevel = level;
 			_skills.Add( newSkill );

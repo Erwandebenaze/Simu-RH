@@ -63,7 +63,7 @@ namespace SRH.Interface
 
                 _timeOfGame.newDay();
                 _myGame.PlayerCompany.EndProjectIfItsFinish();
-				UpdateTraining(); 
+				UpdateEmployeesSkills(); 
                 ClearListsProjects();
 
 				// Current date display
@@ -113,20 +113,28 @@ namespace SRH.Interface
 			}
 		}
 
-		private void UpdateTraining()
+		private void UpdateEmployeesSkills()
 		{
+			// Training
 			int timeLeft;
 			foreach( Employee e in _myGame.PlayerCompany.Employees.Where( emp => emp.SkillInTraining != null ) )
 			{
 				timeLeft = e.UpdateEmployeeTraining();
+				if( timeLeft == 0 )
+				{
+					ucEmployeePage.UpdateEmployeeDisplay();
+					ucEmployeePage.LoadEmployeeList();
+				}
+
 				if( e == ucEmployeePage.CurrentEmployee )
 				{
 					ucEmployeePage.TrainingTimeLeft = timeLeft;
 					ucEmployeePage.SetTrainingProgress( e );
 				}
-
-				if(timeLeft == 0) ucEmployeePage.UpdateEmployeeDisplay();
 			}
+
+			// Level gain
+
 		}
 
         private void ClearListsProjects()

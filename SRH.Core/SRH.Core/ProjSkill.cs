@@ -9,6 +9,13 @@ namespace SRH.Core
     [Serializable]
     public class ProjSkill : Skill
     {
+		internal ProjSkill( Person p, string skillName, int startLevel = 1 )
+			: base( p, skillName, startLevel )
+		{
+			_baseCostToTrain = 1000;
+			_baseTimeToTrain = 15;
+		}
+
         internal ProjSkill( string skillName, int startLevel = 1 )
 			: base( skillName, startLevel )
 		{
