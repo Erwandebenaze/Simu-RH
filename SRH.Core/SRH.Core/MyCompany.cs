@@ -37,7 +37,7 @@ namespace SRH.Core
 		internal MyCompany( Game game, string name ) : base( game, name )
         {
 			if( String.IsNullOrWhiteSpace( name ) ) throw new ArgumentNullException( "The company name cannot be null or a whitespace" );
-            _wealth = 10030000;
+            _wealth = 1003000000;
             _maxWealth = _wealth;
 			_companyLevel = new Level( this, 1 );
 			_maxProjectDifficulty = 1;
@@ -132,13 +132,14 @@ namespace SRH.Core
             {
                 foreach (Project p in _projects)
                 {
+                    p.RefreshActualsTasks();
                     if( p.ActualTasks > 0 )
                     {
                         //p.TimeSpent = _myGame.TimeGame.intervalOfTimeInDays( p.BegginingDate );
                         p.RefreshDuration();
                         p.TimeLeft = p.Duration;
                         if( p.TimeLeft < 0 ) p.TimeLeft = 0;
-                        p.RefreshActualsTasks();
+                        
                     } else
                     {
                         EndAProject( p );

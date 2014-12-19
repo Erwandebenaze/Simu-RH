@@ -47,7 +47,7 @@ namespace SRH.Interface
             _limitEmployees.Text = GameContext.CurrentGame.PlayerCompany.MaxEmployees.ToString();
             _nextLimitEmployees.Text = (10 + (2 * (GameContext.CurrentGame.PlayerCompany.CompanyLevel.CurrentLevel + 1))).ToString();
             _maxDifficultyProject.Text = GameContext.CurrentGame.PlayerCompany.MaxProjectDifficulty.ToString();
-            _maxWealthText.Text = GameContext.CurrentGame.PlayerCompany.MaxWealth.ToString();
+            //_maxWealthText.Text = GameContext.CurrentGame.PlayerCompany.MaxWealth.ToString();
             _actualWealth.Text = GameContext.CurrentGame.PlayerCompany.Wealth.ToString();
             int i = 0;
             foreach( Employee emp in GameContext.CurrentGame.PlayerCompany.Employees )

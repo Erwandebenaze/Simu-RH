@@ -48,17 +48,17 @@ namespace SRH.Core
 			get { return _wealth; }
 			set
 			{
-				if( _wealth + value > _maxWealth )
-				{
-					_maxWealth = _wealth + value;
-				}
+                //if( _wealth + value > _maxWealth )
+                //{
+                //    _maxWealth = _wealth + value;
+                //}
 				_wealth = value;
 			}
 		}
-		public int MaxWealth
-		{
-			get { return _maxWealth; }
-		}
+        //public int MaxWealth
+        //{
+        //    get { return _maxWealth; }
+        //}
 		public int MaxEmployees
 		{
 			get { return _maxEmployees; }

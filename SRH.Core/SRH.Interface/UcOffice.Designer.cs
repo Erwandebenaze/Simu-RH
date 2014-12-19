@@ -32,8 +32,6 @@
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.splitContainer4 = new System.Windows.Forms.SplitContainer();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this._maxWealthText = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
             this._maxDifficultyProject = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -153,8 +151,6 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this._maxWealthText);
-            this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this._maxDifficultyProject);
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.label3);
@@ -172,24 +168,6 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Mon entreprise";
-            // 
-            // _maxWealthText
-            // 
-            this._maxWealthText.AutoSize = true;
-            this._maxWealthText.Location = new System.Drawing.Point(244, 180);
-            this._maxWealthText.Name = "_maxWealthText";
-            this._maxWealthText.Size = new System.Drawing.Size(17, 17);
-            this._maxWealthText.TabIndex = 11;
-            this._maxWealthText.Text = "X";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(10, 180);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(135, 17);
-            this.label5.TabIndex = 10;
-            this.label5.Text = "Record de fortune : ";
             // 
             // _maxDifficultyProject
             // 
@@ -808,8 +786,6 @@
         private System.Windows.Forms.Label _limitEmployees;
         private System.Windows.Forms.Label _maxDifficultyProject;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label _maxWealthText;
-        private System.Windows.Forms.Label label5;
         private System.Windows.Forms.GroupBox BudgetGroupBox;
         private System.Windows.Forms.Label _actualWealth;
         private System.Windows.Forms.Label label6;

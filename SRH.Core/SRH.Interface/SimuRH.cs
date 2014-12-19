@@ -26,7 +26,7 @@ namespace SRH.Interface
         {
             InitializeComponent();
             _myGame = new Game( 1, "Erwan" );
-            //_myGame = GameLoader.Load( "Tristan" );
+            //_myGame = GameLoader.Load( "Olivier9" );
             _optionsForm = new Options();
             _timeOfGame = _myGame.TimeGame;
             _timer = new Timer();
