@@ -62,6 +62,7 @@ namespace SRH.Interface
 
 
                 _timeOfGame.newDay();
+                _myGame.PlayerCompany.AddXpToManagers();
                 _myGame.PlayerCompany.EndProjectIfItsFinish();
 				UpdateTraining(); 
                 ClearListsProjects();
@@ -99,7 +100,8 @@ namespace SRH.Interface
             }
             if( _myGame.TimeGame.CurrentTimeOfGame.Month != _myGame.TimeGame.TryAddDay().Month && (_myGame.PlayerCompany.Wealth < 0) )
             {
-                _interest = _myGame.PlayerCompany.ApplyInterests();
+                _interest = _myGame.PlayerCompany.GetInterest();
+                _myGame.PlayerCompany.ApplyInterests();
             }
 
         }
@@ -127,7 +129,7 @@ namespace SRH.Interface
 					ucEmployeePage.SetTrainingProgress( e );
 				}
 
-				if(timeLeft == 0) ucEmployeePage.UpdateEmployeeDisplay();
+				if( timeLeft == 0 ) ucEmployeePage.UpdateEmployeeDisplay();
 			}
 		}
 

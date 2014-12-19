@@ -90,7 +90,7 @@ namespace SRH.Core
 			get
 			{
 				double cost = _expectedSalary * 0.1;
-				return (int)cost;
+				return Lb.Game.PlayerCompany.EstimateRecrutingAndLayingOffCost((int)cost);
 			}
 		}
 		#endregion

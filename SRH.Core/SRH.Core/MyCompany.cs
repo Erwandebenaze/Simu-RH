@@ -122,14 +122,20 @@ namespace SRH.Core
             }
         }
 
-        public int ApplyInterests()
+        public void ApplyInterests()
+        {
+            _wealth -= GetInterest();
+            
+        }
+
+        public int GetInterest()
         {
             int interest = 0;
             if( _wealth < 0 )
             {
-                interest = (int)(-(_wealth * (3.5/100)));
+                interest = (int)(-(_wealth * (5 / 100)));
             }
-            _wealth -= interest;
+            
             return interest;
         }
         /// <summary>
@@ -224,6 +230,7 @@ namespace SRH.Core
 			_managers.Add( e, s );
 			e.SkillAffectedToCompany = s;
 			e.Busy = true;
+            e.BegginningCompanyWork = Game.TimeGame.CurrentTimeOfGame;
             AffectManagers();
             UseManagers();
 		}
@@ -234,6 +241,7 @@ namespace SRH.Core
 			{
 				_managers.Remove( e );
 				e.Busy = false;
+                e.BegginningCompanyWork = null;
 				e.SkillAffectedToCompany = null;
 			}
 			else
@@ -300,6 +308,20 @@ namespace SRH.Core
                     UseDirecteursProjets();
                 }
             }
+
+            if( _recruteur.Count > 0 )
+            {
+                // Recruteur decrease the cost of hiring and laying off.
+                foreach( Employee emp in _recruteur )
+                {
+                    newDecreaseRecruting += (emp.Worker.Skills.Where( e => e.SkillName == "Recruteur" ).Select( e => e.Level.CurrentLevel ).Single()) * 2;
+                }
+
+                if( _decreaseRecruting != SwitchRecruteur( newDecreaseRecruting ) )
+                {
+                    _decreaseRecruting = SwitchRecruteur( newDecreaseRecruting );
+                }
+            }
             if( _animation.Count > 0 )
             {
                 // Animation increase the happiness of the employees.
@@ -314,20 +336,12 @@ namespace SRH.Core
                     // TODO : Implémentation lorsqu'il y aura un coût de recrutement et de renvoi.
                 }
             }
-            if( _recruteur.Count > 0 )
-            {
-                // Recruteur decrease the cost of hiring and laying off.
-                foreach( Employee emp in _recruteur )
-                {
-                    newDecreaseRecruting += (emp.Worker.Skills.Where( e => e.SkillName == "Recruteur" ).Select( e => e.Level.CurrentLevel ).Single()) * 2;
-                }
 
-                if( newDecreaseRecruting > _decreaseRecruting )
-                {
-                    _decreaseRecruting = newDecreaseRecruting;
-                    // TODO : Implémentation lorsqu'il y aura un coût de recrutement et de renvoi.
-                }
-            }
+        }
+
+        private void UseRecruteur()
+        {
+            throw new NotImplementedException();
         }
 
         private void UseDirecteursProjets()
@@ -354,6 +368,34 @@ namespace SRH.Core
                 emp.SalaryAdjustment -= (int)salaryDecrease;
             }
 
+        }
+        private double SwitchRecruteur( double decreaseRecruting )
+        {
+            switch( this.CompanyLevel.CurrentLevel / 10 )
+            {
+                case 0:
+                    if( decreaseRecruting > 2 ) decreaseRecruting = 2;
+                    break;
+                case 1:
+                    if( decreaseRecruting > 5 ) decreaseRecruting = 5;
+                    break;
+                case 2:
+                    if( decreaseRecruting > 10 ) decreaseRecruting = 10;
+                    break;
+                case 3:
+                    if( decreaseRecruting > 15 ) decreaseRecruting = 15;
+                    break;
+                case 4:
+                    if( decreaseRecruting > 20 ) decreaseRecruting = 20;
+                    break;
+                case 5:
+                    if( decreaseRecruting > 25 ) decreaseRecruting = 25;
+                    break;
+                default:
+                    decreaseRecruting = 25;
+                    break;
+            }
+            return decreaseRecruting;
         }
         private double SwitchCommerciaux( double newPourcentCommerciaux )
         {
@@ -450,5 +492,27 @@ namespace SRH.Core
             if( _commerciaux.Count != 0 ) return (int)(p.Earnings + (p.Earnings * (_pourcentCommerciaux / 100)));
             else return p.Earnings;
         }
-	}
+
+        public int EstimateRecrutingAndLayingOffCost( int cost )
+        {
+            if( cost < 0 ) throw new ArgumentException( "cost can't be = 0 " );
+            if( _recruteur.Count != 0 ) return (int)(cost - (cost * (_decreaseRecruting / 100)));
+            else return cost;
+        }
+
+        public void AddXpToManagers()
+        {
+            if( _managers.Count != 0 )
+            {
+                foreach( Employee emp in _managers.Keys )
+                {
+                    if( Game.TimeGame.intervalOfTimeInDays( emp.BegginningCompanyWork ) == 30 )
+                    {
+                        emp.SkillAffectedToCompany.Level.IncreaseXp( 5 );
+                        emp.BegginningCompanyWork = Game.TimeGame.CurrentTimeOfGame;
+                    }
+                }
+            }
+        }
+    }
 }

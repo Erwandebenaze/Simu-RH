@@ -55,7 +55,7 @@ namespace SRH.Core
 			get { return FixNextXpRequired( _currentLevel ); }
 		}
 
-        public void IncreaseXp( int xp, MyCompany mc = null ) 
+        internal void IncreaseXp( int xp, MyCompany mc = null ) 
         {
             #region Exceptions
             if( xp < 1 ) throw new ArgumentException( "Xp must be positive" );
@@ -64,13 +64,19 @@ namespace SRH.Core
             if( this._currentLevel == 4 && xp > 600 ) throw new ArgumentException( "Xp is too big for the level" );
             if( this._currentLevel == 5 && xp > 1000 ) throw new ArgumentException( "Xp is too big for the level" );
             #endregion
-            if (xp + CurrentXp >= XpRequired)
-			{
-				this.IncreaseLevel( mc );
-				_xpRequired = FixNextXpRequired( _currentLevel );
-			}
+            if(mc == null && this._currentLevel == 5)
+            {
+                return;
+            }else
+            {
+                if( xp + CurrentXp >= XpRequired )
+                {
+                    this.IncreaseLevel( mc );
+                    _xpRequired = FixNextXpRequired( _currentLevel );
+                }
 
-			_currentXp += xp;
+                _currentXp += xp;
+            }
         }
 
         private int FixNextXpRequired( int level)
@@ -86,16 +92,16 @@ namespace SRH.Core
 						NextXpRequired = 50;
                         break;
                     case 2:
-						NextXpRequired = 100;
+						NextXpRequired = 150;
                         break;
                     case 3:
-						NextXpRequired = 250;
+						NextXpRequired = 350;
                         break;
                     case 4:
-						NextXpRequired = 600;
+						NextXpRequired = 750;
                         break;
                     case 5:
-						NextXpRequired = 1000;
+						NextXpRequired = 1500;
                         break;
                     default:
                         throw new InvalidOperationException("Skill can be only level 1 to 5");

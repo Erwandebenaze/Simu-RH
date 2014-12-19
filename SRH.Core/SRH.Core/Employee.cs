@@ -17,6 +17,7 @@ namespace SRH.Core
 		private string _skillInTraining;
 		private DateTime? _traininigBegginingDate;
 		private int? _trainingDuration;
+        DateTime? _begginningCompanyWork;
 
         /// <summary>
 		/// Creates an <see cref="Employee"/>
@@ -55,7 +56,11 @@ namespace SRH.Core
 			get { return _skillAffectedToCompany; }
 			set { _skillAffectedToCompany = value; }
 		}
-
+        internal DateTime? BegginningCompanyWork
+        {
+            get { return (DateTime)_begginningCompanyWork; }
+            set { _begginningCompanyWork = value; }
+        }
 		public string SkillInTraining
 		{
 			get { return _skillInTraining; }

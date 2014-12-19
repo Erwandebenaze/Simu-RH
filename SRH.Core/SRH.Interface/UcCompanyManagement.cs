@@ -77,7 +77,7 @@ namespace SRH.Interface
 				case "Directeur de projets":
 					groupToAffect = managerList.Groups[ 2 ];
 					break;
-				case "Gestion de contrat":
+				case "Recruteur":
 					groupToAffect = managerList.Groups[ 3 ];
 					break;
 				case "Animation":
