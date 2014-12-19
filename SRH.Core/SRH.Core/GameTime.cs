@@ -111,11 +111,19 @@ namespace SRH.Core
         /// </summary>
         /// <param name="date">La date à vérifier</param>
         /// <returns><c>true</c> si la date est un jour ouvré, sinon <c>false</c>.</returns>
-        public static bool IsWorkingDay(DateTime date)
+        bool IsWorkingDay(DateTime date)
         {
             return !(date.DayOfWeek == DayOfWeek.Saturday || date.DayOfWeek == DayOfWeek.Sunday);
         }
         
+        public bool NextDayIsNewMonth()
+        {
+            return (_currentTimeOfGame.Month != TryAddDay().Month);
+        }
+        public bool NextDayIsNewYear()
+        {
+            return (_currentTimeOfGame.Year != TryAddDay().Year);
+        }
        
     }
 }

@@ -15,7 +15,7 @@ namespace SRH.Core
         private bool _busy;
 		private Skill _skillAffectedToCompany;
 		private string _skillInTraining;
-		private DateTime? _traininigBegginingDate;
+		private DateTime? _trainingBegginingDate;
 		private int? _trainingDuration;
         DateTime? _begginningCompanyWork;
 
@@ -82,7 +82,7 @@ namespace SRH.Core
 			set { _salaryAdjustment = value; }
 		}
 
-		public int FiringCost
+		public int LayingOffCost
 		{
 			get
 			{
@@ -123,7 +123,7 @@ namespace SRH.Core
 			{
 				int xpToNextLevel = skillToTrain.Level.NextXpRequired - skillToTrain.Level.CurrentXp;
 				skillToTrain.Level.IncreaseXp( xpToNextLevel );
-				_comp.Wealth -= skillToTrain.UpgradePrice;
+                
 			}
 
 			_skillInTraining = null;
@@ -136,19 +136,19 @@ namespace SRH.Core
 		/// <returns>The time left</returns>
 		public int UpdateEmployeeTraining()
 		{
-			if( _comp.Game.TimeGame.intervalOfTimeInDays( _traininigBegginingDate ) == _trainingDuration )
+			if( _comp.Game.TimeGame.intervalOfTimeInDays( _trainingBegginingDate ) == _trainingDuration )
 			{
 				Train( _skillInTraining );
 			}
 
-			int timeLeft = _trainingDuration.Value - _comp.Game.TimeGame.intervalOfTimeInDays( _traininigBegginingDate );
+			int timeLeft = _trainingDuration.Value - _comp.Game.TimeGame.intervalOfTimeInDays( _trainingBegginingDate );
 			return timeLeft;
 		}
 
 		public bool StartTraining( string skillName )
 		{
 			_skillInTraining = skillName;
-			_traininigBegginingDate = _comp.Game.TimeGame.CurrentTimeOfGame;
+			_trainingBegginingDate = _comp.Game.TimeGame.CurrentTimeOfGame;
 
 			// Set a candidate skill to test
 			Skill candidate = _comp.Game.GetSkillCandidate( skillName );
@@ -161,6 +161,7 @@ namespace SRH.Core
 				{
 					_trainingDuration = candidate.BaseTimeToTrain;
 					_comp.Wealth -= candidate.BaseCostToTrain;
+                    _comp.Game.PlayerCompany.AddTrainingCost( candidate.BaseCostToTrain );
 					_busy = true;
 					return true;
 				}
@@ -173,6 +174,8 @@ namespace SRH.Core
 				{
 					_trainingDuration = skillToTrain.TimeToUpgrade;
 					_comp.Wealth -= skillToTrain.UpgradePrice;
+                    _comp.Game.PlayerCompany.AddTrainingCost( skillToTrain.UpgradePrice );
+
 					_busy = true;
 					return true;
 				}
@@ -186,7 +189,7 @@ namespace SRH.Core
 			_busy = false;
 			_skillInTraining = null;
 			_trainingDuration = null;
-			_traininigBegginingDate = null;
+			_trainingBegginingDate = null;
 		}
 	}
 }

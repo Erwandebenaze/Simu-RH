@@ -25,8 +25,8 @@ namespace SRH.Interface
         public SimuRH()
         {
             InitializeComponent();
-            //_myGame = new Game( 1, "Tristan" );
-            _myGame = GameLoader.Load( "Tristan" );
+            _myGame = new Game( 1, "Erwan" );
+            //_myGame = GameLoader.Load( "Tristan" );
             _optionsForm = new Options();
             _timeOfGame = _myGame.TimeGame;
             _timer = new Timer();
@@ -98,7 +98,7 @@ namespace SRH.Interface
                     competitor.TryToAddMoneyAndEmployee();
                 }
             }
-            if( _myGame.TimeGame.CurrentTimeOfGame.Month != _myGame.TimeGame.TryAddDay().Month && (_myGame.PlayerCompany.Wealth < 0) )
+            if( _myGame.TimeGame.NextDayIsNewMonth() && (_myGame.PlayerCompany.Wealth < 0) )
             {
                 _interest = _myGame.PlayerCompany.GetInterest();
                 _myGame.PlayerCompany.ApplyInterests();
@@ -108,7 +108,7 @@ namespace SRH.Interface
 
 		private void PayEmployees()
 		{
-			if( _myGame.TimeGame.CurrentTimeOfGame.Month != _myGame.TimeGame.TryAddDay().Month )
+            if( _myGame.TimeGame.NextDayIsNewMonth() )
 			{
 				foreach( Employee e in _myGame.PlayerCompany.Employees )
 				{
