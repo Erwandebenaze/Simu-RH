@@ -73,6 +73,7 @@
 			this.personAge = new System.Windows.Forms.Label();
 			this.personName = new System.Windows.Forms.Label();
 			this.hirePerson = new System.Windows.Forms.Button();
+			this.SalaryAdjustmentIndication = new System.Windows.Forms.Label();
 			this.UcEmployeeList1 = new SRH.Interface.UcEmployeeList();
 			this.ucSkillsDisplayEmployee = new SRH.Interface.UcSkillsDisplay();
 			this.ucSkillsDisplayPerson = new SRH.Interface.UcSkillsDisplay();
@@ -310,6 +311,7 @@
 			// 
 			// splitContainer3.Panel1
 			// 
+			this.splitContainer3.Panel1.Controls.Add(this.SalaryAdjustmentIndication);
 			this.splitContainer3.Panel1.Controls.Add(this.trainingPanel);
 			this.splitContainer3.Panel1.Controls.Add(this.currentTrainingPanel);
 			this.splitContainer3.Panel1.Controls.Add(this.decreaseSalary);
@@ -469,7 +471,7 @@
 			// decreaseSalary
 			// 
 			this.decreaseSalary.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.decreaseSalary.Location = new System.Drawing.Point(60, 155);
+			this.decreaseSalary.Location = new System.Drawing.Point(27, 156);
 			this.decreaseSalary.Name = "decreaseSalary";
 			this.decreaseSalary.Size = new System.Drawing.Size(22, 23);
 			this.decreaseSalary.TabIndex = 30;
@@ -481,7 +483,7 @@
 			// increaseSalary
 			// 
 			this.increaseSalary.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.increaseSalary.Location = new System.Drawing.Point(17, 155);
+			this.increaseSalary.Location = new System.Drawing.Point(76, 156);
 			this.increaseSalary.Name = "increaseSalary";
 			this.increaseSalary.Size = new System.Drawing.Size(22, 23);
 			this.increaseSalary.TabIndex = 29;
@@ -586,6 +588,16 @@
 			this.hirePerson.UseVisualStyleBackColor = true;
 			this.hirePerson.Click += new System.EventHandler(this.hirePerson_Click);
 			// 
+			// SalaryAdjustmentIndication
+			// 
+			this.SalaryAdjustmentIndication.AutoSize = true;
+			this.SalaryAdjustmentIndication.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.SalaryAdjustmentIndication.Location = new System.Drawing.Point(14, 182);
+			this.SalaryAdjustmentIndication.Name = "SalaryAdjustmentIndication";
+			this.SalaryAdjustmentIndication.Size = new System.Drawing.Size(110, 26);
+			this.SalaryAdjustmentIndication.TabIndex = 31;
+			this.SalaryAdjustmentIndication.Text = "Ajustement du salaire \r\nde l\'employé.";
+			// 
 			// UcEmployeeList1
 			// 
 			this.UcEmployeeList1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -680,5 +692,6 @@
 		private System.Windows.Forms.Label trainingTimeLeftTitle;
 		private System.Windows.Forms.ProgressBar trainingProgress;
 		private System.Windows.Forms.Label hiringCost;
+		private System.Windows.Forms.Label SalaryAdjustmentIndication;
 	}
 }

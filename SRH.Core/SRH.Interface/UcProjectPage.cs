@@ -322,5 +322,54 @@ namespace SRH.Interface
 
         }
 
+		private void desaffectEmployee_Click( object sender, EventArgs e )
+		{
+			if( !_currentProj.SkillsRequired.ContainsKey( _currentSkill ) )
+			{
+				if( _currentProj.EmployeesAffectedWithSkill.Count != 0 )
+				{
+					foreach( Employee emp in _currentProj.EmployeesAffectedWithSkill.Keys )
+					{
+						if( _currentProj.EmployeesAffectedWithSkill.ContainsValue( _currentSkill ) )
+						{
+							_currentProj.RemoveEmployeeFromAJob( emp, _currentSkill );
+							break;
+						}
+					}
+				}
+				//_currentEmployee = (Employee)listSkillsRequired.SelectedItems[listSkillsRequired.SelectedItems.Count - 1].Tag;
+
+				AffectStartButtonFields();
+
+				listSkillsRequired.Items.Clear();
+				listSkillsRequired.Items.AddRange( _currentProj.SkillsRequired.Select( k => CreateListItemViewSkillsRequired( k.Key, k.Value ) ).ToArray() );
+				listSkillsRequired.Items.AddRange( _currentProj.EmployeesAffectedWithSkill.Select( k => CompleteListItemViewSkillsRequired( k.Key, k.Value ) ).ToArray() );
+
+				listSkillsAvailable.Items.Clear();
+				listSkillsAvailable.Items.AddRange( _currentProj.MyComp.Employees.Where( emp => emp.Worker.Skills.Any( s => s.SkillName == _currentSkill.SkillName ) )
+											 .Where( emp => !emp.Busy )
+											 .Select( emp => CreateListItemViewEmployeeWithSkill( emp, _currentSkill ) )
+											 .OrderBy( emp => _currentSkill.Level.CurrentLevel )
+											 .ToArray() );
+			}
+		}
+
+		private void affectEmployee_Click( object sender, EventArgs e )
+		{
+			if( listSkillsAvailable.SelectedItems.Count > 0 )
+			{
+				_currentEmployee = (Employee)listSkillsAvailable.SelectedItems[ listSkillsAvailable.SelectedItems.Count - 1 ].Tag;
+				_currentProj.AffectEmployeeToAJob( _currentEmployee, _currentSkill );
+				//listSkillsAvailable.Enabled = false;
+				listSkillsAvailable.Items.Clear();
+
+				listSkillsRequired.Items.Clear();
+				listSkillsRequired.Items.AddRange( _currentProj.SkillsRequired.Select( k => CreateListItemViewSkillsRequired( k.Key, k.Value ) ).ToArray() );
+				listSkillsRequired.Items.AddRange( _currentProj.EmployeesAffectedWithSkill.Select( k => CompleteListItemViewSkillsRequired( k.Key, k.Value ) ).ToArray() );
+
+				AffectStartButtonFields();
+			}  
+		}
+
     }
 }

@@ -13,7 +13,7 @@ namespace SRH.Interface
 {
 	public partial class UcEmployeeList : UserControl
 	{
-		List<Employee> _employees;
+		IEnumerable<Employee> _employeesToDisplay;
 		Employee _currentEmployee;
 		string _selectedEmployeeName;
 		string _selectedEmployeeAge;
@@ -80,24 +80,23 @@ namespace SRH.Interface
 
 		internal void LoadUc()
 		{
-			_employees = GameContext.CurrentGame.PlayerCompany.Employees;
+			_employeesToDisplay = GetProjEmployees( _showProj );
 
 			employeeList.Items.Clear();
-			employeeList.Items.AddRange( GetProjEmployees( _showProj )
-				.Select( employee => CreateEmployee( employee ) )
+			employeeList.Items.AddRange( _employeesToDisplay.Select( employee => CreateEmployee( employee ) )
 				.OrderBy( employee => employee.Text)
 				.ToArray() );
 		}
 
-		private IEnumerable<Employee> GetProjEmployees( bool arg )
+		private IEnumerable<Employee> GetProjEmployees( bool showProj )
 		{
-			if( !arg )
+			if( !showProj )
 			{
-				return _employees.Where(e => e.SkillAffectedToCompany == null)
-					.Where( e => e.Worker.Skills.Any( s => !(s is ProjSkill ) ) );
+				return GameContext.CurrentGame.PlayerCompany.Employees.Where(e => e.SkillAffectedToCompany == null)
+					.Where( e => e.Worker.Skills.Any( s => s is CompaSkill ) );
 			}
 			else
-				return _employees;
+				return GameContext.CurrentGame.PlayerCompany.Employees;
 		}
 
 		private void employeeList_SelectedIndexChanged( object sender, EventArgs e )
@@ -120,23 +119,24 @@ namespace SRH.Interface
 			i.SubItems.Add( new ListViewItem.ListViewSubItem( i, e.Worker.FirstName ) );
 			i.SubItems.Add( new ListViewItem.ListViewSubItem( i, e.Worker.Age.ToString() ) );
 
-			if( _showProj )
-			{
+			//if( _showProj )
+			//{
 				Skill employeeBestSkill = e.Worker.Skills
 				.Where( s => s.Level.CurrentXp == e.Worker.Skills.Max( sk => sk.Level.CurrentXp ) )
 				.FirstOrDefault();
 				i.SubItems.Add( new ListViewItem.ListViewSubItem( i, employeeBestSkill.SkillName ) );
 				i.SubItems.Add( new ListViewItem.ListViewSubItem( i, employeeBestSkill.Level.CurrentLevel.ToString() ) );
-			}
-			else
-			{
-				Skill employeeBestSkill = e.Worker.Skills
-				.Where( s => !( s is ProjSkill ) )
-				.Where( s => s.Level.CurrentXp == e.Worker.Skills.Max( sk => sk.Level.CurrentXp ) )
-				.FirstOrDefault();
-				i.SubItems.Add( new ListViewItem.ListViewSubItem( i, employeeBestSkill.SkillName ) );
-				i.SubItems.Add( new ListViewItem.ListViewSubItem( i, employeeBestSkill.Level.CurrentLevel.ToString() ) );
-			}
+			//}
+			//else
+			//{
+			//	Skill employeeBestSkill = e.Worker.Skills
+			//	.Where( s => !( s is ProjSkill ) )
+			//	.Where( s => s.Level.CurrentXp == e.Worker.Skills.Max( sk => sk.Level.CurrentXp ) )
+			//	.FirstOrDefault();
+
+			//	i.SubItems.Add( new ListViewItem.ListViewSubItem( i, employeeBestSkill.SkillName ) );
+			//	i.SubItems.Add( new ListViewItem.ListViewSubItem( i, employeeBestSkill.Level.CurrentLevel.ToString() ) );
+			//}
 			
 			return i;
 		}
