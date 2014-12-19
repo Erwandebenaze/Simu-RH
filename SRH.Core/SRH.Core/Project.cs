@@ -17,7 +17,7 @@ namespace SRH.Core
         private int _timeSpent;
         private int _timeLeft;
         DateTime? _begginingDate;
-        readonly int _earnings;
+        int _earnings;
         readonly int _xpPerCompany;
         readonly int _xpPerPerson;
         bool _activated;
@@ -47,10 +47,12 @@ namespace SRH.Core
         public int Earnings
         {
             get { return _earnings; }
+            internal set { _earnings = value; }
         }
         public int ProjectTasks
         {
             get { return _projectTasks; }
+            internal set { _projectTasks = value; }
         }
         public int Duration
         {
@@ -256,9 +258,9 @@ namespace SRH.Core
         /// </summary>
         /// <param name="pourcentCommerciaux">Int</param>
         /// <returns>The new Projetc</returns>
-        public Project Clone( int pourcentCommerciaux = 100)
+        public Project Clone()
         {
-          Project project = new Project( _myComp, _name, _difficulty, _numberOfWorkers, _earnings + (_earnings * pourcentCommerciaux / 100) , new Dictionary<Skill, int>( _skillsRequired ) );
+          Project project = new Project( _myComp, _name, _difficulty, _numberOfWorkers, _earnings , new Dictionary<Skill, int>( _skillsRequired ) );
           return project;
         }
 

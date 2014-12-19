@@ -71,7 +71,7 @@ namespace SRH.Interface
             ListViewItem i = new ListViewItem( p.Name );
             i.Tag = p;
             i.SubItems.Add( new ListViewItem.ListViewSubItem( i, p.Difficulty.ToString() ) );
-            i.SubItems.Add( new ListViewItem.ListViewSubItem( i, p.Earnings.ToString() ) );
+            i.SubItems.Add( new ListViewItem.ListViewSubItem( i, GameContext.CurrentGame.PlayerCompany.EstimatePourcentCommerciaux( p ).ToString() ) );
             i.SubItems.Add( new ListViewItem.ListViewSubItem( i, p.Duration.ToString() ) );
             return i;
         }
@@ -80,7 +80,7 @@ namespace SRH.Interface
             ListViewItem i = new ListViewItem( p.Name );
             i.Tag = p;
             i.SubItems.Add( new ListViewItem.ListViewSubItem( i, p.Difficulty.ToString() ) );
-            i.SubItems.Add( new ListViewItem.ListViewSubItem( i, p.Earnings.ToString() ) );
+            i.SubItems.Add( new ListViewItem.ListViewSubItem( i, GameContext.CurrentGame.PlayerCompany.EstimatePourcentCommerciaux(p).ToString() ) );
             i.SubItems.Add( new ListViewItem.ListViewSubItem( i, p.TimeLeft.ToString() ) );
             return i;
         }
@@ -199,7 +199,7 @@ namespace SRH.Interface
         {
             _projectNameText.Text = _currentProj.Name;
             _difficulty.Text = _currentProj.Difficulty.ToString();
-            _earnings.Text = _currentProj.Earnings.ToString();
+            _earnings.Text = GameContext.CurrentGame.PlayerCompany.EstimatePourcentCommerciaux( _currentProj ).ToString();
             AffectVariableFields();
             _numberOfWorkers.Text = _currentProj.NumberOfWorkers.ToString();
         }

@@ -40,6 +40,7 @@
             this.Level = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Earnings = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.TimeLeft = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.projectProgressBar = new System.Windows.Forms.ProgressBar();
             this.splitContainer3 = new System.Windows.Forms.SplitContainer();
             this.listSkillsRequired = new System.Windows.Forms.ListView();
             this.ProjectEmployeeName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -59,7 +60,6 @@
             this._difficulty = new System.Windows.Forms.Label();
             this.Difficulty = new System.Windows.Forms.Label();
             this._projectNameText = new System.Windows.Forms.Label();
-            this.projectProgressBar = new System.Windows.Forms.ProgressBar();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -135,7 +135,6 @@
             this.listPossibleProjects.FullRowSelect = true;
             this.listPossibleProjects.Location = new System.Drawing.Point(0, 0);
             this.listPossibleProjects.Margin = new System.Windows.Forms.Padding(4);
-            this.listPossibleProjects.MultiSelect = false;
             this.listPossibleProjects.Name = "listPossibleProjects";
             this.listPossibleProjects.Size = new System.Drawing.Size(365, 271);
             this.listPossibleProjects.TabIndex = 0;
@@ -206,6 +205,13 @@
             this.TimeLeft.Text = "Temps restant";
             this.TimeLeft.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.TimeLeft.Width = 105;
+            // 
+            // projectProgressBar
+            // 
+            this.projectProgressBar.Location = new System.Drawing.Point(33, 215);
+            this.projectProgressBar.Name = "projectProgressBar";
+            this.projectProgressBar.Size = new System.Drawing.Size(658, 23);
+            this.projectProgressBar.TabIndex = 13;
             // 
             // splitContainer3
             // 
@@ -392,13 +398,6 @@
             this._projectNameText.TabIndex = 2;
             this._projectNameText.Text = "Nom du projet";
             this._projectNameText.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // projectProgressBar
-            // 
-            this.projectProgressBar.Location = new System.Drawing.Point(33, 215);
-            this.projectProgressBar.Name = "projectProgressBar";
-            this.projectProgressBar.Size = new System.Drawing.Size(658, 23);
-            this.projectProgressBar.TabIndex = 13;
             // 
             // UcProjectPage
             // 

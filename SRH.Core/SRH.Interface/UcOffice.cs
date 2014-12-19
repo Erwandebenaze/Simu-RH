@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using SRH.Core;
 
 namespace SRH.Interface
 {
@@ -47,6 +48,18 @@ namespace SRH.Interface
             _nextLimitEmployees.Text = (10 + (2 * (GameContext.CurrentGame.PlayerCompany.CompanyLevel.CurrentLevel + 1))).ToString();
             _maxDifficultyProject.Text = GameContext.CurrentGame.PlayerCompany.MaxProjectDifficulty.ToString();
             _maxWealthText.Text = GameContext.CurrentGame.PlayerCompany.MaxWealth.ToString();
+            _actualWealth.Text = GameContext.CurrentGame.PlayerCompany.Wealth.ToString();
+            int i = 0;
+            foreach( Employee emp in GameContext.CurrentGame.PlayerCompany.Employees )
+            {
+                i += emp.Salary; 
+            }
+
+            _salaryMonth.Text = (i ).ToString();
+            _salaryYear.Text = (i * 12).ToString();
+            _interestMonth.Text = GameContext.CurrentGame.PlayerCompany.GetInterest().ToString();
+            _interestYear.Text = (GameContext.CurrentGame.PlayerCompany.GetInterest()*12).ToString();
+
         }
 
     }
