@@ -9,13 +9,19 @@ namespace SRH.Core
     [Serializable]
     public class CompaSkill : Skill
     {
-        internal CompaSkill( string skillName, int startLevel = 1 )
-			: base( skillName, startLevel )
+        internal CompaSkill( Person p, string skillName, int startLevel = 1 )
+			: base( p, skillName, startLevel )
 		{
 			_baseCostToTrain = 1500;
 			_baseTimeToTrain = 20;
 		}
 
+		internal CompaSkill( string skillName, int startLevel = 1 )
+			: base( skillName, startLevel )
+		{
+			_baseCostToTrain = 1500;
+			_baseTimeToTrain = 20;
+		}
         public override void FixPriceAndTime()
         {
             switch( Level.CurrentLevel )

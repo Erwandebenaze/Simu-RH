@@ -75,10 +75,17 @@ namespace SRH.Interface
 			_joblessPersons = GameContext.CurrentGame.Market.JoblessPersons;
 			PersonList.Items.Clear();
 			PersonList.Items.AddRange( _joblessPersons.Select( p => CreatePerson( p ) ).ToArray() );
+			UcEmployeeList1.LoadUc();
+		}
+
+		internal void LoadEmployeeList()
+		{
+			UcEmployeeList1.LoadUc();
 		}
 
 		internal void UpdateEmployeeDisplay()
 		{
+			// UcEmployeeList1.LoadUc();
 			_currentEmployee = UcEmployeeList1.CurrentEmployee;
 
 			ucSkillsDisplayEmployee.CurrentPerson = _currentEmployee.Worker;
@@ -165,6 +172,17 @@ namespace SRH.Interface
 			employeeOccupation.Visible = true;
 			employeeSalary.Visible = true;
 			firingCost.Visible = true;
+			decreaseSalary.Visible = true;
+			increaseSalary.Visible = true;
+
+			if( ( _currentEmployee.Salary - ( _currentEmployee.Worker.ExpectedSalary * 0.05 ) ) < 600 )
+				decreaseSalary.Enabled = false;
+			else
+				decreaseSalary.Enabled = true;
+			if( ( _currentEmployee.Salary + ( _currentEmployee.Worker.ExpectedSalary * 0.05 ) ) > ( 2 * _currentEmployee.Worker.ExpectedSalary ) )
+				increaseSalary.Enabled = false;
+			else
+				increaseSalary.Enabled = true;
 		}
 
 		/// <summary>
@@ -177,7 +195,7 @@ namespace SRH.Interface
 			Train.Enabled = true;
 			string selectedSkill = (string)SelectedEmployeeSkillsToTrain.SelectedItem;
 			_currentSkillToTrain = _currentEmployee.Worker.Skills
-				.Where( s => s.Person == _currentEmployee.Worker )
+				.Where( s => s.SkillName == selectedSkill )
 				.SingleOrDefault();
 			if( _currentSkillToTrain == null )
 			{
@@ -271,8 +289,8 @@ namespace SRH.Interface
 
 		private void decreaseSalary_Click( object sender, EventArgs e )
 		{
-			double salaryIncrease = _currentEmployee.Worker.ExpectedSalary * 0.05;
-			_currentEmployee.SalaryAdjustment -= (int)salaryIncrease;
+			double salaryDecrease = _currentEmployee.Worker.ExpectedSalary * 0.05;
+			_currentEmployee.SalaryAdjustment -= (int)salaryDecrease;
 			UpdateEmployeeDisplay();
 		}
 
@@ -336,7 +354,7 @@ namespace SRH.Interface
 			// Add the other Skills, without the Employee's already present Skills
 			SelectedEmployeeSkillsToTrain.Items.AddRange( Game.SkillNames
 				.Select( s => s.Value )
-				.Where( s => !( _currentEmployee.Worker.Skills.Any( ps => ps.Person == _currentEmployee.Worker ) ) )
+				.Where( s => !( _currentEmployee.Worker.Skills.Any( ps => ps.SkillName == s ) ) )
 				.ToArray() );
 			SelectedEmployeeSkillsToTrain.SelectedIndex = 0;
 		}

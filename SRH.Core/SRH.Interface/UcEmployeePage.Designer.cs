@@ -57,25 +57,25 @@
 			this.SelectedSkillToTrainCost = new System.Windows.Forms.Label();
 			this.SelectedSkillToTrainTime = new System.Windows.Forms.Label();
 			this.SelectedEmployeeSkillsToTrain = new System.Windows.Forms.ComboBox();
+			this.currentTrainingPanel = new System.Windows.Forms.Panel();
+			this.timeLeft = new System.Windows.Forms.Label();
+			this.cancelTraining = new System.Windows.Forms.Button();
+			this.trainingTimeLeftTitle = new System.Windows.Forms.Label();
+			this.trainingProgress = new System.Windows.Forms.ProgressBar();
 			this.decreaseSalary = new System.Windows.Forms.Button();
 			this.increaseSalary = new System.Windows.Forms.Button();
 			this.employeeSalary = new System.Windows.Forms.Label();
 			this.employeeOccupation = new System.Windows.Forms.Label();
 			this.employeeAge = new System.Windows.Forms.Label();
 			this.employeeName = new System.Windows.Forms.Label();
+			this.hiringCost = new System.Windows.Forms.Label();
 			this.personExpectedSalary = new System.Windows.Forms.Label();
 			this.personAge = new System.Windows.Forms.Label();
 			this.personName = new System.Windows.Forms.Label();
 			this.hirePerson = new System.Windows.Forms.Button();
-			this.currentTrainingPanel = new System.Windows.Forms.Panel();
-			this.timeLeft = new System.Windows.Forms.Label();
-			this.cancelTraining = new System.Windows.Forms.Button();
-			this.trainingTimeLeftTitle = new System.Windows.Forms.Label();
-			this.trainingProgress = new System.Windows.Forms.ProgressBar();
 			this.UcEmployeeList1 = new SRH.Interface.UcEmployeeList();
 			this.ucSkillsDisplayEmployee = new SRH.Interface.UcSkillsDisplay();
 			this.ucSkillsDisplayPerson = new SRH.Interface.UcSkillsDisplay();
-			this.hiringCost = new System.Windows.Forms.Label();
 			SelectedPersonTitle = new System.Windows.Forms.Label();
 			personNameTitle = new System.Windows.Forms.Label();
 			personAgeTitle = new System.Windows.Forms.Label();
@@ -194,6 +194,15 @@
 			firingCostTitle.Size = new System.Drawing.Size(35, 13);
 			firingCostTitle.TabIndex = 31;
 			firingCostTitle.Text = "Coût :";
+			// 
+			// hiringCostTitle
+			// 
+			hiringCostTitle.AutoSize = true;
+			hiringCostTitle.Location = new System.Drawing.Point(334, 83);
+			hiringCostTitle.Name = "hiringCostTitle";
+			hiringCostTitle.Size = new System.Drawing.Size(35, 13);
+			hiringCostTitle.TabIndex = 33;
+			hiringCostTitle.Text = "Coût :";
 			// 
 			// SelectedSkillTrainCostTitle
 			// 
@@ -410,113 +419,6 @@
 			this.SelectedEmployeeSkillsToTrain.TabIndex = 15;
 			this.SelectedEmployeeSkillsToTrain.SelectedIndexChanged += new System.EventHandler(this.SelectedEmployeeSkillsToTrain_SelectedIndexChanged);
 			// 
-			// decreaseSalary
-			// 
-			this.decreaseSalary.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.decreaseSalary.Location = new System.Drawing.Point(60, 155);
-			this.decreaseSalary.Name = "decreaseSalary";
-			this.decreaseSalary.Size = new System.Drawing.Size(22, 23);
-			this.decreaseSalary.TabIndex = 30;
-			this.decreaseSalary.Text = "-";
-			this.decreaseSalary.UseVisualStyleBackColor = true;
-			this.decreaseSalary.Click += new System.EventHandler(this.decreaseSalary_Click);
-			// 
-			// increaseSalary
-			// 
-			this.increaseSalary.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.increaseSalary.Location = new System.Drawing.Point(17, 155);
-			this.increaseSalary.Name = "increaseSalary";
-			this.increaseSalary.Size = new System.Drawing.Size(22, 23);
-			this.increaseSalary.TabIndex = 29;
-			this.increaseSalary.Text = "+";
-			this.increaseSalary.UseVisualStyleBackColor = true;
-			this.increaseSalary.Click += new System.EventHandler(this.increaseSalary_Click);
-			// 
-			// employeeSalary
-			// 
-			this.employeeSalary.AutoSize = true;
-			this.employeeSalary.Location = new System.Drawing.Point(88, 129);
-			this.employeeSalary.Name = "employeeSalary";
-			this.employeeSalary.Size = new System.Drawing.Size(14, 13);
-			this.employeeSalary.TabIndex = 28;
-			this.employeeSalary.Text = "X";
-			this.employeeSalary.TextAlign = System.Drawing.ContentAlignment.TopRight;
-			this.employeeSalary.Visible = false;
-			// 
-			// employeeOccupation
-			// 
-			this.employeeOccupation.AutoSize = true;
-			this.employeeOccupation.Location = new System.Drawing.Point(88, 84);
-			this.employeeOccupation.Name = "employeeOccupation";
-			this.employeeOccupation.Size = new System.Drawing.Size(14, 13);
-			this.employeeOccupation.TabIndex = 26;
-			this.employeeOccupation.Text = "X";
-			this.employeeOccupation.TextAlign = System.Drawing.ContentAlignment.TopRight;
-			this.employeeOccupation.Visible = false;
-			// 
-			// employeeAge
-			// 
-			this.employeeAge.AutoSize = true;
-			this.employeeAge.Location = new System.Drawing.Point(55, 58);
-			this.employeeAge.Name = "employeeAge";
-			this.employeeAge.Size = new System.Drawing.Size(14, 13);
-			this.employeeAge.TabIndex = 10;
-			this.employeeAge.Text = "X";
-			this.employeeAge.TextAlign = System.Drawing.ContentAlignment.TopRight;
-			this.employeeAge.Visible = false;
-			// 
-			// employeeName
-			// 
-			this.employeeName.AutoSize = true;
-			this.employeeName.Location = new System.Drawing.Point(55, 34);
-			this.employeeName.Name = "employeeName";
-			this.employeeName.Size = new System.Drawing.Size(14, 13);
-			this.employeeName.TabIndex = 9;
-			this.employeeName.Text = "X";
-			this.employeeName.TextAlign = System.Drawing.ContentAlignment.TopRight;
-			this.employeeName.Visible = false;
-			// 
-			// personExpectedSalary
-			// 
-			this.personExpectedSalary.AutoSize = true;
-			this.personExpectedSalary.Location = new System.Drawing.Point(104, 112);
-			this.personExpectedSalary.Name = "personExpectedSalary";
-			this.personExpectedSalary.Size = new System.Drawing.Size(14, 13);
-			this.personExpectedSalary.TabIndex = 32;
-			this.personExpectedSalary.Text = "X";
-			this.personExpectedSalary.Visible = false;
-			// 
-			// personAge
-			// 
-			this.personAge.AutoSize = true;
-			this.personAge.Location = new System.Drawing.Point(55, 83);
-			this.personAge.Name = "personAge";
-			this.personAge.Size = new System.Drawing.Size(14, 13);
-			this.personAge.TabIndex = 5;
-			this.personAge.Text = "X";
-			this.personAge.Visible = false;
-			// 
-			// personName
-			// 
-			this.personName.AutoSize = true;
-			this.personName.Location = new System.Drawing.Point(55, 59);
-			this.personName.Name = "personName";
-			this.personName.Size = new System.Drawing.Size(14, 13);
-			this.personName.TabIndex = 4;
-			this.personName.Text = "X";
-			this.personName.Visible = false;
-			// 
-			// hirePerson
-			// 
-			this.hirePerson.Enabled = false;
-			this.hirePerson.Location = new System.Drawing.Point(332, 54);
-			this.hirePerson.Name = "hirePerson";
-			this.hirePerson.Size = new System.Drawing.Size(75, 23);
-			this.hirePerson.TabIndex = 0;
-			this.hirePerson.Text = "Engager";
-			this.hirePerson.UseVisualStyleBackColor = true;
-			this.hirePerson.Click += new System.EventHandler(this.hirePerson_Click);
-			// 
 			// currentTrainingPanel
 			// 
 			this.currentTrainingPanel.Controls.Add(this.timeLeft);
@@ -564,6 +466,126 @@
 			this.trainingProgress.Size = new System.Drawing.Size(212, 16);
 			this.trainingProgress.TabIndex = 0;
 			// 
+			// decreaseSalary
+			// 
+			this.decreaseSalary.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.decreaseSalary.Location = new System.Drawing.Point(60, 155);
+			this.decreaseSalary.Name = "decreaseSalary";
+			this.decreaseSalary.Size = new System.Drawing.Size(22, 23);
+			this.decreaseSalary.TabIndex = 30;
+			this.decreaseSalary.Text = "-";
+			this.decreaseSalary.UseVisualStyleBackColor = true;
+			this.decreaseSalary.Visible = false;
+			this.decreaseSalary.Click += new System.EventHandler(this.decreaseSalary_Click);
+			// 
+			// increaseSalary
+			// 
+			this.increaseSalary.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.increaseSalary.Location = new System.Drawing.Point(17, 155);
+			this.increaseSalary.Name = "increaseSalary";
+			this.increaseSalary.Size = new System.Drawing.Size(22, 23);
+			this.increaseSalary.TabIndex = 29;
+			this.increaseSalary.Text = "+";
+			this.increaseSalary.UseVisualStyleBackColor = true;
+			this.increaseSalary.Visible = false;
+			this.increaseSalary.Click += new System.EventHandler(this.increaseSalary_Click);
+			// 
+			// employeeSalary
+			// 
+			this.employeeSalary.AutoSize = true;
+			this.employeeSalary.Location = new System.Drawing.Point(88, 129);
+			this.employeeSalary.Name = "employeeSalary";
+			this.employeeSalary.Size = new System.Drawing.Size(14, 13);
+			this.employeeSalary.TabIndex = 28;
+			this.employeeSalary.Text = "X";
+			this.employeeSalary.TextAlign = System.Drawing.ContentAlignment.TopRight;
+			this.employeeSalary.Visible = false;
+			// 
+			// employeeOccupation
+			// 
+			this.employeeOccupation.AutoSize = true;
+			this.employeeOccupation.Location = new System.Drawing.Point(88, 84);
+			this.employeeOccupation.Name = "employeeOccupation";
+			this.employeeOccupation.Size = new System.Drawing.Size(14, 13);
+			this.employeeOccupation.TabIndex = 26;
+			this.employeeOccupation.Text = "X";
+			this.employeeOccupation.TextAlign = System.Drawing.ContentAlignment.TopRight;
+			this.employeeOccupation.Visible = false;
+			// 
+			// employeeAge
+			// 
+			this.employeeAge.AutoSize = true;
+			this.employeeAge.Location = new System.Drawing.Point(55, 58);
+			this.employeeAge.Name = "employeeAge";
+			this.employeeAge.Size = new System.Drawing.Size(14, 13);
+			this.employeeAge.TabIndex = 10;
+			this.employeeAge.Text = "X";
+			this.employeeAge.TextAlign = System.Drawing.ContentAlignment.TopRight;
+			this.employeeAge.Visible = false;
+			// 
+			// employeeName
+			// 
+			this.employeeName.AutoSize = true;
+			this.employeeName.Location = new System.Drawing.Point(55, 34);
+			this.employeeName.Name = "employeeName";
+			this.employeeName.Size = new System.Drawing.Size(14, 13);
+			this.employeeName.TabIndex = 9;
+			this.employeeName.Text = "X";
+			this.employeeName.TextAlign = System.Drawing.ContentAlignment.TopRight;
+			this.employeeName.Visible = false;
+			// 
+			// hiringCost
+			// 
+			this.hiringCost.AutoSize = true;
+			this.hiringCost.Location = new System.Drawing.Point(370, 83);
+			this.hiringCost.Name = "hiringCost";
+			this.hiringCost.Size = new System.Drawing.Size(14, 13);
+			this.hiringCost.TabIndex = 34;
+			this.hiringCost.Text = "X";
+			this.hiringCost.TextAlign = System.Drawing.ContentAlignment.TopRight;
+			this.hiringCost.Visible = false;
+			// 
+			// personExpectedSalary
+			// 
+			this.personExpectedSalary.AutoSize = true;
+			this.personExpectedSalary.Location = new System.Drawing.Point(104, 112);
+			this.personExpectedSalary.Name = "personExpectedSalary";
+			this.personExpectedSalary.Size = new System.Drawing.Size(14, 13);
+			this.personExpectedSalary.TabIndex = 32;
+			this.personExpectedSalary.Text = "X";
+			this.personExpectedSalary.Visible = false;
+			// 
+			// personAge
+			// 
+			this.personAge.AutoSize = true;
+			this.personAge.Location = new System.Drawing.Point(55, 83);
+			this.personAge.Name = "personAge";
+			this.personAge.Size = new System.Drawing.Size(14, 13);
+			this.personAge.TabIndex = 5;
+			this.personAge.Text = "X";
+			this.personAge.Visible = false;
+			// 
+			// personName
+			// 
+			this.personName.AutoSize = true;
+			this.personName.Location = new System.Drawing.Point(55, 59);
+			this.personName.Name = "personName";
+			this.personName.Size = new System.Drawing.Size(14, 13);
+			this.personName.TabIndex = 4;
+			this.personName.Text = "X";
+			this.personName.Visible = false;
+			// 
+			// hirePerson
+			// 
+			this.hirePerson.Enabled = false;
+			this.hirePerson.Location = new System.Drawing.Point(332, 54);
+			this.hirePerson.Name = "hirePerson";
+			this.hirePerson.Size = new System.Drawing.Size(75, 23);
+			this.hirePerson.TabIndex = 0;
+			this.hirePerson.Text = "Engager";
+			this.hirePerson.UseVisualStyleBackColor = true;
+			this.hirePerson.Click += new System.EventHandler(this.hirePerson_Click);
+			// 
 			// UcEmployeeList1
 			// 
 			this.UcEmployeeList1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -587,26 +609,6 @@
 			this.ucSkillsDisplayPerson.Name = "ucSkillsDisplayPerson";
 			this.ucSkillsDisplayPerson.Size = new System.Drawing.Size(440, 140);
 			this.ucSkillsDisplayPerson.TabIndex = 23;
-			// 
-			// hiringCost
-			// 
-			this.hiringCost.AutoSize = true;
-			this.hiringCost.Location = new System.Drawing.Point(370, 83);
-			this.hiringCost.Name = "hiringCost";
-			this.hiringCost.Size = new System.Drawing.Size(14, 13);
-			this.hiringCost.TabIndex = 34;
-			this.hiringCost.Text = "X";
-			this.hiringCost.TextAlign = System.Drawing.ContentAlignment.TopRight;
-			this.hiringCost.Visible = false;
-			// 
-			// hiringCostTitle
-			// 
-			hiringCostTitle.AutoSize = true;
-			hiringCostTitle.Location = new System.Drawing.Point(334, 83);
-			hiringCostTitle.Name = "hiringCostTitle";
-			hiringCostTitle.Size = new System.Drawing.Size(35, 13);
-			hiringCostTitle.TabIndex = 33;
-			hiringCostTitle.Text = "Coût :";
 			// 
 			// UcEmployeePage
 			// 

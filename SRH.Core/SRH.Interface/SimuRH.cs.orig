@@ -20,17 +20,13 @@ namespace SRH.Interface
         GameTime _timeOfGame;
         DateTime? _begginingDebt;
         bool _debt;
+        int _interest;
 
         public SimuRH()
         {
             InitializeComponent();
-<<<<<<< HEAD
-            _myGame = new Game( 1, "Tristan" );
+            _myGame = new Game( 1, "Erwan" );
             //_myGame = GameLoader.Load( "Erwan" );
-=======
-            //_myGame = new Game( 1, "Erwan" );
-            _myGame = GameLoader.Load( "Erwan" );
->>>>>>> origin/develop
             _optionsForm = new Options();
             _timeOfGame = _myGame.TimeGame;
             _timer = new Timer();
@@ -62,14 +58,23 @@ namespace SRH.Interface
                 BarProgress();
                 ExperienceProgress();
                 WealthProgress();
+                ucOffice.AffectOfficeFields();
+
 
                 _timeOfGame.newDay();
+                _myGame.PlayerCompany.AddXpToManagers();
                 _myGame.PlayerCompany.EndProjectIfItsFinish();
+				UpdateEmployeesSkills(); 
                 ClearListsProjects();
 
 				// Current date display
                 _dateOfGame.Text = _myGame.TimeGame.CurrentTimeOfGame.ToString( "d" );
                 _day.Text = _timeOfGame.FrenchDayOfWeek;
+
+				// Pay employees
+				PayEmployees();
+
+				// Wealth check and consequences
                 if( _myGame.PlayerCompany.Wealth < 0 && !_debt)
                 {
                     _begginingDebt = _myGame.TimeGame.CurrentTimeOfGame;
@@ -93,8 +98,53 @@ namespace SRH.Interface
                     competitor.TryToAddMoneyAndEmployee();
                 }
             }
+            if( _myGame.TimeGame.CurrentTimeOfGame.Month != _myGame.TimeGame.TryAddDay().Month && (_myGame.PlayerCompany.Wealth < 0) )
+            {
+                _interest = _myGame.PlayerCompany.GetInterest();
+                _myGame.PlayerCompany.ApplyInterests();
+            }
 
         }
+
+		private void PayEmployees()
+		{
+			if( _myGame.TimeGame.CurrentTimeOfGame.Month != _myGame.TimeGame.TryAddDay().Month )
+			{
+				foreach( Employee e in _myGame.PlayerCompany.Employees )
+				{
+					_myGame.PlayerCompany.Wealth -= e.Salary;
+				}
+			}
+		}
+
+		private void UpdateEmployeesSkills()
+		{
+			// Training
+			int timeLeft;
+			foreach( Employee e in _myGame.PlayerCompany.Employees.Where( emp => emp.SkillInTraining != null ) )
+			{
+				timeLeft = e.UpdateEmployeeTraining();
+				if( timeLeft == 0 )
+				{
+					ucEmployeePage.UpdateEmployeeDisplay();
+					ucEmployeePage.LoadEmployeeList();
+				}
+
+				if( e == ucEmployeePage.CurrentEmployee )
+				{
+					ucEmployeePage.TrainingTimeLeft = timeLeft;
+					ucEmployeePage.SetTrainingProgress( e );
+				}
+<<<<<<< HEAD
+=======
+
+				if( timeLeft == 0 ) ucEmployeePage.UpdateEmployeeDisplay();
+>>>>>>> origin/develop
+			}
+
+			// Level gain
+
+		}
 
         private void ClearListsProjects()
         {
@@ -103,6 +153,7 @@ namespace SRH.Interface
             {
                 ucProjectPage.listCurrentProjects.Items.Clear();
                 ucProjectPage.listCurrentProjects.Items.AddRange( ucProjectPage.Projects.Select( p => ucProjectPage.CreateListItemViewCurrentProjects( p ) ).ToArray() );
+                ucProjectPage.AffectVariableFields();
             }
         }
 

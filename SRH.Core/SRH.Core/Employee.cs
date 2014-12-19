@@ -96,6 +96,8 @@ namespace SRH.Core
 		{
 			int salary = _worker.ExpectedSalary;
 			salary += _salaryAdjustment;
+			if( salary < 600 )
+				throw new InvalidOperationException( "An Employee's salary cannot be under 600€, check SalaryAdjustment." );
 
 			return salary;
 		}
@@ -105,32 +107,27 @@ namespace SRH.Core
 		/// </summary>
 		/// <param name="skillName"></param>
 		/// <returns>False if the Company has inadequate wealth</returns>
-		public bool Train( string skillName )
+		public void Train( string skillName )
 		{
 			// Check if skillName is valid
 			_comp.Game.ValidateSkillName( skillName );
 			Skill candidate = _comp.Game.GetSkillCandidate( skillName );
 
-			Skill skillToTrain = _worker.Skills.Where( s => s.Person == _worker ).SingleOrDefault();
+			Skill skillToTrain = _worker.Skills.Where( s => s.SkillName == skillName ).SingleOrDefault();
 
 			if( skillToTrain == null )
 			{
 				Skill newSkill = _worker.AddSkill( _worker, skillName );
-				_busy = false;
-				_worker.GenerateExpectedSalary();
-				return true;
 			}
 			else
 			{
 				int xpToNextLevel = skillToTrain.Level.NextXpRequired - skillToTrain.Level.CurrentXp;
 				skillToTrain.Level.IncreaseXp( xpToNextLevel );
 				_comp.Wealth -= skillToTrain.UpgradePrice;
-
-				_skillInTraining = null;
-				_busy = false;
-				_worker.GenerateExpectedSalary();
-				return true;
 			}
+
+			_skillInTraining = null;
+			_busy = false;
 		}
 
 		/// <summary>
@@ -156,7 +153,7 @@ namespace SRH.Core
 			// Set a candidate skill to test
 			Skill candidate = _comp.Game.GetSkillCandidate( skillName );
 			
-			Skill skillToTrain = _worker.Skills.Where( s => s.Person == _worker ).SingleOrDefault();
+			Skill skillToTrain = _worker.Skills.Where( s => s.SkillName == skillName ).SingleOrDefault();
 
 			if( skillToTrain == null )
 			{

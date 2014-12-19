@@ -12,14 +12,16 @@ namespace SRH.Core
         int _currentXp;
         int _xpRequired;
         int _currentLevel;
-        private bool _skill;
+        bool _isSkill;
+		Skill _skill;
 
         internal Level( Skill s, int startLevel )
         {
             // TODO : Trouver le moyen de savoir qui appelle le constructeur pour savoir si c'est la company ou une skill.
+			_skill = s;
 			_currentXp = 0;
             _currentLevel = startLevel;
-            _skill = true;
+            _isSkill = true;
             _xpRequired = FixNextXpRequired( _currentLevel);
         }
 
@@ -28,7 +30,7 @@ namespace SRH.Core
             // TODO : Trouver le moyen de savoir qui appelle le constructeur pour savoir si c'est la company ou une skill.
             _currentXp = 0;
             _currentLevel = startLevel;
-            _skill = false;
+            _isSkill = false;
 			_xpRequired = FixNextXpRequired( _currentLevel );
         }
         public int CurrentXp
@@ -83,7 +85,7 @@ namespace SRH.Core
         {
 			int NextXpRequired = 0;
 
-            if( _skill )
+            if( _isSkill )
             {
                 #region switch
                 switch( level )
@@ -108,7 +110,7 @@ namespace SRH.Core
                 }
             }
                 #endregion
-            else if( !_skill )
+            else if( !_isSkill )
             {
 				if( level == 1 )
 					NextXpRequired = 100;
@@ -121,11 +123,11 @@ namespace SRH.Core
         }
         private void IncreaseLevel( MyCompany mc = null)
         {
-             if( !_skill )
-             {
-                mc.AdjustValuesCompany();
-             }
-			 _currentLevel += 1;
+			_currentLevel += 1;
+			if( _isSkill )
+				_skill.Person.GenerateExpectedSalary();
+			else
+				mc.AdjustValuesCompany();
         }
     }
 }
