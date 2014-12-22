@@ -119,24 +119,24 @@ namespace SRH.Interface
 			i.SubItems.Add( new ListViewItem.ListViewSubItem( i, e.Worker.FirstName ) );
 			i.SubItems.Add( new ListViewItem.ListViewSubItem( i, e.Worker.Age.ToString() ) );
 
-			//if( _showProj )
-			//{
+			if( _showProj )
+			{
 				Skill employeeBestSkill = e.Worker.Skills
 				.Where( s => s.Level.CurrentXp == e.Worker.Skills.Max( sk => sk.Level.CurrentXp ) )
 				.FirstOrDefault();
 				i.SubItems.Add( new ListViewItem.ListViewSubItem( i, employeeBestSkill.SkillName ) );
 				i.SubItems.Add( new ListViewItem.ListViewSubItem( i, employeeBestSkill.Level.CurrentLevel.ToString() ) );
-			//}
-			//else
-			//{
-			//	Skill employeeBestSkill = e.Worker.Skills
-			//	.Where( s => !( s is ProjSkill ) )
-			//	.Where( s => s.Level.CurrentXp == e.Worker.Skills.Max( sk => sk.Level.CurrentXp ) )
-			//	.FirstOrDefault();
+			}
+			else
+			{
+				IEnumerable<Skill> compaSkillsOnly = e.Worker.Skills.Where( s => s is CompaSkill );
+				Skill employeeBestSkill = compaSkillsOnly
+				.Where( s => s.Level.CurrentXp == compaSkillsOnly.Max( sk => sk.Level.CurrentXp ) )
+				.FirstOrDefault();
 
-			//	i.SubItems.Add( new ListViewItem.ListViewSubItem( i, employeeBestSkill.SkillName ) );
-			//	i.SubItems.Add( new ListViewItem.ListViewSubItem( i, employeeBestSkill.Level.CurrentLevel.ToString() ) );
-			//}
+				i.SubItems.Add( new ListViewItem.ListViewSubItem( i, employeeBestSkill.SkillName ) );
+				i.SubItems.Add( new ListViewItem.ListViewSubItem( i, employeeBestSkill.Level.CurrentLevel.ToString() ) );
+			}
 			
 			return i;
 		}

@@ -66,30 +66,33 @@ namespace SRH.Core
 		#endregion
 
         /// <summary>
-        /// Adds an <see cref="Employee"/> to <see cref="MyCompany"/>
+		/// Creates an <see cref="Employee"/> from a Person, adds it to <see cref="MyCompany"/>
+		/// and removes the person from the <see cref="LaborMarket"/>
         /// </summary>
         /// <param name="p">The Worker to add, it becomes an <see cref="Employee"/> when added</param>
-        /// <returns>Returns True if the <see cref="Employee"/> was added</returns>
+        /// <returns> The <see cref="Employee"/> that was added </returns>
         internal Employee AddEmployee( Person p )
         {
             Employee e = new Employee( this, p );
+
+			if( _employees.Count + 1 > _maxEmployees ) throw new InvalidOperationException( "The company has reached it's maximum employee limit." );
             _employees.Add( e );
 
-            if( !(_employees.Exists( x => x.Equals( e ) )) ) throw new InvalidOperationException( "The Employee wasn't properly added to the List." );
-            if( !(p.Lb.RemovePerson( p )) ) throw new InvalidOperationException( "The Person wasn't properly removed from the List." );
+            if( !( _employees.Contains( e ) ) ) throw new InvalidOperationException( "The Employee wasn't properly added to the List." );
+            if( !( p.Lb.RemovePerson( p ) ) ) throw new InvalidOperationException( "The Person wasn't properly removed from the List." );
             return e;
         }
         /// <summary>
-        /// Removes an <see cref="Employee"/> from <see cref="MyCompany"/>
+        /// Removes an <see cref="Employee"/> from <see cref="MyCompany"/> and adds the Person to the <see cref="LaborMarket"/>
         /// </summary>
-        /// <param name="e">The <see cref="Employee"/> to remove</param>
-        /// <returns>Returns True id the <see cref="Employee"/> was removes</returns>
+        /// <param name="e"> The <see cref="Employee"/> to remove </param>
+        /// <returns> The <see cref="Employee"/> Person created </returns>
         internal Person RemoveEmployee( Employee e )
         {
             _employees.Remove( e );
-            if( _employees.Exists( x => x.Equals( e ) ) )
+            if( _employees.Contains( e ) )
                 throw new InvalidOperationException( "The Employee was not removed properly from the List." );
-            if( !(e.Worker.Lb.AddPerson( e.Worker )) )
+            if( !( e.Worker.Lb.AddPerson( e.Worker ) ) )
                 throw new InvalidOperationException( "The Person was not added properly to te List." );
 
             return e.Worker;

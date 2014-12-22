@@ -85,10 +85,9 @@ namespace SRH.Interface
 
 		internal void UpdateEmployeeDisplay()
 		{
-			// UcEmployeeList1.LoadUc();
 			_currentEmployee = UcEmployeeList1.CurrentEmployee;
-
 			ucSkillsDisplayEmployee.CurrentPerson = _currentEmployee.Worker;
+
 			employeeName.Text = _currentEmployee.Worker.FirstName + " " + _currentEmployee.Worker.LastName;
 			employeeAge.Text = _currentEmployee.Worker.Age.ToString();
 			employeeOccupation.Text = GetCurrentOccupationText( _currentEmployee );
@@ -102,7 +101,7 @@ namespace SRH.Interface
 				currentTrainingPanel.Visible = false;
 				CreateSkillsToTrainComboBox();
 			}
-			else if( _currentEmployee.Busy && ( _currentEmployee.SkillInTraining != null ) )
+			else if( _currentEmployee.SkillInTraining != null )
 			{
 				EnableEmployeeInfo();
 				trainingPanel.Visible = false;
@@ -111,6 +110,7 @@ namespace SRH.Interface
 			else
 			{
 				trainingPanel.Visible = false;
+				currentTrainingPanel.Visible = false;
 				Train.Enabled = false;
 			}
 			ucSkillsDisplayEmployee.LoadUc();
@@ -156,7 +156,10 @@ namespace SRH.Interface
             }
 			if( _currentPerson != null )
 			{
-				hirePerson.Enabled = true;
+				if( GameContext.CurrentGame.PlayerCompany.MaxEmployees == GameContext.CurrentGame.PlayerCompany.Employees.Count )
+					hirePerson.Enabled = false;
+				else
+					hirePerson.Enabled = true;
 				personName.Visible = true;
 				personAge.Visible = true;
 				hiringCost.Visible = true;
@@ -219,12 +222,18 @@ namespace SRH.Interface
         private void hirePerson_Click( object sender, EventArgs e )
         {
 			// TODO : deny/prevent hiring if MyCompany doesn't have enough money
-            GameContext.CurrentGame.PlayerCompany.HireEmployee( _currentPerson );
-			var PersonItem = PersonList.Items.Cast<ListViewItem>().Where( item => item.Tag == _currentPerson ).Single();
-			PersonList.Items.Remove( PersonItem );
 
-			UcEmployeeList1.LoadUc();
-			hirePerson.Enabled = false;
+			if( GameContext.CurrentGame.PlayerCompany.MaxEmployees == GameContext.CurrentGame.PlayerCompany.Employees.Count )
+				MessageBox.Show( "Vous ne pouvez pas engager plus d'employés ! " );
+			else
+			{
+				GameContext.CurrentGame.PlayerCompany.HireEmployee( _currentPerson );
+				var PersonItem = PersonList.Items.Cast<ListViewItem>().Where( item => item.Tag == _currentPerson ).Single();
+				PersonList.Items.Remove( PersonItem );
+
+				UcEmployeeList1.LoadUc();
+				hirePerson.Enabled = false;
+			}
         }
 
 		/// <summary>

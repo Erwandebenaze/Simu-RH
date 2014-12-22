@@ -49,7 +49,9 @@
 			this.PersonBestSkillLevelHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.splitContainer1 = new System.Windows.Forms.SplitContainer();
 			this.splitContainer2 = new System.Windows.Forms.SplitContainer();
+			this.UcEmployeeList1 = new SRH.Interface.UcEmployeeList();
 			this.splitContainer3 = new System.Windows.Forms.SplitContainer();
+			this.SalaryAdjustmentIndication = new System.Windows.Forms.Label();
 			this.trainingPanel = new System.Windows.Forms.Panel();
 			this.firingCost = new System.Windows.Forms.Label();
 			this.Train = new System.Windows.Forms.Button();
@@ -68,15 +70,13 @@
 			this.employeeOccupation = new System.Windows.Forms.Label();
 			this.employeeAge = new System.Windows.Forms.Label();
 			this.employeeName = new System.Windows.Forms.Label();
+			this.ucSkillsDisplayEmployee = new SRH.Interface.UcSkillsDisplay();
 			this.hiringCost = new System.Windows.Forms.Label();
 			this.personExpectedSalary = new System.Windows.Forms.Label();
+			this.ucSkillsDisplayPerson = new SRH.Interface.UcSkillsDisplay();
 			this.personAge = new System.Windows.Forms.Label();
 			this.personName = new System.Windows.Forms.Label();
 			this.hirePerson = new System.Windows.Forms.Button();
-			this.SalaryAdjustmentIndication = new System.Windows.Forms.Label();
-			this.UcEmployeeList1 = new SRH.Interface.UcEmployeeList();
-			this.ucSkillsDisplayEmployee = new SRH.Interface.UcSkillsDisplay();
-			this.ucSkillsDisplayPerson = new SRH.Interface.UcSkillsDisplay();
 			SelectedPersonTitle = new System.Windows.Forms.Label();
 			personNameTitle = new System.Windows.Forms.Label();
 			personAgeTitle = new System.Windows.Forms.Label();
@@ -302,6 +302,14 @@
 			this.splitContainer2.SplitterDistance = 259;
 			this.splitContainer2.TabIndex = 1;
 			// 
+			// UcEmployeeList1
+			// 
+			this.UcEmployeeList1.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.UcEmployeeList1.Location = new System.Drawing.Point(0, 0);
+			this.UcEmployeeList1.Name = "UcEmployeeList1";
+			this.UcEmployeeList1.Size = new System.Drawing.Size(432, 259);
+			this.UcEmployeeList1.TabIndex = 1;
+			// 
 			// splitContainer3
 			// 
 			this.splitContainer3.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -343,6 +351,16 @@
 			this.splitContainer3.Size = new System.Drawing.Size(577, 561);
 			this.splitContainer3.SplitterDistance = 257;
 			this.splitContainer3.TabIndex = 0;
+			// 
+			// SalaryAdjustmentIndication
+			// 
+			this.SalaryAdjustmentIndication.AutoSize = true;
+			this.SalaryAdjustmentIndication.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.SalaryAdjustmentIndication.Location = new System.Drawing.Point(14, 182);
+			this.SalaryAdjustmentIndication.Name = "SalaryAdjustmentIndication";
+			this.SalaryAdjustmentIndication.Size = new System.Drawing.Size(110, 26);
+			this.SalaryAdjustmentIndication.TabIndex = 31;
+			this.SalaryAdjustmentIndication.Text = "Ajustement du salaire \r\nde l\'employé.";
 			// 
 			// trainingPanel
 			// 
@@ -451,6 +469,7 @@
 			this.cancelTraining.TabIndex = 3;
 			this.cancelTraining.Text = "Annuler formation";
 			this.cancelTraining.UseVisualStyleBackColor = true;
+			this.cancelTraining.Click += new System.EventHandler(this.cancelTraining_Click);
 			// 
 			// trainingTimeLeftTitle
 			// 
@@ -536,6 +555,14 @@
 			this.employeeName.TextAlign = System.Drawing.ContentAlignment.TopRight;
 			this.employeeName.Visible = false;
 			// 
+			// ucSkillsDisplayEmployee
+			// 
+			this.ucSkillsDisplayEmployee.CurrentPerson = null;
+			this.ucSkillsDisplayEmployee.Location = new System.Drawing.Point(140, 114);
+			this.ucSkillsDisplayEmployee.Name = "ucSkillsDisplayEmployee";
+			this.ucSkillsDisplayEmployee.Size = new System.Drawing.Size(438, 140);
+			this.ucSkillsDisplayEmployee.TabIndex = 22;
+			// 
 			// hiringCost
 			// 
 			this.hiringCost.AutoSize = true;
@@ -556,6 +583,14 @@
 			this.personExpectedSalary.TabIndex = 32;
 			this.personExpectedSalary.Text = "X";
 			this.personExpectedSalary.Visible = false;
+			// 
+			// ucSkillsDisplayPerson
+			// 
+			this.ucSkillsDisplayPerson.CurrentPerson = null;
+			this.ucSkillsDisplayPerson.Location = new System.Drawing.Point(138, 157);
+			this.ucSkillsDisplayPerson.Name = "ucSkillsDisplayPerson";
+			this.ucSkillsDisplayPerson.Size = new System.Drawing.Size(440, 140);
+			this.ucSkillsDisplayPerson.TabIndex = 23;
 			// 
 			// personAge
 			// 
@@ -587,40 +622,6 @@
 			this.hirePerson.Text = "Engager";
 			this.hirePerson.UseVisualStyleBackColor = true;
 			this.hirePerson.Click += new System.EventHandler(this.hirePerson_Click);
-			// 
-			// SalaryAdjustmentIndication
-			// 
-			this.SalaryAdjustmentIndication.AutoSize = true;
-			this.SalaryAdjustmentIndication.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.SalaryAdjustmentIndication.Location = new System.Drawing.Point(14, 182);
-			this.SalaryAdjustmentIndication.Name = "SalaryAdjustmentIndication";
-			this.SalaryAdjustmentIndication.Size = new System.Drawing.Size(110, 26);
-			this.SalaryAdjustmentIndication.TabIndex = 31;
-			this.SalaryAdjustmentIndication.Text = "Ajustement du salaire \r\nde l\'employé.";
-			// 
-			// UcEmployeeList1
-			// 
-			this.UcEmployeeList1.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.UcEmployeeList1.Location = new System.Drawing.Point(0, 0);
-			this.UcEmployeeList1.Name = "UcEmployeeList1";
-			this.UcEmployeeList1.Size = new System.Drawing.Size(432, 259);
-			this.UcEmployeeList1.TabIndex = 1;
-			// 
-			// ucSkillsDisplayEmployee
-			// 
-			this.ucSkillsDisplayEmployee.CurrentPerson = null;
-			this.ucSkillsDisplayEmployee.Location = new System.Drawing.Point(140, 114);
-			this.ucSkillsDisplayEmployee.Name = "ucSkillsDisplayEmployee";
-			this.ucSkillsDisplayEmployee.Size = new System.Drawing.Size(438, 140);
-			this.ucSkillsDisplayEmployee.TabIndex = 22;
-			// 
-			// ucSkillsDisplayPerson
-			// 
-			this.ucSkillsDisplayPerson.CurrentPerson = null;
-			this.ucSkillsDisplayPerson.Location = new System.Drawing.Point(138, 157);
-			this.ucSkillsDisplayPerson.Name = "ucSkillsDisplayPerson";
-			this.ucSkillsDisplayPerson.Size = new System.Drawing.Size(440, 140);
-			this.ucSkillsDisplayPerson.TabIndex = 23;
 			// 
 			// UcEmployeePage
 			// 
