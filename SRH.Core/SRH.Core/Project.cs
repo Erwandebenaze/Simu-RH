@@ -129,13 +129,13 @@ namespace SRH.Core
             _numberOfWorkers = numberOfWorkers;
             _earnings = earnings;
             _activated = false;
-            _xpPerCompany = 100;
-            _xpPerPerson = 100;
+            _xpPerCompany = 45;
+            _xpPerPerson = 25;
 			_skillsRequired = skillsRequired;
             _employeesAffectedWithSkill = new Dictionary<Employee, Skill>();
             _initialTasks = GenerateNumberOfTasks();
             _projectTasks = _initialTasks;
-            _actualTasks = _projectTasks;
+            _actualTasks  = _projectTasks;
             GenerateDuration();
 
         }
@@ -187,9 +187,15 @@ namespace SRH.Core
         public void AffectEmployeeToAJob( Employee e, Skill s )
         {
             if( SkillsRequired.ContainsKey( s ) && e.Worker.Skills.Contains( s ) && !this.Activated )
+            {
                 _employeesAffectedWithSkill.Add( e, e.Worker.Skills.Where( sk => sk.Equals( s ) ).Single() );
-            e.Busy = true;
-            _skillsRequired.Remove( s );
+                e.Busy = true;
+                _skillsRequired.Remove( s );
+            } else
+            {
+                throw new InvalidOperationException( "The employee hasn't been affected." );
+            }
+
         }
         /// <summary>
         /// Remove an Employee from a job if the project is not activated. 
@@ -263,7 +269,5 @@ namespace SRH.Core
           Project project = new Project( _myComp, _name, _difficulty, _numberOfWorkers, _earnings , new Dictionary<Skill, int>( _skillsRequired ) );
           return project;
         }
-
-
     }
 }

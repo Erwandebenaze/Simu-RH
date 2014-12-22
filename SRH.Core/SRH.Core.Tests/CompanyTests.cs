@@ -67,7 +67,7 @@ namespace SRH.Core.Tests
             Assert.That( myGame.PlayerCompany.Name == "IziProj" );
             Assert.That( myGame.PlayerCompany.MaxEmployees == 10 );
             Assert.That( myGame.PlayerCompany.MaxProjectDifficulty == 1 );
-            Assert.That( myGame.PlayerCompany.Wealth == 15000 );
+            Assert.That( myGame.PlayerCompany.Wealth == 1000000 );
         }
 
         [Test]
@@ -140,18 +140,68 @@ namespace SRH.Core.Tests
         public void End_a_project_give_money()
         {
             Game myGame = new Game( 1, "Simu\'RH" );
-            Project p = myGame.PlayerCompany.PossibleCompanyProjects[ 1 ];
+            Project p = myGame.PlayerCompany.PossibleCompanyProjects[ 0 ];
+            Person Tristan = new Person( myGame.Market, "Tristan", "Letrou", 25 );
+            Person Erwan = new Person( myGame.Market, "Erwan", "dB", 21 );
+            Person Olivier = new Person( myGame.Market, "Olivier", "Spinelli", 39 );
+
+            Tristan.AddSkill( Tristan, "Management de projet" );
+            Erwan.AddSkill( Erwan, "Interface graphique" );
+            Olivier.AddSkill( Olivier, "Développement" );
+            myGame.Market.AddPerson( Tristan );
+            myGame.Market.AddPerson( Erwan );
+            myGame.Market.AddPerson( Olivier );
+
+            Employee Tristann = myGame.PlayerCompany.AddEmployee( Tristan );
+            Employee Erwann = myGame.PlayerCompany.AddEmployee( Erwan );
+            Employee Olivierr = myGame.PlayerCompany.AddEmployee( Olivier );
+            Skill man = new ProjSkill( "Management de projet" );
+            Skill inte = new ProjSkill( "Interface graphique" );
+            Skill dev = new ProjSkill( "Développement" );
+            Skill mana = p.SkillsRequired.Keys.Where( s => s.Equals(man) ).Single();
+            Skill inter = p.SkillsRequired.Keys.Where( s => s.Equals(inte) ).Single();
+            Skill deve = p.SkillsRequired.Keys.Where( s => s.Equals(dev) ).Single();
+            
+            p.AffectEmployeeToAJob( Tristann, mana );
+            p.AffectEmployeeToAJob( Erwann, inter );
+            p.AffectEmployeeToAJob( Olivierr, deve);
             myGame.PlayerCompany.BeginAProject(p);
             myGame.PlayerCompany.EndAProject(p);
 
-            Assert.That( myGame.PlayerCompany.Wealth == 17000);
+            Assert.That( myGame.PlayerCompany.Wealth == 1018000);
         }
 
         [Test]
         public void End_a_project_give_xp()
         {
             Game myGame = new Game( 1, "Simu\'RH" );
-            Project p = myGame.PlayerCompany.PossibleCompanyProjects[ 1 ];
+            Project p = myGame.PlayerCompany.PossibleCompanyProjects[0];
+            Person Tristan = new Person( myGame.Market, "Tristan", "Letrou", 25 );
+            Person Erwan = new Person( myGame.Market, "Erwan", "dB", 21 );
+            Person Olivier = new Person( myGame.Market, "Olivier", "Spinelli", 39 );
+
+            Tristan.AddSkill( Tristan, "Management de projet" );
+            Erwan.AddSkill( Erwan, "Interface graphique" );
+            Olivier.AddSkill( Olivier, "Développement" );
+            myGame.Market.AddPerson( Tristan );
+            myGame.Market.AddPerson( Erwan );
+            myGame.Market.AddPerson( Olivier );
+
+            Employee Tristann = myGame.PlayerCompany.AddEmployee( Tristan );
+            Employee Erwann = myGame.PlayerCompany.AddEmployee( Erwan );
+            Employee Olivierr = myGame.PlayerCompany.AddEmployee( Olivier );
+            Skill man = new ProjSkill( "Management de projet" );
+            Skill inte = new ProjSkill( "Interface graphique" );
+            Skill dev = new ProjSkill( "Développement" );
+            Skill mana = p.SkillsRequired.Keys.Where( s => s.Equals( man ) ).Single();
+            Skill inter = p.SkillsRequired.Keys.Where( s => s.Equals( inte ) ).Single();
+            Skill deve = p.SkillsRequired.Keys.Where( s => s.Equals( dev ) ).Single();
+
+
+
+            p.AffectEmployeeToAJob( Tristann, mana );
+            p.AffectEmployeeToAJob( Erwann, inter );
+            p.AffectEmployeeToAJob( Olivierr, deve );
             myGame.PlayerCompany.BeginAProject( p );
             myGame.PlayerCompany.EndAProject( p );
             

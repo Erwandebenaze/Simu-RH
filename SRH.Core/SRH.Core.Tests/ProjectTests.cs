@@ -90,7 +90,7 @@ namespace SRH.Core.Tests
             list = csv.ReadCsv( myGame.PlayerCompany, "../../../Data/data.csv" );
 
 			Assert.That( list[ 0 ].Difficulty == 1.0 );
-			Assert.That( list[ 0 ].Earnings == 2000 );
+			Assert.That( list[ 0 ].Earnings == 18000 );
 		}
     }
 }

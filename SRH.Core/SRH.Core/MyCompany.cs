@@ -37,7 +37,7 @@ namespace SRH.Core
 		internal MyCompany( Game game, string name ) : base( game, name )
         {
 			if( String.IsNullOrWhiteSpace( name ) ) throw new ArgumentNullException( "The company name cannot be null or a whitespace" );
-            _wealth = 1003000000;
+            _wealth = 1000000;
             _maxWealth = _wealth;
 			_companyLevel = new Level( this, 1 );
 			_maxProjectDifficulty = 1;
@@ -264,14 +264,10 @@ namespace SRH.Core
             Wealth += p.Earnings;
             AddProjectEarnings( p.Earnings );
             _companyLevel.IncreaseXp( p.XpPerCompany, this );
-            foreach( Employee e in p.EmployeesAffectedWithSkill.Keys )
+            foreach( KeyValuePair<Employee, Skill> dico in p.EmployeesAffectedWithSkill )
             {
-                foreach( Skill s in p.EmployeesAffectedWithSkill.Values )
-                {
-                    s.Level.IncreaseXp(p.XpPerPerson);
-                    
-                }
-                e.Busy = false;
+                dico.Value.Level.IncreaseXp( p.XpPerPerson );
+                dico.Key.Busy = false;
             }
         }
         /// <summary>
