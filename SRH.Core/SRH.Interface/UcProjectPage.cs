@@ -275,12 +275,16 @@ namespace SRH.Interface
             {
                 if (_currentProj.EmployeesAffectedWithSkill.Count != 0)
                 {
+                    if( _currentProj.EmployeesAffectedWithSkill.ContainsValue( _currentSkill ) )
+                    {
                     foreach( Employee emp in _currentProj.EmployeesAffectedWithSkill.Keys )
                     {
-                        if( _currentProj.EmployeesAffectedWithSkill.ContainsValue( _currentSkill ) )
-                        {
-                            _currentProj.RemoveEmployeeFromAJob( emp, _currentSkill );
-                            break;
+                            if( emp.Worker.Skills.Contains(_currentSkill))
+                            {
+                                _currentProj.RemoveEmployeeFromAJob( emp, _currentSkill );
+                                break;
+                            }
+
                         }
                     }
                 }

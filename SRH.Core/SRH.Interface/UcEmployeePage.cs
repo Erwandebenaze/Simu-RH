@@ -91,7 +91,7 @@ namespace SRH.Interface
 			employeeName.Text = _currentEmployee.Worker.FirstName + " " + _currentEmployee.Worker.LastName;
 			employeeAge.Text = _currentEmployee.Worker.Age.ToString();
 			employeeOccupation.Text = GetCurrentOccupationText( _currentEmployee );
-			firingCost.Text = _currentEmployee.FiringCost.ToString();
+			firingCost.Text = _currentEmployee.LayingOffCost.ToString();
 			GetSalaryDisplay();
 
 			if( !_currentEmployee.Busy )
@@ -244,7 +244,7 @@ namespace SRH.Interface
 		private void fireEmployee_Click( object sender, EventArgs e )
 		{
 			// TODO : deny/prevent firing if MyCompany doesn't have enough money
-			GameContext.CurrentGame.PlayerCompany.FireEmployee( _currentEmployee );
+			GameContext.CurrentGame.PlayerCompany.LayingOffEmployee( _currentEmployee );
 			PersonList.Items.Add( CreatePerson( _currentEmployee.Worker ) );
 
 			var EmployeeItem = UcEmployeeList1.EmployeeList.Items.Cast<ListViewItem>().Where( item => item.Tag == _currentEmployee ).Single();

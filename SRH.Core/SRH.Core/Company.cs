@@ -48,17 +48,17 @@ namespace SRH.Core
 			get { return _wealth; }
 			set
 			{
-				if( _wealth + value > _maxWealth )
-				{
-					_maxWealth = _wealth + value;
-				}
+                //if( _wealth + value > _maxWealth )
+                //{
+                //    _maxWealth = _wealth + value;
+                //}
 				_wealth = value;
 			}
 		}
-		public int MaxWealth
-		{
-			get { return _maxWealth; }
-		}
+        //public int MaxWealth
+        //{
+        //    get { return _maxWealth; }
+        //}
 		public int MaxEmployees
 		{
 			get { return _maxEmployees; }
@@ -101,13 +101,17 @@ namespace SRH.Core
 		public void HireEmployee(Person p)
 		{
 			int cost = p.HiringCost;
+            _myGame.PlayerCompany.AddRecrutingCost( cost );
+
 			_wealth -= cost;
 			AddEmployee( p );
 		}
 
-		public void FireEmployee( Employee e )
+		public void LayingOffEmployee( Employee e )
 		{
-			int cost = e.FiringCost;
+			int cost = e.LayingOffCost;
+            _myGame.PlayerCompany.AddLayingOffCost( cost );
+
 			_wealth -= cost;
 			RemoveEmployee( e );
 		}

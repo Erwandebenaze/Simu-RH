@@ -23,12 +23,21 @@ namespace SRH.Core
         double _decreaseRecruting = 0;
         double _decreaseSalary = 0;
         double _decreaseTasks = 0;
+        int _trainingCost = 0;
+        int _trainingCostYear = 0;
+        int _layingOffCost = 0;
+        int _layingOffCostYear = 0;
+        int _recrutingCost = 0;
+        int _recrutingCostYear = 0;
+        int _projectsEarnings = 0;
+        int _projectsEarningsYear = 0;
+
 
 
 		internal MyCompany( Game game, string name ) : base( game, name )
         {
 			if( String.IsNullOrWhiteSpace( name ) ) throw new ArgumentNullException( "The company name cannot be null or a whitespace" );
-            _wealth = 30000;
+            _wealth = 1003000000;
             _maxWealth = _wealth;
 			_companyLevel = new Level( this, 1 );
 			_maxProjectDifficulty = 1;
@@ -73,6 +82,25 @@ namespace SRH.Core
 				return _possibleCompanyProjects;
 			}
         }
+        internal int TrainingCost
+        {
+            get { return _trainingCost; }
+            set { _trainingCost = value; }
+        }
+
+        internal int RecrutingCost
+        {
+             get { return _recrutingCost; }
+        }
+
+        internal int LayingOffCost
+        {
+             get { return _layingOffCost; }
+        }
+        internal int ProjectsEarnings
+        {
+             get { return _projectsEarnings; }
+        }
         #endregion
         public void MoveProject( Project p )
         {
@@ -104,13 +132,14 @@ namespace SRH.Core
             {
                 foreach (Project p in _projects)
                 {
+                    p.RefreshActualsTasks();
                     if( p.ActualTasks > 0 )
                     {
                         //p.TimeSpent = _myGame.TimeGame.intervalOfTimeInDays( p.BegginingDate );
                         p.RefreshDuration();
                         p.TimeLeft = p.Duration;
                         if( p.TimeLeft < 0 ) p.TimeLeft = 0;
-                        p.RefreshActualsTasks();
+                        
                     } else
                     {
                         EndAProject( p );
@@ -121,13 +150,99 @@ namespace SRH.Core
                 }
             }
         }
-
+        internal void AddTrainingCost( int cost )
+        {
+            if( cost <= 0 ) throw new ArgumentException( "Cost must be superior than 0." );
+            _trainingCost += cost;
+            _trainingCostYear += cost;
+        }
+        internal void AddRecrutingCost( int cost )
+        {
+            if( cost <= 0 ) throw new ArgumentException( "Cost must be superior than 0." );
+            _recrutingCost += cost;
+            _recrutingCostYear += cost;
+        }
+        internal void AddLayingOffCost( int cost )
+        {
+            if( cost <= 0 ) throw new ArgumentException( "Cost must be superior than 0." );
+            _layingOffCost += cost;
+            _layingOffCostYear += cost;
+        }
+        internal void AddProjectEarnings( int earnings )
+        {
+            if( earnings <= 0 ) throw new ArgumentException( "Earnings must be superior than 0." );
+            _projectsEarnings += earnings;
+            _projectsEarningsYear += earnings;
+        }
+        public int GetTrainingCostMonth()
+        {
+            if( _myGame.TimeGame.NextDayIsNewMonth() )
+            {
+                _trainingCost = 0;
+            }
+            return _trainingCost;
+        }
+        public int GetTrainingCostYear()
+        {
+            if( _myGame.TimeGame.NextDayIsNewYear() )
+            {
+                _trainingCostYear = 0;
+            }
+            return _trainingCostYear;
+        }
+        public int GetRecrutingCostMonth()
+        {
+            if( _myGame.TimeGame.NextDayIsNewMonth() )
+            {
+                _recrutingCost = 0;
+            }
+            return _recrutingCost;
+        }
+        public int GetRecrutingCostYear()
+        {
+            if( _myGame.TimeGame.NextDayIsNewYear() )
+            {
+                _recrutingCostYear = 0;
+            }
+            return _recrutingCostYear;
+        }
+        public int GetLayingOffCostMonth()
+        {
+            if( _myGame.TimeGame.NextDayIsNewMonth() )
+            {
+                _layingOffCost = 0;
+            }
+            return _layingOffCost;
+        }
+        public int GetLayingOffCostYear()
+        {
+            if( _myGame.TimeGame.NextDayIsNewYear() )
+            {
+                _layingOffCostYear = 0;
+            }
+            return _layingOffCostYear;
+        }
+        public int GetProjectsEarningsMonth()
+        {
+            if( _myGame.TimeGame.NextDayIsNewMonth() )
+            {
+                _projectsEarnings = 0;
+            }
+            return _projectsEarnings;
+        }
+        public int GetProjectsEarningsYear()
+        {
+            if( _myGame.TimeGame.NextDayIsNewYear() )
+            {
+                _projectsEarningsYear = 0;
+            }
+            return _projectsEarningsYear;
+        }
         public void ApplyInterests()
         {
             _wealth -= GetInterest();
             
         }
-
         public int GetInterest()
         {
             int interest = 0;
@@ -147,6 +262,7 @@ namespace SRH.Core
             p.StopProject();
             AddPourcentCommerciaux( p );
             Wealth += p.Earnings;
+            AddProjectEarnings( p.Earnings );
             _companyLevel.IncreaseXp( p.XpPerCompany, this );
             foreach( Employee e in p.EmployeesAffectedWithSkill.Keys )
             {
@@ -202,6 +318,8 @@ namespace SRH.Core
 			return finalList;
 		}
 
+
+        #region Gestion des managers
         /// <summary>
         /// Affect the differents managers to their own task.
         /// </summary>
@@ -214,9 +332,9 @@ namespace SRH.Core
                 _recruteur.Clear();
                 _directeursProjets.Clear();
                 _ressourcesHumaines.Clear();
-                foreach( KeyValuePair<Employee, Skill> dico in _managers)
+                foreach( KeyValuePair<Employee, Skill> dico in _managers )
                 {
-                    if( dico.Value.SkillName == "Commercial" ) _commerciaux.Add(dico.Key);
+                    if( dico.Value.SkillName == "Commercial" ) _commerciaux.Add( dico.Key );
                     if( dico.Value.SkillName == "Animation" ) _animation.Add( dico.Key );
                     if( dico.Value.SkillName == "Recruteur" ) _recruteur.Add( dico.Key );
                     if( dico.Value.SkillName == "Directeur de projets" ) _directeursProjets.Add( dico.Key );
@@ -224,30 +342,27 @@ namespace SRH.Core
                 }
             }
         }
-
-		public void AddManager(Employee e, Skill s)
-		{
-			_managers.Add( e, s );
-			e.SkillAffectedToCompany = s;
-			e.Busy = true;
+        public void AddManager( Employee e, Skill s )
+        {
+            _managers.Add( e, s );
+            e.SkillAffectedToCompany = s;
+            e.Busy = true;
             e.BegginningCompanyWork = Game.TimeGame.CurrentTimeOfGame;
             AffectManagers();
             UseManagers();
-		}
-
-		public void RemoveManager( Employee e )
-		{
-			if( _managers.ContainsKey( e ) )
-			{
-				_managers.Remove( e );
-				e.Busy = false;
+        }
+        public void RemoveManager( Employee e )
+        {
+            if( _managers.ContainsKey( e ) )
+            {
+                _managers.Remove( e );
+                e.Busy = false;
                 e.BegginningCompanyWork = null;
-				e.SkillAffectedToCompany = null;
-			}
-			else
-				throw new ArgumentException( "You connot remove a manager that is not in the Disctionnary." );
-		}
-
+                e.SkillAffectedToCompany = null;
+            }
+            else
+                throw new ArgumentException( "You connot remove a manager that is not in the Dictionnary." );
+        }
         /// <summary>
         /// Use the different skill of the managers.
         /// </summary>
@@ -259,20 +374,20 @@ namespace SRH.Core
             double newDecreaseTasks = 0;
 
             #region Commerciaux
-		    if( _commerciaux.Count > 0)
+            if( _commerciaux.Count > 0 )
             {
                 // Commerciaux increase the earnings of projects.
                 foreach( Employee emp in _commerciaux )
                 {
-                    newPourcentCommerciaux += ( emp.Worker.Skills.Where( e => e.SkillName == "Commercial" ).Select( e => e.Level.CurrentLevel ).Single()) * 2;
+                    newPourcentCommerciaux += (emp.Worker.Skills.Where( e => e.SkillName == "Commercial" ).Select( e => e.Level.CurrentLevel ).Single()) * 2;
                 }
                 if( _pourcentCommerciaux != SwitchCommerciaux( newPourcentCommerciaux ) )
                 {
                     _pourcentCommerciaux = SwitchCommerciaux( newPourcentCommerciaux );
                 }
 
-            } 
-	        #endregion
+            }
+            #endregion
 
             #region Ressources humaines
             if( _ressourcesHumaines.Count > 0 )
@@ -291,7 +406,7 @@ namespace SRH.Core
                         UseRessourcesHumaines( emp );
                     }
                 }
-            } 
+            }
             #endregion
 
             if( _directeursProjets.Count > 0 )
@@ -338,12 +453,6 @@ namespace SRH.Core
             }
 
         }
-
-        private void UseRecruteur()
-        {
-            throw new NotImplementedException();
-        }
-
         private void UseDirecteursProjets()
         {
             if( _directeursProjets.Count != 0 )
@@ -353,11 +462,8 @@ namespace SRH.Core
                     p.ProjectTasks -= (int)(p.ProjectTasks * (_decreaseTasks / 100));
                 }
             }
-           
+
         }
-
-
-
         internal void UseRessourcesHumaines( Employee emp )
         {
             // À implémenter à chaque recrutement d'un employé.
@@ -452,7 +558,7 @@ namespace SRH.Core
         }
         private double SwitchDirecteursProjets( double decreaseTasks )
         {
-            switch( PossibleCompanyProjects.Count / 3)
+            switch( PossibleCompanyProjects.Count / 3 )
             {
                 case 1:
                     if( decreaseTasks > 5 ) decreaseTasks = 5;
@@ -474,8 +580,6 @@ namespace SRH.Core
             }
             return decreaseTasks;
         }
-
-
         /// <summary>
         /// Use the commerciaux skill. Add a pourcent on every projects of the company.
         /// </summary>
@@ -486,20 +590,17 @@ namespace SRH.Core
                 p.Earnings = (int)(p.Earnings + (p.Earnings * (_pourcentCommerciaux / 100)));
             }
         }
-
         public int EstimatePourcentCommerciaux( Project p )
         {
             if( _commerciaux.Count != 0 ) return (int)(p.Earnings + (p.Earnings * (_pourcentCommerciaux / 100)));
             else return p.Earnings;
         }
-
         public int EstimateRecrutingAndLayingOffCost( int cost )
         {
             if( cost < 0 ) throw new ArgumentException( "cost can't be = 0 " );
             if( _recruteur.Count != 0 ) return (int)(cost - (cost * (_decreaseRecruting / 100)));
             else return cost;
         }
-
         public void AddXpToManagers()
         {
             if( _managers.Count != 0 )
@@ -513,6 +614,7 @@ namespace SRH.Core
                     }
                 }
             }
-        }
+        } 
+        #endregion
     }
 }
