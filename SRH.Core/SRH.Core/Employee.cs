@@ -96,8 +96,9 @@ namespace SRH.Core
 		{
 			int salary = _worker.ExpectedSalary;
 			salary += _salaryAdjustment;
-			if( salary < 600 )
-				throw new InvalidOperationException( "An Employee's salary cannot be under 600€, check SalaryAdjustment." );
+			if( salary < 600 || salary > 2 * ( _worker.ExpectedSalary ) )
+				throw new InvalidOperationException( "An Employee's salary has to be between 600 and 2 times the Person's expectedSalary, check SalaryAdjustment." );
+
 
 			return salary;
 		}
@@ -117,7 +118,7 @@ namespace SRH.Core
 
 			if( skillToTrain == null )
 			{
-				Skill newSkill = _worker.AddSkill( _worker, skillName );
+				Skill newSkill = _worker.AddSkill( skillName );
 			}
 			else
 			{
@@ -145,7 +146,7 @@ namespace SRH.Core
 			return timeLeft;
 		}
 
-		public bool StartTraining( string skillName )
+		public void StartTraining( string skillName )
 		{
 			_skillInTraining = skillName;
 			_trainingBegginingDate = _comp.Game.TimeGame.CurrentTimeOfGame;
@@ -157,30 +158,18 @@ namespace SRH.Core
 
 			if( skillToTrain == null )
 			{
-				if( _comp.Wealth >= candidate.BaseCostToTrain )
-				{
-					_trainingDuration = candidate.BaseTimeToTrain;
-					_comp.Wealth -= candidate.BaseCostToTrain;
-                    _comp.Game.PlayerCompany.AddTrainingCost( candidate.BaseCostToTrain );
-					_busy = true;
-					return true;
-				}
-				else
-					return false;
+				_trainingDuration = candidate.BaseTimeToTrain;
+				_comp.Wealth -= candidate.BaseCostToTrain;
+                _comp.Game.PlayerCompany.AddTrainingCost( candidate.BaseCostToTrain );
+				_busy = true;
 			}
 			else
 			{
-				if( _comp.Wealth >= skillToTrain.UpgradePrice )
-				{
-					_trainingDuration = skillToTrain.TimeToUpgrade;
-					_comp.Wealth -= skillToTrain.UpgradePrice;
-                    _comp.Game.PlayerCompany.AddTrainingCost( skillToTrain.UpgradePrice );
+				_trainingDuration = skillToTrain.TimeToUpgrade;
+				_comp.Wealth -= skillToTrain.UpgradePrice;
+                _comp.Game.PlayerCompany.AddTrainingCost( skillToTrain.UpgradePrice );
 
-					_busy = true;
-					return true;
-				}
-				else
-					return false;
+				_busy = true;
 			}
 		}
 

@@ -100,7 +100,7 @@ namespace SRH.Core
 		/// </summary>
 		/// <param name="skillName">The name of the skill, must be present in the SkillList</param>
 		/// <returns>The Skill added</returns>
-		public Skill AddSkill( Person p, string skillName, int level = 1)
+		public Skill AddSkill( string skillName, int level = 1)
 		{
 			_lb.Game.ValidateSkillName( skillName );
 
@@ -112,8 +112,8 @@ namespace SRH.Core
 
 			Skill newSkill = null;
 			if( skillName.IsProjSkill() )
-				newSkill = new ProjSkill( p, skillName );
-			else newSkill = new CompaSkill( p, skillName );
+				newSkill = new ProjSkill( this, skillName );
+			else newSkill = new CompaSkill( this, skillName );
 
 			newSkill.Level.CurrentLevel = level;
 			_skills.Add( newSkill );

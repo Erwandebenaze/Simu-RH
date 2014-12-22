@@ -489,6 +489,7 @@
 			// 
 			// decreaseSalary
 			// 
+			this.decreaseSalary.Enabled = false;
 			this.decreaseSalary.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.decreaseSalary.Location = new System.Drawing.Point(27, 156);
 			this.decreaseSalary.Name = "decreaseSalary";
@@ -501,6 +502,7 @@
 			// 
 			// increaseSalary
 			// 
+			this.increaseSalary.Enabled = false;
 			this.increaseSalary.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.increaseSalary.Location = new System.Drawing.Point(76, 156);
 			this.increaseSalary.Name = "increaseSalary";

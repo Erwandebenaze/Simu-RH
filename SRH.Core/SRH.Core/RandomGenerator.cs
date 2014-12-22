@@ -71,7 +71,7 @@ namespace SRH.Core
 				string randomSkillName = GetRandomSkillName();
 				if( !(bool)p.Skills.Select(s => s.SkillName == randomSkillName).SingleOrDefault()  )
 				{
-					p.AddSkill( p, randomSkillName );
+					p.AddSkill( randomSkillName );
 					numberOfSKills++;
 				}
 			}

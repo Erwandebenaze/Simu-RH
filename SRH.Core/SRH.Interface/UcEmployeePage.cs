@@ -112,6 +112,8 @@ namespace SRH.Interface
 				trainingPanel.Visible = false;
 				currentTrainingPanel.Visible = false;
 				Train.Enabled = false;
+				increaseSalary.Enabled = false;
+				decreaseSalary.Enabled = false;
 			}
 			ucSkillsDisplayEmployee.LoadUc();
 		}

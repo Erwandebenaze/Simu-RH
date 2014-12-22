@@ -98,22 +98,26 @@ namespace SRH.Core
             return e.Worker;
         }
 
-		public void HireEmployee(Person p)
+		public Employee HireEmployee(Person p)
 		{
 			int cost = p.HiringCost;
             _myGame.PlayerCompany.AddRecrutingCost( cost );
 
 			_wealth -= cost;
-			AddEmployee( p );
+			Employee e = AddEmployee( p );
+
+			return e;
 		}
 
-		public void LayingOffEmployee( Employee e )
+		public Person LayingOffEmployee( Employee e )
 		{
 			int cost = e.LayingOffCost;
             _myGame.PlayerCompany.AddLayingOffCost( cost );
 
 			_wealth -= cost;
-			RemoveEmployee( e );
+			Person p = RemoveEmployee( e );
+
+			return p;
 		}
 
     }
