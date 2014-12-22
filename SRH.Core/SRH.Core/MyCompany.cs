@@ -264,14 +264,10 @@ namespace SRH.Core
             Wealth += p.Earnings;
             AddProjectEarnings( p.Earnings );
             _companyLevel.IncreaseXp( p.XpPerCompany, this );
-            foreach( Employee e in p.EmployeesAffectedWithSkill.Keys )
+            foreach( KeyValuePair<Employee, Skill> dico in p.EmployeesAffectedWithSkill )
             {
-                foreach( Skill s in p.EmployeesAffectedWithSkill.Values )
-                {
-                    s.Level.IncreaseXp(p.XpPerPerson);
-                    
-                }
-                e.Busy = false;
+                dico.Value.Level.IncreaseXp( p.XpPerPerson );
+                dico.Key.Busy = false;
             }
         }
         /// <summary>
