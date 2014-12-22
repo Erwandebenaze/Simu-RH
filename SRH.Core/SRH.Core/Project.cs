@@ -129,8 +129,8 @@ namespace SRH.Core
             _numberOfWorkers = numberOfWorkers;
             _earnings = earnings;
             _activated = false;
-            _xpPerCompany = 100;
-            _xpPerPerson = 100;
+            _xpPerCompany = 30;
+            _xpPerPerson = 15;
 			_skillsRequired = skillsRequired;
             _employeesAffectedWithSkill = new Dictionary<Employee, Skill>();
             _initialTasks = GenerateNumberOfTasks();
