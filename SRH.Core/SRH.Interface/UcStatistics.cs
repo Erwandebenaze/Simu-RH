@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using SRH.Core;
 
+
 namespace SRH.Interface
 {
     public partial class UcStatistics : UserControl
@@ -16,6 +17,7 @@ namespace SRH.Interface
         public UcStatistics()
         {
             InitializeComponent();
+
         }
         IGameContext GameContext
         {
