@@ -145,9 +145,9 @@ namespace SRH.Core.Tests
             Person Erwan = new Person( myGame.Market, "Erwan", "dB", 21 );
             Person Olivier = new Person( myGame.Market, "Olivier", "Spinelli", 39 );
 
-            Tristan.AddSkill( Tristan, "Management de projet" );
-            Erwan.AddSkill( Erwan, "Interface graphique" );
-            Olivier.AddSkill( Olivier, "Développement" );
+            Tristan.AddSkill( "Management de projet" );
+            Erwan.AddSkill( "Interface graphique" );
+            Olivier.AddSkill( "Développement" );
             myGame.Market.AddPerson( Tristan );
             myGame.Market.AddPerson( Erwan );
             myGame.Market.AddPerson( Olivier );
@@ -180,9 +180,9 @@ namespace SRH.Core.Tests
             Person Erwan = new Person( myGame.Market, "Erwan", "dB", 21 );
             Person Olivier = new Person( myGame.Market, "Olivier", "Spinelli", 39 );
 
-            Tristan.AddSkill( Tristan, "Management de projet" );
-            Erwan.AddSkill( Erwan, "Interface graphique" );
-            Olivier.AddSkill( Olivier, "Développement" );
+            Tristan.AddSkill( "Management de projet" );
+            Erwan.AddSkill( "Interface graphique" );
+            Olivier.AddSkill( "Développement" );
             myGame.Market.AddPerson( Tristan );
             myGame.Market.AddPerson( Erwan );
             myGame.Market.AddPerson( Olivier );
