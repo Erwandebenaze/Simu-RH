@@ -190,5 +190,66 @@ namespace SRH.Core.Tests
 
 			int salary = e.Salary;
 		}
+
+		[Test]
+		public void decreasing_happiness_under_0_stays_0()
+		{
+			Person p = new Person( myGame.Market, "André", "LeGéant", 20 );
+			Employee e = new Employee( myGame.PlayerCompany, p );
+			
+			Happiness h = new Happiness();
+
+			h.ChangeHappinessScore( -51 );
+
+			Assert.That( h.HappinessScore == 0 );
+		}
+
+		[Test]
+		public void increasing_happiness_over_100_stays_100()
+		{
+			Happiness h = new Happiness();
+
+			h.ChangeHappinessScore( 51 );
+
+			Assert.That( h.HappinessScore == 100 );
+		}
+
+		[Test]
+		public void incresing_salary_increses_happiness()
+		{
+			Person p = new Person( myGame.Market, "André", "LeGéant", 20 );
+			Employee e = new Employee( myGame.PlayerCompany, p );
+
+			e.SalaryAdjustment += 100;
+			e.Behavior.SalaryReaction();
+
+			Assert.That( e.Happiness.HappinessScore == 52 );
+		}
+
+		[Test]
+		public void decresing_salary_decreses_happiness()
+		{
+			Person p = new Person( myGame.Market, "André", "LeGéant", 20 );
+			Employee e = new Employee( myGame.PlayerCompany, p );
+
+			e.SalaryAdjustment -= 100;
+			e.Behavior.SalaryReaction();
+
+			Assert.That( e.Happiness.HappinessScore == 48 );
+		}
+
+		[Test]
+		public void add_an_element_from_skills_used()
+		{
+			Person p = new Person( myGame.Market, "André", "LeGéant", 20 );
+			Employee e = new Employee( myGame.PlayerCompany, p );
+			Skill s = new ProjSkill("Développement");
+
+			e.Behavior.AddOrUpdateSkillUsed( s );
+			e.Behavior.AddOrUpdateSkillUsed( s );
+
+			Assert.That( e.Behavior.SkillsUsed.Count == 0 );
+		}
+
 	}
 }

@@ -18,7 +18,8 @@ namespace SRH.Core
 		int _expectedSalary;
 		LaborMarket _lb;
         Random rand;
-
+		// TODO : add a behavior type (string or enum) that indicates the person's behaviour
+		//string _behaviorType;
 
 		internal Person( LaborMarket lb, string firstName, string lastName, int age )
 		{
@@ -26,12 +27,12 @@ namespace SRH.Core
 			_firstName = firstName;
 			_lastName = lastName;
 			_age = age;
-            rand = new Random();
-            int month = rand.Next( 1, 12 );
-            GetRandomDay( month );
-            int year = 2015 - age;
-            _birthDate = new DateTime(year,month,01);
-            _lb = lb;
+			rand = new Random();
+			int month = rand.Next( 1, 12 );
+			GetRandomDay( month );
+			int year = 2015 - age;
+			_birthDate = new DateTime( year, month, 01 );
+			_lb = lb;
 			GenerateExpectedSalary();
 		}
 

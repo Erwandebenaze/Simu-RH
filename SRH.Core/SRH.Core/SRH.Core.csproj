@@ -56,12 +56,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Behavior.cs" />
     <Compile Include="Company.cs" />
     <Compile Include="Competitor.cs" />
     <Compile Include="CompaSkill.cs" />
     <Compile Include="CSV.cs" />
     <Compile Include="Employee.cs" />
     <Compile Include="Game.cs" />
+    <Compile Include="Happiness.cs" />
     <Compile Include="LaborMarket.cs" />
     <Compile Include="Level.cs" />
     <Compile Include="MyCompany.cs" />

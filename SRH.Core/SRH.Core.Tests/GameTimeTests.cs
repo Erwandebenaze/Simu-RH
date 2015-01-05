@@ -91,5 +91,15 @@ namespace SRH.Core.Tests
             GameTime myGameTime = new GameTime( myGame );
             Assert.That( myGame.TimeGame.intervalOfTimeInDays( new DateTime( 2014, 12, 26 ) ) == 21 );
         }
+
+		[Test]
+		public void three_months_passed()
+		{
+			Game myGame = new Game( 1, "Dannone" );
+			GameTime myGameTime = new GameTime( myGame ); // New default date is 26/01/2014
+			DateTime t = new DateTime(2014,10,26);
+
+			Assert.That( myGameTime.AreMonthsPassed( t, 3 ) );
+		}
     }
 }

@@ -18,6 +18,8 @@ namespace SRH.Core
 		private DateTime? _trainingBegginingDate;
 		private int? _trainingDuration;
         DateTime? _begginningCompanyWork;
+		Happiness _happiness;
+		Behavior _behavior;
 
         /// <summary>
 		/// Creates an <see cref="Employee"/>
@@ -34,6 +36,8 @@ namespace SRH.Core
             _comp = comp;
 			_worker = worker;
 			_salary = GenerateSalary();
+			_happiness = new Happiness();
+			_behavior = new Behavior( this );
         }
 
 		#region Getters setters
@@ -89,6 +93,16 @@ namespace SRH.Core
 				double cost = Salary * 0.5;
 				return (int)cost;
 			}
+		}
+
+		public Happiness Happiness
+		{
+			get { return _happiness; }
+		}
+
+		public Behavior Behavior
+		{
+			get { return _behavior; }
 		}
 		#endregion
 
