@@ -234,6 +234,8 @@ namespace SRH.Core.Tests
 		[Test]
 		public void a_skill_not_used_for_6_months_is_removed_from_skillsUsed()
 		{
+			Game myGame = new Game( 1, "Simu'RH" );
+
 			Person p = new Person( myGame.Market, "André", "LeGéant", 20 );
 			Employee e = new Employee( myGame.PlayerCompany, p );
 
@@ -247,6 +249,8 @@ namespace SRH.Core.Tests
 		[Test]
 		public void an_eclectic_employee_with_less_than_4_skills_loses_happiness()
 		{
+			Game myGame = new Game( 1, "Simu'RH" );
+
 			Person p = new Person( myGame.Market, "André", "LeGéant", 20 );
 			Skill s = p.AddSkill( "Développement" );
 			Employee e = new Employee( myGame.PlayerCompany, p );
@@ -261,6 +265,8 @@ namespace SRH.Core.Tests
 		[Test]
 		public void an_eclectic_employee_who_used_less_than_3_skills_int_the_last_6_months_loses_happiness()
 		{
+			Game myGame = new Game( 1, "Simu'RH" );
+
 			Person p = new Person( myGame.Market, "André", "LeGéant", 20 );
 			Skill s = p.AddSkill( "Développement" );
 			Skill s2 = p.AddSkill( "Conception" );
@@ -279,6 +285,8 @@ namespace SRH.Core.Tests
 		[Test]
 		public void an_eclectic_employee_who_used_3_skills_in_the_last_6_months_doesnt_change_his_happiness()
 		{
+			Game myGame = new Game( 1, "Simu'RH" );
+
 			Person p = new Person( myGame.Market, "André", "LeGéant", 20 );
 			Skill s = p.AddSkill( "Développement" );
 			Skill s2 = p.AddSkill( "Conception" );
@@ -298,6 +306,8 @@ namespace SRH.Core.Tests
 		[Test]
 		public void an_eclectic_employee_who_used_more_than_3_skills_in_the_last_6_months_gains_happiness()
 		{
+			Game myGame = new Game( 1, "Simu'RH" );
+
 			Person p = new Person( myGame.Market, "André", "LeGéant", 20 );
 			Skill s = p.AddSkill( "Développement" );
 			Skill s2 = p.AddSkill( "Conception" );
@@ -318,6 +328,8 @@ namespace SRH.Core.Tests
 		[Test]
 		public void a_manager_skill_affected_to_company_is_added_to_the_used_skills_list()
 		{
+			Game myGame = new Game( 1, "Simu'RH" );
+
 			Person p = new Person( myGame.Market, "André", "LeGéant", 20 );
 			Employee e = new Employee( myGame.PlayerCompany, p );
 			Skill s = e.Worker.AddSkill("Commercial");

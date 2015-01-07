@@ -288,6 +288,7 @@ namespace SRH.Core
             {
                 dico.Value.Level.IncreaseXp( p.XpPerPerson );
                 dico.Key.Busy = false;
+				dico.Key.SkillInProject = null;
             }
         }
         /// <summary>
@@ -312,6 +313,7 @@ namespace SRH.Core
             foreach( Employee e in p.EmployeesAffectedWithSkill.Keys )
             {
                 e.Busy = false;
+				e.SkillInProject = null;
             }
             _projects.Remove( p );
             p.StopProject();
