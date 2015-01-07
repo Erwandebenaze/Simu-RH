@@ -96,10 +96,10 @@ namespace SRH.Core.Tests
 		public void three_months_passed()
 		{
 			Game myGame = new Game( 1, "Dannone" );
-			GameTime myGameTime = new GameTime( myGame ); // New default date is 26/01/2014
-			DateTime t = new DateTime(2014,10,26);
 
-			Assert.That( myGameTime.AreMonthsPassed( t, 3 ) );
+			DateTime t = new DateTime( 2014, 10, 26 ); // New default date is 26/01/2015
+
+			Assert.That( myGame.TimeGame.AreMonthsPassed( t, 3 ) );
 		}
     }
 }

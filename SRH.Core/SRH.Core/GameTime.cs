@@ -24,6 +24,7 @@ namespace SRH.Core
         public DateTime CurrentTimeOfGame
         {
             get { return _currentTimeOfGame; }
+			internal set { _currentTimeOfGame = value; }
         }
         public string FrenchDayOfWeek
         {

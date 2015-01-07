@@ -239,17 +239,113 @@ namespace SRH.Core.Tests
 		}
 
 		[Test]
-		public void add_an_element_from_skills_used()
+		public void add_an_element_to_skills_used()
 		{
 			Person p = new Person( myGame.Market, "André", "LeGéant", 20 );
 			Employee e = new Employee( myGame.PlayerCompany, p );
-			Skill s = new ProjSkill("Développement");
 
-			e.Behavior.AddOrUpdateSkillUsed( s );
-			e.Behavior.AddOrUpdateSkillUsed( s );
+			e.Behavior.AddOrUpdateSkillsUsed( "Développement" );
+			e.Behavior.AddOrUpdateSkillsUsed( "Développement" );
+
+			Assert.That( e.Behavior.SkillsUsed.Count == 1 );
+		}
+
+		[Test]
+		public void a_skill_not_used_for_6_months_is_removed_from_skillsUsed()
+		{
+			Person p = new Person( myGame.Market, "André", "LeGéant", 20 );
+			Employee e = new Employee( myGame.PlayerCompany, p );
+
+			e.Behavior.AddOrUpdateSkillsUsed( "Développement" );
+			myGame.TimeGame.CurrentTimeOfGame = new DateTime( 2015, 07, 26 ); // New default date is 26/01/2015
+			e.Behavior.CheckSkillsUsed();
 
 			Assert.That( e.Behavior.SkillsUsed.Count == 0 );
 		}
 
+		[Test]
+		public void an_eclectic_employee_with_less_than_4_skills_loses_happiness()
+		{
+			Person p = new Person( myGame.Market, "André", "LeGéant", 20 );
+			Skill s = p.AddSkill( "Développement" );
+			Employee e = new Employee( myGame.PlayerCompany, p );
+
+			e.Behavior.AddOrUpdateSkillsUsed( "Développement" );
+			myGame.TimeGame.CurrentTimeOfGame = new DateTime( 2015, 04, 26 ); // New default date is 26/01/2015
+			e.Behavior.SkillsReaction();
+
+			Assert.That( e.Happiness.HappinessScore == 48 );
+		}
+
+		[Test]
+		public void an_eclectic_employee_who_used_less_than_3_skills_int_the_last_6_months_loses_happiness()
+		{
+			Person p = new Person( myGame.Market, "André", "LeGéant", 20 );
+			Skill s = p.AddSkill( "Développement" );
+			Skill s2 = p.AddSkill( "Conception" );
+			Skill s3 = p.AddSkill( "Réseau" );
+			Skill s4 = p.AddSkill( "Sécurité" );
+			Employee e = new Employee( myGame.PlayerCompany, p );
+
+			e.Behavior.AddOrUpdateSkillsUsed( s.SkillName );
+			e.Behavior.AddOrUpdateSkillsUsed( s2.SkillName );
+			myGame.TimeGame.CurrentTimeOfGame = new DateTime( 2015, 04, 26 ); // New default date is 26/01/2015
+			e.Behavior.SkillsReaction();
+
+			Assert.That( e.Happiness.HappinessScore == 48 );
+		}
+
+		[Test]
+		public void an_eclectic_employee_who_used_3_skills_in_the_last_6_months_doesnt_change_his_happiness()
+		{
+			Person p = new Person( myGame.Market, "André", "LeGéant", 20 );
+			Skill s = p.AddSkill( "Développement" );
+			Skill s2 = p.AddSkill( "Conception" );
+			Skill s3 = p.AddSkill( "Réseau" );
+			Skill s4 = p.AddSkill( "Sécurité" );
+			Employee e = new Employee( myGame.PlayerCompany, p );
+
+			e.Behavior.AddOrUpdateSkillsUsed( s.SkillName );
+			e.Behavior.AddOrUpdateSkillsUsed( s2.SkillName );
+			e.Behavior.AddOrUpdateSkillsUsed( s3.SkillName );
+			myGame.TimeGame.CurrentTimeOfGame = new DateTime( 2015, 04, 26 ); // New default date is 26/01/2015
+			e.Behavior.SkillsReaction();
+
+			Assert.That( e.Happiness.HappinessScore == 50 );
+		}
+
+		[Test]
+		public void an_eclectic_employee_who_used_more_than_3_skills_in_the_last_6_months_gains_happiness()
+		{
+			Person p = new Person( myGame.Market, "André", "LeGéant", 20 );
+			Skill s = p.AddSkill( "Développement" );
+			Skill s2 = p.AddSkill( "Conception" );
+			Skill s3 = p.AddSkill( "Réseau" );
+			Skill s4 = p.AddSkill( "Sécurité" );
+			Employee e = new Employee( myGame.PlayerCompany, p );
+
+			e.Behavior.AddOrUpdateSkillsUsed( s.SkillName );
+			e.Behavior.AddOrUpdateSkillsUsed( s2.SkillName );
+			e.Behavior.AddOrUpdateSkillsUsed( s3.SkillName );
+			e.Behavior.AddOrUpdateSkillsUsed( s4.SkillName );
+			myGame.TimeGame.CurrentTimeOfGame = new DateTime( 2015, 04, 26 ); // New default date is 26/01/2015
+			e.Behavior.SkillsReaction();
+
+			Assert.That( e.Happiness.HappinessScore == 52 );
+		}
+
+		[Test]
+		public void a_manager_skill_affected_to_company_is_added_to_the_used_skills_list()
+		{
+			Person p = new Person( myGame.Market, "André", "LeGéant", 20 );
+			Employee e = new Employee( myGame.PlayerCompany, p );
+			Skill s = e.Worker.AddSkill("Commercial");
+			myGame.PlayerCompany.AddManager( e, s );
+
+			myGame.TimeGame.CurrentTimeOfGame = new DateTime( 2015, 07, 26 ); // New default date is 26/01/2015
+			e.Behavior.CheckSkillsUsed();
+
+			Assert.That( e.Behavior.SkillsUsed.Count == 1 );
+		}
 	}
 }
