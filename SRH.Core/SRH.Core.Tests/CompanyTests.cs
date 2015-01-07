@@ -22,13 +22,6 @@ namespace SRH.Core.Tests
             Assert.That( c.CompanyLevel.CurrentLevel == 1 );
         }
 
-        //[Test]
-        //public void Create_competitor()
-        //{
-        //    Competitor c = new Competitor("Danone");
-        //    Assert.That( c, Is.Not.Null );
-        //}
-
         [Test]
         [ExpectedException( typeof( ArgumentNullException ) )]
         public void Create_mycompany_with_white_space_throw_argument_null_exeption()

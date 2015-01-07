@@ -27,8 +27,6 @@ namespace SRH.Core
         readonly int _initialTasks;
         int _projectTasks;
         int _actualTasks;
-
-
         #endregion
 
         #region Getter
@@ -239,6 +237,7 @@ namespace SRH.Core
 			{
                 Activated = true;
                 _begginingDate = _myComp.MyGame.TimeGame.CurrentTimeOfGame;
+				AddEmployeeSkillInProject();
             }
 			else
 			{
@@ -256,7 +255,6 @@ namespace SRH.Core
             if( !Activated ) throw new InvalidOperationException( "A project can not be stoped if he is not begun." );
             Activated = false;
             _begginingDate = null;
-            
         }
         /// <summary>
         /// Return the same project with differents references.
@@ -269,5 +267,13 @@ namespace SRH.Core
           Project project = new Project( _myComp, _name, _difficulty, _numberOfWorkers, _earnings , new Dictionary<Skill, int>( _skillsRequired ) );
           return project;
         }
+
+		private void AddEmployeeSkillInProject()
+		{
+			foreach( KeyValuePair<Employee, Skill> kvp in _employeesAffectedWithSkill )
+			{
+				kvp.Key.SkillInProject = kvp.Value;
+			}
+		}
     }
 }

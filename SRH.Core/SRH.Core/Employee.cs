@@ -13,6 +13,7 @@ namespace SRH.Core
 		private int _salary;
 		private int _salaryAdjustment;
         private bool _busy;
+		private Skill _skillInProject;
 		private Skill _skillAffectedToCompany;
 		private string _skillInTraining;
 		private DateTime? _trainingBegginingDate;
@@ -103,6 +104,12 @@ namespace SRH.Core
 		public Behavior Behavior
 		{
 			get { return _behavior; }
+		}
+
+		internal Skill SkillInProject
+		{
+			get { return _skillInProject; }
+			set { _skillInProject = value; }
 		}
 		#endregion
 
