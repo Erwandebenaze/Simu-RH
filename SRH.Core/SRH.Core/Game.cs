@@ -229,7 +229,7 @@ namespace SRH.Core
                     {
                         if( emplo == emp )
                         {
-                            p.RemoveEmployeeFromTheProject( emp );
+                            p.RemoveEmployeeFromTheProject( emp ); // TODO : Mettre la skill avec !
                             break;
                         }
                     }
