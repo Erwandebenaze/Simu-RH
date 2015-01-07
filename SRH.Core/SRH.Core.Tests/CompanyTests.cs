@@ -229,7 +229,21 @@ namespace SRH.Core.Tests
         }
 
         [Test]
-        public void Affect_managers()
+        public void Remove_a_manager()
+        {
+            Game myGame = new Game( 1, "Simu\'RH" );
+            Person p = new Person( myGame.Market, "André", "LeGéant", 20 );
+            Employee e = new Employee( myGame.PlayerCompany, p );
+
+            Skill s = p.AddSkill( "Commercial" );
+
+            myGame.PlayerCompany.AddManager( e, s );
+            myGame.PlayerCompany.RemoveManager( e);
+            Assert.That( !myGame.PlayerCompany.Managers.ContainsKey( e ) );
+        }
+
+        [Test]
+        public void Affect_commerciaux()
         {
             Game myGame = new Game( 1, "Simu\'RH" );
             Person p = new Person( myGame.Market, "André", "LeGéant", 20 );
@@ -240,6 +254,77 @@ namespace SRH.Core.Tests
             myGame.PlayerCompany.AddManager( e, s );
             Assert.That( myGame.PlayerCompany.Commerciaux.Contains( e ) );
             Assert.That( myGame.PlayerCompany.Managers.ContainsValue( s ) );
+        }
+
+        [Test]
+        public void Affect_animation()
+        {
+            Game myGame = new Game( 1, "Simu\'RH" );
+            Person p = new Person( myGame.Market, "André", "LeGéant", 20 );
+            Employee e = new Employee( myGame.PlayerCompany, p );
+
+            Skill s = p.AddSkill( "Animation" );
+
+            myGame.PlayerCompany.AddManager( e, s );
+            Assert.That( myGame.PlayerCompany.Animation.Contains( e ) );
+            Assert.That( myGame.PlayerCompany.Managers.ContainsValue( s ) );
+        }
+
+        [Test]
+        public void Affect_recruteur()
+        {
+            Game myGame = new Game( 1, "Simu\'RH" );
+            Person p = new Person( myGame.Market, "André", "LeGéant", 20 );
+            Employee e = new Employee( myGame.PlayerCompany, p );
+
+            Skill s = p.AddSkill( "Recruteur" );
+
+            myGame.PlayerCompany.AddManager( e, s );
+            Assert.That( myGame.PlayerCompany.Recruteur.Contains( e ) );
+            Assert.That( myGame.PlayerCompany.Managers.ContainsValue( s ) );
+        }
+
+        [Test]
+        public void Affect_directeur_de_projet()
+        {
+            Game myGame = new Game( 1, "Simu\'RH" );
+            Person p = new Person( myGame.Market, "André", "LeGéant", 20 );
+            Employee e = new Employee( myGame.PlayerCompany, p );
+
+            Skill s = p.AddSkill( "Directeur de projets" );
+
+            myGame.PlayerCompany.AddManager( e, s );
+            Assert.That( myGame.PlayerCompany.DirecteursProjets.Contains( e ) );
+            Assert.That( myGame.PlayerCompany.Managers.ContainsValue( s ) );
+        }
+
+        [Test]
+        public void Affect_ressources_humaines()
+        {
+            Game myGame = new Game( 1, "Simu\'RH" );
+            Person p = new Person( myGame.Market, "André", "LeGéant", 20 );
+            Employee e = new Employee( myGame.PlayerCompany, p );
+
+            Skill s = p.AddSkill( "Ressources humaines" );
+
+            myGame.PlayerCompany.AddManager( e, s );
+            Assert.That( myGame.PlayerCompany.RessourcesHumaines.Contains( e ) );
+            Assert.That( myGame.PlayerCompany.Managers.ContainsValue( s ) );
+        }
+
+        [Test]
+        public void Use_recruteur()
+        {
+            Game myGame = new Game( 1, "Simu\'RH" );
+            Person p = new Person( myGame.Market, "André", "LeGéant", 20 );
+            Employee e = new Employee( myGame.PlayerCompany, p );
+
+            Skill s = p.AddSkill( "Recruteur" );
+           // if( _recruteur.Count != 0 ) return (int)(cost - (cost * (_decreaseRecruting / 100)));
+
+            myGame.PlayerCompany.AddManager( e, s );
+            // 1 recruteur avec un niveau d'entreprise inférieur à 10 = pourcent de baisse cout = à 2
+            Assert.That( myGame.PlayerCompany.EstimateRecrutingAndLayingOffCost(1000) == 980 );
         }
     }
 }
