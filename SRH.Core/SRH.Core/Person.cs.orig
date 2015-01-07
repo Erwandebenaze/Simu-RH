@@ -27,13 +27,22 @@ namespace SRH.Core
 			_firstName = firstName;
 			_lastName = lastName;
 			_age = age;
+<<<<<<< HEAD
+            rand = new Random();
+            int month = rand.Next( 1, 12 );
+            GetRandomDay( month );
+            int year = 2015 - age;
+            int day = rand.Next( 1, 28 );
+            _birthDate = new DateTime(year,month,day);
+            _lb = lb;
+=======
 			rand = new Random();
 			int month = rand.Next( 1, 12 );
 			GetRandomDay( month );
 			int year = 2015 - age;
-            int day = rand.Next( 1, 28 );
-            _birthDate = new DateTime(year,month,day);
+			_birthDate = new DateTime( year, month, 01 );
 			_lb = lb;
+>>>>>>> 802b546718c99bf0d50be9c4e728b0bcc06e4b3d
 			GenerateExpectedSalary();
 		}
 

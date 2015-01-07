@@ -24,6 +24,7 @@ namespace SRH.Core
         public DateTime CurrentTimeOfGame
         {
             get { return _currentTimeOfGame; }
+			internal set { _currentTimeOfGame = value; }
         }
         public string FrenchDayOfWeek
         {
@@ -124,6 +125,20 @@ namespace SRH.Core
         {
             return (_currentTimeOfGame.Year != TryAddDay().Year);
         }
+
+		/// <summary>
+		/// Checks if a number of months have passed since a date
+		/// </summary>
+		/// <param name="time">The start date</param>
+		/// <param name="numberOfMonths">The number of months that should have passed</param>
+		/// <returns>True if the months have passed, false if not</returns>
+		public bool AreMonthsPassed( DateTime begginingDate, int numberOfMonths)
+		{
+			if( _currentTimeOfGame >= begginingDate.AddMonths( numberOfMonths ) )
+				return true;
+			else
+				return false;
+		} 
        
     }
 }
