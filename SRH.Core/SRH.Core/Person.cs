@@ -30,7 +30,8 @@ namespace SRH.Core
             int month = rand.Next( 1, 12 );
             GetRandomDay( month );
             int year = 2015 - age;
-            _birthDate = new DateTime(year,month,01);
+            int day = rand.Next( 1, 28 );
+            _birthDate = new DateTime(year,month,day);
             _lb = lb;
 			GenerateExpectedSalary();
 		}
@@ -131,10 +132,9 @@ namespace SRH.Core
         /// Add a year in the first January of the new year.
         /// </summary>
         /// <returns></returns>
-        public int AddAYear()
+        public void AddAYear()
         {
             this.Age += 1;
-            return this.Age;
         }
 
 		internal void GenerateExpectedSalary()

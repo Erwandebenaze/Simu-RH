@@ -199,22 +199,29 @@ namespace SRH.Core
         }
         /// <summary>
         /// Remove an Employee from a job if the project is not activated. 
-        /// TODO : Put again the skill in skillsRequired  with the good difficulty
         /// </summary>
         /// <param name="e"></param>
         /// <param name="skill"></param>
         public void RemoveEmployeeFromAJob( Employee e, Skill s )
         {
             if( !SkillsRequired.ContainsKey(s) && e.Worker.Skills.Contains(s) && !this.Activated )
-                _employeesAffectedWithSkill.Remove( e );
-            int nb = 0;
-            e.Busy = false;
-            foreach (Skill sk in e.Worker.Skills)
-            {
-                if (sk.SkillName == s.SkillName)
-                    nb = sk.Level.CurrentLevel; 
+                {
+
+          
+                    _employeesAffectedWithSkill.Remove( e );
+                int nb = 0;
+                e.Busy = false;
+                foreach (Skill sk in e.Worker.Skills)
+                {
+                    if (sk.SkillName == s.SkillName)
+                        nb = sk.Level.CurrentLevel; 
+                }
+                _skillsRequired.Add( s, nb );
             }
-            _skillsRequired.Add( s, nb );
+        }
+        internal void RemoveEmployeeFromTheProject(Employee e)
+        {
+            _employeesAffectedWithSkill.Remove( e );
         }
         /// <summary>
         /// Free every employees of the project.
