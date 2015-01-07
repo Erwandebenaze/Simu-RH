@@ -123,12 +123,6 @@ namespace SRH.Core
 			return newSkill;
 		}
 
-		public void RemoveSkill( Skill skill )
-		{
-			_skills.Remove( skill );
-			GenerateExpectedSalary();
-		}
-
         /// <summary>
         /// Add a year in the first January of the new year.
         /// </summary>

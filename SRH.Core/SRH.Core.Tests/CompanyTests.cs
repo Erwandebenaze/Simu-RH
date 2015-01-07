@@ -22,13 +22,6 @@ namespace SRH.Core.Tests
             Assert.That( c.CompanyLevel.CurrentLevel == 1 );
         }
 
-        //[Test]
-        //public void Create_competitor()
-        //{
-        //    Competitor c = new Competitor("Danone");
-        //    Assert.That( c, Is.Not.Null );
-        //}
-
         [Test]
         [ExpectedException( typeof( ArgumentNullException ) )]
         public void Create_mycompany_with_white_space_throw_argument_null_exeption()
@@ -220,5 +213,33 @@ namespace SRH.Core.Tests
 			Assert.That( myGame.PlayerCompany.CompanyLevel.XpRequired == 200 );
 			Assert.That( lastXpRequired == 100 );
 		}
+
+        [Test]
+        public void Add_a_manager()
+        {
+            Game myGame = new Game( 1, "Simu\'RH" );
+            Person p = new Person( myGame.Market, "André", "LeGéant", 20 );
+            Employee e = new Employee( myGame.PlayerCompany, p );
+
+            Skill s = p.AddSkill( "Commercial" );
+
+            myGame.PlayerCompany.AddManager( e, s );
+            Assert.That( myGame.PlayerCompany.Managers.ContainsKey( e ) );
+            Assert.That( myGame.PlayerCompany.Managers.ContainsValue( s ) );
+        }
+
+        [Test]
+        public void Affect_managers()
+        {
+            Game myGame = new Game( 1, "Simu\'RH" );
+            Person p = new Person( myGame.Market, "André", "LeGéant", 20 );
+            Employee e = new Employee( myGame.PlayerCompany, p );
+
+            Skill s = p.AddSkill( "Commercial" );
+
+            myGame.PlayerCompany.AddManager( e, s );
+            Assert.That( myGame.PlayerCompany.Commerciaux.Contains( e ) );
+            Assert.That( myGame.PlayerCompany.Managers.ContainsValue( s ) );
+        }
     }
 }

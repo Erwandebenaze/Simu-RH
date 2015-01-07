@@ -101,6 +101,26 @@ namespace SRH.Core
         {
              get { return _projectsEarnings; }
         }
+        internal List<Employee> Commerciaux
+        {
+            get { return _commerciaux; }
+        }
+        internal List<Employee> Animation
+        {
+            get { return _animation; }
+        }
+        internal List<Employee> RessourcesHumaines
+        {
+            get { return _ressourcesHumaines; }
+        }
+        internal List<Employee> DirecteursProjets
+        {
+            get { return _directeursProjets; }
+        }
+        internal List<Employee> Recruteur
+        {
+            get { return _recruteur; }
+        }
         #endregion
         public void MoveProject( Project p )
         {
