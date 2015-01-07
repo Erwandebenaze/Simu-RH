@@ -313,7 +313,7 @@ namespace SRH.Core.Tests
         }
 
         [Test]
-        public void Use_recruteur()
+        public void Use_recruteur() 
         {
             Game myGame = new Game( 1, "Simu\'RH" );
             Person p = new Person( myGame.Market, "André", "LeGéant", 20 );
