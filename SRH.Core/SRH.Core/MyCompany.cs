@@ -273,6 +273,21 @@ namespace SRH.Core
             
             return interest;
         }
+        public int GetCharges()
+        {
+            if( this.Employees.Count == 0 )
+                return 250;
+            else
+            {
+                return 500 * this.Employees.Count;
+            }
+        }
+
+        public void ApplyCharges()
+        {
+            _wealth -= GetCharges();
+
+        }
         /// <summary>
         /// End a project and give the earnings. XP/Person, XP/Company and earnings. Free the employees of the project.
         /// </summary>
@@ -634,5 +649,7 @@ namespace SRH.Core
             }
         } 
         #endregion
+
+
     }
 }

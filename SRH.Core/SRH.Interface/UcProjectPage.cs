@@ -185,6 +185,7 @@ namespace SRH.Interface
                 if( _currentProj.Activated )
                 {
                     _startOrStopProject.Text = "Arrêter un projet";
+                    _startOrStopProject.Enabled = true;
                     listSkillsRequired.Items.Clear();
                     listSkillsRequired.Items.AddRange( _currentProj.EmployeesAffectedWithSkill.Select( k => CompleteListItemViewSkillsRequired( k.Key, k.Value ) ).ToArray() );
 

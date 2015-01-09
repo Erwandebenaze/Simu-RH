@@ -323,7 +323,7 @@ namespace SRH.Core.Tests
            // if( _recruteur.Count != 0 ) return (int)(cost - (cost * (_decreaseRecruting / 100)));
 
             myGame.PlayerCompany.AddManager( e, s );
-            // 1 recruteur avec un niveau d'entreprise inférieur à 10 = pourcent de baisse cout = à 2
+            // 1 recruteur avec un niveau d'entreprise inférieur à 10 = pourcent de baisse coût = à 2
             Assert.That( myGame.PlayerCompany.EstimateRecrutingAndLayingOffCost(1000) == 980 );
         }
     }

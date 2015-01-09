@@ -17,13 +17,16 @@ namespace SRH.Core
         readonly Random _randomNumberGenerator;
         readonly List<Project> _possibleProjects;
 		static List<KeyValuePair<string, string>> _skillNames = CreateSkillNames();
+        Dictionary<Employee, string> _events;
+
+
 
 		public Game( int seed, string companyName )
 		{
 			_randomNumberGenerator = new Random( seed );
 			_market = new LaborMarket(this);
             _timeGame = new GameTime( this );
-
+            _events = new Dictionary<Employee, string>();
 			_competitors = new List<Competitor>();
 
             _playerCompany = new MyCompany( this, companyName );
@@ -61,7 +64,10 @@ namespace SRH.Core
         {
             get { return _competitors; }
         }
-
+        public Dictionary<Employee, string> Events
+        {
+            get { return _events; }
+        }
 		public static IReadOnlyList<KeyValuePair<string, string>> SkillNames
 		{
 			get { return _skillNames; }
@@ -155,7 +161,7 @@ namespace SRH.Core
             {
                 if( _timeGame.CurrentTimeOfGame.DayOfWeek == DayOfWeek.Monday )
                 {
-                    if( (pers.BirthDate.Day == _timeGame.CurrentTimeOfGame.Day - 1 || pers.BirthDate.Day == _timeGame.CurrentTimeOfGame.Day - 2) && pers.BirthDate.Month == _timeGame.CurrentTimeOfGame.Month && pers.BirthDate.Year + (1 + pers.Age) == _timeGame.CurrentTimeOfGame.Year )
+                    if( (pers.BirthDate.Day == _timeGame.CurrentTimeOfGame.Day - 1 || pers.BirthDate.Day == _timeGame.CurrentTimeOfGame.Day - 2) && pers.BirthDate.Month == _timeGame.CurrentTimeOfGame.Month )
                     {
                         pers.AddAYear();
                         if( pers.Age == 62 )
@@ -167,7 +173,7 @@ namespace SRH.Core
                 }
                 else
                 {
-                    if( pers.BirthDate.Day == _timeGame.CurrentTimeOfGame.Day && pers.BirthDate.Month == _timeGame.CurrentTimeOfGame.Month && pers.BirthDate.Year + (1 + pers.Age) == _timeGame.CurrentTimeOfGame.Year )
+                    if( pers.BirthDate.Day == _timeGame.CurrentTimeOfGame.Day && pers.BirthDate.Month == _timeGame.CurrentTimeOfGame.Month )
                     {
                         pers.AddAYear();
                         if( pers.Age == 62 )
@@ -176,6 +182,10 @@ namespace SRH.Core
                         }
                     }
 
+                }
+                if( pers.BirthDate.Year - _timeGame.CurrentTimeOfGame.Year > pers.Age )
+                {
+                    throw new InvalidOperationException("Date et age de la personne incohérente");
                 }
             }
             foreach( Person per in listPersTmp ) 
@@ -186,7 +196,7 @@ namespace SRH.Core
             {
                 if (_timeGame.CurrentTimeOfGame.DayOfWeek == DayOfWeek.Monday )
                 {
-                    if(( emp.Worker.BirthDate.Day == _timeGame.CurrentTimeOfGame.Day - 1 || emp.Worker.BirthDate.Day == _timeGame.CurrentTimeOfGame.Day -2 ) && emp.Worker.BirthDate.Month == _timeGame.CurrentTimeOfGame.Month && emp.Worker.BirthDate.Year + (1 + emp.Worker.Age) == _timeGame.CurrentTimeOfGame.Year )
+                    if(( emp.Worker.BirthDate.Day == _timeGame.CurrentTimeOfGame.Day - 1 || emp.Worker.BirthDate.Day == _timeGame.CurrentTimeOfGame.Day -2 ) && emp.Worker.BirthDate.Month == _timeGame.CurrentTimeOfGame.Month )
                     {
                         emp.Worker.AddAYear();
                         if( emp.Worker.Age == 62 )
@@ -198,7 +208,7 @@ namespace SRH.Core
                 }
                 else
                 {
-                    if( emp.Worker.BirthDate.Day == _timeGame.CurrentTimeOfGame.Day && emp.Worker.BirthDate.Month == _timeGame.CurrentTimeOfGame.Month && emp.Worker.BirthDate.Year + (1 + emp.Worker.Age) == _timeGame.CurrentTimeOfGame.Year )
+                    if( emp.Worker.BirthDate.Day == _timeGame.CurrentTimeOfGame.Day && emp.Worker.BirthDate.Month == _timeGame.CurrentTimeOfGame.Month )
                     {
                         emp.Worker.AddAYear();
                         if( emp.Worker.Age == 62 )
@@ -207,6 +217,10 @@ namespace SRH.Core
 
                         }
                     }
+                }
+                if( emp.Worker.BirthDate.Year - _timeGame.CurrentTimeOfGame.Year > emp.Worker.Age )
+                {
+                    throw new InvalidOperationException( "Date et age de la personne incohérente" );
                 }
             }
             foreach( Employee em in listEmpTmp ) 
@@ -237,8 +251,24 @@ namespace SRH.Core
             }
 
             _playerCompany.RemoveEmployee( emp );
+            OnRetirement += new SomeoneGoInRetirement(SomeoneRetirement);
             // TODO : Ajouter un évènement.
             GoInRetirement( emp.Worker );
         }
-	}
+
+        public delegate void SomeoneGoInRetirement( object sender, System.EventArgs e, Employee emp );
+        public event SomeoneGoInRetirement OnRetirement;
+
+        public void SomeoneRetirement( object sender, System.EventArgs e, Employee emp )
+        {
+            if( OnRetirement != null )
+            {
+                _events.Add( emp, "Retraite" );
+            }
+        }
+
+
+   }
+   
 }
+

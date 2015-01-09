@@ -21,12 +21,13 @@ namespace SRH.Interface
         DateTime? _begginingDebt;
         bool _debt;
         int _interest;
+        int _charges;
 
         public SimuRH()
         {
             InitializeComponent();
-            _myGame = new Game( 1, "Erwan" );
-            //_myGame = GameLoader.Load( "Erwan" );
+           //_myGame = new Game( 1, "Erwan" );
+            _myGame = GameLoader.Load( "Erwan" );
             _optionsForm = new Options();
             _timeOfGame = _myGame.TimeGame;
             _timer = new Timer();
@@ -59,6 +60,7 @@ namespace SRH.Interface
                 ExperienceProgress();
                 WealthProgress();
                 ucOffice.AffectOfficeFields();
+                ucOffice.GenerateListOfEvents();
 
 
                 _timeOfGame.newDay();
@@ -98,13 +100,17 @@ namespace SRH.Interface
                     competitor.TryToAddMoneyAndEmployee();
                 }
             }
-            if( _myGame.TimeGame.NextDayIsNewMonth() && (_myGame.PlayerCompany.Wealth < 0) )
+            if( _myGame.TimeGame.NextDayIsNewMonth() && (_myGame.PlayerCompany.Wealth < 0))
             {
                 _interest = _myGame.PlayerCompany.GetInterest();
                 _myGame.PlayerCompany.ApplyInterests();
             }
+
             if( _myGame.TimeGame.NextDayIsNewMonth())
             {
+                _charges = _myGame.PlayerCompany.GetCharges();
+                _myGame.PlayerCompany.ApplyCharges();
+
                 #region switch WealthInYear
                 switch( _myGame.TimeGame.CurrentTimeOfGame.Month )
                 {

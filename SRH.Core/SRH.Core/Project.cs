@@ -280,6 +280,7 @@ namespace SRH.Core
 			foreach( KeyValuePair<Employee, Skill> kvp in _employeesAffectedWithSkill )
 			{
 				kvp.Key.SkillInProject = kvp.Value;
+                kvp.Key.Project = _name;
 			}
 		}
     }

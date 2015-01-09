@@ -13,7 +13,8 @@ namespace SRH.Core
 		private int _salary;
 		private int _salaryAdjustment;
         private bool _busy;
-		private Skill _skillInProject;
+        private Skill _skillInProject;
+        private string _project;
 		private Skill _skillAffectedToCompany;
 		private string _skillInTraining;
 		private DateTime? _trainingBegginingDate;
@@ -27,7 +28,7 @@ namespace SRH.Core
         /// </summary>
         /// <param name="name"></param>
 		/// <param name="firstName"></param>
-		/// <param name="age">Cannot inferior to 18 or superiror to 62</param>
+		/// <param name="age">Cannot inferior to 18 or superior to 62</param>
         internal Employee(Company comp, Person worker )
         {
             if( comp == null ) throw new ArgumentNullException( "Company is null" );
@@ -50,6 +51,11 @@ namespace SRH.Core
         {
             get { return _busy; }
             internal set { _busy = value; }
+        }
+        public string Project
+        {
+            get { return _project; }
+            internal set { _project = value; }
         }
         public Company Comp
         {
@@ -106,10 +112,10 @@ namespace SRH.Core
 			get { return _behavior; }
 		}
 
-		internal Skill SkillInProject
+		public Skill SkillInProject
 		{
 			get { return _skillInProject; }
-			set { _skillInProject = value; }
+			internal set { _skillInProject = value; }
 		}
 		#endregion
 
