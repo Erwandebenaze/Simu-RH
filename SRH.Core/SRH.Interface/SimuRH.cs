@@ -25,8 +25,8 @@ namespace SRH.Interface
         public SimuRH()
         {
             InitializeComponent();
-            //_myGame = new Game( 1, "Erwan" );
-            _myGame = GameLoader.Load( "Erwan" );
+            _myGame = new Game( 1, "Erwan" );
+            //_myGame = GameLoader.Load( "Erwan" );
             _optionsForm = new Options();
             _timeOfGame = _myGame.TimeGame;
             _timer = new Timer();
@@ -64,7 +64,8 @@ namespace SRH.Interface
                 _timeOfGame.newDay();
                 _myGame.PlayerCompany.AddXpToManagers();
                 _myGame.PlayerCompany.EndProjectIfItsFinish();
-				UpdateEmployeesSkills(); 
+				UpdateEmployeesSkills();
+				UpdateEmployeesHappiness();
                 ClearListsProjects();
 
 				// Current date display
@@ -105,6 +106,18 @@ namespace SRH.Interface
             }
 
         }
+
+		private void UpdateEmployeesHappiness()
+		{
+			foreach( Employee e in _myGame.PlayerCompany.Employees )
+			{
+				e.Behavior.UpdateHappiness();
+				if( e == ucEmployeePage.CurrentEmployee )
+				{
+					ucEmployeePage.SetHappinessBar();
+				}
+			}
+		}
 
 		private void PayEmployees()
 		{

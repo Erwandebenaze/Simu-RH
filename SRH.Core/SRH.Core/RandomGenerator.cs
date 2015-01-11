@@ -79,10 +79,67 @@ namespace SRH.Core
 			return p;
 		}
 
-		string GetRandomSkillName()
+		//TODO : make private, internal just for temporary tests
+		internal string GetRandomSkillName()
 		{
-			return Game.SkillNames[ _randomNumberGenerator.Next( 0, Game.SkillNames.Count ) ].Value;
+			string randomSkillName;
+			List<string> skillsToChooseFrom = null;
+			int alea = _randomNumberGenerator.Next( 1, 4 );
+
+			if( alea == 1 )
+			{
+				IEnumerable<String> skills = Game.SkillNames.Where( s => s.Key == "compa" ).Select( s => s.Value );
+				skillsToChooseFrom = new List<string>( skills );
+				randomSkillName = skillsToChooseFrom[ _randomNumberGenerator.Next( 0, skillsToChooseFrom.Count ) ];
+			}
+			else
+			{
+				int aleaProj = _randomNumberGenerator.Next( 1, 11 );
+				IEnumerable<String> skills = Game.SkillNames
+					.Where( kvp => kvp.Key == "proj" && kvp.Value != "Développement" && kvp.Value != "Développement web" )
+					.Select( kvp => kvp.Value );
+				skillsToChooseFrom = new List<string>( skills );
+
+				if( aleaProj <= 3 )
+					randomSkillName = "Développement";
+				else if( aleaProj <= 5 )
+					randomSkillName = "Développement web";
+				else
+				{
+					randomSkillName = skillsToChooseFrom[ _randomNumberGenerator.Next( 0, skillsToChooseFrom.Count ) ];
+				}
+			}
+
+			return randomSkillName;
 		}
+
+		//TODO : make private, internal just for temporary tests
+		internal int GetRandomPoints()
+		{
+			int points = 0;
+			bool check = false;
+			while( !check )
+			{
+				points = _randomNumberGenerator.Next( 2, 7 );
+				if( points == 2 || points > 4 )
+				{
+					if( _randomNumberGenerator.Next( 1, 6 ) == 5 )
+						check = true;
+				}
+				else
+					check = true;
+			}
+
+			return points;
+		}
+
+		//internal List<KeyValuePair<string, int>> AssignPoints( int points )
+		//{
+		//	// chaque point vaut 1 niveau de compétence
+		//	// choisis 1 compétence (do while)
+		//	// condition : si skills.count > 4 => augmentation de lvl d'1 skill
+		//}
+
         public int GetRandomMonth()
         {
             int month = RandomNumberGenerator.Next( 1, 12 );

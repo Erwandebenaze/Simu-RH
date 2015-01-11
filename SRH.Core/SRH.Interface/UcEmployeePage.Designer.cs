@@ -39,6 +39,7 @@
 			System.Windows.Forms.Label personExpectedSalaryTitle;
 			System.Windows.Forms.Label firingCostTitle;
 			System.Windows.Forms.Label hiringCostTitle;
+			System.Windows.Forms.Label happinessTtile;
 			this.SelectedSkillTrainCostTitle = new System.Windows.Forms.Label();
 			this.SelectedSkillTrainTimeTitle = new System.Windows.Forms.Label();
 			this.PersonList = new System.Windows.Forms.ListView();
@@ -51,6 +52,8 @@
 			this.splitContainer2 = new System.Windows.Forms.SplitContainer();
 			this.UcEmployeeList1 = new SRH.Interface.UcEmployeeList();
 			this.splitContainer3 = new System.Windows.Forms.SplitContainer();
+			this.happinessValues = new System.Windows.Forms.Label();
+			this.happinessBar = new System.Windows.Forms.ProgressBar();
 			this.SalaryAdjustmentIndication = new System.Windows.Forms.Label();
 			this.trainingPanel = new System.Windows.Forms.Panel();
 			this.firingCost = new System.Windows.Forms.Label();
@@ -88,6 +91,7 @@
 			personExpectedSalaryTitle = new System.Windows.Forms.Label();
 			firingCostTitle = new System.Windows.Forms.Label();
 			hiringCostTitle = new System.Windows.Forms.Label();
+			happinessTtile = new System.Windows.Forms.Label();
 			((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
 			this.splitContainer1.Panel1.SuspendLayout();
 			this.splitContainer1.Panel2.SuspendLayout();
@@ -172,7 +176,7 @@
 			// employeeSalaryTitle
 			// 
 			employeeSalaryTitle.AutoSize = true;
-			employeeSalaryTitle.Location = new System.Drawing.Point(14, 129);
+			employeeSalaryTitle.Location = new System.Drawing.Point(14, 114);
 			employeeSalaryTitle.Name = "employeeSalaryTitle";
 			employeeSalaryTitle.Size = new System.Drawing.Size(45, 13);
 			employeeSalaryTitle.TabIndex = 27;
@@ -204,6 +208,15 @@
 			hiringCostTitle.Size = new System.Drawing.Size(35, 13);
 			hiringCostTitle.TabIndex = 33;
 			hiringCostTitle.Text = "Coût :";
+			// 
+			// happinessTtile
+			// 
+			happinessTtile.AutoSize = true;
+			happinessTtile.Location = new System.Drawing.Point(14, 219);
+			happinessTtile.Name = "happinessTtile";
+			happinessTtile.Size = new System.Drawing.Size(79, 13);
+			happinessTtile.TabIndex = 33;
+			happinessTtile.Text = "Contentement :";
 			// 
 			// SelectedSkillTrainCostTitle
 			// 
@@ -319,6 +332,9 @@
 			// 
 			// splitContainer3.Panel1
 			// 
+			this.splitContainer3.Panel1.Controls.Add(this.happinessValues);
+			this.splitContainer3.Panel1.Controls.Add(happinessTtile);
+			this.splitContainer3.Panel1.Controls.Add(this.happinessBar);
 			this.splitContainer3.Panel1.Controls.Add(this.SalaryAdjustmentIndication);
 			this.splitContainer3.Panel1.Controls.Add(this.trainingPanel);
 			this.splitContainer3.Panel1.Controls.Add(this.currentTrainingPanel);
@@ -352,11 +368,29 @@
 			this.splitContainer3.SplitterDistance = 257;
 			this.splitContainer3.TabIndex = 0;
 			// 
+			// happinessValues
+			// 
+			this.happinessValues.AutoSize = true;
+			this.happinessValues.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.happinessValues.Location = new System.Drawing.Point(24, 232);
+			this.happinessValues.Name = "happinessValues";
+			this.happinessValues.Size = new System.Drawing.Size(14, 13);
+			this.happinessValues.TabIndex = 34;
+			this.happinessValues.Text = "X";
+			// 
+			// happinessBar
+			// 
+			this.happinessBar.ForeColor = System.Drawing.Color.Lime;
+			this.happinessBar.Location = new System.Drawing.Point(11, 206);
+			this.happinessBar.Name = "happinessBar";
+			this.happinessBar.Size = new System.Drawing.Size(107, 10);
+			this.happinessBar.TabIndex = 32;
+			// 
 			// SalaryAdjustmentIndication
 			// 
 			this.SalaryAdjustmentIndication.AutoSize = true;
 			this.SalaryAdjustmentIndication.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.SalaryAdjustmentIndication.Location = new System.Drawing.Point(14, 182);
+			this.SalaryAdjustmentIndication.Location = new System.Drawing.Point(14, 167);
 			this.SalaryAdjustmentIndication.Name = "SalaryAdjustmentIndication";
 			this.SalaryAdjustmentIndication.Size = new System.Drawing.Size(110, 26);
 			this.SalaryAdjustmentIndication.TabIndex = 31;
@@ -491,7 +525,7 @@
 			// 
 			this.decreaseSalary.Enabled = false;
 			this.decreaseSalary.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.decreaseSalary.Location = new System.Drawing.Point(27, 156);
+			this.decreaseSalary.Location = new System.Drawing.Point(27, 141);
 			this.decreaseSalary.Name = "decreaseSalary";
 			this.decreaseSalary.Size = new System.Drawing.Size(22, 23);
 			this.decreaseSalary.TabIndex = 30;
@@ -504,7 +538,7 @@
 			// 
 			this.increaseSalary.Enabled = false;
 			this.increaseSalary.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.increaseSalary.Location = new System.Drawing.Point(76, 156);
+			this.increaseSalary.Location = new System.Drawing.Point(76, 141);
 			this.increaseSalary.Name = "increaseSalary";
 			this.increaseSalary.Size = new System.Drawing.Size(22, 23);
 			this.increaseSalary.TabIndex = 29;
@@ -516,7 +550,7 @@
 			// employeeSalary
 			// 
 			this.employeeSalary.AutoSize = true;
-			this.employeeSalary.Location = new System.Drawing.Point(88, 129);
+			this.employeeSalary.Location = new System.Drawing.Point(88, 114);
 			this.employeeSalary.Name = "employeeSalary";
 			this.employeeSalary.Size = new System.Drawing.Size(14, 13);
 			this.employeeSalary.TabIndex = 28;
@@ -696,5 +730,7 @@
 		private System.Windows.Forms.ProgressBar trainingProgress;
 		private System.Windows.Forms.Label hiringCost;
 		private System.Windows.Forms.Label SalaryAdjustmentIndication;
+		private System.Windows.Forms.ProgressBar happinessBar;
+		private System.Windows.Forms.Label happinessValues;
 	}
 }

@@ -158,10 +158,7 @@ namespace SRH.Core
 		public int UpdateEmployeeTraining()
 		{
 			if( _comp.Game.TimeGame.intervalOfTimeInDays( _trainingBegginingDate ) == _trainingDuration )
-			{
-				// Puts the skill in the used skills
-				this.Behavior.AddOrUpdateSkillsUsed( _skillInTraining );
-				
+			{				
 				Train( _skillInTraining );
 			}
 

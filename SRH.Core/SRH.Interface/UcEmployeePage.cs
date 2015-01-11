@@ -92,7 +92,9 @@ namespace SRH.Interface
 			employeeAge.Text = _currentEmployee.Worker.Age.ToString();
 			employeeOccupation.Text = GetCurrentOccupationText( _currentEmployee );
 			firingCost.Text = _currentEmployee.LayingOffCost.ToString();
-			GetSalaryDisplay();
+			SetSalaryDisplay();
+			happinessBar.Value = _currentEmployee.Happiness.HappinessScore;
+			happinessValues.Text = _currentEmployee.Happiness.HappinessScore.ToString() + " / 100";
 
 			if( !_currentEmployee.Busy )
 			{
@@ -118,7 +120,7 @@ namespace SRH.Interface
 			ucSkillsDisplayEmployee.LoadUc();
 		}
 
-		private void GetSalaryDisplay()
+		private void SetSalaryDisplay()
 		{
 			employeeSalary.Text = _currentEmployee.Salary.ToString();
 			if( _currentEmployee.Salary == _currentEmployee.Worker.ExpectedSalary )
@@ -132,13 +134,19 @@ namespace SRH.Interface
 
 		internal void SetTrainingProgress( Employee e )
 		{
-			timeLeft.Visible = true;
-			timeLeft.Text = _trainingTimeLeft.ToString();
 			trainingProgress.Minimum = 0;
 			trainingProgress.Maximum = _currentEmployee.TrainingDuration;
 			trainingProgress.Value = _currentEmployee.TrainingDuration - _trainingTimeLeft;
+
+			timeLeft.Visible = true;
+			timeLeft.Text = _trainingTimeLeft.ToString();
 		}
 
+		internal void SetHappinessBar()
+		{
+			happinessBar.Value = _currentEmployee.Happiness.HappinessScore;
+			happinessValues.Text = _currentEmployee.Happiness.HappinessScore.ToString() + " / 100";
+		}
 		/// <summary>
 		/// Displays the information about the selected Person
 		/// </summary>
