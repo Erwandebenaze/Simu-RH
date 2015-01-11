@@ -101,6 +101,26 @@ namespace SRH.Core
         {
              get { return _projectsEarnings; }
         }
+        internal List<Employee> Commerciaux
+        {
+            get { return _commerciaux; }
+        }
+        internal List<Employee> Animation
+        {
+            get { return _animation; }
+        }
+        internal List<Employee> RessourcesHumaines
+        {
+            get { return _ressourcesHumaines; }
+        }
+        internal List<Employee> DirecteursProjets
+        {
+            get { return _directeursProjets; }
+        }
+        internal List<Employee> Recruteur
+        {
+            get { return _recruteur; }
+        }
         #endregion
         public void MoveProject( Project p )
         {
@@ -252,6 +272,21 @@ namespace SRH.Core
             }
             
             return interest;
+        }
+        public int GetCharges()
+        {
+            if( this.Employees.Count == 0 )
+                return 250;
+            else
+            {
+                return 500 * this.Employees.Count;
+            }
+        }
+
+        public void ApplyCharges()
+        {
+            _wealth -= GetCharges();
+
         }
         /// <summary>
         /// End a project and give the earnings. XP/Person, XP/Company and earnings. Free the employees of the project.
@@ -614,5 +649,7 @@ namespace SRH.Core
             }
         } 
         #endregion
+
+
     }
 }

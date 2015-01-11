@@ -16,7 +16,7 @@ namespace SRH.Core
         protected int _maxWealth;
         protected readonly List<Employee> _employees;
         readonly protected Game _myGame;
-
+        WealthInYear _wealthInYear;
 
         public Company( Game game, string name )
         {
@@ -25,6 +25,8 @@ namespace SRH.Core
             _myGame = game;
             _maxEmployees = 10;
             _employees = new List<Employee>();
+            _wealthInYear = new WealthInYear( this );
+            
         }
 
 		#region Getters Setters
@@ -55,6 +57,11 @@ namespace SRH.Core
 				_wealth = value;
 			}
 		}
+        public WealthInYear WealthInYear
+        {
+            get { return _wealthInYear; }
+            set { _wealthInYear = value; }
+        }
         //public int MaxWealth
         //{
         //    get { return _maxWealth; }

@@ -21,16 +21,17 @@ namespace SRH.Interface
         DateTime? _begginingDebt;
         bool _debt;
         int _interest;
+        int _charges;
 
         public SimuRH()
         {
             InitializeComponent();
-            _myGame = new Game( 1, "Erwan" );
+           //_myGame = new Game( 1, "Erwan" );
             //_myGame = GameLoader.Load( "Erwan" );
             _optionsForm = new Options();
             _timeOfGame = _myGame.TimeGame;
             _timer = new Timer();
-            interval = 2000;
+            interval = 500;
             _timer.Interval = interval;
             _timer.Tick += _timer_Tick;
             _timer.Start();
@@ -59,6 +60,7 @@ namespace SRH.Interface
                 ExperienceProgress();
                 WealthProgress();
                 ucOffice.AffectOfficeFields();
+                ucOffice.GenerateListOfEvents();
 
 
                 _timeOfGame.newDay();
@@ -99,12 +101,64 @@ namespace SRH.Interface
                     competitor.TryToAddMoneyAndEmployee();
                 }
             }
-            if( _myGame.TimeGame.NextDayIsNewMonth() && (_myGame.PlayerCompany.Wealth < 0) )
+            if( _myGame.TimeGame.NextDayIsNewMonth() && (_myGame.PlayerCompany.Wealth < 0))
             {
                 _interest = _myGame.PlayerCompany.GetInterest();
                 _myGame.PlayerCompany.ApplyInterests();
             }
 
+            if( _myGame.TimeGame.NextDayIsNewMonth())
+            {
+                _charges = _myGame.PlayerCompany.GetCharges();
+                _myGame.PlayerCompany.ApplyCharges();
+
+                #region switch WealthInYear
+                switch( _myGame.TimeGame.CurrentTimeOfGame.Month )
+                {
+                    case 1:
+                        _myGame.PlayerCompany.WealthInYear.January = _myGame.PlayerCompany.Wealth;
+                        _myGame.PlayerCompany.WealthInYear.NewYear();
+                        break;
+                    case 2:
+                        _myGame.PlayerCompany.WealthInYear.February = _myGame.PlayerCompany.Wealth;
+                        break;
+                    case 3:
+                        _myGame.PlayerCompany.WealthInYear.March = _myGame.PlayerCompany.Wealth;
+                        break;
+                    case 4:
+                        _myGame.PlayerCompany.WealthInYear.April = _myGame.PlayerCompany.Wealth;
+                        break;
+                    case 5:
+                        _myGame.PlayerCompany.WealthInYear.May = _myGame.PlayerCompany.Wealth;
+                        break;
+                    case 6:
+                        _myGame.PlayerCompany.WealthInYear.June = _myGame.PlayerCompany.Wealth;
+                        break;
+                    case 7:
+                        _myGame.PlayerCompany.WealthInYear.July = _myGame.PlayerCompany.Wealth;
+                        break;
+                    case 8:
+                        _myGame.PlayerCompany.WealthInYear.August = _myGame.PlayerCompany.Wealth;
+                        break;
+                    case 9:
+                        _myGame.PlayerCompany.WealthInYear.September = _myGame.PlayerCompany.Wealth;
+                        break;
+                    case 10:
+                        _myGame.PlayerCompany.WealthInYear.October = _myGame.PlayerCompany.Wealth;
+                        break;
+                    case 11:
+                        _myGame.PlayerCompany.WealthInYear.November = _myGame.PlayerCompany.Wealth;
+                        break;
+                    case 12:
+                        _myGame.PlayerCompany.WealthInYear.December = _myGame.PlayerCompany.Wealth;
+                        break;
+                    default:
+                        throw new InvalidOperationException( "Month is beetween 1 and 12" );
+                }
+                #endregion
+            }
+
+            _myGame.TryToAddYear();
         }
 
 		private void UpdateEmployeesHappiness()

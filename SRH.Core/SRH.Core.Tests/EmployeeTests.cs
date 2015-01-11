@@ -133,26 +133,7 @@ namespace SRH.Core.Tests
 			Assert.That( myGame.PlayerCompany.Wealth == ( companyWealth - layingOffCost ) );
 		}
 
-		[Test]
-		public void a_person_generates_an_expected_salary_depending_on_its_skills()
-		{
-			Person p = new Person( myGame.Market, "André", "LeGéant", 20 );
-			p.GenerateExpectedSalary();
 
-			Assert.That( p.ExpectedSalary == 1000);
-
-			p.AddSkill( "Conception" );
-			p.GenerateExpectedSalary();
-			Assert.That( p.ExpectedSalary == 1100 );
-
-			p.AddSkill( "Commercial" );
-			p.GenerateExpectedSalary();
-			Assert.That( p.ExpectedSalary == 1300 );
-
-			p.Skills[1].Level.CurrentLevel += 1 ;
-			p.GenerateExpectedSalary();
-			Assert.That( p.ExpectedSalary == 1500 );
-		}
 
 		[Test]
 		public void an_employee_can_have_his_salary_adjusted()

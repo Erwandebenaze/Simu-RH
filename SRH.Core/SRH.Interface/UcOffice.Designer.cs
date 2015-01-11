@@ -44,7 +44,9 @@
             this.label1 = new System.Windows.Forms.Label();
             this.BudgetGroupBox = new System.Windows.Forms.GroupBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this._chargesYear = new System.Windows.Forms.Label();
             this._totalRecYear = new System.Windows.Forms.Label();
+            this.label20 = new System.Windows.Forms.Label();
             this.label32 = new System.Windows.Forms.Label();
             this._resYear = new System.Windows.Forms.Label();
             this._projectsYear = new System.Windows.Forms.Label();
@@ -66,6 +68,8 @@
             this.label30 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this._chargesMonth = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
             this._totalRecMonth = new System.Windows.Forms.Label();
             this.label31 = new System.Windows.Forms.Label();
             this._resMonth = new System.Windows.Forms.Label();
@@ -89,6 +93,7 @@
             this.label7 = new System.Windows.Forms.Label();
             this._actualWealth = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
+            this._listViewEvents = new System.Windows.Forms.ListView();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -97,6 +102,7 @@
             this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer4)).BeginInit();
+            this.splitContainer4.Panel1.SuspendLayout();
             this.splitContainer4.Panel2.SuspendLayout();
             this.splitContainer4.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -141,6 +147,10 @@
             this.splitContainer4.Location = new System.Drawing.Point(0, 0);
             this.splitContainer4.Name = "splitContainer4";
             this.splitContainer4.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            // 
+            // splitContainer4.Panel1
+            // 
+            this.splitContainer4.Panel1.Controls.Add(this._listViewEvents);
             // 
             // splitContainer4.Panel2
             // 
@@ -275,7 +285,9 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this._chargesYear);
             this.groupBox3.Controls.Add(this._totalRecYear);
+            this.groupBox3.Controls.Add(this.label20);
             this.groupBox3.Controls.Add(this.label32);
             this.groupBox3.Controls.Add(this._resYear);
             this.groupBox3.Controls.Add(this._projectsYear);
@@ -303,21 +315,39 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Mouvements annuels";
             // 
+            // _chargesYear
+            // 
+            this._chargesYear.AutoSize = true;
+            this._chargesYear.Location = new System.Drawing.Point(195, 148);
+            this._chargesYear.Name = "_chargesYear";
+            this._chargesYear.Size = new System.Drawing.Size(17, 17);
+            this._chargesYear.TabIndex = 24;
+            this._chargesYear.Text = "X";
+            // 
             // _totalRecYear
             // 
             this._totalRecYear.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this._totalRecYear.AutoSize = true;
-            this._totalRecYear.Location = new System.Drawing.Point(326, 146);
+            this._totalRecYear.Location = new System.Drawing.Point(326, 164);
             this._totalRecYear.Name = "_totalRecYear";
             this._totalRecYear.Size = new System.Drawing.Size(17, 17);
             this._totalRecYear.TabIndex = 31;
             this._totalRecYear.Text = "X";
             // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(67, 148);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(61, 17);
+            this.label20.TabIndex = 23;
+            this.label20.Text = "Charges";
+            // 
             // label32
             // 
             this.label32.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label32.AutoSize = true;
-            this.label32.Location = new System.Drawing.Point(261, 146);
+            this.label32.Location = new System.Drawing.Point(261, 164);
             this.label32.Name = "label32";
             this.label32.Size = new System.Drawing.Size(40, 17);
             this.label32.TabIndex = 30;
@@ -345,7 +375,7 @@
             // _totalDepYear
             // 
             this._totalDepYear.AutoSize = true;
-            this._totalDepYear.Location = new System.Drawing.Point(195, 147);
+            this._totalDepYear.Location = new System.Drawing.Point(195, 165);
             this._totalDepYear.Name = "_totalDepYear";
             this._totalDepYear.Size = new System.Drawing.Size(17, 17);
             this._totalDepYear.TabIndex = 27;
@@ -408,7 +438,7 @@
             // label22
             // 
             this.label22.AutoSize = true;
-            this.label22.Location = new System.Drawing.Point(67, 147);
+            this.label22.Location = new System.Drawing.Point(67, 165);
             this.label22.Name = "label22";
             this.label22.Size = new System.Drawing.Size(40, 17);
             this.label22.TabIndex = 19;
@@ -499,6 +529,8 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this._chargesMonth);
+            this.groupBox2.Controls.Add(this.label5);
             this.groupBox2.Controls.Add(this._totalRecMonth);
             this.groupBox2.Controls.Add(this.label31);
             this.groupBox2.Controls.Add(this._resMonth);
@@ -527,11 +559,29 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Mouvements mensuels";
             // 
+            // _chargesMonth
+            // 
+            this._chargesMonth.AutoSize = true;
+            this._chargesMonth.Location = new System.Drawing.Point(195, 155);
+            this._chargesMonth.Name = "_chargesMonth";
+            this._chargesMonth.Size = new System.Drawing.Size(17, 17);
+            this._chargesMonth.TabIndex = 22;
+            this._chargesMonth.Text = "X";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(67, 155);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(61, 17);
+            this.label5.TabIndex = 21;
+            this.label5.Text = "Charges";
+            // 
             // _totalRecMonth
             // 
             this._totalRecMonth.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this._totalRecMonth.AutoSize = true;
-            this._totalRecMonth.Location = new System.Drawing.Point(342, 152);
+            this._totalRecMonth.Location = new System.Drawing.Point(342, 178);
             this._totalRecMonth.Name = "_totalRecMonth";
             this._totalRecMonth.Size = new System.Drawing.Size(17, 17);
             this._totalRecMonth.TabIndex = 20;
@@ -541,7 +591,7 @@
             // 
             this.label31.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label31.AutoSize = true;
-            this.label31.Location = new System.Drawing.Point(261, 152);
+            this.label31.Location = new System.Drawing.Point(261, 178);
             this.label31.Name = "label31";
             this.label31.Size = new System.Drawing.Size(40, 17);
             this.label31.TabIndex = 19;
@@ -569,7 +619,7 @@
             // _totalDepMonth
             // 
             this._totalDepMonth.AutoSize = true;
-            this._totalDepMonth.Location = new System.Drawing.Point(195, 152);
+            this._totalDepMonth.Location = new System.Drawing.Point(195, 178);
             this._totalDepMonth.Name = "_totalDepMonth";
             this._totalDepMonth.Size = new System.Drawing.Size(17, 17);
             this._totalDepMonth.TabIndex = 15;
@@ -632,7 +682,7 @@
             // label17
             // 
             this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(67, 152);
+            this.label17.Location = new System.Drawing.Point(67, 178);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(40, 17);
             this.label17.TabIndex = 8;
@@ -740,6 +790,15 @@
             this.label6.TabIndex = 0;
             this.label6.Text = "Solde actuel : ";
             // 
+            // _listViewEvents
+            // 
+            this._listViewEvents.Dock = System.Windows.Forms.DockStyle.Fill;
+            this._listViewEvents.Location = new System.Drawing.Point(0, 0);
+            this._listViewEvents.Name = "_listViewEvents";
+            this._listViewEvents.Size = new System.Drawing.Size(405, 364);
+            this._listViewEvents.TabIndex = 0;
+            this._listViewEvents.UseCompatibleStateImageBehavior = false;
+            // 
             // UcOffice
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -755,6 +814,7 @@
             this.splitContainer2.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
+            this.splitContainer4.Panel1.ResumeLayout(false);
             this.splitContainer4.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer4)).EndInit();
             this.splitContainer4.ResumeLayout(false);
@@ -833,5 +893,10 @@
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label _chargesYear;
+        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.Label _chargesMonth;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.ListView _listViewEvents;
     }
 }

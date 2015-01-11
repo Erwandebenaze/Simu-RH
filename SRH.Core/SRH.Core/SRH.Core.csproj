@@ -76,6 +76,7 @@
     <Compile Include="Skill.cs" />
     <Compile Include="GameTime.cs" />
     <Compile Include="StringExtension.cs" />
+    <Compile Include="WealthInYear.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Model.cd" />

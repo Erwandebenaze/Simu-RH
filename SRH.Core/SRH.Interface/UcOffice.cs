@@ -33,6 +33,27 @@ namespace SRH.Interface
         internal void LoadPage()
         {
             AffectOfficeFields();
+            GenerateListOfEvents();
+        }
+
+        internal void GenerateListOfEvents()
+        {
+            if( GameContext.CurrentGame.Events.Count != 0 )
+            {
+                _listViewEvents.Items.AddRange( GameContext.CurrentGame.Events.Select( ev => CreateListItemViewEvents( ev ) ).ToArray() );
+            }
+        }
+        private ListViewItem CreateListItemViewEvents( KeyValuePair<Employee,string> dico )
+        {
+            ListViewItem i;
+            if (dico.Value == "Retraite")
+            {
+            i = new ListViewItem( "Votre employé " + dico.Key.Worker.FirstName + " " + dico.Key.Worker.LastName + " est parti à la retraite, le projet : " + dico.Key.Project + " a été ralenti. "  + dico.Key.Worker.FirstName + " " + dico.Key.Worker.LastName + " avait la compétence " + dico.Key.SkillInProject.SkillName + ".");
+            } else
+            {
+                i = new ListViewItem();
+            }
+            return i;
         }
 
         internal void AffectOfficeFields()
@@ -61,6 +82,9 @@ namespace SRH.Interface
             _interestMonth.Text = GameContext.CurrentGame.PlayerCompany.GetInterest().ToString();
             _interestYear.Text = (GameContext.CurrentGame.PlayerCompany.GetInterest()*12).ToString();
 
+            _chargesMonth.Text = GameContext.CurrentGame.PlayerCompany.GetCharges().ToString();
+            _chargesYear.Text = (GameContext.CurrentGame.PlayerCompany.GetCharges() * 12).ToString();
+
             _trainingMonth.Text = GameContext.CurrentGame.PlayerCompany.GetTrainingCostMonth().ToString();
             _trainingYear.Text = GameContext.CurrentGame.PlayerCompany.GetTrainingCostYear().ToString();
 
@@ -70,8 +94,8 @@ namespace SRH.Interface
             _layingOffMonth.Text = GameContext.CurrentGame.PlayerCompany.GetLayingOffCostMonth().ToString();
             _layingOffYear.Text = GameContext.CurrentGame.PlayerCompany.GetLayingOffCostYear().ToString();
 
-            _totalDepMonth.Text = (GameContext.CurrentGame.PlayerCompany.GetTrainingCostMonth() + GameContext.CurrentGame.PlayerCompany.GetRecrutingCostMonth() + GameContext.CurrentGame.PlayerCompany.GetLayingOffCostMonth() + GameContext.CurrentGame.PlayerCompany.GetInterest() + i ).ToString();
-            _totalDepYear.Text = (GameContext.CurrentGame.PlayerCompany.GetTrainingCostYear() + GameContext.CurrentGame.PlayerCompany.GetRecrutingCostYear() + (GameContext.CurrentGame.PlayerCompany.GetInterest() * 12) + (i*12)).ToString();
+            _totalDepMonth.Text = (GameContext.CurrentGame.PlayerCompany.GetTrainingCostMonth() + GameContext.CurrentGame.PlayerCompany.GetRecrutingCostMonth() + GameContext.CurrentGame.PlayerCompany.GetLayingOffCostMonth() + GameContext.CurrentGame.PlayerCompany.GetInterest() + GameContext.CurrentGame.PlayerCompany.GetCharges() + i).ToString();
+            _totalDepYear.Text = (GameContext.CurrentGame.PlayerCompany.GetTrainingCostYear() + GameContext.CurrentGame.PlayerCompany.GetRecrutingCostYear() + (GameContext.CurrentGame.PlayerCompany.GetInterest() * 12) + (GameContext.CurrentGame.PlayerCompany.GetCharges() * 12) + (i * 12)).ToString();
             
             _projectsMonth.Text = GameContext.CurrentGame.PlayerCompany.GetProjectsEarningsMonth().ToString();
             _projectsYear.Text = GameContext.CurrentGame.PlayerCompany.GetProjectsEarningsYear().ToString();
@@ -79,8 +103,8 @@ namespace SRH.Interface
             _totalRecMonth.Text = GameContext.CurrentGame.PlayerCompany.GetProjectsEarningsMonth().ToString();
             _totalRecYear.Text = GameContext.CurrentGame.PlayerCompany.GetProjectsEarningsYear().ToString();
 
-            _resMonth.Text = (GameContext.CurrentGame.PlayerCompany.GetProjectsEarningsMonth() - ((GameContext.CurrentGame.PlayerCompany.GetTrainingCostMonth() + GameContext.CurrentGame.PlayerCompany.GetRecrutingCostMonth() + GameContext.CurrentGame.PlayerCompany.GetLayingOffCostMonth() + GameContext.CurrentGame.PlayerCompany.GetInterest() + i ))).ToString();
-            _resYear.Text = (GameContext.CurrentGame.PlayerCompany.GetProjectsEarningsYear() - (GameContext.CurrentGame.PlayerCompany.GetTrainingCostYear() + GameContext.CurrentGame.PlayerCompany.GetRecrutingCostYear() + GameContext.CurrentGame.PlayerCompany.GetLayingOffCostYear() + (GameContext.CurrentGame.PlayerCompany.GetInterest() * 12) + (i * 12))).ToString();
+            _resMonth.Text = (GameContext.CurrentGame.PlayerCompany.GetProjectsEarningsMonth() - ((GameContext.CurrentGame.PlayerCompany.GetTrainingCostMonth() + GameContext.CurrentGame.PlayerCompany.GetRecrutingCostMonth() + GameContext.CurrentGame.PlayerCompany.GetLayingOffCostMonth() + GameContext.CurrentGame.PlayerCompany.GetInterest() + GameContext.CurrentGame.PlayerCompany.GetCharges() + i))).ToString();
+            _resYear.Text = (GameContext.CurrentGame.PlayerCompany.GetProjectsEarningsYear() - (GameContext.CurrentGame.PlayerCompany.GetTrainingCostYear() + GameContext.CurrentGame.PlayerCompany.GetRecrutingCostYear() + GameContext.CurrentGame.PlayerCompany.GetLayingOffCostYear() + (GameContext.CurrentGame.PlayerCompany.GetInterest() * 12) + (GameContext.CurrentGame.PlayerCompany.GetCharges() * 12) + (i * 12))).ToString();
         }
 
     }

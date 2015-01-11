@@ -17,13 +17,16 @@ namespace SRH.Core
         readonly Random _randomNumberGenerator;
         readonly List<Project> _possibleProjects;
 		static List<KeyValuePair<string, string>> _skillNames = CreateSkillNames();
+        Dictionary<Employee, string> _events;
+
+
 
 		public Game( int seed, string companyName )
 		{
 			_randomNumberGenerator = new Random( seed );
 			_market = new LaborMarket(this);
             _timeGame = new GameTime( this );
-
+            _events = new Dictionary<Employee, string>();
 			_competitors = new List<Competitor>();
 
             _playerCompany = new MyCompany( this, companyName );
@@ -61,7 +64,10 @@ namespace SRH.Core
         {
             get { return _competitors; }
         }
-
+        public Dictionary<Employee, string> Events
+        {
+            get { return _events; }
+        }
 		public static IReadOnlyList<KeyValuePair<string, string>> SkillNames
 		{
 			get { return _skillNames; }
@@ -146,5 +152,123 @@ namespace SRH.Core
 			
 			return candidate;
 		}
-	}
+
+        public void TryToAddYear()
+        {
+
+            List<Person> listPersTmp = new List<Person>();
+            foreach( Person pers in _market.JoblessPersons )
+            {
+                if( _timeGame.CurrentTimeOfGame.DayOfWeek == DayOfWeek.Monday )
+                {
+                    if( (pers.BirthDate.Day == _timeGame.CurrentTimeOfGame.Day - 1 || pers.BirthDate.Day == _timeGame.CurrentTimeOfGame.Day - 2) && pers.BirthDate.Month == _timeGame.CurrentTimeOfGame.Month )
+                    {
+                        pers.AddAYear();
+                        if( pers.Age == 62 )
+                        {
+                            listPersTmp.Add( pers );
+
+                        }
+                    }
+                }
+                else
+                {
+                    if( pers.BirthDate.Day == _timeGame.CurrentTimeOfGame.Day && pers.BirthDate.Month == _timeGame.CurrentTimeOfGame.Month )
+                    {
+                        pers.AddAYear();
+                        if( pers.Age == 62 )
+                        {
+                            listPersTmp.Add( pers );
+                        }
+                    }
+
+                }
+                if( pers.BirthDate.Year - _timeGame.CurrentTimeOfGame.Year > pers.Age )
+                {
+                    throw new InvalidOperationException("Date et age de la personne incohérente");
+                }
+            }
+            foreach( Person per in listPersTmp ) 
+                 GoInRetirement( per );
+
+            List<Employee> listEmpTmp = new List<Employee>();
+            foreach( Employee emp in _playerCompany.Employees )
+            {
+                if (_timeGame.CurrentTimeOfGame.DayOfWeek == DayOfWeek.Monday )
+                {
+                    if(( emp.Worker.BirthDate.Day == _timeGame.CurrentTimeOfGame.Day - 1 || emp.Worker.BirthDate.Day == _timeGame.CurrentTimeOfGame.Day -2 ) && emp.Worker.BirthDate.Month == _timeGame.CurrentTimeOfGame.Month )
+                    {
+                        emp.Worker.AddAYear();
+                        if( emp.Worker.Age == 62 )
+                        {
+                            listEmpTmp.Add( emp );
+
+                        }
+                    }
+                }
+                else
+                {
+                    if( emp.Worker.BirthDate.Day == _timeGame.CurrentTimeOfGame.Day && emp.Worker.BirthDate.Month == _timeGame.CurrentTimeOfGame.Month )
+                    {
+                        emp.Worker.AddAYear();
+                        if( emp.Worker.Age == 62 )
+                        {
+                            listEmpTmp.Add( emp );
+
+                        }
+                    }
+                }
+                if( emp.Worker.BirthDate.Year - _timeGame.CurrentTimeOfGame.Year > emp.Worker.Age )
+                {
+                    throw new InvalidOperationException( "Date et age de la personne incohérente" );
+                }
+            }
+            foreach( Employee em in listEmpTmp ) 
+                GoInRetirement( em );
+
+        }
+
+        private void GoInRetirement( Person pers )
+        {
+            _market.RemovePerson( pers );
+        }
+
+        private void GoInRetirement( Employee emp )
+        {
+            if( emp.Busy && emp.SkillInTraining == null && emp.SkillAffectedToCompany == null)
+            {
+                foreach( Project p in _playerCompany.Projects)
+                {
+                    foreach( Employee emplo in p.EmployeesAffectedWithSkill.Keys )
+                    {
+                        if( emplo == emp )
+                        {
+                            p.RemoveEmployeeFromTheProject( emp ); // TODO : Mettre la skill avec !
+                            break;
+                        }
+                    }
+                }
+            }
+
+            _playerCompany.RemoveEmployee( emp );
+            OnRetirement += new SomeoneGoInRetirement(SomeoneRetirement);
+            // TODO : Ajouter un évènement.
+            GoInRetirement( emp.Worker );
+        }
+
+        public delegate void SomeoneGoInRetirement( object sender, System.EventArgs e, Employee emp );
+        public event SomeoneGoInRetirement OnRetirement;
+
+        public void SomeoneRetirement( object sender, System.EventArgs e, Employee emp )
+        {
+            if( OnRetirement != null )
+            {
+                _events.Add( emp, "Retraite" );
+            }
+        }
+
+
+   }
+   
 }
+

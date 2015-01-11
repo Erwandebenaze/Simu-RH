@@ -17,13 +17,21 @@ namespace SRH.Interface
         public UcStatistics()
         {
             InitializeComponent();
-
         }
         IGameContext GameContext
         {
             get { return (IGameContext)TopLevelControl; }
         }
 
+        protected override void OnLoad( EventArgs e )
+        {
+            if( this.IsInRuntimeMode() )
+            {
+                base.OnLoad( e );
+                AffectCompFields( GameContext.CurrentGame.PlayerCompany );
+                
+            }
+        }
         private void _myCompanyLogo_Click( object sender, EventArgs e )
         {
             Company comp = GameContext.CurrentGame.PlayerCompany;
@@ -66,6 +74,8 @@ namespace SRH.Interface
             _companyNameText.Text = comp.Name;
             _wealthText.Text = comp.Wealth.ToString();
             _nbEmployeeText.Text = comp.Employees.Count.ToString();
+            ucGraph1.CurrentComp = comp;
+            ucGraph1.LoadUc();
         }
     }
 }
