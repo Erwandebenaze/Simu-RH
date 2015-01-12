@@ -26,12 +26,12 @@ namespace SRH.Interface
         public SimuRH()
         {
             InitializeComponent();
-           //_myGame = new Game( 1, "Erwan" );
-            //_myGame = GameLoader.Load( "Erwan" );
+            //_myGame = new Game( 1, "Erwan" );
+            _myGame = GameLoader.Load( "Erwan" );
             _optionsForm = new Options();
             _timeOfGame = _myGame.TimeGame;
             _timer = new Timer();
-            interval = 500;
+            interval = 1000;
             _timer.Interval = interval;
             _timer.Tick += _timer_Tick;
             _timer.Start();

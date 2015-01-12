@@ -13,7 +13,7 @@ namespace SRH.Core
 		string _firstName;
 		string _lastName;
 		int _age;
-        readonly DateTime _birthDate;
+        DateTime _birthDate;
 		readonly List<Skill> _skills;
 		int _expectedSalary;
 		LaborMarket _lb;
@@ -28,10 +28,9 @@ namespace SRH.Core
 			_lastName = lastName;
 			_age = age;
 			rand = new Random();
-			int month = rand.Next( 1, 12 );
-			GetRandomDay( month );
+			int month = rand.Next( 1, 13 );
+            int day = GetRandomDay( month );
 			int year = 2015 - age;
-            int day = rand.Next( 1, 28 );
             _birthDate = new DateTime(year,month,day);
 			_lb = lb;
 			GenerateExpectedSalary();
@@ -41,15 +40,15 @@ namespace SRH.Core
         {
             if( month == 2 )
             {
-                return rand.Next( 1, 28 );
+                return rand.Next( 1, 29 );
             }
             else if( month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12 )
             {
-                return rand.Next( 1, 31 );
+                return rand.Next( 1, 32 );
             }
             else
             {
-                return rand.Next( 1, 30 );
+                return rand.Next( 1, 31 );
             }
         }
 		#region Getters Setters
@@ -65,6 +64,7 @@ namespace SRH.Core
 		public DateTime BirthDate
 		{
 			get { return _birthDate; }
+            internal set { _birthDate = value; }
 		}
 		public int Age
 		{

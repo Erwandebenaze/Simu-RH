@@ -38,9 +38,11 @@ namespace SRH.Interface
 
         internal void GenerateListOfEvents()
         {
+            _listViewEvents.Items.Clear();
             if( GameContext.CurrentGame.Events.Count != 0 )
             {
-                _listViewEvents.Items.AddRange( GameContext.CurrentGame.Events.Select( ev => CreateListItemViewEvents( ev ) ).ToArray() );
+                for( int i = 0; i < GameContext.CurrentGame.Events.Count; i++ )
+                    _listViewEvents.Items.AddRange( GameContext.CurrentGame.Events.Select( ev => CreateListItemViewEvents( ev ) ).ToArray() );
             }
         }
         private ListViewItem CreateListItemViewEvents( KeyValuePair<Employee,string> dico )
@@ -53,7 +55,36 @@ namespace SRH.Interface
             {
                 i = new ListViewItem();
             }
+            GroupItem( dico.Value, i );
             return i;
+        }
+        void GroupItem( String eventName, ListViewItem i )
+        {
+            ListViewGroup groupToAffect = new ListViewGroup();
+            switch( eventName )
+            {
+                case "Retraite":
+                    groupToAffect = _listViewEvents.Groups[0];
+                    break;
+                case "Ressources humaines":
+                    groupToAffect = _listViewEvents.Groups[1];
+                    break;
+                case "Directeur de projets":
+                    groupToAffect = _listViewEvents.Groups[2];
+                    break;
+                case "Recruteur":
+                    groupToAffect = _listViewEvents.Groups[3];
+                    break;
+                case "Animation":
+                    groupToAffect = _listViewEvents.Groups[4];
+                    break;
+                default:
+                    throw new InvalidOperationException( "This event as an invalid Name." );
+            }
+
+
+            if( !groupToAffect.Items.Contains( i ) )
+                i.Group = groupToAffect;
         }
 
         internal void AffectOfficeFields()

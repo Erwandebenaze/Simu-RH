@@ -28,9 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.ListViewGroup listViewGroup1 = new System.Windows.Forms.ListViewGroup("Retraite", System.Windows.Forms.HorizontalAlignment.Left);
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.splitContainer4 = new System.Windows.Forms.SplitContainer();
+            this._listViewEvents = new System.Windows.Forms.ListView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this._maxDifficultyProject = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -93,7 +95,7 @@
             this.label7 = new System.Windows.Forms.Label();
             this._actualWealth = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
-            this._listViewEvents = new System.Windows.Forms.ListView();
+            this.Events = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -158,6 +160,24 @@
             this.splitContainer4.Size = new System.Drawing.Size(405, 719);
             this.splitContainer4.SplitterDistance = 364;
             this.splitContainer4.TabIndex = 0;
+            // 
+            // _listViewEvents
+            // 
+            this._listViewEvents.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.Events});
+            this._listViewEvents.Dock = System.Windows.Forms.DockStyle.Fill;
+            this._listViewEvents.FullRowSelect = true;
+            listViewGroup1.Header = "Retraite";
+            listViewGroup1.Name = "Retraite";
+            this._listViewEvents.Groups.AddRange(new System.Windows.Forms.ListViewGroup[] {
+            listViewGroup1});
+            this._listViewEvents.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
+            this._listViewEvents.Location = new System.Drawing.Point(0, 0);
+            this._listViewEvents.Name = "_listViewEvents";
+            this._listViewEvents.Size = new System.Drawing.Size(405, 364);
+            this._listViewEvents.TabIndex = 0;
+            this._listViewEvents.UseCompatibleStateImageBehavior = false;
+            this._listViewEvents.View = System.Windows.Forms.View.Details;
             // 
             // groupBox1
             // 
@@ -790,14 +810,10 @@
             this.label6.TabIndex = 0;
             this.label6.Text = "Solde actuel : ";
             // 
-            // _listViewEvents
+            // Events
             // 
-            this._listViewEvents.Dock = System.Windows.Forms.DockStyle.Fill;
-            this._listViewEvents.Location = new System.Drawing.Point(0, 0);
-            this._listViewEvents.Name = "_listViewEvents";
-            this._listViewEvents.Size = new System.Drawing.Size(405, 364);
-            this._listViewEvents.TabIndex = 0;
-            this._listViewEvents.UseCompatibleStateImageBehavior = false;
+            this.Events.Text = "Événements";
+            this.Events.Width = 402;
             // 
             // UcOffice
             // 
@@ -898,5 +914,6 @@
         private System.Windows.Forms.Label _chargesMonth;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ListView _listViewEvents;
+        private System.Windows.Forms.ColumnHeader Events;
     }
 }
