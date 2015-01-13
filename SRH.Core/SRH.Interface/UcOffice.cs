@@ -48,13 +48,21 @@ namespace SRH.Interface
         private ListViewItem CreateListItemViewEvents( KeyValuePair<Employee,string> dico )
         {
             ListViewItem i;
-            if (dico.Value == "Retraite")
+            if( dico.Value == "Retraite")
             {
-            i = new ListViewItem( "Votre employé " + dico.Key.Worker.FirstName + " " + dico.Key.Worker.LastName + " est parti à la retraite, le projet : " + dico.Key.Project + " a été ralenti. "  + dico.Key.Worker.FirstName + " " + dico.Key.Worker.LastName + " avait la compétence " + dico.Key.SkillInProject.SkillName + ".");
+                if( dico.Key.SkillInProject != null )
+                {
+                    i = new ListViewItem( "Votre employé " + dico.Key.Worker.FirstName + " " + dico.Key.Worker.LastName + " est parti à la retraite, le projet : " + dico.Key.Project + " a été ralenti. " + dico.Key.Worker.FirstName + " " + dico.Key.Worker.LastName + " avait la compétence " + dico.Key.SkillInProject.SkillName + "." );
+                }
+                else
+                {
+                    i = new ListViewItem("Votre employé " + dico.Key.Worker.FirstName + " " + dico.Key.Worker.LastName + " est parti à la retraite.");
+                }
             } else
             {
                 i = new ListViewItem();
             }
+               
             GroupItem( dico.Value, i );
             return i;
         }
