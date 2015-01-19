@@ -74,6 +74,8 @@ namespace SRH.Core
 				int happinessAdjustment = (int)( _employee.SalaryAdjustment / ( _employee.Worker.ExpectedSalary * 0.05 ) );
 				_employee.Happiness.ChangeHappinessScore( happinessAdjustment );
 
+
+
 				_lastDateSalaryReactionCheck = _employee.Comp.Game.TimeGame.CurrentTimeOfGame;
 			}
 		}

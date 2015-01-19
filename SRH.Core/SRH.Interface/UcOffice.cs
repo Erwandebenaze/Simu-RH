@@ -58,6 +58,11 @@ namespace SRH.Interface
                 {
                     i = new ListViewItem("Votre employé " + dico.Key.Worker.FirstName + " " + dico.Key.Worker.LastName + " est parti à la retraite.");
                 }
+            }
+            else if( dico.Value == "Raz-le-bol" )
+            {
+                i = new ListViewItem( "Votre employé " + dico.Key.Worker.FirstName + " " + dico.Key.Worker.LastName + " est parti de votre entreprise, votre employé était trop malheureux." );
+
             } else
             {
                 i = new ListViewItem();
@@ -74,17 +79,14 @@ namespace SRH.Interface
                 case "Retraite":
                     groupToAffect = _listViewEvents.Groups[0];
                     break;
-                case "Ressources humaines":
+                case "Raz-le-bol":
                     groupToAffect = _listViewEvents.Groups[1];
                     break;
-                case "Directeur de projets":
+                case "Vacances":
                     groupToAffect = _listViewEvents.Groups[2];
                     break;
-                case "Recruteur":
+                case "Maladie":
                     groupToAffect = _listViewEvents.Groups[3];
-                    break;
-                case "Animation":
-                    groupToAffect = _listViewEvents.Groups[4];
                     break;
                 default:
                     throw new InvalidOperationException( "This event as an invalid Name." );

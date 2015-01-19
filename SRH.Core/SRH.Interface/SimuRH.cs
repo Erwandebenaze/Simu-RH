@@ -209,6 +209,7 @@ namespace SRH.Interface
 
 		private void UpdateEmployeesHappiness()
 		{
+            List<Employee> listEmpTmp = new List<Employee>();
 			foreach( Employee e in _myGame.PlayerCompany.Employees )
 			{
 				e.Behavior.UpdateHappiness();
@@ -216,7 +217,17 @@ namespace SRH.Interface
 				{
 					ucEmployeePage.SetHappinessBar();
 				}
+                if( e.Happiness.HappinessScore == 0 )
+                {
+                    listEmpTmp.Add( e );
+                }
 			}
+
+            foreach( Employee e in listEmpTmp )
+            {
+                _myGame.OnFedUp += new Game.SomeoneIsFedUpWithHisCompany( _myGame.SomeoneFedUp );
+                _myGame.FedUp( e );
+            }
 		}
 
 		private void PayEmployees()
