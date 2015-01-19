@@ -376,5 +376,20 @@ namespace SRH.Interface
 			}  
 		}
 
+        private void listPossibleProjects_ColumnClick( object sender, ColumnClickEventArgs e )
+        {
+            //listPossibleProjects.Items.Clear();
+            //listPossibleProjects.Items.AddRange
+            //( _possibleProjects.Select( p => CreateListItemViewProjects( p ) )
+            //                   .OrderBy( i => new SortWrapper(i, e.Column))
+            //                   .ToArray()
+            //);
+            if( listPossibleProjects.Sorting == SortOrder.Ascending )
+                listPossibleProjects.Sorting = SortOrder.Descending;
+            else
+                listPossibleProjects.Sorting = SortOrder.Ascending;
+
+        }
+
     }
 }
