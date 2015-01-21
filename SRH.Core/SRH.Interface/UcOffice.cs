@@ -65,7 +65,7 @@ namespace SRH.Interface
             {
                 if( dico.Key.SkillInProject != null )
                 {
-                    i = new ListViewItem( "Votre employé(e) " + dico.Key.Worker.FirstName + " " + dico.Key.Worker.LastName + " est parti(e) à la retraite, le projet : " + dico.Key.Project + " a été ralenti. " + dico.Key.Worker.FirstName + " " + dico.Key.Worker.LastName + " avait la compétence " + dico.Key.SkillInProject.SkillName + "." );
+                    i = new ListViewItem( "Votre employé(e) " + dico.Key.Worker.FirstName + " " + dico.Key.Worker.LastName + " est parti(e) à la retraite, le projet : " + dico.Key.Project.Name + " a été ralenti. " + dico.Key.Worker.FirstName + " " + dico.Key.Worker.LastName + " avait la compétence " + dico.Key.SkillInProject.SkillName + "." );
                 }
                 else
                 {

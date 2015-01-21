@@ -189,7 +189,7 @@ namespace SRH.Core
                 e.Busy = true;
                 _skillsRequired.Remove( s );
             }
-            else if( e.Busy)
+            else if( e.Busy && e.SkillInProject != null )
             {
                 _employeesAffectedWithSkill.Add( e, s );
 
@@ -288,7 +288,7 @@ namespace SRH.Core
 			foreach( KeyValuePair<Employee, Skill> kvp in _employeesAffectedWithSkill )
 			{
 				kvp.Key.SkillInProject = kvp.Value;
-                kvp.Key.Project = _name;
+                kvp.Key.Project = this;
 			}
 		}
     }
