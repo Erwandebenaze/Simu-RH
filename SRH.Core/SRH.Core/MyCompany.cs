@@ -351,6 +351,22 @@ namespace SRH.Core
 			return finalList;
 		}
 
+		public void UpdateEmployeesAbsence()
+		{
+			IEnumerable<Employee> sickEmployees = _myGame.PlayerCompany.Employees.Where( e => e.IsSick.Value != 0 ).DefaultIfEmpty( null );
+			if( sickEmployees != null )
+			{
+				foreach( Employee e in sickEmployees )
+					e.UpdateSickStatus();
+			}
+
+			IEnumerable<Employee> awayEmployees = _myGame.PlayerCompany.Employees.Where( e => e.InVacation.Value != 0 ).DefaultIfEmpty( null );
+			if( awayEmployees != null )
+			{
+				foreach( Employee e in sickEmployees )
+					e.UpdateVacationStatus();
+			}
+		}
 
         #region Gestion des managers
         /// <summary>

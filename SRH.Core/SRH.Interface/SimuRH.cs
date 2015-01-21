@@ -68,7 +68,7 @@ namespace SRH.Interface
                 _myGame.PlayerCompany.EndProjectIfItsFinish();
 				UpdateEmployeesSkills();
 				UpdateEmployeesHappiness();
-				UpdateEmployeesAbsence();
+				_myGame.PlayerCompany.UpdateEmployeesAbsence();
                 ClearListsProjects();
 
 				// Current date display
@@ -207,23 +207,6 @@ namespace SRH.Interface
 
             _myGame.TryToAddYear();
         }
-
-		private void UpdateEmployeesAbsence()
-		{
-			IEnumerable<Employee> sickEmployees = _myGame.PlayerCompany.Employees.Where( e => e.IsSick.Value != 0 ).DefaultIfEmpty( null );
-			if( sickEmployees != null )
-			{
-				foreach( Employee e in sickEmployees )
-					e.UpdateSickStatus();
-			}
-
-			IEnumerable<Employee> awayEmployees = _myGame.PlayerCompany.Employees.Where( e => e.InVacation.Value != 0 ).DefaultIfEmpty( null );
-			if( awayEmployees != null )
-			{
-				foreach( Employee e in sickEmployees )
-					e.UpdateVacationStatus();
-			}
-		}
 
 		private void UpdateEmployeesHappiness()
 		{
