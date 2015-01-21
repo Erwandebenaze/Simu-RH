@@ -153,8 +153,11 @@
   <data name="employeeList.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
+  <data name="employeeList.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
   <data name="employeeList.Size" type="System.Drawing.Size, System.Drawing">
-    <value>510, 249</value>
+    <value>680, 306</value>
   </data>
   <data name="employeeList.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -171,14 +174,20 @@
   <data name="&gt;&gt;employeeList.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <metadata name="_infoListEmployees.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>6, 13</value>
+    <value>8, 16</value>
+  </data>
+  <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
-    <value>510, 249</value>
+    <value>680, 306</value>
   </data>
   <data name="&gt;&gt;EmployeeLastNameHeader.Name" xml:space="preserve">
     <value>EmployeeLastNameHeader</value>
@@ -209,6 +218,12 @@
   </data>
   <data name="&gt;&gt;EmployeeBestSkillLevelHeader.Type" xml:space="preserve">
     <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;_infoListEmployees.Name" xml:space="preserve">
+    <value>_infoListEmployees</value>
+  </data>
+  <data name="&gt;&gt;_infoListEmployees.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolTip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>UcEmployeeList</value>

@@ -76,7 +76,15 @@ namespace SRH.Interface
 			PersonList.Items.Clear();
 			PersonList.Items.AddRange( _joblessPersons.Select( p => CreatePerson( p ) ).ToArray() );
 			UcEmployeeList1.LoadUc();
+            GenerateEmployeePageToolTip();
 		}
+
+        private void GenerateEmployeePageToolTip()
+        {
+            _infoListPersons.SetToolTip( PersonList , "Liste des personnes sur le marché du travail prêtes à entrer dans mon entreprise." );
+            _infoHappiness.SetToolTip( this.increaseSalary, "Le bonheur est généré selon le salaire de l'employé et l'utilisation de ses compétences. Le bonheur peut également être altéré par les responsables du comité d'entreprise." );
+            _infoHappiness.SetToolTip( this.decreaseSalary, "Le bonheur est généré selon le salaire de l'employé et l'utilisation de ses compétences. Le bonheur peut également être altéré par les responsables du comité d'entreprise." );
+        }
 
 		internal void LoadEmployeeList()
 		{

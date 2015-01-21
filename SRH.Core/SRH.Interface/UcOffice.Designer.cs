@@ -28,12 +28,26 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.ListViewGroup listViewGroup1 = new System.Windows.Forms.ListViewGroup("Retraite", System.Windows.Forms.HorizontalAlignment.Left);
-            System.Windows.Forms.ListViewGroup listViewGroup2 = new System.Windows.Forms.ListViewGroup("Raz-le-bol", System.Windows.Forms.HorizontalAlignment.Left);
-            System.Windows.Forms.ListViewGroup listViewGroup3 = new System.Windows.Forms.ListViewGroup("Vacances", System.Windows.Forms.HorizontalAlignment.Left);
-            System.Windows.Forms.ListViewGroup listViewGroup4 = new System.Windows.Forms.ListViewGroup("Maladie", System.Windows.Forms.HorizontalAlignment.Left);
+            this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.ListViewGroup listViewGroup5 = new System.Windows.Forms.ListViewGroup("Retraite", System.Windows.Forms.HorizontalAlignment.Left);
+            System.Windows.Forms.ListViewGroup listViewGroup6 = new System.Windows.Forms.ListViewGroup("Raz-le-bol", System.Windows.Forms.HorizontalAlignment.Left);
+            System.Windows.Forms.ListViewGroup listViewGroup7 = new System.Windows.Forms.ListViewGroup("Vacances", System.Windows.Forms.HorizontalAlignment.Left);
+            System.Windows.Forms.ListViewGroup listViewGroup8 = new System.Windows.Forms.ListViewGroup("Maladie", System.Windows.Forms.HorizontalAlignment.Left);
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
+            this._listViewEvents = new System.Windows.Forms.ListView();
+            this.Evenement = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this._maxDifficultyProject = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this._nextLimitEmployees = new System.Windows.Forms.Label();
+            this._limitEmployees = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this._progressBarCompany = new System.Windows.Forms.ProgressBar();
+            this._nextLevelCompany = new System.Windows.Forms.Label();
+            this._currentLevelCompany = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.BudgetGroupBox = new System.Windows.Forms.GroupBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this._chargesYear = new System.Windows.Forms.Label();
@@ -85,19 +99,10 @@
             this.label7 = new System.Windows.Forms.Label();
             this._actualWealth = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this._maxDifficultyProject = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this._nextLimitEmployees = new System.Windows.Forms.Label();
-            this._limitEmployees = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this._progressBarCompany = new System.Windows.Forms.ProgressBar();
-            this._nextLevelCompany = new System.Windows.Forms.Label();
-            this._currentLevelCompany = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this._listViewEvents = new System.Windows.Forms.ListView();
-            this.Evenement = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this._infoEvents = new System.Windows.Forms.ToolTip(this.components);
+            this._infoMonEntreprise = new System.Windows.Forms.ToolTip(this.components);
+            this._infoMouvMensuels = new System.Windows.Forms.ToolTip(this.components);
+            this._infoMouvAnnuels = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -106,10 +111,10 @@
             this.splitContainer2.Panel1.SuspendLayout();
             this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.BudgetGroupBox.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
-            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -146,6 +151,146 @@
             this.splitContainer2.Size = new System.Drawing.Size(697, 719);
             this.splitContainer2.SplitterDistance = 384;
             this.splitContainer2.TabIndex = 0;
+            // 
+            // _listViewEvents
+            // 
+            this._listViewEvents.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.Evenement});
+            this._listViewEvents.Dock = System.Windows.Forms.DockStyle.Fill;
+            this._listViewEvents.FullRowSelect = true;
+            listViewGroup5.Header = "Retraite";
+            listViewGroup5.Name = "Retraite";
+            listViewGroup6.Header = "Raz-le-bol";
+            listViewGroup6.Name = "Raz-le-bol";
+            listViewGroup7.Header = "Vacances";
+            listViewGroup7.Name = "Vacances";
+            listViewGroup8.Header = "Maladie";
+            listViewGroup8.Name = "Maladie";
+            this._listViewEvents.Groups.AddRange(new System.Windows.Forms.ListViewGroup[] {
+            listViewGroup5,
+            listViewGroup6,
+            listViewGroup7,
+            listViewGroup8});
+            this._listViewEvents.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
+            this._listViewEvents.Location = new System.Drawing.Point(0, 0);
+            this._listViewEvents.Name = "_listViewEvents";
+            this._listViewEvents.Size = new System.Drawing.Size(697, 384);
+            this._listViewEvents.TabIndex = 24;
+            this._listViewEvents.UseCompatibleStateImageBehavior = false;
+            this._listViewEvents.View = System.Windows.Forms.View.Details;
+            // 
+            // Evenement
+            // 
+            this.Evenement.Text = "Événements";
+            this.Evenement.Width = 692;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this._maxDifficultyProject);
+            this.groupBox1.Controls.Add(this.label4);
+            this.groupBox1.Controls.Add(this.label3);
+            this.groupBox1.Controls.Add(this._nextLimitEmployees);
+            this.groupBox1.Controls.Add(this._limitEmployees);
+            this.groupBox1.Controls.Add(this.label2);
+            this.groupBox1.Controls.Add(this._progressBarCompany);
+            this.groupBox1.Controls.Add(this._nextLevelCompany);
+            this.groupBox1.Controls.Add(this._currentLevelCompany);
+            this.groupBox1.Controls.Add(this.label1);
+            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox1.Location = new System.Drawing.Point(0, 0);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(697, 331);
+            this.groupBox1.TabIndex = 25;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Mon entreprise";
+            // 
+            // _maxDifficultyProject
+            // 
+            this._maxDifficultyProject.AutoSize = true;
+            this._maxDifficultyProject.Location = new System.Drawing.Point(244, 159);
+            this._maxDifficultyProject.Name = "_maxDifficultyProject";
+            this._maxDifficultyProject.Size = new System.Drawing.Size(17, 17);
+            this._maxDifficultyProject.TabIndex = 9;
+            this._maxDifficultyProject.Text = "X";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(10, 158);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(196, 17);
+            this.label4.TabIndex = 8;
+            this.label4.Text = "Difficulté maximale de projet : ";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(10, 133);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(237, 17);
+            this.label3.TabIndex = 7;
+            this.label3.Text = "Limite d\'employés prochain niveau : ";
+            // 
+            // _nextLimitEmployees
+            // 
+            this._nextLimitEmployees.AutoSize = true;
+            this._nextLimitEmployees.Location = new System.Drawing.Point(244, 133);
+            this._nextLimitEmployees.Name = "_nextLimitEmployees";
+            this._nextLimitEmployees.Size = new System.Drawing.Size(17, 17);
+            this._nextLimitEmployees.TabIndex = 6;
+            this._nextLimitEmployees.Text = "X";
+            // 
+            // _limitEmployees
+            // 
+            this._limitEmployees.AutoSize = true;
+            this._limitEmployees.Location = new System.Drawing.Point(244, 111);
+            this._limitEmployees.Name = "_limitEmployees";
+            this._limitEmployees.Size = new System.Drawing.Size(17, 17);
+            this._limitEmployees.TabIndex = 5;
+            this._limitEmployees.Text = "X";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(10, 111);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(185, 17);
+            this.label2.TabIndex = 4;
+            this.label2.Text = "Limite d\'employés actuelle : ";
+            // 
+            // _progressBarCompany
+            // 
+            this._progressBarCompany.Location = new System.Drawing.Point(36, 66);
+            this._progressBarCompany.Name = "_progressBarCompany";
+            this._progressBarCompany.Size = new System.Drawing.Size(323, 23);
+            this._progressBarCompany.TabIndex = 3;
+            // 
+            // _nextLevelCompany
+            // 
+            this._nextLevelCompany.AutoSize = true;
+            this._nextLevelCompany.Location = new System.Drawing.Point(365, 66);
+            this._nextLevelCompany.Name = "_nextLevelCompany";
+            this._nextLevelCompany.Size = new System.Drawing.Size(17, 17);
+            this._nextLevelCompany.TabIndex = 2;
+            this._nextLevelCompany.Text = "X";
+            // 
+            // _currentLevelCompany
+            // 
+            this._currentLevelCompany.AutoSize = true;
+            this._currentLevelCompany.Location = new System.Drawing.Point(10, 66);
+            this._currentLevelCompany.Name = "_currentLevelCompany";
+            this._currentLevelCompany.Size = new System.Drawing.Size(17, 17);
+            this._currentLevelCompany.TabIndex = 1;
+            this._currentLevelCompany.Text = "X";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(7, 35);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(158, 17);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Niveau de l\'entreprise : ";
             // 
             // BudgetGroupBox
             // 
@@ -670,145 +815,34 @@
             this.label6.TabIndex = 0;
             this.label6.Text = "Solde actuel : ";
             // 
-            // groupBox1
+            // _infoEvents
             // 
-            this.groupBox1.Controls.Add(this._maxDifficultyProject);
-            this.groupBox1.Controls.Add(this.label4);
-            this.groupBox1.Controls.Add(this.label3);
-            this.groupBox1.Controls.Add(this._nextLimitEmployees);
-            this.groupBox1.Controls.Add(this._limitEmployees);
-            this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Controls.Add(this._progressBarCompany);
-            this.groupBox1.Controls.Add(this._nextLevelCompany);
-            this.groupBox1.Controls.Add(this._currentLevelCompany);
-            this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox1.Location = new System.Drawing.Point(0, 0);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(697, 331);
-            this.groupBox1.TabIndex = 25;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Mon entreprise";
+            this._infoEvents.IsBalloon = true;
+            this._infoEvents.ToolTipTitle = "Liste événements";
             // 
-            // _maxDifficultyProject
+            // _infoMonEntreprise
             // 
-            this._maxDifficultyProject.AutoSize = true;
-            this._maxDifficultyProject.Location = new System.Drawing.Point(244, 159);
-            this._maxDifficultyProject.Name = "_maxDifficultyProject";
-            this._maxDifficultyProject.Size = new System.Drawing.Size(17, 17);
-            this._maxDifficultyProject.TabIndex = 9;
-            this._maxDifficultyProject.Text = "X";
+            this._infoMonEntreprise.AutoPopDelay = 3000;
+            this._infoMonEntreprise.InitialDelay = 1700;
+            this._infoMonEntreprise.IsBalloon = true;
+            this._infoMonEntreprise.ReshowDelay = 100;
+            this._infoMonEntreprise.ToolTipTitle = "Mon entreprise";
             // 
-            // label4
+            // _infoMouvMensuels
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(10, 158);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(196, 17);
-            this.label4.TabIndex = 8;
-            this.label4.Text = "Difficulté maximale de projet : ";
+            this._infoMouvMensuels.AutoPopDelay = 3000;
+            this._infoMouvMensuels.InitialDelay = 1700;
+            this._infoMouvMensuels.IsBalloon = true;
+            this._infoMouvMensuels.ReshowDelay = 100;
+            this._infoMouvMensuels.ToolTipTitle = "Mouvements mensuels";
             // 
-            // label3
+            // _infoMouvAnnuels
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(10, 133);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(237, 17);
-            this.label3.TabIndex = 7;
-            this.label3.Text = "Limite d\'employés prochain niveau : ";
-            // 
-            // _nextLimitEmployees
-            // 
-            this._nextLimitEmployees.AutoSize = true;
-            this._nextLimitEmployees.Location = new System.Drawing.Point(244, 133);
-            this._nextLimitEmployees.Name = "_nextLimitEmployees";
-            this._nextLimitEmployees.Size = new System.Drawing.Size(17, 17);
-            this._nextLimitEmployees.TabIndex = 6;
-            this._nextLimitEmployees.Text = "X";
-            // 
-            // _limitEmployees
-            // 
-            this._limitEmployees.AutoSize = true;
-            this._limitEmployees.Location = new System.Drawing.Point(244, 111);
-            this._limitEmployees.Name = "_limitEmployees";
-            this._limitEmployees.Size = new System.Drawing.Size(17, 17);
-            this._limitEmployees.TabIndex = 5;
-            this._limitEmployees.Text = "X";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(10, 111);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(185, 17);
-            this.label2.TabIndex = 4;
-            this.label2.Text = "Limite d\'employés actuelle : ";
-            // 
-            // _progressBarCompany
-            // 
-            this._progressBarCompany.Location = new System.Drawing.Point(36, 66);
-            this._progressBarCompany.Name = "_progressBarCompany";
-            this._progressBarCompany.Size = new System.Drawing.Size(323, 23);
-            this._progressBarCompany.TabIndex = 3;
-            // 
-            // _nextLevelCompany
-            // 
-            this._nextLevelCompany.AutoSize = true;
-            this._nextLevelCompany.Location = new System.Drawing.Point(365, 66);
-            this._nextLevelCompany.Name = "_nextLevelCompany";
-            this._nextLevelCompany.Size = new System.Drawing.Size(17, 17);
-            this._nextLevelCompany.TabIndex = 2;
-            this._nextLevelCompany.Text = "X";
-            // 
-            // _currentLevelCompany
-            // 
-            this._currentLevelCompany.AutoSize = true;
-            this._currentLevelCompany.Location = new System.Drawing.Point(10, 66);
-            this._currentLevelCompany.Name = "_currentLevelCompany";
-            this._currentLevelCompany.Size = new System.Drawing.Size(17, 17);
-            this._currentLevelCompany.TabIndex = 1;
-            this._currentLevelCompany.Text = "X";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(7, 35);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(158, 17);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Niveau de l\'entreprise : ";
-            // 
-            // _listViewEvents
-            // 
-            this._listViewEvents.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.Evenement});
-            this._listViewEvents.Dock = System.Windows.Forms.DockStyle.Fill;
-            this._listViewEvents.FullRowSelect = true;
-            listViewGroup1.Header = "Retraite";
-            listViewGroup1.Name = "Retraite";
-            listViewGroup2.Header = "Raz-le-bol";
-            listViewGroup2.Name = "Raz-le-bol";
-            listViewGroup3.Header = "Vacances";
-            listViewGroup3.Name = "Vacances";
-            listViewGroup4.Header = "Maladie";
-            listViewGroup4.Name = "Maladie";
-            this._listViewEvents.Groups.AddRange(new System.Windows.Forms.ListViewGroup[] {
-            listViewGroup1,
-            listViewGroup2,
-            listViewGroup3,
-            listViewGroup4});
-            this._listViewEvents.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
-            this._listViewEvents.Location = new System.Drawing.Point(0, 0);
-            this._listViewEvents.Name = "_listViewEvents";
-            this._listViewEvents.Size = new System.Drawing.Size(697, 384);
-            this._listViewEvents.TabIndex = 24;
-            this._listViewEvents.UseCompatibleStateImageBehavior = false;
-            this._listViewEvents.View = System.Windows.Forms.View.Details;
-            // 
-            // Evenement
-            // 
-            this.Evenement.Text = "Événements";
-            this.Evenement.Width = 692;
+            this._infoMouvAnnuels.AutoPopDelay = 3000;
+            this._infoMouvAnnuels.InitialDelay = 1700;
+            this._infoMouvAnnuels.IsBalloon = true;
+            this._infoMouvAnnuels.ReshowDelay = 100;
+            this._infoMouvAnnuels.ToolTipTitle = "Mouvements annuels";
             // 
             // UcOffice
             // 
@@ -826,14 +860,14 @@
             this.splitContainer2.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.BudgetGroupBox.ResumeLayout(false);
             this.BudgetGroupBox.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -906,5 +940,9 @@
         private System.Windows.Forms.Label _nextLevelCompany;
         private System.Windows.Forms.Label _currentLevelCompany;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ToolTip _infoEvents;
+        private System.Windows.Forms.ToolTip _infoMonEntreprise;
+        private System.Windows.Forms.ToolTip _infoMouvMensuels;
+        private System.Windows.Forms.ToolTip _infoMouvAnnuels;
     }
 }

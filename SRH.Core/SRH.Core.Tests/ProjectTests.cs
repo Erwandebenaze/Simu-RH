@@ -209,6 +209,131 @@ namespace SRH.Core.Tests
 
 		}
 
+        [Test]
+        public void Someone_goes_in_holidays()
+        {
+            Game myGame = new Game( 1, "Simu\'RH" );
+            myGame.TimeGame.CurrentTimeOfGame = new DateTime( 2015, 01, 01 );
+            Project p = myGame.PlayerCompany.PossibleCompanyProjects[0];
+            Person Tristan = new Person( myGame.Market, "Tristan", "Letrou", 25 );
+            Person Erwan = new Person( myGame.Market, "Erwan", "dB", 22 );
+            Person Olivier = new Person( myGame.Market, "Olivier", "Spinelli", 39 );
+
+            Tristan.AddSkill( "Management de projet" );
+            Erwan.AddSkill( "Interface graphique" );
+            Olivier.AddSkill( "Développement" );
+            myGame.Market.AddPerson( Tristan );
+            myGame.Market.AddPerson( Erwan );
+            myGame.Market.AddPerson( Olivier );
+
+            Employee Tristann = myGame.PlayerCompany.AddEmployee( Tristan );
+            Employee Erwann = myGame.PlayerCompany.AddEmployee( Erwan );
+            Employee Olivierr = myGame.PlayerCompany.AddEmployee( Olivier );
+            Skill man = new ProjSkill( "Management de projet" );
+            Skill inte = new ProjSkill( "Interface graphique" );
+            Skill dev = new ProjSkill( "Développement" );
+            Skill mana = p.SkillsRequired.Keys.Where( s => s.Equals( man ) ).Single();
+            Skill inter = p.SkillsRequired.Keys.Where( s => s.Equals( inte ) ).Single();
+            Skill deve = p.SkillsRequired.Keys.Where( s => s.Equals( dev ) ).Single();
+
+            p.AffectEmployeeToAJob( Tristann, mana );
+            p.AffectEmployeeToAJob( Erwann, inter );
+            p.AffectEmployeeToAJob( Olivierr, deve );
+            myGame.PlayerCompany.BeginAProject( p );
+            myGame.TimeGame.newDay();
+
+            myGame.OnHolidays += new Game.SomeoneGoInHolidays( myGame.SomeoneHolidays );
+            myGame.Holidays( Erwann );
+
+            Assert.That( myGame.Events.Count == 1 );
+
+        }
+
+        [Test]
+        public void Someone_is_seek()
+        {
+            Game myGame = new Game( 1, "Simu\'RH" );
+            myGame.TimeGame.CurrentTimeOfGame = new DateTime( 2015, 01, 01 );
+            Project p = myGame.PlayerCompany.PossibleCompanyProjects[0];
+            Person Tristan = new Person( myGame.Market, "Tristan", "Letrou", 25 );
+            Person Erwan = new Person( myGame.Market, "Erwan", "dB", 22 );
+            Person Olivier = new Person( myGame.Market, "Olivier", "Spinelli", 39 );
+
+            Tristan.AddSkill( "Management de projet" );
+            Erwan.AddSkill( "Interface graphique" );
+            Olivier.AddSkill( "Développement" );
+            myGame.Market.AddPerson( Tristan );
+            myGame.Market.AddPerson( Erwan );
+            myGame.Market.AddPerson( Olivier );
+
+            Employee Tristann = myGame.PlayerCompany.AddEmployee( Tristan );
+            Employee Erwann = myGame.PlayerCompany.AddEmployee( Erwan );
+            Employee Olivierr = myGame.PlayerCompany.AddEmployee( Olivier );
+            Skill man = new ProjSkill( "Management de projet" );
+            Skill inte = new ProjSkill( "Interface graphique" );
+            Skill dev = new ProjSkill( "Développement" );
+            Skill mana = p.SkillsRequired.Keys.Where( s => s.Equals( man ) ).Single();
+            Skill inter = p.SkillsRequired.Keys.Where( s => s.Equals( inte ) ).Single();
+            Skill deve = p.SkillsRequired.Keys.Where( s => s.Equals( dev ) ).Single();
+
+            p.AffectEmployeeToAJob( Tristann, mana );
+            p.AffectEmployeeToAJob( Erwann, inter );
+            p.AffectEmployeeToAJob( Olivierr, deve );
+            myGame.PlayerCompany.BeginAProject( p );
+            myGame.OnSeek += new Game.SomeoneIsSeek( myGame.SomeoneSeek );
+            myGame.Seek( Erwann );
+
+            Assert.That( myGame.Events.Count == 1 );
+
+        }
+
+        [Test]
+        public void Someone_leaves_the_project_and_comebacks_into()
+        {
+            Game myGame = new Game( 1, "Simu\'RH" );
+            myGame.TimeGame.CurrentTimeOfGame = new DateTime( 2015, 01, 01 );
+            Project p = myGame.PlayerCompany.PossibleCompanyProjects[0];
+            Person Tristan = new Person( myGame.Market, "Tristan", "Letrou", 25 );
+            Person Erwan = new Person( myGame.Market, "Erwan", "dB", 22 );
+            Person Olivier = new Person( myGame.Market, "Olivier", "Spinelli", 39 );
+
+            Tristan.AddSkill( "Management de projet" );
+            Erwan.AddSkill( "Interface graphique" );
+            Olivier.AddSkill( "Développement" );
+            myGame.Market.AddPerson( Tristan );
+            myGame.Market.AddPerson( Erwan );
+            myGame.Market.AddPerson( Olivier );
+
+            Employee Tristann = myGame.PlayerCompany.AddEmployee( Tristan );
+            Employee Erwann = myGame.PlayerCompany.AddEmployee( Erwan );
+            Employee Olivierr = myGame.PlayerCompany.AddEmployee( Olivier );
+            Skill man = new ProjSkill( "Management de projet" );
+            Skill inte = new ProjSkill( "Interface graphique" );
+            Skill dev = new ProjSkill( "Développement" );
+            Skill mana = p.SkillsRequired.Keys.Where( s => s.Equals( man ) ).Single();
+            Skill inter = p.SkillsRequired.Keys.Where( s => s.Equals( inte ) ).Single();
+            Skill deve = p.SkillsRequired.Keys.Where( s => s.Equals( dev ) ).Single();
+
+            p.AffectEmployeeToAJob( Tristann, mana );
+            p.AffectEmployeeToAJob( Erwann, inter );
+            p.AffectEmployeeToAJob( Olivierr, deve );
+
+            myGame.PlayerCompany.BeginAProject( p );
+
+            p.RefreshActualsTasks();
+            Console.WriteLine( p.ActualTasks );
+            p.RemoveEmployeeFromTheProject( Erwann );
+            p.RefreshActualsTasks();
+
+            Console.WriteLine( p.ActualTasks );
+            p.AffectEmployeeToAJob( Erwann, Erwann.SkillInProject );
+            p.RefreshActualsTasks();
+
+            Console.WriteLine( p.ActualTasks );
+            Assert.That( Erwann == p.EmployeesAffectedWithSkill.Select( s => s.Key ).Where( emp => emp.SkillInProject.SkillName == "Interface graphique").Single());
+
+        }
+
         			
     }
 }

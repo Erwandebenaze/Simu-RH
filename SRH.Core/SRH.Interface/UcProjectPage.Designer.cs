@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.listPossibleProjects = new System.Windows.Forms.ListView();
@@ -63,6 +64,9 @@
             this.ProjectSkillRequired = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.ProjectLevelRecommanded = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.desaffectEmployee = new System.Windows.Forms.Button();
+            this._infoPossibleProjects = new System.Windows.Forms.ToolTip(this.components);
+            this._infoProjects = new System.Windows.Forms.ToolTip(this.components);
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -127,7 +131,7 @@
             this.listPossibleProjects.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listPossibleProjects.FullRowSelect = true;
             this.listPossibleProjects.Location = new System.Drawing.Point(0, 0);
-            this.listPossibleProjects.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.listPossibleProjects.Margin = new System.Windows.Forms.Padding(4);
             this.listPossibleProjects.Name = "listPossibleProjects";
             this.listPossibleProjects.Size = new System.Drawing.Size(462, 324);
             this.listPossibleProjects.TabIndex = 0;
@@ -169,7 +173,7 @@
             this.listCurrentProjects.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listCurrentProjects.FullRowSelect = true;
             this.listCurrentProjects.Location = new System.Drawing.Point(0, 0);
-            this.listCurrentProjects.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.listCurrentProjects.Margin = new System.Windows.Forms.Padding(4);
             this.listCurrentProjects.Name = "listCurrentProjects";
             this.listCurrentProjects.Size = new System.Drawing.Size(462, 430);
             this.listCurrentProjects.TabIndex = 0;
@@ -204,7 +208,7 @@
             // 
             this.splitContainer3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainer3.Location = new System.Drawing.Point(0, 0);
-            this.splitContainer3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.splitContainer3.Margin = new System.Windows.Forms.Padding(4);
             this.splitContainer3.Name = "splitContainer3";
             this.splitContainer3.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
@@ -355,7 +359,7 @@
             this.tableLayoutPanel1.Controls.Add(this.desaffectEmployee, 0, 1);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(4);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 91.95403F));
@@ -399,7 +403,7 @@
             // 
             this.affectEmployee.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.affectEmployee.Location = new System.Drawing.Point(800, 399);
-            this.affectEmployee.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.affectEmployee.Margin = new System.Windows.Forms.Padding(4);
             this.affectEmployee.Name = "affectEmployee";
             this.affectEmployee.Size = new System.Drawing.Size(124, 27);
             this.affectEmployee.TabIndex = 1;
@@ -444,13 +448,30 @@
             // 
             this.desaffectEmployee.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.desaffectEmployee.Location = new System.Drawing.Point(336, 399);
-            this.desaffectEmployee.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.desaffectEmployee.Margin = new System.Windows.Forms.Padding(4);
             this.desaffectEmployee.Name = "desaffectEmployee";
             this.desaffectEmployee.Size = new System.Drawing.Size(124, 27);
             this.desaffectEmployee.TabIndex = 0;
             this.desaffectEmployee.Text = "Désaffecter";
             this.desaffectEmployee.UseVisualStyleBackColor = true;
             this.desaffectEmployee.Click += new System.EventHandler(this.desaffectEmployee_Click);
+            // 
+            // _infoPossibleProjects
+            // 
+            this._infoPossibleProjects.AutoPopDelay = 3000;
+            this._infoPossibleProjects.InitialDelay = 1700;
+            this._infoPossibleProjects.IsBalloon = true;
+            this._infoPossibleProjects.ReshowDelay = 100;
+            this._infoPossibleProjects.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
+            this._infoPossibleProjects.ToolTipTitle = "Liste des projets possible";
+            // 
+            // _infoProjects
+            // 
+            this._infoProjects.AutoPopDelay = 3000;
+            this._infoProjects.InitialDelay = 1700;
+            this._infoProjects.IsBalloon = true;
+            this._infoProjects.ReshowDelay = 100;
+            this._infoProjects.ToolTipTitle = "Liste des projets en cours";
             // 
             // UcProjectPage
             // 
@@ -506,7 +527,6 @@
         private System.Windows.Forms.ColumnHeader EmployeeName;
         private System.Windows.Forms.ColumnHeader EmployeeSkill;
         private System.Windows.Forms.ColumnHeader EmployeeLevel;
-        public System.Windows.Forms.ListView listPossibleProjects;
         public System.Windows.Forms.ListView listCurrentProjects;
         public System.Windows.Forms.ListView listSkillsRequired;
         public System.Windows.Forms.ListView listSkillsAvailable;
@@ -514,7 +534,11 @@
 		private System.Windows.Forms.Button affectEmployee;
 		private System.Windows.Forms.Button desaffectEmployee;
 		private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-		private System.Windows.Forms.SplitContainer splitContainer3;
+        private System.Windows.Forms.SplitContainer splitContainer3;
+        private System.Windows.Forms.ToolTip _infoPossibleProjects;
+        private System.Windows.Forms.ToolTip _infoProjects;
+        private System.Windows.Forms.ToolTip toolTip1;
+        public System.Windows.Forms.ListView listPossibleProjects;
 
     }
 }

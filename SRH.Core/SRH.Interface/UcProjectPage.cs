@@ -51,6 +51,7 @@ namespace SRH.Interface
         }
 		internal void LoadPage()
 		{
+
 			_projects = GameContext.CurrentGame.PlayerCompany.Projects;
 			_possibleProjects = GameContext.CurrentGame.PlayerCompany.PossibleCompanyProjects;
 
@@ -58,6 +59,8 @@ namespace SRH.Interface
 			listCurrentProjects.Items.Clear();
             listSkillsAvailable.Items.Clear();
             listSkillsRequired.Items.Clear();
+            GenerateProjectPageToolTip();
+
 			listPossibleProjects.Items.AddRange( _possibleProjects.Select( p => CreateListItemViewProjects( p ) ).ToArray() );
 			listCurrentProjects.Items.AddRange( _projects.Select( p => CreateListItemViewProjects( p ) ).ToArray() );
             #region TODO
@@ -65,6 +68,14 @@ namespace SRH.Interface
             #endregion
 
 		}
+
+        private void GenerateProjectPageToolTip()
+        {
+            
+            _infoPossibleProjects.InitialDelay = 1700;
+            _infoPossibleProjects.SetToolTip( this.listPossibleProjects, "Liste des projets possible à l'entreprise." );
+            _infoProjects.SetToolTip( this.listCurrentProjects, "Liste des projets en cours dans l'entreprise." );
+        }
         private ListViewItem CreateListItemViewProjects( Project project )
         {
             Project p = project.Clone();
@@ -329,51 +340,60 @@ namespace SRH.Interface
 
 		private void desaffectEmployee_Click( object sender, EventArgs e )
 		{
-			if( !_currentProj.SkillsRequired.ContainsKey( _currentSkill ) )
-			{
-				if( _currentProj.EmployeesAffectedWithSkill.Count != 0 )
-				{
-					foreach( Employee emp in _currentProj.EmployeesAffectedWithSkill.Keys )
-					{
-						if( _currentProj.EmployeesAffectedWithSkill.ContainsValue( _currentSkill ) )
-						{
-							_currentProj.RemoveEmployeeFromAJob( emp, _currentSkill );
-							break;
-						}
-					}
-				}
-				//_currentEmployee = (Employee)listSkillsRequired.SelectedItems[listSkillsRequired.SelectedItems.Count - 1].Tag;
+            if (_currentProj != null )
+            {
 
-				AffectStartButtonFields();
+            
+			    if( !_currentProj.SkillsRequired.ContainsKey( _currentSkill ) )
+			    {
+				    if( _currentProj.EmployeesAffectedWithSkill.Count != 0 )
+				    {
+					    foreach( Employee emp in _currentProj.EmployeesAffectedWithSkill.Keys )
+					    {
+						    if( _currentProj.EmployeesAffectedWithSkill.ContainsValue( _currentSkill ) )
+						    {
+							    _currentProj.RemoveEmployeeFromAJob( emp, _currentSkill );
+							    break;
+						    }
+					    }
+				    }
+				    //_currentEmployee = (Employee)listSkillsRequired.SelectedItems[listSkillsRequired.SelectedItems.Count - 1].Tag;
 
-				listSkillsRequired.Items.Clear();
-				listSkillsRequired.Items.AddRange( _currentProj.SkillsRequired.Select( k => CreateListItemViewSkillsRequired( k.Key, k.Value ) ).ToArray() );
-				listSkillsRequired.Items.AddRange( _currentProj.EmployeesAffectedWithSkill.Select( k => CompleteListItemViewSkillsRequired( k.Key, k.Value ) ).ToArray() );
+				    AffectStartButtonFields();
 
-				listSkillsAvailable.Items.Clear();
-				listSkillsAvailable.Items.AddRange( _currentProj.MyComp.Employees.Where( emp => emp.Worker.Skills.Any( s => s.SkillName == _currentSkill.SkillName ) )
-											 .Where( emp => !emp.Busy )
-											 .Select( emp => CreateListItemViewEmployeeWithSkill( emp, _currentSkill ) )
-											 .OrderBy( emp => _currentSkill.Level.CurrentLevel )
-											 .ToArray() );
-			}
+				    listSkillsRequired.Items.Clear();
+				    listSkillsRequired.Items.AddRange( _currentProj.SkillsRequired.Select( k => CreateListItemViewSkillsRequired( k.Key, k.Value ) ).ToArray() );
+				    listSkillsRequired.Items.AddRange( _currentProj.EmployeesAffectedWithSkill.Select( k => CompleteListItemViewSkillsRequired( k.Key, k.Value ) ).ToArray() );
+
+				    listSkillsAvailable.Items.Clear();
+				    listSkillsAvailable.Items.AddRange( _currentProj.MyComp.Employees.Where( emp => emp.Worker.Skills.Any( s => s.SkillName == _currentSkill.SkillName ) )
+											     .Where( emp => !emp.Busy )
+											     .Select( emp => CreateListItemViewEmployeeWithSkill( emp, _currentSkill ) )
+											     .OrderBy( emp => _currentSkill.Level.CurrentLevel )
+											     .ToArray() );
+			    }
+            }
 		}
 
 		private void affectEmployee_Click( object sender, EventArgs e )
 		{
-			if( listSkillsAvailable.SelectedItems.Count > 0 )
-			{
-				_currentEmployee = (Employee)listSkillsAvailable.SelectedItems[ listSkillsAvailable.SelectedItems.Count - 1 ].Tag;
-				_currentProj.AffectEmployeeToAJob( _currentEmployee, _currentSkill );
-				//listSkillsAvailable.Enabled = false;
-				listSkillsAvailable.Items.Clear();
+            if( _currentProj != null )
+            {
+			    if( listSkillsAvailable.SelectedItems.Count > 0 )
+			    {
+				    _currentEmployee = (Employee)listSkillsAvailable.SelectedItems[ listSkillsAvailable.SelectedItems.Count - 1 ].Tag;
+				    _currentProj.AffectEmployeeToAJob( _currentEmployee, _currentSkill );
+				    //listSkillsAvailable.Enabled = false;
+				    listSkillsAvailable.Items.Clear();
 
-				listSkillsRequired.Items.Clear();
-				listSkillsRequired.Items.AddRange( _currentProj.SkillsRequired.Select( k => CreateListItemViewSkillsRequired( k.Key, k.Value ) ).ToArray() );
-				listSkillsRequired.Items.AddRange( _currentProj.EmployeesAffectedWithSkill.Select( k => CompleteListItemViewSkillsRequired( k.Key, k.Value ) ).ToArray() );
+				    listSkillsRequired.Items.Clear();
+				    listSkillsRequired.Items.AddRange( _currentProj.SkillsRequired.Select( k => CreateListItemViewSkillsRequired( k.Key, k.Value ) ).ToArray() );
+				    listSkillsRequired.Items.AddRange( _currentProj.EmployeesAffectedWithSkill.Select( k => CompleteListItemViewSkillsRequired( k.Key, k.Value ) ).ToArray() );
 
-				AffectStartButtonFields();
-			}  
+				    AffectStartButtonFields();
+			    }
+
+            }
 		}
 
         private void listPossibleProjects_ColumnClick( object sender, ColumnClickEventArgs e )
