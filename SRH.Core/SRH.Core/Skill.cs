@@ -39,6 +39,7 @@ namespace SRH.Core
 		public Level Level
 		{
 			get { return _level; }
+            internal set { _level = value; }
 		}
 		public int UpgradePrice
 		{

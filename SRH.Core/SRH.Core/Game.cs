@@ -196,7 +196,7 @@ namespace SRH.Core
             {
                 if (_timeGame.CurrentTimeOfGame.DayOfWeek == DayOfWeek.Monday )
                 {
-                    if(( emp.Worker.BirthDate.Day == _timeGame.CurrentTimeOfGame.Day - 1 || emp.Worker.BirthDate.Day == _timeGame.CurrentTimeOfGame.Day -2 ) && emp.Worker.BirthDate.Month == _timeGame.CurrentTimeOfGame.Month )
+                    if( (emp.Worker.BirthDate.Day == _timeGame.CurrentTimeOfGame.Day || emp.Worker.BirthDate.Day == _timeGame.CurrentTimeOfGame.Day - 1 || emp.Worker.BirthDate.Day == _timeGame.CurrentTimeOfGame.Day - 2) && emp.Worker.BirthDate.Month == _timeGame.CurrentTimeOfGame.Month )
                     {
                         emp.Worker.AddAYear();
                         if( emp.Worker.Age == 62 )
@@ -250,20 +250,27 @@ namespace SRH.Core
                 }
             }
 
-            _playerCompany.RemoveEmployee( emp );
-            OnRetirement += new SomeoneGoInRetirement(SomeoneRetirement);
+            Person tmpPerson = _playerCompany.RemoveEmployee( emp );
+            OnRetirement += new SomeoneGoInRetirement( SomeoneRetirement );
+            Retirement( emp );
+
             // TODO : Ajouter un évènement.
-            GoInRetirement( emp.Worker );
+            GoInRetirement( tmpPerson );
         }
 
-        public delegate void SomeoneGoInRetirement( object sender, System.EventArgs e, Employee emp );
+        public delegate void SomeoneGoInRetirement(Employee emp);
         public event SomeoneGoInRetirement OnRetirement;
 
-        public void SomeoneRetirement( object sender, System.EventArgs e, Employee emp )
+        public void SomeoneRetirement( Employee emp )
+        {
+            _events.Add( emp, "Retraite" );
+        }
+
+        public void Retirement(Employee emp)
         {
             if( OnRetirement != null )
             {
-                _events.Add( emp, "Retraite" );
+                OnRetirement( emp );
             }
         }
 
