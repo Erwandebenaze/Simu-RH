@@ -29,11 +29,24 @@ namespace SRH.Interface
                 base.OnLoad( e );
                 LoadPage();
             }
+
         }
         internal void LoadPage()
         {
             AffectOfficeFields();
             GenerateListOfEvents();
+            GenerateOfficeToolTip();
+
+        }
+
+        private void GenerateOfficeToolTip()
+        {
+            _infoEvents.SetToolTip( this._listViewEvents, "Liste des événements se produisant dans l'entreprise." );
+            _infoEvents.InitialDelay = 1700;
+            _infoEvents.AutoPopDelay = 3000;
+            _infoMonEntreprise.SetToolTip( this.groupBox1, "État de mon entreprise." );
+            _infoMouvMensuels.SetToolTip( this.groupBox2, "Mouvements mensuels de l'entreprise." );
+            _infoMouvAnnuels.SetToolTip( this.groupBox3, "Mouvements annuels de l'entreprise." );
         }
 
         internal void GenerateListOfEvents()
@@ -52,12 +65,17 @@ namespace SRH.Interface
             {
                 if( dico.Key.SkillInProject != null )
                 {
-                    i = new ListViewItem( "Votre employé " + dico.Key.Worker.FirstName + " " + dico.Key.Worker.LastName + " est parti à la retraite, le projet : " + dico.Key.Project + " a été ralenti. " + dico.Key.Worker.FirstName + " " + dico.Key.Worker.LastName + " avait la compétence " + dico.Key.SkillInProject.SkillName + "." );
+                    i = new ListViewItem( "Votre employé(e) " + dico.Key.Worker.FirstName + " " + dico.Key.Worker.LastName + " est parti(e) à la retraite, le projet : " + dico.Key.Project + " a été ralenti. " + dico.Key.Worker.FirstName + " " + dico.Key.Worker.LastName + " avait la compétence " + dico.Key.SkillInProject.SkillName + "." );
                 }
                 else
                 {
-                    i = new ListViewItem("Votre employé " + dico.Key.Worker.FirstName + " " + dico.Key.Worker.LastName + " est parti à la retraite.");
+                    i = new ListViewItem( "Votre employé(e) " + dico.Key.Worker.FirstName + " " + dico.Key.Worker.LastName + " est parti(e) à la retraite." );
                 }
+            }
+            else if( dico.Value == "Raz-le-bol" )
+            {
+                i = new ListViewItem( "Votre employé(e) " + dico.Key.Worker.FirstName + " " + dico.Key.Worker.LastName + " est parti(e) de votre entreprise, votre employé était trop malheureux." );
+
             } else
             {
                 i = new ListViewItem();
@@ -74,17 +92,14 @@ namespace SRH.Interface
                 case "Retraite":
                     groupToAffect = _listViewEvents.Groups[0];
                     break;
-                case "Ressources humaines":
+                case "Raz-le-bol":
                     groupToAffect = _listViewEvents.Groups[1];
                     break;
-                case "Directeur de projets":
+                case "Vacances":
                     groupToAffect = _listViewEvents.Groups[2];
                     break;
-                case "Recruteur":
+                case "Maladie":
                     groupToAffect = _listViewEvents.Groups[3];
-                    break;
-                case "Animation":
-                    groupToAffect = _listViewEvents.Groups[4];
                     break;
                 default:
                     throw new InvalidOperationException( "This event as an invalid Name." );

@@ -118,17 +118,17 @@ namespace SRH.Core
 
         public void NewYear()
         {
-            _february = 0;
-            _march = 0;
-            _april = 0;
-            _may = 0;
-            _june = 0;
-            _july = 0;
-            _august = 0;
-            _september = 0;
-            _october = 0;
-            _november = 0;
-            _december = 0;
+            _february = _january;
+            _march = _january;
+            _april = _january;
+            _may = _january;
+            _june = _january;
+            _july = _january;
+            _august = _january;
+            _september = _january;
+            _october = _january;
+            _november = _january;
+            _december = _january;
         }
     }
 }
