@@ -31,7 +31,7 @@ namespace SRH.Interface
             _optionsForm = new Options();
             _timeOfGame = _myGame.TimeGame;
             _timer = new Timer();
-            interval = 500;
+            interval = 1000;
             _timer.Interval = interval;
             _timer.Tick += _timer_Tick;
             _timer.Start();

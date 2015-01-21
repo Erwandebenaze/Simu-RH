@@ -168,5 +168,47 @@ namespace SRH.Core.Tests
 			Assert.That( list[ 0 ].Difficulty == 1.0 );
 			Assert.That( list[ 0 ].Earnings == 18000 );
 		}
+
+        [Test]
+		public void Someone_go_in_retirement_when_he_is_62()
+		{
+            Game myGame = new Game( 1, "Simu\'RH" );
+            myGame.TimeGame.CurrentTimeOfGame = new DateTime( 2015, 01, 01 );
+            Project p = myGame.PlayerCompany.PossibleCompanyProjects[0];
+            Person Tristan = new Person( myGame.Market, "Tristan", "Letrou", 25 );
+            Person Erwan = new Person( myGame.Market, "Erwan", "dB", 61 );
+            Person Olivier = new Person( myGame.Market, "Olivier", "Spinelli", 39 );
+
+            Tristan.AddSkill( "Management de projet" );
+            Erwan.AddSkill( "Interface graphique" );
+            Olivier.AddSkill( "Développement" );
+            Erwan.BirthDate = new DateTime( 2015, 01, 02 );
+            myGame.Market.AddPerson( Tristan );
+            myGame.Market.AddPerson( Erwan );
+            myGame.Market.AddPerson( Olivier );
+
+            Employee Tristann = myGame.PlayerCompany.AddEmployee( Tristan );
+            Employee Erwann = myGame.PlayerCompany.AddEmployee( Erwan );
+            Employee Olivierr = myGame.PlayerCompany.AddEmployee( Olivier );
+            Skill man = new ProjSkill( "Management de projet" );
+            Skill inte = new ProjSkill( "Interface graphique" );
+            Skill dev = new ProjSkill( "Développement" );
+            Skill mana = p.SkillsRequired.Keys.Where( s => s.Equals( man ) ).Single();
+            Skill inter = p.SkillsRequired.Keys.Where( s => s.Equals( inte ) ).Single();
+            Skill deve = p.SkillsRequired.Keys.Where( s => s.Equals( dev ) ).Single();
+
+            p.AffectEmployeeToAJob( Tristann, mana );
+            p.AffectEmployeeToAJob( Erwann, inter );
+            p.AffectEmployeeToAJob( Olivierr, deve );
+            myGame.PlayerCompany.BeginAProject( p );
+            myGame.TimeGame.newDay();
+            myGame.TryToAddYear();
+
+
+            Assert.That( myGame.Events.Count == 1 );
+
+		}
+
+        			
     }
 }
