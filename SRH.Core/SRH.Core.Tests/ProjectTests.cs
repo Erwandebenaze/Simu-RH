@@ -319,17 +319,11 @@ namespace SRH.Core.Tests
             p.AffectEmployeeToAJob( Olivierr, deve );
 
             myGame.PlayerCompany.BeginAProject( p );
-
             p.RefreshActualsTasks();
-            Console.WriteLine( p.ActualTasks );
             p.RemoveEmployeeFromTheProject( Erwann );
             p.RefreshActualsTasks();
-
-            Console.WriteLine( p.ActualTasks );
             p.AffectEmployeeToAJob( Erwann, Erwann.SkillInProject );
             p.RefreshActualsTasks();
-
-            Console.WriteLine( p.ActualTasks );
             Assert.That( Erwann == p.EmployeesAffectedWithSkill.Select( s => s.Key ).Where( emp => emp.SkillInProject.SkillName == "Interface graphique").Single());
 
         }
