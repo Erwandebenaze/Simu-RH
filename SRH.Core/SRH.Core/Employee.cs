@@ -17,7 +17,7 @@ namespace SRH.Core
 		private KeyValuePair<DateTime, int> _isSick;
 		private int _vacationDays;
         private Skill _skillInProject;
-        private string _project;
+        private Project _project;
 		private Skill _skillAffectedToCompany;
 		private string _skillInTraining;
 		private DateTime? _trainingBegginingDate;
@@ -59,7 +59,7 @@ namespace SRH.Core
             get { return _busy; }
             internal set { _busy = value; }
         }
-        public string Project
+        public Project Project
         {
             get { return _project; }
             internal set { _project = value; }
