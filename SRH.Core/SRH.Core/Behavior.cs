@@ -58,7 +58,7 @@ namespace SRH.Core
 			{
 				if( _employee.Comp.Game.TimeGame.AreMonthsPassed( kvp.Value, 12 ) )
 					flagged.Add( kvp.Key );
-			}
+			}		
 			foreach( string s in flagged )
 			{
 				_skillsUsed.Remove( s );
@@ -104,6 +104,12 @@ namespace SRH.Core
 			CheckSkillsUsed();
 			SalaryReaction();
 			SkillsReaction();
+		}
+
+
+		internal void HandleSickEmployees()
+		{
+
 		}
 
 	}
