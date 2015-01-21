@@ -64,41 +64,30 @@ namespace SRH.Core
 
 			Person p = new Person( Lb, RandomFirstName, RandomLastName, RandomAge );
 
-			// TODO : add a GetRandomSKill that gives more skills and/or more level of skills (native talent of the Person)
-			int numberOfSKills = 0;
-			while( numberOfSKills < 2 )
-			{
-				string randomSkillName = GetRandomSkillName();
-				if( !(bool)p.Skills.Select(s => s.SkillName == randomSkillName).SingleOrDefault()  )
-				{
-					p.AddSkill( randomSkillName );
-					numberOfSKills++;
-				}
-			}
+            AssignSkillPoints( p, GetRandomPoints() );
 
 			return p;
 		}
 
-		//TODO : make private, internal just for temporary tests
 		internal string GetRandomSkillName()
 		{
 			string randomSkillName;
 			List<string> skillsToChooseFrom = null;
-			int alea = _randomNumberGenerator.Next( 1, 4 );
+			int alea = _randomNumberGenerator.Next( 1, 5 );
 
 			if( alea == 1 )
 			{
-				IEnumerable<String> skills = Game.SkillNames.Where( s => s.Key == "compa" ).Select( s => s.Value );
-				skillsToChooseFrom = new List<string>( skills );
+				IEnumerable<String> compaSkills = Game.SkillNames.Where( s => s.Key == "compa" ).Select( s => s.Value );
+				skillsToChooseFrom = new List<string>( compaSkills );
 				randomSkillName = skillsToChooseFrom[ _randomNumberGenerator.Next( 0, skillsToChooseFrom.Count ) ];
 			}
 			else
 			{
-				int aleaProj = _randomNumberGenerator.Next( 1, 11 );
-				IEnumerable<String> skills = Game.SkillNames
+				IEnumerable<String> projSkills = Game.SkillNames
 					.Where( kvp => kvp.Key == "proj" && kvp.Value != "Développement" && kvp.Value != "Développement web" )
 					.Select( kvp => kvp.Value );
-				skillsToChooseFrom = new List<string>( skills );
+				skillsToChooseFrom = new List<string>( projSkills );
+                int aleaProj = _randomNumberGenerator.Next( 1, 11 );
 
 				if( aleaProj <= 3 )
 					randomSkillName = "Développement";
@@ -133,12 +122,75 @@ namespace SRH.Core
 			return points;
 		}
 
-		//internal List<KeyValuePair<string, int>> AssignPoints( int points )
-		//{
-		//	// chaque point vaut 1 niveau de compétence
-		//	// choisis 1 compétence (do while)
-		//	// condition : si skills.count > 4 => augmentation de lvl d'1 skill
-		//}
+        //internal List<KeyValuePair<string, int>> AssignPoints( Person p, int points )
+        //{
+        //    // Create the KeyValuePair and add a first SkillName level 1
+        //    List<KeyValuePair<string, int>> skillsToGive = new List<KeyValuePair<string, int>>();
+        //    skillsToGive.Add( new KeyValuePair<string, int>( GetRandomSkillName(), 1) );
+
+        //    while( points > 1 )
+        //    {
+        //        int alea = _randomNumberGenerator.Next( 1, 4 );
+        //        // Add a new SkillName to the KeyValuePair, level 1
+        //        if( alea <= 2 && skillsToGive.Count < 4 )
+        //        {
+        //            bool check = false;
+        //            while( !check )
+        //            {
+        //                string randomSkillName = GetRandomSkillName();
+        //                if( !(bool)skillsToGive.Select( kvp => kvp.Key == randomSkillName ).SingleOrDefault() )
+        //                {
+        //                    skillsToGive.Add( new KeyValuePair<string, int>( randomSkillName, 1 ) );
+        //                    points--;
+        //                    check = true;
+        //                }
+        //            }
+        //        }
+        //        else
+        //        {
+        //            KeyValuePair<string, int> skillToImprove = skillsToGive[ _randomNumberGenerator.Next( 0, skillsToGive.Count ) ];
+        //            int newLevel = skillToImprove.Value +1;
+
+        //            skillsToGive.Remove( skillsToGive.Where( kvp => kvp.Equals(skillToImprove) ).Single() );
+        //            skillsToGive.Add( new KeyValuePair<string, int>( skillToImprove.Key, newLevel ) );
+        //            points--;
+        //        }
+        //    }
+
+        //    return skillsToGive;
+        //}
+
+        internal void AssignSkillPoints( Person p, int points )
+        {
+            // Add a first level 1 Skill to the Person
+            p.AddSkill( GetRandomSkillName() );
+
+            while( points > 1 )
+            {
+                int alea = _randomNumberGenerator.Next( 1, 4 );
+                // Add a new level 1 Skill to the Person
+                if( alea <= 2 && p.Skills.Count < 4 )
+                {
+                    bool check = false;
+                    while( !check )
+                    {
+                        string randomSkillName = GetRandomSkillName();
+                        if( p.Skills.Where( s => s.SkillName == randomSkillName ).SingleOrDefault() == null)
+                        {
+                            p.AddSkill( randomSkillName );
+                            points--;
+                            check = true;
+                        }
+                    }
+                }
+                else
+                {
+                    Skill skillToImprove = p.Skills[ _randomNumberGenerator.Next( 0, p.Skills.Count ) ];
+                    skillToImprove.Level.CurrentLevel ++;
+                    points--;
+                }
+            }
+        }
 
         public int GetRandomMonth()
         {
