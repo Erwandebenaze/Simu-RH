@@ -28,10 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.ListViewGroup listViewGroup1 = new System.Windows.Forms.ListViewGroup("Retraite", System.Windows.Forms.HorizontalAlignment.Left);
+            this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.ListViewGroup listViewGroup5 = new System.Windows.Forms.ListViewGroup("Retraite", System.Windows.Forms.HorizontalAlignment.Left);
+            System.Windows.Forms.ListViewGroup listViewGroup6 = new System.Windows.Forms.ListViewGroup("Raz-le-bol", System.Windows.Forms.HorizontalAlignment.Left);
+            System.Windows.Forms.ListViewGroup listViewGroup7 = new System.Windows.Forms.ListViewGroup("Vacances", System.Windows.Forms.HorizontalAlignment.Left);
+            System.Windows.Forms.ListViewGroup listViewGroup8 = new System.Windows.Forms.ListViewGroup("Maladie", System.Windows.Forms.HorizontalAlignment.Left);
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
-            this.splitContainer4 = new System.Windows.Forms.SplitContainer();
             this._listViewEvents = new System.Windows.Forms.ListView();
             this.Evenement = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -96,17 +99,18 @@
             this.label7 = new System.Windows.Forms.Label();
             this._actualWealth = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
+            this._infoEvents = new System.Windows.Forms.ToolTip(this.components);
+            this._infoMonEntreprise = new System.Windows.Forms.ToolTip(this.components);
+            this._infoMouvMensuels = new System.Windows.Forms.ToolTip(this.components);
+            this._infoMouvAnnuels = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
+            this.splitContainer2.Panel1.SuspendLayout();
             this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer4)).BeginInit();
-            this.splitContainer4.Panel1.SuspendLayout();
-            this.splitContainer4.Panel2.SuspendLayout();
-            this.splitContainer4.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.BudgetGroupBox.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -137,30 +141,16 @@
             this.splitContainer2.Name = "splitContainer2";
             this.splitContainer2.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
+            // splitContainer2.Panel1
+            // 
+            this.splitContainer2.Panel1.Controls.Add(this._listViewEvents);
+            // 
             // splitContainer2.Panel2
             // 
-            this.splitContainer2.Panel2.Controls.Add(this.splitContainer4);
+            this.splitContainer2.Panel2.Controls.Add(this.groupBox1);
             this.splitContainer2.Size = new System.Drawing.Size(697, 719);
-            this.splitContainer2.SplitterDistance = 90;
+            this.splitContainer2.SplitterDistance = 384;
             this.splitContainer2.TabIndex = 0;
-            // 
-            // splitContainer4
-            // 
-            this.splitContainer4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer4.Location = new System.Drawing.Point(0, 0);
-            this.splitContainer4.Name = "splitContainer4";
-            this.splitContainer4.Orientation = System.Windows.Forms.Orientation.Horizontal;
-            // 
-            // splitContainer4.Panel1
-            // 
-            this.splitContainer4.Panel1.Controls.Add(this._listViewEvents);
-            // 
-            // splitContainer4.Panel2
-            // 
-            this.splitContainer4.Panel2.Controls.Add(this.groupBox1);
-            this.splitContainer4.Size = new System.Drawing.Size(697, 625);
-            this.splitContainer4.SplitterDistance = 316;
-            this.splitContainer4.TabIndex = 0;
             // 
             // _listViewEvents
             // 
@@ -168,22 +158,31 @@
             this.Evenement});
             this._listViewEvents.Dock = System.Windows.Forms.DockStyle.Fill;
             this._listViewEvents.FullRowSelect = true;
-            listViewGroup1.Header = "Retraite";
-            listViewGroup1.Name = "Retraite";
+            listViewGroup5.Header = "Retraite";
+            listViewGroup5.Name = "Retraite";
+            listViewGroup6.Header = "Raz-le-bol";
+            listViewGroup6.Name = "Raz-le-bol";
+            listViewGroup7.Header = "Vacances";
+            listViewGroup7.Name = "Vacances";
+            listViewGroup8.Header = "Maladie";
+            listViewGroup8.Name = "Maladie";
             this._listViewEvents.Groups.AddRange(new System.Windows.Forms.ListViewGroup[] {
-            listViewGroup1});
+            listViewGroup5,
+            listViewGroup6,
+            listViewGroup7,
+            listViewGroup8});
             this._listViewEvents.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this._listViewEvents.Location = new System.Drawing.Point(0, 0);
             this._listViewEvents.Name = "_listViewEvents";
-            this._listViewEvents.Size = new System.Drawing.Size(697, 316);
-            this._listViewEvents.TabIndex = 0;
+            this._listViewEvents.Size = new System.Drawing.Size(697, 384);
+            this._listViewEvents.TabIndex = 24;
             this._listViewEvents.UseCompatibleStateImageBehavior = false;
             this._listViewEvents.View = System.Windows.Forms.View.Details;
             // 
             // Evenement
             // 
             this.Evenement.Text = "Événements";
-            this.Evenement.Width = 402;
+            this.Evenement.Width = 692;
             // 
             // groupBox1
             // 
@@ -200,8 +199,8 @@
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox1.Location = new System.Drawing.Point(0, 0);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(697, 305);
-            this.groupBox1.TabIndex = 0;
+            this.groupBox1.Size = new System.Drawing.Size(697, 331);
+            this.groupBox1.TabIndex = 25;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Mon entreprise";
             // 
@@ -816,6 +815,35 @@
             this.label6.TabIndex = 0;
             this.label6.Text = "Solde actuel : ";
             // 
+            // _infoEvents
+            // 
+            this._infoEvents.IsBalloon = true;
+            this._infoEvents.ToolTipTitle = "Liste événements";
+            // 
+            // _infoMonEntreprise
+            // 
+            this._infoMonEntreprise.AutoPopDelay = 3000;
+            this._infoMonEntreprise.InitialDelay = 1700;
+            this._infoMonEntreprise.IsBalloon = true;
+            this._infoMonEntreprise.ReshowDelay = 100;
+            this._infoMonEntreprise.ToolTipTitle = "Mon entreprise";
+            // 
+            // _infoMouvMensuels
+            // 
+            this._infoMouvMensuels.AutoPopDelay = 3000;
+            this._infoMouvMensuels.InitialDelay = 1700;
+            this._infoMouvMensuels.IsBalloon = true;
+            this._infoMouvMensuels.ReshowDelay = 100;
+            this._infoMouvMensuels.ToolTipTitle = "Mouvements mensuels";
+            // 
+            // _infoMouvAnnuels
+            // 
+            this._infoMouvAnnuels.AutoPopDelay = 3000;
+            this._infoMouvAnnuels.InitialDelay = 1700;
+            this._infoMouvAnnuels.IsBalloon = true;
+            this._infoMouvAnnuels.ReshowDelay = 100;
+            this._infoMouvAnnuels.ToolTipTitle = "Mouvements annuels";
+            // 
             // UcOffice
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -828,13 +856,10 @@
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
+            this.splitContainer2.Panel1.ResumeLayout(false);
             this.splitContainer2.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
-            this.splitContainer4.Panel1.ResumeLayout(false);
-            this.splitContainer4.Panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer4)).EndInit();
-            this.splitContainer4.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.BudgetGroupBox.ResumeLayout(false);
@@ -851,18 +876,6 @@
 
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.SplitContainer splitContainer2;
-        private System.Windows.Forms.SplitContainer splitContainer4;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label _currentLevelCompany;
-        private System.Windows.Forms.Label _nextLevelCompany;
-        private System.Windows.Forms.ProgressBar _progressBarCompany;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label _nextLimitEmployees;
-        private System.Windows.Forms.Label _limitEmployees;
-        private System.Windows.Forms.Label _maxDifficultyProject;
-        private System.Windows.Forms.Label label4;
         private System.Windows.Forms.GroupBox BudgetGroupBox;
         private System.Windows.Forms.Label _actualWealth;
         private System.Windows.Forms.Label label6;
@@ -916,5 +929,20 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ListView _listViewEvents;
         private System.Windows.Forms.ColumnHeader Evenement;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Label _maxDifficultyProject;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label _nextLimitEmployees;
+        private System.Windows.Forms.Label _limitEmployees;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.ProgressBar _progressBarCompany;
+        private System.Windows.Forms.Label _nextLevelCompany;
+        private System.Windows.Forms.Label _currentLevelCompany;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ToolTip _infoEvents;
+        private System.Windows.Forms.ToolTip _infoMonEntreprise;
+        private System.Windows.Forms.ToolTip _infoMouvMensuels;
+        private System.Windows.Forms.ToolTip _infoMouvAnnuels;
     }
 }

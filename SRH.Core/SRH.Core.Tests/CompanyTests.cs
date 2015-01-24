@@ -119,14 +119,14 @@ namespace SRH.Core.Tests
         }
 
 		[Test]
-		public void A_randomly_created_Person_has_2_random_skills()
+		public void A_randomly_created_Person_has_between_1_and_6_random_skills()
 		{
 			Game myGame = new Game( 1, "Simu\'RH" );
 
 			RandomGenerator random = myGame.GetRandomGenerator();
 			Person p = random.GetRandomPerson(myGame.Market, 18, 60);
 
-			Assert.That( p.Skills.Count == 2 );
+			Assert.That( p.Skills.Count >= 1 && p.Skills.Count <= 6 );
 		}
 
         [Test]

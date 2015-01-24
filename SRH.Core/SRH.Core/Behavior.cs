@@ -58,7 +58,7 @@ namespace SRH.Core
 			{
 				if( _employee.Comp.Game.TimeGame.AreMonthsPassed( kvp.Value, 12 ) )
 					flagged.Add( kvp.Key );
-			}
+			}		
 			foreach( string s in flagged )
 			{
 				_skillsUsed.Remove( s );
@@ -73,6 +73,8 @@ namespace SRH.Core
 				// 1 point every 5% above the expected Salary, -1 every 5% under
 				int happinessAdjustment = (int)( _employee.SalaryAdjustment / ( _employee.Worker.ExpectedSalary * 0.05 ) );
 				_employee.Happiness.ChangeHappinessScore( happinessAdjustment );
+
+
 
 				_lastDateSalaryReactionCheck = _employee.Comp.Game.TimeGame.CurrentTimeOfGame;
 			}
@@ -104,6 +106,12 @@ namespace SRH.Core
 			CheckSkillsUsed();
 			SalaryReaction();
 			SkillsReaction();
+		}
+
+
+		internal void HandleSickEmployees()
+		{
+
 		}
 
 	}

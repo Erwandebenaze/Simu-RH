@@ -274,6 +274,55 @@ namespace SRH.Core
             }
         }
 
+        public delegate void SomeoneIsFedUpWithHisCompany( Employee emp );
+        public event SomeoneIsFedUpWithHisCompany OnFedUp;
+
+        public void SomeoneFedUp( Employee emp )
+        {
+            _events.Add( emp, "Raz-le-bol" );
+            
+        }
+
+        public void FedUp( Employee emp )
+        {
+            if( OnFedUp != null )
+            {
+                OnFedUp( emp );
+            }
+            _playerCompany.RemoveEmployee( emp );
+        }
+
+        public delegate void SomeoneGoInHolidays( Employee emp );
+        public event SomeoneGoInHolidays OnHolidays;
+
+        public void SomeoneHolidays( Employee emp )
+        {
+            _events.Add( emp, "Vacances" );
+        }
+
+        public void Holidays( Employee emp )
+        {
+            if( OnHolidays != null )
+            {
+                OnHolidays( emp );
+            }
+        }
+
+        public delegate void SomeoneIsSeek( Employee emp );
+        public event SomeoneIsSeek OnSeek;
+
+        public void SomeoneSeek( Employee emp )
+        {
+            _events.Add( emp, "Maladie" );
+        }
+
+        public void Seek( Employee emp )
+        {
+            if( OnSeek != null )
+            {
+                OnSeek( emp );
+            }
+        }
 
    }
    

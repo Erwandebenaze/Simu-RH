@@ -81,7 +81,7 @@ namespace SRH.Interface
 		internal void LoadUc()
 		{
 			_employeesToDisplay = GetProjEmployees( _showProj );
-
+            _infoListEmployees.SetToolTip( this, "Liste des employés de mon entreprise." );
 			employeeList.Items.Clear();
 			employeeList.Items.AddRange( _employeesToDisplay.Select( employee => CreateEmployee( employee ) )
 				.OrderBy( employee => employee.Text)

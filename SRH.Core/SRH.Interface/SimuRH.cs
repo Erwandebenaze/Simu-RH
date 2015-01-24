@@ -26,8 +26,8 @@ namespace SRH.Interface
         public SimuRH()
         {
             InitializeComponent();
-           _myGame = new Game( 1, "Erwan" );
-           //_myGame = GameLoader.Load( "Erwan" );
+            _myGame = new Game( 1, "Erwan" );
+            //_myGame = GameLoader.Load( "Erwan" );
             _optionsForm = new Options();
             _timeOfGame = _myGame.TimeGame;
             _timer = new Timer();
@@ -68,6 +68,8 @@ namespace SRH.Interface
                 _myGame.PlayerCompany.EndProjectIfItsFinish();
 				UpdateEmployeesSkills();
 				UpdateEmployeesHappiness();
+				_myGame.PlayerCompany.UpdateEmployeesAbsence();
+				_myGame.PlayerCompany.ResetVacationDays();
                 ClearListsProjects();
 
 				// Current date display
@@ -155,6 +157,52 @@ namespace SRH.Interface
                     default:
                         throw new InvalidOperationException( "Month is beetween 1 and 12" );
                 }
+
+                foreach( Competitor competitor in _myGame.Competitors )
+                {
+                    switch( _myGame.TimeGame.CurrentTimeOfGame.Month )
+                    {
+                        case 1:
+                            competitor.WealthInYear.January = competitor.Wealth;
+                            competitor.WealthInYear.NewYear();
+                            break;
+                        case 2:
+                            competitor.WealthInYear.February = competitor.Wealth;
+                            break;
+                        case 3:
+                            competitor.WealthInYear.March = competitor.Wealth;
+                            break;
+                        case 4:
+                            competitor.WealthInYear.April = competitor.Wealth;
+                            break;
+                        case 5:
+                            competitor.WealthInYear.May = competitor.Wealth;
+                            break;
+                        case 6:
+                            competitor.WealthInYear.June = competitor.Wealth;
+                            break;
+                        case 7:
+                            competitor.WealthInYear.July = competitor.Wealth;
+                            break;
+                        case 8:
+                            competitor.WealthInYear.August = competitor.Wealth;
+                            break;
+                        case 9:
+                            competitor.WealthInYear.September = competitor.Wealth;
+                            break;
+                        case 10:
+                            competitor.WealthInYear.October = competitor.Wealth;
+                            break;
+                        case 11:
+                            competitor.WealthInYear.November = competitor.Wealth;
+                            break;
+                        case 12:
+                            competitor.WealthInYear.December = competitor.Wealth;
+                            break;
+                        default:
+                            throw new InvalidOperationException( "Month is beetween 1 and 12" );
+                    }
+                }
                 #endregion
             }
 
@@ -163,6 +211,7 @@ namespace SRH.Interface
 
 		private void UpdateEmployeesHappiness()
 		{
+            List<Employee> listEmpTmp = new List<Employee>();
 			foreach( Employee e in _myGame.PlayerCompany.Employees )
 			{
 				e.Behavior.UpdateHappiness();
@@ -170,7 +219,17 @@ namespace SRH.Interface
 				{
 					ucEmployeePage.SetHappinessBar();
 				}
+                if( e.Happiness.HappinessScore == 0 )
+                {
+                    listEmpTmp.Add( e );
+                }
 			}
+
+            foreach( Employee e in listEmpTmp )
+            {
+                _myGame.OnFedUp += new Game.SomeoneIsFedUpWithHisCompany( _myGame.SomeoneFedUp );
+                _myGame.FedUp( e );
+            }
 		}
 
 		private void PayEmployees()

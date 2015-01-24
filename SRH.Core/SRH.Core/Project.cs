@@ -80,8 +80,7 @@ namespace SRH.Core
         {
             get { return _actualTasks; }
         }
-        #endregion
-        #region GetterSetter
+
         public int TimeSpent
         {
             get { return _timeSpent; }
@@ -184,16 +183,27 @@ namespace SRH.Core
         /// <param name="skill"></param>
         public void AffectEmployeeToAJob( Employee e, Skill s )
         {
-            if( SkillsRequired.ContainsKey( s ) && e.Worker.Skills.Contains( s ) && !this.Activated )
+            if( SkillsRequired.ContainsKey( s ) && e.Worker.Skills.Contains( s ) && !this.Activated && e.Busy == false)
             {
                 _employeesAffectedWithSkill.Add( e, e.Worker.Skills.Where( sk => sk.Equals( s ) ).Single() );
                 e.Busy = true;
                 _skillsRequired.Remove( s );
+            }
+            else if( e.Busy && e.SkillInProject != null )
+            {
+                _employeesAffectedWithSkill.Add( e, s );
+
             } else
             {
                 throw new InvalidOperationException( "The employee hasn't been affected." );
             }
 
+
+        }
+
+        internal void ReAffectSeekEmployee( Employee emp )
+        {
+            _employeesAffectedWithSkill.Add( emp, emp.SkillInProject );
         }
         /// <summary>
         /// Remove an Employee from a job if the project is not activated. 
@@ -204,8 +214,6 @@ namespace SRH.Core
         {
             if( !SkillsRequired.ContainsKey(s) && e.Worker.Skills.Contains(s) && !this.Activated )
                 {
-
-          
                     _employeesAffectedWithSkill.Remove( e );
                 int nb = 0;
                 e.Busy = false;
@@ -217,7 +225,7 @@ namespace SRH.Core
                 _skillsRequired.Add( s, nb );
             }
         }
-        internal void RemoveEmployeeFromTheProject(Employee e)
+        internal void RemoveEmployeeFromTheProject( Employee e )
         {
             _employeesAffectedWithSkill.Remove( e );
         }
@@ -280,7 +288,7 @@ namespace SRH.Core
 			foreach( KeyValuePair<Employee, Skill> kvp in _employeesAffectedWithSkill )
 			{
 				kvp.Key.SkillInProject = kvp.Value;
-                kvp.Key.Project = _name;
+                kvp.Key.Project = this;
 			}
 		}
     }

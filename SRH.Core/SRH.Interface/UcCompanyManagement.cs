@@ -47,7 +47,9 @@ namespace SRH.Interface
 			managerList.Items.Clear();
 			_managers = GameContext.CurrentGame.PlayerCompany.Employees
 				.Where( e => e.SkillAffectedToCompany != null );
-			managerList.Items.AddRange( _managers.Select( m => CreateManager( m ) ).ToArray() );
+            managerList.Items.AddRange( _managers.Select( m => CreateManager( m ) ).ToArray() );
+            _infoManagement.SetToolTip( this.Controls.Owner,
+                "Les onnaire essourcesontrat, Ressources humaines" );
 
 		}
 
@@ -124,10 +126,14 @@ namespace SRH.Interface
 
 		private void DesaffectManager_Click( object sender, EventArgs e )
 		{
-			MyCompany playerCompany = (MyCompany)_currentManager.Comp;
-			playerCompany.RemoveManager( _currentManager );
-			DesaffectManager.Enabled = false;
-			LoadPage();
+            if( _currentManager != null)
+            {
+                MyCompany playerCompany = (MyCompany)_currentManager.Comp;
+                playerCompany.RemoveManager( _currentManager );
+                DesaffectManager.Enabled = false;
+                LoadPage();
+            }
+
 		}
 
 		private void managerList_SelectedIndexChanged( object sender, EventArgs e )

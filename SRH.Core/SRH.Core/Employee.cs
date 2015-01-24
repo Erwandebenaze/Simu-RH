@@ -13,15 +13,18 @@ namespace SRH.Core
 		private int _salary;
 		private int _salaryAdjustment;
         private bool _busy;
+		private KeyValuePair<DateTime, int> _inVacation;
+		private KeyValuePair<DateTime, int> _isSick;
+		private int _vacationDays;
         private Skill _skillInProject;
-        private string _project;
+        private Project _project;
 		private Skill _skillAffectedToCompany;
 		private string _skillInTraining;
 		private DateTime? _trainingBegginingDate;
 		private int? _trainingDuration;
-        DateTime? _begginningCompanyWork;
-		Happiness _happiness;
-		Behavior _behavior;
+		private DateTime? _begginningCompanyWork;
+		private Happiness _happiness;
+		private Behavior _behavior;
 
         /// <summary>
 		/// Creates an <see cref="Employee"/>
@@ -40,6 +43,10 @@ namespace SRH.Core
 			_salary = GenerateSalary();
 			_happiness = new Happiness();
 			_behavior = new Behavior( this );
+
+			_inVacation = new KeyValuePair<DateTime, int>( _comp.Game.TimeGame.CurrentTimeOfGame, 0);
+			_isSick = new KeyValuePair<DateTime, int>( _comp.Game.TimeGame.CurrentTimeOfGame, 0 );
+			_vacationDays = 30;
         }
 
 		#region Getters setters
@@ -52,7 +59,7 @@ namespace SRH.Core
             get { return _busy; }
             internal set { _busy = value; }
         }
-        public string Project
+        public Project Project
         {
             get { return _project; }
             internal set { _project = value; }
@@ -116,6 +123,30 @@ namespace SRH.Core
 		{
 			get { return _skillInProject; }
 			internal set { _skillInProject = value; }
+		}
+
+		/// <summary>
+		/// Key = last time checked, Value = vacation duration
+		/// </summary>
+		public KeyValuePair<DateTime, int> InVacation
+		{
+			get { return _inVacation; }
+			set { _inVacation = value; }
+		}
+
+		internal int VacationDays
+		{
+			get { return _vacationDays; }
+			set { _vacationDays = value; }
+		}
+
+		/// <summary>
+		/// Key = last time checked, Value = sickness duration
+		/// </summary>
+		public KeyValuePair<DateTime, int> IsSick
+		{
+			get { return _isSick; }
+			set { _isSick = value; }
 		}
 		#endregion
 
@@ -205,6 +236,36 @@ namespace SRH.Core
 			_skillInTraining = null;
 			_trainingDuration = null;
 			_trainingBegginingDate = null;
+		}
+
+		/// <summary>
+		/// Checks if the number of sick days are passed, if they are, the employee's status is changed
+		/// </summary>
+		public void UpdateSickStatus()
+		{
+			if( _isSick.Value != 0 )
+			{
+				if( _comp.Game.TimeGame.intervalOfTimeInDays( _isSick.Key ) == _isSick.Value )
+				{
+					_busy = false;
+					_isSick = new KeyValuePair<DateTime, int>( _comp.Game.TimeGame.CurrentTimeOfGame, 0 );
+				}
+			}
+		}
+
+		/// <summary>
+		/// Checks if the number of vacation days are passed, if they are, the employee's status is changed
+		/// </summary>
+		public void UpdateVacationStatus()
+		{
+			if( _inVacation.Value != 0 )
+			{
+				if( _comp.Game.TimeGame.intervalOfTimeInDays( _inVacation.Key ) == _inVacation.Value )
+				{
+					_busy = false;
+					_inVacation = new KeyValuePair<DateTime, int>( _comp.Game.TimeGame.CurrentTimeOfGame, 0 );
+				}
+			}
 		}
 	}
 }

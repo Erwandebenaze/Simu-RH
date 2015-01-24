@@ -198,10 +198,13 @@ namespace SRH.Core.Tests
 		[Test]
 		public void incresing_salary_increses_happiness()
 		{
+			Game myGame = new Game( 1, "Simu'RH" );
+
 			Person p = new Person( myGame.Market, "André", "LeGéant", 20 );
 			Employee e = new Employee( myGame.PlayerCompany, p );
 
 			e.SalaryAdjustment += 100;
+			myGame.TimeGame.CurrentTimeOfGame = new DateTime( 2015, 04, 26 ); // New default date is 26/01/2015
 			e.Behavior.SalaryReaction();
 
 			Assert.That( e.Happiness.HappinessScore == 52 );
@@ -210,10 +213,13 @@ namespace SRH.Core.Tests
 		[Test]
 		public void decresing_salary_decreses_happiness()
 		{
+			Game myGame = new Game( 1, "Simu'RH" );
+
 			Person p = new Person( myGame.Market, "André", "LeGéant", 20 );
 			Employee e = new Employee( myGame.PlayerCompany, p );
 
 			e.SalaryAdjustment -= 100;
+			myGame.TimeGame.CurrentTimeOfGame = new DateTime( 2015, 04, 26 ); // New default date is 26/01/2015
 			e.Behavior.SalaryReaction();
 
 			Assert.That( e.Happiness.HappinessScore == 48 );
@@ -232,7 +238,7 @@ namespace SRH.Core.Tests
 		}
 
 		[Test]
-		public void a_skill_not_used_for_6_months_is_removed_from_skillsUsed()
+		public void a_skill_not_used_for_12_months_is_removed_from_skillsUsed()
 		{
 			Game myGame = new Game( 1, "Simu'RH" );
 
@@ -240,7 +246,7 @@ namespace SRH.Core.Tests
 			Employee e = new Employee( myGame.PlayerCompany, p );
 
 			e.Behavior.AddOrUpdateSkillsUsed( "Développement" );
-			myGame.TimeGame.CurrentTimeOfGame = new DateTime( 2015, 07, 26 ); // New default date is 26/01/2015
+			myGame.TimeGame.CurrentTimeOfGame = new DateTime( 2016, 01, 26 ); // New default date is 26/01/2015
 			e.Behavior.CheckSkillsUsed();
 
 			Assert.That( e.Behavior.SkillsUsed.Count == 0 );
@@ -336,7 +342,7 @@ namespace SRH.Core.Tests
 			myGame.PlayerCompany.AddManager( e, s );
 
 			myGame.TimeGame.CurrentTimeOfGame = new DateTime( 2015, 07, 26 ); // New default date is 26/01/2015
-			e.Behavior.CheckSkillsUsed();
+			e.Behavior.UpdateHappiness();
 
 			Assert.That( e.Behavior.SkillsUsed.Count == 1 );
 		}

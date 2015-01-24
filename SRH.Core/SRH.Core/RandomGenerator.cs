@@ -122,44 +122,6 @@ namespace SRH.Core
 			return points;
 		}
 
-        //internal List<KeyValuePair<string, int>> AssignPoints( Person p, int points )
-        //{
-        //    // Create the KeyValuePair and add a first SkillName level 1
-        //    List<KeyValuePair<string, int>> skillsToGive = new List<KeyValuePair<string, int>>();
-        //    skillsToGive.Add( new KeyValuePair<string, int>( GetRandomSkillName(), 1) );
-
-        //    while( points > 1 )
-        //    {
-        //        int alea = _randomNumberGenerator.Next( 1, 4 );
-        //        // Add a new SkillName to the KeyValuePair, level 1
-        //        if( alea <= 2 && skillsToGive.Count < 4 )
-        //        {
-        //            bool check = false;
-        //            while( !check )
-        //            {
-        //                string randomSkillName = GetRandomSkillName();
-        //                if( !(bool)skillsToGive.Select( kvp => kvp.Key == randomSkillName ).SingleOrDefault() )
-        //                {
-        //                    skillsToGive.Add( new KeyValuePair<string, int>( randomSkillName, 1 ) );
-        //                    points--;
-        //                    check = true;
-        //                }
-        //            }
-        //        }
-        //        else
-        //        {
-        //            KeyValuePair<string, int> skillToImprove = skillsToGive[ _randomNumberGenerator.Next( 0, skillsToGive.Count ) ];
-        //            int newLevel = skillToImprove.Value +1;
-
-        //            skillsToGive.Remove( skillsToGive.Where( kvp => kvp.Equals(skillToImprove) ).Single() );
-        //            skillsToGive.Add( new KeyValuePair<string, int>( skillToImprove.Key, newLevel ) );
-        //            points--;
-        //        }
-        //    }
-
-        //    return skillsToGive;
-        //}
-
         internal void AssignSkillPoints( Person p, int points )
         {
             // Add a first level 1 Skill to the Person
@@ -191,6 +153,90 @@ namespace SRH.Core
                 }
             }
         }
+
+		internal void EmployeeGetsSick( Employee e )
+		{
+			// If the employee hasn't been checked for at least a month and is not already sick
+			if( e.Comp.Game.TimeGame.AreMonthsPassed( e.IsSick.Key, 1 ) && e.IsSick.Value == 0 )
+			{
+				if( _randomNumberGenerator.Next( 1, 13 ) == 12 )
+				{
+					e.IsSick = new KeyValuePair<DateTime, int>( _game.TimeGame.CurrentTimeOfGame, CreateRandomDuration() );
+					e.Busy = true;
+				}
+				else
+					e.IsSick = new KeyValuePair<DateTime, int>( _game.TimeGame.CurrentTimeOfGame, 0 );
+			}
+		}
+
+		internal void EmployeeGoesInVacation( Employee e )
+		{
+			// If the employee hasn't been checked for at least a month and is not already in vacation
+			//if( e.Comp.Game.TimeGame.AreMonthsPassed( e.InVacation.Key, 1 ) && e.InVacation.Value == 0 && e.VacationDays != 0)
+			//{
+			if( e.VacationDays != 0 )
+			{
+				if( _randomNumberGenerator.Next( 1, 2 ) == 1 )
+				{
+					int duration = CreateRandomDuration( e );
+
+					e.InVacation = new KeyValuePair<DateTime, int>( _game.TimeGame.CurrentTimeOfGame, duration );
+					e.Busy = true;
+
+					e.VacationDays -= duration;
+				}
+				else
+					e.InVacation = new KeyValuePair<DateTime, int>( _game.TimeGame.CurrentTimeOfGame, 0 );
+			}
+			//}
+		}
+
+		/// <summary>
+		/// Creates a random number of vacation days, cannot be over the number of vacation days left, mostly between 3 and 10 days
+		/// </summary>
+		/// <param name="e"> The Employee that will go in vacation </param>
+		/// <returns> A number of vacation days </returns>
+		private int CreateRandomDuration( Employee e )
+		{
+			int days = 0;
+			bool check = false;
+
+			while( !check )
+			{
+				days = _randomNumberGenerator.Next( 1, e.VacationDays );
+				if( days < 3 || days > 11 )
+				{
+					if( _randomNumberGenerator.Next( 1, 11 ) == 10 )
+						check = true;
+				}
+				else
+					check = true;
+			}
+			return days;
+		}
+
+		/// <summary>
+		/// Creates a random number of sick days, no maximum in a year, if you're sick you're sick !
+		/// </summary>
+		/// <returns> A number of sick days </returns>
+		private int CreateRandomDuration()
+		{
+			int days = 0;
+			bool check = false;
+
+			while(!check)
+			{
+				days = _randomNumberGenerator.Next( 1, 31 );
+				if( days < 3 || days > 7 )
+				{
+					if( _randomNumberGenerator.Next( 1, 11 ) == 10 )
+						check = true;
+				}
+				else
+					check = true;
+			}
+			return days;
+		}
 
         public int GetRandomMonth()
         {
