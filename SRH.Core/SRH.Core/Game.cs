@@ -303,8 +303,8 @@ namespace SRH.Core
 
         public void SomeoneHolidays( Employee emp )
         {
-            if( _events.ContainsKey( emp ) ) throw new InvalidOperationException( "L'employé(e) est déjà dans le dico" );
-            _events.Add( emp, "Vacances" );
+            if( !_events.ContainsKey( emp ) )
+                _events.Add( emp, "Vacances" );
         }
 
         public void Holidays( Employee emp )
