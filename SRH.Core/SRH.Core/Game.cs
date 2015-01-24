@@ -236,9 +236,21 @@ namespace SRH.Core
 
         private void GoInRetirement( Employee emp )
         {
-            if( emp.Busy && emp.SkillInTraining == null && emp.SkillAffectedToCompany == null)
+            RemoveEmployeeFromAProject( emp );
+
+            Person tmpPerson = _playerCompany.RemoveEmployee( emp );
+            OnRetirement += new SomeoneGoInRetirement( SomeoneRetirement );
+            Retirement( emp );
+
+            // TODO : Ajouter un évènement.
+            GoInRetirement( tmpPerson );
+        }
+
+        internal void RemoveEmployeeFromAProject( Employee emp )
+        {
+            if( emp.Busy && emp.SkillInTraining == null && emp.SkillAffectedToCompany == null )
             {
-                foreach( Project p in _playerCompany.Projects)
+                foreach( Project p in _playerCompany.Projects )
                 {
                     foreach( Employee emplo in p.EmployeesAffectedWithSkill.Keys )
                     {
@@ -250,13 +262,6 @@ namespace SRH.Core
                     }
                 }
             }
-
-            Person tmpPerson = _playerCompany.RemoveEmployee( emp );
-            OnRetirement += new SomeoneGoInRetirement( SomeoneRetirement );
-            Retirement( emp );
-
-            // TODO : Ajouter un évènement.
-            GoInRetirement( tmpPerson );
         }
 
         public delegate void SomeoneGoInRetirement(Employee emp);
@@ -298,7 +303,7 @@ namespace SRH.Core
 
         public void SomeoneHolidays( Employee emp )
         {
-            if( _events.ContainsKey( emp ) ) throw new InvalidOperationException( "L'employée est déjà dans le dico" );
+            if( _events.ContainsKey( emp ) ) throw new InvalidOperationException( "L'employé(e) est déjà dans le dico" );
             _events.Add( emp, "Vacances" );
         }
 
