@@ -31,7 +31,7 @@ namespace SRH.Core
         int _recrutingCostYear = 0;
         int _projectsEarnings = 0;
         int _projectsEarningsYear = 0;
-
+        RandomGenerator _random;
 
 
 		internal MyCompany( Game game, string name ) : base( game, name )
@@ -48,7 +48,7 @@ namespace SRH.Core
             _ressourcesHumaines = new List<Employee>();
             _directeursProjets = new List<Employee>();
             _recruteur = new List<Employee>();
-
+            _random = game.GetRandomGenerator();
         }
 
         #region Getters Setters
@@ -351,30 +351,51 @@ namespace SRH.Core
 			return finalList;
 		}
 
+        /// <summary>
+        /// Randomly sends employee's to vacation or sick leave and updates the status of employees that are in vacation or sick
+        /// </summary>
 		public void UpdateEmployeesAbsence()
 		{
-			List<Employee> sickEmployees = new List<Employee>(_employees.Where( e => e.IsSick.Value != 0 ).DefaultIfEmpty( null ) );
-			if( sickEmployees[0] != null )
-			{
-				foreach( Employee e in sickEmployees )
-				{
-					e.UpdateSickStatus();
+            foreach( Employee e in _employees )
+            {
+                _random.EmployeeGetsSick(e);
+                _random.EmployeeGoesInVacation(e);
+                if( e.IsSick.Value != 0 )
+                {
+                    e.UpdateSickStatus();
 					if( !e.Busy )
 						ReaffectEmployeeToProject( e );
-				}
-					
-			}
+                }
+                if( e.InVacation.Value != 0 )
+                {
+                    e.UpdateVacationStatus();
+					if( !e.Busy )
+						ReaffectEmployeeToProject( e );
+                }
+            }
 
-			List<Employee> awayEmployees = new List<Employee>( _employees.Where( e => e.InVacation.Value != 0 ).DefaultIfEmpty( null ) );
-			if( awayEmployees[0] != null )
-			{
-				foreach( Employee e in sickEmployees )
-				{
-					e.UpdateVacationStatus();
-					if( !e.Busy )
-						ReaffectEmployeeToProject( e );
-				}
-			}
+            //List<Employee> sickEmployees = new List<Employee>(_employees.Where( e => e.IsSick.Value != 0 ).DefaultIfEmpty( null ) );
+            //if( sickEmployees[0] != null )
+            //{
+            //    foreach( Employee e in sickEmployees )
+            //    {
+            //        e.UpdateSickStatus();
+            //        if( !e.Busy )
+            //            ReaffectEmployeeToProject( e );
+            //    }
+					
+            //}
+
+            //List<Employee> awayEmployees = new List<Employee>( _employees.Where( e => e.InVacation.Value != 0 ).DefaultIfEmpty( null ) );
+            //if( awayEmployees[0] != null )
+            //{
+            //    foreach( Employee e in sickEmployees )
+            //    {
+            //        e.UpdateVacationStatus();
+            //        if( !e.Busy )
+            //            ReaffectEmployeeToProject( e );
+            //    }
+            //}
 		}
 
 		/// <summary>
@@ -385,6 +406,7 @@ namespace SRH.Core
 		{
 			if( e.Project != null && e.Project.Activated )
 			{
+                e.Busy = true;
 				e.Project.AffectEmployeeToAJob( e, e.SkillInProject );
 			}
 		}
