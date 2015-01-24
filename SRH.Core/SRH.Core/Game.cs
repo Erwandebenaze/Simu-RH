@@ -67,6 +67,7 @@ namespace SRH.Core
         public Dictionary<Employee, string> Events
         {
             get { return _events; }
+            internal set { _events = value; }
         }
 		public static IReadOnlyList<KeyValuePair<string, string>> SkillNames
 		{
@@ -297,6 +298,7 @@ namespace SRH.Core
 
         public void SomeoneHolidays( Employee emp )
         {
+            if( _events.ContainsKey( emp ) ) throw new InvalidOperationException( "L'employée est déjà dans le dico" );
             _events.Add( emp, "Vacances" );
         }
 

@@ -74,9 +74,22 @@ namespace SRH.Interface
             }
             else if( dico.Value == "Raz-le-bol" )
             {
-                i = new ListViewItem( "Votre employé(e) " + dico.Key.Worker.FirstName + " " + dico.Key.Worker.LastName + " est parti(e) de votre entreprise, votre employé était trop malheureux." );
+                i = new ListViewItem( "Votre employé(e) " + dico.Key.Worker.FirstName + " " + dico.Key.Worker.LastName + " est parti(e) de votre entreprise, il (elle) était trop malheureu(se)x." );
 
-            } else
+            }
+            else if( dico.Value == "Vacances" )
+            {
+                i = new ListViewItem( "Votre employé(e) " + dico.Key.Worker.FirstName + " " + dico.Key.Worker.LastName + " est parti(e) en vacances, il (elle) sera bientôt de retour." );
+
+            }
+            else if( dico.Value == "Maladie" )
+            {
+                i = new ListViewItem( "Votre employé(e) " + dico.Key.Worker.FirstName + " " + dico.Key.Worker.LastName + " est tombé(e) malade, il (elle) sera bientôt de retour." );
+
+            } 
+            
+            
+            else 
             {
                 i = new ListViewItem();
             }
