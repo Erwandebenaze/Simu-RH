@@ -27,16 +27,16 @@ namespace SRH.Interface
         {
             InitializeComponent();
 <<<<<<< HEAD
-            _myGame = new Game( 1, "Erwan" );
-            //_myGame = GameLoader.Load( "Erwan" );
+           _myGame = new Game( 1, "Erwan" );
+           //_myGame = GameLoader.Load( "Erwan" );
 =======
-           //_myGame = new Game( 1, "Erwan" );
+            //_myGame = new Game( 1, "Erwan" );
             _myGame = GameLoader.Load( "Erwan" );
->>>>>>> origin/develop
+>>>>>>> f0c7269f2af1945350c87a64cddb17a224dd745b
             _optionsForm = new Options();
             _timeOfGame = _myGame.TimeGame;
             _timer = new Timer();
-            interval = 500;
+            interval = 1000;
             _timer.Interval = interval;
             _timer.Tick += _timer_Tick;
             _timer.Start();
