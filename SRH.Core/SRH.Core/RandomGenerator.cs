@@ -157,9 +157,9 @@ namespace SRH.Core
 		internal void EmployeeGetsSick( Employee e )
 		{
 			// If the employee hasn't been checked for at least a month and is not already sick
-			if( e.Comp.Game.TimeGame.AreMonthsPassed( e.IsSick.Key, 1 ) && e.IsSick.Value == 0)
+			if( e.Comp.Game.TimeGame.AreMonthsPassed( e.IsSick.Key, 1 ) && e.IsSick.Value == 0 )
 			{
-				if( _randomNumberGenerator.Next( 1, 21 ) == 20 ) 
+				if( _randomNumberGenerator.Next( 1, 13 ) == 12 )
 				{
 					e.IsSick = new KeyValuePair<DateTime, int>( _game.TimeGame.CurrentTimeOfGame, CreateRandomDuration() );
 					e.Busy = true;
@@ -172,11 +172,13 @@ namespace SRH.Core
 		internal void EmployeeGoesInVacation( Employee e )
 		{
 			// If the employee hasn't been checked for at least a month and is not already in vacation
-			if( e.Comp.Game.TimeGame.AreMonthsPassed( e.InVacation.Key, 1 ) && e.InVacation.Value == 0 && e.VacationDays != 0)
+			//if( e.Comp.Game.TimeGame.AreMonthsPassed( e.InVacation.Key, 1 ) && e.InVacation.Value == 0 && e.VacationDays != 0)
+			//{
+			if( e.VacationDays != 0 )
 			{
-				if( _randomNumberGenerator.Next( 1, 6 ) == 5 )
+				if( _randomNumberGenerator.Next( 1, 2 ) == 1 )
 				{
-					int duration = CreateRandomDuration();
+					int duration = CreateRandomDuration( e );
 
 					e.InVacation = new KeyValuePair<DateTime, int>( _game.TimeGame.CurrentTimeOfGame, duration );
 					e.Busy = true;
@@ -186,6 +188,7 @@ namespace SRH.Core
 				else
 					e.InVacation = new KeyValuePair<DateTime, int>( _game.TimeGame.CurrentTimeOfGame, 0 );
 			}
+			//}
 		}
 
 		/// <summary>

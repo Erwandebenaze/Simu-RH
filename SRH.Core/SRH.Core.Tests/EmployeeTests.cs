@@ -346,17 +346,5 @@ namespace SRH.Core.Tests
 
 			Assert.That( e.Behavior.SkillsUsed.Count == 1 );
 		}
-
-		//[Test]
-		//public void substracting_vacation_days_under_0_stays_0()
-		//{
-		//	Person p = new Person( myGame.Market, "André", "LeGéant", 20 );
-		//	Employee e = new Employee( myGame.PlayerCompany, p );
-
-		//	e.VacationDays = 1;
-		//	e.VacationDays -= 2;
-
-		//	Assert.That( e.VacationDays == 0 );
-		//}
 	}
 }

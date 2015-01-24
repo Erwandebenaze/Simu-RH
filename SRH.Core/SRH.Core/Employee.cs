@@ -267,11 +267,5 @@ namespace SRH.Core
 				}
 			}
 		}
-
-		public void ResetVacationDays()
-		{
-			if( _comp.Game.TimeGame.NextDayIsNewYear() )
-				_vacationDays = 30;
-		}
 	}
 }

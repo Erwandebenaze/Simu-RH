@@ -353,18 +353,50 @@ namespace SRH.Core
 
 		public void UpdateEmployeesAbsence()
 		{
-			IEnumerable<Employee> sickEmployees = _myGame.PlayerCompany.Employees.Where( e => e.IsSick.Value != 0 ).DefaultIfEmpty( null );
-			if( sickEmployees != null )
+			List<Employee> sickEmployees = new List<Employee>(_employees.Where( e => e.IsSick.Value != 0 ).DefaultIfEmpty( null ) );
+			if( sickEmployees[0] != null )
 			{
 				foreach( Employee e in sickEmployees )
+				{
 					e.UpdateSickStatus();
+					if( !e.Busy )
+						ReaffectEmployeeToProject( e );
+				}
+					
 			}
 
-			IEnumerable<Employee> awayEmployees = _myGame.PlayerCompany.Employees.Where( e => e.InVacation.Value != 0 ).DefaultIfEmpty( null );
-			if( awayEmployees != null )
+			List<Employee> awayEmployees = new List<Employee>( _employees.Where( e => e.InVacation.Value != 0 ).DefaultIfEmpty( null ) );
+			if( awayEmployees[0] != null )
 			{
 				foreach( Employee e in sickEmployees )
+				{
 					e.UpdateVacationStatus();
+					if( !e.Busy )
+						ReaffectEmployeeToProject( e );
+				}
+			}
+		}
+
+		/// <summary>
+		/// Checks if an employee's project is over or not, if it is no, the employee is reaffected to it
+		/// </summary>
+		/// <param name="e"> The employee to reaffect </param>
+		private void ReaffectEmployeeToProject( Employee e )
+		{
+			if( e.Project != null && e.Project.Activated )
+			{
+				e.Project.AffectEmployeeToAJob( e, e.SkillInProject );
+			}
+		}
+
+		public void ResetVacationDays()
+		{
+			if( _game.TimeGame.NextDayIsNewYear() )
+			{
+				foreach( Employee e in _employees )
+				{
+					e.VacationDays = 30;
+				}
 			}
 		}
 

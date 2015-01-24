@@ -69,6 +69,7 @@ namespace SRH.Interface
 				UpdateEmployeesSkills();
 				UpdateEmployeesHappiness();
 				_myGame.PlayerCompany.UpdateEmployeesAbsence();
+				_myGame.PlayerCompany.ResetVacationDays();
                 ClearListsProjects();
 
 				// Current date display
