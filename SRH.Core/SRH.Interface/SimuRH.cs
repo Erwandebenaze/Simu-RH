@@ -214,7 +214,7 @@ namespace SRH.Interface
             List<Employee> listEmpTmp = new List<Employee>();
 			foreach( Employee e in _myGame.PlayerCompany.Employees )
 			{
-				e.Behavior.UpdateHappiness();
+				e.Worker.Behavior.UpdateHappiness();
 				if( e == ucEmployeePage.CurrentEmployee )
 				{
 					ucEmployeePage.SetHappinessBar();

@@ -10,18 +10,18 @@ namespace SRH.Core
 	//TODO : make the class abstract and add 3 sub-classes of different behaviors
 	public class Behavior
 	{
-		Employee _employee;
+		Person _person;
 		Dictionary<string, DateTime> _skillsUsed;
 		DateTime _lastDateSkillsReactionCheck;
 		DateTime _lastDateSalaryReactionCheck;
 
 
-		internal Behavior( Employee e )
+		internal Behavior( Person p )
 		{
-			_employee = e;
+            _person = p;
 			_skillsUsed = new Dictionary<string, DateTime>();
-			_lastDateSkillsReactionCheck = _employee.Comp.Game.TimeGame.CurrentTimeOfGame;
-			_lastDateSalaryReactionCheck = _employee.Comp.Game.TimeGame.CurrentTimeOfGame;
+            _lastDateSkillsReactionCheck = _person.Lb.Game.TimeGame.CurrentTimeOfGame;
+            _lastDateSalaryReactionCheck = _person.Lb.Game.TimeGame.CurrentTimeOfGame;
 		}
 
 
@@ -35,20 +35,20 @@ namespace SRH.Core
 		internal void AddOrUpdateSkillsUsed( string s )
 		{
 			_skillsUsed.Remove( s );
-			_skillsUsed.Add( s, _employee.Comp.Game.TimeGame.CurrentTimeOfGame );
+            _skillsUsed.Add( s, _person.Lb.Game.TimeGame.CurrentTimeOfGame );
 		}
 
 		private void AddOrUpdateEmployeeSkillInUse()
 		{
 			// Puts the skill in project in the SkillsUsed list
-			if( _employee.SkillInProject != null )
-				AddOrUpdateSkillsUsed( _employee.SkillInProject.SkillName );
+            if( _person.Employee.SkillInProject != null )
+                AddOrUpdateSkillsUsed( _person.Employee.SkillInProject.SkillName );
 			// Puts the compaSkill affected in the SkillsUsed list
-			if( _employee.SkillAffectedToCompany != null )
-				AddOrUpdateSkillsUsed( _employee.SkillAffectedToCompany.SkillName );
+            if( _person.Employee.SkillAffectedToCompany != null )
+                AddOrUpdateSkillsUsed( _person.Employee.SkillAffectedToCompany.SkillName );
 			// Puts the skill in training in the SkillsUsed list
-			if( _employee.SkillInTraining != null )
-				AddOrUpdateSkillsUsed( _employee.SkillInTraining );
+            if( _person.Employee.SkillInTraining != null )
+                AddOrUpdateSkillsUsed( _person.Employee.SkillInTraining );
 		}
 
 		internal void CheckSkillsUsed()
@@ -56,7 +56,7 @@ namespace SRH.Core
 			List<string> flagged = new List<string>();
 			foreach( KeyValuePair<string, DateTime> kvp in _skillsUsed )
 			{
-				if( _employee.Comp.Game.TimeGame.AreMonthsPassed( kvp.Value, 12 ) )
+                if( _person.Lb.Game.TimeGame.AreMonthsPassed( kvp.Value, 12 ) )
 					flagged.Add( kvp.Key );
 			}		
 			foreach( string s in flagged )
@@ -67,36 +67,34 @@ namespace SRH.Core
 
 		internal void SalaryReaction()
 		{
-			// Checks only every 3 months
-			if( _employee.Comp.Game.TimeGame.AreMonthsPassed( _lastDateSalaryReactionCheck, 1 ) )
+			// Checks only every month
+            if( _person.Lb.Game.TimeGame.AreMonthsPassed( _lastDateSalaryReactionCheck, 1 ) )
 			{
 				// 1 point every 5% above the expected Salary, -1 every 5% under
-				int happinessAdjustment = (int)( _employee.SalaryAdjustment / ( _employee.Worker.ExpectedSalary * 0.05 ) );
-				_employee.Happiness.ChangeHappinessScore( happinessAdjustment );
+                int happinessAdjustment = (int)( _person.Employee.SalaryAdjustment / ( _person.Employee.Worker.ExpectedSalary * 0.05 ) );
+                _person.Employee.Happiness.ChangeHappinessScore( happinessAdjustment );
 
-
-
-				_lastDateSalaryReactionCheck = _employee.Comp.Game.TimeGame.CurrentTimeOfGame;
+                _lastDateSalaryReactionCheck = _person.Lb.Game.TimeGame.CurrentTimeOfGame;
 			}
 		}
 
 		internal void SkillsReaction()
 		{
 			// Checks only every 3 months
-			if( _employee.Comp.Game.TimeGame.AreMonthsPassed( _lastDateSkillsReactionCheck, 3 ) )
+            if( _person.Lb.Game.TimeGame.AreMonthsPassed( _lastDateSkillsReactionCheck, 3 ) )
 			{
 				//If the employee has less than 4 skills, he wants to train more
-				if( _employee.Worker.Skills.Count < 4 ) 
+                if( _person.Employee.Worker.Skills.Count < 4 ) 
 				{
-					if( _employee.SkillInTraining == null )
-						_employee.Happiness.ChangeHappinessScore( -2 );
+                    if( _person.Employee.SkillInTraining == null )
+                        _person.Employee.Happiness.ChangeHappinessScore( -2 );
 				}
 				else if( _skillsUsed.Count < 3 )
-					_employee.Happiness.ChangeHappinessScore( -2 );
+                    _person.Employee.Happiness.ChangeHappinessScore( -2 );
 				else if( _skillsUsed.Count > 3 )
-					_employee.Happiness.ChangeHappinessScore( 2 );
+                    _person.Employee.Happiness.ChangeHappinessScore( 2 );
 
-				_lastDateSkillsReactionCheck = _employee.Comp.Game.TimeGame.CurrentTimeOfGame;
+                _lastDateSkillsReactionCheck = _person.Lb.Game.TimeGame.CurrentTimeOfGame;
 			}
 		}
 
@@ -106,12 +104,6 @@ namespace SRH.Core
 			CheckSkillsUsed();
 			SalaryReaction();
 			SkillsReaction();
-		}
-
-
-		internal void HandleSickEmployees()
-		{
-
 		}
 
 	}

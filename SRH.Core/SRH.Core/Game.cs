@@ -24,8 +24,8 @@ namespace SRH.Core
 		public Game( int seed, string companyName )
 		{
 			_randomNumberGenerator = new Random( seed );
-			_market = new LaborMarket(this);
             _timeGame = new GameTime( this );
+            _market = new LaborMarket( this );
             _events = new Dictionary<Employee, string>();
 			_competitors = new List<Competitor>();
 
@@ -303,8 +303,8 @@ namespace SRH.Core
 
         public void SomeoneHolidays( Employee emp )
         {
-            if( _events.ContainsKey( emp ) ) throw new InvalidOperationException( "L'employé(e) est déjà dans le dico" );
-            _events.Add( emp, "Vacances" );
+            if( !_events.ContainsKey( emp ) )
+                _events.Add( emp, "Vacances" );
         }
 
         public void Holidays( Employee emp )
@@ -320,7 +320,8 @@ namespace SRH.Core
 
         public void SomeoneSeek( Employee emp )
         {
-            _events.Add( emp, "Maladie" );
+            if( !_events.ContainsKey( emp ) )
+                _events.Add( emp, "Maladie" );
         }
 
         public void Seek( Employee emp )

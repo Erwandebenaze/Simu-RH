@@ -164,8 +164,10 @@ namespace SRH.Core
 					e.IsSick = new KeyValuePair<DateTime, int>( _game.TimeGame.CurrentTimeOfGame, CreateRandomDuration() );
 					e.Busy = true;
 
-                    //_game.OnSeek += new Game.SomeoneIsSeek( _game.SomeoneSeek );
-                    //_game.Seek( e );
+                    _game.RemoveEmployeeFromAProject( e );
+
+                    _game.OnSeek += new Game.SomeoneIsSeek( _game.SomeoneSeek );
+                    _game.Seek( e );
 				}
 				else
 					e.IsSick = new KeyValuePair<DateTime, int>( _game.TimeGame.CurrentTimeOfGame, 0 );
@@ -175,9 +177,9 @@ namespace SRH.Core
 		internal void EmployeeGoesInVacation( Employee e )
 		{
 			// If the employee hasn't been checked for at least a month and is not already in vacation
-			if( /*e.Comp.Game.TimeGame.AreMonthsPassed( e.InVacation.Key, 1 ) &&*/ e.InVacation.Value == 0 && e.VacationDays != 0)
+			if( e.Comp.Game.TimeGame.AreMonthsPassed( e.InVacation.Key, 1 ) && e.InVacation.Value == 0 && e.VacationDays != 0)
 			{
-				if( _randomNumberGenerator.Next( 1, 2 ) == 1 )
+				if( _randomNumberGenerator.Next( 1, 6 ) == 5 )
 				{
 					int duration = CreateRandomDuration( e );
 
@@ -185,6 +187,8 @@ namespace SRH.Core
 					e.Busy = true;
 
 					e.VacationDays -= duration;
+
+                    _game.RemoveEmployeeFromAProject( e );
 
                     _game.OnHolidays += new Game.SomeoneGoInHolidays( _game.SomeoneHolidays );
                     _game.Holidays( e );

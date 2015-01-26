@@ -205,7 +205,7 @@ namespace SRH.Core.Tests
 
 			e.SalaryAdjustment += 100;
 			myGame.TimeGame.CurrentTimeOfGame = new DateTime( 2015, 04, 26 ); // New default date is 26/01/2015
-			e.Behavior.SalaryReaction();
+			e.Worker.Behavior.SalaryReaction();
 
 			Assert.That( e.Happiness.HappinessScore == 52 );
 		}
@@ -220,7 +220,7 @@ namespace SRH.Core.Tests
 
 			e.SalaryAdjustment -= 100;
 			myGame.TimeGame.CurrentTimeOfGame = new DateTime( 2015, 04, 26 ); // New default date is 26/01/2015
-			e.Behavior.SalaryReaction();
+			e.Worker.Behavior.SalaryReaction();
 
 			Assert.That( e.Happiness.HappinessScore == 48 );
 		}
@@ -231,10 +231,10 @@ namespace SRH.Core.Tests
 			Person p = new Person( myGame.Market, "André", "LeGéant", 20 );
 			Employee e = new Employee( myGame.PlayerCompany, p );
 
-			e.Behavior.AddOrUpdateSkillsUsed( "Développement" );
-			e.Behavior.AddOrUpdateSkillsUsed( "Développement" );
+			e.Worker.Behavior.AddOrUpdateSkillsUsed( "Développement" );
+			e.Worker.Behavior.AddOrUpdateSkillsUsed( "Développement" );
 
-			Assert.That( e.Behavior.SkillsUsed.Count == 1 );
+			Assert.That( e.Worker.Behavior.SkillsUsed.Count == 1 );
 		}
 
 		[Test]
@@ -245,11 +245,11 @@ namespace SRH.Core.Tests
 			Person p = new Person( myGame.Market, "André", "LeGéant", 20 );
 			Employee e = new Employee( myGame.PlayerCompany, p );
 
-			e.Behavior.AddOrUpdateSkillsUsed( "Développement" );
+			e.Worker.Behavior.AddOrUpdateSkillsUsed( "Développement" );
 			myGame.TimeGame.CurrentTimeOfGame = new DateTime( 2016, 01, 26 ); // New default date is 26/01/2015
-			e.Behavior.CheckSkillsUsed();
+			e.Worker.Behavior.CheckSkillsUsed();
 
-			Assert.That( e.Behavior.SkillsUsed.Count == 0 );
+			Assert.That( e.Worker.Behavior.SkillsUsed.Count == 0 );
 		}
 
 		[Test]
@@ -261,9 +261,9 @@ namespace SRH.Core.Tests
 			Skill s = p.AddSkill( "Développement" );
 			Employee e = new Employee( myGame.PlayerCompany, p );
 
-			e.Behavior.AddOrUpdateSkillsUsed( "Développement" );
+			e.Worker.Behavior.AddOrUpdateSkillsUsed( "Développement" );
 			myGame.TimeGame.CurrentTimeOfGame = new DateTime( 2015, 04, 26 ); // New default date is 26/01/2015
-			e.Behavior.SkillsReaction();
+			e.Worker.Behavior.SkillsReaction();
 
 			Assert.That( e.Happiness.HappinessScore == 48 );
 		}
@@ -280,10 +280,10 @@ namespace SRH.Core.Tests
 			Skill s4 = p.AddSkill( "Sécurité" );
 			Employee e = new Employee( myGame.PlayerCompany, p );
 
-			e.Behavior.AddOrUpdateSkillsUsed( s.SkillName );
-			e.Behavior.AddOrUpdateSkillsUsed( s2.SkillName );
+			e.Worker.Behavior.AddOrUpdateSkillsUsed( s.SkillName );
+			e.Worker.Behavior.AddOrUpdateSkillsUsed( s2.SkillName );
 			myGame.TimeGame.CurrentTimeOfGame = new DateTime( 2015, 04, 26 ); // New default date is 26/01/2015
-			e.Behavior.SkillsReaction();
+			e.Worker.Behavior.SkillsReaction();
 
 			Assert.That( e.Happiness.HappinessScore == 48 );
 		}
@@ -300,11 +300,11 @@ namespace SRH.Core.Tests
 			Skill s4 = p.AddSkill( "Sécurité" );
 			Employee e = new Employee( myGame.PlayerCompany, p );
 
-			e.Behavior.AddOrUpdateSkillsUsed( s.SkillName );
-			e.Behavior.AddOrUpdateSkillsUsed( s2.SkillName );
-			e.Behavior.AddOrUpdateSkillsUsed( s3.SkillName );
+			e.Worker.Behavior.AddOrUpdateSkillsUsed( s.SkillName );
+			e.Worker.Behavior.AddOrUpdateSkillsUsed( s2.SkillName );
+			e.Worker.Behavior.AddOrUpdateSkillsUsed( s3.SkillName );
 			myGame.TimeGame.CurrentTimeOfGame = new DateTime( 2015, 04, 26 ); // New default date is 26/01/2015
-			e.Behavior.SkillsReaction();
+			e.Worker.Behavior.SkillsReaction();
 
 			Assert.That( e.Happiness.HappinessScore == 50 );
 		}
@@ -321,12 +321,12 @@ namespace SRH.Core.Tests
 			Skill s4 = p.AddSkill( "Sécurité" );
 			Employee e = new Employee( myGame.PlayerCompany, p );
 
-			e.Behavior.AddOrUpdateSkillsUsed( s.SkillName );
-			e.Behavior.AddOrUpdateSkillsUsed( s2.SkillName );
-			e.Behavior.AddOrUpdateSkillsUsed( s3.SkillName );
-			e.Behavior.AddOrUpdateSkillsUsed( s4.SkillName );
+			e.Worker.Behavior.AddOrUpdateSkillsUsed( s.SkillName );
+			e.Worker.Behavior.AddOrUpdateSkillsUsed( s2.SkillName );
+			e.Worker.Behavior.AddOrUpdateSkillsUsed( s3.SkillName );
+			e.Worker.Behavior.AddOrUpdateSkillsUsed( s4.SkillName );
 			myGame.TimeGame.CurrentTimeOfGame = new DateTime( 2015, 04, 26 ); // New default date is 26/01/2015
-			e.Behavior.SkillsReaction();
+			e.Worker.Behavior.SkillsReaction();
 
 			Assert.That( e.Happiness.HappinessScore == 52 );
 		}
@@ -342,9 +342,9 @@ namespace SRH.Core.Tests
 			myGame.PlayerCompany.AddManager( e, s );
 
 			myGame.TimeGame.CurrentTimeOfGame = new DateTime( 2015, 07, 26 ); // New default date is 26/01/2015
-			e.Behavior.UpdateHappiness();
+			e.Worker.Behavior.UpdateHappiness();
 
-			Assert.That( e.Behavior.SkillsUsed.Count == 1 );
+			Assert.That( e.Worker.Behavior.SkillsUsed.Count == 1 );
 		}
 	}
 }
