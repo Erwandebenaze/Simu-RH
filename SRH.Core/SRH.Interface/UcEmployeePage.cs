@@ -103,6 +103,7 @@ namespace SRH.Interface
 			employeeOccupation.Text = GetCurrentOccupationText( _currentEmployee );
 			firingCost.Text = _currentEmployee.LayingOffCost.ToString();
 			SetSalaryDisplay();
+			employeeBehavior.Text = GetBehavior( _currentEmployee.Worker );
 			happinessBar.Value = _currentEmployee.Happiness.HappinessScore;
 			happinessValues.Text = _currentEmployee.Happiness.HappinessScore.ToString() + " / 100";
 
@@ -171,6 +172,7 @@ namespace SRH.Interface
                 personAge.Text = _currentPerson.Age.ToString();
 				personExpectedSalary.Text = _currentPerson.ExpectedSalary.ToString();
 				hiringCost.Text = _currentPerson.HiringCost.ToString();
+				personBehavior.Text = GetBehavior( _currentPerson );
 				ucSkillsDisplayPerson.CurrentPerson = _currentPerson;
 				ucSkillsDisplayPerson.LoadUc();
             }
@@ -409,5 +411,19 @@ namespace SRH.Interface
 			return currentOccupation;
 
 		}
+
+		private string GetBehavior( Person p )
+		{
+			string behavior;
+
+			if( p.Behavior is Eclectic )
+				behavior = "Éclectic";
+			else if( p.Behavior is Specialist )
+				behavior = "Spécialiste";
+			else
+				behavior = "Ambitieux";
+
+			return behavior;
+		} 
     }
 }
