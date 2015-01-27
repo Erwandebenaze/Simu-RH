@@ -41,17 +41,18 @@
 			System.Windows.Forms.Label employeeSalaryTitle;
 			System.Windows.Forms.Label firingCostTitle;
 			System.Windows.Forms.Label happinessTtile;
-			System.Windows.Forms.Label playersEmployeeTitle;
-			System.Windows.Forms.Label labourMarketTitle;
 			System.Windows.Forms.Label employeeBehaviorTitle;
 			System.Windows.Forms.Label personBehaviorTitle;
+			this.playersEmployeeTitle = new System.Windows.Forms.Label();
+			this.labourMarketTitle = new System.Windows.Forms.Label();
 			this._infoListPersons = new System.Windows.Forms.ToolTip(this.components);
-			this._infoEmployee = new System.Windows.Forms.ToolTip(this.components);
+			this._infoListEmployees = new System.Windows.Forms.ToolTip(this.components);
 			this._infoPerson = new System.Windows.Forms.ToolTip(this.components);
 			this._infoHappiness = new System.Windows.Forms.ToolTip(this.components);
 			this._infoSalaryExpected = new System.Windows.Forms.ToolTip(this.components);
 			this._infoTraining = new System.Windows.Forms.ToolTip(this.components);
 			this.splitContainer3 = new System.Windows.Forms.SplitContainer();
+			this.employeeBehavior = new System.Windows.Forms.Label();
 			this.happinessValues = new System.Windows.Forms.Label();
 			this.happinessBar = new System.Windows.Forms.ProgressBar();
 			this.SalaryAdjustmentIndication = new System.Windows.Forms.Label();
@@ -75,8 +76,11 @@
 			this.employeeOccupation = new System.Windows.Forms.Label();
 			this.employeeAge = new System.Windows.Forms.Label();
 			this.employeeName = new System.Windows.Forms.Label();
+			this.ucSkillsDisplayEmployee = new SRH.Interface.UcSkillsDisplay();
+			this.personBehavior = new System.Windows.Forms.Label();
 			this.hiringCost = new System.Windows.Forms.Label();
 			this.personExpectedSalary = new System.Windows.Forms.Label();
+			this.ucSkillsDisplayPerson = new SRH.Interface.UcSkillsDisplay();
 			this.personAge = new System.Windows.Forms.Label();
 			this.personName = new System.Windows.Forms.Label();
 			this.hirePerson = new System.Windows.Forms.Button();
@@ -88,11 +92,7 @@
 			this.PersonBestSkillLevelHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.splitContainer1 = new System.Windows.Forms.SplitContainer();
 			this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-			this.employeeBehavior = new System.Windows.Forms.Label();
 			this.UcEmployeeList1 = new SRH.Interface.UcEmployeeList();
-			this.ucSkillsDisplayEmployee = new SRH.Interface.UcSkillsDisplay();
-			this.ucSkillsDisplayPerson = new SRH.Interface.UcSkillsDisplay();
-			this.personBehavior = new System.Windows.Forms.Label();
 			SelectedPersonTitle = new System.Windows.Forms.Label();
 			personNameTitle = new System.Windows.Forms.Label();
 			personAgeTitle = new System.Windows.Forms.Label();
@@ -105,8 +105,6 @@
 			employeeSalaryTitle = new System.Windows.Forms.Label();
 			firingCostTitle = new System.Windows.Forms.Label();
 			happinessTtile = new System.Windows.Forms.Label();
-			playersEmployeeTitle = new System.Windows.Forms.Label();
-			labourMarketTitle = new System.Windows.Forms.Label();
 			employeeBehaviorTitle = new System.Windows.Forms.Label();
 			personBehaviorTitle = new System.Windows.Forms.Label();
 			((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).BeginInit();
@@ -234,23 +232,41 @@
 			// 
 			// playersEmployeeTitle
 			// 
-			playersEmployeeTitle.AutoSize = true;
-			playersEmployeeTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			playersEmployeeTitle.Location = new System.Drawing.Point(3, 0);
-			playersEmployeeTitle.Name = "playersEmployeeTitle";
-			playersEmployeeTitle.Size = new System.Drawing.Size(120, 20);
-			playersEmployeeTitle.TabIndex = 35;
-			playersEmployeeTitle.Text = "Vos employés";
+			this.playersEmployeeTitle.AutoSize = true;
+			this.playersEmployeeTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.playersEmployeeTitle.Location = new System.Drawing.Point(3, 0);
+			this.playersEmployeeTitle.Name = "playersEmployeeTitle";
+			this.playersEmployeeTitle.Size = new System.Drawing.Size(120, 20);
+			this.playersEmployeeTitle.TabIndex = 35;
+			this.playersEmployeeTitle.Text = "Vos employés";
 			// 
 			// labourMarketTitle
 			// 
-			labourMarketTitle.AutoSize = true;
-			labourMarketTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			labourMarketTitle.Location = new System.Drawing.Point(3, 280);
-			labourMarketTitle.Name = "labourMarketTitle";
-			labourMarketTitle.Size = new System.Drawing.Size(146, 20);
-			labourMarketTitle.TabIndex = 36;
-			labourMarketTitle.Text = "Marché du travail";
+			this.labourMarketTitle.AutoSize = true;
+			this.labourMarketTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.labourMarketTitle.Location = new System.Drawing.Point(3, 280);
+			this.labourMarketTitle.Name = "labourMarketTitle";
+			this.labourMarketTitle.Size = new System.Drawing.Size(146, 20);
+			this.labourMarketTitle.TabIndex = 36;
+			this.labourMarketTitle.Text = "Marché du travail";
+			// 
+			// employeeBehaviorTitle
+			// 
+			employeeBehaviorTitle.AutoSize = true;
+			employeeBehaviorTitle.Location = new System.Drawing.Point(14, 241);
+			employeeBehaviorTitle.Name = "employeeBehaviorTitle";
+			employeeBehaviorTitle.Size = new System.Drawing.Size(59, 13);
+			employeeBehaviorTitle.TabIndex = 35;
+			employeeBehaviorTitle.Text = "Caractère :";
+			// 
+			// personBehaviorTitle
+			// 
+			personBehaviorTitle.AutoSize = true;
+			personBehaviorTitle.Location = new System.Drawing.Point(14, 142);
+			personBehaviorTitle.Name = "personBehaviorTitle";
+			personBehaviorTitle.Size = new System.Drawing.Size(59, 13);
+			personBehaviorTitle.TabIndex = 37;
+			personBehaviorTitle.Text = "Caractère :";
 			// 
 			// _infoListPersons
 			// 
@@ -260,13 +276,13 @@
 			this._infoListPersons.ReshowDelay = 100;
 			this._infoListPersons.ToolTipTitle = "Liste des postulants";
 			// 
-			// _infoEmployee
+			// _infoListEmployees
 			// 
-			this._infoEmployee.AutoPopDelay = 3000;
-			this._infoEmployee.InitialDelay = 1700;
-			this._infoEmployee.IsBalloon = true;
-			this._infoEmployee.ReshowDelay = 100;
-			this._infoEmployee.ToolTipTitle = "Employé";
+			this._infoListEmployees.AutoPopDelay = 3000;
+			this._infoListEmployees.InitialDelay = 1700;
+			this._infoListEmployees.IsBalloon = true;
+			this._infoListEmployees.ReshowDelay = 100;
+			this._infoListEmployees.ToolTipTitle = "Employé";
 			// 
 			// _infoPerson
 			// 
@@ -348,6 +364,16 @@
 			this.splitContainer3.Size = new System.Drawing.Size(578, 561);
 			this.splitContainer3.SplitterDistance = 276;
 			this.splitContainer3.TabIndex = 0;
+			// 
+			// employeeBehavior
+			// 
+			this.employeeBehavior.AutoSize = true;
+			this.employeeBehavior.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.employeeBehavior.Location = new System.Drawing.Point(24, 254);
+			this.employeeBehavior.Name = "employeeBehavior";
+			this.employeeBehavior.Size = new System.Drawing.Size(14, 13);
+			this.employeeBehavior.TabIndex = 36;
+			this.employeeBehavior.Text = "X";
 			// 
 			// happinessValues
 			// 
@@ -590,6 +616,25 @@
 			this.employeeName.TextAlign = System.Drawing.ContentAlignment.TopRight;
 			this.employeeName.Visible = false;
 			// 
+			// ucSkillsDisplayEmployee
+			// 
+			this.ucSkillsDisplayEmployee.CurrentPerson = null;
+			this.ucSkillsDisplayEmployee.Location = new System.Drawing.Point(140, 114);
+			this.ucSkillsDisplayEmployee.Margin = new System.Windows.Forms.Padding(4);
+			this.ucSkillsDisplayEmployee.Name = "ucSkillsDisplayEmployee";
+			this.ucSkillsDisplayEmployee.Size = new System.Drawing.Size(438, 140);
+			this.ucSkillsDisplayEmployee.TabIndex = 22;
+			// 
+			// personBehavior
+			// 
+			this.personBehavior.AutoSize = true;
+			this.personBehavior.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.personBehavior.Location = new System.Drawing.Point(24, 155);
+			this.personBehavior.Name = "personBehavior";
+			this.personBehavior.Size = new System.Drawing.Size(14, 13);
+			this.personBehavior.TabIndex = 38;
+			this.personBehavior.Text = "X";
+			// 
 			// hiringCost
 			// 
 			this.hiringCost.AutoSize = true;
@@ -610,6 +655,15 @@
 			this.personExpectedSalary.TabIndex = 32;
 			this.personExpectedSalary.Text = "X";
 			this.personExpectedSalary.Visible = false;
+			// 
+			// ucSkillsDisplayPerson
+			// 
+			this.ucSkillsDisplayPerson.CurrentPerson = null;
+			this.ucSkillsDisplayPerson.Location = new System.Drawing.Point(138, 157);
+			this.ucSkillsDisplayPerson.Margin = new System.Windows.Forms.Padding(4);
+			this.ucSkillsDisplayPerson.Name = "ucSkillsDisplayPerson";
+			this.ucSkillsDisplayPerson.Size = new System.Drawing.Size(440, 140);
+			this.ucSkillsDisplayPerson.TabIndex = 23;
 			// 
 			// personAge
 			// 
@@ -712,8 +766,8 @@
 			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
 			this.tableLayoutPanel1.Controls.Add(this.PersonList, 0, 3);
 			this.tableLayoutPanel1.Controls.Add(this.UcEmployeeList1, 0, 1);
-			this.tableLayoutPanel1.Controls.Add(playersEmployeeTitle, 0, 0);
-			this.tableLayoutPanel1.Controls.Add(labourMarketTitle, 0, 2);
+			this.tableLayoutPanel1.Controls.Add(this.playersEmployeeTitle, 0, 0);
+			this.tableLayoutPanel1.Controls.Add(this.labourMarketTitle, 0, 2);
 			this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
 			this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -725,25 +779,6 @@
 			this.tableLayoutPanel1.Size = new System.Drawing.Size(431, 561);
 			this.tableLayoutPanel1.TabIndex = 0;
 			// 
-			// employeeBehaviorTitle
-			// 
-			employeeBehaviorTitle.AutoSize = true;
-			employeeBehaviorTitle.Location = new System.Drawing.Point(14, 241);
-			employeeBehaviorTitle.Name = "employeeBehaviorTitle";
-			employeeBehaviorTitle.Size = new System.Drawing.Size(59, 13);
-			employeeBehaviorTitle.TabIndex = 35;
-			employeeBehaviorTitle.Text = "Caractère :";
-			// 
-			// employeeBehavior
-			// 
-			this.employeeBehavior.AutoSize = true;
-			this.employeeBehavior.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.employeeBehavior.Location = new System.Drawing.Point(24, 254);
-			this.employeeBehavior.Name = "employeeBehavior";
-			this.employeeBehavior.Size = new System.Drawing.Size(14, 13);
-			this.employeeBehavior.TabIndex = 36;
-			this.employeeBehavior.Text = "X";
-			// 
 			// UcEmployeeList1
 			// 
 			this.UcEmployeeList1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -751,43 +786,6 @@
 			this.UcEmployeeList1.Name = "UcEmployeeList1";
 			this.UcEmployeeList1.Size = new System.Drawing.Size(425, 249);
 			this.UcEmployeeList1.TabIndex = 0;
-			// 
-			// ucSkillsDisplayEmployee
-			// 
-			this.ucSkillsDisplayEmployee.CurrentPerson = null;
-			this.ucSkillsDisplayEmployee.Location = new System.Drawing.Point(140, 114);
-			this.ucSkillsDisplayEmployee.Margin = new System.Windows.Forms.Padding(4);
-			this.ucSkillsDisplayEmployee.Name = "ucSkillsDisplayEmployee";
-			this.ucSkillsDisplayEmployee.Size = new System.Drawing.Size(438, 140);
-			this.ucSkillsDisplayEmployee.TabIndex = 22;
-			// 
-			// ucSkillsDisplayPerson
-			// 
-			this.ucSkillsDisplayPerson.CurrentPerson = null;
-			this.ucSkillsDisplayPerson.Location = new System.Drawing.Point(138, 157);
-			this.ucSkillsDisplayPerson.Margin = new System.Windows.Forms.Padding(4);
-			this.ucSkillsDisplayPerson.Name = "ucSkillsDisplayPerson";
-			this.ucSkillsDisplayPerson.Size = new System.Drawing.Size(440, 140);
-			this.ucSkillsDisplayPerson.TabIndex = 23;
-			// 
-			// personBehavior
-			// 
-			this.personBehavior.AutoSize = true;
-			this.personBehavior.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.personBehavior.Location = new System.Drawing.Point(24, 155);
-			this.personBehavior.Name = "personBehavior";
-			this.personBehavior.Size = new System.Drawing.Size(14, 13);
-			this.personBehavior.TabIndex = 38;
-			this.personBehavior.Text = "X";
-			// 
-			// personBehaviorTitle
-			// 
-			personBehaviorTitle.AutoSize = true;
-			personBehaviorTitle.Location = new System.Drawing.Point(14, 142);
-			personBehaviorTitle.Name = "personBehaviorTitle";
-			personBehaviorTitle.Size = new System.Drawing.Size(59, 13);
-			personBehaviorTitle.TabIndex = 37;
-			personBehaviorTitle.Text = "Caractère :";
 			// 
 			// UcEmployeePage
 			// 
@@ -821,7 +819,7 @@
 		#endregion
 
         private System.Windows.Forms.ToolTip _infoListPersons;
-        private System.Windows.Forms.ToolTip _infoEmployee;
+        private System.Windows.Forms.ToolTip _infoListEmployees;
         private System.Windows.Forms.ToolTip _infoPerson;
         private System.Windows.Forms.ToolTip _infoHappiness;
         private System.Windows.Forms.ToolTip _infoSalaryExpected;
@@ -868,5 +866,7 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
 		private System.Windows.Forms.Label employeeBehavior;
 		private System.Windows.Forms.Label personBehavior;
+		private System.Windows.Forms.Label playersEmployeeTitle;
+		private System.Windows.Forms.Label labourMarketTitle;
 	}
 }
