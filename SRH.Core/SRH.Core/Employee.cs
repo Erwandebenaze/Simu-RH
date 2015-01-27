@@ -24,7 +24,6 @@ namespace SRH.Core
 		private int? _trainingDuration;
 		private DateTime? _begginningCompanyWork;
 		private Happiness _happiness;
-		private Behavior _behavior;
 
         /// <summary>
 		/// Creates an <see cref="Employee"/>
@@ -42,11 +41,13 @@ namespace SRH.Core
 			_worker = worker;
 			_salary = GenerateSalary();
 			_happiness = new Happiness();
-			_behavior = new Behavior( this );
 
 			_inVacation = new KeyValuePair<DateTime, int>( _comp.Game.TimeGame.CurrentTimeOfGame, 0);
 			_isSick = new KeyValuePair<DateTime, int>( _comp.Game.TimeGame.CurrentTimeOfGame, 0 );
 			_vacationDays = 30;
+
+            _worker.Employee = this;
+            _worker.Behavior.LastDateSkillsReactionCheck = _comp.Game.TimeGame.CurrentTimeOfGame;
         }
 
 		#region Getters setters
@@ -112,11 +113,6 @@ namespace SRH.Core
 		public Happiness Happiness
 		{
 			get { return _happiness; }
-		}
-
-		public Behavior Behavior
-		{
-			get { return _behavior; }
 		}
 
 		public Skill SkillInProject
@@ -248,6 +244,7 @@ namespace SRH.Core
 				if( _comp.Game.TimeGame.intervalOfTimeInDays( _isSick.Key ) == _isSick.Value )
 				{
 					_busy = false;
+                    _comp.Game.Events.Remove( this );
 					_isSick = new KeyValuePair<DateTime, int>( _comp.Game.TimeGame.CurrentTimeOfGame, 0 );
 				}
 			}
@@ -263,6 +260,7 @@ namespace SRH.Core
 				if( _comp.Game.TimeGame.intervalOfTimeInDays( _inVacation.Key ) == _inVacation.Value )
 				{
 					_busy = false;
+                    _comp.Game.Events.Remove( this );
 					_inVacation = new KeyValuePair<DateTime, int>( _comp.Game.TimeGame.CurrentTimeOfGame, 0 );
 				}
 			}

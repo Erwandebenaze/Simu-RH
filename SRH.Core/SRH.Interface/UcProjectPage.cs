@@ -242,6 +242,7 @@ namespace SRH.Interface
         private void _startOrStopProject_Click( object sender, EventArgs e )
         {
             Project pr;
+            bool flag = true;
 
             if( _currentProj.Activated )
             {
@@ -255,12 +256,25 @@ namespace SRH.Interface
             }
             else
             {
-               GameContext.CurrentGame.PlayerCompany.BeginAProject( _currentProj );
-                _startOrStopProject.Text = "Arrêter un projet";
-                listSkillsRequired.Enabled = false;
-                //listPossibleProjects.Items.Remove( projectItem );
-                //var projectItemCopy = (ListViewItem)projectItem.Clone();
-                listCurrentProjects.Items.Add( _projectItem );
+                foreach( Employee emp in _currentProj.EmployeesAffectedWithSkill.Keys)
+                {
+                    if(emp.InVacation.Value != 0 || emp.IsSick.Value != 0 )
+                    {
+                        MessageBox.Show( "Un employé est parti en vacances ou en congé maladie pendant la préparation du projet, merci de resélectionner des membres pour le projet." );
+                        flag = false;
+                        break;
+                    }
+                }
+                if( flag )
+                {
+                    GameContext.CurrentGame.PlayerCompany.BeginAProject( _currentProj );
+                    _startOrStopProject.Text = "Arrêter un projet";
+                    listSkillsRequired.Enabled = false;
+                    //listPossibleProjects.Items.Remove( projectItem );
+                    //var projectItemCopy = (ListViewItem)projectItem.Clone();
+                    listCurrentProjects.Items.Add( _projectItem );
+                }
+
             }
             //_projects = GameContext.CurrentGame.PlayerCompany.Projects;
         }

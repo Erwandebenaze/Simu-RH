@@ -154,7 +154,7 @@ namespace SRH.Core
                 duration += s.Level.CurrentLevel;
             }
             duration *= 10;
-            _duration = ( _actualTasks / duration );
+            if( duration != 0 ) _duration = (_actualTasks / duration);
         }
 
         private int GenerateNumberOfTasks()

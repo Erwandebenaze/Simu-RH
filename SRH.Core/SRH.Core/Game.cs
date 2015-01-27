@@ -24,8 +24,8 @@ namespace SRH.Core
 		public Game( int seed, string companyName )
 		{
 			_randomNumberGenerator = new Random( seed );
-			_market = new LaborMarket(this);
             _timeGame = new GameTime( this );
+            _market = new LaborMarket( this );
             _events = new Dictionary<Employee, string>();
 			_competitors = new List<Competitor>();
 
@@ -67,6 +67,7 @@ namespace SRH.Core
         public Dictionary<Employee, string> Events
         {
             get { return _events; }
+            internal set { _events = value; }
         }
 		public static IReadOnlyList<KeyValuePair<string, string>> SkillNames
 		{
@@ -235,9 +236,21 @@ namespace SRH.Core
 
         private void GoInRetirement( Employee emp )
         {
-            if( emp.Busy && emp.SkillInTraining == null && emp.SkillAffectedToCompany == null)
+            RemoveEmployeeFromAProject( emp );
+
+            Person tmpPerson = _playerCompany.RemoveEmployee( emp );
+            OnRetirement += new SomeoneGoInRetirement( SomeoneRetirement );
+            Retirement( emp );
+
+            // TODO : Ajouter un évènement.
+            GoInRetirement( tmpPerson );
+        }
+
+        internal void RemoveEmployeeFromAProject( Employee emp )
+        {
+            if( emp.Busy && emp.SkillInTraining == null && emp.SkillAffectedToCompany == null )
             {
-                foreach( Project p in _playerCompany.Projects)
+                foreach( Project p in _playerCompany.Projects )
                 {
                     foreach( Employee emplo in p.EmployeesAffectedWithSkill.Keys )
                     {
@@ -249,13 +262,6 @@ namespace SRH.Core
                     }
                 }
             }
-
-            Person tmpPerson = _playerCompany.RemoveEmployee( emp );
-            OnRetirement += new SomeoneGoInRetirement( SomeoneRetirement );
-            Retirement( emp );
-
-            // TODO : Ajouter un évènement.
-            GoInRetirement( tmpPerson );
         }
 
         public delegate void SomeoneGoInRetirement(Employee emp);
@@ -297,7 +303,8 @@ namespace SRH.Core
 
         public void SomeoneHolidays( Employee emp )
         {
-            _events.Add( emp, "Vacances" );
+            if( !_events.ContainsKey( emp ) )
+                _events.Add( emp, "Vacances" );
         }
 
         public void Holidays( Employee emp )
@@ -313,7 +320,8 @@ namespace SRH.Core
 
         public void SomeoneSeek( Employee emp )
         {
-            _events.Add( emp, "Maladie" );
+            if( !_events.ContainsKey( emp ) )
+                _events.Add( emp, "Maladie" );
         }
 
         public void Seek( Employee emp )

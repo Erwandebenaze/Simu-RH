@@ -18,8 +18,8 @@ namespace SRH.Core
 		int _expectedSalary;
 		LaborMarket _lb;
         Random rand;
-		// TODO : add a behavior type (string or enum) that indicates the person's behaviour
-		//string _behaviorType;
+        Employee _employee;
+        Behavior _behavior;
 
 		internal Person( LaborMarket lb, string firstName, string lastName, int age )
 		{
@@ -34,6 +34,8 @@ namespace SRH.Core
             _birthDate = new DateTime(year,month,day);
 			_lb = lb;
 			GenerateExpectedSalary();
+
+            _behavior = new Eclectic( this );
 		}
 
         private int GetRandomDay( int month )
@@ -95,6 +97,17 @@ namespace SRH.Core
 				return Lb.Game.PlayerCompany.EstimateRecrutingAndLayingOffCost((int)cost);
 			}
 		}
+
+        internal Employee Employee
+        {
+            get { return _employee; }
+            set { _employee = value; }
+        }
+
+        internal Behavior Behavior
+        {
+            get { return _behavior; }
+        }
 		#endregion
 
 		/// <summary>
