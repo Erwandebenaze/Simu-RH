@@ -26,7 +26,7 @@ namespace SRH.Interface
         public SimuRH()
         {
             InitializeComponent();
-            _myGame = new Game( 2, "Erwan" );
+            _myGame = new Game( 2, "Tristan" );
             //_myGame = GameLoader.Load( "Erwan" );
             _optionsForm = new Options();
             _timeOfGame = _myGame.TimeGame;
