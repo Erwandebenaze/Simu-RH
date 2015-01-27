@@ -145,7 +145,7 @@ namespace SRH.Core
             _maxEmployees = 10 + (2 * (this.CompanyLevel.CurrentLevel));
 
 			if( this.CompanyLevel.CurrentLevel == 1 ) _maxProjectDifficulty = 1.0;
-			if( ( this.CompanyLevel.CurrentLevel +1 ) % 10 == 0 ) _maxProjectDifficulty += 0.5;
+			if( ( this.CompanyLevel.CurrentLevel +1 ) % 5 == 0 ) _maxProjectDifficulty += 0.5;
         }
 
         /// <summary>

@@ -74,7 +74,7 @@ namespace SRH.Interface
 		{
 			_joblessPersons = GameContext.CurrentGame.Market.JoblessPersons;
 			PersonList.Items.Clear();
-			PersonList.Items.AddRange( _joblessPersons.OrderBy( p => p.LastName ).Select( p => CreatePerson( p ) ).ToArray() );
+			PersonList.Items.AddRange( _joblessPersons.Select( p => CreatePerson( p ) ).ToArray() );
 			UcEmployeeList1.LoadUc();
             GenerateEmployeePageToolTip();
 		}
@@ -101,7 +101,6 @@ namespace SRH.Interface
 			employeeName.Text = _currentEmployee.Worker.FirstName + " " + _currentEmployee.Worker.LastName;
 			employeeAge.Text = _currentEmployee.Worker.Age.ToString();
 			employeeOccupation.Text = GetCurrentOccupationText( _currentEmployee );
-			employeeBehavior.Text = GetBehaviorText( _currentEmployee.Worker );
 			firingCost.Text = _currentEmployee.LayingOffCost.ToString();
 			SetSalaryDisplay();
 			happinessBar.Value = _currentEmployee.Happiness.HappinessScore;
@@ -172,7 +171,6 @@ namespace SRH.Interface
                 personAge.Text = _currentPerson.Age.ToString();
 				personExpectedSalary.Text = _currentPerson.ExpectedSalary.ToString();
 				hiringCost.Text = _currentPerson.HiringCost.ToString();
-				personBehavior.Text = GetBehaviorText( _currentPerson );
 				ucSkillsDisplayPerson.CurrentPerson = _currentPerson;
 				ucSkillsDisplayPerson.LoadUc();
             }
@@ -410,20 +408,6 @@ namespace SRH.Interface
 
 			return currentOccupation;
 
-		}
-
-		private string GetBehaviorText( Person p )
-		{
-			string behavior;
-
-			if( p.Behavior is Eclectic )
-				behavior = "Éclectique";
-			else if( p.Behavior is Specialist )
-				behavior = "Spécialiste";
-			else
-				behavior = "Ambitieux";
-
-			return behavior;
 		}
     }
 }
