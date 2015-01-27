@@ -33,10 +33,15 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SimuRH));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.Board = new System.Windows.Forms.TabPage();
+            this.ucOffice = new SRH.Interface.UcOffice();
             this.Employees = new System.Windows.Forms.TabPage();
+            this.ucEmployeePage = new SRH.Interface.UcEmployeePage();
             this.Projects = new System.Windows.Forms.TabPage();
+            this.ucProjectPage = new SRH.Interface.UcProjectPage();
             this.CompanyManagement = new System.Windows.Forms.TabPage();
+            this.ucCompanyManagement1 = new SRH.Interface.UcCompanyManagement();
             this.Statistics = new System.Windows.Forms.TabPage();
+            this.ucStatistics1 = new SRH.Interface.UcStatistics();
             this._dateOfGame = new System.Windows.Forms.Label();
             this._day = new System.Windows.Forms.Label();
             this._pauseButton = new System.Windows.Forms.Button();
@@ -51,11 +56,6 @@
             this.experiencePanel = new System.Windows.Forms.Panel();
             this.CompanyWealth = new System.Windows.Forms.Label();
             this.visualStyler1 = new SkinSoft.VisualStyler.VisualStyler(this.components);
-            this.ucOffice = new SRH.Interface.UcOffice();
-            this.ucEmployeePage = new SRH.Interface.UcEmployeePage();
-            this.ucProjectPage = new SRH.Interface.UcProjectPage();
-            this.ucCompanyManagement1 = new SRH.Interface.UcCompanyManagement();
-            this.ucStatistics1 = new SRH.Interface.UcStatistics();
             WealthTitle = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.Board.SuspendLayout();
@@ -91,12 +91,25 @@
             this.Board.Name = "Board";
             this.Board.UseVisualStyleBackColor = true;
             // 
+            // ucOffice
+            // 
+            resources.ApplyResources(this.ucOffice, "ucOffice");
+            this.ucOffice.Name = "ucOffice";
+            // 
             // Employees
             // 
             this.Employees.Controls.Add(this.ucEmployeePage);
             resources.ApplyResources(this.Employees, "Employees");
             this.Employees.Name = "Employees";
             this.Employees.UseVisualStyleBackColor = true;
+            // 
+            // ucEmployeePage
+            // 
+            resources.ApplyResources(this.ucEmployeePage, "ucEmployeePage");
+            this.ucEmployeePage.CurrentTrainingProgress = 0;
+            this.ucEmployeePage.MaximumTrainingProgress = 0;
+            this.ucEmployeePage.Name = "ucEmployeePage";
+            this.ucEmployeePage.TrainingTimeLeft = 0;
             // 
             // Projects
             // 
@@ -105,6 +118,11 @@
             this.Projects.Name = "Projects";
             this.Projects.UseVisualStyleBackColor = true;
             // 
+            // ucProjectPage
+            // 
+            resources.ApplyResources(this.ucProjectPage, "ucProjectPage");
+            this.ucProjectPage.Name = "ucProjectPage";
+            // 
             // CompanyManagement
             // 
             this.CompanyManagement.Controls.Add(this.ucCompanyManagement1);
@@ -112,12 +130,22 @@
             this.CompanyManagement.Name = "CompanyManagement";
             this.CompanyManagement.UseVisualStyleBackColor = true;
             // 
+            // ucCompanyManagement1
+            // 
+            resources.ApplyResources(this.ucCompanyManagement1, "ucCompanyManagement1");
+            this.ucCompanyManagement1.Name = "ucCompanyManagement1";
+            // 
             // Statistics
             // 
             this.Statistics.Controls.Add(this.ucStatistics1);
             resources.ApplyResources(this.Statistics, "Statistics");
             this.Statistics.Name = "Statistics";
             this.Statistics.UseVisualStyleBackColor = true;
+            // 
+            // ucStatistics1
+            // 
+            resources.ApplyResources(this.ucStatistics1, "ucStatistics1");
+            this.ucStatistics1.Name = "ucStatistics1";
             // 
             // _dateOfGame
             // 
@@ -204,35 +232,7 @@
             // 
             this.visualStyler1.HostForm = this;
             this.visualStyler1.License = ((SkinSoft.VisualStyler.Licensing.VisualStylerLicense)(resources.GetObject("visualStyler1.License")));
-            this.visualStyler1.LoadVisualStyle(null, "Office2007 (Silver).vssf");
-            // 
-            // ucOffice
-            // 
-            resources.ApplyResources(this.ucOffice, "ucOffice");
-            this.ucOffice.Name = "ucOffice";
-            // 
-            // ucEmployeePage
-            // 
-            resources.ApplyResources(this.ucEmployeePage, "ucEmployeePage");
-            this.ucEmployeePage.CurrentTrainingProgress = 0;
-            this.ucEmployeePage.MaximumTrainingProgress = 0;
-            this.ucEmployeePage.Name = "ucEmployeePage";
-            this.ucEmployeePage.TrainingTimeLeft = 0;
-            // 
-            // ucProjectPage
-            // 
-            resources.ApplyResources(this.ucProjectPage, "ucProjectPage");
-            this.ucProjectPage.Name = "ucProjectPage";
-            // 
-            // ucCompanyManagement1
-            // 
-            resources.ApplyResources(this.ucCompanyManagement1, "ucCompanyManagement1");
-            this.ucCompanyManagement1.Name = "ucCompanyManagement1";
-            // 
-            // ucStatistics1
-            // 
-            resources.ApplyResources(this.ucStatistics1, "ucStatistics1");
-            this.ucStatistics1.Name = "ucStatistics1";
+            this.visualStyler1.LoadVisualStyle(null, "XP (Olive).vssf");
             // 
             // SimuRH
             // 

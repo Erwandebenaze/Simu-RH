@@ -73,8 +73,13 @@ namespace SRH.Interface
         {
             
             _infoPossibleProjects.InitialDelay = 1700;
-            _infoPossibleProjects.SetToolTip( this.listPossibleProjects, "Liste des projets possible à l'entreprise." );
-            _infoProjects.SetToolTip( this.listCurrentProjects, "Liste des projets en cours dans l'entreprise." );
+            _infoPossibleProjects.SetToolTip( possibleProjectsTitle , "Liste des projets possible à l'entreprise." );
+            _infoProjects.SetToolTip( currentProjectsTitle, "Liste des projets en cours dans l'entreprise." );
+            _infoSkillRequired.SetToolTip( requiredSkillsTitle, 
+                "Liste des compétences requises. Cliquez sur une compétence pour afficher les employés qui peuvent y être affectés.\n" + 
+                "Toutes les compétences doivent être occupées pour que le projet puisse être lancé.");
+            _infoSkillAvailable.SetToolTip( availableSkillsTitle,
+                "Liste des compétences disponible. Affectez un employé au projet.\nVous pouvez affecter un employé d'un niveau inférieur ou supérieur au projet.\n Cependant, celui-ci s'en verra ralenti ou accéléré." );
         }
         private ListViewItem CreateListItemViewProjects( Project project )
         {
@@ -260,7 +265,7 @@ namespace SRH.Interface
                 {
                     if(emp.InVacation.Value != 0 || emp.IsSick.Value != 0 )
                     {
-                        MessageBox.Show( "Un employé est parti en vacances ou en congé maladie pendant la préparation du projet, merci de resélectionner des membres pour le projet." );
+                        MessageBox.Show( "Un(e) employé(e) est parti en vacances ou en congé maladie pendant la préparation du projet, merci de resélectionner des membres pour le projet." );
                         flag = false;
                         break;
                     }

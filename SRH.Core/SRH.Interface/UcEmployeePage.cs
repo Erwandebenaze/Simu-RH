@@ -81,7 +81,9 @@ namespace SRH.Interface
 
         private void GenerateEmployeePageToolTip()
         {
-            _infoListPersons.SetToolTip( PersonList , "Liste des personnes sur le marché du travail prêtes à entrer dans mon entreprise." );
+            _infoListPersons.SetToolTip( labourMarketTitle , "Liste des personnes sur le marché du travail prêtes à entrer dans mon entreprise." );
+            _infoListEmployees.SetToolTip( playersEmployeeTitle, "Liste des employés de mon entreprise." );
+            
             _infoHappiness.SetToolTip( this.increaseSalary, "Le bonheur est généré selon le salaire de l'employé et l'utilisation de ses compétences. Le bonheur peut également être altéré par les responsables du comité d'entreprise." );
             _infoHappiness.SetToolTip( this.decreaseSalary, "Le bonheur est généré selon le salaire de l'employé et l'utilisation de ses compétences. Le bonheur peut également être altéré par les responsables du comité d'entreprise." );
         }
