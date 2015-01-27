@@ -271,6 +271,7 @@ namespace SRH.Interface
 			UcEmployeeList1.EmployeeList.Items.Remove( EmployeeItem );
 
 			fireEmployee.Enabled = false;
+
 		}
 
 		/// <summary>

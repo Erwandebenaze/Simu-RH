@@ -123,6 +123,7 @@ namespace SRH.Core
 
 			_wealth -= cost;
 			Person p = RemoveEmployee( e );
+            p.GenerateExpectedSalary();
 
 			return p;
 		}
