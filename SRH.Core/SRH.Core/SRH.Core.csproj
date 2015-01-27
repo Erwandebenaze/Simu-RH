@@ -61,6 +61,7 @@
     <Compile Include="Competitor.cs" />
     <Compile Include="CompaSkill.cs" />
     <Compile Include="CSV.cs" />
+    <Compile Include="Eclectic.cs" />
     <Compile Include="Employee.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="Happiness.cs" />

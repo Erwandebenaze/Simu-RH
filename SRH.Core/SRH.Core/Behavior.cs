@@ -8,20 +8,18 @@ namespace SRH.Core
 {
 	[Serializable]
 	//TODO : make the class abstract and add 3 sub-classes of different behaviors
-	public class Behavior
+	public abstract class Behavior
 	{
-		Person _person;
-		Dictionary<string, DateTime> _skillsUsed;
-		DateTime _lastDateSkillsReactionCheck;
-		DateTime _lastDateSalaryReactionCheck;
+		protected Person _person;
+        protected Dictionary<string, DateTime> _skillsUsed;
+        protected DateTime _lastDateSkillsReactionCheck;
+        protected DateTime _lastDateSalaryReactionCheck;
 
 
-		internal Behavior( Person p )
+		protected Behavior( Person p )
 		{
             _person = p;
 			_skillsUsed = new Dictionary<string, DateTime>();
-            _lastDateSkillsReactionCheck = _person.Lb.Game.TimeGame.CurrentTimeOfGame;
-            _lastDateSalaryReactionCheck = _person.Lb.Game.TimeGame.CurrentTimeOfGame;
 		}
 
 
@@ -30,6 +28,11 @@ namespace SRH.Core
 		{
 			get { return _skillsUsed; }
 		}
+
+        internal DateTime LastDateSkillsReactionCheck
+        {
+            set { _lastDateSkillsReactionCheck = value; }
+        }
 		#endregion
 
 		internal void AddOrUpdateSkillsUsed( string s )
@@ -78,27 +81,9 @@ namespace SRH.Core
 			}
 		}
 
-		internal void SkillsReaction()
-		{
-			// Checks only every 3 months
-            if( _person.Lb.Game.TimeGame.AreMonthsPassed( _lastDateSkillsReactionCheck, 3 ) )
-			{
-				//If the employee has less than 4 skills, he wants to train more
-                if( _person.Employee.Worker.Skills.Count < 4 ) 
-				{
-                    if( _person.Employee.SkillInTraining == null )
-                        _person.Employee.Happiness.ChangeHappinessScore( -2 );
-				}
-				else if( _skillsUsed.Count < 3 )
-                    _person.Employee.Happiness.ChangeHappinessScore( -2 );
-				else if( _skillsUsed.Count > 3 )
-                    _person.Employee.Happiness.ChangeHappinessScore( 2 );
+        internal abstract void SkillsReaction();
 
-                _lastDateSkillsReactionCheck = _person.Lb.Game.TimeGame.CurrentTimeOfGame;
-			}
-		}
-
-		public void UpdateHappiness()
+        public void UpdateHappiness()
 		{
 			AddOrUpdateEmployeeSkillInUse();
 			CheckSkillsUsed();

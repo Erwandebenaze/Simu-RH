@@ -47,6 +47,7 @@ namespace SRH.Core
 			_vacationDays = 30;
 
             _worker.Employee = this;
+            _worker.Behavior.LastDateSkillsReactionCheck = _comp.Game.TimeGame.CurrentTimeOfGame;
         }
 
 		#region Getters setters

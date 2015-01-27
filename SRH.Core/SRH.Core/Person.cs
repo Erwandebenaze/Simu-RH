@@ -35,7 +35,7 @@ namespace SRH.Core
 			_lb = lb;
 			GenerateExpectedSalary();
 
-            _behavior = new Behavior( this );
+            _behavior = new Eclectic( this );
 		}
 
         private int GetRandomDay( int month )
@@ -104,7 +104,7 @@ namespace SRH.Core
             set { _employee = value; }
         }
 
-        public Behavior Behavior
+        internal Behavior Behavior
         {
             get { return _behavior; }
         }
