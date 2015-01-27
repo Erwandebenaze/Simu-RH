@@ -23,6 +23,7 @@ namespace SRH.Core
         double _decreaseRecruting = 0;
         double _decreaseSalary = 0;
         double _decreaseTasks = 0;
+        double _increaseHappiness = 0;
         int _trainingCost = 0;
         int _trainingCostYear = 0;
         int _layingOffCost = 0;
@@ -32,6 +33,7 @@ namespace SRH.Core
         int _projectsEarnings = 0;
         int _projectsEarningsYear = 0;
         RandomGenerator _random;
+        DateTime _lastUpdateHappiness = new DateTime( 2015, 1, 1 );
 
 
 		internal MyCompany( Game game, string name ) : base( game, name )
@@ -112,6 +114,10 @@ namespace SRH.Core
         internal List<Employee> RessourcesHumaines
         {
             get { return _ressourcesHumaines; }
+        }
+        internal double DecreaseSalary
+        {
+            get { return SwitchRessourcesHumaines( _decreaseSalary ); }
         }
         internal List<Employee> DirecteursProjets
         {
@@ -462,10 +468,17 @@ namespace SRH.Core
                 e.Busy = false;
                 e.BegginningCompanyWork = null;
                 e.SkillAffectedToCompany = null;
+                DesaffectManager( e );
             }
             else
-                throw new ArgumentException( "You connot remove a manager that is not in the Dictionnary." );
+                throw new ArgumentException( "You cannot remove a manager that is not in the Dictionnary." );
         }
+
+        private void DesaffectManager( Employee e )
+        {
+            UseManagers();
+        }
+
         /// <summary>
         /// Use the different skill of the managers.
         /// </summary>
@@ -475,6 +488,7 @@ namespace SRH.Core
             double newDecreaseRecruting = 0;
             double newDecreaseSalary = 0;
             double newDecreaseTasks = 0;
+            double newIncreaseHappiness = 0;
 
             #region Commerciaux
             if( _commerciaux.Count > 0 )
@@ -509,6 +523,14 @@ namespace SRH.Core
                         UseRessourcesHumaines( emp );
                     }
                 }
+            } else if (_ressourcesHumaines.Count == 0 )
+            {
+                _decreaseSalary = 1;
+                foreach( Employee emp in _employees )
+                {
+                    UseRessourcesHumaines( emp );
+                }
+
             }
             #endregion
 
@@ -526,6 +548,12 @@ namespace SRH.Core
                     UseDirecteursProjets();
                 }
             }
+            else if( _directeursProjets.Count == 0 )
+            {
+                _decreaseTasks = 1;
+                UseDirecteursProjets();
+                
+            }
 
             if( _recruteur.Count > 0 )
             {
@@ -540,43 +568,81 @@ namespace SRH.Core
                     _decreaseRecruting = SwitchRecruteur( newDecreaseRecruting );
                 }
             }
+            else if( _recruteur.Count == 0 )
+                _decreaseRecruting = 1;
+
             if( _animation.Count > 0 )
             {
                 // Animation increase the happiness of the employees.
-                foreach( Employee emp in _directeursProjets )
+                foreach( Employee emp in _animation )
                 {
-                    newDecreaseRecruting += (emp.Worker.Skills.Where( e => e.SkillName == "Animation" ).Select( e => e.Level.CurrentLevel ).Single()) * 2;
+                    newIncreaseHappiness += (emp.Worker.Skills.Where( e => e.SkillName == "Animation" ).Select( e => e.Level.CurrentLevel ).Single());
                 }
 
-                if( newDecreaseRecruting > _decreaseRecruting )
+                if( newIncreaseHappiness != _increaseHappiness )
                 {
-                    _decreaseRecruting = newDecreaseRecruting;
-                    // TODO : Implémentation lorsqu'il y aura un coût de recrutement et de renvoi.
+                    _increaseHappiness = SwitchAnimateur( newIncreaseHappiness );
+                    UseAnimateurs();
+                    
                 }
+            }
+
+        }
+
+        
+
+        internal void UseAnimateurs()
+        {
+            if( MyGame.TimeGame.AreMonthsPassed( _lastUpdateHappiness, 3 ) )
+            {
+                foreach( Employee emp in _employees )
+                {
+                    emp.Happiness.ChangeHappinessScore( (int)_increaseHappiness );
+                }
+                _lastUpdateHappiness = MyGame.TimeGame.CurrentTimeOfGame;
             }
 
         }
         private void UseDirecteursProjets()
         {
-            if( _directeursProjets.Count != 0 )
+            foreach( Project p in _possibleCompanyProjects )
             {
-                foreach( Project p in _possibleCompanyProjects )
-                {
-                    p.ProjectTasks -= (int)(p.ProjectTasks * (_decreaseTasks / 100));
-                }
+                p.ProjectTasks -= (int)(p.ProjectTasks * (_decreaseTasks / 100));
             }
 
         }
         internal void UseRessourcesHumaines( Employee emp )
         {
-            // À implémenter à chaque recrutement d'un employé.
-            if( _ressourcesHumaines.Count != 0 )
+            _decreaseSalary = SwitchRessourcesHumaines( _decreaseSalary );
+            emp.Worker.GenerateExpectedSalary();
+        }
+        private double SwitchAnimateur( double increaseHappiness )
+        {
+            switch( _employees.Count / 10 )
             {
-                _decreaseSalary = SwitchRessourcesHumaines( _decreaseSalary );
-                double salaryDecrease = emp.Worker.ExpectedSalary * (_decreaseSalary / 100);
-                emp.SalaryAdjustment -= (int)salaryDecrease;
+                case 0:
+                    if( increaseHappiness > 2 ) increaseHappiness = 2;
+                    break;
+                case 1:
+                    if( increaseHappiness > 5 ) increaseHappiness = 5;
+                    break;
+                case 2:
+                    if( increaseHappiness > 10 ) increaseHappiness = 10;
+                    break;
+                case 3:
+                    if( increaseHappiness > 15 ) increaseHappiness = 15;
+                    break;
+                case 4:
+                    if( increaseHappiness > 20 ) increaseHappiness = 20;
+                    break;
+                case 5:
+                    if( increaseHappiness > 25 ) increaseHappiness = 25;
+                    break;
+                default:
+                    increaseHappiness = 25;
+                    break;
             }
-
+            return increaseHappiness;
         }
         private double SwitchRecruteur( double decreaseRecruting )
         {

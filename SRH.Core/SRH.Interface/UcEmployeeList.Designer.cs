@@ -28,7 +28,6 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UcEmployeeList));
             this.employeeList = new System.Windows.Forms.ListView();
             this.EmployeeLastNameHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -36,7 +35,6 @@
             this.EmployeeAgeHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.EmployeeBestSkillHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.EmployeeBestSkillLevelHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this._infoListEmployees = new System.Windows.Forms.ToolTip(this.components);
             this.SuspendLayout();
             // 
             // employeeList
@@ -76,14 +74,6 @@
             // 
             resources.ApplyResources(this.EmployeeBestSkillLevelHeader, "EmployeeBestSkillLevelHeader");
             // 
-            // _infoListEmployees
-            // 
-            this._infoListEmployees.AutoPopDelay = 3000;
-            this._infoListEmployees.InitialDelay = 1700;
-            this._infoListEmployees.IsBalloon = true;
-            this._infoListEmployees.ReshowDelay = 100;
-            this._infoListEmployees.ToolTipTitle = "Liste des employés";
-            // 
             // UcEmployeeList
             // 
             resources.ApplyResources(this, "$this");
@@ -101,7 +91,6 @@
 		private System.Windows.Forms.ColumnHeader EmployeeFirstNameHeader;
 		private System.Windows.Forms.ColumnHeader EmployeeAgeHeader;
 		private System.Windows.Forms.ColumnHeader EmployeeBestSkillHeader;
-		private System.Windows.Forms.ColumnHeader EmployeeBestSkillLevelHeader;
-        private System.Windows.Forms.ToolTip _infoListEmployees;
+        private System.Windows.Forms.ColumnHeader EmployeeBestSkillLevelHeader;
 	}
 }

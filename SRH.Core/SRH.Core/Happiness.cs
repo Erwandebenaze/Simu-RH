@@ -21,7 +21,7 @@ namespace SRH.Core
 			get { return _happinessScore; }
 		}
 
-		public int ChangeHappinessScore ( int i )
+		internal int ChangeHappinessScore ( int i )
 		{
 			if( _happinessScore + i > 100 ) _happinessScore = 100;
 			else if( _happinessScore + i < 0 ) _happinessScore = 0;
