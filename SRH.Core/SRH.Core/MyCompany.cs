@@ -145,7 +145,7 @@ namespace SRH.Core
             _maxEmployees = 10 + (2 * (this.CompanyLevel.CurrentLevel));
 
 			if( this.CompanyLevel.CurrentLevel == 1 ) _maxProjectDifficulty = 1.0;
-			if( ( this.CompanyLevel.CurrentLevel +1 ) % 10 == 0 ) _maxProjectDifficulty += 0.5;
+			if( ( this.CompanyLevel.CurrentLevel +1 ) % 5 == 0 ) _maxProjectDifficulty += 0.5;
         }
 
         /// <summary>
@@ -434,13 +434,13 @@ namespace SRH.Core
         /// </summary>
         public void AffectManagers()
         {
+            _commerciaux.Clear();
+            _animation.Clear();
+            _recruteur.Clear();
+            _directeursProjets.Clear();
+            _ressourcesHumaines.Clear();
             if( _managers.Count != 0 )
             {
-                _commerciaux.Clear();
-                _animation.Clear();
-                _recruteur.Clear();
-                _directeursProjets.Clear();
-                _ressourcesHumaines.Clear();
                 foreach( KeyValuePair<Employee, Skill> dico in _managers )
                 {
                     if( dico.Value.SkillName == "Commercial" ) _commerciaux.Add( dico.Key );
@@ -476,6 +476,7 @@ namespace SRH.Core
 
         private void DesaffectManager( Employee e )
         {
+            AffectManagers();
             UseManagers();
         }
 
@@ -605,7 +606,7 @@ namespace SRH.Core
         }
         private void UseDirecteursProjets()
         {
-            foreach( Project p in _possibleCompanyProjects )
+            foreach( Project p in PossibleCompanyProjects )
             {
                 p.ProjectTasks -= (int)(p.ProjectTasks * (_decreaseTasks / 100));
             }
