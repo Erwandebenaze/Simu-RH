@@ -17,7 +17,7 @@ namespace SRH.Core
         readonly List<Skill> _skills;
         int _expectedSalary;
         LaborMarket _lb;
-        Random rand;
+        RandomGenerator _rand;
         Employee _employee;
         Behavior _behavior;
 
@@ -27,30 +27,30 @@ namespace SRH.Core
             _firstName = firstName;
             _lastName = lastName;
             _age = age;
-            rand = new Random();
-            int month = rand.Next( 1, 13 );
+			_rand = new RandomGenerator( lb.Game, new Random() );
+			int month = _rand.RandomNumberGenerator.Next( 1, 13 );
             int day = GetRandomDay( month );
             int year = 2015 - age;
             _birthDate = new DateTime( year, month, day );
             _lb = lb;
             GenerateExpectedSalary();
 
-            _behavior = new Eclectic( this );
+			_rand.CreateRandomBehavior( this );
         }
 
         private int GetRandomDay( int month )
         {
             if( month == 2 )
             {
-                return rand.Next( 1, 29 );
+                return _rand.RandomNumberGenerator.Next( 1, 29 );
             }
             else if( month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12 )
             {
-                return rand.Next( 1, 32 );
+                return _rand.RandomNumberGenerator.Next( 1, 32 );
             }
             else
             {
-                return rand.Next( 1, 31 );
+                return _rand.RandomNumberGenerator.Next( 1, 31 );
             }
         }
         #region Getters Setters
@@ -104,9 +104,10 @@ namespace SRH.Core
             set { _employee = value; }
         }
 
-        internal Behavior Behavior
+        public Behavior Behavior
         {
             get { return _behavior; }
+			set { _behavior = value; }
         }
         #endregion
 
@@ -133,6 +134,11 @@ namespace SRH.Core
             newSkill.Level.CurrentLevel = level;
             _skills.Add( newSkill );
             GenerateExpectedSalary();
+			if( _behavior is Specialist )
+			{
+				Specialist spe = (Specialist)_behavior;
+				spe.CreateFavoriteSkills();
+			}
             return newSkill;
         }
 

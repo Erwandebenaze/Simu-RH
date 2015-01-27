@@ -26,7 +26,7 @@ namespace SRH.Interface
         public SimuRH()
         {
             InitializeComponent();
-            _myGame = new Game( 1, "Erwan" );
+            _myGame = new Game( 2, "Erwan" );
             //_myGame = GameLoader.Load( "Erwan" );
             _optionsForm = new Options();
             _timeOfGame = _myGame.TimeGame;
@@ -214,7 +214,7 @@ namespace SRH.Interface
             List<Employee> listEmpTmp = new List<Employee>();
 			foreach( Employee e in _myGame.PlayerCompany.Employees )
 			{
-				//e.Worker.Behavior.UpdateHappiness();
+				e.Worker.Behavior.UpdateHappiness();
 				if( e == ucEmployeePage.CurrentEmployee )
 				{
 					ucEmployeePage.SetHappinessBar();

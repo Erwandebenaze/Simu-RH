@@ -129,9 +129,9 @@ namespace SRH.Core
 
             while( points > 1 )
             {
-                int alea = _randomNumberGenerator.Next( 1, 4 );
+                int rand = _randomNumberGenerator.Next( 1, 4 );
                 // Add a new level 1 Skill to the Person
-                if( alea <= 2 && p.Skills.Count < 4 )
+                if( rand <= 2 && p.Skills.Count < 4 )
                 {
                     bool check = false;
                     while( !check )
@@ -243,6 +243,17 @@ namespace SRH.Core
 					check = true;
 			}
 			return days;
+		}
+
+		internal void CreateRandomBehavior( Person p )
+		{
+			int rand = _randomNumberGenerator.Next( 1, 91 );
+			if( rand <= 30 )
+				p.Behavior = new Eclectic( p );
+			else if( rand <= 60 )
+				p.Behavior = new Specialist( p );
+			else
+				p.Behavior = new Ambitious( p );
 		}
 
         public int GetRandomMonth()
