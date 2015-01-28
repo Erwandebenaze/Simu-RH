@@ -405,15 +405,15 @@ namespace SRH.Interface
 		{
 			string currentOccupation;
 
-            if( e.Busy && e.SkillAffectedToCompany != null )
+            if( e.SkillAffectedToCompany != null )
                 currentOccupation = "En poste Fixe (" + e.SkillAffectedToCompany.SkillName + ")";
-            else if( e.Busy && e.SkillInTraining != null )
+            else if( e.SkillInTraining != null )
                 currentOccupation = "En formation (" + e.SkillInTraining + ")";
-            else if( e.Busy && e.InVacation.Value != 0 )
+            else if( e.InVacation.Value != 0 )
                 currentOccupation = "En vacances";
-            else if( e.Busy && e.IsSick.Value != 0 )
+            else if( e.IsSick.Value != 0 )
                 currentOccupation = "Malade";
-            else if( e.Busy )
+            else if( e.SkillInProject != null )
                 currentOccupation = "En projet";
             else
                 currentOccupation = "Aucune";
