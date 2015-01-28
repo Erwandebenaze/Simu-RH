@@ -26,15 +26,12 @@ namespace SRH.Core
 			_randomNumberGenerator = new Random( seed );
             _market = new LaborMarket( this );
             _events = new Dictionary<Employee, string>();
-
             _playerCompany = new MyCompany( this, companyName );
             CSV csvImport = new CSV();
 			_possibleProjects = csvImport.ReadCsv(_playerCompany, "../../../Data/data.csv" );
             _timeGame = new GameTime( this );
             _competitors = new List<Competitor>();
             AddCompetitors();
-
-
 		}
 
         private void AddCompetitors()
@@ -293,6 +290,7 @@ namespace SRH.Core
             if( !_events.ContainsKey( emp ) )
             {
                 emp.TimeOfEvent = TimeGame.CurrentTimeOfGame;
+                RemoveEmployeeFromAProject( emp );
                 _events.Add( emp, "Raz-le-bol" );
             }
             else
@@ -308,6 +306,7 @@ namespace SRH.Core
             {
                 OnFedUp( emp );
             }
+
             _playerCompany.RemoveEmployee( emp );
         }
 
