@@ -18,51 +18,263 @@ namespace SRH.Interface
         int interval;
         readonly Options _optionsForm;
         GameTime _timeOfGame;
+        DateTime? _begginingDebt;
+        bool _debt;
+        int _interest;
+        int _charges;
 
         public SimuRH()
         {
             InitializeComponent();
-            _myGame = new Game( 1, "SimuRH" );
-            //_myGame = GameLoader.Load("SimuRH");
+            _myGame = new Game( 1, "Tristan" );
+            //_myGame = GameLoader.Load( "Erwan" );
             _optionsForm = new Options();
             _timeOfGame = _myGame.TimeGame;
             _timer = new Timer();
-            interval = 2000;
+            interval = 1000;
             _timer.Interval = interval;
             _timer.Tick += _timer_Tick;
             _timer.Start();
         }
 
+		void Reload()
+		{
+			this.ucEmployeePage.LoadPage();
+			this.ucProjectPage.LoadPage();
+		}
 
+		
         void _timer_Tick( object sender, EventArgs e )
         {
-            BarProgress();
-			ExperienceProgress();
-			WealthProgress();
-            _timeOfGame.newDay();
-            _myGame.PlayerCompany.EndProjectIfItsFinish();
-            ClearListsProjects();
-            _dateOfGame.Text = GameTime.TimeOfGame.ToString("d");
-            _day.Text = _timeOfGame.FrenchDayOfWeek;
+            if( _myGame.PlayerCompany.Wealth < -50000 )
+            {
+                _timer.Stop();
+
+                MessageBox.Show( "Vous avez perdu. Votre dette a dépassé 50 000€ ! Retentez votre chance ou chargez une partie." );
+                _optionsForm.SaveGameButton.Enabled = false;
+                ShowOptions();
+            } else
+            {
+				// Progress bars
+                BarProgress();
+                ExperienceProgress();
+                WealthProgress();
+                ucOffice.AffectOfficeFields();
+                ucOffice.GenerateListOfEvents();
+
+
+                _timeOfGame.newDay();
+                _myGame.PlayerCompany.AddXpToManagers();
+                _myGame.PlayerCompany.EndProjectIfItsFinish();
+				UpdateEmployeesSkills();
+				UpdateEmployeesHappiness();
+				_myGame.PlayerCompany.UpdateEmployeesAbsence();
+				_myGame.PlayerCompany.ResetVacationDays();
+                ClearListsProjects();
+
+				// Current date display
+                _dateOfGame.Text = _myGame.TimeGame.CurrentTimeOfGame.ToString( "d" );
+                _day.Text = _timeOfGame.FrenchDayOfWeek;
+
+				// Pay employees
+				PayEmployees();
+
+				// Wealth check and consequences
+                if( _myGame.PlayerCompany.Wealth < 0 && !_debt)
+                {
+                    _begginingDebt = _myGame.TimeGame.CurrentTimeOfGame;
+                    _debt = true;
+                }
+                else if( _myGame.PlayerCompany.Wealth < 0 && _debt )
+                {
+                    if( _myGame.TimeGame.intervalOfTimeInDays( _begginingDebt ) % 20 == 0 ) 
+                    {
+                        
+                        _myGame.PlayerCompany.Wealth -= _myGame.PlayerCompany.Wealth / 100 * 5 ;
+                    }
+
+                } else if (!_debt)
+                {
+                    _begginingDebt = null;
+                }
+
+                foreach( Competitor competitor in _myGame.Competitors )
+                {
+                    competitor.TryToAddMoneyAndEmployee();
+                }
+            }
+            if( _myGame.TimeGame.NextDayIsNewMonth() && (_myGame.PlayerCompany.Wealth < 0))
+            {
+                _interest = _myGame.PlayerCompany.GetInterest();
+                _myGame.PlayerCompany.ApplyInterests();
+            }
+
+            if( _myGame.TimeGame.NextDayIsNewMonth())
+            {
+                _charges = _myGame.PlayerCompany.GetCharges();
+                _myGame.PlayerCompany.ApplyCharges();
+
+                #region switch WealthInYear
+                switch( _myGame.TimeGame.CurrentTimeOfGame.Month )
+                {
+                    case 1:
+                        _myGame.PlayerCompany.WealthInYear.January = _myGame.PlayerCompany.Wealth;
+                        _myGame.PlayerCompany.WealthInYear.NewYear();
+                        break;
+                    case 2:
+                        _myGame.PlayerCompany.WealthInYear.February = _myGame.PlayerCompany.Wealth;
+                        break;
+                    case 3:
+                        _myGame.PlayerCompany.WealthInYear.March = _myGame.PlayerCompany.Wealth;
+                        break;
+                    case 4:
+                        _myGame.PlayerCompany.WealthInYear.April = _myGame.PlayerCompany.Wealth;
+                        break;
+                    case 5:
+                        _myGame.PlayerCompany.WealthInYear.May = _myGame.PlayerCompany.Wealth;
+                        break;
+                    case 6:
+                        _myGame.PlayerCompany.WealthInYear.June = _myGame.PlayerCompany.Wealth;
+                        break;
+                    case 7:
+                        _myGame.PlayerCompany.WealthInYear.July = _myGame.PlayerCompany.Wealth;
+                        break;
+                    case 8:
+                        _myGame.PlayerCompany.WealthInYear.August = _myGame.PlayerCompany.Wealth;
+                        break;
+                    case 9:
+                        _myGame.PlayerCompany.WealthInYear.September = _myGame.PlayerCompany.Wealth;
+                        break;
+                    case 10:
+                        _myGame.PlayerCompany.WealthInYear.October = _myGame.PlayerCompany.Wealth;
+                        break;
+                    case 11:
+                        _myGame.PlayerCompany.WealthInYear.November = _myGame.PlayerCompany.Wealth;
+                        break;
+                    case 12:
+                        _myGame.PlayerCompany.WealthInYear.December = _myGame.PlayerCompany.Wealth;
+                        break;
+                    default:
+                        throw new InvalidOperationException( "Month is beetween 1 and 12" );
+                }
+
+                foreach( Competitor competitor in _myGame.Competitors )
+                {
+                    switch( _myGame.TimeGame.CurrentTimeOfGame.Month )
+                    {
+                        case 1:
+                            competitor.WealthInYear.January = competitor.Wealth;
+                            competitor.WealthInYear.NewYear();
+                            break;
+                        case 2:
+                            competitor.WealthInYear.February = competitor.Wealth;
+                            break;
+                        case 3:
+                            competitor.WealthInYear.March = competitor.Wealth;
+                            break;
+                        case 4:
+                            competitor.WealthInYear.April = competitor.Wealth;
+                            break;
+                        case 5:
+                            competitor.WealthInYear.May = competitor.Wealth;
+                            break;
+                        case 6:
+                            competitor.WealthInYear.June = competitor.Wealth;
+                            break;
+                        case 7:
+                            competitor.WealthInYear.July = competitor.Wealth;
+                            break;
+                        case 8:
+                            competitor.WealthInYear.August = competitor.Wealth;
+                            break;
+                        case 9:
+                            competitor.WealthInYear.September = competitor.Wealth;
+                            break;
+                        case 10:
+                            competitor.WealthInYear.October = competitor.Wealth;
+                            break;
+                        case 11:
+                            competitor.WealthInYear.November = competitor.Wealth;
+                            break;
+                        case 12:
+                            competitor.WealthInYear.December = competitor.Wealth;
+                            break;
+                        default:
+                            throw new InvalidOperationException( "Month is beetween 1 and 12" );
+                    }
+                }
+                #endregion
+            }
+
+            _myGame.TryToAddYear();
         }
-        static ListViewItem CreateListItemViewProjects( Project p )
-        {
-            ListViewItem i = new ListViewItem( p.Name );
-            i.Tag = p;
-            i.SubItems.Add( new ListViewItem.ListViewSubItem( i, p.Difficulty.ToString() ) );
-            i.SubItems.Add( new ListViewItem.ListViewSubItem( i, p.Earnings.ToString() ) );
-            i.SubItems.Add( new ListViewItem.ListViewSubItem( i, p.Duration.ToString() ) );
-            return i;
-        }
+
+		private void UpdateEmployeesHappiness()
+		{
+            List<Employee> listEmpTmp = new List<Employee>();
+			foreach( Employee e in _myGame.PlayerCompany.Employees )
+			{
+				e.Worker.Behavior.UpdateHappiness();
+				if( e == ucEmployeePage.CurrentEmployee )
+				{
+					ucEmployeePage.SetHappinessBar();
+				}
+                if( e.Happiness.HappinessScore == 0 )
+                {
+                    listEmpTmp.Add( e );
+                }
+			}
+
+            foreach( Employee e in listEmpTmp )
+            {
+                _myGame.OnFedUp += new Game.SomeoneIsFedUpWithHisCompany( _myGame.SomeoneFedUp );
+                _myGame.FedUp( e );
+            }
+		}
+
+		private void PayEmployees()
+		{
+            if( _myGame.TimeGame.NextDayIsNewMonth() )
+			{
+				foreach( Employee e in _myGame.PlayerCompany.Employees )
+				{
+					_myGame.PlayerCompany.Wealth -= e.Salary;
+				}
+			}
+		}
+
+		private void UpdateEmployeesSkills()
+		{
+			// Training
+			int timeLeft;
+			foreach( Employee e in _myGame.PlayerCompany.Employees.Where( emp => emp.SkillInTraining != null ) )
+			{
+				timeLeft = e.UpdateEmployeeTraining();
+				if( timeLeft == 0 )
+				{
+					ucEmployeePage.UpdateEmployeeDisplay();
+					ucEmployeePage.LoadEmployeeList();
+				}
+
+				if( e == ucEmployeePage.CurrentEmployee )
+				{
+					ucEmployeePage.TrainingTimeLeft = timeLeft;
+					ucEmployeePage.SetTrainingProgress( e );
+				}
+			}
+
+			// Level gain
+
+		}
+
         private void ClearListsProjects()
         {
 
-            if (ucProjectPage.Projects != null)
+            if( ucProjectPage.Projects != null )
             {
                 ucProjectPage.listCurrentProjects.Items.Clear();
-                ucProjectPage.listPossibleProjects.Items.Clear();
-                ucProjectPage.listCurrentProjects.Items.AddRange( ucProjectPage.Projects.Select( p => CreateListItemViewProjects( p ) ).ToArray() );
-                ucProjectPage.listPossibleProjects.Items.AddRange( ucProjectPage.PossibleProjects.Select( p => CreateListItemViewProjects( p ) ).ToArray() );
+                ucProjectPage.listCurrentProjects.Items.AddRange( ucProjectPage.Projects.Select( p => ucProjectPage.CreateListItemViewCurrentProjects( p ) ).ToArray() );
+                ucProjectPage.AffectVariableFields();
             }
         }
 
@@ -70,7 +282,7 @@ namespace SRH.Interface
 		{
 			string companyCurrentXp = CurrentGame.PlayerCompany.CompanyLevel.CurrentXp.ToString();
 			string companyNextXP = CurrentGame.PlayerCompany.CompanyLevel.XpRequired.ToString();
-			companyExperience.Text = companyCurrentXp + " / " + companyNextXP;
+			companyExperience.Text = companyCurrentXp + " / " + companyNextXP +" Exp";
 			companyExperience.Visible = true;
 		}
 
@@ -100,32 +312,37 @@ namespace SRH.Interface
             get { return _myGame; }
         }
 
-        internal void LoadOrCreateGame(string name)
+        public void LoadOrCreateGame( string name )
         {
             try
             {
                 _myGame = GameLoader.Load( name );
                 MessageBox.Show( "La partie est déjà existante. Celle-ci a été chargée." );
+				Reload();
             }
             catch (System.IO.FileNotFoundException)
             {
-                MessageBox.Show( "La partie a été créé." );
+                MessageBox.Show( "La partie a été créée." );
                 _myGame = new Game( 1,name );
+                _timeOfGame = _myGame.TimeGame;
+
+				Reload();
             }
 
             ShowOptions( false );
         }
 
-        internal void SaveGame( )
+        public void SaveGame()
         {
             if( _myGame == null ) throw new InvalidOperationException( "No CurrentGame to save!" );
             _myGame.SaveGame();
         }
 
-        internal void LoadGame(string game)
+        public void LoadGame( string game )
         {
             _myGame = GameLoader.Load( game );
-            this.Refresh();
+            _timeOfGame = _myGame.TimeGame;
+			Reload();
         }
 
         public void ShowOptions(bool show = true)
@@ -195,5 +412,32 @@ namespace SRH.Interface
             _x10Button.Enabled = false;
             _timer.Interval = interval/10;
         }
+
+		private void tabControl1_SelectedIndexChanged( object sender, TabControlEventArgs e )
+		{
+			//
+			// TODO : Add Load methods when Uc are implemented
+			//
+			//if( tabControl1.SelectedTab == tabControl1.TabPages[ "Board" ] )
+			//{
+			//	this.ucBoardPage.LoadPage();
+			//}
+			if( tabControl1.SelectedTab == tabControl1.TabPages[ "Employees" ] )
+			{
+				this.ucEmployeePage.LoadPage();
+			}
+			else if( tabControl1.SelectedTab == tabControl1.TabPages[ "Projects" ] )
+			{
+				this.ucProjectPage.LoadPage();
+			}
+			else if( tabControl1.SelectedTab == tabControl1.TabPages[ "CompanyManagement" ] )
+			{
+				this.ucCompanyManagement1.LoadPage();
+			}
+			//else if( tabControl1.SelectedTab == tabControl1.TabPages[ "Statistics" ] )
+			//{
+			//	this.ucStatistics.LoadPage();
+			//}
+		}
     }
 }

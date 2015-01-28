@@ -20,6 +20,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>true</UseVSHostingProcess>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -37,6 +38,15 @@
     <Reference Include="nunit.framework">
       <HintPath>..\packages\NUnit.2.6.3\lib\nunit.framework.dll</HintPath>
     </Reference>
+    <Reference Include="OxyPlot.WindowsForms">
+      <HintPath>..\packages\OxyPlot.2014.1.546\lib\net45\OxyPlot.WindowsForms.dll</HintPath>
+    </Reference>
+    <Reference Include="OxyPlot.Wpf">
+      <HintPath>..\packages\OxyPlot.2014.1.546\lib\net45\OxyPlot.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="OxyPlot.Xps">
+      <HintPath>..\packages\OxyPlot.2014.1.546\lib\net45\OxyPlot.Xps.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -46,12 +56,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Ambitious.cs" />
+    <Compile Include="Behavior.cs" />
+    <Compile Include="Company.cs" />
     <Compile Include="Competitor.cs" />
     <Compile Include="CompaSkill.cs" />
     <Compile Include="CSV.cs" />
+    <Compile Include="Eclectic.cs" />
     <Compile Include="Employee.cs" />
     <Compile Include="Game.cs" />
-    <Compile Include="Helper.cs" />
+    <Compile Include="Happiness.cs" />
     <Compile Include="LaborMarket.cs" />
     <Compile Include="Level.cs" />
     <Compile Include="MyCompany.cs" />
@@ -63,8 +77,12 @@
     <Compile Include="GameLoader.cs" />
     <Compile Include="Skill.cs" />
     <Compile Include="GameTime.cs" />
+    <Compile Include="Specialist.cs" />
+    <Compile Include="StringExtension.cs" />
+    <Compile Include="WealthInYear.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Model.cd" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

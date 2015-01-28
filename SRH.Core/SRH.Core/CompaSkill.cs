@@ -9,38 +9,38 @@ namespace SRH.Core
     [Serializable]
     public class CompaSkill : Skill
     {
-		public CompaSkill( string skillName, int startLevel = 1 )
-			: base( skillName, startLevel )
+        internal CompaSkill( Person p, string skillName, int startLevel = 1 )
+			: base( p, skillName, startLevel )
 		{
-		}
-		public enum SkillName
-		{
-			SalesRep, // *Commercial*, increase 20 projects earnings.
-			HumansRessources, // *Ressources humaines*, descrease recruting and laying off cost.
-			ProjDirection, // *Directeur de projets*, decrease the duration of 20 projects.
-			ContractManagement, // *Gestion de contrat*, decrease the duration of 30 projects.
-			Animation // *Animation*, inscrease 30 employees hapiness
+			_baseCostToTrain = 1500;
+			_baseTimeToTrain = 20;
 		}
 
-        public void FixPriceAndTime()
+		internal CompaSkill( string skillName, int startLevel = 1 )
+			: base( skillName, startLevel )
+		{
+			_baseCostToTrain = 1500;
+			_baseTimeToTrain = 20;
+		}
+        public override void FixPriceAndTime()
         {
             switch( Level.CurrentLevel )
             {
                 case 1:
-                    _upgradePrice = 1500;
-                    _timeToUpgrade = 4;
+					UpgradePrice = 1750;
+                    TimeToUpgrade = 25;
                     break;
                 case 2:
-                    _upgradePrice = 1750;
-                    _timeToUpgrade = 5;
+					UpgradePrice = 2000;
+                    TimeToUpgrade = 30;
                     break;
                 case 3:
-                    _upgradePrice = 2000;
-                    _timeToUpgrade = 6;
+					UpgradePrice = 2250;
+                    TimeToUpgrade = 35;
                     break;
                 case 4:
-                    _upgradePrice = 2250;
-                    _timeToUpgrade = 7;
+                    UpgradePrice = 2500;
+                    TimeToUpgrade = 40;
                     break;
                 default:
                     throw new InvalidOperationException();

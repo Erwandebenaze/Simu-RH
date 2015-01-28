@@ -1,0 +1,293 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="NameAndType">
+  <Class Name="SRH.Core.Game">
+    <Position X="0.5" Y="0.5" Width="3" />
+    <Members>
+      <Field Name="_competitors" Hidden="true" />
+      <Field Name="_market" Hidden="true" />
+      <Field Name="_playerCompany" Hidden="true" />
+      <Field Name="_possibleProjects" Hidden="true" />
+      <Field Name="_randomNumberGenerator" Hidden="true" />
+      <Field Name="_timeGame" Hidden="true" />
+    </Members>
+    <AssociationLine Name="TimeGame" Type="SRH.Core.GameTime">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.507" Y="-0.282" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="Market" Type="SRH.Core.LaborMarket" ManuallyRouted="true" FixedToPoint="true">
+      <Path>
+        <Point X="3.5" Y="1.678" />
+        <Point X="4.25" Y="1.678" />
+        <Point X="4.25" Y="1.75" />
+        <Point X="5" Y="1.75" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true" ManuallySized="true">
+        <Position X="0.903" Y="-0.149" Height="0.182" Width="0.667" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="PlayerCompany" Type="SRH.Core.MyCompany">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="1.223" Y="0.468" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="PossibleProjects" Type="SRH.Core.Project">
+      <MemberNameLabel ManuallyPlaced="true" ManuallySized="true">
+        <Position X="0.628" Y="0.06" Height="0.182" Width="1.217" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AQAAAAEAIAGQAAgAAAAgAQABAAEAACEAAAIIAAIggQA=</HashCode>
+      <FileName>Game.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="TimeGame" />
+      <Property Name="Market" />
+      <Property Name="PlayerCompany" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="PossibleProjects" />
+      <Property Name="Competitors" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="SRH.Core.MyCompany">
+    <Position X="9" Y="6" Width="2.75" />
+    <Members>
+      <Field Name="_companyLevel" Hidden="true" />
+      <Field Name="_maxProjectDifficulty" Hidden="true" />
+      <Field Name="_possibleCompanyProjects" Hidden="true" />
+      <Field Name="_projects" Hidden="true" />
+    </Members>
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <AssociationLine Name="MyGame" Type="SRH.Core.Game">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="-2.579" Y="8.094" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="Projects" Type="SRH.Core.Project">
+      <MemberNameLabel ManuallyPlaced="true" ManuallySized="true">
+        <Position X="-0.59" Y="0.672" Height="0.182" Width="1.634" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="CompanyLevel" Type="SRH.Core.Level" FixedToPoint="true">
+      <Path>
+        <Point X="10.518" Y="6" />
+        <Point X="10.518" Y="5.438" />
+        <Point X="10.957" Y="5.438" Type="JumpStart" />
+        <Point X="11.123" Y="5.438" Type="JumpEnd" />
+        <Point X="12.323" Y="5.438" Type="JumpStart" />
+        <Point X="12.49" Y="5.438" Type="JumpEnd" />
+        <Point X="15" Y="5.438" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="PossibleCompanyProjects" Type="SRH.Core.Project">
+      <MemberNameLabel ManuallyPlaced="true" ManuallySized="true">
+        <Position X="-0.959" Y="0.986" Height="0.182" Width="1.856" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>ABZAB0MDEICIAAOIQCQijQwigOAEEBGoEElgZBCAMYA=</HashCode>
+      <FileName>MyCompany.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="MyGame" />
+      <Property Name="CompanyLevel" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="Projects" />
+      <Property Name="PossibleCompanyProjects" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="SRH.Core.LaborMarket">
+    <Position X="5" Y="1.5" Width="3" />
+    <Members>
+      <Field Name="_game" Hidden="true" />
+      <Field Name="_joblessPersons" Hidden="true" />
+    </Members>
+    <AssociationLine Name="Game" Type="SRH.Core.Game" FixedFromPoint="true">
+      <Path>
+        <Point X="5" Y="2.47" />
+        <Point X="4.395" Y="2.47" Type="JumpStart" />
+        <Point X="4.229" Y="2.47" Type="JumpEnd" />
+        <Point X="3.5" Y="2.47" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.336" Y="-0.121" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="JoblessPersons" Type="SRH.Core.Person" FixedToPoint="true">
+      <Path>
+        <Point X="5" Y="2.11" />
+        <Point X="4.312" Y="2.11" />
+        <Point X="4.312" Y="5.25" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true" ManuallySized="true">
+        <Position X="-0.871" Y="0.6" Height="0.182" Width="1.407" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAACAAAAAAAAAAAgAAAiAAAAAAAAAAAAAAEU=</HashCode>
+      <FileName>LaborMarket.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Game" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="JoblessPersons" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="SRH.Core.GameTime">
+    <Position X="0.5" Y="4.25" Width="1.5" />
+    <Members>
+      <Field Name="_currentTimeOfGame" Hidden="true" />
+      <Field Name="_dayOfTheWeek" Hidden="true" />
+      <Field Name="_frenchTranslationDay" Hidden="true" />
+      <Field Name="_myGame" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>ABAAACAAAAASAAIQEAAAAAAgBgAAAAAAQAAAAAAAAAg=</HashCode>
+      <FileName>GameTime.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SRH.Core.Project">
+    <Position X="9" Y="0.5" Width="1.5" />
+    <Members>
+      <Field Name="_activated" Hidden="true" />
+      <Field Name="_begginingDate" Hidden="true" />
+      <Field Name="_difficulty" Hidden="true" />
+      <Field Name="_duration" Hidden="true" />
+      <Field Name="_earnings" Hidden="true" />
+      <Field Name="_employeesAffectedWithSkill" Hidden="true" />
+      <Field Name="_myComp" Hidden="true" />
+      <Field Name="_name" Hidden="true" />
+      <Field Name="_numberOfWorkers" Hidden="true" />
+      <Field Name="_skillsRequired" Hidden="true" />
+      <Field Name="_timeLeft" Hidden="true" />
+      <Field Name="_timeSpent" Hidden="true" />
+      <Field Name="_xpPerCompany" Hidden="true" />
+      <Field Name="_xpPerPerson" Hidden="true" />
+    </Members>
+    <Compartments>
+      <Compartment Name="Properties" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>CAiEJABBQAFCEwBAAhAAgKwEAAAQBIgh0BAAGUYBABA=</HashCode>
+      <FileName>Project.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SRH.Core.Level">
+    <Position X="15" Y="3" Width="1.5" />
+    <Members>
+      <Field Name="_currentLevel" Hidden="true" />
+      <Field Name="_currentXp" Hidden="true" />
+      <Field Name="_skill" Hidden="true" />
+      <Field Name="_xpRequired" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AAAAIAABAAAAIAAAAAQQgAAAAAAEAACAAAAgABgAIAA=</HashCode>
+      <FileName>Level.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SRH.Core.Person">
+    <Position X="3.25" Y="5.25" Width="1.5" />
+    <Members>
+      <Field Name="_age" Hidden="true" />
+      <Field Name="_birthDate" Hidden="true" />
+      <Field Name="_firstName" Hidden="true" />
+      <Field Name="_lastName" Hidden="true" />
+      <Field Name="_lb" Hidden="true" />
+      <Field Name="_skills" Hidden="true" />
+      <Field Name="rand" Hidden="true" />
+    </Members>
+    <Compartments>
+      <Compartment Name="Properties" Collapsed="true" />
+    </Compartments>
+    <AssociationLine Name="Skills" Type="SRH.Core.Skill">
+      <MemberNameLabel ManuallyPlaced="true" ManuallySized="true">
+        <Position X="-0.535" Y="1.466" Height="0.182" Width="2.06" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="Lb" Type="SRH.Core.LaborMarket" FixedFromPoint="true">
+      <Path>
+        <Point X="3.625" Y="5.25" />
+        <Point X="3.625" Y="2.814" />
+        <Point X="4.229" Y="2.814" Type="JumpStart" />
+        <Point X="4.395" Y="2.814" Type="JumpEnd" />
+        <Point X="5" Y="2.814" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.242" Y="-0.271" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>kAEAAMAAAAAIAEAAFFkAAAQAAAAAAAhKAAAAQAAAAAg=</HashCode>
+      <FileName>Person.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Lb" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="Skills" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="SRH.Core.Skill">
+    <Position X="11.5" Y="1.25" Width="1.5" />
+    <Members>
+      <Field Name="_level" Hidden="true" />
+      <Field Name="_skillName" Hidden="true" />
+      <Field Name="_timeToUpgrade" Hidden="true" />
+      <Field Name="_upgradePrice" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AIAAAAAAAAAAAAgAgACCARAAAABAgAABAAKQgCAAACA=</HashCode>
+      <FileName>Skill.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Level" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="SRH.Core.Employee">
+    <Position X="2" Y="9.25" Width="2.75" />
+    <Members>
+      <Field Name="_comp" Hidden="true" />
+      <Field Name="_worker" Hidden="true" />
+    </Members>
+    <AssociationLine Name="Worker" Type="SRH.Core.Person">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.363" Y="-0.447" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AEEwADBhBICAACIAIAEAAAABAAAIIAAAAQBAoAQAgAA=</HashCode>
+      <FileName>Employee.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Worker" />
+      <Property Name="Comp" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="SRH.Core.StringExtension" Collapsed="true">
+    <Position X="4.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>StringExtension.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SRH.Core.Competitor">
+    <Position X="6.5" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAACAAAAAAAAAAAAAAAAAEACAAAAAAAAA=</HashCode>
+      <FileName>Competitor.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SRH.Core.Company">
+    <Position X="6.5" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAIGAgAAAAAAAEAgCAAAQCGEgABAAAAAAAAAAgAAQ=</HashCode>
+      <FileName>Company.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

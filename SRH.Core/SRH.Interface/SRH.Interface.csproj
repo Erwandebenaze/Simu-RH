@@ -21,6 +21,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>true</UseVSHostingProcess>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -31,7 +32,23 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Simu’RH 1.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
+    <Reference Include="OxyPlot">
+      <HintPath>..\packages\OxyPlot.Core.2014.1.546\lib\portable-net4+sl4+wp71+win8\OxyPlot.dll</HintPath>
+    </Reference>
+    <Reference Include="OxyPlot.WindowsForms">
+      <HintPath>..\packages\OxyPlot.WindowsForms.2014.1.546\lib\net45\OxyPlot.WindowsForms.dll</HintPath>
+    </Reference>
+    <Reference Include="OxyPlot.Wpf">
+      <HintPath>..\packages\OxyPlot.2014.1.546\lib\net45\OxyPlot.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="OxyPlot.Xps">
+      <HintPath>..\packages\OxyPlot.2014.1.546\lib\net45\OxyPlot.Xps.dll</HintPath>
+    </Reference>
+    <Reference Include="SkinSoft.VisualStyler, Version=2.4.0.0, Culture=neutral, PublicKeyToken=0fda9f423e1d9830, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -66,17 +83,54 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SortWrapper.cs" />
+    <Compile Include="UcCompanyManagement.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UcCompanyManagement.Designer.cs">
+      <DependentUpon>UcCompanyManagement.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UcEmployeeList.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UcEmployeeList.Designer.cs">
+      <DependentUpon>UcEmployeeList.cs</DependentUpon>
+    </Compile>
     <Compile Include="UcEmployeePage.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="UcEmployeePage.Designer.cs">
       <DependentUpon>UcEmployeePage.cs</DependentUpon>
     </Compile>
+    <Compile Include="UcGraph.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UcGraph.Designer.cs">
+      <DependentUpon>UcGraph.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UcOffice.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UcOffice.Designer.cs">
+      <DependentUpon>UcOffice.cs</DependentUpon>
+    </Compile>
     <Compile Include="UcProjectPage.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="UcProjectPage.Designer.cs">
       <DependentUpon>UcProjectPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UcSkillsDisplay.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UcSkillsDisplay.Designer.cs">
+      <DependentUpon>UcSkillsDisplay.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UcStatistics.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UcStatistics.Designer.cs">
+      <DependentUpon>UcStatistics.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="NewGame.resx">
       <DependentUpon>NewGame.cs</DependentUpon>
@@ -96,12 +150,31 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="UcCompanyManagement.resx">
+      <DependentUpon>UcCompanyManagement.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UcEmployeeList.resx">
+      <DependentUpon>UcEmployeeList.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UcEmployeePage.resx">
       <DependentUpon>UcEmployeePage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UcGraph.resx">
+      <DependentUpon>UcGraph.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UcOffice.resx">
+      <DependentUpon>UcOffice.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UcProjectPage.resx">
       <DependentUpon>UcProjectPage.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UcSkillsDisplay.resx">
+      <DependentUpon>UcSkillsDisplay.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UcStatistics.resx">
+      <DependentUpon>UcStatistics.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -120,6 +193,9 @@
       <Project>{34152c60-2157-4758-ae1c-2fe71d4dedeb}</Project>
       <Name>SRH.Core</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Simu’RH 1.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

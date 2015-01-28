@@ -36,4 +36,14 @@ Global
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		VSStyle = XP (Olive).vssf
+		VSTargetControls = FormsAndControls
+		VSToolStripStyle = Mixed
+		VSTextShadow = True
+		VSSkinFlatStyles = True
+		VSSkinToggleButtons = True
+		VSUseSystemFonts = False
+		VSCustomBkgrdPaint = True
+	EndGlobalSection
 EndGlobal

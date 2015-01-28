@@ -68,7 +68,7 @@ namespace SRH.Interface
                         using( myStream )
                         {
                             MainForm.LoadGame( d.FileName );
-                            MessageBox.Show( "La partie a été chargée" );
+                            MessageBox.Show( "La partie a été chargée." );
                             this.Hide();
                         }
                     }

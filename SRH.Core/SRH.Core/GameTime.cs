@@ -9,34 +9,36 @@ namespace SRH.Core
     [Serializable]
     public class GameTime
     {
-        static DateTime _timeOfGame;
+        DateTime _currentTimeOfGame;
         DayOfWeek _dayOfTheWeek;
         string _frenchTranslationDay;
+        Game _myGame;
 
-      
 
-        public GameTime()
+        internal GameTime( Game myGame )
         {
-            _timeOfGame = new DateTime(2015,01,26);
-            _dayOfTheWeek = _timeOfGame.DayOfWeek; 
+            _myGame = myGame;
+            _currentTimeOfGame = new DateTime(2015,01,26);
+            _dayOfTheWeek = _currentTimeOfGame.DayOfWeek; 
         }
-        public static DateTime TimeOfGame
+        public DateTime CurrentTimeOfGame
         {
-            get { return _timeOfGame.Date; }
+            get { return _currentTimeOfGame; }
+			internal set { _currentTimeOfGame = value; }
         }
         public string FrenchDayOfWeek
         {
             get
             {
-                if( _timeOfGame.DayOfWeek == DayOfWeek.Monday )
+                if( _currentTimeOfGame.DayOfWeek == DayOfWeek.Monday )
                     _frenchTranslationDay = "Lundi";
-                else if( _timeOfGame.DayOfWeek == DayOfWeek.Tuesday )
+                else if( _currentTimeOfGame.DayOfWeek == DayOfWeek.Tuesday )
                     _frenchTranslationDay = "Mardi";
-                else if( _timeOfGame.DayOfWeek == DayOfWeek.Wednesday )
+                else if( _currentTimeOfGame.DayOfWeek == DayOfWeek.Wednesday )
                     _frenchTranslationDay = "Mercredi";
-                else if( _timeOfGame.DayOfWeek == DayOfWeek.Thursday )
+                else if( _currentTimeOfGame.DayOfWeek == DayOfWeek.Thursday )
                     _frenchTranslationDay = "Jeudi";
-                else if( _timeOfGame.DayOfWeek == DayOfWeek.Friday )
+                else if( _currentTimeOfGame.DayOfWeek == DayOfWeek.Friday )
                     _frenchTranslationDay = "Vendredi";
 
                 return _frenchTranslationDay;
@@ -45,15 +47,27 @@ namespace SRH.Core
 
         public void newDay()
         {
-            _timeOfGame = _timeOfGame.AddDays( 1 );
+            _currentTimeOfGame = _currentTimeOfGame.AddDays( 1 );
             
-            if( _timeOfGame.DayOfWeek == DayOfWeek.Saturday )
+            if( _currentTimeOfGame.DayOfWeek == DayOfWeek.Saturday )
             {
-                _timeOfGame = _timeOfGame.AddDays( 2 );
+                _currentTimeOfGame = _currentTimeOfGame.AddDays( 2 );
             }
         }
 
-        static public int intervalOfTimeInDays( DateTime? beginningDateNullable )
+		public DateTime TryAddDay()
+		{
+			DateTime currentDate = _currentTimeOfGame;
+			
+			currentDate = currentDate.AddDays( 1 );
+			if( currentDate.DayOfWeek == DayOfWeek.Saturday )
+			{
+				currentDate = currentDate.AddDays( 2 );
+			}
+			return currentDate;
+		}
+
+        public int intervalOfTimeInDays( DateTime? beginningDateNullable )
         {
             //TimeSpan ts = new TimeSpan();
             //ts = _timeOfGame - beginningDate;
@@ -63,7 +77,7 @@ namespace SRH.Core
                 return 0;
             }
             DateTime beginningDate = (DateTime)beginningDateNullable;
-            while (beginningDate < _timeOfGame)
+            while (beginningDate < _currentTimeOfGame)
             {
                 if( IsWorkingDay( beginningDate ) )
                 {
@@ -98,11 +112,33 @@ namespace SRH.Core
         /// </summary>
         /// <param name="date">La date à vérifier</param>
         /// <returns><c>true</c> si la date est un jour ouvré, sinon <c>false</c>.</returns>
-        public static bool IsWorkingDay(DateTime date)
+        bool IsWorkingDay(DateTime date)
         {
             return !(date.DayOfWeek == DayOfWeek.Saturday || date.DayOfWeek == DayOfWeek.Sunday);
         }
         
+        public bool NextDayIsNewMonth()
+        {
+            return (_currentTimeOfGame.Month != TryAddDay().Month);
+        }
+        public bool NextDayIsNewYear()
+        {
+            return (_currentTimeOfGame.Year != TryAddDay().Year);
+        }
+
+		/// <summary>
+		/// Checks if a number of months have passed since a date
+		/// </summary>
+		/// <param name="time">The start date</param>
+		/// <param name="numberOfMonths">The number of months that should have passed</param>
+		/// <returns>True if the months have passed, false if not</returns>
+		public bool AreMonthsPassed( DateTime begginingDate, int numberOfMonths)
+		{
+			if( _currentTimeOfGame >= begginingDate.AddMonths( numberOfMonths ) )
+				return true;
+			else
+				return false;
+		} 
        
     }
 }
