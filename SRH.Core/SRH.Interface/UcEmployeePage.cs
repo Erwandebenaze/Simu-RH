@@ -86,6 +86,7 @@ namespace SRH.Interface
             
             _infoHappiness.SetToolTip( this.increaseSalary, "Le bonheur est généré selon le salaire de l'employé et l'utilisation de ses compétences. Le bonheur peut également être altéré par les responsables du comité d'entreprise." );
             _infoHappiness.SetToolTip( this.decreaseSalary, "Le bonheur est généré selon le salaire de l'employé et l'utilisation de ses compétences. Le bonheur peut également être altéré par les responsables du comité d'entreprise." );
+            _infoBehaviors.AutoPopDelay = 1000000;
 
 			_infoBehaviors.SetToolTip( this.personBehavior, "Les employés peuvent avoir 3 caractères différents :"
 				+ Environment.NewLine + "Ecléctique : l'employé cherche à pratiquer des compétences variées, apprennez lui au moins 4 compétences et faites lui pratiquer ses différentes capacités pour qu'il ne s'ennuie pas !"

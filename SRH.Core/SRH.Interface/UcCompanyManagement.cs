@@ -50,23 +50,23 @@ namespace SRH.Interface
             managerList.Items.AddRange( _managers.Select( m => CreateManager( m ) ).ToArray() );
             _infoManagement.AutoPopDelay = 1000000;
             _infoManagement.SetToolTip( ActiveManagersList,
-                "Chaque manager a un rôle différent. Ci-dessous, les différents managers : \n" + 
-                "Les commerciaux augmentent les gains de vos projets. \n" + 
-                "Les animateurs augmentent le bonheur de vos employés. \n" + 
-                "Les recruteurs baissent les coûts de recrutement et de licenciement. \n" +
-                "Les directeurs de projets organisent mieux votre projet et réduisent ainsi le temps pour les accomplir. \n" +
-                "Les ressources humaines baissent les salaires de vos employés sans altérer le bonheur. \n" + 
-                "Attention, avoir 3 managers de la même catégorie alors que vous n'avez que 5 employés n'est pas une bonne idée. \n"+
+                "Chaque manager a un rôle différent. Ci-dessous, les différents managers : "+  Environment.NewLine +
+                "Les commerciaux augmentent les gains de vos projets. " + Environment.NewLine +
+                "Les animateurs augmentent le bonheur de vos employés. " + Environment.NewLine +
+                "Les recruteurs baissent les coûts de recrutement et de licenciement. " + Environment.NewLine +
+                "Les directeurs de projets organisent mieux votre projet et réduisent ainsi le temps pour les accomplir. " + Environment.NewLine +
+                "Les ressources humaines baissent les salaires de vos employés sans altérer le bonheur. " + Environment.NewLine +
+                "Attention, avoir 3 managers de la même catégorie alors que vous n'avez que 5 employés n'est pas une bonne idée. " + Environment.NewLine +
                 "Selon votre niveau, votre nombre d'employés ou de projets possibles, le plafond de chaque catégorie augmente.");
 
             _infoManagement.SetToolTip( ManagersListTitle,
-                 "Chaque manager a un rôle différent. Ci-dessous, les différents managers : \n" +
-                 "Les commerciaux augmentent les gains de vos projets. \n" +
-                 "Les animateurs augmentent le bonheur de vos employés. \n" +
-                 "Les recruteurs baissent les coûts de recrutement et de licenciement. \n" +
-                 "Les directeurs de projets organisent mieux votre projet et réduisent ainsi le temps pour les accomplir. \n" +
-                 "Les ressources humaines baissent les salaires de vos employés sans altérer le bonheur. \n" +
-                 "Attention, avoir 3 managers de la même catégorie alors que vous n'avez que 5 employés n'est pas une bonne idée. \n" +
+                 "Chaque manager a un rôle différent. Ci-dessous, les différents managers : " + Environment.NewLine +
+                 "Les commerciaux augmentent les gains de vos projets. " + Environment.NewLine +
+                 "Les animateurs augmentent le bonheur de vos employés. " + Environment.NewLine +
+                 "Les recruteurs baissent les coûts de recrutement et de licenciement. " + Environment.NewLine +
+                 "Les directeurs de projets organisent mieux votre projet et réduisent ainsi le temps pour les accomplir. " + Environment.NewLine +
+                 "Les ressources humaines baissent les salaires de vos employés sans altérer le bonheur. " + Environment.NewLine +
+                 "Attention, avoir 3 managers de la même catégorie alors que vous n'avez que 5 employés n'est pas une bonne idée. " + Environment.NewLine +
                  "Selon votre niveau, votre nombre d'employés ou de projets possibles, le plafond de chaque catégorie augmente." );
 
 		}
