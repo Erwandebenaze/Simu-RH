@@ -86,6 +86,15 @@ namespace SRH.Interface
             
             _infoHappiness.SetToolTip( this.increaseSalary, "Le bonheur est généré selon le salaire de l'employé et l'utilisation de ses compétences. Le bonheur peut également être altéré par les responsables du comité d'entreprise." );
             _infoHappiness.SetToolTip( this.decreaseSalary, "Le bonheur est généré selon le salaire de l'employé et l'utilisation de ses compétences. Le bonheur peut également être altéré par les responsables du comité d'entreprise." );
+
+			_infoBehaviors.SetToolTip( this.personBehavior, "Les employés peuvent avoir 3 caractères différents :"
+				+ Environment.NewLine + "Ecléctique : l'employé cherche à pratiquer des compétences variées, apprennez lui au moins 4 compétences et faites lui pratiquer ses différentes capacités pour qu'il ne s'ennuie pas !"
+				+ Environment.NewLine + "Spécialiste : l'employé est spécialisé et aime ça, faites lui développer et pratiquer une ou deux compétences précises."
+				+ Environment.NewLine + "Ambitieux : l'employé veut devenir cadre, faites lui apprendre et pratiquer des compététences managériales." );
+			_infoBehaviors.SetToolTip( this.employeeBehavior, "Les employés peuvent avoir 3 caractères différents :"
+				+ Environment.NewLine + "Ecléctique : l'employé cherche à pratiquer des compétences variées, apprennez lui au moins 4 compétences et faites lui pratiquer ses différentes capacités pour qu'il ne s'ennuie pas !"
+				+ Environment.NewLine + "Spécialiste : l'employé est spécialisé et aime ça, faites lui développer et pratiquer une ou deux compétences précises."
+				+ Environment.NewLine + "Ambitieux : l'employé veut devenir cadre, faites lui apprendre et pratiquer des compététences managériales." );
         }
 
 		internal void LoadEmployeeList()

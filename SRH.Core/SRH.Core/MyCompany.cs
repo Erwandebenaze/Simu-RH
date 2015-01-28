@@ -379,7 +379,6 @@ namespace SRH.Core
 						ReaffectEmployeeToProject( e );
                 }
             }
-
 		}
 
 		/// <summary>

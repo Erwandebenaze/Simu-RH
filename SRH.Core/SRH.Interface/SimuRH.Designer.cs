@@ -56,11 +56,6 @@
 			this.experiencePanel = new System.Windows.Forms.Panel();
 			this.CompanyWealth = new System.Windows.Forms.Label();
 			this.visualStyler1 = new SkinSoft.VisualStyler.VisualStyler(this.components);
-			this.ucOffice = new SRH.Interface.UcOffice();
-			this.ucEmployeePage = new SRH.Interface.UcEmployeePage();
-			this.ucProjectPage = new SRH.Interface.UcProjectPage();
-			this.ucCompanyManagement1 = new SRH.Interface.UcCompanyManagement();
-			this.ucStatistics1 = new SRH.Interface.UcStatistics();
 			WealthTitle = new System.Windows.Forms.Label();
 			this.tabControl1.SuspendLayout();
 			this.Board.SuspendLayout();

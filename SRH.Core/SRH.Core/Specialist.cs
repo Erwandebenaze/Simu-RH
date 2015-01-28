@@ -17,12 +17,17 @@ namespace SRH.Core
 			CreateFavoriteSkills();
         }
 
+		internal List<Skill> PreferedSkills
+		{
+			get { return _preferedSkills; }
+		}
+
 		internal void CreateFavoriteSkills()
 		{
 			List<Skill> prefSkills = new List<Skill>();
 			foreach( Skill s in _person.Skills.Where( skill => skill is ProjSkill ).OrderByDescending( s => s.Level.CurrentXp ) )
 			{
-				if( prefSkills.Count <= 2 )
+				if( prefSkills.Count < 2 )
 				{
 					prefSkills.Add( s );
 				}
@@ -37,9 +42,7 @@ namespace SRH.Core
 			if( _person.Lb.Game.TimeGame.AreMonthsPassed( _lastDateSkillsReactionCheck, 3 ) )
 			{
 				// If the employee hasn't used one of his favorite skills recently (set in Behavior method CheckSkillsUsed) he loses happiness
-				IEnumerable<Skill> ps = _person.Skills.Where( s => _skillsUsed.Any( kvp => s.SkillName == kvp.Key ) ).DefaultIfEmpty(null);
-				List<Skill> preferedSkillsUsed = new List<Skill>( ps );
-				if( preferedSkillsUsed[0] == null )
+				if( !_person.Skills.Any( s => _skillsUsed.Any( kvp => s.SkillName == kvp.Key ) ) )
 					_person.Employee.Happiness.ChangeHappinessScore( -2 );
 				else
 					_person.Employee.Happiness.ChangeHappinessScore( 2 );
