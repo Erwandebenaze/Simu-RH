@@ -41,7 +41,7 @@ namespace SRH.Core
             _skillsUsed.Add( s, _person.Lb.Game.TimeGame.CurrentTimeOfGame );
 		}
 
-		private void AddOrUpdateEmployeeSkillInUse()
+		internal void AddOrUpdateEmployeeSkillInUse()
 		{
 			// Puts the skill in project in the SkillsUsed list
             if( _person.Employee.SkillInProject != null )
