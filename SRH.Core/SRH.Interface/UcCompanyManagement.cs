@@ -48,6 +48,7 @@ namespace SRH.Interface
 			_managers = GameContext.CurrentGame.PlayerCompany.Employees
 				.Where( e => e.SkillAffectedToCompany != null );
             managerList.Items.AddRange( _managers.Select( m => CreateManager( m ) ).ToArray() );
+            _infoManagement.AutoPopDelay = 1000000;
             _infoManagement.SetToolTip( ActiveManagersList,
                 "Chaque manager a un rôle différent. Ci-dessous, les différents managers : \n" + 
                 "Les commerciaux augmentent les gains de vos projets. \n" + 

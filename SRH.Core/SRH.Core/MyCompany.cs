@@ -380,28 +380,6 @@ namespace SRH.Core
                 }
             }
 
-            //List<Employee> sickEmployees = new List<Employee>(_employees.Where( e => e.IsSick.Value != 0 ).DefaultIfEmpty( null ) );
-            //if( sickEmployees[0] != null )
-            //{
-            //    foreach( Employee e in sickEmployees )
-            //    {
-            //        e.UpdateSickStatus();
-            //        if( !e.Busy )
-            //            ReaffectEmployeeToProject( e );
-            //    }
-					
-            //}
-
-            //List<Employee> awayEmployees = new List<Employee>( _employees.Where( e => e.InVacation.Value != 0 ).DefaultIfEmpty( null ) );
-            //if( awayEmployees[0] != null )
-            //{
-            //    foreach( Employee e in sickEmployees )
-            //    {
-            //        e.UpdateVacationStatus();
-            //        if( !e.Busy )
-            //            ReaffectEmployeeToProject( e );
-            //    }
-            //}
 		}
 
 		/// <summary>

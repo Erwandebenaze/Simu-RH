@@ -24,15 +24,16 @@ namespace SRH.Core
 		public Game( int seed, string companyName )
 		{
 			_randomNumberGenerator = new Random( seed );
-            _timeGame = new GameTime( this );
             _market = new LaborMarket( this );
             _events = new Dictionary<Employee, string>();
-			_competitors = new List<Competitor>();
 
             _playerCompany = new MyCompany( this, companyName );
             CSV csvImport = new CSV();
 			_possibleProjects = csvImport.ReadCsv(_playerCompany, "../../../Data/data.csv" );
+            _timeGame = new GameTime( this );
+            _competitors = new List<Competitor>();
             AddCompetitors();
+
 
 		}
 
@@ -269,7 +270,11 @@ namespace SRH.Core
 
         public void SomeoneRetirement( Employee emp )
         {
-            _events.Add( emp, "Retraite" );
+            if( !_events.ContainsKey( emp ) )
+            {
+                emp.TimeOfEvent = TimeGame.CurrentTimeOfGame;
+                _events.Add( emp, "Retraite" );
+            }
         }
 
         public void Retirement(Employee emp)
@@ -285,7 +290,15 @@ namespace SRH.Core
 
         public void SomeoneFedUp( Employee emp )
         {
-            _events.Add( emp, "Raz-le-bol" );
+            if( !_events.ContainsKey( emp ) )
+            {
+                emp.TimeOfEvent = TimeGame.CurrentTimeOfGame;
+                _events.Add( emp, "Raz-le-bol" );
+            }
+            else
+            {
+                _events.Remove( emp );
+            }
             
         }
 
@@ -304,7 +317,10 @@ namespace SRH.Core
         public void SomeoneHolidays( Employee emp )
         {
             if( !_events.ContainsKey( emp ) )
+            {
+                emp.TimeOfEvent = TimeGame.CurrentTimeOfGame;
                 _events.Add( emp, "Vacances" );
+            }
         }
 
         public void Holidays( Employee emp )
@@ -321,7 +337,10 @@ namespace SRH.Core
         public void SomeoneSeek( Employee emp )
         {
             if( !_events.ContainsKey( emp ) )
+            {
+                emp.TimeOfEvent = TimeGame.CurrentTimeOfGame;
                 _events.Add( emp, "Maladie" );
+            }
         }
 
         public void Seek( Employee emp )

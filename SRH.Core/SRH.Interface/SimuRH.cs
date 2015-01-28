@@ -322,7 +322,7 @@ namespace SRH.Interface
             }
             catch (System.IO.FileNotFoundException)
             {
-                MessageBox.Show( "La partie a été créé." );
+                MessageBox.Show( "La partie a été créée." );
                 _myGame = new Game( 1,name );
 				Reload();
             }
