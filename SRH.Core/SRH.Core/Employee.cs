@@ -265,7 +265,7 @@ namespace SRH.Core
 			{
 				if( _comp.Game.TimeGame.intervalOfTimeInDays( _inVacation.Key ) == _inVacation.Value )
 				{
-					_busy = false;
+                    _busy = false;
                     _comp.Game.Events.Remove( this );
 					_inVacation = new KeyValuePair<DateTime, int>( _comp.Game.TimeGame.CurrentTimeOfGame, 0 );
 				}

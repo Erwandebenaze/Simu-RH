@@ -81,7 +81,7 @@ namespace SRH.Core
             }
         }
 
-        private int FixNextXpRequired( int level)
+        internal int FixNextXpRequired( int level)
         {
 			int NextXpRequired = 0;
 
