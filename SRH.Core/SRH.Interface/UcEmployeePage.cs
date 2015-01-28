@@ -89,11 +89,11 @@ namespace SRH.Interface
             _infoBehaviors.AutoPopDelay = 1000000;
 
 			_infoBehaviors.SetToolTip( this.personBehavior, "Les employés peuvent avoir 3 caractères différents :"
-				+ Environment.NewLine + "Ecléctique : l'employé cherche à pratiquer des compétences variées, apprennez lui au moins 4 compétences et faites lui pratiquer ses différentes capacités pour qu'il ne s'ennuie pas !"
+				+ Environment.NewLine + "Éclectique : l'employé cherche à pratiquer des compétences variées, apprennez lui au moins 4 compétences et faites lui pratiquer ses différentes capacités pour qu'il ne s'ennuie pas !"
 				+ Environment.NewLine + "Spécialiste : l'employé est spécialisé et aime ça, faites lui développer et pratiquer une ou deux compétences précises."
 				+ Environment.NewLine + "Ambitieux : l'employé veut devenir cadre, faites lui apprendre et pratiquer des compététences managériales." );
 			_infoBehaviors.SetToolTip( this.employeeBehavior, "Les employés peuvent avoir 3 caractères différents :"
-				+ Environment.NewLine + "Ecléctique : l'employé cherche à pratiquer des compétences variées, apprennez lui au moins 4 compétences et faites lui pratiquer ses différentes capacités pour qu'il ne s'ennuie pas !"
+				+ Environment.NewLine + "Éclectique : l'employé cherche à pratiquer des compétences variées, apprennez lui au moins 4 compétences et faites lui pratiquer ses différentes capacités pour qu'il ne s'ennuie pas !"
 				+ Environment.NewLine + "Spécialiste : l'employé est spécialisé et aime ça, faites lui développer et pratiquer une ou deux compétences précises."
 				+ Environment.NewLine + "Ambitieux : l'employé veut devenir cadre, faites lui apprendre et pratiquer des compététences managériales." );
         }
@@ -427,7 +427,7 @@ namespace SRH.Interface
 			string behavior;
 
 			if( p.Behavior is Eclectic )
-				behavior = "Éclectic";
+				behavior = "Éclectique";
 			else if( p.Behavior is Specialist )
 				behavior = "Spécialiste";
 			else
