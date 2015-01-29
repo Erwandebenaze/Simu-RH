@@ -26,7 +26,7 @@ namespace SRH.Interface
         public SimuRH()
         {
             InitializeComponent();
-            _myGame = new Game( 2, "Erwan" );
+            _myGame = new Game( 1, "Tristan" );
             //_myGame = GameLoader.Load( "Erwan" );
             _optionsForm = new Options();
             _timeOfGame = _myGame.TimeGame;
@@ -322,8 +322,10 @@ namespace SRH.Interface
             }
             catch (System.IO.FileNotFoundException)
             {
-                MessageBox.Show( "La partie a été créé." );
+                MessageBox.Show( "La partie a été créée." );
                 _myGame = new Game( 1,name );
+                _timeOfGame = _myGame.TimeGame;
+
 				Reload();
             }
 
@@ -339,6 +341,7 @@ namespace SRH.Interface
         public void LoadGame( string game )
         {
             _myGame = GameLoader.Load( game );
+            _timeOfGame = _myGame.TimeGame;
 			Reload();
         }
 
@@ -409,11 +412,6 @@ namespace SRH.Interface
             _x10Button.Enabled = false;
             _timer.Interval = interval/10;
         }
-
-		private void SimuRH_Load()
-		{
-
-		}
 
 		private void tabControl1_SelectedIndexChanged( object sender, TabControlEventArgs e )
 		{

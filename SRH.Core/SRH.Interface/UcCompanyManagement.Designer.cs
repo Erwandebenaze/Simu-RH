@@ -113,7 +113,7 @@
             this.tableLayoutPanel2.Controls.Add(this.DesaffectManager, 0, 2);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(4);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 3;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 31F));
@@ -150,7 +150,7 @@
             listViewGroup4,
             listViewGroup5});
             this.managerList.Location = new System.Drawing.Point(4, 35);
-            this.managerList.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.managerList.Margin = new System.Windows.Forms.Padding(4);
             this.managerList.Name = "managerList";
             this.managerList.Size = new System.Drawing.Size(649, 734);
             this.managerList.TabIndex = 7;
@@ -181,7 +181,7 @@
             // DesaffectManager
             // 
             this.DesaffectManager.Location = new System.Drawing.Point(4, 777);
-            this.DesaffectManager.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.DesaffectManager.Margin = new System.Windows.Forms.Padding(4);
             this.DesaffectManager.Name = "DesaffectManager";
             this.DesaffectManager.Size = new System.Drawing.Size(100, 25);
             this.DesaffectManager.TabIndex = 0;
@@ -200,7 +200,7 @@
             this.tableLayoutPanel1.Controls.Add(this.ManagersListTitle, 0, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(4);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 4;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
@@ -220,7 +220,7 @@
             this.panel4.Controls.Add(this.AffectManager);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel4.Location = new System.Drawing.Point(4, 575);
-            this.panel4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel4.Margin = new System.Windows.Forms.Padding(4);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(884, 226);
             this.panel4.TabIndex = 8;
@@ -262,7 +262,7 @@
             // 
             this.SkillsToAffect.FormattingEnabled = true;
             this.SkillsToAffect.Location = new System.Drawing.Point(179, 188);
-            this.SkillsToAffect.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.SkillsToAffect.Margin = new System.Windows.Forms.Padding(4);
             this.SkillsToAffect.Name = "SkillsToAffect";
             this.SkillsToAffect.Size = new System.Drawing.Size(283, 24);
             this.SkillsToAffect.TabIndex = 2;
@@ -273,7 +273,7 @@
             // 
             this.AffectManager.Enabled = false;
             this.AffectManager.Location = new System.Drawing.Point(483, 186);
-            this.AffectManager.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.AffectManager.Margin = new System.Windows.Forms.Padding(4);
             this.AffectManager.Name = "AffectManager";
             this.AffectManager.Size = new System.Drawing.Size(100, 28);
             this.AffectManager.TabIndex = 4;
@@ -284,11 +284,8 @@
             // 
             // _infoManagement
             // 
-            this._infoManagement.AutomaticDelay = 1000;
-            this._infoManagement.AutoPopDelay = 50000;
-            this._infoManagement.InitialDelay = 200;
             this._infoManagement.IsBalloon = true;
-            this._infoManagement.ReshowDelay = 200;
+            this._infoManagement.ShowAlways = true;
             this._infoManagement.ToolTipTitle = "Les différents managers";
             // 
             // UcSkillsDisplay1

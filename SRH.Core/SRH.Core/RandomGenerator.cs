@@ -73,7 +73,8 @@ namespace SRH.Core
 		{
 			string randomSkillName;
 			List<string> skillsToChooseFrom = null;
-			int alea = _randomNumberGenerator.Next( 1, 5 );
+            Random randGen = new Random( Guid.NewGuid().GetHashCode() );
+            int alea = randGen.Next( 1, 5 );
 
 			if( alea == 1 )
 			{
@@ -109,7 +110,8 @@ namespace SRH.Core
 			bool check = false;
 			while( !check )
 			{
-				points = _randomNumberGenerator.Next( 2, 7 );
+                Random randGen = new Random( Guid.NewGuid().GetHashCode() );
+                points = randGen.Next( 2, 7 );
 				if( points == 2 || points > 4 )
 				{
 					if( _randomNumberGenerator.Next( 1, 6 ) == 5 )
@@ -129,7 +131,8 @@ namespace SRH.Core
 
             while( points > 1 )
             {
-                int rand = _randomNumberGenerator.Next( 1, 4 );
+                Random randGen = new Random( Guid.NewGuid().GetHashCode() );
+                int rand = randGen.Next( 1, 4 );
                 // Add a new level 1 Skill to the Person
                 if( rand <= 2 && p.Skills.Count < 4 )
                 {
@@ -148,7 +151,8 @@ namespace SRH.Core
                 else
                 {
                     Skill skillToImprove = p.Skills[ _randomNumberGenerator.Next( 0, p.Skills.Count ) ];
-                    skillToImprove.Level.CurrentLevel ++;
+                    int xpToNextLevel = skillToImprove.Level.NextXpRequired - skillToImprove.Level.CurrentXp;
+                    skillToImprove.Level.IncreaseXp( xpToNextLevel );
                     points--;
                 }
             }
@@ -156,10 +160,12 @@ namespace SRH.Core
 
 		internal void EmployeeGetsSick( Employee e )
 		{
-			// If the employee hasn't been checked for at least a month and is not already sick
+            Random randGen = new Random( Guid.NewGuid().GetHashCode() );
+
+            // If the employee hasn't been checked for at least a month and is not already sick
 			if( e.Comp.Game.TimeGame.AreMonthsPassed( e.IsSick.Key, 1 ) && e.IsSick.Value == 0 )
 			{
-				if( _randomNumberGenerator.Next( 1, 13 ) == 12 )
+                if( randGen.Next( 1, 13 ) == 12 )
 				{
 					e.IsSick = new KeyValuePair<DateTime, int>( _game.TimeGame.CurrentTimeOfGame, CreateRandomDuration() );
 					e.Busy = true;
@@ -176,10 +182,12 @@ namespace SRH.Core
 
 		internal void EmployeeGoesInVacation( Employee e )
 		{
+            Random randGen = new Random( Guid.NewGuid().GetHashCode() );
+
 			// If the employee hasn't been checked for at least a month and is not already in vacation
 			if( e.Comp.Game.TimeGame.AreMonthsPassed( e.InVacation.Key, 1 ) && e.InVacation.Value == 0 && e.VacationDays != 0)
 			{
-				if( _randomNumberGenerator.Next( 1, 6 ) == 5 )
+                if( randGen.Next( 1, 6 ) == 5 )
 				{
 					int duration = CreateRandomDuration( e );
 
@@ -205,15 +213,17 @@ namespace SRH.Core
 		/// <returns> A number of vacation days </returns>
 		private int CreateRandomDuration( Employee e )
 		{
+            Random randGen = new Random( Guid.NewGuid().GetHashCode() );
+
 			int days = 0;
 			bool check = false;
 
 			while( !check )
 			{
-				days = _randomNumberGenerator.Next( 1, e.VacationDays );
+                days = randGen.Next( 1, e.VacationDays );
 				if( days < 3 || days > 11 )
 				{
-					if( _randomNumberGenerator.Next( 1, 11 ) == 10 )
+                    if( randGen.Next( 1, 11 ) == 10 )
 						check = true;
 				}
 				else
@@ -230,13 +240,14 @@ namespace SRH.Core
 		{
 			int days = 0;
 			bool check = false;
+            Random randGen = new Random( Guid.NewGuid().GetHashCode() );
 
 			while(!check)
 			{
-				days = _randomNumberGenerator.Next( 1, 31 );
+                days = randGen.Next( 1, 31 );
 				if( days < 3 || days > 7 )
 				{
-					if( _randomNumberGenerator.Next( 1, 11 ) == 10 )
+                    if( randGen.Next( 1, 11 ) == 10 )
 						check = true;
 				}
 				else
@@ -247,10 +258,11 @@ namespace SRH.Core
 
 		internal void CreateRandomBehavior( Person p )
 		{
-			int rand = _randomNumberGenerator.Next( 1, 91 );
-			if( rand <= 30 )
+            Random randGen = new Random( Guid.NewGuid().GetHashCode() );
+            int rand = randGen.Next( 3001 );
+			if( rand <= 1000 )
 				p.Behavior = new Eclectic( p );
-			else if( rand <= 60 )
+            else if( rand <= 2000 )
 				p.Behavior = new Specialist( p );
 			else
 				p.Behavior = new Ambitious( p );

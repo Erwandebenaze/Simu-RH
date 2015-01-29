@@ -13,6 +13,7 @@ namespace SRH.Interface
 {
     public partial class UcOffice : UserControl
     {
+        DateTime _lastRefreshEvent;
          IGameContext GameContext
         {
             get { return (IGameContext)TopLevelControl; }
@@ -20,6 +21,7 @@ namespace SRH.Interface
         public UcOffice()
         {
             InitializeComponent();
+            
         }
 
         protected override void OnLoad( EventArgs e )
@@ -33,6 +35,10 @@ namespace SRH.Interface
         }
         internal void LoadPage()
         {
+            if( _lastRefreshEvent  == null )
+            {
+               _lastRefreshEvent = GameContext.CurrentGame.TimeGame.CurrentTimeOfGame;
+            }
             AffectOfficeFields();
             GenerateListOfEvents();
             GenerateOfficeToolTip();
@@ -51,11 +57,24 @@ namespace SRH.Interface
 
         internal void GenerateListOfEvents()
         {
-            _listViewEvents.Items.Clear();
-            if( GameContext.CurrentGame.Events.Count != 0 )
+            if( GameContext.CurrentGame.TimeGame.AreMonthsPassed( _lastRefreshEvent, 1 ) ) 
             {
-                for( int i = 0; i < GameContext.CurrentGame.Events.Count; i++ )
-                    _listViewEvents.Items.AddRange( GameContext.CurrentGame.Events.Select( ev => CreateListItemViewEvents( ev ) ).ToArray() );
+                _listViewEvents.Items.Clear();
+                _lastRefreshEvent = GameContext.CurrentGame.TimeGame.CurrentTimeOfGame;
+                if( GameContext.CurrentGame.Events.Count != 0 )
+                {
+                    _listViewEvents.Items.AddRange( GameContext.CurrentGame.Events
+                            .Select( ev => CreateListItemViewEvents( ev ) ).ToArray() );
+                }
+            }
+            
+            if( GameContext.CurrentGame.Events.Count != 0 && _listViewEvents.Items.Count < GameContext.CurrentGame.Events.Count)
+            {
+                _listViewEvents.Items.AddRange( GameContext.CurrentGame.Events
+                    .Where( et => et.Value != "Retraite" )
+                    .Where( et => et.Value != "Raz-le-bol" )
+                    .Select( ev => CreateListItemViewEvents( ev ) )
+                    .ToArray() );
             }
         }
         private ListViewItem CreateListItemViewEvents( KeyValuePair<Employee,string> dico )
@@ -65,26 +84,34 @@ namespace SRH.Interface
             {
                 if( dico.Key.SkillInProject != null )
                 {
-                    i = new ListViewItem( "Votre employé(e) " + dico.Key.Worker.FirstName + " " + dico.Key.Worker.LastName + " est parti(e) à la retraite, le projet : " + dico.Key.Project.Name + " a été ralenti. " + dico.Key.Worker.FirstName + " " + dico.Key.Worker.LastName + " avait la compétence " + dico.Key.SkillInProject.SkillName + "." );
+                    i = new ListViewItem( "[" + dico.Key.TimeOfEvent.ToString( "d" ) + "] Votre employé(e) " + dico.Key.Worker.FirstName + " " + dico.Key.Worker.LastName + " est parti(e) à la retraite, le projet : " + dico.Key.Project.Name + " a été ralenti. " + dico.Key.Worker.FirstName + " " + dico.Key.Worker.LastName + " avait la compétence " + dico.Key.SkillInProject.SkillName + "." );
                 }
                 else
                 {
-                    i = new ListViewItem( "Votre employé(e) " + dico.Key.Worker.FirstName + " " + dico.Key.Worker.LastName + " est parti(e) à la retraite." );
+                    i = new ListViewItem( "[" + dico.Key.TimeOfEvent.ToString( "d" ) + "] Votre employé(e) " + dico.Key.Worker.FirstName + " " + dico.Key.Worker.LastName + " est parti(e) à la retraite." );
                 }
             }
             else if( dico.Value == "Raz-le-bol" )
             {
-                i = new ListViewItem( "Votre employé(e) " + dico.Key.Worker.FirstName + " " + dico.Key.Worker.LastName + " est parti(e) de votre entreprise, il (elle) était trop malheureu(se)x." );
+                if( dico.Key.SkillInProject != null )
+                {
+                    i = new ListViewItem( "[" + dico.Key.TimeOfEvent.ToString( "d" ) + "] Votre employé(e) " + dico.Key.Worker.FirstName + " " + dico.Key.Worker.LastName + " est parti(e) de votre entreprise, il (elle) était trop malheureu(se)x. Le projet : " + dico.Key.Project.Name + " a été ralenti. " + dico.Key.Worker.FirstName + " " + dico.Key.Worker.LastName + " avait la compétence " + dico.Key.SkillInProject.SkillName + "." );
+                }
+                else
+                {
+                    i = new ListViewItem( "[" + dico.Key.TimeOfEvent.ToString( "d" ) + "] Votre employé(e) " + dico.Key.Worker.FirstName + " " + dico.Key.Worker.LastName + " est parti(e) de votre entreprise." );
+                }
+               
 
             }
             else if( dico.Value == "Vacances" )
             {
-                i = new ListViewItem( "Votre employé(e) " + dico.Key.Worker.FirstName + " " + dico.Key.Worker.LastName + " est parti(e) en vacances, il (elle) sera bientôt de retour." );
+                i = new ListViewItem( "[" + dico.Key.TimeOfEvent.ToString( "d" ) + "] Votre employé(e) " + dico.Key.Worker.FirstName + " " + dico.Key.Worker.LastName + " est parti(e) en vacances, il (elle) sera bientôt de retour." );
 
             }
             else if( dico.Value == "Maladie" )
             {
-                i = new ListViewItem( "Votre employé(e) " + dico.Key.Worker.FirstName + " " + dico.Key.Worker.LastName + " est tombé(e) malade, il (elle) sera bientôt de retour." );
+                i = new ListViewItem( "[" + dico.Key.TimeOfEvent.ToString( "d" ) + "] Votre employé(e) " + dico.Key.Worker.FirstName + " " + dico.Key.Worker.LastName + " est tombé(e) malade, il (elle) sera bientôt de retour." );
 
             } 
             

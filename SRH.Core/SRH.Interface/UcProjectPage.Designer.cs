@@ -229,7 +229,7 @@
             this.listPossibleProjects.TabIndex = 0;
             this.listPossibleProjects.UseCompatibleStateImageBehavior = false;
             this.listPossibleProjects.View = System.Windows.Forms.View.Details;
-            this.listPossibleProjects.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.listPossibleProjects_ColumnClick);
+           // this.listPossibleProjects.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.listPossibleProjects_ColumnClick);
             this.listPossibleProjects.SelectedIndexChanged += new System.EventHandler(this.listPossibleProjects_SelectedIndexChanged);
             // 
             // Project
