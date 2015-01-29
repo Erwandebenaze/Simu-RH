@@ -136,10 +136,14 @@ namespace SRH.Interface
 
 		private void Affect_Manager_Click( object sender, EventArgs e )
 		{
-			MyCompany playerCompany = (MyCompany)_currentEmployee.Comp;
-			playerCompany.AddManager( _currentEmployee, _currentSkillToAffect );
-			AffectManager.Enabled = false;
-			LoadPage();
+            if( _currentEmployee != null )
+            {
+                MyCompany playerCompany = (MyCompany)_currentEmployee.Comp;
+                playerCompany.AddManager( _currentEmployee, _currentSkillToAffect );
+                AffectManager.Enabled = false;
+                LoadPage();
+            }
+
 		}
 
 		private void DesaffectManager_Click( object sender, EventArgs e )

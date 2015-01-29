@@ -359,10 +359,8 @@ namespace SRH.Interface
 
 		private void desaffectEmployee_Click( object sender, EventArgs e )
 		{
-            if (_currentProj != null )
+            if (_currentProj != null && _currentEmployee != null)
             {
-
-            
 			    if( !_currentProj.SkillsRequired.ContainsKey( _currentSkill ) )
 			    {
 				    if( _currentProj.EmployeesAffectedWithSkill.Count != 0 )
@@ -396,7 +394,7 @@ namespace SRH.Interface
 
 		private void affectEmployee_Click( object sender, EventArgs e )
 		{
-            if( _currentProj != null )
+            if( _currentProj != null && _currentEmployee != null)
             {
 			    if( listSkillsAvailable.SelectedItems.Count > 0 )
 			    {
@@ -414,21 +412,6 @@ namespace SRH.Interface
 
             }
 		}
-
-        private void listPossibleProjects_ColumnClick( object sender, ColumnClickEventArgs e )
-        {
-            //listPossibleProjects.Items.Clear();
-            //listPossibleProjects.Items.AddRange
-            //( _possibleProjects.Select( p => CreateListItemViewProjects( p ) )
-            //                   .OrderBy( i => new SortWrapper(i, e.Column))
-            //                   .ToArray()
-            //);
-            if( listPossibleProjects.Sorting == SortOrder.Ascending )
-                listPossibleProjects.Sorting = SortOrder.Descending;
-            else
-                listPossibleProjects.Sorting = SortOrder.Ascending;
-
-        }
 
     }
 }
