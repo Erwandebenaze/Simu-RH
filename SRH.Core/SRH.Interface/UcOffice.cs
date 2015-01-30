@@ -93,7 +93,15 @@ namespace SRH.Interface
             }
             else if( dico.Value == "Raz-le-bol" )
             {
-                i = new ListViewItem( "[" + dico.Key.TimeOfEvent.ToString( "d" ) + "] Votre employé(e) " + dico.Key.Worker.FirstName + " " + dico.Key.Worker.LastName + " est parti(e) de votre entreprise, il (elle) était trop malheureu(se)x." );
+                if( dico.Key.SkillInProject != null )
+                {
+                    i = new ListViewItem( "[" + dico.Key.TimeOfEvent.ToString( "d" ) + "] Votre employé(e) " + dico.Key.Worker.FirstName + " " + dico.Key.Worker.LastName + " est parti(e) de votre entreprise, il (elle) était trop malheureu(se)x. Le projet : " + dico.Key.Project.Name + " a été ralenti. " + dico.Key.Worker.FirstName + " " + dico.Key.Worker.LastName + " avait la compétence " + dico.Key.SkillInProject.SkillName + "." );
+                }
+                else
+                {
+                    i = new ListViewItem( "[" + dico.Key.TimeOfEvent.ToString( "d" ) + "] Votre employé(e) " + dico.Key.Worker.FirstName + " " + dico.Key.Worker.LastName + " est parti(e) de votre entreprise." );
+                }
+               
 
             }
             else if( dico.Value == "Vacances" )

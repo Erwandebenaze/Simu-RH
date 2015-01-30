@@ -29,10 +29,10 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.ListViewGroup listViewGroup5 = new System.Windows.Forms.ListViewGroup("Retraite", System.Windows.Forms.HorizontalAlignment.Left);
-            System.Windows.Forms.ListViewGroup listViewGroup6 = new System.Windows.Forms.ListViewGroup("Raz-le-bol", System.Windows.Forms.HorizontalAlignment.Left);
-            System.Windows.Forms.ListViewGroup listViewGroup7 = new System.Windows.Forms.ListViewGroup("Vacances", System.Windows.Forms.HorizontalAlignment.Left);
-            System.Windows.Forms.ListViewGroup listViewGroup8 = new System.Windows.Forms.ListViewGroup("Maladie", System.Windows.Forms.HorizontalAlignment.Left);
+            System.Windows.Forms.ListViewGroup listViewGroup1 = new System.Windows.Forms.ListViewGroup("Retraite", System.Windows.Forms.HorizontalAlignment.Left);
+            System.Windows.Forms.ListViewGroup listViewGroup2 = new System.Windows.Forms.ListViewGroup("Raz-le-bol", System.Windows.Forms.HorizontalAlignment.Left);
+            System.Windows.Forms.ListViewGroup listViewGroup3 = new System.Windows.Forms.ListViewGroup("Vacances", System.Windows.Forms.HorizontalAlignment.Left);
+            System.Windows.Forms.ListViewGroup listViewGroup4 = new System.Windows.Forms.ListViewGroup("Maladie", System.Windows.Forms.HorizontalAlignment.Left);
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this._listViewEvents = new System.Windows.Forms.ListView();
@@ -130,8 +130,8 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.BudgetGroupBox);
-            this.splitContainer1.Size = new System.Drawing.Size(1120, 719);
-            this.splitContainer1.SplitterDistance = 697;
+            this.splitContainer1.Size = new System.Drawing.Size(1187, 712);
+            this.splitContainer1.SplitterDistance = 789;
             this.splitContainer1.TabIndex = 0;
             // 
             // splitContainer2
@@ -148,33 +148,35 @@
             // splitContainer2.Panel2
             // 
             this.splitContainer2.Panel2.Controls.Add(this.groupBox1);
-            this.splitContainer2.Size = new System.Drawing.Size(697, 719);
-            this.splitContainer2.SplitterDistance = 384;
+            this.splitContainer2.Size = new System.Drawing.Size(789, 712);
+            this.splitContainer2.SplitterDistance = 380;
             this.splitContainer2.TabIndex = 0;
             // 
             // _listViewEvents
             // 
+            this._listViewEvents.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this._listViewEvents.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.Evenement});
             this._listViewEvents.Dock = System.Windows.Forms.DockStyle.Fill;
+            this._listViewEvents.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this._listViewEvents.FullRowSelect = true;
-            listViewGroup5.Header = "Retraite";
-            listViewGroup5.Name = "Retraite";
-            listViewGroup6.Header = "Raz-le-bol";
-            listViewGroup6.Name = "Raz-le-bol";
-            listViewGroup7.Header = "Vacances";
-            listViewGroup7.Name = "Vacances";
-            listViewGroup8.Header = "Maladie";
-            listViewGroup8.Name = "Maladie";
+            listViewGroup1.Header = "Retraite";
+            listViewGroup1.Name = "Retraite";
+            listViewGroup2.Header = "Raz-le-bol";
+            listViewGroup2.Name = "Raz-le-bol";
+            listViewGroup3.Header = "Vacances";
+            listViewGroup3.Name = "Vacances";
+            listViewGroup4.Header = "Maladie";
+            listViewGroup4.Name = "Maladie";
             this._listViewEvents.Groups.AddRange(new System.Windows.Forms.ListViewGroup[] {
-            listViewGroup5,
-            listViewGroup6,
-            listViewGroup7,
-            listViewGroup8});
+            listViewGroup1,
+            listViewGroup2,
+            listViewGroup3,
+            listViewGroup4});
             this._listViewEvents.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this._listViewEvents.Location = new System.Drawing.Point(0, 0);
             this._listViewEvents.Name = "_listViewEvents";
-            this._listViewEvents.Size = new System.Drawing.Size(697, 384);
+            this._listViewEvents.Size = new System.Drawing.Size(789, 380);
             this._listViewEvents.TabIndex = 24;
             this._listViewEvents.UseCompatibleStateImageBehavior = false;
             this._listViewEvents.View = System.Windows.Forms.View.Details;
@@ -182,7 +184,7 @@
             // Evenement
             // 
             this.Evenement.Text = "Événements";
-            this.Evenement.Width = 692;
+            this.Evenement.Width = 935;
             // 
             // groupBox1
             // 
@@ -199,7 +201,7 @@
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox1.Location = new System.Drawing.Point(0, 0);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(697, 331);
+            this.groupBox1.Size = new System.Drawing.Size(789, 328);
             this.groupBox1.TabIndex = 25;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Mon entreprise";
@@ -303,7 +305,7 @@
             this.BudgetGroupBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.BudgetGroupBox.Location = new System.Drawing.Point(0, 0);
             this.BudgetGroupBox.Name = "BudgetGroupBox";
-            this.BudgetGroupBox.Size = new System.Drawing.Size(419, 719);
+            this.BudgetGroupBox.Size = new System.Drawing.Size(394, 712);
             this.BudgetGroupBox.TabIndex = 0;
             this.BudgetGroupBox.TabStop = false;
             this.BudgetGroupBox.Text = "Budget";
@@ -335,7 +337,7 @@
             this.groupBox3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox3.Location = new System.Drawing.Point(3, 468);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(413, 248);
+            this.groupBox3.Size = new System.Drawing.Size(388, 241);
             this.groupBox3.TabIndex = 6;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Mouvements annuels";
@@ -343,7 +345,7 @@
             // _chargesYear
             // 
             this._chargesYear.AutoSize = true;
-            this._chargesYear.Location = new System.Drawing.Point(195, 148);
+            this._chargesYear.Location = new System.Drawing.Point(158, 149);
             this._chargesYear.Name = "_chargesYear";
             this._chargesYear.Size = new System.Drawing.Size(17, 17);
             this._chargesYear.TabIndex = 24;
@@ -353,7 +355,7 @@
             // 
             this._totalRecYear.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this._totalRecYear.AutoSize = true;
-            this._totalRecYear.Location = new System.Drawing.Point(326, 164);
+            this._totalRecYear.Location = new System.Drawing.Point(264, 165);
             this._totalRecYear.Name = "_totalRecYear";
             this._totalRecYear.Size = new System.Drawing.Size(17, 17);
             this._totalRecYear.TabIndex = 31;
@@ -362,7 +364,7 @@
             // label20
             // 
             this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(67, 148);
+            this.label20.Location = new System.Drawing.Point(30, 149);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(61, 17);
             this.label20.TabIndex = 23;
@@ -372,7 +374,7 @@
             // 
             this.label32.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label32.AutoSize = true;
-            this.label32.Location = new System.Drawing.Point(261, 164);
+            this.label32.Location = new System.Drawing.Point(199, 165);
             this.label32.Name = "label32";
             this.label32.Size = new System.Drawing.Size(40, 17);
             this.label32.TabIndex = 30;
@@ -381,7 +383,7 @@
             // _resYear
             // 
             this._resYear.AutoSize = true;
-            this._resYear.Location = new System.Drawing.Point(258, 204);
+            this._resYear.Location = new System.Drawing.Point(221, 205);
             this._resYear.Name = "_resYear";
             this._resYear.Size = new System.Drawing.Size(17, 17);
             this._resYear.TabIndex = 19;
@@ -391,7 +393,7 @@
             // 
             this._projectsYear.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this._projectsYear.AutoSize = true;
-            this._projectsYear.Location = new System.Drawing.Point(326, 44);
+            this._projectsYear.Location = new System.Drawing.Point(264, 45);
             this._projectsYear.Name = "_projectsYear";
             this._projectsYear.Size = new System.Drawing.Size(17, 17);
             this._projectsYear.TabIndex = 28;
@@ -400,7 +402,7 @@
             // _totalDepYear
             // 
             this._totalDepYear.AutoSize = true;
-            this._totalDepYear.Location = new System.Drawing.Point(195, 165);
+            this._totalDepYear.Location = new System.Drawing.Point(158, 166);
             this._totalDepYear.Name = "_totalDepYear";
             this._totalDepYear.Size = new System.Drawing.Size(17, 17);
             this._totalDepYear.TabIndex = 27;
@@ -409,7 +411,7 @@
             // _interestYear
             // 
             this._interestYear.AutoSize = true;
-            this._interestYear.Location = new System.Drawing.Point(195, 127);
+            this._interestYear.Location = new System.Drawing.Point(158, 128);
             this._interestYear.Name = "_interestYear";
             this._interestYear.Size = new System.Drawing.Size(17, 17);
             this._interestYear.TabIndex = 26;
@@ -418,7 +420,7 @@
             // _layingOffYear
             // 
             this._layingOffYear.AutoSize = true;
-            this._layingOffYear.Location = new System.Drawing.Point(195, 106);
+            this._layingOffYear.Location = new System.Drawing.Point(158, 107);
             this._layingOffYear.Name = "_layingOffYear";
             this._layingOffYear.Size = new System.Drawing.Size(17, 17);
             this._layingOffYear.TabIndex = 25;
@@ -427,7 +429,7 @@
             // _recrutingYear
             // 
             this._recrutingYear.AutoSize = true;
-            this._recrutingYear.Location = new System.Drawing.Point(195, 85);
+            this._recrutingYear.Location = new System.Drawing.Point(158, 86);
             this._recrutingYear.Name = "_recrutingYear";
             this._recrutingYear.Size = new System.Drawing.Size(17, 17);
             this._recrutingYear.TabIndex = 24;
@@ -436,7 +438,7 @@
             // _trainingYear
             // 
             this._trainingYear.AutoSize = true;
-            this._trainingYear.Location = new System.Drawing.Point(195, 66);
+            this._trainingYear.Location = new System.Drawing.Point(158, 67);
             this._trainingYear.Name = "_trainingYear";
             this._trainingYear.Size = new System.Drawing.Size(17, 17);
             this._trainingYear.TabIndex = 23;
@@ -445,7 +447,7 @@
             // _salaryYear
             // 
             this._salaryYear.AutoSize = true;
-            this._salaryYear.Location = new System.Drawing.Point(195, 45);
+            this._salaryYear.Location = new System.Drawing.Point(158, 46);
             this._salaryYear.Name = "_salaryYear";
             this._salaryYear.Size = new System.Drawing.Size(17, 17);
             this._salaryYear.TabIndex = 22;
@@ -454,7 +456,7 @@
             // label21
             // 
             this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(126, 204);
+            this.label21.Location = new System.Drawing.Point(89, 205);
             this.label21.Name = "label21";
             this.label21.Size = new System.Drawing.Size(133, 17);
             this.label21.TabIndex = 20;
@@ -463,7 +465,7 @@
             // label22
             // 
             this.label22.AutoSize = true;
-            this.label22.Location = new System.Drawing.Point(67, 165);
+            this.label22.Location = new System.Drawing.Point(30, 166);
             this.label22.Name = "label22";
             this.label22.Size = new System.Drawing.Size(40, 17);
             this.label22.TabIndex = 19;
@@ -472,7 +474,7 @@
             // label23
             // 
             this.label23.AutoSize = true;
-            this.label23.Location = new System.Drawing.Point(67, 127);
+            this.label23.Location = new System.Drawing.Point(30, 128);
             this.label23.Name = "label23";
             this.label23.Size = new System.Drawing.Size(55, 17);
             this.label23.TabIndex = 18;
@@ -482,7 +484,7 @@
             // 
             this.label24.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label24.AutoSize = true;
-            this.label24.Location = new System.Drawing.Point(261, 44);
+            this.label24.Location = new System.Drawing.Point(199, 45);
             this.label24.Name = "label24";
             this.label24.Size = new System.Drawing.Size(52, 17);
             this.label24.TabIndex = 17;
@@ -491,7 +493,7 @@
             // label25
             // 
             this.label25.AutoSize = true;
-            this.label25.Location = new System.Drawing.Point(67, 106);
+            this.label25.Location = new System.Drawing.Point(30, 107);
             this.label25.Name = "label25";
             this.label25.Size = new System.Drawing.Size(98, 17);
             this.label25.TabIndex = 16;
@@ -500,7 +502,7 @@
             // label26
             // 
             this.label26.AutoSize = true;
-            this.label26.Location = new System.Drawing.Point(67, 85);
+            this.label26.Location = new System.Drawing.Point(30, 86);
             this.label26.Name = "label26";
             this.label26.Size = new System.Drawing.Size(96, 17);
             this.label26.TabIndex = 15;
@@ -509,7 +511,7 @@
             // label27
             // 
             this.label27.AutoSize = true;
-            this.label27.Location = new System.Drawing.Point(67, 66);
+            this.label27.Location = new System.Drawing.Point(30, 67);
             this.label27.Name = "label27";
             this.label27.Size = new System.Drawing.Size(78, 17);
             this.label27.TabIndex = 14;
@@ -518,7 +520,7 @@
             // label28
             // 
             this.label28.AutoSize = true;
-            this.label28.Location = new System.Drawing.Point(67, 45);
+            this.label28.Location = new System.Drawing.Point(30, 46);
             this.label28.Name = "label28";
             this.label28.Size = new System.Drawing.Size(52, 17);
             this.label28.TabIndex = 13;
@@ -528,7 +530,7 @@
             // 
             this.label29.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label29.AutoSize = true;
-            this.label29.Location = new System.Drawing.Point(310, 16);
+            this.label29.Location = new System.Drawing.Point(248, 17);
             this.label29.Name = "label29";
             this.label29.Size = new System.Drawing.Size(64, 17);
             this.label29.TabIndex = 12;
@@ -537,7 +539,7 @@
             // label30
             // 
             this.label30.AutoSize = true;
-            this.label30.Location = new System.Drawing.Point(165, 17);
+            this.label30.Location = new System.Drawing.Point(128, 18);
             this.label30.Name = "label30";
             this.label30.Size = new System.Drawing.Size(72, 17);
             this.label30.TabIndex = 11;
@@ -579,7 +581,7 @@
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox2.Location = new System.Drawing.Point(3, 52);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(413, 399);
+            this.groupBox2.Size = new System.Drawing.Size(388, 399);
             this.groupBox2.TabIndex = 4;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Mouvements mensuels";
@@ -587,7 +589,7 @@
             // _chargesMonth
             // 
             this._chargesMonth.AutoSize = true;
-            this._chargesMonth.Location = new System.Drawing.Point(195, 155);
+            this._chargesMonth.Location = new System.Drawing.Point(158, 158);
             this._chargesMonth.Name = "_chargesMonth";
             this._chargesMonth.Size = new System.Drawing.Size(17, 17);
             this._chargesMonth.TabIndex = 22;
@@ -596,7 +598,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(67, 155);
+            this.label5.Location = new System.Drawing.Point(30, 158);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(61, 17);
             this.label5.TabIndex = 21;
@@ -606,7 +608,7 @@
             // 
             this._totalRecMonth.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this._totalRecMonth.AutoSize = true;
-            this._totalRecMonth.Location = new System.Drawing.Point(342, 178);
+            this._totalRecMonth.Location = new System.Drawing.Point(280, 181);
             this._totalRecMonth.Name = "_totalRecMonth";
             this._totalRecMonth.Size = new System.Drawing.Size(17, 17);
             this._totalRecMonth.TabIndex = 20;
@@ -616,7 +618,7 @@
             // 
             this.label31.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label31.AutoSize = true;
-            this.label31.Location = new System.Drawing.Point(261, 178);
+            this.label31.Location = new System.Drawing.Point(216, 181);
             this.label31.Name = "label31";
             this.label31.Size = new System.Drawing.Size(40, 17);
             this.label31.TabIndex = 19;
@@ -625,7 +627,7 @@
             // _resMonth
             // 
             this._resMonth.AutoSize = true;
-            this._resMonth.Location = new System.Drawing.Point(258, 210);
+            this._resMonth.Location = new System.Drawing.Point(221, 213);
             this._resMonth.Name = "_resMonth";
             this._resMonth.Size = new System.Drawing.Size(17, 17);
             this._resMonth.TabIndex = 17;
@@ -635,7 +637,7 @@
             // 
             this._projectsMonth.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this._projectsMonth.AutoSize = true;
-            this._projectsMonth.Location = new System.Drawing.Point(342, 50);
+            this._projectsMonth.Location = new System.Drawing.Point(280, 53);
             this._projectsMonth.Name = "_projectsMonth";
             this._projectsMonth.Size = new System.Drawing.Size(17, 17);
             this._projectsMonth.TabIndex = 16;
@@ -644,7 +646,7 @@
             // _totalDepMonth
             // 
             this._totalDepMonth.AutoSize = true;
-            this._totalDepMonth.Location = new System.Drawing.Point(195, 178);
+            this._totalDepMonth.Location = new System.Drawing.Point(158, 181);
             this._totalDepMonth.Name = "_totalDepMonth";
             this._totalDepMonth.Size = new System.Drawing.Size(17, 17);
             this._totalDepMonth.TabIndex = 15;
@@ -653,7 +655,7 @@
             // _interestMonth
             // 
             this._interestMonth.AutoSize = true;
-            this._interestMonth.Location = new System.Drawing.Point(195, 132);
+            this._interestMonth.Location = new System.Drawing.Point(158, 135);
             this._interestMonth.Name = "_interestMonth";
             this._interestMonth.Size = new System.Drawing.Size(17, 17);
             this._interestMonth.TabIndex = 14;
@@ -662,7 +664,7 @@
             // _layingOffMonth
             // 
             this._layingOffMonth.AutoSize = true;
-            this._layingOffMonth.Location = new System.Drawing.Point(195, 111);
+            this._layingOffMonth.Location = new System.Drawing.Point(158, 114);
             this._layingOffMonth.Name = "_layingOffMonth";
             this._layingOffMonth.Size = new System.Drawing.Size(17, 17);
             this._layingOffMonth.TabIndex = 13;
@@ -671,7 +673,7 @@
             // _recrutingMonth
             // 
             this._recrutingMonth.AutoSize = true;
-            this._recrutingMonth.Location = new System.Drawing.Point(195, 90);
+            this._recrutingMonth.Location = new System.Drawing.Point(158, 93);
             this._recrutingMonth.Name = "_recrutingMonth";
             this._recrutingMonth.Size = new System.Drawing.Size(17, 17);
             this._recrutingMonth.TabIndex = 12;
@@ -680,7 +682,7 @@
             // _trainingMonth
             // 
             this._trainingMonth.AutoSize = true;
-            this._trainingMonth.Location = new System.Drawing.Point(195, 71);
+            this._trainingMonth.Location = new System.Drawing.Point(158, 74);
             this._trainingMonth.Name = "_trainingMonth";
             this._trainingMonth.Size = new System.Drawing.Size(17, 17);
             this._trainingMonth.TabIndex = 11;
@@ -689,7 +691,7 @@
             // _salaryMonth
             // 
             this._salaryMonth.AutoSize = true;
-            this._salaryMonth.Location = new System.Drawing.Point(195, 50);
+            this._salaryMonth.Location = new System.Drawing.Point(158, 53);
             this._salaryMonth.Name = "_salaryMonth";
             this._salaryMonth.Size = new System.Drawing.Size(17, 17);
             this._salaryMonth.TabIndex = 7;
@@ -698,7 +700,7 @@
             // label18
             // 
             this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(126, 210);
+            this.label18.Location = new System.Drawing.Point(89, 213);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(136, 17);
             this.label18.TabIndex = 9;
@@ -707,7 +709,7 @@
             // label17
             // 
             this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(67, 178);
+            this.label17.Location = new System.Drawing.Point(30, 181);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(40, 17);
             this.label17.TabIndex = 8;
@@ -716,7 +718,7 @@
             // label16
             // 
             this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(67, 132);
+            this.label16.Location = new System.Drawing.Point(30, 135);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(55, 17);
             this.label16.TabIndex = 7;
@@ -726,7 +728,7 @@
             // 
             this.label15.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(261, 50);
+            this.label15.Location = new System.Drawing.Point(216, 53);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(52, 17);
             this.label15.TabIndex = 6;
@@ -735,7 +737,7 @@
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(67, 111);
+            this.label14.Location = new System.Drawing.Point(30, 114);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(98, 17);
             this.label14.TabIndex = 5;
@@ -744,7 +746,7 @@
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(67, 90);
+            this.label13.Location = new System.Drawing.Point(30, 93);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(96, 17);
             this.label13.TabIndex = 4;
@@ -753,7 +755,7 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(67, 71);
+            this.label12.Location = new System.Drawing.Point(30, 74);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(78, 17);
             this.label12.TabIndex = 3;
@@ -762,7 +764,7 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(67, 50);
+            this.label11.Location = new System.Drawing.Point(30, 53);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(52, 17);
             this.label11.TabIndex = 2;
@@ -772,7 +774,7 @@
             // 
             this.label10.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(326, 22);
+            this.label10.Location = new System.Drawing.Point(264, 25);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(64, 17);
             this.label10.TabIndex = 1;
@@ -781,7 +783,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(165, 22);
+            this.label9.Location = new System.Drawing.Point(128, 25);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(72, 17);
             this.label9.TabIndex = 0;
@@ -851,7 +853,7 @@
             this.Controls.Add(this.splitContainer1);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "UcOffice";
-            this.Size = new System.Drawing.Size(1120, 719);
+            this.Size = new System.Drawing.Size(1187, 712);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
