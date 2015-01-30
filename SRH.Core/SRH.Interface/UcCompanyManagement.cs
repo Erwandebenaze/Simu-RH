@@ -136,8 +136,12 @@ namespace SRH.Interface
 
 		private void Affect_Manager_Click( object sender, EventArgs e )
 		{
-            if( _currentEmployee != null )
+            if( _currentEmployee != null)
             {
+                if( !_currentEmployee.Busy )
+                {
+                    MessageBox.Show( _currentEmployee.Worker.FirstName + " " + _currentEmployee.Worker.LastName + " est parti(e) en vacances ou en congé maladie pendant l'affectation à la tâche, merci de réaffecter un employé." );
+                }
                 MyCompany playerCompany = (MyCompany)_currentEmployee.Comp;
                 playerCompany.AddManager( _currentEmployee, _currentSkillToAffect );
                 AffectManager.Enabled = false;
