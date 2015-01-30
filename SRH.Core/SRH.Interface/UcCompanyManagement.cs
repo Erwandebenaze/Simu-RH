@@ -193,7 +193,6 @@ namespace SRH.Interface
 		private void CreateSkillsToAffectComboBox()
 		{
 			SkillsToAffect.Items.Clear();
-
 			SkillsToAffect.Items.AddRange( UcEmployeeList1.CurrentEmployee.Worker.Skills
 				.Where( s => s is CompaSkill )
 				.Select( s => s.SkillName ).ToArray() );
